@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="XRVectorInspector">
+            <connections>
+                <outlet property="_customView" destination="5" id="36"/>
+                <outlet property="_objectController" destination="27" id="47"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView autoresizesSubviews="NO" id="5" userLabel="View">
+            <rect key="frame" x="0.0" y="0.0" width="268" height="365"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <textField autoresizesSubviews="NO" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="25">
+                    <rect key="frame" x="14" y="26" width="114" height="17"/>
+                    <autoresizingMask key="autoresizingMask"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Arrow Size:" id="54">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField autoresizesSubviews="NO" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="24">
+                    <rect key="frame" x="14" y="64" width="114" height="17"/>
+                    <autoresizingMask key="autoresizingMask"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Line Weight:" id="53">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField autoresizesSubviews="NO" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="23">
+                    <rect key="frame" x="78" y="105" width="57" height="17"/>
+                    <autoresizingMask key="autoresizingMask"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Color:" id="52">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <colorWell autoresizesSubviews="NO" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="22">
+                    <rect key="frame" x="140" y="100" width="54" height="26"/>
+                    <autoresizingMask key="autoresizingMask"/>
+                    <color key="color" red="0.058130499000000002" green="0.055541898999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <action selector="viewRequiresChange:" target="-2" id="39"/>
+                        <binding destination="27" name="value" keyPath="selection._strokeColor" id="32"/>
+                    </connections>
+                </colorWell>
+                <slider autoresizesSubviews="NO" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="21">
+                    <rect key="frame" x="104" y="22" width="146" height="21"/>
+                    <autoresizingMask key="autoresizingMask"/>
+                    <sliderCell key="cell" continuous="YES" alignment="left" minValue="0.10000000000000001" maxValue="10" doubleValue="1" tickMarkPosition="above" allowsTickMarkValuesOnly="YES" sliderType="linear" id="51">
+                        <font key="font" size="12" name="Helvetica-Oblique"/>
+                    </sliderCell>
+                    <connections>
+                        <action selector="viewRequiresChange:" target="-2" id="37"/>
+                        <binding destination="27" name="value" keyPath="selection._arrowSize" id="35"/>
+                    </connections>
+                </slider>
+                <slider autoresizesSubviews="NO" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="20">
+                    <rect key="frame" x="104" y="60" width="146" height="21"/>
+                    <autoresizingMask key="autoresizingMask"/>
+                    <sliderCell key="cell" continuous="YES" alignment="left" minValue="0.10000000000000001" maxValue="10" doubleValue="1" tickMarkPosition="above" allowsTickMarkValuesOnly="YES" sliderType="linear" id="50">
+                        <font key="font" size="12" name="Helvetica"/>
+                    </sliderCell>
+                    <connections>
+                        <action selector="viewRequiresChange:" target="-2" id="38"/>
+                        <binding destination="27" name="value" keyPath="selection._lineWeight" id="34"/>
+                    </connections>
+                </slider>
+                <box autoresizesSubviews="NO" fixedFrame="YES" title="Error (95% Confidence)" translatesAutoresizingMaskIntoConstraints="NO" id="18">
+                    <rect key="frame" x="10" y="152" width="248" height="59"/>
+                    <autoresizingMask key="autoresizingMask"/>
+                    <view key="contentView" id="dln-1Z-wQg">
+                        <rect key="frame" x="4" y="5" width="240" height="39"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button autoresizesSubviews="NO" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="17">
+                                <rect key="frame" x="12" y="12" width="91" height="18"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <buttonCell key="cell" type="check" title="Show Error" bezelStyle="regularSquare" imagePosition="leading" alignment="left" inset="2" id="58">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="viewRequiresChange:" target="-2" id="40"/>
+                                    <binding destination="27" name="value" keyPath="selection._showError" id="31"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                    </view>
+                </box>
+                <box autoresizesSubviews="NO" fixedFrame="YES" title="Vector" translatesAutoresizingMaskIntoConstraints="NO" id="15">
+                    <rect key="frame" x="10" y="218" width="248" height="92"/>
+                    <autoresizingMask key="autoresizingMask"/>
+                    <view key="contentView" id="cPC-pa-p2B">
+                        <rect key="frame" x="4" y="5" width="240" height="72"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button autoresizesSubviews="NO" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8">
+                                <rect key="frame" x="12" y="45" width="100" height="18"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <buttonCell key="cell" type="check" title="Show Vector" bezelStyle="regularSquare" imagePosition="leading" alignment="left" inset="2" id="55">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="viewRequiresChange:" target="-2" id="42"/>
+                                    <binding destination="27" name="value" keyPath="selection._showVector" id="43"/>
+                                </connections>
+                            </button>
+                            <popUpButton autoresizesSubviews="NO" verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9">
+                                <rect key="frame" x="98" y="10" width="135" height="26"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <popUpButtonCell key="cell" type="push" title="Vector" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="13" id="56">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" title="OtherViews" id="11">
+                                        <items>
+                                            <menuItem title="Vector" state="on" id="13"/>
+                                            <menuItem title="Vector Strength" id="10"/>
+                                            <menuItem title="Vector (Outer Ring)" id="12"/>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                                <connections>
+                                    <action selector="viewRequiresChange:" target="-2" id="41"/>
+                                    <binding destination="27" name="enabled" keyPath="selection._showVector" id="30"/>
+                                    <binding destination="27" name="selectedIndex" keyPath="selection._type" id="46"/>
+                                </connections>
+                            </popUpButton>
+                            <textField autoresizesSubviews="NO" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="14">
+                                <rect key="frame" x="11" y="16" width="85" height="17"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Vector Type:" id="57">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                    </view>
+                </box>
+                <textField autoresizesSubviews="NO" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6">
+                    <rect key="frame" x="17" y="328" width="234" height="17"/>
+                    <autoresizingMask key="autoresizingMask"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Mean Vector Statistics" id="49">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <point key="canvasLocation" x="4" y="155"/>
+        </customView>
+        <objectController id="27">
+            <declaredKeys>
+                <string>_arrowSize</string>
+                <string>_type</string>
+                <string>_showVector</string>
+                <string>_showError</string>
+                <string>_strokeColor</string>
+                <string>_lineWeight</string>
+            </declaredKeys>
+        </objectController>
+    </objects>
+</document>

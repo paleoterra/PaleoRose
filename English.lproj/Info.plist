@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>XRose</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>xroseDocIcon</string>
+			<key>CFBundleTypeMIMETypes</key>
+			<array>
+				<string>XRose</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>XRose</string>
+			<key>CFBundleTypeOSTypes</key>
+			<array>
+				<string>XRose</string>
+			</array>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>NSDocumentClass</key>
+			<string>XRoseDocument</string>
+		</dict>
+	</array>
+	<key>CFBundleExecutable</key>
+	<string>PaleoRose</string>
+	<key>CFBundleHelpBookFolder</key>
+	<string>XRose Help</string>
+	<key>CFBundleHelpBookName</key>
+	<string>XRose Help</string>
+	<key>CFBundleIconFile</key>
+	<string>xroseapp</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.productivity</string>
+	<key>NSMainNibFile</key>
+	<string>MainMenu</string>
+	<key>NSPrincipalClass</key>
+	<string>NSApplication</string>
+</dict>
+</plist>
