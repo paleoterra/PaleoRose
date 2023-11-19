@@ -49,7 +49,7 @@
 	NSImage *_anImage;
 	BOOL _canFill;
 	BOOL _canStroke;
-	XRGeometryController *geometryController;
+	__weak XRGeometryController *geometryController;
 	//loose connection to the dataset
 }
 

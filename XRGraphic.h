@@ -42,7 +42,7 @@
     BOOL _needsDisplay;
     BOOL _drawsFill;
     BOOL _isSelected;
-	XRGeometryController *geometryController;
+	__weak XRGeometryController *geometryController;
 }
 
 //Initialization
