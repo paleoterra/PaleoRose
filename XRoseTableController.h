@@ -28,10 +28,10 @@
 @class XRDataSet,LITMXMLTree,XRLayer;
 @interface XRoseTableController : NSObject
 {
-	IBOutlet id _rosePlotController;
-    IBOutlet id _roseTableView;
-    IBOutlet id _roseView;
-    IBOutlet id _windowController;
+	__weak IBOutlet id _rosePlotController;
+    __weak IBOutlet id _roseTableView;
+    __weak IBOutlet id _roseView;
+    __weak IBOutlet id _windowController;
 	NSArray *colorArray;
 	NSMutableArray *_theLayers;
 	NSTimer *_timer;
