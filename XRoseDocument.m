@@ -76,6 +76,10 @@
     return self;
 }
 
+- (void)dealloc {
+    sqlite3_close(_inMemoryStore);
+}
+
 -(void)makeWindowControllers
 {
 	XRoseWindowController *aController = [[XRoseWindowController alloc] initWithWindowNibName:@"XRoseDocument"];
