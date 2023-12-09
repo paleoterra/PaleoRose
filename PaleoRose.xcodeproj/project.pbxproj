@@ -436,8 +436,6 @@
 			isa = PBXGroup;
 			children = (
 				B43D6118063451DC001B863E /* Info.plist */,
-				089C165FFE840EACC02AAC07 /* InfoPlist.strings */,
-				B4E0138C05EC4AC500C50D5D /* version.plist */,
 			);
 			name = "Resources Old";
 			sourceTree = "<group>";
@@ -697,6 +695,8 @@
 		B4149FF42B24C653008AE5F4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				089C165FFE840EACC02AAC07 /* InfoPlist.strings */,
+				B4E0138C05EC4AC500C50D5D /* version.plist */,
 				2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */,
 				B486E29C1E7B850300F1ADAA /* AppendDialog.xib */,
 				B486E27B1E7B76EB00F1ADAA /* XRoseDocument.xib */,
