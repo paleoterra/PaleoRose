@@ -227,7 +227,7 @@
 		B411E7F205C396A400C22F3E /* XRAppendDialogController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XRAppendDialogController.m; sourceTree = "<group>"; };
 		B411E84A05C397D000C22F3E /* XREncodingAccessoryView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XREncodingAccessoryView.h; sourceTree = "<group>"; };
 		B411E84B05C397D000C22F3E /* XREncodingAccessoryView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XREncodingAccessoryView.m; sourceTree = "<group>"; };
-		B416A00E05F2D77500821225 /* XRose Help */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "XRose Help"; path = "XRoseDocs/XRose Help"; sourceTree = "<group>"; };
+		B416A00E05F2D77500821225 /* XRose Help */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "XRose Help"; sourceTree = "<group>"; };
 		B41D283A094FC7CA008DF384 /* XRTableImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRTableImporter.h; sourceTree = "<group>"; };
 		B41D283B094FC7CA008DF384 /* XRTableImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRTableImporter.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B42083AF09637969007A74A8 /* PTFMXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTFMXMLParser.h; sourceTree = "<group>"; };
@@ -412,8 +412,10 @@
 			children = (
 				B4149FE22B24C285008AE5F4 /* Table Importing */,
 				B4149FE42B24C2FA008AE5F4 /* Classes */,
+				B4149FF32B24C607008AE5F4 /* XRoseDocs */,
 				2A37F4AFFDCFA73011CA2CEA /* Other Sources */,
-				2A37F4B8FDCFA73011CA2CEA /* Resources */,
+				B4149FF42B24C653008AE5F4 /* Resources */,
+				2A37F4B8FDCFA73011CA2CEA /* Resources Old */,
 				B4B0BB661E7E41C900F392DA /* Unit Tests */,
 				2A37F4C3FDCFA73011CA2CEA /* Frameworks */,
 				19C28FB0FE9D524F11CA2CBB /* Products */,
@@ -430,24 +432,14 @@
 			name = "Other Sources";
 			sourceTree = "<group>";
 		};
-		2A37F4B8FDCFA73011CA2CEA /* Resources */ = {
+		2A37F4B8FDCFA73011CA2CEA /* Resources Old */ = {
 			isa = PBXGroup;
 			children = (
-				B416A00E05F2D77500821225 /* XRose Help */,
-				B4524F5605D402AF008338E8 /* Patterns */,
-				B48B89E105C78EBE00248F96 /* Inspectors */,
-				B48B89EA05C78ECF00248F96 /* Icons */,
-				B486E29C1E7B850300F1ADAA /* AppendDialog.xib */,
-				B486E27B1E7B76EB00F1ADAA /* XRoseDocument.xib */,
-				B486E27E1E7B76FB00F1ADAA /* MainMenu.xib */,
-				B486E2811E7B770A00F1ADAA /* XRVStatPanel.xib */,
-				2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */,
-				B486E2841E7B770F00F1ADAA /* FStatisticSheet.xib */,
 				B43D6118063451DC001B863E /* Info.plist */,
 				089C165FFE840EACC02AAC07 /* InfoPlist.strings */,
 				B4E0138C05EC4AC500C50D5D /* version.plist */,
 			);
-			name = Resources;
+			name = "Resources Old";
 			sourceTree = "<group>";
 		};
 		2A37F4C3FDCFA73011CA2CEA /* Frameworks */ = {
@@ -694,15 +686,39 @@
 			path = "XRose File";
 			sourceTree = "<group>";
 		};
-		B4524F5605D402AF008338E8 /* Patterns */ = {
+		B4149FF32B24C607008AE5F4 /* XRoseDocs */ = {
+			isa = PBXGroup;
+			children = (
+				B416A00E05F2D77500821225 /* XRose Help */,
+			);
+			path = XRoseDocs;
+			sourceTree = "<group>";
+		};
+		B4149FF42B24C653008AE5F4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */,
+				B486E29C1E7B850300F1ADAA /* AppendDialog.xib */,
+				B486E27B1E7B76EB00F1ADAA /* XRoseDocument.xib */,
+				B486E27E1E7B76FB00F1ADAA /* MainMenu.xib */,
+				B486E2811E7B770A00F1ADAA /* XRVStatPanel.xib */,
+				B486E2841E7B770F00F1ADAA /* FStatisticSheet.xib */,
+				B4149FF72B24C684008AE5F4 /* Icons */,
+				B4149FF62B24C674008AE5F4 /* Inspectors */,
+				B4149FF52B24C666008AE5F4 /* Patterns */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		B4149FF52B24C666008AE5F4 /* Patterns */ = {
 			isa = PBXGroup;
 			children = (
 				B4524F4E05D402AA008338E8 /* hollowCorePattern.tif */,
 			);
-			name = Patterns;
+			path = Patterns;
 			sourceTree = "<group>";
 		};
-		B48B89E105C78EBE00248F96 /* Inspectors */ = {
+		B4149FF62B24C674008AE5F4 /* Inspectors */ = {
 			isa = PBXGroup;
 			children = (
 				B486E2871E7B772E00F1ADAA /* XRLayerCore.xib */,
@@ -713,10 +729,10 @@
 				B486E2961E7B774E00F1ADAA /* XRPropertyInspector.xib */,
 				B486E2991E7B775600F1ADAA /* XRVectorInspector.xib */,
 			);
-			name = Inspectors;
+			path = Inspectors;
 			sourceTree = "<group>";
 		};
-		B48B89EA05C78ECF00248F96 /* Icons */ = {
+		B4149FF72B24C684008AE5F4 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
 				B447A95F062B002B00154420 /* logo.jpg */,
@@ -731,7 +747,7 @@
 				B47CA33105C6C8E90060A30C /* infoicon.tiff */,
 				B461BA3C05C4F84C00738D23 /* LayerDrawerImageAddLayer.tiff */,
 			);
-			name = Icons;
+			path = Icons;
 			sourceTree = "<group>";
 		};
 		B4B0BB661E7E41C900F392DA /* Unit Tests */ = {

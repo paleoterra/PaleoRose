@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="22154" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22154"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -25,7 +25,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="268" height="233"/>
                     <autoresizingMask key="autoresizingMask"/>
                 </customView>
-                <popUpButton autoresizesSubviews="NO" verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="10">
+                <popUpButton autoresizesSubviews="NO" imageHugsTitle="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="10">
                     <rect key="frame" x="17" y="249" width="234" height="26"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <popUpButtonCell key="cell" type="push" title="Appearence" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="9" id="132">
@@ -42,7 +42,7 @@
                         <action selector="changeView:" target="-2" id="98"/>
                     </connections>
                 </popUpButton>
-                <textField autoresizesSubviews="NO" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8">
+                <textField autoresizesSubviews="NO" focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8">
                     <rect key="frame" x="22" y="298" width="55" height="17"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Name:" id="131">
@@ -51,7 +51,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField autoresizesSubviews="NO" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7">
+                <textField autoresizesSubviews="NO" focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7">
                     <rect key="frame" x="72" y="296" width="176" height="22"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" id="130">
@@ -63,7 +63,7 @@
                         <binding destination="63" name="value" keyPath="selection._layerName" id="65"/>
                     </connections>
                 </textField>
-                <textField autoresizesSubviews="NO" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6">
+                <textField autoresizesSubviews="NO" focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6">
                     <rect key="frame" x="17" y="328" width="234" height="17"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Core Layer" id="129">
@@ -90,7 +90,7 @@
             <rect key="frame" x="0.0" y="0.0" width="268" height="233"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
-                <button autoresizesSubviews="NO" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="76">
+                <button autoresizesSubviews="NO" imageHugsTitle="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="76">
                     <rect key="frame" x="58" y="180" width="153" height="18"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <buttonCell key="cell" type="check" title="Lock To Hollow Core" bezelStyle="regularSquare" imagePosition="leading" alignment="left" inset="2" id="133">
@@ -121,7 +121,7 @@
                                     <binding destination="63" name="enabled" keyPath="selection.coreRadiusIsEditable" id="120"/>
                                 </connections>
                             </slider>
-                            <textField autoresizesSubviews="NO" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="73">
+                            <textField autoresizesSubviews="NO" focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="73">
                                 <rect key="frame" x="162" y="14" width="54" height="22"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" id="137">
@@ -163,7 +163,7 @@
                                     <binding destination="63" name="value" keyPath="selection._lineWeight" id="126"/>
                                 </connections>
                             </slider>
-                            <textField autoresizesSubviews="NO" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="82">
+                            <textField autoresizesSubviews="NO" focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="82">
                                 <rect key="frame" x="162" y="14" width="54" height="22"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" id="139">
@@ -188,7 +188,7 @@
                         <binding destination="63" name="value" keyPath="selection._fillColor" id="86"/>
                     </connections>
                 </colorWell>
-                <textField autoresizesSubviews="NO" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="79">
+                <textField autoresizesSubviews="NO" focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="79">
                     <rect key="frame" x="62" y="156" width="79" height="17"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Fill Color:" id="135">
@@ -197,7 +197,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField autoresizesSubviews="NO" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="78">
+                <textField autoresizesSubviews="NO" focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="78">
                     <rect key="frame" x="62" y="192" width="79" height="17"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Line Color:" id="134">

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="22154" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22154"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -17,12 +17,12 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="336" y="457" width="422" height="107"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1792" height="1095"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
             <view key="contentView" autoresizesSubviews="NO" id="5">
                 <rect key="frame" x="0.0" y="0.0" width="422" height="107"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <popUpButton autoresizesSubviews="NO" verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8">
+                    <popUpButton autoresizesSubviews="NO" imageHugsTitle="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8">
                         <rect key="frame" x="126" y="63" width="279" height="26"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <popUpButtonCell key="cell" type="push" title="Item1" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="11" id="25">
@@ -37,7 +37,7 @@
                             </menu>
                         </popUpButtonCell>
                     </popUpButton>
-                    <textField autoresizesSubviews="NO" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="12">
+                    <textField autoresizesSubviews="NO" focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="12">
                         <rect key="frame" x="17" y="69" width="114" height="17"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Append To Set:" id="26">
@@ -46,7 +46,7 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <button autoresizesSubviews="NO" verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="14">
+                    <button autoresizesSubviews="NO" imageHugsTitle="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="14">
                         <rect key="frame" x="297" y="12" width="91" height="32"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <buttonCell key="cell" type="push" title="New Set" bezelStyle="rounded" alignment="center" state="on" borderStyle="border" inset="2" id="27">
@@ -57,7 +57,7 @@
                             <action selector="new:" target="-2" id="22"/>
                         </connections>
                     </button>
-                    <button autoresizesSubviews="NO" verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="15">
+                    <button autoresizesSubviews="NO" imageHugsTitle="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="15">
                         <rect key="frame" x="194" y="12" width="103" height="32"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <buttonCell key="cell" type="push" title="Append" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="28">
@@ -68,7 +68,7 @@
                             <action selector="append:" target="-2" id="21"/>
                         </connections>
                     </button>
-                    <button autoresizesSubviews="NO" verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="16">
+                    <button autoresizesSubviews="NO" imageHugsTitle="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="16">
                         <rect key="frame" x="26" y="12" width="82" height="32"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="29">
