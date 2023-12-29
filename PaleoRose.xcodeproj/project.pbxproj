@@ -44,6 +44,7 @@
 		B435676D096DA4C000DCF143 /* XRPreferencePanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = B435676B096DA4C000DCF143 /* XRPreferencePanelController.m */; };
 		B43D613906345207001B863E /* FStatisticController.m in Sources */ = {isa = PBXBuildFile; fileRef = B43D613706345207001B863E /* FStatisticController.m */; };
 		B43D613A06345207001B863E /* FStatisticController.h in Headers */ = {isa = PBXBuildFile; fileRef = B43D613806345207001B863E /* FStatisticController.h */; };
+		B44267502B3F881300749923 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B442674F2B3F881300749923 /* Info.plist */; };
 		B447A960062B002B00154420 /* logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B447A95F062B002B00154420 /* logo.jpg */; };
 		B447A965062B021A00154420 /* AboutPanelController.h in Headers */ = {isa = PBXBuildFile; fileRef = B447A963062B021A00154420 /* AboutPanelController.h */; };
 		B447A966062B021A00154420 /* AboutPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = B447A964062B021A00154420 /* AboutPanelController.m */; };
@@ -210,7 +211,6 @@
 		2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32DBCF750370BD2300C91783 /* PaleoRose_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaleoRose_Prefix.pch; sourceTree = "<group>"; };
-		8D15AC360486D014006FF6A4 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = English; path = English.lproj/Info.plist; sourceTree = "<group>"; };
 		8D15AC370486D014006FF6A4 /* PaleoRose.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaleoRose.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B40C43C3060545BD00353928 /* XRLayerLineArrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRLayerLineArrow.h; sourceTree = "<group>"; };
 		B40C43C4060545BD00353928 /* XRLayerLineArrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRLayerLineArrow.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -245,6 +245,7 @@
 		B43D613806345207001B863E /* FStatisticController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = FStatisticController.h; sourceTree = "<group>"; };
 		B441FEFB05CB725300F9A0F9 /* XRStatistic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRStatistic.h; sourceTree = "<group>"; };
 		B441FEFC05CB725300F9A0F9 /* XRStatistic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRStatistic.m; sourceTree = "<group>"; };
+		B442674F2B3F881300749923 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B442E69D2A48E9F300466763 /* PaleoRose-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PaleoRose-Bridging-Header.h"; sourceTree = "<group>"; };
 		B447A95F062B002B00154420 /* logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = logo.jpg; sourceTree = "<group>"; };
 		B447A963062B021A00154420 /* AboutPanelController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = AboutPanelController.h; sourceTree = "<group>"; };
@@ -666,8 +667,8 @@
 			isa = PBXGroup;
 			children = (
 				32DBCF750370BD2300C91783 /* PaleoRose_Prefix.pch */,
+				B442674F2B3F881300749923 /* Info.plist */,
 				2A37F4B0FDCFA73011CA2CEA /* main.m */,
-				B43D6118063451DC001B863E /* Info.plist */,
 				B474B40305CBFEBD00F63AE9 /* XRoseAppDelegate.h */,
 				B474B40405CBFEBD00F63AE9 /* XRoseAppDelegate.m */,
 				B442E69D2A48E9F300466763 /* PaleoRose-Bridging-Header.h */,
@@ -1027,6 +1028,7 @@
 				B486E2921E7B774000F1ADAA /* XRGeometryInspector.xib in Resources */,
 				B486E2831E7B770A00F1ADAA /* XRVStatPanel.xib in Resources */,
 				B486E2981E7B774E00F1ADAA /* XRPropertyInspector.xib in Resources */,
+				B44267502B3F881300749923 /* Info.plist in Resources */,
 				B44B08A705CFE9D200C6E8D3 /* xroseapp.icns in Resources */,
 				B44B08A805CFE9D200C6E8D3 /* xroseDocIcon.icns in Resources */,
 				B486E27D1E7B76EB00F1ADAA /* XRoseDocument.xib in Resources */,
@@ -1151,14 +1153,6 @@
 				2A37F4BAFDCFA73011CA2CEA /* English */,
 			);
 			name = Credits.rtf;
-			sourceTree = "<group>";
-		};
-		B43D6118063451DC001B863E /* Info.plist */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8D15AC360486D014006FF6A4 /* English */,
-			);
-			name = Info.plist;
 			sourceTree = "<group>";
 		};
 		B486E2741E7B765400F1ADAA /* XRTableInitialTextController.xib */ = {
