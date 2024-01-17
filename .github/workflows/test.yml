@@ -1,0 +1,11 @@
+name: tests
+on: [push]
+jobs:
+  run_tests:
+    runs-on: macos-13
+    steps:
+    - uses: actions/checkout@v1
+    - name: Select Xcode
+      run: sudo xcode-select -switch /Applications/Xcode_15.0.app && /usr/bin/xcodebuild -version
+    - name: Run tests
+      run: xcodebuild test -workspace PaleoRose.xcworkspace -scheme PaleoRose -destination 'platform=macOS,name=Any Mac' | xcpretty && exit ${PIPESTATUS[0]}
