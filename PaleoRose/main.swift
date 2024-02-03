@@ -1,12 +1,10 @@
 //
-//  main.m
-//  XRose
-//
-//  Created by Tom Moore on Fri Jan 23 2004.
+// main.swift
+// PaleoRose
 //
 // MIT License
 //
-// Copyright (c) 2004 to present Thomas L. Moore.
+// Copyright (c) 2024 to present Thomas L. Moore.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,10 +24,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#import <Cocoa/Cocoa.h>
+import Cocoa
 
-int main(int argc, const char *argv[])
-{
-	
-    return NSApplicationMain(argc, argv);
-}
+NSApplication.shared.run()

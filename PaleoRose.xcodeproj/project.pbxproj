@@ -10,7 +10,6 @@
 		8D15AC290486D014006FF6A4 /* PaleoRose_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32DBCF750370BD2300C91783 /* PaleoRose_Prefix.pch */; };
 		8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */; };
 		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
-		8D15AC320486D014006FF6A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4B0FDCFA73011CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 		B40C43C5060545BD00353928 /* XRLayerLineArrow.h in Headers */ = {isa = PBXBuildFile; fileRef = B40C43C3060545BD00353928 /* XRLayerLineArrow.h */; };
 		B40C43C6060545BD00353928 /* XRLayerLineArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = B40C43C4060545BD00353928 /* XRLayerLineArrow.m */; };
@@ -26,6 +25,7 @@
 		B411E7F505C396A400C22F3E /* XRAppendDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = B411E7F205C396A400C22F3E /* XRAppendDialogController.m */; };
 		B411E84C05C397D000C22F3E /* XREncodingAccessoryView.h in Headers */ = {isa = PBXBuildFile; fileRef = B411E84A05C397D000C22F3E /* XREncodingAccessoryView.h */; };
 		B411E84D05C397D000C22F3E /* XREncodingAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = B411E84B05C397D000C22F3E /* XREncodingAccessoryView.m */; };
+		B412666B2B6EDB1800E1C385 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41266692B6EDAD200E1C385 /* main.swift */; };
 		B414A00D2B24CD24008AE5F4 /* XRStatistic.m in Sources */ = {isa = PBXBuildFile; fileRef = B441FEFC05CB725300F9A0F9 /* XRStatistic.m */; };
 		B416A04805F2D77500821225 /* XRose Help in Resources */ = {isa = PBXBuildFile; fileRef = B416A00E05F2D77500821225 /* XRose Help */; };
 		B41D283C094FC7CA008DF384 /* XRTableImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = B41D283A094FC7CA008DF384 /* XRTableImporter.h */; };
@@ -206,7 +206,6 @@
 /* Begin PBXFileReference section */
 		089C1660FE840EACC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
-		2A37F4B0FDCFA73011CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2A37F4BAFDCFA73011CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
 		2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
@@ -226,6 +225,8 @@
 		B411E7F205C396A400C22F3E /* XRAppendDialogController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XRAppendDialogController.m; sourceTree = "<group>"; };
 		B411E84A05C397D000C22F3E /* XREncodingAccessoryView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XREncodingAccessoryView.h; sourceTree = "<group>"; };
 		B411E84B05C397D000C22F3E /* XREncodingAccessoryView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XREncodingAccessoryView.m; sourceTree = "<group>"; };
+		B41266682B6EDAD100E1C385 /* PaleoRose-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PaleoRose-Bridging-Header.h"; sourceTree = "<group>"; };
+		B41266692B6EDAD200E1C385 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		B416A00E05F2D77500821225 /* XRose Help */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "XRose Help"; sourceTree = "<group>"; };
 		B41D283A094FC7CA008DF384 /* XRTableImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRTableImporter.h; sourceTree = "<group>"; };
 		B41D283B094FC7CA008DF384 /* XRTableImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRTableImporter.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -668,13 +669,14 @@
 			children = (
 				32DBCF750370BD2300C91783 /* PaleoRose_Prefix.pch */,
 				B442674F2B3F881300749923 /* Info.plist */,
-				2A37F4B0FDCFA73011CA2CEA /* main.m */,
+				B41266692B6EDAD200E1C385 /* main.swift */,
 				B474B40305CBFEBD00F63AE9 /* XRoseAppDelegate.h */,
 				B474B40405CBFEBD00F63AE9 /* XRoseAppDelegate.m */,
 				B442E69D2A48E9F300466763 /* PaleoRose-Bridging-Header.h */,
 				B4149FE42B24C2FA008AE5F4 /* Classes */,
 				B4149FF32B24C607008AE5F4 /* XRoseDocs */,
 				B4149FF42B24C653008AE5F4 /* Resources */,
+				B41266682B6EDAD100E1C385 /* PaleoRose-Bridging-Header.h */,
 			);
 			path = PaleoRose;
 			sourceTree = "<group>";
@@ -986,7 +988,7 @@
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					8D15AC270486D014006FF6A4 = {
-						LastSwiftMigration = 1430;
+						LastSwiftMigration = 1500;
 					};
 					B4B0BB7A1E7E459B00F392DA = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1062,7 +1064,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D15AC320486D014006FF6A4 /* main.m in Sources */,
 				B48345CF05C238B500E3F6B7 /* XRoseDocument.m in Sources */,
 				B48345D305C23B3000E3F6B7 /* XRoseWindowController.m in Sources */,
 				B48345D705C23B3D00E3F6B7 /* XRoseTableController.m in Sources */,
@@ -1101,6 +1102,7 @@
 				B46C6D2A0607F2A2000620E7 /* XRVectorInspector.m in Sources */,
 				B4A82FA52A07FA8900790052 /* LITMXMLParser.m in Sources */,
 				B4F08862060914150000CF7A /* XRVStatCreatePanelController.m in Sources */,
+				B412666B2B6EDB1800E1C385 /* main.swift in Sources */,
 				B464E643060956DE009C1C89 /* XRGeometryPropertyInspector.m in Sources */,
 				B4324D0B06187FFF0083AE8A /* XRLayerText.m in Sources */,
 				B4A82F982A07F87A00790052 /* LITMXMLTree.m in Sources */,
@@ -1291,6 +1293,9 @@
 				PRODUCT_NAME = PaleoRose;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "PaleoRose/PaleoRose-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				WARNING_CFLAGS = (
 					"-Wmost",
 					"-Wno-four-char-constants",
@@ -1336,6 +1341,8 @@
 				PRODUCT_NAME = PaleoRose;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "PaleoRose/PaleoRose-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				WARNING_CFLAGS = (
 					"-Wmost",
 					"-Wno-four-char-constants",
@@ -1441,6 +1448,7 @@
 		B4B0BB831E7E459B00F392DA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1508,6 +1516,7 @@
 		B4B0BB841E7E459B00F392DA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
