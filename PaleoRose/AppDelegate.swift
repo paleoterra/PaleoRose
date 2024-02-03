@@ -1,5 +1,5 @@
 //
-// main.swift
+// AppDelegate.swift
 // PaleoRose
 //
 // MIT License
@@ -26,6 +26,9 @@
 
 import Cocoa
 
-let appDelegate = AppDelegate()
-NSApplication.shared.delegate = appDelegate
-NSApplication.shared.run()
+class AppDelegate: NSObject, NSApplicationDelegate {
+
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        NSColorPanel.shared.showsAlpha = true
+    }
+}

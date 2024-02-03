@@ -26,6 +26,7 @@
 		B411E84C05C397D000C22F3E /* XREncodingAccessoryView.h in Headers */ = {isa = PBXBuildFile; fileRef = B411E84A05C397D000C22F3E /* XREncodingAccessoryView.h */; };
 		B411E84D05C397D000C22F3E /* XREncodingAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = B411E84B05C397D000C22F3E /* XREncodingAccessoryView.m */; };
 		B412666B2B6EDB1800E1C385 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41266692B6EDAD200E1C385 /* main.swift */; };
+		B41266712B6EDF4C00E1C385 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41266702B6EDF4C00E1C385 /* AppDelegate.swift */; };
 		B414A00D2B24CD24008AE5F4 /* XRStatistic.m in Sources */ = {isa = PBXBuildFile; fileRef = B441FEFC05CB725300F9A0F9 /* XRStatistic.m */; };
 		B416A04805F2D77500821225 /* XRose Help in Resources */ = {isa = PBXBuildFile; fileRef = B416A00E05F2D77500821225 /* XRose Help */; };
 		B41D283C094FC7CA008DF384 /* XRTableImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = B41D283A094FC7CA008DF384 /* XRTableImporter.h */; };
@@ -67,8 +68,6 @@
 		B464E72106095B82009C1C89 /* geometryInspector.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B464E72006095B82009C1C89 /* geometryInspector.tiff */; };
 		B46C6D290607F2A2000620E7 /* XRVectorInspector.h in Headers */ = {isa = PBXBuildFile; fileRef = B46C6D270607F2A2000620E7 /* XRVectorInspector.h */; };
 		B46C6D2A0607F2A2000620E7 /* XRVectorInspector.m in Sources */ = {isa = PBXBuildFile; fileRef = B46C6D280607F2A2000620E7 /* XRVectorInspector.m */; };
-		B474B40505CBFEBD00F63AE9 /* XRoseAppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = B474B40305CBFEBD00F63AE9 /* XRoseAppDelegate.h */; };
-		B474B40605CBFEBD00F63AE9 /* XRoseAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B474B40405CBFEBD00F63AE9 /* XRoseAppDelegate.m */; };
 		B47CA2F105C6C5470060A30C /* XRPropertyInspector.h in Headers */ = {isa = PBXBuildFile; fileRef = B47CA2EF05C6C5470060A30C /* XRPropertyInspector.h */; };
 		B47CA2F205C6C5470060A30C /* XRPropertyInspector.m in Sources */ = {isa = PBXBuildFile; fileRef = B47CA2F005C6C5470060A30C /* XRPropertyInspector.m */; };
 		B47CA33205C6C8E90060A30C /* infoicon.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B47CA33105C6C8E90060A30C /* infoicon.tiff */; };
@@ -227,6 +226,7 @@
 		B411E84B05C397D000C22F3E /* XREncodingAccessoryView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XREncodingAccessoryView.m; sourceTree = "<group>"; };
 		B41266682B6EDAD100E1C385 /* PaleoRose-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PaleoRose-Bridging-Header.h"; sourceTree = "<group>"; };
 		B41266692B6EDAD200E1C385 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		B41266702B6EDF4C00E1C385 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B416A00E05F2D77500821225 /* XRose Help */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "XRose Help"; sourceTree = "<group>"; };
 		B41D283A094FC7CA008DF384 /* XRTableImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRTableImporter.h; sourceTree = "<group>"; };
 		B41D283B094FC7CA008DF384 /* XRTableImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRTableImporter.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -672,6 +672,7 @@
 				B41266692B6EDAD200E1C385 /* main.swift */,
 				B474B40305CBFEBD00F63AE9 /* XRoseAppDelegate.h */,
 				B474B40405CBFEBD00F63AE9 /* XRoseAppDelegate.m */,
+				B41266702B6EDF4C00E1C385 /* AppDelegate.swift */,
 				B442E69D2A48E9F300466763 /* PaleoRose-Bridging-Header.h */,
 				B4149FE42B24C2FA008AE5F4 /* Classes */,
 				B4149FF32B24C607008AE5F4 /* XRoseDocs */,
@@ -909,7 +910,6 @@
 				B47CA37A05C6CB150060A30C /* XREmptyInspectorController.h in Headers */,
 				B47CA41305C6D56D0060A30C /* XRGeometryInspector.h in Headers */,
 				B48B89FB05C794C500248F96 /* XRDataInspector.h in Headers */,
-				B474B40505CBFEBD00F63AE9 /* XRoseAppDelegate.h in Headers */,
 				B4BF9C1505CD6B110047E8CF /* XRGridInspector.h in Headers */,
 				B4F929FD05D35D3A00EAAED0 /* XRLayerCore.h in Headers */,
 				B452504D05D427F1008338E8 /* XRCoreInspector.h in Headers */,
@@ -1090,13 +1090,13 @@
 				B47CA41405C6D56D0060A30C /* XRGeometryInspector.m in Sources */,
 				B48B89FC05C794C500248F96 /* XRDataInspector.m in Sources */,
 				B4A82FA82A07FB7300790052 /* LITMPercentFormatter.m in Sources */,
-				B474B40605CBFEBD00F63AE9 /* XRoseAppDelegate.m in Sources */,
 				B4BF9C1605CD6B110047E8CF /* XRGridInspector.m in Sources */,
 				B4F929FE05D35D3A00EAAED0 /* XRLayerCore.m in Sources */,
 				B452504E05D427F1008338E8 /* XRCoreInspector.m in Sources */,
 				B4950F0105DD286A00C711DC /* XRGraphicCircleLabel.m in Sources */,
 				B414A00D2B24CD24008AE5F4 /* XRStatistic.m in Sources */,
 				B4E5F8C105FC63A00011788E /* XRFileParser.m in Sources */,
+				B41266712B6EDF4C00E1C385 /* AppDelegate.swift in Sources */,
 				B4E5F90E05FC679E0011788E /* XRFileParser1.m in Sources */,
 				B40C43C6060545BD00353928 /* XRLayerLineArrow.m in Sources */,
 				B46C6D2A0607F2A2000620E7 /* XRVectorInspector.m in Sources */,
