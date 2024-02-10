@@ -1,7 +1,10 @@
 //
+// ApplicationDefaults.swift
+// PaleoRose
+//
 // MIT License
 //
-// Copyright (c) 2005 to present Thomas L. Moore.
+// Copyright (c) 2024 to present Thomas L. Moore.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,24 +23,22 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-#import "XRoseAppDelegate.h"
 
-@implementation XRoseAppDelegate
+import Foundation
 
-+ (void)initialize{
-	
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSDictionary *appDefaults = [NSDictionary
-        dictionaryWithObject:[NSNumber numberWithInt:0] forKey:@"vectorCalculationMethod"];
-	
-    [defaults registerDefaults:appDefaults];
+class ApplicationDefaults {
+
+    enum ApplicationDefaultKey: String {
+        case vectorCalculationMethod
+    }
+
+    private let userDefaults = UserDefaults.standard
+
+    init() {
+        let defaultValues: [String: Any] = [
+            ApplicationDefaultKey.vectorCalculationMethod.rawValue: 0
+        ]
+        userDefaults.register(defaults: defaultValues)
+    }
+
 }
-
-
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
-{
-	[[NSColorPanel sharedColorPanel] setShowsAlpha:YES];
-}
-
-
-@end
