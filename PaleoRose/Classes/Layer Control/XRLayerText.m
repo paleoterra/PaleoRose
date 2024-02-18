@@ -35,6 +35,8 @@
 #import "LITMXMLTree.h"
 #import "LITMXMLBinaryEncoding.h"
 
+static NSLayoutManager *sharedDrawingLayoutManager(void);
+
 @implementation XRLayerText
 -(id)initWithGeometryController:(XRGeometryController *)aController parentView:(NSView *)view
 {
@@ -78,7 +80,7 @@
 	return _contents;
 }
 
-static NSLayoutManager *sharedDrawingLayoutManager() {
+static NSLayoutManager *sharedDrawingLayoutManager(void) {
     // This method returns an NSLayoutManager that can be used to draw the contents of a SKTTextArea.
     static NSLayoutManager *sharedLM = nil;
     if (!sharedLM) {

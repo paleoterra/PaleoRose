@@ -269,7 +269,7 @@
         if(result == NSModalResponseOK)
         {
             NSMutableString *theString = [[NSMutableString alloc] init];
-            [theString appendFormat:@"XRose STATISTICS REPORT FOR FILE: %@\n%@\n\n\n" ,[self fileURL] ,[[NSDate date] descriptionWithCalendarFormat:@"%Y-%m-%d %H:%M:%S" timeZone:nil locale:nil]];
+            [theString appendFormat:@"XRose STATISTICS REPORT FOR FILE: %@\n%@\n\n\n" ,[self fileURL] ,[[NSDate date] descriptionWithLocale:nil]];
             //now append general geometry issues
             [theString appendFormat:@"Geometry:\n\tSector Count: %i\n\tSector Size (degrees): %f\n\n",[(XRGeometryController *)[[[self windowControllers] objectAtIndex:0] geometryController]  sectorCount],[(XRGeometryController *)[[[self windowControllers] objectAtIndex:0] geometryController]  sectorSize]];
             //have table controller append info
