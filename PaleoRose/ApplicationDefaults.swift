@@ -27,7 +27,6 @@
 import Foundation
 
 class ApplicationDefaults {
-
     enum ApplicationDefaultKey: String {
         case vectorCalculationMethod
     }
@@ -40,5 +39,4 @@ class ApplicationDefaults {
         ]
         userDefaults.register(defaults: defaultValues)
     }
-
 }

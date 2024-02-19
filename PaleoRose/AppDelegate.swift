@@ -29,7 +29,7 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
     private let applicationDefaults = ApplicationDefaults()
 
-    func applicationDidFinishLaunching(_ notification: Notification) {
+    func applicationDidFinishLaunching(_: Notification) {
         NSColorPanel.shared.showsAlpha = true
     }
 }
