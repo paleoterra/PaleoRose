@@ -58,6 +58,8 @@
 
 @property (readwrite) sqlite3* inMemoryStore;
 @property (readwrite) BOOL didLoad;
+
+@property (weak, nonatomic) XRoseWindowController *mainWindowController;
 @end
 
 @implementation XRoseDocument
@@ -118,9 +120,9 @@
 -(BOOL)writeToURL:(NSURL *)url ofType:(NSString *)typeName error:(NSError * _Nullable __autoreleasing *)outError
 {
     NSString *fileName = [url path];//temp save path
-    [[(XRoseWindowController *)[[self windowControllers] objectAtIndex:0] geometryController]  saveToSQLDB:self.inMemoryStore];
-    [(XRoseWindowController *)[[self windowControllers] objectAtIndex:0]  saveToSQLDB:self.inMemoryStore];
-    [(XRoseTableController *)[(XRoseWindowController *)[[self windowControllers] objectAtIndex:0] tableController] saveToSQLDB:self.inMemoryStore];
+    [[self.mainWindowController geometryController]  saveToSQLDB:self.inMemoryStore];
+    [self.mainWindowController  saveToSQLDB:self.inMemoryStore];
+    [(XRoseTableController *)[self.mainWindowController tableController] saveToSQLDB:self.inMemoryStore];
     [self writeInMemoryStoreToPath:fileName];
     return YES;
 }
@@ -154,6 +156,7 @@
 {
     XRoseWindowController *aController = [[XRoseWindowController alloc] initWithWindowNibName:@"XRoseDocument"];
     [self addWindowController:aController];
+    _mainWindowController = aController;
     [[NSNotificationCenter defaultCenter] addObserver:aController selector:@selector(importerCompleted:) name:@"XRTableListChanged" object:nil];
 }
 
@@ -184,7 +187,7 @@
 #pragma mark - Handling User Actions
 
 - (void)printDocument:(id)sender {
-    [[NSPrintOperation printOperationWithView:[[[self windowControllers] objectAtIndex:0] mainView] printInfo:[self printInfo]] runOperation];
+    [[NSPrintOperation printOperationWithView:[self.mainWindowController mainView] printInfo:[self printInfo]] runOperation];
 }
 
 #pragma mark - Closing the Document
@@ -227,11 +230,11 @@
 {
     if(self.didLoad) {
         [self loadDatasetsFromDB:self.inMemoryStore];
-        [[(XRoseWindowController *)[[self windowControllers] objectAtIndex:0] geometryController]  setValuesFromSQLDB:self.inMemoryStore];
+        [[self.mainWindowController geometryController]  setValuesFromSQLDB:self.inMemoryStore];
 
-        [(XRoseWindowController *)[[self windowControllers] objectAtIndex:0]  setValuesFromSQLDB:self.inMemoryStore];
+        [self.mainWindowController  setValuesFromSQLDB:self.inMemoryStore];
 
-        [(XRoseTableController *)[(XRoseWindowController *)[[self windowControllers] objectAtIndex:0]  tableController] configureControllerWithSQL:self.inMemoryStore withDataSets:self.dataSets];
+        [(XRoseTableController *)[self.mainWindowController  tableController] configureControllerWithSQL:self.inMemoryStore withDataSets:self.dataSets];
     }
     else {
 
@@ -257,13 +260,13 @@
 {
 	if(self.inMemoryStore != NULL)
 	{
-		[[[self windowControllers] objectAtIndex:0]  setValuesFromSQLDB:self.inMemoryStore];
+		[self.mainWindowController  setValuesFromSQLDB:self.inMemoryStore];
 	}
 	else
 	{
 		[self createDB];
 	}
-	[[[self windowControllers] objectAtIndex:0] setTableList:self.tables];
+	[self.mainWindowController setTableList:self.tables];
 	[self discoverTables];
 }
 
@@ -283,7 +286,7 @@
     else
         controller = [[XRMakeDatasetController alloc] initWithTableArray:self.tables inMemoryDocument:self.inMemoryStore];
     self.currentSheetController = controller;
-    [[[[self windowControllers] objectAtIndex:0] window]
+    [[self.mainWindowController window]
      beginSheet:[controller window]
      completionHandler:^(NSModalResponse returnCode) {
         if(returnCode == NSModalResponseOK)
@@ -297,8 +300,8 @@
             if(aSet)
             {
                 [self.dataSets addObject:aSet];
-                [(XRoseTableController *)[[[self windowControllers] objectAtIndex:0] tableController] addDataLayerForSet:aSet];
-                //[[self undoManager] registerUndoWithTarget:[[[self windowControllers] objectAtIndex:0] tableController] selector:@selector(deleteLayer:) object:[[[[self windowControllers] objectAtIndex:0] tableController]lastLayer]];
+                [(XRoseTableController *)[self.mainWindowController tableController] addDataLayerForSet:aSet];
+                //[[self undoManager] registerUndoWithTarget:[self.mainWindowController tableController] selector:@selector(deleteLayer:) object:[[self.mainWindowController tableController]lastLayer]];
                 //[[self undoManager] setActionName:@"Add Data Layer"];
                 [self updateChangeCount:NSChangeDone];
             }
@@ -312,12 +315,12 @@
 
 -(IBAction)copyPDFImage:(id)sender
 {
-    [[[self windowControllers] objectAtIndex:0] copyPDFToPasteboard];
+    [self.mainWindowController copyPDFToPasteboard];
 }
 
 -(IBAction)copyTIFFImage:(id)sender
 {
-    [[[self windowControllers] objectAtIndex:0] copyPDFToPasteboard];
+    [self.mainWindowController copyPDFToPasteboard];
 }
 
 -(IBAction)exportImage:(id)sender
@@ -334,14 +337,14 @@
     else
     {
         baseName = NSHomeDirectory();
-        baseName = [baseName stringByAppendingPathComponent:[[[[self windowControllers] objectAtIndex:0] window] title]];
+        baseName = [baseName stringByAppendingPathComponent:[[self.mainWindowController window] title]];
     }
     [sp setDirectoryURL:[NSURL fileURLWithPath:[baseName stringByDeletingLastPathComponent]]];
-    [sp beginSheetModalForWindow:[[[self windowControllers] objectAtIndex:0] window] completionHandler:^(NSInteger result) {
+    [sp beginSheetModalForWindow:[self.mainWindowController window] completionHandler:^(NSInteger result) {
         if(result == NSModalResponseOK)
         {
             NSData *targetData;
-            if((targetData = [(XRoseView *)[[[self windowControllers] objectAtIndex:0]mainView] imageDataForType:[[sp URL] pathExtension]]))
+            if((targetData = [(XRoseView *)[self.mainWindowController mainView] imageDataForType:[[sp URL] pathExtension]]))
             {
                 [[NSFileManager defaultManager] createFileAtPath:[[sp URL] path] contents:targetData attributes:nil];
             }
@@ -354,18 +357,18 @@
     NSSavePanel *sp = [NSSavePanel savePanel];
     __block NSString *basename = [[[self fileURL] path ]lastPathComponent];
     if(!basename)
-        basename = [[[[self windowControllers] objectAtIndex:0] window] title];
+        basename = [[self.mainWindowController window] title];
     [sp setAllowedFileTypes:@[@"txt"]];
     [sp setDirectoryURL:[[self fileURL] URLByDeletingLastPathComponent]];
-    [sp beginSheetModalForWindow:[[[self windowControllers] objectAtIndex:0] window] completionHandler:^(NSInteger result) {
+    [sp beginSheetModalForWindow:[self.mainWindowController window] completionHandler:^(NSInteger result) {
         if(result == NSModalResponseOK)
         {
             NSMutableString *theString = [[NSMutableString alloc] init];
             [theString appendFormat:@"XRose STATISTICS REPORT FOR FILE: %@\n%@\n\n\n" ,[self fileURL] ,[[NSDate date] descriptionWithLocale:nil]];
             //now append general geometry issues
-            [theString appendFormat:@"Geometry:\n\tSector Count: %i\n\tSector Size (degrees): %f\n\n",[(XRGeometryController *)[[[self windowControllers] objectAtIndex:0] geometryController]  sectorCount],[(XRGeometryController *)[[[self windowControllers] objectAtIndex:0] geometryController]  sectorSize]];
+            [theString appendFormat:@"Geometry:\n\tSector Count: %i\n\tSector Size (degrees): %f\n\n",[(XRGeometryController *)[self.mainWindowController geometryController]  sectorCount],[(XRGeometryController *)[self.mainWindowController geometryController]  sectorSize]];
             //have table controller append info
-            [theString appendString:[(XRoseTableController *)[[[self windowControllers] objectAtIndex:0] tableController] generateStatisticsString]];
+            [theString appendString:[(XRoseTableController *)[self.mainWindowController tableController] generateStatisticsString]];
             if([[NSFileManager defaultManager] fileExistsAtPath:[[sp URL] path]])
                 [[NSFileManager defaultManager] removeItemAtPath:[[sp URL] path] error:nil];
             [[NSFileManager defaultManager] createFileAtPath:[[sp URL] path] contents:[theString dataUsingEncoding:NSASCIIStringEncoding] attributes:nil];
@@ -476,7 +479,7 @@
         [self presentError:theError];
     }
     if([[self windowControllers] count] > 0){
-        [[[self windowControllers] objectAtIndex:0] SQLInitialSaveToDatabase:self.inMemoryStore];
+        [self.mainWindowController SQLInitialSaveToDatabase:self.inMemoryStore];
     }
 
 
@@ -564,7 +567,7 @@
     }
 
     if([[self windowControllers] count]) {
-        [[[[self windowControllers] objectAtIndex:0] geometryController] SQLInitialSaveToDatabase:self.inMemoryStore];
+        [[self.mainWindowController geometryController] SQLInitialSaveToDatabase:self.inMemoryStore];
     }
 
 }
@@ -643,7 +646,7 @@
         [self presentError:theError];
     }
     sqlite3_finalize(stmt);
-    [[[self windowControllers] objectAtIndex:0] updateTable];
+    [self.mainWindowController updateTable];
 }
 
 -(void)loadDatasetsFromDB:(sqlite3 *)db
@@ -684,7 +687,7 @@
     NSOpenPanel *op = [NSOpenPanel openPanel];
     [op setAllowsMultipleSelection:NO]; //this should change as the code matures
     [op setAllowedFileTypes:[NSArray arrayWithObjects:@"txt",@"xml",@"XML",nil]];
-    [op beginSheetModalForWindow:[[[self windowControllers] objectAtIndex:0] window] completionHandler:^(NSInteger result) {
+    [op beginSheetModalForWindow:[self.mainWindowController window] completionHandler:^(NSInteger result) {
         if(result == NSModalResponseOK)
         {
             NSEnumerator *anEnum = [[op URLs] objectEnumerator];
@@ -694,7 +697,7 @@
                 [op close];
                 [self.tableImporter importTableFromFile:aPath forDocument:self] ;
                 //NSLog(@"***back at document***");
-                [[[self windowControllers] objectAtIndex:0] updateTable];
+                [self.mainWindowController updateTable];
 
 
             }
@@ -720,9 +723,9 @@
 {
     NSMutableDictionary *theDict = [[NSMutableDictionary alloc] init];
     //NSLog(@"geometry dictionary");
-    [theDict setObject:[(XRGeometryController *)[[[self windowControllers] objectAtIndex:0] geometryController] geometrySettings] forKey:@"geometrySettings"];
+    [theDict setObject:[(XRGeometryController *)[self.mainWindowController geometryController] geometrySettings] forKey:@"geometrySettings"];
     //NSLog(@"layers dictionary");
-    [theDict setObject:[(XRoseTableController *)[[[self windowControllers] objectAtIndex:0] tableController] layersSettings] forKey:@"layersSettings"];
+    [theDict setObject:[(XRoseTableController *)[self.mainWindowController tableController] layersSettings] forKey:@"layersSettings"];
     //NSLog(@"end layers");
     return [NSDictionary dictionaryWithDictionary:theDict];
 }
@@ -740,10 +743,10 @@
         [dataSets addChild:[aSet treeForVersion:version]];
     }
     [rootObject addChild:dataSets];
-    [rootObject addChild:[[[self windowControllers] objectAtIndex:0] windowControllerXMLSettings]];
-    [rootObject addChild:[(XRGeometryController *)[[[self windowControllers] objectAtIndex:0] geometryController] xmlTreeForVersion:version]];
-    [rootObject addChild:[(XRoseTableController *)[[[self windowControllers] objectAtIndex:0] tableController]xmlTreeForVersion:version]];
-    [rootObject addChild:[(XRoseView *)[[[self windowControllers] objectAtIndex:0]mainView] xmlTreeForPreview]];
+    [rootObject addChild:[self.mainWindowController windowControllerXMLSettings]];
+    [rootObject addChild:[(XRGeometryController *)[self.mainWindowController geometryController] xmlTreeForVersion:version]];
+    [rootObject addChild:[(XRoseTableController *)[self.mainWindowController tableController]xmlTreeForVersion:version]];
+    [rootObject addChild:[(XRoseView *)[self.mainWindowController tableController] xmlTreeForPreview]];
     return rootObject;
 }
 
