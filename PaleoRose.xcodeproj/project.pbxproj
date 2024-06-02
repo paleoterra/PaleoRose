@@ -25,7 +25,6 @@
 		B411E7F505C396A400C22F3E /* XRAppendDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = B411E7F205C396A400C22F3E /* XRAppendDialogController.m */; };
 		B411E84C05C397D000C22F3E /* XREncodingAccessoryView.h in Headers */ = {isa = PBXBuildFile; fileRef = B411E84A05C397D000C22F3E /* XREncodingAccessoryView.h */; };
 		B411E84D05C397D000C22F3E /* XREncodingAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = B411E84B05C397D000C22F3E /* XREncodingAccessoryView.m */; };
-		B412666B2B6EDB1800E1C385 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41266692B6EDAD200E1C385 /* main.swift */; };
 		B41266712B6EDF4C00E1C385 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41266702B6EDF4C00E1C385 /* AppDelegate.swift */; };
 		B41266732B6EE09300E1C385 /* ApplicationDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41266722B6EE09300E1C385 /* ApplicationDefaults.swift */; };
 		B414A00D2B24CD24008AE5F4 /* XRStatistic.m in Sources */ = {isa = PBXBuildFile; fileRef = B441FEFC05CB725300F9A0F9 /* XRStatistic.m */; };
@@ -223,7 +222,6 @@
 		B411E84A05C397D000C22F3E /* XREncodingAccessoryView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XREncodingAccessoryView.h; sourceTree = "<group>"; };
 		B411E84B05C397D000C22F3E /* XREncodingAccessoryView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XREncodingAccessoryView.m; sourceTree = "<group>"; };
 		B41266682B6EDAD100E1C385 /* PaleoRose-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PaleoRose-Bridging-Header.h"; sourceTree = "<group>"; };
-		B41266692B6EDAD200E1C385 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		B41266702B6EDF4C00E1C385 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B41266722B6EE09300E1C385 /* ApplicationDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationDefaults.swift; sourceTree = "<group>"; };
 		B416A00E05F2D77500821225 /* XRose Help */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "XRose Help"; sourceTree = "<group>"; };
@@ -668,7 +666,6 @@
 			children = (
 				32DBCF750370BD2300C91783 /* PaleoRose_Prefix.pch */,
 				B442674F2B3F881300749923 /* Info.plist */,
-				B41266692B6EDAD200E1C385 /* main.swift */,
 				B41266702B6EDF4C00E1C385 /* AppDelegate.swift */,
 				B41266722B6EE09300E1C385 /* ApplicationDefaults.swift */,
 				B442E69D2A48E9F300466763 /* PaleoRose-Bridging-Header.h */,
@@ -1143,7 +1140,6 @@
 				B46C6D2A0607F2A2000620E7 /* XRVectorInspector.m in Sources */,
 				B4A82FA52A07FA8900790052 /* LITMXMLParser.m in Sources */,
 				B4F08862060914150000CF7A /* XRVStatCreatePanelController.m in Sources */,
-				B412666B2B6EDB1800E1C385 /* main.swift in Sources */,
 				B464E643060956DE009C1C89 /* XRGeometryPropertyInspector.m in Sources */,
 				B4324D0B06187FFF0083AE8A /* XRLayerText.m in Sources */,
 				B4A82F982A07F87A00790052 /* LITMXMLTree.m in Sources */,
