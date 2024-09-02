@@ -43,6 +43,8 @@
 		B4324D0B06187FFF0083AE8A /* XRLayerText.m in Sources */ = {isa = PBXBuildFile; fileRef = B4324D0906187FFF0083AE8A /* XRLayerText.m */; };
 		B435676C096DA4C000DCF143 /* XRPreferencePanelController.h in Headers */ = {isa = PBXBuildFile; fileRef = B435676A096DA4C000DCF143 /* XRPreferencePanelController.h */; };
 		B435676D096DA4C000DCF143 /* XRPreferencePanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = B435676B096DA4C000DCF143 /* XRPreferencePanelController.m */; };
+		B439AB372C83CF7900252574 /* DocumentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B439AB362C83CF7900252574 /* DocumentModel.swift */; };
+		B439AB392C83D01700252574 /* InMemoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B439AB382C83D01700252574 /* InMemoryStore.swift */; };
 		B43D613906345207001B863E /* FStatisticController.m in Sources */ = {isa = PBXBuildFile; fileRef = B43D613706345207001B863E /* FStatisticController.m */; };
 		B43D613A06345207001B863E /* FStatisticController.h in Headers */ = {isa = PBXBuildFile; fileRef = B43D613806345207001B863E /* FStatisticController.h */; };
 		B447A960062B002B00154420 /* logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B447A95F062B002B00154420 /* logo.jpg */; };
@@ -253,6 +255,8 @@
 		B4339BFE2B82BC360016F4E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FStatisticSheet.xib; sourceTree = "<group>"; };
 		B435676A096DA4C000DCF143 /* XRPreferencePanelController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRPreferencePanelController.h; sourceTree = "<group>"; };
 		B435676B096DA4C000DCF143 /* XRPreferencePanelController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XRPreferencePanelController.m; sourceTree = "<group>"; };
+		B439AB362C83CF7900252574 /* DocumentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentModel.swift; sourceTree = "<group>"; };
+		B439AB382C83D01700252574 /* InMemoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryStore.swift; sourceTree = "<group>"; };
 		B43D613706345207001B863E /* FStatisticController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = FStatisticController.m; sourceTree = "<group>"; };
 		B43D613806345207001B863E /* FStatisticController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = FStatisticController.h; sourceTree = "<group>"; };
 		B441FEFB05CB725300F9A0F9 /* XRStatistic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRStatistic.h; sourceTree = "<group>"; };
@@ -483,6 +487,7 @@
 		B4149FE92B24C401008AE5F4 /* Document */ = {
 			isa = PBXGroup;
 			children = (
+				B439AB352C83CEF500252574 /* Document Model */,
 				B414A0042B24CB37008AE5F4 /* XRose Document */,
 				B48345D005C23B3000E3F6B7 /* XRoseWindowController.h */,
 				B48345D105C23B3000E3F6B7 /* XRoseWindowController.m */,
@@ -860,6 +865,15 @@
 			path = "Property Inspector";
 			sourceTree = "<group>";
 		};
+		B439AB352C83CEF500252574 /* Document Model */ = {
+			isa = PBXGroup;
+			children = (
+				B439AB362C83CF7900252574 /* DocumentModel.swift */,
+				B439AB382C83D01700252574 /* InMemoryStore.swift */,
+			);
+			path = "Document Model";
+			sourceTree = "<group>";
+		};
 		B4B0BB661E7E41C900F392DA /* Unit Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -1103,6 +1117,7 @@
 			files = (
 				B48345CF05C238B500E3F6B7 /* XRoseDocument.m in Sources */,
 				B48345D305C23B3000E3F6B7 /* XRoseWindowController.m in Sources */,
+				B439AB372C83CF7900252574 /* DocumentModel.swift in Sources */,
 				B41266732B6EE09300E1C385 /* ApplicationDefaults.swift in Sources */,
 				B48345D705C23B3D00E3F6B7 /* XRoseTableController.m in Sources */,
 				B48345F105C23CA100E3F6B7 /* XRoseView.m in Sources */,
@@ -1127,6 +1142,7 @@
 				B47CA37905C6CB150060A30C /* XREmptyInspectorController.m in Sources */,
 				B47CA41405C6D56D0060A30C /* XRGeometryInspector.m in Sources */,
 				B48B89FC05C794C500248F96 /* XRDataInspector.m in Sources */,
+				B439AB392C83D01700252574 /* InMemoryStore.swift in Sources */,
 				B4A82FA82A07FB7300790052 /* LITMPercentFormatter.m in Sources */,
 				B4BF9C1605CD6B110047E8CF /* XRGridInspector.m in Sources */,
 				B4F929FE05D35D3A00EAAED0 /* XRLayerCore.m in Sources */,

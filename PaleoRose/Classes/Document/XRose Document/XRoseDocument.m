@@ -44,6 +44,7 @@
 #import <Security/AuthSession.h>
 #import "XRTableImporter.h"
 #import <os/activity.h>
+#import <PaleoRose-Swift.h>
 
 @interface XRoseDocument()
 
@@ -56,7 +57,8 @@
 @property (nonatomic) NSMutableArray *tables;
 
 
-@property (readwrite) sqlite3* inMemoryStore;
+//@property (readwrite) sqlite3* inMemoryStore;
+@property (readwrite) DocumentModel* documentModel;
 @property (readwrite) BOOL didLoad;
 
 @property (weak, nonatomic) XRoseWindowController *mainWindowController;
@@ -73,15 +75,11 @@
 		_dataSets = [[NSMutableArray alloc] init];
 		_tables = [[NSMutableArray alloc] init];
         _tableImporter = [[XRTableImporter alloc] init];
-        sqlite3_open(":memory:", &_inMemoryStore);
+        _documentModel = [[DocumentModel alloc] initInMemoryStore:[[InMemoryStore alloc] init]];
         [self createDB];
         _didLoad = NO;
 	}
     return self;
-}
-
-- (void)dealloc {
-    sqlite3_close(_inMemoryStore);
 }
 
 #pragma mark - Reading the Document's Content
@@ -105,7 +103,7 @@
     returnCode = sqlite3_open([sourcePath cStringUsingEncoding:NSUTF8StringEncoding], &sourceFile);
 
     if (returnCode == SQLITE_OK) {
-        sqliteBackup = sqlite3_backup_init(self.inMemoryStore, "main", sourceFile, "main");
+        sqliteBackup = sqlite3_backup_init([self.documentModel store], "main", sourceFile, "main");
         if (sqliteBackup) {
             (void)sqlite3_backup_step(sqliteBackup, -1);
             (void)sqlite3_backup_finish(sqliteBackup);
@@ -120,9 +118,9 @@
 -(BOOL)writeToURL:(NSURL *)url ofType:(NSString *)typeName error:(NSError * _Nullable __autoreleasing *)outError
 {
     NSString *fileName = [url path];//temp save path
-    [[self.mainWindowController geometryController]  saveToSQLDB:self.inMemoryStore];
-    [self.mainWindowController  saveToSQLDB:self.inMemoryStore];
-    [(XRoseTableController *)[self.mainWindowController tableController] saveToSQLDB:self.inMemoryStore];
+    [[self.mainWindowController geometryController]  saveToSQLDB:[self.documentModel store]];
+    [self.mainWindowController  saveToSQLDB:[self.documentModel store]];
+    [(XRoseTableController *)[self.mainWindowController tableController] saveToSQLDB:[self.documentModel store]];
     [self writeInMemoryStoreToPath:fileName];
     return YES;
 }
@@ -136,7 +134,7 @@
     returnCode = sqlite3_open([targetPath cStringUsingEncoding:NSUTF8StringEncoding], &targetFile);
 
     if (returnCode == SQLITE_OK) {
-        sqliteBackup = sqlite3_backup_init(targetFile, "main", self.inMemoryStore, "main");
+        sqliteBackup = sqlite3_backup_init(targetFile, "main", [self.documentModel store], "main");
         if (sqliteBackup) {
             (void)sqlite3_backup_step(sqliteBackup, -1);
             (void)sqlite3_backup_finish(sqliteBackup);
@@ -229,12 +227,12 @@
 -(void)awakeFromNib
 {
     if(self.didLoad) {
-        [self loadDatasetsFromDB:self.inMemoryStore];
-        [[self.mainWindowController geometryController]  setValuesFromSQLDB:self.inMemoryStore];
+        [self loadDatasetsFromDB:[self.documentModel store]];
+        [[self.mainWindowController geometryController]  setValuesFromSQLDB:[self.documentModel store]];
 
-        [self.mainWindowController  setValuesFromSQLDB:self.inMemoryStore];
+        [self.mainWindowController  setValuesFromSQLDB:[self.documentModel store]];
 
-        [(XRoseTableController *)[self.mainWindowController  tableController] configureControllerWithSQL:self.inMemoryStore withDataSets:self.dataSets];
+        [(XRoseTableController *)[self.mainWindowController  tableController] configureControllerWithSQL:[self.documentModel store] withDataSets:self.dataSets];
     }
     else {
 
@@ -246,7 +244,7 @@
 
 -(sqlite3 *)documentInMemoryStore
 {
-    return self.inMemoryStore;
+    return [self.documentModel store];
 }
 
 -(NSArray *)tableList
@@ -258,9 +256,9 @@
 
 -(void)configureDocument
 {
-	if(self.inMemoryStore != NULL)
+	if([self.documentModel store] != NULL)
 	{
-		[self.mainWindowController  setValuesFromSQLDB:self.inMemoryStore];
+		[self.mainWindowController  setValuesFromSQLDB:[self.documentModel store]];
 	}
 	else
 	{
@@ -282,9 +280,9 @@
 {
     XRMakeDatasetController *controller;
     if([self fileURL])
-        controller = [[XRMakeDatasetController alloc] initWithTableArray:self.tables inMemoryDocument:self.inMemoryStore];
+        controller = [[XRMakeDatasetController alloc] initWithTableArray:self.tables inMemoryDocument:[self.documentModel store]];
     else
-        controller = [[XRMakeDatasetController alloc] initWithTableArray:self.tables inMemoryDocument:self.inMemoryStore];
+        controller = [[XRMakeDatasetController alloc] initWithTableArray:self.tables inMemoryDocument:[self.documentModel store]];
     self.currentSheetController = controller;
     [[self.mainWindowController window]
      beginSheet:[controller window]
@@ -471,7 +469,7 @@
 
     //create window controller table
     sqlStatement = @"CREATE TABLE _windowController ( height    float, width    float )";
-    error = sqlite3_exec(self.inMemoryStore,[sqlStatement UTF8String],NULL,NULL,&errorMsg);
+    error = sqlite3_exec([self.documentModel store],[sqlStatement UTF8String],NULL,NULL,&errorMsg);
     if(error!=SQLITE_OK)
     {
         NSError *theError = [NSError errorWithDomain:@"SQLITE" code:error userInfo:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSString stringWithUTF8String:errorMsg],nil]
@@ -479,13 +477,13 @@
         [self presentError:theError];
     }
     if([[self windowControllers] count] > 0){
-        [self.mainWindowController SQLInitialSaveToDatabase:self.inMemoryStore];
+        [self.mainWindowController SQLInitialSaveToDatabase:[self.documentModel store]];
     }
 
 
     //create geometryController table
     sqlStatement = @"CREATE TABLE _geometryController ( isEqualArea bool, isPercent bool, MAXCOUNT int, MAXPERCENT float, HOLLOWCORE float, SECTORSIZE float, STARTINGANGLE float, SECTORCOUNT int, RELATIVESIZE float)";
-    error = sqlite3_exec(self.inMemoryStore,[sqlStatement UTF8String],NULL,NULL,&errorMsg);
+    error = sqlite3_exec([self.documentModel store],[sqlStatement UTF8String],NULL,NULL,&errorMsg);
     if(error!=SQLITE_OK)
     {
         NSError *theError = [NSError errorWithDomain:@"SQLITE" code:error userInfo:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSString stringWithUTF8String:errorMsg],nil]
@@ -494,7 +492,7 @@
     }
     //create layers table
     sqlStatement = @"CREATE TABLE _layers ( LAYERID INTEGER, TYPE TEXT, VISIBLE bool, ACTIVE bool, BIDIR bool, LAYER_NAME TEXT, LINEWEIGHT float, MAXCOUNT int, MAXPERCENT float, STROKECOLORID INTEGER, FILLCOLORID INTEGER)";
-    error = sqlite3_exec(self.inMemoryStore,[sqlStatement UTF8String],NULL,NULL,&errorMsg);
+    error = sqlite3_exec([self.documentModel store],[sqlStatement UTF8String],NULL,NULL,&errorMsg);
     if(error!=SQLITE_OK)
     {
         NSError *theError = [NSError errorWithDomain:@"SQLITE" code:error userInfo:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSString stringWithUTF8String:errorMsg],nil]
@@ -503,7 +501,7 @@
     }
     //create colors table
     sqlStatement = @"CREATE TABLE _colors ( COLORID INTEGER PRIMARY KEY, RED float, BLUE float, GREEN float, ALPHA float)";
-    error = sqlite3_exec(self.inMemoryStore,[sqlStatement UTF8String],NULL,NULL,&errorMsg);
+    error = sqlite3_exec([self.documentModel store],[sqlStatement UTF8String],NULL,NULL,&errorMsg);
     if(error!=SQLITE_OK)
     {
         NSError *theError = [NSError errorWithDomain:@"SQLITE" code:error userInfo:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSString stringWithUTF8String:errorMsg],nil]
@@ -512,7 +510,7 @@
     }
     //create datasets table
     sqlStatement = @"CREATE TABLE _datasets ( _id INTEGER PRIMARY KEY, NAME TEXT, TABLENAME TEXT, COLUMNNAME text, PREDICATE text,COMMENTS BLOB)";
-    error = sqlite3_exec(self.inMemoryStore,[sqlStatement UTF8String],NULL,NULL,&errorMsg);
+    error = sqlite3_exec([self.documentModel store],[sqlStatement UTF8String],NULL,NULL,&errorMsg);
     if(error!=SQLITE_OK)
     {
         NSError *theError = [NSError errorWithDomain:@"SQLITE" code:error userInfo:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSString stringWithUTF8String:errorMsg],nil]
@@ -522,7 +520,7 @@
 
     //create _layerText table
     sqlStatement = @"CREATE TABLE _layerText ( LAYERID INTEGER, CONTENTS BLOB, RECT_POINT_X float, RECT_POINT_Y float,RECT_SIZE_HEIGHT float,RECT_SIZE_WIDTH float)";
-    error = sqlite3_exec(self.inMemoryStore,[sqlStatement UTF8String],NULL,NULL,&errorMsg);
+    error = sqlite3_exec([self.documentModel store],[sqlStatement UTF8String],NULL,NULL,&errorMsg);
     if(error!=SQLITE_OK)
     {
         NSError *theError = [NSError errorWithDomain:@"SQLITE" code:error userInfo:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSString stringWithUTF8String:errorMsg],nil]
@@ -531,7 +529,7 @@
     }
     //create _layerLineArrow table
     sqlStatement = @"CREATE TABLE _layerLineArrow ( LAYERID INTEGER, DATASET integer, ARROWSIZE float, VECTORTYPE INTEGER,ARROWTYPE INTEGER,SHOWVECTOR bool,SHOWERROR bool)";
-    error = sqlite3_exec(self.inMemoryStore,[sqlStatement UTF8String],NULL,NULL,&errorMsg);
+    error = sqlite3_exec([self.documentModel store],[sqlStatement UTF8String],NULL,NULL,&errorMsg);
     if(error!=SQLITE_OK)
     {
         NSError *theError = [NSError errorWithDomain:@"SQLITE" code:error userInfo:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSString stringWithUTF8String:errorMsg],nil]
@@ -540,7 +538,7 @@
     }
     //create _layerCore table
     sqlStatement = @"CREATE TABLE _layerCore ( LAYERID INTEGER, RADIUS float, TYPE bool)";
-    error = sqlite3_exec(self.inMemoryStore,[sqlStatement UTF8String],NULL,NULL,&errorMsg);
+    error = sqlite3_exec([self.documentModel store],[sqlStatement UTF8String],NULL,NULL,&errorMsg);
     if(error!=SQLITE_OK)
     {
         NSError *theError = [NSError errorWithDomain:@"SQLITE" code:error userInfo:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSString stringWithUTF8String:errorMsg],nil]
@@ -549,7 +547,7 @@
     }
     //create _layerGrid table
     sqlStatement = @"CREATE TABLE _layerGrid ( LAYERID INTEGER, RINGS_ISFIXEDCOUNT bool, RINGS_VISIBLE bool, RINGS_LABELS bool,RINGS_FIXEDCOUNT  INTEGER, RINGS_COUNTINCREMENT INTEGER,RINGS_PERCENTINCREMENT  FLOAT, RINGS_LABELANGLE FLOAT, RINGS_FONTNAME text, RINGS_FONTSIZE float,RADIALS_COUNT INTEGER,RADIALS_ANGLE float,RADIALS_LABELALIGN integer,RADIALS_COMPASSPOINT integer,RADIALS_ORDER integer,RADIALS_FONT text,RADIALS_FONTSIZE float,RADIALS_SECTORLOCK bool, RADIALS_VISIBLE bool, RADIALS_ISPERCENT bool,RADIALS_TICKS bool,RADIALS_MINORTICKS bool,RADIALS_LABELS bool)";
-    error = sqlite3_exec(self.inMemoryStore,[sqlStatement UTF8String],NULL,NULL,&errorMsg);
+    error = sqlite3_exec([self.documentModel store],[sqlStatement UTF8String],NULL,NULL,&errorMsg);
     if(error!=SQLITE_OK)
     {
         NSError *theError = [NSError errorWithDomain:@"SQLITE" code:error userInfo:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSString stringWithUTF8String:errorMsg],nil]
@@ -558,7 +556,7 @@
     }
     //create _layerData table
     sqlStatement = @"CREATE TABLE _layerData ( LAYERID INTEGER, DATASET INTEGER, PLOTTYPE INTEGER, TOTALCOUNT INTEGER,DOTRADIUS  FLOAT)";
-    error = sqlite3_exec(self.inMemoryStore,[sqlStatement UTF8String],NULL,NULL,&errorMsg);
+    error = sqlite3_exec([self.documentModel store],[sqlStatement UTF8String],NULL,NULL,&errorMsg);
     if(error!=SQLITE_OK)
     {
         NSError *theError = [NSError errorWithDomain:@"SQLITE" code:error userInfo:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSString stringWithUTF8String:errorMsg],nil]
@@ -567,7 +565,7 @@
     }
 
     if([[self windowControllers] count]) {
-        [[self.mainWindowController geometryController] SQLInitialSaveToDatabase:self.inMemoryStore];
+        [[self.mainWindowController geometryController] SQLInitialSaveToDatabase:[self.documentModel store]];
     }
 
 }
@@ -627,7 +625,7 @@
     const char *zSql;
     NSString *sql = @"select tbl_name from sqlite_master where type = \"table\" AND tbl_name NOT LIKE \"_w%\" AND tbl_name NOT LIKE \"_g%\" AND tbl_name NOT LIKE \"_l%\" AND tbl_name NOT LIKE \"_c%\" AND tbl_name NOT LIKE \"_d%\"";
 
-    error = sqlite3_prepare(self.inMemoryStore,[sql UTF8String],-1,&stmt,&zSql);
+    error = sqlite3_prepare([self.documentModel store],[sql UTF8String],-1,&stmt,&zSql);
     if(error == SQLITE_OK)
     {
         [self.tables removeAllObjects];
@@ -641,7 +639,7 @@
     }
     else
     {
-        NSError *theError = [NSError errorWithDomain:@"SQLITE" code:error userInfo:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSString stringWithUTF8String:(char *)sqlite3_errmsg(self.inMemoryStore)],nil]
+        NSError *theError = [NSError errorWithDomain:@"SQLITE" code:error userInfo:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSString stringWithUTF8String:(char *)sqlite3_errmsg([self.documentModel store])],nil]
                                                                                                                forKeys:[NSArray arrayWithObjects:@"NSLocalizedFailureReasonErrorKey",nil]]];
         [self presentError:theError];
     }
@@ -786,7 +784,7 @@
     int error;
     char *errorMsg;
 
-    error = sqlite3_exec(self.inMemoryStore,[command UTF8String],nil,nil,&errorMsg);
+    error = sqlite3_exec([self.documentModel store],[command UTF8String],nil,nil,&errorMsg);
     if(error!=SQLITE_OK)
     {
         NSError *theError = [NSError errorWithDomain:@"SQLITE" code:error userInfo:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSString stringWithUTF8String:errorMsg],nil]
