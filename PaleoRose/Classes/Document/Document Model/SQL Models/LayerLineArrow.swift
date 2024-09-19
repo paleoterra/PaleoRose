@@ -1,5 +1,5 @@
 //
-// InMemoryStore.swift
+// LayerLineArrow.swift
 // PaleoRose
 //
 // MIT License
@@ -24,34 +24,37 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import CodableSQLiteNonThread
 import Foundation
-import SQLite3
 
-class InMemoryStore: NSObject {
-    private var sqliteStore: OpaquePointer?
+struct LayerLineArrow: TableRepresentable {
+    static var tableName: String = "_layerLineArrow"
 
-    deinit {
-        sqlite3_close(sqliteStore)
+    static var primaryKey: String?
+
+    var LAYERID: Int
+    var DATASET: Int
+    var ARROWSIZE: Float
+    var VECTORTYPE: Int
+    var ARROWTYPE: Int
+    var SHOWVECTOR: Bool
+    var SHOWERROR: Bool
+
+    // MARK: - TableRepresentable
+
+    static func createTableQuery() -> any QueryProtocol {
+        Query(sql: "CREATE TABLE IF NOT EXISTS _layerLineArrow ( LAYERID INTEGER, DATASET integer, ARROWSIZE float, VECTORTYPE INTEGER,ARROWTYPE INTEGER,SHOWVECTOR bool,SHOWERROR bool);")
     }
 
-    private func createStore() {
-        let result = sqlite3_open_v2(
-            UUID().uuidString,
-            &sqliteStore,
-            SQLITE_OPEN_MEMORY | SQLITE_OPEN_READWRITE,
-            nil
-        )
-        if result != SQLITE_OK {
-            print("In memory store failed to init")
-        }
+    static func insertQuery() -> any QueryProtocol {
+        Query(sql: "")
     }
 
-    @available(*, deprecated, message: "This code will become unavailable")
-    @objc func store() -> OpaquePointer? {
-        guard let sqliteStore else {
-            createStore()
-            return sqliteStore
-        }
-        return sqliteStore
+    static func updateQuery() -> any QueryProtocol {
+        Query(sql: "")
+    }
+
+    static func deleteQuery() -> any QueryProtocol {
+        Query(sql: "")
     }
 }

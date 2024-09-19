@@ -1,6 +1,6 @@
 //
-// InMemoryStore.swift
-// PaleoRose
+// CodableSQLNonThread.h
+// CodableSQLNonThread
 //
 // MIT License
 //
@@ -24,34 +24,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
-import SQLite3
+#import <Foundation/Foundation.h>
 
-class InMemoryStore: NSObject {
-    private var sqliteStore: OpaquePointer?
+//! Project version number for CodableSQLNonThread.
+FOUNDATION_EXPORT double CodableSQLNonThreadVersionNumber;
 
-    deinit {
-        sqlite3_close(sqliteStore)
-    }
+//! Project version string for CodableSQLNonThread.
+FOUNDATION_EXPORT const unsigned char CodableSQLNonThreadVersionString[];
 
-    private func createStore() {
-        let result = sqlite3_open_v2(
-            UUID().uuidString,
-            &sqliteStore,
-            SQLITE_OPEN_MEMORY | SQLITE_OPEN_READWRITE,
-            nil
-        )
-        if result != SQLITE_OK {
-            print("In memory store failed to init")
-        }
-    }
+// In this header, you should import all the public headers of your framework using statements like #import <CodableSQLNonThread/PublicHeader.h>
 
-    @available(*, deprecated, message: "This code will become unavailable")
-    @objc func store() -> OpaquePointer? {
-        guard let sqliteStore else {
-            createStore()
-            return sqliteStore
-        }
-        return sqliteStore
-    }
-}
+

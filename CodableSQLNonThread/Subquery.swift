@@ -1,5 +1,5 @@
 //
-// InMemoryStore.swift
+// Subquery.swift
 // PaleoRose
 //
 // MIT License
@@ -25,33 +25,9 @@
 // SOFTWARE.
 
 import Foundation
-import SQLite3
 
-class InMemoryStore: NSObject {
-    private var sqliteStore: OpaquePointer?
-
-    deinit {
-        sqlite3_close(sqliteStore)
-    }
-
-    private func createStore() {
-        let result = sqlite3_open_v2(
-            UUID().uuidString,
-            &sqliteStore,
-            SQLITE_OPEN_MEMORY | SQLITE_OPEN_READWRITE,
-            nil
-        )
-        if result != SQLITE_OK {
-            print("In memory store failed to init")
-        }
-    }
-
-    @available(*, deprecated, message: "This code will become unavailable")
-    @objc func store() -> OpaquePointer? {
-        guard let sqliteStore else {
-            createStore()
-            return sqliteStore
-        }
-        return sqliteStore
-    }
+/// Allows for custom queries for the Query Protocols
+public struct Subquery {
+    /// An array of any optional objects to be bound in an Sqlite call
+    public let bindables: [Any?]
 }

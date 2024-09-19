@@ -1,5 +1,5 @@
 //
-// InMemoryStore.swift
+// CommonSQL.swift
 // PaleoRose
 //
 // MIT License
@@ -24,34 +24,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import CodableSQLiteNonThread
 import Foundation
-import SQLite3
 
-class InMemoryStore: NSObject {
-    private var sqliteStore: OpaquePointer?
+enum CommonSQL: CaseIterable {
+    case tableNames
 
-    deinit {
-        sqlite3_close(sqliteStore)
-    }
-
-    private func createStore() {
-        let result = sqlite3_open_v2(
-            UUID().uuidString,
-            &sqliteStore,
-            SQLITE_OPEN_MEMORY | SQLITE_OPEN_READWRITE,
-            nil
-        )
-        if result != SQLITE_OK {
-            print("In memory store failed to init")
+    func query() -> QueryProtocol {
+        switch self {
+        case .tableNames:
+            // swiftlint:disable:next line_length
+            Query(sql: "select tbl_name from sqlite_master where type = \"table\" AND tbl_name NOT LIKE \"_w%\" AND tbl_name NOT LIKE \"_g%\" AND tbl_name NOT LIKE \"_l%\" AND tbl_name NOT LIKE \"_c%\" AND tbl_name NOT LIKE \"_d%\"")
         }
-    }
-
-    @available(*, deprecated, message: "This code will become unavailable")
-    @objc func store() -> OpaquePointer? {
-        guard let sqliteStore else {
-            createStore()
-            return sqliteStore
-        }
-        return sqliteStore
     }
 }

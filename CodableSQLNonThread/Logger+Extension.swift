@@ -1,6 +1,6 @@
 //
-// InMemoryStore.swift
-// PaleoRose
+// Logger+Extension.swift
+// CodableSQLiteNonThread
 //
 // MIT License
 //
@@ -25,33 +25,9 @@
 // SOFTWARE.
 
 import Foundation
-import SQLite3
+import OSLog
 
-class InMemoryStore: NSObject {
-    private var sqliteStore: OpaquePointer?
-
-    deinit {
-        sqlite3_close(sqliteStore)
-    }
-
-    private func createStore() {
-        let result = sqlite3_open_v2(
-            UUID().uuidString,
-            &sqliteStore,
-            SQLITE_OPEN_MEMORY | SQLITE_OPEN_READWRITE,
-            nil
-        )
-        if result != SQLITE_OK {
-            print("In memory store failed to init")
-        }
-    }
-
-    @available(*, deprecated, message: "This code will become unavailable")
-    @objc func store() -> OpaquePointer? {
-        guard let sqliteStore else {
-            createStore()
-            return sqliteStore
-        }
-        return sqliteStore
-    }
+@available(macOS 11.0, *)
+extension Logger {
+    static let codableLog = Logger(subsystem: "come.paleoterra.codableSqliteNonThread", category: "codablesql")
 }

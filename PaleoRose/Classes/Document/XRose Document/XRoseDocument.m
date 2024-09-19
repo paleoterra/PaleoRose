@@ -476,10 +476,6 @@
                                                                                                                forKeys:[NSArray arrayWithObjects:@"NSLocalizedFailureReasonErrorKey",nil]]];
         [self presentError:theError];
     }
-    if([[self windowControllers] count] > 0){
-        [self.mainWindowController SQLInitialSaveToDatabase:[self.documentModel store]];
-    }
-
 
     //create geometryController table
     sqlStatement = @"CREATE TABLE _geometryController ( isEqualArea bool, isPercent bool, MAXCOUNT int, MAXPERCENT float, HOLLOWCORE float, SECTORSIZE float, STARTINGANGLE float, SECTORCOUNT int, RELATIVESIZE float)";
@@ -565,6 +561,7 @@
     }
 
     if([[self windowControllers] count]) {
+        [self.mainWindowController SQLInitialSaveToDatabase:[self.documentModel store]];
         [[self.mainWindowController geometryController] SQLInitialSaveToDatabase:[self.documentModel store]];
     }
 
@@ -715,81 +712,4 @@
     }
 }
 
-#pragma mark - Unused?
-
--(NSDictionary *)documentStateDictionary
-{
-    NSMutableDictionary *theDict = [[NSMutableDictionary alloc] init];
-    //NSLog(@"geometry dictionary");
-    [theDict setObject:[(XRGeometryController *)[self.mainWindowController geometryController] geometrySettings] forKey:@"geometrySettings"];
-    //NSLog(@"layers dictionary");
-    [theDict setObject:[(XRoseTableController *)[self.mainWindowController tableController] layersSettings] forKey:@"layersSettings"];
-    //NSLog(@"end layers");
-    return [NSDictionary dictionaryWithDictionary:theDict];
-}
-
--(LITMXMLTree *)xmlDocumentTreeForVersion:(NSString *)version
-{
-    NSArray *keys = [NSArray arrayWithObject:@"VERSION"];
-    NSDictionary *aDict = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:version,nil] forKeys:keys];
-    LITMXMLTree *rootObject = [LITMXMLTree xmlTreeWithElementTag:@"XROSE" attributes:aDict attributeOrder:keys contents:nil];
-    NSEnumerator *anEnum = [self.dataSets objectEnumerator];
-    XRDataSet *aSet;
-    LITMXMLTree *dataSets = [LITMXMLTree xmlTreeWithElementTag:@"DATASETS"];
-    while(aSet = [anEnum nextObject])
-    {
-        [dataSets addChild:[aSet treeForVersion:version]];
-    }
-    [rootObject addChild:dataSets];
-    [rootObject addChild:[self.mainWindowController windowControllerXMLSettings]];
-    [rootObject addChild:[(XRGeometryController *)[self.mainWindowController geometryController] xmlTreeForVersion:version]];
-    [rootObject addChild:[(XRoseTableController *)[self.mainWindowController tableController]xmlTreeForVersion:version]];
-    [rootObject addChild:[(XRoseView *)[self.mainWindowController tableController] xmlTreeForPreview]];
-    return rootObject;
-}
-
--(void)createDataSetsWithXMLTree:(LITMXMLTree *)tree forVersion:(NSString *)version
-{
-
-    XRDataSet *aSet;
-    if(!tree)
-        return;
-
-    for(int i=0;i<[tree childCount];i++)
-    {
-        aSet = [[XRDataSet alloc] initWithXMLTree:[tree childAtIndex:i] forVersion:version];
-        [self.dataSets addObject:aSet];
-        aSet = nil;
-    }
-
-}
-
--(void)clearTableNamed:(NSString *)aTable inSQL:(sqlite3 *)db
-{
-    NSString *command = [NSString stringWithFormat:@"DELETE FROM \"%@\"",aTable];
-    int error;
-    char *errorMsg;
-    error = sqlite3_exec(db,[command UTF8String],nil,nil,&errorMsg);
-    if(error!=SQLITE_OK)
-    {
-        NSError *theError = [NSError errorWithDomain:@"SQLITE" code:error userInfo:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSString stringWithUTF8String:errorMsg],nil]
-                                                                                                               forKeys:[NSArray arrayWithObjects:@"NSLocalizedFailureReasonErrorKey",nil]]];
-        [self presentError:theError];
-    }
-}
-
--(void)clearSQLTableWithName:(NSString *)table
-{
-    NSString *command = [NSString stringWithFormat:@"DELETE FROM \"%@\"",table];
-    int error;
-    char *errorMsg;
-
-    error = sqlite3_exec([self.documentModel store],[command UTF8String],nil,nil,&errorMsg);
-    if(error!=SQLITE_OK)
-    {
-        NSError *theError = [NSError errorWithDomain:@"SQLITE" code:error userInfo:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSString stringWithUTF8String:errorMsg],nil]
-                                                                                                               forKeys:[NSArray arrayWithObjects:@"NSLocalizedFailureReasonErrorKey",nil]]];
-        [self presentError:theError];
-    }
-}
 @end

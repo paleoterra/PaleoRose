@@ -1,5 +1,5 @@
 //
-// InMemoryStore.swift
+// DataSet.swift
 // PaleoRose
 //
 // MIT License
@@ -24,34 +24,36 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import CodableSQLiteNonThread
 import Foundation
-import SQLite3
 
-class InMemoryStore: NSObject {
-    private var sqliteStore: OpaquePointer?
+struct DataSet: TableRepresentable {
+    static var tableName: String = "_datasets"
+    static var primaryKey: String? = "_id"
 
-    deinit {
-        sqlite3_close(sqliteStore)
+    // swiftlint:disable:next identifier_name
+    var _id: Int
+    var NAME: String
+    var TABLENAME: String
+    var COLUMNNAME: String
+    var PREDICATE: String
+    var COMMENTS: String
+
+    // MARK: - TableRepresentable
+
+    static func createTableQuery() -> any QueryProtocol {
+        Query(sql: "CREATE TABLE IF NOT EXISTS _datasets ( _id INTEGER PRIMARY KEY, NAME TEXT, TABLENAME TEXT, COLUMNNAME text, PREDICATE text,COMMENTS BLOB)")
     }
 
-    private func createStore() {
-        let result = sqlite3_open_v2(
-            UUID().uuidString,
-            &sqliteStore,
-            SQLITE_OPEN_MEMORY | SQLITE_OPEN_READWRITE,
-            nil
-        )
-        if result != SQLITE_OK {
-            print("In memory store failed to init")
-        }
+    static func insertQuery() -> any QueryProtocol {
+        Query(sql: "")
     }
 
-    @available(*, deprecated, message: "This code will become unavailable")
-    @objc func store() -> OpaquePointer? {
-        guard let sqliteStore else {
-            createStore()
-            return sqliteStore
-        }
-        return sqliteStore
+    static func updateQuery() -> any QueryProtocol {
+        Query(sql: "")
+    }
+
+    static func deleteQuery() -> any QueryProtocol {
+        Query(sql: "")
     }
 }

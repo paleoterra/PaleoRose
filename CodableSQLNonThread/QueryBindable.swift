@@ -1,6 +1,6 @@
 //
-// InMemoryStore.swift
-// PaleoRose
+// QueryBindable.swift
+// CodableSQLNonThread
 //
 // MIT License
 //
@@ -25,33 +25,12 @@
 // SOFTWARE.
 
 import Foundation
-import SQLite3
 
-class InMemoryStore: NSObject {
-    private var sqliteStore: OpaquePointer?
+/// For queries that use binding to set values
+public protocol QueryBindable {
+    /// Binding values to set in the query
+    var bindings: [[Any?]] { get set }
 
-    deinit {
-        sqlite3_close(sqliteStore)
-    }
-
-    private func createStore() {
-        let result = sqlite3_open_v2(
-            UUID().uuidString,
-            &sqliteStore,
-            SQLITE_OPEN_MEMORY | SQLITE_OPEN_READWRITE,
-            nil
-        )
-        if result != SQLITE_OK {
-            print("In memory store failed to init")
-        }
-    }
-
-    @available(*, deprecated, message: "This code will become unavailable")
-    @objc func store() -> OpaquePointer? {
-        guard let sqliteStore else {
-            createStore()
-            return sqliteStore
-        }
-        return sqliteStore
-    }
+    /// Array of subqueries
+    func subqueries() -> [Subquery]
 }

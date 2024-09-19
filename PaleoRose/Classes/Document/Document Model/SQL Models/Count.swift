@@ -1,5 +1,5 @@
 //
-// InMemoryStore.swift
+// Count.swift
 // PaleoRose
 //
 // MIT License
@@ -24,34 +24,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import CodableSQLiteNonThread
 import Foundation
-import SQLite3
 
-class InMemoryStore: NSObject {
-    private var sqliteStore: OpaquePointer?
-
-    deinit {
-        sqlite3_close(sqliteStore)
+struct Count: Codable {
+    enum CodingKeys: String, CodingKey {
+        case count = "COUNT(*)"
     }
 
-    private func createStore() {
-        let result = sqlite3_open_v2(
-            UUID().uuidString,
-            &sqliteStore,
-            SQLITE_OPEN_MEMORY | SQLITE_OPEN_READWRITE,
-            nil
-        )
-        if result != SQLITE_OK {
-            print("In memory store failed to init")
-        }
-    }
-
-    @available(*, deprecated, message: "This code will become unavailable")
-    @objc func store() -> OpaquePointer? {
-        guard let sqliteStore else {
-            createStore()
-            return sqliteStore
-        }
-        return sqliteStore
-    }
+    var count: Int
 }

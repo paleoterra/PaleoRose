@@ -1,6 +1,6 @@
 //
-// InMemoryStore.swift
-// PaleoRose
+// CodableSQLiteNonThreadTests.swift
+// CodableSQLiteNonThreadTests
 //
 // MIT License
 //
@@ -24,34 +24,26 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
-import SQLite3
+import CodableSQLiteNonThread
+import XCTest
 
-class InMemoryStore: NSObject {
+final class CodableSQLiteNonThreadTests: XCTestCase {
+
     private var sqliteStore: OpaquePointer?
+    private var interface = SQLITEInterface()
 
-    deinit {
-        sqlite3_close(sqliteStore)
+    override func setUp() async throws {
+        sqliteStore = nil
     }
 
-    private func createStore() {
-        let result = sqlite3_open_v2(
-            UUID().uuidString,
-            &sqliteStore,
-            SQLITE_OPEN_MEMORY | SQLITE_OPEN_READWRITE,
-            nil
-        )
-        if result != SQLITE_OK {
-            print("In memory store failed to init")
+    override func tearDown() async throws {
+        if let sqliteStore {
+            try interface.close(store: sqliteStore)
         }
     }
 
-    @available(*, deprecated, message: "This code will become unavailable")
-    @objc func store() -> OpaquePointer? {
-        guard let sqliteStore else {
-            createStore()
-            return sqliteStore
-        }
-        return sqliteStore
+    func test_createInMemorySture_thenReturnPointer() throws {
+        sqliteStore = try interface.createInMemoryStore()
+        XCTAssertNotNil(sqliteStore)
     }
 }

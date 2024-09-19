@@ -1,5 +1,5 @@
 //
-// InMemoryStore.swift
+// QueryProtocol.swift
 // PaleoRose
 //
 // MIT License
@@ -25,33 +25,9 @@
 // SOFTWARE.
 
 import Foundation
-import SQLite3
 
-class InMemoryStore: NSObject {
-    private var sqliteStore: OpaquePointer?
-
-    deinit {
-        sqlite3_close(sqliteStore)
-    }
-
-    private func createStore() {
-        let result = sqlite3_open_v2(
-            UUID().uuidString,
-            &sqliteStore,
-            SQLITE_OPEN_MEMORY | SQLITE_OPEN_READWRITE,
-            nil
-        )
-        if result != SQLITE_OK {
-            print("In memory store failed to init")
-        }
-    }
-
-    @available(*, deprecated, message: "This code will become unavailable")
-    @objc func store() -> OpaquePointer? {
-        guard let sqliteStore else {
-            createStore()
-            return sqliteStore
-        }
-        return sqliteStore
-    }
+/// A protocol with required information to perform a SQLite call.  It is also adheres to QueryBindable.
+public protocol QueryProtocol: QueryBindable {
+    var sql: String { get }
+    var keys: [String] { get }
 }
