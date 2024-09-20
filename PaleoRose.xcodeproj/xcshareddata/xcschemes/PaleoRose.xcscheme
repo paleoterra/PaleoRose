@@ -59,6 +59,17 @@
                ReferencedContainer = "container:PaleoRose.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B4AF8C682C9CEECA0044A63D"
+               BuildableName = "CodableSQLiteNonThreadTests.xctest"
+               BlueprintName = "CodableSQLiteNonThreadTests"
+               ReferencedContainer = "container:PaleoRose.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

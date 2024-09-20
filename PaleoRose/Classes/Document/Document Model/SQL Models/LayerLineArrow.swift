@@ -43,6 +43,7 @@ struct LayerLineArrow: TableRepresentable {
     // MARK: - TableRepresentable
 
     static func createTableQuery() -> any QueryProtocol {
+        // swiftlint:disable:next line_length
         Query(sql: "CREATE TABLE IF NOT EXISTS _layerLineArrow ( LAYERID INTEGER, DATASET integer, ARROWSIZE float, VECTORTYPE INTEGER,ARROWTYPE INTEGER,SHOWVECTOR bool,SHOWERROR bool);")
     }
 

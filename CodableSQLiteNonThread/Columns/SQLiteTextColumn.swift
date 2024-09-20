@@ -1,6 +1,6 @@
 //
-// CodableSQLNonThread.h
-// CodableSQLNonThread
+// SQLiteTextColumn.swift
+// PaleoRose
 //
 // MIT License
 //
@@ -24,14 +24,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#import <Foundation/Foundation.h>
+import Foundation
+import SQLite3
 
-//! Project version number for CodableSQLNonThread.
-FOUNDATION_EXPORT double CodableSQLNonThreadVersionNumber;
-
-//! Project version string for CodableSQLNonThread.
-FOUNDATION_EXPORT const unsigned char CodableSQLNonThreadVersionString[];
-
-// In this header, you should import all the public headers of your framework using statements like #import <CodableSQLNonThread/PublicHeader.h>
-
-
+struct SQLiteTextColumn: SQLiteColumn {
+    func value(stmt: OpaquePointer, index: Int32) -> (any Codable)? {
+        if let pointer = UnsafeRawPointer(sqlite3_column_text(stmt, index)) {
+            return String(cString: pointer.assumingMemoryBound(to: CChar.self))
+        }
+        return nil
+    }
+}

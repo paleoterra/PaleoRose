@@ -41,12 +41,15 @@ public protocol TableRepresentable: Codable {
     func valueBindables(keys: [String]) throws -> [Any?]
 }
 
-extension TableRepresentable {
+// swiftlint:disable:next no_extension_access_modifier
+public extension TableRepresentable {
 
+    /// Returns a query design to count items in a table
     static func countQuery() -> QueryProtocol {
         Query(sql: "SELECT COUNT(*) FROM \(tableName);")
     }
 
+    /// Returns a rows in a table
     static func storedValues() -> QueryProtocol {
         Query(sql: "SELECT * FROM  \(tableName);")
     }
@@ -67,6 +70,7 @@ extension TableRepresentable {
         return bindables
     }
 
+    /// Assign keys to create bindings
     func valueBindables(keys: [String] = []) throws -> [Any?] {
         try bindingArray(keys: keys)
     }

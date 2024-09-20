@@ -1,5 +1,5 @@
 //
-// QueryProtocol.swift
+// SQLiteIntegerColumn.swift
 // PaleoRose
 //
 // MIT License
@@ -23,11 +23,11 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-
 import Foundation
+import SQLite3
 
-/// A protocol with required information to perform a SQLite call.  It is also adheres to QueryBindable.
-public protocol QueryProtocol: QueryBindable {
-    var sql: String { get }
-    var keys: [String] { get }
+struct SQLiteIntegerColumn: SQLiteColumn {
+    func value(stmt: OpaquePointer, index: Int32) -> (any Codable)? {
+        sqlite3_column_int(stmt, index)
+    }
 }

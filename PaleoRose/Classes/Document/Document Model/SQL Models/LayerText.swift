@@ -43,6 +43,7 @@ struct LayerText: TableRepresentable {
     // MARK: - TableRepresentable
 
     static func createTableQuery() -> any QueryProtocol {
+        // swiftlint:disable:next line_length
         Query(sql: "CREATE TABLE IF NOT EXISTS _layerText ( LAYERID INTEGER, CONTENTS BLOB, RECT_POINT_X float, RECT_POINT_Y float,RECT_SIZE_HEIGHT float,RECT_SIZE_WIDTH float)")
     }
 

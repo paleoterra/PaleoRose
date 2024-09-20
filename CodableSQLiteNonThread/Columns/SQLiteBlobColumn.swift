@@ -1,5 +1,5 @@
 //
-// LayerData.swift
+// SQLiteBlobColumn.swift
 // PaleoRose
 //
 // MIT License
@@ -24,35 +24,16 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import CodableSQLiteNonThread
 import Foundation
+import SQLite3
 
-struct LayerData: TableRepresentable {
-    static var tableName: String = "_layerData"
-    static var primaryKey: String?
-
-    var LAYERID: Int
-    var DATASET: Int
-    var PLOTTYPE: Int
-    var TOTALCOUNT: Int
-    var DOTRADIUS: Float
-
-    // MARK: - TableRepresentable
-
-    static func createTableQuery() -> any QueryProtocol {
-        // swiftlint:disable:next line_length
-        Query(sql: "CREATE TABLE IF NOT EXISTS _layerData ( LAYERID INTEGER, DATASET INTEGER, PLOTTYPE INTEGER, TOTALCOUNT INTEGER,DOTRADIUS  FLOAT);")
-    }
-
-    static func insertQuery() -> any QueryProtocol {
-        Query(sql: "")
-    }
-
-    static func updateQuery() -> any QueryProtocol {
-        Query(sql: "")
-    }
-
-    static func deleteQuery() -> any QueryProtocol {
-        Query(sql: "")
+struct SQLiteBlobColumn: SQLiteColumn {
+    func value(stmt: OpaquePointer, index: Int32) -> (any Codable)? {
+        let length = sqlite3_column_bytes(stmt, index)
+        if let pointer = UnsafeRawPointer(sqlite3_column_blob(stmt, index)) {
+            let tempData = Data(bytes: pointer, count: Int(length))
+            return tempData.base64EncodedString()
+        }
+        return nil
     }
 }

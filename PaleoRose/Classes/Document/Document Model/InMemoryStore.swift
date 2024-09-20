@@ -30,10 +30,6 @@ import SQLite3
 class InMemoryStore: NSObject {
     private var sqliteStore: OpaquePointer?
 
-    deinit {
-        sqlite3_close(sqliteStore)
-    }
-
     private func createStore() {
         let result = sqlite3_open_v2(
             UUID().uuidString,
@@ -53,5 +49,9 @@ class InMemoryStore: NSObject {
             return sqliteStore
         }
         return sqliteStore
+    }
+
+    deinit {
+        sqlite3_close(sqliteStore)
     }
 }

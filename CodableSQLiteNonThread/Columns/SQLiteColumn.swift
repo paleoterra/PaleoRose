@@ -1,5 +1,5 @@
 //
-// LayerData.swift
+// SQLiteColumn.swift
 // PaleoRose
 //
 // MIT License
@@ -24,35 +24,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import CodableSQLiteNonThread
-import Foundation
-
-struct LayerData: TableRepresentable {
-    static var tableName: String = "_layerData"
-    static var primaryKey: String?
-
-    var LAYERID: Int
-    var DATASET: Int
-    var PLOTTYPE: Int
-    var TOTALCOUNT: Int
-    var DOTRADIUS: Float
-
-    // MARK: - TableRepresentable
-
-    static func createTableQuery() -> any QueryProtocol {
-        // swiftlint:disable:next line_length
-        Query(sql: "CREATE TABLE IF NOT EXISTS _layerData ( LAYERID INTEGER, DATASET INTEGER, PLOTTYPE INTEGER, TOTALCOUNT INTEGER,DOTRADIUS  FLOAT);")
-    }
-
-    static func insertQuery() -> any QueryProtocol {
-        Query(sql: "")
-    }
-
-    static func updateQuery() -> any QueryProtocol {
-        Query(sql: "")
-    }
-
-    static func deleteQuery() -> any QueryProtocol {
-        Query(sql: "")
-    }
+protocol SQLiteColumn {
+    func value(stmt: OpaquePointer, index: Int32) -> Codable?
 }

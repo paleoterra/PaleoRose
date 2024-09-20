@@ -1,6 +1,6 @@
 //
-// CodableSQLiteNonThreadTests.swift
-// CodableSQLiteNonThreadTests
+// SQLiteFloatColumn.swift
+// PaleoRose
 //
 // MIT License
 //
@@ -24,26 +24,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import CodableSQLiteNonThread
-import XCTest
+import Foundation
+import SQLite3
 
-final class CodableSQLiteNonThreadTests: XCTestCase {
-
-    private var sqliteStore: OpaquePointer?
-    private var interface = SQLITEInterface()
-
-    override func setUp() async throws {
-        sqliteStore = nil
-    }
-
-    override func tearDown() async throws {
-        if let sqliteStore {
-            try interface.close(store: sqliteStore)
-        }
-    }
-
-    func test_createInMemorySture_thenReturnPointer() throws {
-        sqliteStore = try interface.createInMemoryStore()
-        XCTAssertNotNil(sqliteStore)
+struct SQLiteFloatColumn: SQLiteColumn {
+    func value(stmt: OpaquePointer, index: Int32) -> (any Codable)? {
+        sqlite3_column_double(stmt, index)
     }
 }

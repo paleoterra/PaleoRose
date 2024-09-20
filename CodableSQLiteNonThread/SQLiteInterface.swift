@@ -1,5 +1,5 @@
 //
-// SQLInterface.swift
+// SQLiteInterface.swift
 // PaleoRose
 //
 // MIT License
@@ -29,17 +29,17 @@ import OSLog
 import SQLite3
 
 /// The Codeable (Non-threaded) interface for Sqlite
-public struct SQLITEInterface {
-
+public struct SQLiteInterface {
+    private let columnProcessor = SQLiteColumnProcessor()
     /// Simple init
     public init() {}
 
     // document the createInMemoryStore function
     /// Create an in memory store
-    /// When using an in-memory store, the user must hold on to the pointer to the store.  Allowing the pointer to go nil may delete
-    /// the store and could lead to a memory leak
+    /// When using an in-memory store, the user must hold on to the pointer to the store.
+    /// Allowing the pointer to go nil may delete he store and could lead to a memory leak
     /// - Parameters:
-    /// - Identifier: Specify an identifier for the store.  One will be set automatically if not specified
+    /// - Identifier: Specify an identifier for the store. One will be set automatically if not specified
     /// - Returns:OpaquePointer, the pointer to the SQLite in-memory store
     /// - throws:on failure, throws  with a SQLiteError
     public func createInMemoryStore(identifier: String = UUID().uuidString) throws -> OpaquePointer {
@@ -171,40 +171,9 @@ public struct SQLITEInterface {
     private func processRow(theStmt: OpaquePointer) -> [String: Codable] {
         var aRecord = [String: Codable]()
         let count = sqlite3_column_count(theStmt)
-        for row in 0 ..< count {
-            if let columnString = String(validatingUTF8: sqlite3_column_name(theStmt, row)) {
-                let columnType = sqlite3_column_type(theStmt, row)
-                switch columnType {
-
-                case SQLITE_INTEGER:
-                    let baseValue = sqlite3_column_int(theStmt, row)
-                    aRecord[columnString] = baseValue
-
-                case SQLITE_FLOAT:
-                    let baseValue = sqlite3_column_double(theStmt, row)
-                    aRecord[columnString] = baseValue
-
-                case SQLITE_BLOB:
-                    let length = sqlite3_column_bytes(theStmt, row)
-                    if let pointer = UnsafeRawPointer(sqlite3_column_blob(theStmt, row)) {
-                        let tempData = Data(bytes: pointer, count: Int(length))
-                        aRecord[columnString] = tempData.base64EncodedString()
-                    }
-
-                case SQLITE_TEXT:
-                    if let pointer = UnsafeRawPointer(sqlite3_column_text(theStmt, row)) {
-                        let tempString = String(cString: pointer.assumingMemoryBound(to: CChar.self))
-                        aRecord[columnString] = tempString
-                    }
-
-                case SQLITE_NULL:
-                    ()
-
-                default:
-                    if #available(macOS 11.0, *) {
-                        Logger.codableLog.error("\(columnString) \(columnType)")
-                    }
-                }
+        for column in 0 ..< count {
+            if let value = columnProcessor.processColumn(statement: theStmt, index: column) {
+                aRecord[value.0] = value.1
             }
         }
         return aRecord
@@ -213,7 +182,7 @@ public struct SQLITEInterface {
     // MARK: - Binding
 
     /// Allows binding values to a sqlite call
-    /// Normally, this process should be done useing the query.  This is available if required.
+    /// Normally, this process should be done useing the query. This is available if required.
     /// - Parameters:
     /// - value: An array of values to bind
     /// - statement: SQLite statement pointer

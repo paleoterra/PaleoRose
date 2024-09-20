@@ -40,6 +40,7 @@ struct Color: TableRepresentable {
     // MARK: - TableRepresentable
 
     static func createTableQuery() -> any QueryProtocol {
+        // swiftlint:disable:next line_length
         Query(sql: "CREATE TABLE IF NOT EXISTS _colors (COLORID INTEGER PRIMARY KEY AUTOINCREMENT, RED REAL, BLUE REAL, GREEN REAL, ALPHA REAL)")
     }
 
