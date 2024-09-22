@@ -41,6 +41,11 @@ struct DataSet: TableRepresentable {
 
     // MARK: - TableRepresentable
 
+    private static func allKeys() -> [String] {
+        let keys: [CodingKeys] = [.NAME, .TABLENAME, .COLUMNNAME, .PREDICATE, .COMMENTS]
+        return keys.map(\.stringValue)
+    }
+
     static func createTableQuery() -> any QueryProtocol {
         // swiftlint:disable:next line_length
         Query(sql: "CREATE TABLE IF NOT EXISTS _datasets ( _id INTEGER PRIMARY KEY, NAME TEXT, TABLENAME TEXT, COLUMNNAME text, PREDICATE text,COMMENTS BLOB)")

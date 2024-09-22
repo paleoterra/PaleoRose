@@ -42,6 +42,11 @@ struct LayerText: TableRepresentable {
 
     // MARK: - TableRepresentable
 
+    private static func allKeys() -> [String] {
+        let keys: [CodingKeys] = [.LAYERID, .CONTENTS, .RECT_POINT_X, .RECT_POINT_Y, .RECT_SIZE_WIDTH]
+        return keys.map(\.stringValue)
+    }
+
     static func createTableQuery() -> any QueryProtocol {
         // swiftlint:disable:next line_length
         Query(sql: "CREATE TABLE IF NOT EXISTS _layerText ( LAYERID INTEGER, CONTENTS BLOB, RECT_POINT_X float, RECT_POINT_Y float,RECT_SIZE_HEIGHT float,RECT_SIZE_WIDTH float)")

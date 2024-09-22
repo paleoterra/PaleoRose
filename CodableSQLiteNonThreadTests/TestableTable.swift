@@ -27,7 +27,7 @@
 import CodableSQLiteNonThread
 import Foundation
 
-struct TestableTable: TableRepresentable {
+struct TestableTable: TableRepresentable, Equatable {
 
     static var tableName: String = "TestableTable"
 
@@ -44,6 +44,7 @@ struct TestableTable: TableRepresentable {
     var cgFloatValue: Double
     var stringValue: String
     var optionalString: String?
+    var dataStore: Data?
 
     static func stub(
         intValue: Int = 23212,
@@ -56,7 +57,8 @@ struct TestableTable: TableRepresentable {
         doubleValue: Double = 4534.3453,
         cgFloatValue: CGFloat = 4534.3453,
         stringValue: String = "Tests",
-        optionalString: String? = nil
+        optionalString: String? = nil,
+        dataStore: Data? = nil
     ) -> Self {
         .init(
             intValue: intValue,
@@ -69,16 +71,51 @@ struct TestableTable: TableRepresentable {
             doubleValue: doubleValue,
             cgFloatValue: cgFloatValue,
             stringValue: stringValue,
-            optionalString: optionalString
+            optionalString: optionalString,
+            dataStore: dataStore
         )
     }
 
     static func createTableQuery() -> any QueryProtocol {
-        Query(sql: "")
+        Query(
+            sql:
+            """
+            create table \(tableName)
+            (intValue INTEGER PRIMARY KEY,
+            int32Value INTEGER not null,
+            uintValue INTEGER not null,
+            uint32Value INTEGER not null,
+            int16Value INTEGER not null,
+            uint16Value INTEGER not null,
+            floatValue REAL not null,
+            doubleValue DOUBLE not null,
+            cgFloatValue DOUBLE not null,
+            stringValue TEXT not null,
+            optionalString TEXT,
+            dataStore blob);
+            """
+        )
     }
 
     static func insertQuery() -> any QueryProtocol {
-        Query(sql: "")
+        // sql insert command for TestableTable
+        let codingKeys: [CodingKeys] = [
+            .intValue,
+            .int32Value,
+            .uintValue,
+            .uint32Value,
+            .int16Value,
+            .uint16Value,
+            .floatValue,
+            .doubleValue,
+            .cgFloatValue,
+            .stringValue,
+            .optionalString,
+            .dataStore
+        ]
+        let keys = codingKeys.map(\.stringValue)
+
+        return Query(sql: "INSERT INTO \(tableName) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", keys: keys)
     }
 
     static func updateQuery() -> any QueryProtocol {
@@ -104,5 +141,6 @@ struct TestableTable: TableRepresentable {
         try container.encode(cgFloatValue, forKey: .cgFloatValue)
         try container.encode(stringValue, forKey: .stringValue)
         try container.encode(optionalString, forKey: .optionalString)
+        try container.encode(dataStore, forKey: .dataStore)
     }
 }

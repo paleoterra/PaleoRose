@@ -1,5 +1,5 @@
 //
-// Color.swift
+// Tag.swift
 // PaleoRose
 //
 // MIT License
@@ -24,40 +24,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import CodableSQLiteNonThread
-import Foundation
+import Testing
 
-struct Color: TableRepresentable {
-    static var tableName = "_colors"
-    static var primaryKey: String? = "COLORID"
-
-    var COLORID: Int
-    var RED: Float
-    var BLUE: Float
-    var GREEN: Float
-    var ALPHA: Float
-
-    // MARK: - TableRepresentable
-
-    private static func allKeys() -> [String] {
-        let keys: [CodingKeys] = [.COLORID, .RED, .BLUE, .GREEN, .ALPHA]
-        return keys.map(\.stringValue)
-    }
-
-    static func createTableQuery() -> any QueryProtocol {
-        // swiftlint:disable:next line_length
-        Query(sql: "CREATE TABLE IF NOT EXISTS _colors (COLORID INTEGER PRIMARY KEY AUTOINCREMENT, RED REAL, BLUE REAL, GREEN REAL, ALPHA REAL)")
-    }
-
-    static func insertQuery() -> any QueryProtocol {
-        Query(sql: "")
-    }
-
-    static func updateQuery() -> any QueryProtocol {
-        Query(sql: "")
-    }
-
-    static func deleteQuery() -> any QueryProtocol {
-        Query(sql: "")
-    }
+extension Tag {
+    @Tag static var integration: Self
 }

@@ -35,7 +35,7 @@ struct Geometry: TableRepresentable {
     var _id: String
     var isEqualArea: Bool
     var isPercent: Bool
-    var MAXCOUT: Int
+    var MAXCOUNT: Int
     var MAXPERCENT: Float
     var HOLLOWCORE: Float
     var SECTORSIZE: Float
@@ -45,6 +45,21 @@ struct Geometry: TableRepresentable {
 
     // MARK: - TableRepresentable
 
+    private static func allKeys() -> [String] {
+        let keys: [CodingKeys] = [
+            .isEqualArea,
+            .isPercent,
+            .MAXCOUNT,
+            .MAXPERCENT,
+            .HOLLOWCORE,
+            .SECTORSIZE,
+            .STARTINGANGLE,
+            .SECTORCOUNT,
+            .RELATIVESIZE
+        ]
+        return keys.map(\.stringValue)
+    }
+
     static func createTableQuery() -> any QueryProtocol {
         // swiftlint:disable:next line_length
         Query(sql: "CREATE TABLE IF NOT EXISTS _geometryController (isEqualArea bool, isPercent bool, MAXCOUNT int, MAXPERCENT float, HOLLOWCORE float, SECTORSIZE float, STARTINGANGLE float, SECTORCOUNT int, RELATIVESIZE float);")
@@ -52,12 +67,12 @@ struct Geometry: TableRepresentable {
 
     static func insertQuery() -> any QueryProtocol {
         // swiftlint:disable:next line_length
-        Query(sql: "INSERT INTO _geometryController (isEqualArea, isPercent, MAXCOUNT, MAXPERCENT, HOLLOWCORE, SECTORSIZE, STARTINGANGLE, SECTORCOUNT, RELATIVESIZE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", keys: ["isEqualArea", "isPercent", "MAXCOUNT", "MAXPERCENT", "MAXPERCENT", "HOLLOWCORE", "SECTORSIZE", "STARTINGANGLE", "SECTORCOUNT", "RELATIVESIZE"])
+        Query(sql: "INSERT INTO _geometryController (isEqualArea, isPercent, MAXCOUNT, MAXPERCENT, HOLLOWCORE, SECTORSIZE, STARTINGANGLE, SECTORCOUNT, RELATIVESIZE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", keys: allKeys())
     }
 
     static func updateQuery() -> any QueryProtocol {
         // swiftlint:disable:next line_length
-        Query(sql: "update _geometryController  set isEqualArea=?, isPercent=?, MAXCOUNT=?, MAXPERCENT=?, HOLLOWCORE=?, SECTORSIZE=?, STARTINGANGLE=?, SECTORCOUNT=?, RELATIVESIZE=?;", keys: ["isEqualArea", "isPercent", "MAXCOUNT", "MAXPERCENT", "MAXPERCENT", "HOLLOWCORE", "SECTORSIZE", "STARTINGANGLE", "SECTORCOUNT", "RELATIVESIZE"])
+        Query(sql: "update _geometryController  set isEqualArea=?, isPercent=?, MAXCOUNT=?, MAXPERCENT=?, HOLLOWCORE=?, SECTORSIZE=?, STARTINGANGLE=?, SECTORCOUNT=?, RELATIVESIZE=?;", keys: allKeys())
     }
 
     static func deleteQuery() -> any QueryProtocol {

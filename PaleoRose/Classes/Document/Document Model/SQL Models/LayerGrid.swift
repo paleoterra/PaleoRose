@@ -59,6 +59,35 @@ struct LayerGrid: TableRepresentable {
 
     // MARK: - TableRepresentable
 
+    private static func allKeys() -> [String] {
+        let keys: [CodingKeys] = [
+            .LAYERID,
+            .RINGS_ISFIXEDCOUNT,
+            .RINGS_VISIBLE,
+            .RINGS_LABELS,
+            .RINGS_FIXEDCOUNT,
+            .RINGS_COUNTINCREMENT,
+            .RINGS_PERCENTINCREMENT,
+            .RINGS_LABELANGLE,
+            .RINGS_FONTNAME,
+            .RINGS_FONTSIZE,
+            .RADIALS_COUNT,
+            .RADIALS_ANGLE,
+            .RADIALS_LABELALIGN,
+            .RADIALS_COMPASSPOINT,
+            .RADIALS_ORDER,
+            .RADIALS_FONT,
+            .RADIALS_FONTSIZE,
+            .RADIALS_SECTORLOCK,
+            .RADIALS_VISIBLE,
+            .RADIALS_ISPERCENT,
+            .RADIALS_TICKS,
+            .RADIALS_MINORTICKS,
+            .RADIALS_LABELS
+        ]
+        return keys.map(\.stringValue)
+    }
+
     static func createTableQuery() -> any QueryProtocol {
         // swiftlint:disable:next line_length
         Query(sql: "CREATE TABLE IF NOT EXISTS _layerGrid ( LAYERID INTEGER, RINGS_ISFIXEDCOUNT bool, RINGS_VISIBLE bool, RINGS_LABELS bool,RINGS_FIXEDCOUNT  INTEGER, RINGS_COUNTINCREMENT INTEGER,RINGS_PERCENTINCREMENT  FLOAT, RINGS_LABELANGLE FLOAT, RINGS_FONTNAME text, RINGS_FONTSIZE float,RADIALS_COUNT INTEGER,RADIALS_ANGLE float,RADIALS_LABELALIGN integer,RADIALS_COMPASSPOINT integer,RADIALS_ORDER integer,RADIALS_FONT text,RADIALS_FONTSIZE float,RADIALS_SECTORLOCK bool, RADIALS_VISIBLE bool, RADIALS_ISPERCENT bool,RADIALS_TICKS bool,RADIALS_MINORTICKS bool,RADIALS_LABELS bool);")

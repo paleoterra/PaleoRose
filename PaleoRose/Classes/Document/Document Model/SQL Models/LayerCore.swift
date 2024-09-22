@@ -37,6 +37,11 @@ struct LayerCore: TableRepresentable {
 
     // MARK: - TableRepresentable
 
+    private static func allKeys() -> [String] {
+        let keys: [CodingKeys] = [.LAYERID, .RADIUS, .TYPE]
+        return keys.map(\.stringValue)
+    }
+
     static func createTableQuery() -> any QueryProtocol {
         Query(sql: "CREATE TABLE IF NOT EXISTS _layerCore (LAYERID INTEGER PRIMARY KEY, RADIUS REAL, TYPE BOOL)")
     }

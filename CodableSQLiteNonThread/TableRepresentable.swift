@@ -43,7 +43,6 @@ public protocol TableRepresentable: Codable {
 
 // swiftlint:disable:next no_extension_access_modifier
 public extension TableRepresentable {
-
     /// Returns a query design to count items in a table
     static func countQuery() -> QueryProtocol {
         Query(sql: "SELECT COUNT(*) FROM \(tableName);")

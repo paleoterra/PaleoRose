@@ -44,6 +44,22 @@ struct Layer: TableRepresentable {
 
     // MARK: - TableRepresentable
 
+    private static func allKeys() -> [String] {
+        let keys: [CodingKeys] = [
+            .LAYERID,
+            .TYPE,
+            .VISIBLE,
+            .ACTIVE,
+            .BIDIR,
+            .LAYER_NAME,
+            .LINEWEIGHT,
+            .MAXCOUNT,
+            .MAXPERCENT
+        ]
+
+        return keys.map(\.stringValue)
+    }
+
     static func createTableQuery() -> any QueryProtocol {
         // swiftlint:disable:next line_length
         Query(sql: "CREATE TABLE IF NOT EXISTS _layers (LAYERID INTEGER PRIMARY KEY AUTOINCREMENT, TYPE TEXT, VISIBLE BOOL, ACTIVE BOOL, BIDIR BOOL, LAYER_NAME TEXT, LINEWEIGHT REAL, MAXCOUNT INTEGER, MAXPERCENT REAL);")

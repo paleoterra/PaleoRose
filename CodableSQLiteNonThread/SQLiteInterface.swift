@@ -28,6 +28,11 @@ import Foundation
 import OSLog
 import SQLite3
 
+// swiftlint:disable:next identifier_name
+let SQLITE_STATIC = unsafeBitCast(0, to: sqlite3_destructor_type.self)
+// swiftlint:disable:next identifier_name
+let SQLITE_TRANSIENT = unsafeBitCast(-1, to: sqlite3_destructor_type.self)
+
 /// The Codeable (Non-threaded) interface for Sqlite
 public struct SQLiteInterface {
     private let columnProcessor = SQLiteColumnProcessor()
@@ -214,7 +219,11 @@ public struct SQLiteInterface {
         case let value as String:
             try bindString(value, to: statement, at: index)
 
+        case _ as NSNull:
+            try bindNull(to: statement, at: index)
+
         default:
+            print("Unhandled type: \(value) \(value.self)")
             throw SQLiteError.invalidBindings
         }
     }
@@ -265,7 +274,7 @@ public struct SQLiteInterface {
     }
 
     private func bindString(_ value: String, to statement: OpaquePointer, at index: Int32) throws {
-        let result = sqlite3_bind_text(statement, index, value, -1, nil)
+        let result = sqlite3_bind_text(statement, index, value, -1, SQLITE_TRANSIENT)
         if result != SQLITE_OK {
             throw SQLiteError.invalidBindings
         }

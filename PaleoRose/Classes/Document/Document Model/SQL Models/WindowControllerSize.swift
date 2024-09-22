@@ -36,16 +36,27 @@ struct WindowControllerSize: TableRepresentable {
 
     // MARK: - TableRepresentable
 
+    private static func allKeys() -> [String] {
+        let keys: [CodingKeys] = [.width, .height]
+        return keys.map(\.stringValue)
+    }
+
     static func createTableQuery() -> any QueryProtocol {
         Query(sql: "CREATE TABLE IF NOT EXISTS _windowController (width REAL, height REAL);")
     }
 
     static func insertQuery() -> any QueryProtocol {
-        Query(sql: "INSERT INTO _windowController (width, height) VALUES  (?, ?)", keys: ["width", "height"])
+        Query(
+            sql: "INSERT INTO _windowController (width, height) VALUES  (?, ?)",
+            keys: allKeys()
+        )
     }
 
     static func updateQuery() -> any QueryProtocol {
-        Query(sql: "UPDATE _windowController SET width = ?, height = ?;", keys: ["width", "height"])
+        Query(
+            sql: "UPDATE _windowController SET width = ?, height = ?;",
+            keys: allKeys()
+        )
     }
 
     static func deleteQuery() -> any QueryProtocol {

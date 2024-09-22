@@ -187,6 +187,12 @@ import Testing
         let query = TestableTable.countQuery()
         #expect(query.sql == "SELECT COUNT(*) FROM TestableTable;")
     }
+
+    @Test("Given create table querty, then return a query")
+    func createTableQuery() throws {
+        let query = TestableTable.createTableQuery()
+        #expect(!query.sql.isEmpty)
+    }
 }
 
 // swiftlint:enable legacy_objc_type no_magic_numbers
