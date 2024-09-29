@@ -24,34 +24,65 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import CodableSQLiteNonThread
 import Foundation
-import SQLite3
 
 class InMemoryStore: NSObject {
     private var sqliteStore: OpaquePointer?
+    private let interface = SQLiteInterface()
 
-    private func createStore() {
-        let result = sqlite3_open_v2(
-            UUID().uuidString,
-            &sqliteStore,
-            SQLITE_OPEN_MEMORY | SQLITE_OPEN_READWRITE,
-            nil
-        )
-        if result != SQLITE_OK {
-            print("In memory store failed to init")
-        }
-    }
+    private let createTableQueries: [QueryProtocol] = [
+        WindowControllerSize.createTableQuery(),
+        Geometry.createTableQuery(),
+        Layer.createTableQuery(),
+        Color.createTableQuery(),
+        DataSet.createTableQuery(),
+        LayerText.createTableQuery(),
+        LayerLineArrow.createTableQuery(),
+        LayerCore.createTableQuery(),
+        LayerGrid.createTableQuery(),
+        LayerData.createTableQuery()
+    ]
 
     @available(*, deprecated, message: "This code will become unavailable")
     @objc func store() -> OpaquePointer? {
         guard let sqliteStore else {
-            createStore()
-            return sqliteStore
+            do {
+                try createStore()
+                try configureStore()
+                return sqliteStore
+            } catch {
+                return nil
+            }
         }
         return sqliteStore
     }
 
+    private func createStore() throws {
+        do {
+            sqliteStore = try interface.createInMemoryStore()
+        } catch {
+            print("Error creating in-memory store: \(error)")
+            throw error
+        }
+    }
+
+    private func configureStore() throws {
+        guard let sqliteStore else {
+            return
+        }
+        try createTableQueries.forEach { query in
+            try interface.executeQuery(sqlite: sqliteStore, query: query)
+        }
+    }
+
     deinit {
-        sqlite3_close(sqliteStore)
+        if let sqliteStore {
+            do {
+                try interface.close(store: sqliteStore)
+            } catch {
+                print("Error closing in-memory store: \(error)")
+            }
+        }
     }
 }
