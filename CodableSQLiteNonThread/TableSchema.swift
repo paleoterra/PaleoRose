@@ -1,5 +1,5 @@
 //
-// DocumentModel.swift
+// TableSchema.swift
 // PaleoRose
 //
 // MIT License
@@ -26,16 +26,37 @@
 
 import Foundation
 
-class DocumentModel: NSObject {
-    private var inMemoryStore: InMemoryStore
+public struct TableSchema: TableRepresentable {
+    public static var tableName: String = "sqlite_schema"
+    public static var primaryKey: String?
 
-    @available(*, deprecated, message: "This code will become unavailable")
-    @objc init(inMemoryStore: InMemoryStore) {
-        self.inMemoryStore = inMemoryStore
+    public let type: String
+    public let name: String
+    // swiftlint:disable:next identifier_name
+    public let tbl_name: String
+    public let rootpage: Int
+    public let sql: String
+
+    // MARK: - TableRepresentable
+
+    private static func allKeys() -> [String] {
+        let keys: [CodingKeys] = [.type, .name, .tbl_name, .rootpage, .sql]
+        return keys.map(\.stringValue)
     }
 
-    @available(*, deprecated, message: "This code will become unavailable")
-    @objc func store() -> OpaquePointer? {
-        inMemoryStore.store()
+    public static func createTableQuery() -> any QueryProtocol {
+        Query(sql: "")
+    }
+
+    public static func insertQuery() -> any QueryProtocol {
+        Query(sql: "")
+    }
+
+    public static func updateQuery() -> any QueryProtocol {
+        Query(sql: "")
+    }
+
+    public static func deleteQuery() -> any QueryProtocol {
+        Query(sql: "")
     }
 }

@@ -32,7 +32,7 @@ struct IntegrationTest {
     let sut = SQLiteInterface()
 
     private func createInMemoryStore() throws -> OpaquePointer? {
-        try sut.createInMemoryStore()
+        try sut.createInMemoryStore(identifier: UUID().uuidString)
     }
 
     private func createTestableTable(store: OpaquePointer) throws {
@@ -42,7 +42,7 @@ struct IntegrationTest {
 
     private func insert(records: [TestableTable], intoStore store: OpaquePointer) throws {
         var insertQuery = TestableTable.insertQuery()
-        let bindings = try records.map { try $0.valueBindables(keys: insertQuery.keys) }
+        let bindings = try records.compactMap { try $0.valueBindables(keys: insertQuery.keys) }
         insertQuery.bindings = bindings
 
         try sut.executeQuery(sqlite: store, query: insertQuery)
@@ -74,7 +74,7 @@ struct IntegrationTest {
     }
 
     @Test("Given Create Table, and records inserted, then return correct item count")
-    func countRectords() throws {
+    func countRecords() throws {
         let store = try #require(try createInMemoryStore())
         try #require(try createTestableTable(store: store))
 

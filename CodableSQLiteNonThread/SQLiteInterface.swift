@@ -47,24 +47,18 @@ public struct SQLiteInterface {
     /// - Identifier: Specify an identifier for the store. One will be set automatically if not specified
     /// - Returns:OpaquePointer, the pointer to the SQLite in-memory store
     /// - throws:on failure, throws  with a SQLiteError
-    public func createInMemoryStore(identifier: String = UUID().uuidString) throws -> OpaquePointer {
+    public func createInMemoryStore(identifier: String) throws -> OpaquePointer {
         var sqliteStore: OpaquePointer?
-        let result = sqlite3_open_v2(
+        try SQLiteError.checkSqliteStatus(sqlite3_open_v2(
             identifier,
             &sqliteStore,
             SQLITE_OPEN_MEMORY | SQLITE_OPEN_READWRITE,
             nil
-        )
-        switch result {
-        case SQLITE_OK, SQLITE_DONE, SQLITE_ROW:
-            guard let sqliteStore else {
-                throw SQLiteError.sqliteError(String(cString: sqlite3_errstr(result), encoding: .utf8) ?? "")
-            }
-            return sqliteStore
-
-        default:
-            throw SQLiteError.sqliteError(String(cString: sqlite3_errstr(result), encoding: .utf8) ?? "")
+        ))
+        guard let store = sqliteStore else {
+            throw SQLiteError.unknownSqliteError("Failed to open in-memory store")
         }
+        return store
     }
 
     /// Closes a SQLite store.
@@ -73,14 +67,7 @@ public struct SQLiteInterface {
     /// - store: The SQLite OpagePointer to a file or in-memory store
     /// - throws:on failure, throws  with a SQLiteError
     public func close(store: OpaquePointer) throws {
-        let result = sqlite3_close(store)
-        switch result {
-        case SQLITE_OK, SQLITE_DONE, SQLITE_ROW:
-            return
-
-        default:
-            throw SQLiteError.sqliteError(String(cString: sqlite3_errstr(result), encoding: .utf8) ?? "")
-        }
+        try SQLiteError.checkSqliteStatus(sqlite3_close(store))
     }
 
     /// Executes a query on a database with the expectation of returning items of type T
@@ -132,43 +119,37 @@ public struct SQLiteInterface {
             while sqlite3_step(statement) == SQLITE_ROW {
                 rowData.append(processRow(theStmt: statement))
             }
-            let error = sqlite3_errcode(sqlite)
-            if error != SQLITE_OK, error != SQLITE_DONE {
-                try processSQLiteError(sqlite: sqlite)
-            }
+            try SQLiteError.checkSqliteStatus(sqlite3_errcode(sqlite))
         }
 
         sqlite3_finalize(statement)
         return rowData
     }
 
+    /// Create a statement for a database using a query
+    ///
+    /// - Parameters:
+    ///   - sqlite: Pointer to the database
+    ///   - query: Query for building the statement
+    ///   - returns: Pointer to the statement
+    ///   - throws: SQLite error
+    public func buildStatement(sqlite: OpaquePointer, query: QueryProtocol) throws -> OpaquePointer {
+        var theStmt: OpaquePointer?
+        try SQLiteError.checkSqliteStatus(sqlite3_prepare_v2(sqlite, query.sql, -1, &theStmt, nil))
+        guard let statement = theStmt else {
+            throw SQLiteError.unknownSqliteError("Failed to prepare statement")
+        }
+        return statement
+    }
+
     // MARK: Private API
 
-    private func processSQLiteError(sqlite: OpaquePointer) throws {
-        let message = String(cString: sqlite3_errmsg(sqlite))
-        throw (SQLiteError.sqliteError(message))
-    }
-
-    private func buildStatement(sqlite: OpaquePointer, query: QueryProtocol) throws -> OpaquePointer {
-        var theStmt: OpaquePointer?
-        let prepareResult = sqlite3_prepare_v2(sqlite, query.sql, -1, &theStmt, nil)
-
-        guard let stmt = theStmt else {
-            let message = String(cString: sqlite3_errmsg(sqlite))
-            throw (SQLiteError.sqliteStatementError(message))
-        }
-
-        if prepareResult != SQLITE_OK {
-            try processSQLiteError(sqlite: sqlite)
-        }
-
-        return stmt
-    }
-
-    private func bind(bindings: [Any?], statement: OpaquePointer) throws {
+    private func bind(bindings: [Bindable?], statement: OpaquePointer) throws {
         for (index, binding) in bindings.enumerated() {
-            let currentIndex = Int32(index + 1)
-            try bind(binding, to: statement, at: currentIndex)
+            if let binding {
+                let currentIndex = Int32(index + 1)
+                try bind(binding, to: statement, at: currentIndex)
+            }
         }
     }
 
@@ -192,91 +173,25 @@ public struct SQLiteInterface {
     /// - value: An array of values to bind
     /// - statement: SQLite statement pointer
     /// - throws:on failure, throws  with a SQLiteError
-    public func bind(_ value: (some Any)?, to statement: OpaquePointer?, at index: Int32) throws {
-        guard let statement else {
-            throw SQLiteError.invalidStatement
-        }
-
+    public func bind(_ value: (some Bindable)?, to statement: OpaquePointer, at index: Int32) throws {
         guard let value else {
             try bindNull(to: statement, at: index)
             return
         }
-
-        switch value {
-        case let dataValue as Data:
-            try bindData(dataValue, to: statement, at: index)
-
-        case let value as any BinaryInteger:
-            try bindInteger(value, to: statement, at: index)
-
-        case let value as any BinaryFloatingPoint:
-            try bindBinaryFloatingPoint(value, to: statement, at: index)
-
-        case let value as CGFloat:
-            let doubleValue = Double(value)
-            try bindBinaryFloatingPoint(doubleValue, to: statement, at: index)
-
-        case let value as String:
-            try bindString(value, to: statement, at: index)
-
-        case _ as NSNull:
-            try bindNull(to: statement, at: index)
-
-        default:
-            print("Unhandled type: \(value) \(value.self)")
-            throw SQLiteError.invalidBindings
-        }
+        try value.bind(statement: statement, index: index)
     }
 
     private func bindNull(to statement: OpaquePointer, at index: Int32) throws {
-        let result = sqlite3_bind_null(statement, index)
-        if result != SQLITE_OK {
-            throw SQLiteError.invalidBindings
-        }
-    }
-
-    private func bindData(_ data: Data, to statement: OpaquePointer, at index: Int32) throws {
-        let bytes = try data.withUnsafeBytes { value in
-            guard let address = value.baseAddress else {
-                throw SQLiteError.invalidBindings
-            }
-            return address
-        }
-        let result = sqlite3_bind_blob(statement, index, bytes, Int32(data.count), nil)
-        if result != SQLITE_OK {
-            throw SQLiteError.invalidBindings
-        }
-    }
-
-    private func bindInteger<T: BinaryInteger>(_ value: T, to statement: OpaquePointer, at index: Int32) throws {
-        let memeorySize = MemoryLayout<T>.size
-        var result: Int32 = 0
-        let byteCount = 4
-        if memeorySize <= byteCount {
-            result = sqlite3_bind_int(statement, index, Int32(value))
-        } else {
-            result = sqlite3_bind_int64(statement, index, Int64(value))
-        }
-        if result != SQLITE_OK {
-            throw SQLiteError.invalidBindings
-        }
-    }
-
-    private func bindBinaryFloatingPoint(
-        _ value: some BinaryFloatingPoint,
-        to statement: OpaquePointer,
-        at index: Int32
-    ) throws {
-        let result = sqlite3_bind_double(statement, index, Double(value))
-        if result != SQLITE_OK {
-            throw SQLiteError.invalidBindings
-        }
-    }
-
-    private func bindString(_ value: String, to statement: OpaquePointer, at index: Int32) throws {
-        let result = sqlite3_bind_text(statement, index, value, -1, SQLITE_TRANSIENT)
-        if result != SQLITE_OK {
-            throw SQLiteError.invalidBindings
+        do {
+            try SQLiteError.checkSqliteStatus(sqlite3_bind_null(statement, index))
+        } catch let SQLiteError.sqliteError(result, _) {
+            throw SQLiteError.invalidBindings(
+                type: String(describing: type(of: NSNull.self)),
+                value: nil,
+                SQLiteError: result
+            )
+        } catch {
+            throw error
         }
     }
 }

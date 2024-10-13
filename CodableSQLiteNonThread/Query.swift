@@ -28,10 +28,10 @@ import Foundation
 
 public class Query: QueryProtocol {
     public let sql: String
-    public var bindings: [[Any?]]
+    public var bindings: [[Bindable?]]
     public let keys: [String]
 
-    public init(sql: String, keys: [String] = [], bindings: [[Any?]] = []) {
+    public init(sql: String, keys: [String] = [], bindings: [[Bindable?]] = []) {
         self.sql = sql
         self.bindings = bindings
         self.keys = keys

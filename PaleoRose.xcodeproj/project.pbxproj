@@ -29,6 +29,8 @@
 		B41266732B6EE09300E1C385 /* ApplicationDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41266722B6EE09300E1C385 /* ApplicationDefaults.swift */; };
 		B414A00D2B24CD24008AE5F4 /* XRStatistic.m in Sources */ = {isa = PBXBuildFile; fileRef = B441FEFC05CB725300F9A0F9 /* XRStatistic.m */; };
 		B416A04805F2D77500821225 /* XRose Help in Resources */ = {isa = PBXBuildFile; fileRef = B416A00E05F2D77500821225 /* XRose Help */; };
+		B41C17522CB1C278002D19C2 /* InMemoryStoreIntegrationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41C17502CB1C1B0002D19C2 /* InMemoryStoreIntegrationTest.swift */; };
+		B41C17532CB1C2AF002D19C2 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41C174D2CB0E45C002D19C2 /* Tag.swift */; };
 		B41D283C094FC7CA008DF384 /* XRTableImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = B41D283A094FC7CA008DF384 /* XRTableImporter.h */; };
 		B41D283D094FC7CA008DF384 /* XRTableImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = B41D283B094FC7CA008DF384 /* XRTableImporter.m */; };
 		B42083B109637969007A74A8 /* PTFMXMLParser.h in Headers */ = {isa = PBXBuildFile; fileRef = B42083AF09637969007A74A8 /* PTFMXMLParser.h */; };
@@ -90,6 +92,8 @@
 		B48345F105C23CA100E3F6B7 /* XRoseView.m in Sources */ = {isa = PBXBuildFile; fileRef = B48345EF05C23CA100E3F6B7 /* XRoseView.m */; };
 		B4852A8405C2E223002212E3 /* XRGeometryController.h in Headers */ = {isa = PBXBuildFile; fileRef = B4852A8205C2E223002212E3 /* XRGeometryController.h */; };
 		B4852A8505C2E223002212E3 /* XRGeometryController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4852A8305C2E223002212E3 /* XRGeometryController.m */; };
+		B4866BF42CAE02C900319712 /* StoreProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4866BF32CAE02C300319712 /* StoreProtocol.swift */; };
+		B4866BF72CAE039200319712 /* MockSqliteInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4866BF52CAE033800319712 /* MockSqliteInterface.swift */; };
 		B486E2731E7B761B00F1ADAA /* XRTableImporterXRoseSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = B486E2721E7B761B00F1ADAA /* XRTableImporterXRoseSheet.xib */; };
 		B486E2761E7B765400F1ADAA /* XRTableInitialTextController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B486E2741E7B765400F1ADAA /* XRTableInitialTextController.xib */; };
 		B486E2781E7B769300F1ADAA /* XRCalculateAzimuthSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = B486E2771E7B769300F1ADAA /* XRCalculateAzimuthSheet.xib */; };
@@ -109,6 +113,8 @@
 		B486E29F1E7B9C2300F1ADAA /* XRCreateDatasetSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = B486E29E1E7B9C2300F1ADAA /* XRCreateDatasetSheet.xib */; };
 		B48B89FB05C794C500248F96 /* XRDataInspector.h in Headers */ = {isa = PBXBuildFile; fileRef = B48B89F905C794C500248F96 /* XRDataInspector.h */; };
 		B48B89FC05C794C500248F96 /* XRDataInspector.m in Sources */ = {isa = PBXBuildFile; fileRef = B48B89FA05C794C500248F96 /* XRDataInspector.m */; };
+		B48BBEC12CAA1BFA0050852E /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48BBEC02CAA1BF40050852E /* Logger.swift */; };
+		B48BBEC82CAA20DC0050852E /* InMemoryStoreTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48BBEC62CAA20C70050852E /* InMemoryStoreTest.swift */; };
 		B4950F0005DD286A00C711DC /* XRGraphicCircleLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = B4950EFE05DD286A00C711DC /* XRGraphicCircleLabel.h */; };
 		B4950F0105DD286A00C711DC /* XRGraphicCircleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4950EFF05DD286A00C711DC /* XRGraphicCircleLabel.m */; };
 		B4A82F962A07F87A00790052 /* LITMXMLNodeProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A82F932A07F87900790052 /* LITMXMLNodeProtocol.h */; };
@@ -155,7 +161,6 @@
 		B4F2595205C58F28008591BE /* XRGraphicHistogram.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F2595005C58F28008591BE /* XRGraphicHistogram.m */; };
 		B4F25AE405C59CE6008591BE /* XRGraphicDotDeviation.h in Headers */ = {isa = PBXBuildFile; fileRef = B4F25AE205C59CE6008591BE /* XRGraphicDotDeviation.h */; };
 		B4F25AE505C59CE6008591BE /* XRGraphicDotDeviation.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F25AE305C59CE6008591BE /* XRGraphicDotDeviation.m */; };
-		B4F2B17C2C97CB0B0017E717 /* CommonSQL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F2B17B2C97CB0B0017E717 /* CommonSQL.swift */; };
 		B4F2B1892C97CB300017E717 /* LayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F2B1872C97CB300017E717 /* LayerData.swift */; };
 		B4F2B18A2C97CB300017E717 /* WindowControllerSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F2B17E2C97CB300017E717 /* WindowControllerSize.swift */; };
 		B4F2B18B2C97CB300017E717 /* Layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F2B1802C97CB300017E717 /* Layer.swift */; };
@@ -265,6 +270,9 @@
 		B41266702B6EDF4C00E1C385 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B41266722B6EE09300E1C385 /* ApplicationDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationDefaults.swift; sourceTree = "<group>"; };
 		B416A00E05F2D77500821225 /* XRose Help */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "XRose Help"; sourceTree = "<group>"; };
+		B41C174C2CB0DF6F002D19C2 /* PaleoRose.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = PaleoRose.xctestplan; sourceTree = "<group>"; };
+		B41C174D2CB0E45C002D19C2 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
+		B41C17502CB1C1B0002D19C2 /* InMemoryStoreIntegrationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryStoreIntegrationTest.swift; sourceTree = "<group>"; };
 		B41D283A094FC7CA008DF384 /* XRTableImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRTableImporter.h; sourceTree = "<group>"; };
 		B41D283B094FC7CA008DF384 /* XRTableImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRTableImporter.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B42083AF09637969007A74A8 /* PTFMXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTFMXMLParser.h; sourceTree = "<group>"; };
@@ -344,6 +352,8 @@
 		B48345EF05C23CA100E3F6B7 /* XRoseView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XRoseView.m; sourceTree = "<group>"; };
 		B4852A8205C2E223002212E3 /* XRGeometryController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRGeometryController.h; sourceTree = "<group>"; };
 		B4852A8305C2E223002212E3 /* XRGeometryController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XRGeometryController.m; sourceTree = "<group>"; };
+		B4866BF32CAE02C300319712 /* StoreProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreProtocol.swift; sourceTree = "<group>"; };
+		B4866BF52CAE033800319712 /* MockSqliteInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSqliteInterface.swift; sourceTree = "<group>"; };
 		B486E2721E7B761B00F1ADAA /* XRTableImporterXRoseSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XRTableImporterXRoseSheet.xib; sourceTree = "<group>"; };
 		B486E2771E7B769300F1ADAA /* XRCalculateAzimuthSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XRCalculateAzimuthSheet.xib; sourceTree = "<group>"; };
 		B486E2791E7B76A500F1ADAA /* XRTableAddColumnSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XRTableAddColumnSheet.xib; sourceTree = "<group>"; };
@@ -351,6 +361,8 @@
 		B486E29E1E7B9C2300F1ADAA /* XRCreateDatasetSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XRCreateDatasetSheet.xib; sourceTree = "<group>"; };
 		B48B89F905C794C500248F96 /* XRDataInspector.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRDataInspector.h; sourceTree = "<group>"; };
 		B48B89FA05C794C500248F96 /* XRDataInspector.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRDataInspector.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		B48BBEC02CAA1BF40050852E /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		B48BBEC62CAA20C70050852E /* InMemoryStoreTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryStoreTest.swift; sourceTree = "<group>"; };
 		B4950EFE05DD286A00C711DC /* XRGraphicCircleLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRGraphicCircleLabel.h; sourceTree = "<group>"; };
 		B4950EFF05DD286A00C711DC /* XRGraphicCircleLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRGraphicCircleLabel.m; sourceTree = "<group>"; };
 		B4A82F932A07F87900790052 /* LITMXMLNodeProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LITMXMLNodeProtocol.h; sourceTree = "<group>"; };
@@ -398,7 +410,6 @@
 		B4F2595005C58F28008591BE /* XRGraphicHistogram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRGraphicHistogram.m; sourceTree = "<group>"; };
 		B4F25AE205C59CE6008591BE /* XRGraphicDotDeviation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRGraphicDotDeviation.h; sourceTree = "<group>"; };
 		B4F25AE305C59CE6008591BE /* XRGraphicDotDeviation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRGraphicDotDeviation.m; sourceTree = "<group>"; };
-		B4F2B17B2C97CB0B0017E717 /* CommonSQL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonSQL.swift; sourceTree = "<group>"; };
 		B4F2B17E2C97CB300017E717 /* WindowControllerSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowControllerSize.swift; sourceTree = "<group>"; };
 		B4F2B17F2C97CB300017E717 /* Geometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geometry.swift; sourceTree = "<group>"; };
 		B4F2B1802C97CB300017E717 /* Layer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layer.swift; sourceTree = "<group>"; };
@@ -497,6 +508,7 @@
 		2A37F4AAFDCFA73011CA2CEA /* XRose */ = {
 			isa = PBXGroup;
 			children = (
+				B41C174C2CB0DF6F002D19C2 /* PaleoRose.xctestplan */,
 				B4149FF82B24C838008AE5F4 /* PaleoRose */,
 				B4B0BB661E7E41C900F392DA /* Unit Tests */,
 				B4AF8C612C9CEECA0044A63D /* CodableSQLiteNonThread */,
@@ -533,6 +545,7 @@
 		B4149FE42B24C2FA008AE5F4 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B48BBEC02CAA1BF40050852E /* Logger.swift */,
 				B4149FFD2B24CA10008AE5F4 /* Main View */,
 				B4149FE22B24C285008AE5F4 /* Table Importing */,
 				B4149FFC2B24C9A9008AE5F4 /* Formatters */,
@@ -957,8 +970,11 @@
 			children = (
 				B439AB362C83CF7900252574 /* DocumentModel.swift */,
 				B439AB382C83D01700252574 /* InMemoryStore.swift */,
+				B4866BF32CAE02C300319712 /* StoreProtocol.swift */,
+				B4866BF52CAE033800319712 /* MockSqliteInterface.swift */,
+				B48BBEC62CAA20C70050852E /* InMemoryStoreTest.swift */,
+				B41C17502CB1C1B0002D19C2 /* InMemoryStoreIntegrationTest.swift */,
 				B4F2B17D2C97CB150017E717 /* SQL Models */,
-				B4F2B17A2C97CAFD0017E717 /* Queries */,
 			);
 			path = "Document Model";
 			sourceTree = "<group>";
@@ -967,16 +983,9 @@
 			isa = PBXGroup;
 			children = (
 				B4B0BB691E7E41C900F392DA /* Info.plist */,
+				B41C174D2CB0E45C002D19C2 /* Tag.swift */,
 			);
 			path = "Unit Tests";
-			sourceTree = "<group>";
-		};
-		B4F2B17A2C97CAFD0017E717 /* Queries */ = {
-			isa = PBXGroup;
-			children = (
-				B4F2B17B2C97CB0B0017E717 /* CommonSQL.swift */,
-			);
-			path = Queries;
 			sourceTree = "<group>";
 		};
 		B4F2B17D2C97CB150017E717 /* SQL Models */ = {
@@ -1325,11 +1334,11 @@
 				B4815B7105C44C0200403360 /* XRLayerData.m in Sources */,
 				B461B87205C4E1DA00738D23 /* XRGraphicKite.m in Sources */,
 				B44D357705C5578500D7823C /* XRGraphicPetal.m in Sources */,
-				B4F2B17C2C97CB0B0017E717 /* CommonSQL.swift in Sources */,
 				B4A82F9C2A07F8A400790052 /* LITMXMLBinaryEncoding.m in Sources */,
 				B4F257AE05C58578008591BE /* XRGraphicDot.m in Sources */,
 				B4A82FAD2A07FB8800790052 /* LITMArrowHead.m in Sources */,
 				B4F2595205C58F28008591BE /* XRGraphicHistogram.m in Sources */,
+				B4866BF42CAE02C900319712 /* StoreProtocol.swift in Sources */,
 				B4F25AE505C59CE6008591BE /* XRGraphicDotDeviation.m in Sources */,
 				B4E2DE8A05C5BD6500714F6F /* XRLayerGrid.m in Sources */,
 				B4EE8F7905C5E0A9001BACD3 /* XRGraphicLine.m in Sources */,
@@ -1364,6 +1373,7 @@
 				B4F08862060914150000CF7A /* XRVStatCreatePanelController.m in Sources */,
 				B464E643060956DE009C1C89 /* XRGeometryPropertyInspector.m in Sources */,
 				B4324D0B06187FFF0083AE8A /* XRLayerText.m in Sources */,
+				B48BBEC12CAA1BFA0050852E /* Logger.swift in Sources */,
 				B4A82F982A07F87A00790052 /* LITMXMLTree.m in Sources */,
 				B447A966062B021A00154420 /* AboutPanelController.m in Sources */,
 				B4C08803063069F2001A91F4 /* XRExportGraphicAccessory.m in Sources */,
@@ -1398,7 +1408,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B41C17532CB1C2AF002D19C2 /* Tag.swift in Sources */,
+				B48BBEC82CAA20DC0050852E /* InMemoryStoreTest.swift in Sources */,
+				B4866BF72CAE039200319712 /* MockSqliteInterface.swift in Sources */,
 				B427CFF21E81EB9E0047F659 /* XRStatisticTests.m in Sources */,
+				B41C17522CB1C278002D19C2 /* InMemoryStoreIntegrationTest.swift in Sources */,
 				B4B0BB881E7E45CB00F392DA /* XRLayerDataTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1974,6 +1988,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PaleoRose.app/Contents/MacOS/PaleoRose";
 			};
 			name = Debug;
@@ -2036,6 +2051,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PaleoRose.app/Contents/MacOS/PaleoRose";
 			};
 			name = Release;

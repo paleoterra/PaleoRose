@@ -80,7 +80,7 @@ struct TestableTable: TableRepresentable, Equatable {
         Query(
             sql:
             """
-            create table \(tableName)
+            CREATE TABLE \(tableName)
             (intValue INTEGER PRIMARY KEY,
             int32Value INTEGER not null,
             uintValue INTEGER not null,

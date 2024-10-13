@@ -1,5 +1,5 @@
 //
-// DocumentModel.swift
+// Logger.swift
 // PaleoRose
 //
 // MIT License
@@ -23,19 +23,9 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+import OSLog
 
-import Foundation
-
-class DocumentModel: NSObject {
-    private var inMemoryStore: InMemoryStore
-
-    @available(*, deprecated, message: "This code will become unavailable")
-    @objc init(inMemoryStore: InMemoryStore) {
-        self.inMemoryStore = inMemoryStore
-    }
-
-    @available(*, deprecated, message: "This code will become unavailable")
-    @objc func store() -> OpaquePointer? {
-        inMemoryStore.store()
-    }
+@available(macOS 11.0, *)
+extension Logger {
+    static let memoryStoreLogger = Logger(subsystem: "come.paleorose", category: "memorystore")
 }

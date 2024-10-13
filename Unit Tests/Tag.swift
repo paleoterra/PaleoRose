@@ -1,5 +1,5 @@
 //
-// DocumentModel.swift
+// Tag.swift
 // PaleoRose
 //
 // MIT License
@@ -24,18 +24,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
+import Testing
 
-class DocumentModel: NSObject {
-    private var inMemoryStore: InMemoryStore
-
-    @available(*, deprecated, message: "This code will become unavailable")
-    @objc init(inMemoryStore: InMemoryStore) {
-        self.inMemoryStore = inMemoryStore
-    }
-
-    @available(*, deprecated, message: "This code will become unavailable")
-    @objc func store() -> OpaquePointer? {
-        inMemoryStore.store()
-    }
+extension Tag {
+    @Tag static var integration: Self
 }

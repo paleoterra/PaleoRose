@@ -29,5 +29,5 @@ import Foundation
 /// Allows for custom queries for the Query Protocols
 public struct Subquery {
     /// An array of any optional objects to be bound in an Sqlite call
-    public let bindables: [Any?]
+    public let bindables: [Bindable?]
 }
