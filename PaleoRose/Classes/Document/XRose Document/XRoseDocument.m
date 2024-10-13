@@ -56,8 +56,6 @@
 
 @property (nonatomic) NSMutableArray *tables;
 
-
-//@property (readwrite) sqlite3* inMemoryStore;
 @property (readwrite) DocumentModel* documentModel;
 @property (readwrite) BOOL didLoad;
 
@@ -462,7 +460,6 @@
         [self.mainWindowController SQLInitialSaveToDatabase:[self.documentModel store]];
         [[self.mainWindowController geometryController] SQLInitialSaveToDatabase:[self.documentModel store]];
     }
-
 }
 
 -(void)datasetsRenameTable:(NSString *)oldName toName:(NSString *)newName

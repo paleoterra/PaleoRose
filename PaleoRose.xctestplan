@@ -1,0 +1,36 @@
+{
+  "configurations" : [
+    {
+      "id" : "2297A730-6A29-4B42-AFAF-3E3CD39E2B92",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:PaleoRose.xcodeproj",
+      "identifier" : "8D15AC270486D014006FF6A4",
+      "name" : "PaleoRose"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:PaleoRose.xcodeproj",
+        "identifier" : "B4B0BB7A1E7E459B00F392DA",
+        "name" : "Unit Tests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:PaleoRose.xcodeproj",
+        "identifier" : "B4AF8C682C9CEECA0044A63D",
+        "name" : "CodableSQLiteNonThreadTests"
+      }
+    }
+  ],
+  "version" : 1
+}

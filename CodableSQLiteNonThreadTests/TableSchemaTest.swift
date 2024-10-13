@@ -1,5 +1,5 @@
 //
-// CommonSQL.swift
+// TableSchemaTest.swift
 // PaleoRose
 //
 // MIT License
@@ -25,16 +25,32 @@
 // SOFTWARE.
 
 import CodableSQLiteNonThread
-import Foundation
+import Testing
 
-enum CommonSQL: CaseIterable {
-    case tableNames
+struct TableSchemaTest {
+    let interface = SQLiteInterface()
 
-    func query() -> QueryProtocol {
-        switch self {
-        case .tableNames:
-            // swiftlint:disable:next line_length
-            Query(sql: "select tbl_name from sqlite_master where type = \"table\" AND tbl_name NOT LIKE \"_w%\" AND tbl_name NOT LIKE \"_g%\" AND tbl_name NOT LIKE \"_l%\" AND tbl_name NOT LIKE \"_c%\" AND tbl_name NOT LIKE \"_d%\"")
-        }
+    @Test("Given Table, then read the schema")
+    func readSchema() throws {
+        let database = try interface.createInMemoryStore(identifier: UUID().uuidString)
+        _ = try interface.executeQuery(sqlite: database, query: TestableTable.createTableQuery())
+
+        let schema: [TableSchema] = try interface.executeCodableQuery(
+            sqlite: database,
+            query: TableSchema.storedValues()
+        )
+        let scheme = try #require(schema.first)
+        #expect(schema.count == 1)
+        #expect(scheme.name == "TestableTable")
+        #expect(scheme.sql + ";" == TestableTable.createTableQuery().sql)
+    }
+
+    @Test("Generate empty queries")
+    func generateEmptyQueries() throws {
+        #expect(TableSchema.storedValues().sql == "SELECT * FROM sqlite_schema;")
+        #expect(TableSchema.createTableQuery().sql.isEmpty)
+        #expect(TableSchema.insertQuery().sql.isEmpty)
+        #expect(TableSchema.updateQuery().sql.isEmpty)
+        #expect(TableSchema.deleteQuery().sql.isEmpty)
     }
 }

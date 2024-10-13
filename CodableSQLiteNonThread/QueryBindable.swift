@@ -29,7 +29,7 @@ import Foundation
 /// For queries that use binding to set values
 public protocol QueryBindable {
     /// Binding values to set in the query
-    var bindings: [[Any?]] { get set }
+    var bindings: [[Bindable?]] { get set }
 
     /// Array of subqueries
     func subqueries() -> [Subquery]

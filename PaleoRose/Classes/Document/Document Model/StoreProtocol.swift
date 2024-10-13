@@ -1,5 +1,5 @@
 //
-// DocumentModel.swift
+// StoreProtocol.swift
 // PaleoRose
 //
 // MIT License
@@ -24,18 +24,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import CodableSQLiteNonThread
 import Foundation
 
-class DocumentModel: NSObject {
-    private var inMemoryStore: InMemoryStore
+protocol StoreProtocol {
+    func createInMemoryStore() throws -> OpaquePointer
+    func createInMemoryStore(identifier: String) throws -> OpaquePointer
+    func executeQuery(sqlite: OpaquePointer, query: QueryProtocol) throws -> [[String: Codable]]
+    func close(store: OpaquePointer) throws
+}
 
-    @available(*, deprecated, message: "This code will become unavailable")
-    @objc init(inMemoryStore: InMemoryStore) {
-        self.inMemoryStore = inMemoryStore
-    }
-
-    @available(*, deprecated, message: "This code will become unavailable")
-    @objc func store() -> OpaquePointer? {
-        inMemoryStore.store()
+extension SQLiteInterface: StoreProtocol {
+    func createInMemoryStore() throws -> OpaquePointer {
+        try createInMemoryStore(identifier: UUID().uuidString)
     }
 }

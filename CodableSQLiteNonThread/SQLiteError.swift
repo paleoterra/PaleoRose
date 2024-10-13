@@ -25,16 +25,71 @@
 // SOFTWARE.
 
 import Foundation
+import SQLite3
 
 public enum SQLiteError: Error {
+
     case dataNotFound
     case decodeFailure
     case failedToOpen
     case fileNotFound
-    case invalidBindings
+    case invalidBindings(type: String, value: Any?, SQLiteError: Int32?)
     case invalidFile
     case invalidStatement
     case sqliteBindingError(String)
-    case sqliteError(String)
+    case sqliteError(result: Int32, message: String)
     case sqliteStatementError(String)
+    case unknownSqliteError(String)
+
+    var localizedDescription: String {
+        switch self {
+        case .dataNotFound:
+            "Data not found"
+
+        case .decodeFailure:
+            "Failed to decode data"
+
+        case .failedToOpen:
+            "Failed to open database"
+
+        case .fileNotFound:
+            "File not found"
+
+        case let .invalidBindings(type, value, error):
+            "Invalid bindings: \(type): \(String(describing: value)), \(String(describing: error))"
+
+        case .invalidFile:
+            "Invalid file"
+
+        case .invalidStatement:
+            "Invalid statement"
+
+        case let .sqliteBindingError(message):
+            "SQLite binding error: \(message)"
+
+        case let .sqliteError(result: result, message: message):
+            "SQLite error: \(String(describing: result)): \(message)"
+
+        case let .sqliteStatementError(message):
+            "SQLite statement error: \(message)"
+
+        case let .unknownSqliteError(message):
+            "Unknown SQLite error: \(message)"
+        }
+    }
+
+    public static func checkSqliteStatus(_ status: Int32) throws {
+        guard [SQLITE_OK, SQLITE_ROW, SQLITE_DONE].contains(status) else {
+            throw sqliteError(result: status, message: String(cString: sqlite3_errstr(status)))
+        }
+    }
+}
+
+extension SQLiteError: Equatable {
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+        let lhsDescription = lhs.localizedDescription
+        let rhsDescription = rhs.localizedDescription
+
+        return lhsDescription == rhsDescription
+    }
 }

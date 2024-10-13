@@ -28,6 +28,8 @@ import Foundation
 import OSLog
 
 @available(macOS 11.0, *)
-extension Logger {
+// swiftlint:disable:next no_extension_access_modifier
+public extension Logger {
+    /// Logs associated with SQLite
     static let codableLog = Logger(subsystem: "come.paleoterra.codableSqliteNonThread", category: "codablesql")
 }

@@ -59,7 +59,7 @@
 --shortoptionals except-properties
 --smarttabs enabled
 --someany true
---stripunusedargs always
+--stripunusedargs unnamed-only
 --structthreshold 0
 --swiftversion 5.9
 --tabwidth unspecified

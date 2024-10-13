@@ -26,10 +26,15 @@
 
 import CodableSQLiteNonThread
 import Foundation
+import OSLog
 
 class InMemoryStore: NSObject {
+    enum InMemoryStoreError: Error {
+        case databaseDoesNotExist
+    }
+
     private var sqliteStore: OpaquePointer?
-    private let interface = SQLiteInterface()
+    let interface: StoreProtocol
 
     private let createTableQueries: [QueryProtocol] = [
         WindowControllerSize.createTableQuery(),
@@ -45,35 +50,51 @@ class InMemoryStore: NSObject {
     ]
 
     @available(*, deprecated, message: "This code will become unavailable")
-    @objc func store() -> OpaquePointer? {
-        guard let sqliteStore else {
-            do {
-                try createStore()
-                try configureStore()
-                return sqliteStore
-            } catch {
-                return nil
-            }
+    @objc override init() {
+        interface = SQLiteInterface()
+        super.init()
+        do {
+            try setupDatabase()
+        } catch {
+            logError(error: "Error creating in-memory store: \(error)")
+            return
         }
-        return sqliteStore
     }
 
-    private func createStore() throws {
+    init(interface: StoreProtocol = SQLiteInterface()) throws {
+        self.interface = interface
+        super.init()
+        try setupDatabase()
+    }
+
+    @available(*, deprecated, message: "This code will become unavailable")
+    @objc func store() -> OpaquePointer? {
+        sqliteStore
+    }
+
+    private func setupDatabase() throws {
         do {
-            sqliteStore = try interface.createInMemoryStore()
+            let store = try createStore()
+            sqliteStore = store
+            try configureStore(store: store)
         } catch {
-            print("Error creating in-memory store: \(error)")
+            logError(error: "Error creating in-memory store: \(error)")
             throw error
         }
     }
 
-    private func configureStore() throws {
-        guard let sqliteStore else {
-            return
-        }
+    private func createStore() throws -> OpaquePointer {
+        try interface.createInMemoryStore()
+    }
+
+    private func configureStore(store: OpaquePointer) throws {
         try createTableQueries.forEach { query in
-            try interface.executeQuery(sqlite: sqliteStore, query: query)
+            try _ = interface.executeQuery(sqlite: store, query: query)
         }
+    }
+
+    private func logError(error: String) {
+        Logger.memoryStoreLogger.error("\(error)")
     }
 
     deinit {
@@ -81,7 +102,7 @@ class InMemoryStore: NSObject {
             do {
                 try interface.close(store: sqliteStore)
             } catch {
-                print("Error closing in-memory store: \(error)")
+                logError(error: "Error closing in-memory store: \(error)")
             }
         }
     }
