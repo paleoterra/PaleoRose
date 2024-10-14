@@ -112,7 +112,6 @@
 }
 
 #pragma mark - Writing the Document's Content
-
 -(BOOL)writeToURL:(NSURL *)url ofType:(NSString *)typeName error:(NSError * _Nullable __autoreleasing *)outError
 {
     NSString *fileName = [url path];//temp save path
@@ -139,7 +138,6 @@
         }
     }
     sqlite3_close(targetFile);
-
 }
 
 #pragma mark - Getting Document Metadata
