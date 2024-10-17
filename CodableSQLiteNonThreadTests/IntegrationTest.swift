@@ -30,6 +30,50 @@ import Testing
 @Suite("IntegrationTest", .tags(.integration))
 struct IntegrationTest {
     let sut = SQLiteInterface()
+    let expectedTestableTable: [TestableTable] = [
+        .init(
+            intValue: 1,
+            int32Value: 2,
+            uintValue: 3,
+            uint32Value: 4,
+            int16Value: 5,
+            uint16Value: 6,
+            floatValue: 17.1,
+            doubleValue: 342.234234,
+            cgFloatValue: 23.23,
+            stringValue: "dream",
+            optionalString: nil,
+            dataStore: nil
+        ),
+        .init(
+            intValue: 2,
+            int32Value: 3,
+            uintValue: 2,
+            uint32Value: 54,
+            int16Value: 34,
+            uint16Value: 2,
+            floatValue: 13.1,
+            doubleValue: 540.3,
+            cgFloatValue: 23.23,
+            stringValue: "bacon",
+            optionalString: "sunshine",
+            dataStore: nil
+        ),
+        .init(
+            intValue: 3,
+            int32Value: 33,
+            uintValue: 23,
+            uint32Value: 543,
+            int16Value: 345,
+            uint16Value: 15,
+            floatValue: 145.2323,
+            doubleValue: 520,
+            cgFloatValue: 23,
+            stringValue: "day",
+            optionalString: "week",
+            dataStore: nil
+        )
+    ]
 
     private func createInMemoryStore() throws -> OpaquePointer? {
         try sut.createInMemoryStore(identifier: UUID().uuidString)
@@ -46,6 +90,16 @@ struct IntegrationTest {
         insertQuery.bindings = bindings
 
         try sut.executeQuery(sqlite: store, query: insertQuery)
+    }
+
+    private func openTestFile() throws -> OpaquePointer {
+        guard let bundle = Bundle(identifier: "paleoterra.CodableSQLiteNonThreadTests"),
+              let path = bundle.path(forResource: "testfile", ofType: "sqlite")
+        else {
+            Issue.record("Could not find test file")
+            throw SQLiteError.failedToOpen
+        }
+        return try sut.openDatabase(path: path)
     }
 
     @Test("Given initializing a database, it is created")
@@ -119,5 +173,22 @@ struct IntegrationTest {
         )
 
         #expect(fromDatabase == records)
+    }
+
+    @Test("Given existing store url, then open, and then close again")
+    func openAndCloseSqliteFileOnDisk() throws {
+        let store = try #require(try openTestFile())
+        try #require(try sut.close(store: store))
+    }
+
+    @Test("Given database on disk, open file and read testable table, then verify records")
+    func readDataFromDisk() throws {
+        let file = try #require(try openTestFile())
+        let items: [TestableTable] = try #require(
+            try sut.executeCodableQuery(sqlite: file, query: TestableTable.storedValues())
+        )
+        try #require(items.count == 3)
+        #expect(items == expectedTestableTable)
+        try #require(try sut.close(store: file))
     }
 }
