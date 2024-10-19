@@ -102,6 +102,33 @@ struct IntegrationTest {
         return try sut.openDatabase(path: path)
     }
 
+    private func openTemporaryFile(directory: URL, name: String) throws -> OpaquePointer {
+        try sut.openDatabase(path: directory.appendingPathComponent(name).path)
+    }
+
+//    private func cleanupTemporaryDirectory(_ directory: URL) throws {
+//        try FileManager.default.removeItem(at: directory)
+//    }
+
+    private func temporaryDirectory() throws -> URL {
+        FileManager.default.temporaryDirectory
+    }
+
+//
+//        guard let bundle = Bundle(identifier: "paleoterra.CodableSQLiteNonThreadTests"),
+//              let path = bundle.path(forResource: "testfile", ofType: "sqlite")
+//        else {
+//            Issue.record("Could not find test file")
+//            throw SQLiteError.failedToOpen
+//        }
+//        return try FileManager.default.url(
+//            for: .itemReplacementDirectory,
+//            in: .userDomainMask,
+//            appropriateFor: URL(string: path),
+//            create: true
+//        )
+//    }
+
     @Test("Given initializing a database, it is created")
     func createDatabase() throws {
         _ = try createInMemoryStore()
@@ -184,11 +211,94 @@ struct IntegrationTest {
     @Test("Given database on disk, open file and read testable table, then verify records")
     func readDataFromDisk() throws {
         let file = try #require(try openTestFile())
+        defer {
+            do {
+                try #require(try sut.close(store: file))
+            } catch {
+                Issue.record("Failed to close database file: \(error)")
+            }
+        }
         let items: [TestableTable] = try #require(
             try sut.executeCodableQuery(sqlite: file, query: TestableTable.storedValues())
         )
         try #require(items.count == 3)
         #expect(items == expectedTestableTable)
-        try #require(try sut.close(store: file))
+    }
+
+    @Test("Given sqlite file, when backing up to in-memory, then data copied")
+    func backupFromDiskToInMemory() throws {
+        let file = try #require(try openTestFile())
+        defer {
+            do {
+                try #require(try sut.close(store: file))
+            } catch {
+                Issue.record("Failed to close database file: \(error)")
+            }
+        }
+        let store = try #require(try createInMemoryStore())
+        defer {
+            do {
+                try #require(try sut.close(store: store))
+            } catch {
+                Issue.record("Failed to close database store: \(error)")
+            }
+        }
+
+        try sut.backup(source: file, destination: store)
+
+        let originalItems: [TestableTable] = try #require(
+            try sut.executeCodableQuery(sqlite: file, query: TestableTable.storedValues())
+        )
+        let copiedItems: [TestableTable] = try #require(
+            try sut.executeCodableQuery(sqlite: store, query: TestableTable.storedValues())
+        )
+        #expect(originalItems == copiedItems)
+        #expect(copiedItems == expectedTestableTable)
+    }
+
+    @Test("Given in-memory store, when backing up to file, then data copied")
+    func backupFromMemoryToInDisk() throws {
+        let temporaryDirectory = try temporaryDirectory()
+        let filename = UUID().uuidString
+        let path = temporaryDirectory.appendingPathComponent(filename).path
+        let file = try #require(try sut.openDatabase(path: path))
+        defer {
+            do {
+                try #require(try sut.close(store: file))
+                try #require(try FileManager.default.removeItem(atPath: path))
+            } catch {
+                Issue.record("Failed to close or delete database file: \(error)")
+            }
+        }
+
+        try #require(try FileManager.default.fileExists(atPath: path))
+
+        let store = try #require(try createInMemoryStore())
+        defer {
+            do {
+                try #require(try sut.close(store: store))
+            } catch {
+                Issue.record("Failed to close database store: \(error)")
+            }
+        }
+
+        try sut.executeQuery(sqlite: store, query: TestableTable.createTableQuery())
+
+        var insertQuery = TestableTable.insertQuery()
+        let bindings = try expectedTestableTable.compactMap { try $0.valueBindables(keys: insertQuery.keys) }
+        insertQuery.bindings = bindings
+
+        try sut.executeQuery(sqlite: store, query: insertQuery)
+
+        try sut.backup(source: store, destination: file)
+
+        let originalItems: [TestableTable] = try #require(
+            try sut.executeCodableQuery(sqlite: store, query: TestableTable.storedValues())
+        )
+        let copiedItems: [TestableTable] = try #require(
+            try sut.executeCodableQuery(sqlite: file, query: TestableTable.storedValues())
+        )
+        #expect(originalItems == copiedItems)
+        #expect(copiedItems == expectedTestableTable)
     }
 }

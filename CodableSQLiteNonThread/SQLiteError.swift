@@ -40,6 +40,7 @@ public enum SQLiteError: Error {
     case sqliteError(result: Int32, message: String)
     case sqliteStatementError(String)
     case unknownSqliteError(String)
+    case backupFailed
 
     var localizedDescription: String {
         switch self {
@@ -75,6 +76,9 @@ public enum SQLiteError: Error {
 
         case let .unknownSqliteError(message):
             "Unknown SQLite error: \(message)"
+
+        case .backupFailed:
+            "SQLite backup failed"
         }
     }
 
