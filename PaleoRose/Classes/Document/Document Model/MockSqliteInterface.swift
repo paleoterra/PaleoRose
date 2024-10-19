@@ -54,6 +54,7 @@ class MockSqliteInterface: StoreProtocol {
         if let createInMemoryStoreError {
             throw createInMemoryStoreError
         }
+
         guard let pointer else {
             fatalError("Pointer is nil")
         }

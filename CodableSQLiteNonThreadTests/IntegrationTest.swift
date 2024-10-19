@@ -106,28 +106,9 @@ struct IntegrationTest {
         try sut.openDatabase(path: directory.appendingPathComponent(name).path)
     }
 
-//    private func cleanupTemporaryDirectory(_ directory: URL) throws {
-//        try FileManager.default.removeItem(at: directory)
-//    }
-
     private func temporaryDirectory() throws -> URL {
         FileManager.default.temporaryDirectory
     }
-
-//
-//        guard let bundle = Bundle(identifier: "paleoterra.CodableSQLiteNonThreadTests"),
-//              let path = bundle.path(forResource: "testfile", ofType: "sqlite")
-//        else {
-//            Issue.record("Could not find test file")
-//            throw SQLiteError.failedToOpen
-//        }
-//        return try FileManager.default.url(
-//            for: .itemReplacementDirectory,
-//            in: .userDomainMask,
-//            appropriateFor: URL(string: path),
-//            create: true
-//        )
-//    }
 
     @Test("Given initializing a database, it is created")
     func createDatabase() throws {

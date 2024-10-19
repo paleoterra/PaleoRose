@@ -135,21 +135,21 @@ struct InMemoryStoreIntegrationTest {
 
     @Test("Given a populated in-memory store, when backing up to new file, then backup successfully")
     func backupToNewFile() throws {
-        let store = try #require(try InMemoryStore())
+        let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
         try backupFromSampleFileToInMemoryStore(store)
 
         let temporaryDirectory = FileManager.default.temporaryDirectory
-        let filePath = "\(temporaryDirectory)/\(UUID().uuidString)"
+        let fileURL = temporaryDirectory.appendingPathComponent(UUID().uuidString)
 
-        try #require(try store.save(to: filePath))
+        try #require(try store.save(to: fileURL.path()))
 
-        let tempFile = try SQLiteInterface().openDatabase(path: filePath)
+        let tempFile = try SQLiteInterface().openDatabase(path: fileURL.path())
         defer {
             do {
                 try SQLiteInterface().close(store: tempFile)
-                try FileManager.default.removeItem(at: URL(filePath: filePath))
+                try FileManager.default.removeItem(at: fileURL)
             } catch {
-                print("Failed to close database: \(error)")
+                Issue.record("Failed to remove database \(error)")
             }
         }
         try assertDatabaseContentMatchesSampleFile(database: tempFile)
