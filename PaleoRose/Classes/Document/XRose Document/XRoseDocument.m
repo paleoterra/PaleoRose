@@ -86,58 +86,32 @@
 {
     if([typeName isEqualToString:@"XRose"])
     {
-        [self readInMemoryStoreToPath:[url path]];
+        NSError *error = nil;
+        [_documentModel readFromFile:url error:&error];
+        if (error) {
+            NSLog(@"%@", error.localizedDescription);
+            return NO;
+        }
+        self.didLoad = YES;
         return YES;
     }
     return NO;
 }
 
--(void)readInMemoryStoreToPath:(NSString *)sourcePath {
-    int returnCode;
-    sqlite3 *sourceFile;
-    sqlite3_backup *sqliteBackup;
-
-    //create target file
-    returnCode = sqlite3_open([sourcePath cStringUsingEncoding:NSUTF8StringEncoding], &sourceFile);
-
-    if (returnCode == SQLITE_OK) {
-        sqliteBackup = sqlite3_backup_init([self.documentModel store], "main", sourceFile, "main");
-        if (sqliteBackup) {
-            (void)sqlite3_backup_step(sqliteBackup, -1);
-            (void)sqlite3_backup_finish(sqliteBackup);
-        }
-    }
-    sqlite3_close(sourceFile);
-    self.didLoad = YES;
-}
-
 #pragma mark - Writing the Document's Content
 -(BOOL)writeToURL:(NSURL *)url ofType:(NSString *)typeName error:(NSError * _Nullable __autoreleasing *)outError
 {
+    NSError *error = nil;
     NSString *fileName = [url path];//temp save path
     [[self.mainWindowController geometryController]  saveToSQLDB:[self.documentModel store]];
     [self.mainWindowController  saveToSQLDB:[self.documentModel store]];
     [(XRoseTableController *)[self.mainWindowController tableController] saveToSQLDB:[self.documentModel store]];
-    [self writeInMemoryStoreToPath:fileName];
-    return YES;
-}
-
--(void)writeInMemoryStoreToPath:(NSString *)targetPath {
-    int returnCode;
-    sqlite3 *targetFile;
-    sqlite3_backup *sqliteBackup;
-
-    //create target file
-    returnCode = sqlite3_open([targetPath cStringUsingEncoding:NSUTF8StringEncoding], &targetFile);
-
-    if (returnCode == SQLITE_OK) {
-        sqliteBackup = sqlite3_backup_init(targetFile, "main", [self.documentModel store], "main");
-        if (sqliteBackup) {
-            (void)sqlite3_backup_step(sqliteBackup, -1);
-            (void)sqlite3_backup_finish(sqliteBackup);
-        }
+    [_documentModel writeToFile:url error:&error];
+    if (error) {
+        NSLog(@"%@", error.localizedDescription);
+        return NO;
     }
-    sqlite3_close(targetFile);
+    return YES;
 }
 
 #pragma mark - Getting Document Metadata
@@ -563,8 +537,6 @@
         [self.dataSets addObject:aSet];
         aSet = nil;
     }
-
-
 }
 
 #pragma mark Importing Data
