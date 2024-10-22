@@ -482,32 +482,8 @@
 
 -(void)discoverTables
 {
-
-    int error;
-
-    sqlite3_stmt *stmt;
-    const char *zSql;
-    NSString *sql = @"select tbl_name from sqlite_master where type = \"table\" AND tbl_name NOT LIKE \"_w%\" AND tbl_name NOT LIKE \"_g%\" AND tbl_name NOT LIKE \"_l%\" AND tbl_name NOT LIKE \"_c%\" AND tbl_name NOT LIKE \"_d%\"";
-
-    error = sqlite3_prepare([self.documentModel store],[sql UTF8String],-1,&stmt,&zSql);
-    if(error == SQLITE_OK)
-    {
-        [self.tables removeAllObjects];
-        while(sqlite3_step(stmt)!=SQLITE_DONE)
-        {
-            NSString *aString = [NSString stringWithUTF8String:(char *)sqlite3_column_text(stmt,0)];
-            //NSLog(aString);
-            if(![self.tables containsObject:aString])
-                [self.tables addObject:aString];
-        }
-    }
-    else
-    {
-        NSError *theError = [NSError errorWithDomain:@"SQLITE" code:error userInfo:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSString stringWithUTF8String:(char *)sqlite3_errmsg([self.documentModel store])],nil]
-                                                                                                               forKeys:[NSArray arrayWithObjects:@"NSLocalizedFailureReasonErrorKey",nil]]];
-        [self presentError:theError];
-    }
-    sqlite3_finalize(stmt);
+    [self.tables removeAllObjects];
+    [self.tables addObjectsFromArray:[_documentModel dataTableNames]];
     [self.mainWindowController updateTable];
 }
 

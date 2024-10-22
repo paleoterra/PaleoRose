@@ -97,6 +97,31 @@ class InMemoryStore: NSObject {
         try backup(info: BackupInfo(path: filePath, type: .toFile))
     }
 
+    func dataTables() throws -> [TableSchema] {
+        guard let sqliteStore else {
+            throw InMemoryStoreError.databaseDoesNotExist
+        }
+        let tables: [TableSchema] = try interface.executeCodableQuery(
+            sqlite: sqliteStore,
+            query: TableSchema.storedValues()
+        )
+        let nonDataTableNames = [
+            WindowControllerSize.tableName,
+            Geometry.tableName,
+            Layer.tableName,
+            Color.tableName,
+            DataSet.tableName,
+            LayerText.tableName,
+            LayerLineArrow.tableName,
+            LayerCore.tableName,
+            LayerGrid.tableName,
+            LayerData.tableName,
+            "sqlite_master",
+            "sqlite_sequence"
+        ]
+        return tables.filter { !nonDataTableNames.contains($0.name) }
+    }
+
     private func backup(info: BackupInfo) throws {
         let store = try sqlitePointer()
         let file = try interface.openDatabase(path: info.path)

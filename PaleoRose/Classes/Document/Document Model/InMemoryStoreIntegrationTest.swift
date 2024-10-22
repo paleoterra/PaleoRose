@@ -154,4 +154,23 @@ struct InMemoryStoreIntegrationTest {
         }
         try assertDatabaseContentMatchesSampleFile(database: tempFile)
     }
+
+    @Test("Given document with no data, when requesting data tables, then return an empty array")
+    func returnEmptyTableListWhenNoData() throws {
+        let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
+
+        let tables = try store.dataTables()
+        #expect(tables.isEmpty)
+    }
+
+    @Test("Given document with data, when requesting data tables, then return array")
+    func returnPopulatedTableListWhenNoData() throws {
+        let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
+        try backupFromSampleFileToInMemoryStore(store)
+
+        let tables = try store.dataTables()
+        print(tables)
+        #expect(tables.count == 1, "Expected 1 table, got \(tables.count)")
+        #expect(tables.first?.name == "rtest")
+    }
 }

@@ -24,10 +24,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import CodableSQLiteNonThread
 import Foundation
 
 class DocumentModel: NSObject {
     private var inMemoryStore: InMemoryStore
+    var dataTables: [TableSchema] = []
 
     @available(*, deprecated, message: "This code will become unavailable")
     @objc init(inMemoryStore: InMemoryStore) {
@@ -45,5 +47,10 @@ class DocumentModel: NSObject {
 
     @objc func readFromFile(_ file: URL) throws {
         try inMemoryStore.load(from: file.path)
+        dataTables = try inMemoryStore.dataTables()
+    }
+
+    @objc func dataTableNames() -> [String] {
+        return dataTables.map{ $0.name }
     }
 }
