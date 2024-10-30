@@ -48,9 +48,22 @@ class DocumentModel: NSObject {
     @objc func readFromFile(_ file: URL) throws {
         try inMemoryStore.load(from: file.path)
         dataTables = try inMemoryStore.dataTables()
+        let dataSets = try inMemoryStore.dataSets()
+        let dataSetValues = try dataSets.map { dataSet in
+            let values = try inMemoryStore.dataSetValues(for: dataSet)
+            return (dataSet, values)
+        }
+//        let finalDataSets: [XRDataSet] = dataSetValues.map { dataSet, values in
+//            XRDataSet(
+//                table: dataSet.name ?? "",
+//                column: <#T##String!#>,
+//                for: <#T##NSDocument!#>,
+//                predicate: <#T##String!#>
+//            )
+//        }
     }
 
     @objc func dataTableNames() -> [String] {
-        return dataTables.map{ $0.name }
+        dataTables.map { $0.name }
     }
 }

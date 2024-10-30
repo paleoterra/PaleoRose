@@ -29,6 +29,7 @@ import SQLite3
 
 public enum SQLiteError: Error {
 
+    case backupFailed
     case dataNotFound
     case decodeFailure
     case failedToOpen
@@ -40,7 +41,6 @@ public enum SQLiteError: Error {
     case sqliteError(result: Int32, message: String)
     case sqliteStatementError(String)
     case unknownSqliteError(String)
-    case backupFailed
 
     var localizedDescription: String {
         switch self {

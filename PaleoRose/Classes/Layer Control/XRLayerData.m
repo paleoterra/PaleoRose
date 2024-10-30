@@ -463,8 +463,6 @@
 
 }
 
-
-
 -(void)setStatisticsArray
 {
 	if(_statistics)
@@ -482,8 +480,6 @@
 
 -(NSMutableArray *)statisticsArray
 {
-	//if(_statistics)
-	//	NSLog(@"stats is live %i",[_statistics count]);
 	return _statistics;
 }
 
@@ -506,7 +502,6 @@
 		[theGraphics addObject:[aGraphic graphicSettings]];
 	}
 	[theDict setObject:theGraphics forKey:XRLayerGraphicObjectArray];
-	//NSLog(@"end data layer");
 	return [NSDictionary dictionaryWithDictionary:theDict];
 }
 
@@ -519,7 +514,6 @@
 {
 	return @"DATA";
 }
-
 
 -(LITMXMLTree *)xmlTreeForVersion:(NSString *)version
 {
@@ -582,7 +576,6 @@
 
 -(void)setDataSet:(XRDataSet *)aSet
 {
-
 	_theSet = aSet;
 	[self calculateSectorValues];
 	[self generateGraphics];

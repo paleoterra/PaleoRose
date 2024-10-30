@@ -31,6 +31,7 @@ import OSLog
 class InMemoryStore: NSObject {
     enum InMemoryStoreError: Error {
         case databaseDoesNotExist
+        case unknownType
     }
 
     enum BackupType {
@@ -120,6 +121,40 @@ class InMemoryStore: NSObject {
             "sqlite_sequence"
         ]
         return tables.filter { !nonDataTableNames.contains($0.name) }
+    }
+
+    func dataSets() throws -> [DataSet] {
+        guard let sqliteStore else {
+            throw InMemoryStoreError.databaseDoesNotExist
+        }
+
+        return try interface.executeCodableQuery(
+            sqlite: sqliteStore,
+            query: DataSet.storedValues()
+        )
+    }
+
+    func dataSetValues(for dataSet: DataSet) throws -> [Double] {
+        guard let sqliteStore, let columnName = dataSet.COLUMNNAME else {
+            throw InMemoryStoreError.databaseDoesNotExist
+        }
+        let values = try interface.executeQuery(
+            sqlite: sqliteStore,
+            query: dataSet.dataQuery()
+        )
+        return try values.compactMap { value in
+            guard let value = value[columnName] else {
+                return nil
+            }
+            if let stringValue = value as? String {
+                return Double(stringValue)
+            }
+            // swiftlint:disable:next legacy_objc_type
+            if let number = value as? NSNumber {
+                return Double(truncating: number)
+            }
+            throw InMemoryStoreError.unknownType
+        }
     }
 
     private func backup(info: BackupInfo) throws {

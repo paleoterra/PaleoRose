@@ -60,7 +60,8 @@ struct SQLiteErrorTest {
             ),
             .init(leftError: .sqliteStatementError("test"), rightError: .sqliteStatementError("test")),
             .init(leftError: .unknownSqliteError("test"), rightError: .unknownSqliteError("test")),
-            .init(leftError: .invalidBindings(
+            .init(
+                leftError: .invalidBindings(
                 type: "cheese",
                 value: 32,
                 SQLiteError: 321

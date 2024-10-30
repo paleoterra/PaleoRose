@@ -32,12 +32,12 @@ struct DataSet: TableRepresentable {
     static var primaryKey: String? = "_id"
 
     // swiftlint:disable:next identifier_name
-    var _id: Int
-    var NAME: String
-    var TABLENAME: String
-    var COLUMNNAME: String
-    var PREDICATE: String
-    var COMMENTS: String
+    var _id: Int?
+    var NAME: String?
+    var TABLENAME: String?
+    var COLUMNNAME: String?
+    var PREDICATE: String?
+    var COMMENTS: String?
 
     // MARK: - TableRepresentable
 
@@ -61,5 +61,13 @@ struct DataSet: TableRepresentable {
 
     static func deleteQuery() -> any QueryProtocol {
         Query(sql: "")
+    }
+
+    func dataQuery() -> any QueryProtocol {
+        guard let tableName = TABLENAME else {
+            return Query(sql: "")
+        }
+        let predicate = PREDICATE ?? ""
+        return Query(sql: "SELECT * from \(tableName) \(predicate.isEmpty ? "" : "WHERE \(predicate)")")
     }
 }
