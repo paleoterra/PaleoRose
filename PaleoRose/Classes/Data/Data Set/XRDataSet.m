@@ -38,17 +38,16 @@
 
 #pragma mark Initers
 
--(id)initWithTable:(NSString *)table column:(NSString *)column forDocument:(NSDocument *)aDoc
+-(id)initWithTable:(NSString *)table column:(NSString *)column db:(sqlite3 *)db
 {
 	if (!(self = [super init])) return nil;
 	if(self)
 	{
-		theDocument = (XRoseDocument *)aDoc;
 		predicate = nil;
 		tableName = table;
 		columnName = column;
 		_theValues = [[NSMutableData alloc] init];
-		if([self readSQL])
+        if([self readSQL:db])
 			return self;
 		else
 			return nil;
@@ -56,20 +55,18 @@
 	return self;
 }
 
--(id)initWithTable:(NSString *)table column:(NSString *)column forDocument:(NSDocument *)aDoc predicate:(NSString *)aPredicate;
+-(id)initWithTable:(NSString *)table column:(NSString *)column db:(sqlite3 *)db predicate:(NSString *)aPredicate;
 {
 	if (!(self = [super init])) return nil;
 	if(self)
 	{
-		
-		theDocument = (XRoseDocument *)aDoc;
 		predicate = nil;
 		tableName = table;
 		columnName = column;
 	
 		predicate = aPredicate;
 		_theValues = [[NSMutableData alloc] init];
-		if([self readSQL])
+        if([self readSQL:db])
 			return self;
 		else
 			return nil;
@@ -85,6 +82,22 @@
     {
         _theValues = [[NSMutableData alloc] init];
         _name = name;
+        [_theValues appendData:data];
+    }
+    return self;
+}
+
+-(id)initWithName:(NSString *)name tableName:(NSString *)table column:(NSString *)column predicate:(NSString *)aPredicate comments:(NSAttributedString *)comments data:(NSData *)data {
+    if (!(self = [super init])) return nil;
+    if(self)
+    {
+        _theValues = [[NSMutableData alloc] init];
+        _name = name;
+        tableName = table;
+        columnName = column;
+        predicate = aPredicate;
+        _comments = [[NSMutableAttributedString alloc] initWithAttributedString:comments];
+
         [_theValues appendData:data];
     }
     return self;
@@ -643,11 +656,11 @@
 	return aSql;
 }
 
--(BOOL)readSQL
+-(BOOL)readSQL:(sqlite3 *)db
 {
 	NSString *theSQL = [self buildSQL];
 	NSString *theCountSQL = [self buildCountSQL];
-    sqlite3 *db = [theDocument documentInMemoryStore];
+
 	sqlite3_stmt *stmt;
 	const char *pzTail;
 	int count = 0, index;

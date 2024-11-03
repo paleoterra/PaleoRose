@@ -134,7 +134,7 @@ class InMemoryStore: NSObject {
         )
     }
 
-    func dataSetValues(for dataSet: DataSet) throws -> [Double] {
+    func dataSetValues(for dataSet: DataSet) throws -> [Float] {
         guard let sqliteStore, let columnName = dataSet.COLUMNNAME else {
             throw InMemoryStoreError.databaseDoesNotExist
         }
@@ -147,11 +147,11 @@ class InMemoryStore: NSObject {
                 return nil
             }
             if let stringValue = value as? String {
-                return Double(stringValue)
+                return Float(stringValue)
             }
             // swiftlint:disable:next legacy_objc_type
             if let number = value as? NSNumber {
-                return Double(truncating: number)
+                return Float(truncating: number)
             }
             throw InMemoryStoreError.unknownType
         }

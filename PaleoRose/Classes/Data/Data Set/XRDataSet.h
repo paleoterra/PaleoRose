@@ -38,7 +38,6 @@
 	NSMutableAttributedString *_comments;
 	//statistics
 	NSMutableArray *_circularStatistics;
-	XRoseDocument *theDocument;
 	NSString *predicate;
 	NSString *tableName;
 	NSString *columnName;
@@ -47,10 +46,10 @@
 
 #pragma mark init
 
--(id)initWithTable:(NSString *)table column:(NSString *)column forDocument:(NSDocument *)aDoc;
--(id)initWithTable:(NSString *)table column:(NSString *)column forDocument:(NSDocument *)aDoc predicate:(NSString *)aPredicate;
+-(id)initWithTable:(NSString *)table column:(NSString *)column db:(sqlite3 *)db;
+-(id)initWithTable:(NSString *)table column:(NSString *)column db:(sqlite3 *)db predicate:(NSString *)aPredicate;
 -(id)initWithData:(NSData *)theData withName:(NSString *)name;
-
+-(id)initWithName:(NSString *)name tableName:(NSString *)table column:(NSString *)column predicate:(NSString *)aPredicate comments:(NSAttributedString *)comments data:(NSData *)data;
 #pragma mark accessors
 
 -(NSData *)theData;
@@ -115,7 +114,7 @@
 #pragma mark SQL
 
 -(NSString *)buildSQL;
--(BOOL)readSQL;
+-(BOOL)readSQL:(sqlite3 *)db;
 -(void)saveToSQLDB:(sqlite3 *)db;
 -(id)initFromSQL:(sqlite3 *)db forIndex:(int)index;
 

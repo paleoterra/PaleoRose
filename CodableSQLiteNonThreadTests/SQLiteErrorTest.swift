@@ -62,15 +62,16 @@ struct SQLiteErrorTest {
             .init(leftError: .unknownSqliteError("test"), rightError: .unknownSqliteError("test")),
             .init(
                 leftError: .invalidBindings(
-                type: "cheese",
-                value: 32,
-                SQLiteError: 321
-            ),
-            rightError: .invalidBindings(
-                type: "cheese",
-                value: 32,
-                SQLiteError: 321
-            ))
+                    type: "cheese",
+                    value: 32,
+                    SQLiteError: 321
+                ),
+                rightError: .invalidBindings(
+                    type: "cheese",
+                    value: 32,
+                    SQLiteError: 321
+                )
+            )
         ]
     )
     func testEquality(values: ErrorContainer) {
