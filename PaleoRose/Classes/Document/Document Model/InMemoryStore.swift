@@ -84,10 +84,7 @@ class InMemoryStore: NSObject {
     }
 
     func sqlitePointer() throws -> OpaquePointer {
-        guard let store = sqliteStore else {
-            throw InMemoryStoreError.databaseDoesNotExist
-        }
-        return store
+        try validateStore()
     }
 
     func load(from filePath: String) throws {
@@ -99,9 +96,7 @@ class InMemoryStore: NSObject {
     }
 
     func dataTables() throws -> [TableSchema] {
-        guard let sqliteStore else {
-            throw InMemoryStoreError.databaseDoesNotExist
-        }
+        let sqliteStore = try validateStore()
         let tables: [TableSchema] = try interface.executeCodableQuery(
             sqlite: sqliteStore,
             query: TableSchema.storedValues()
@@ -124,9 +119,7 @@ class InMemoryStore: NSObject {
     }
 
     func dataSets() throws -> [DataSet] {
-        guard let sqliteStore else {
-            throw InMemoryStoreError.databaseDoesNotExist
-        }
+        let sqliteStore = try validateStore()
 
         return try interface.executeCodableQuery(
             sqlite: sqliteStore,
@@ -135,7 +128,8 @@ class InMemoryStore: NSObject {
     }
 
     func dataSetValues(for dataSet: DataSet) throws -> [Float] {
-        guard let sqliteStore, let columnName = dataSet.COLUMNNAME else {
+        let sqliteStore = try validateStore()
+        guard let columnName = dataSet.COLUMNNAME else {
             throw InMemoryStoreError.databaseDoesNotExist
         }
         let values = try interface.executeQuery(
@@ -157,8 +151,28 @@ class InMemoryStore: NSObject {
         }
     }
 
+    func valueColumnNames(for table: String) throws -> [String] {
+        let valueColumnsTypes: [ColumnAffinity] = [.integer, .float]
+        let sqliteStore = try validateStore()
+        let columns = try interface.columns(sqlite: sqliteStore, table: table)
+        return columns.compactMap { column in
+            if let affinity = column.type, valueColumnsTypes.contains(affinity) {
+                return column.name
+            }
+            return nil
+        }
+    }
+
+    @discardableResult
+    private func validateStore() throws -> OpaquePointer {
+        guard let sqliteStore else {
+            throw InMemoryStoreError.databaseDoesNotExist
+        }
+        return sqliteStore
+    }
+
     private func backup(info: BackupInfo) throws {
-        let store = try sqlitePointer()
+        let store = try validateStore()
         let file = try interface.openDatabase(path: info.path)
         defer {
             closeFile(file: file)

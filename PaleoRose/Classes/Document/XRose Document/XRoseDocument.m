@@ -87,7 +87,7 @@
     if([typeName isEqualToString:@"XRose"])
     {
         NSError *error = nil;
-        [_documentModel openFile:url error:&error];
+        [self.documentModel openFile:url error:&error];
         if (error) {
             NSLog(@"%@", error.localizedDescription);
             return NO;
@@ -102,11 +102,10 @@
 -(BOOL)writeToURL:(NSURL *)url ofType:(NSString *)typeName error:(NSError * _Nullable __autoreleasing *)outError
 {
     NSError *error = nil;
-    NSString *fileName = [url path];//temp save path
     [[self.mainWindowController geometryController]  saveToSQLDB:[self.documentModel store]];
     [self.mainWindowController  saveToSQLDB:[self.documentModel store]];
     [(XRoseTableController *)[self.mainWindowController tableController] saveToSQLDB:[self.documentModel store]];
-    [_documentModel writeToFile:url error:&error];
+    [self.documentModel writeToFile:url error:&error];
     if (error) {
         NSLog(@"%@", error.localizedDescription);
         return NO;
@@ -447,48 +446,25 @@
 
 -(NSArray *)retrieveNonTextColumnNamesFromTable:(NSString *)aTableName
 {
-    sqlite3 *db = [self documentInMemoryStore];
-    sqlite3_stmt *stmt;
-    const char *pzTail;
-    int error;
-    NSMutableArray *theColumns = [[NSMutableArray alloc] init];
-
-    error = sqlite3_prepare(db,[[NSString stringWithFormat:@"SELECT * FROM \"%@\" LIMIT 1",aTableName] UTF8String],-1,&stmt,&pzTail);
-    if(error != SQLITE_OK)
-    {
-        NSError *theError = [NSError errorWithDomain:@"SQLITE" code:error userInfo:nil];
-        [self presentError:theError];
-        return nil;
+    NSError *error = nil;
+    NSArray *columns = [self.documentModel possibleColumnNamesWithTable:aTableName error:&error];
+    if (error != nil) {
+        [self presentError:error];
+         return nil;
     }
-    while(sqlite3_step(stmt)==SQLITE_ROW)
-    {
-        int count = sqlite3_column_count(stmt);
-        for(int i=0;i<count;i++)
-        {
-            int columnType = (int)sqlite3_column_type(stmt,i);
-            NSString *columnName = [NSString stringWithUTF8String:(char *)sqlite3_column_name(stmt,i)];
-
-            if((columnType < 3)||(columnType == 5))
-                [theColumns addObject:columnName];
-
-
-        }
-    }
-    sqlite3_finalize(stmt);
-
-    return [NSArray arrayWithArray:theColumns];
+    return columns;
 }
 
 -(void)discoverTables
 {
     [self.tables removeAllObjects];
-    [self.tables addObjectsFromArray:[_documentModel dataTableNames]];
+    [self.tables addObjectsFromArray:[self.documentModel dataTableNames]];
     [self.mainWindowController updateTable];
 }
 
 -(void)loadDatasetsFromDB:(sqlite3 *)db
 {
-    self.dataSets = [[NSMutableArray alloc] initWithArray: _documentModel.dataSets];
+    self.dataSets = [[NSMutableArray alloc] initWithArray: self.documentModel.dataSets];
 }
 
 #pragma mark Importing Data

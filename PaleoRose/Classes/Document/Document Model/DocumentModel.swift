@@ -56,6 +56,10 @@ class DocumentModel: NSObject {
         dataTables.map(\.name)
     }
 
+    @objc func possibleColumnNames(table: String) throws -> [String] {
+        try inMemoryStore.valueColumnNames(for: table)
+    }
+
     // MARK: - Read From Store
 
     private func loadFromFile(_ file: URL) throws {

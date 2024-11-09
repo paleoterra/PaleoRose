@@ -29,6 +29,8 @@ import Foundation
 @testable import PaleoRose
 
 class MockSqliteInterface: StoreProtocol {
+
+    
     var pointer: OpaquePointer?
 
     var createInMemoryStoreError: Error?
@@ -113,5 +115,10 @@ class MockSqliteInterface: StoreProtocol {
 
     func backup(source: OpaquePointer, destination: OpaquePointer) throws {
         backupCalled = true
+    }
+
+    var columnsToReturn: [ColumnInformation] = []
+    func columns(sqlite: OpaquePointer, table: String) throws -> [ColumnInformation] {
+        columnsToReturn
     }
 }
