@@ -39,6 +39,12 @@ struct DataSet: TableRepresentable, Equatable {
     var PREDICATE: String?
     var COMMENTS: String? // Base 64 encoded
 
+    func decodedComments() -> NSAttributedString? {
+        guard let COMMENTS else { return nil }
+        guard let rtfData = Data(base64Encoded: COMMENTS) else { return nil }
+        return NSAttributedString(rtf: rtfData, documentAttributes: nil)
+    }
+
     mutating func set(comments: NSAttributedString?) {
         guard let comments else {
             COMMENTS = nil
@@ -50,12 +56,6 @@ struct DataSet: TableRepresentable, Equatable {
             return
         }
         COMMENTS = rtfData.base64EncodedString()
-    }
-
-    func decodedComments() -> NSAttributedString? {
-        guard let COMMENTS else { return nil }
-        guard let rtfData = Data(base64Encoded: COMMENTS) else { return nil }
-        return NSAttributedString(rtf: rtfData, documentAttributes: nil)
     }
 
     // MARK: - TableRepresentable
