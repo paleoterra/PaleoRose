@@ -38,4 +38,12 @@ class DocumentModel: NSObject {
     @objc func store() -> OpaquePointer? {
         inMemoryStore.store()
     }
+
+    @objc func writeToFile(_ file: URL) throws {
+        try inMemoryStore.save(to: file.path)
+    }
+
+    @objc func readFromFile(_ file: URL) throws {
+        try inMemoryStore.load(from: file.path)
+    }
 }

@@ -36,6 +36,7 @@ struct InMemoryStoreTest {
     }
 
     private var sqlitePointer: OpaquePointer?
+    private let sqliteInterface = MockSqliteInterface()
 
     private func createPointer() throws -> OpaquePointer {
         var pointer: OpaquePointer?
@@ -49,7 +50,13 @@ struct InMemoryStoreTest {
         try #require(result == SQLITE_OK)
     }
 
-    @Test("Creating and clearing the object does not crash")
+    private func assignSqlitePointerToInterface() throws -> OpaquePointer {
+        let pointer = try createPointer()
+        sqliteInterface.pointer = pointer
+        return pointer
+    }
+
+    @Test("Creating and clearing with ObjC init the object does not crash")
     func createObject() {
         var sut: InMemoryStore? = InMemoryStore()
         #expect(sut != nil)
@@ -59,7 +66,7 @@ struct InMemoryStoreTest {
 
     @Test("Store called, given interface, when createStore throws, then return nil")
     func catchCreateStoreError() throws {
-        let sqliteInterface = MockSqliteInterface()
+
         sqliteInterface.createInMemoryStoreError = InMemoryStoreTestError.failedToCreateStore
         #expect(throws: (any Error).self) {
             try InMemoryStore(interface: sqliteInterface)
@@ -68,7 +75,6 @@ struct InMemoryStoreTest {
 
     @Test("Store called, given interface, when configureStore throws, then return nil")
     func catchConfigureStoreError() throws {
-        let sqliteInterface = MockSqliteInterface()
         sqliteInterface.queryError = InMemoryStoreTestError.queryError
         let pointer = try createPointer()
         sqliteInterface.pointer = pointer
@@ -80,7 +86,6 @@ struct InMemoryStoreTest {
 
     @Test("Store called, given interface, when configures, call create and executequery without error")
     func configureStoreWithoutError() throws {
-        let sqliteInterface = MockSqliteInterface()
         let pointer = try createPointer()
         sqliteInterface.pointer = pointer
         _ = try #require(try InMemoryStore(interface: sqliteInterface))
@@ -107,14 +112,34 @@ struct InMemoryStoreTest {
         ]
     )
     func configureStoreContainsQuery(tableName: String) throws {
-        let sqliteInterface = MockSqliteInterface()
-        let pointer = try createPointer()
-        sqliteInterface.pointer = pointer
+        let pointer = try assignSqlitePointerToInterface()
+        defer {
+            do {
+                try closePointer(pointer: pointer)
+            } catch {
+                Issue.record("Failed to close pointer: \(error)")
+            }
+        }
         _ = try #require(try InMemoryStore(interface: sqliteInterface))
 
         let allQueries = sqliteInterface.queryAccumulator.map(\.sql).joined(separator: "\n")
         #expect(allQueries.contains(tableName))
+    }
 
-        try closePointer(pointer: pointer)
+    @Test("Given sqlite pointer, then return pointer when sqlitePointer is called")
+    func getSqlitePointer() throws {
+        let expectedPointer = try assignSqlitePointerToInterface()
+        defer {
+            do {
+                try closePointer(pointer: expectedPointer)
+            } catch {
+                Issue.record("Failed to close pointer: \(error)")
+            }
+        }
+        let store = try #require(try InMemoryStore(interface: sqliteInterface))
+        let pointer = try #require(try store.sqlitePointer())
+        let expectedPointerInt = Int(bitPattern: expectedPointer)
+        let pointerInt = Int(bitPattern: pointer)
+        #expect(pointerInt == expectedPointerInt)
     }
 }

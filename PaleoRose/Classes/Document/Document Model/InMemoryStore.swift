@@ -33,6 +33,16 @@ class InMemoryStore: NSObject {
         case databaseDoesNotExist
     }
 
+    enum BackupType {
+        case fromFile
+        case toFile
+    }
+
+    struct BackupInfo {
+        let path: String
+        let type: BackupType
+    }
+
     private var sqliteStore: OpaquePointer?
     let interface: StoreProtocol
 
@@ -70,6 +80,44 @@ class InMemoryStore: NSObject {
     @available(*, deprecated, message: "This code will become unavailable")
     @objc func store() -> OpaquePointer? {
         sqliteStore
+    }
+
+    func sqlitePointer() throws -> OpaquePointer {
+        guard let store = sqliteStore else {
+            throw InMemoryStoreError.databaseDoesNotExist
+        }
+        return store
+    }
+
+    func load(from filePath: String) throws {
+        try backup(info: BackupInfo(path: filePath, type: .fromFile))
+    }
+
+    func save(to filePath: String) throws {
+        try backup(info: BackupInfo(path: filePath, type: .toFile))
+    }
+
+    private func backup(info: BackupInfo) throws {
+        let store = try sqlitePointer()
+        let file = try interface.openDatabase(path: info.path)
+        defer {
+            closeFile(file: file)
+        }
+        switch info.type {
+        case .fromFile:
+            try interface.backup(source: file, destination: store)
+
+        case .toFile:
+            try interface.backup(source: store, destination: file)
+        }
+    }
+
+    private func closeFile(file: OpaquePointer) {
+        do {
+            try interface.close(store: file)
+        } catch {
+            logError(error: "Error closing file store: \(error)")
+        }
     }
 
     private func setupDatabase() throws {

@@ -61,6 +61,49 @@ public struct SQLiteInterface {
         return store
     }
 
+    /// Open a sqlite database on disk
+    /// - Parameters:
+    /// - Path: String representing the file location on disk
+    ///
+    /// - Returns: Pointer representing the sqlite file
+    /// - Throws: SQLite error if opening the file fails
+    public func openDatabase(path: String) throws -> OpaquePointer {
+        var sqliteStore: OpaquePointer?
+        try SQLiteError.checkSqliteStatus(sqlite3_open_v2(
+            path,
+            &sqliteStore,
+            SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE,
+            nil
+        ))
+        guard let store = sqliteStore else {
+            throw SQLiteError.unknownSqliteError("Failed to open database at \(path)")
+        }
+        return store
+    }
+
+    /// Copies SQLite contents from inmemory to disk or vice versa
+    ///
+    /// - Parameters:
+    /// - source: The database pointer to be copied
+    /// - destination: The database pointer that is the target of the copy
+    ///
+    /// - Throws: If the copy process fails, expect a SQLiteError
+    public func backup(source: OpaquePointer, destination: OpaquePointer) throws {
+        let backup = sqlite3_backup_init(
+            destination,
+            "main",
+            source,
+            "main"
+        )
+        guard let backup else {
+            throw SQLiteError.backupFailed
+        }
+        defer {
+            sqlite3_backup_finish(backup)
+        }
+        try SQLiteError.checkSqliteStatus(sqlite3_backup_step(backup, -1))
+    }
+
     /// Closes a SQLite store.
     /// clase will close either an in-memory SQLite store or a file-based store.
     /// - Parameters:

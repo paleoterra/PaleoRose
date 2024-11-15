@@ -44,11 +44,17 @@ class MockSqliteInterface: StoreProtocol {
     var closeError: Error?
     var closeCalled = false
 
+    var openDatabaseCalled = false
+    var openDatabaseCapturedPath: String?
+
+    var backupCalled = false
+
     func createInMemoryStore() throws -> OpaquePointer {
         createInMemoryStoreCalled = true
         if let createInMemoryStoreError {
             throw createInMemoryStoreError
         }
+
         guard let pointer else {
             fatalError("Pointer is nil")
         }
@@ -80,5 +86,21 @@ class MockSqliteInterface: StoreProtocol {
         if let closeError {
             throw closeError
         }
+    }
+
+    func openDatabase(path: String) throws -> OpaquePointer {
+        openDatabaseCalled = true
+        openDatabaseCapturedPath = path
+        if let createInMemoryStoreError {
+            throw createInMemoryStoreError
+        }
+        guard let pointer else {
+            fatalError("Pointer is nil")
+        }
+        return pointer
+    }
+
+    func backup(source: OpaquePointer, destination: OpaquePointer) throws {
+        backupCalled = true
     }
 }

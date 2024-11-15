@@ -33,6 +33,25 @@ import Testing
     .tags(.integration)
 )
 struct InMemoryStoreIntegrationTest {
+    private func sampleFilePath() throws -> String {
+        guard let bundle = Bundle(identifier: "PaleoTerra.Unit-Tests"),
+              let path = bundle.path(forResource: "rtest1", ofType: "XRose")
+        else {
+            Issue.record("Could not find test file")
+            throw SQLiteError.failedToOpen
+        }
+        return path
+    }
+
+    private func backupFromSampleFileToInMemoryStore(_ store: InMemoryStore) throws {
+        let filePath = try sampleFilePath()
+        try store.load(from: filePath)
+    }
+
+    private func openTemporaryFile(directory: URL, name: String) throws -> OpaquePointer {
+        try SQLiteInterface().openDatabase(path: directory.appendingPathComponent(name).path)
+    }
+
     @Test(
         "Given an in-memory store, when it is initialized, then it should successfully create tables",
         arguments: zip(
@@ -75,5 +94,64 @@ struct InMemoryStoreIntegrationTest {
         let table = try #require(result.first { $0.name == execptedTable })
         let caputedSql = table.sql.replacingOccurrences(of: "IF NOT EXISTS ", with: "")
         #expect(table.sql == caputedSql)
+    }
+
+    private func assertDatabaseContentMatchesSampleFile(database: OpaquePointer) throws {
+        let tables: [TableSchema] = try #require(
+            try SQLiteInterface().executeCodableQuery(sqlite: database, query: TableSchema.storedValues())
+        )
+        let tableNames = tables.map(\.name)
+        let expectedTableNames = [
+            "_windowController",
+            "_geometryController",
+            "_layers",
+            "_colors",
+            "_datasets",
+            "_layerText",
+            "_layerLineArrow",
+            "_layerCore",
+            "_layerGrid",
+            "_layerData",
+            "rtest"
+        ]
+        #expect(tableNames == expectedTableNames)
+
+        let colors: [Color] = try #require(
+            try SQLiteInterface().executeCodableQuery(sqlite: database, query: Color.storedValues())
+        )
+        #expect(colors.count == 4)
+    }
+
+    @Test("Given sample file, then loading the file will populate the in-memory store")
+    func readFileShouldPopulateStore() throws {
+        let store = try #require(try InMemoryStore())
+
+        try backupFromSampleFileToInMemoryStore(store)
+
+        let storePointer = try #require(store.store())
+
+        try assertDatabaseContentMatchesSampleFile(database: storePointer)
+    }
+
+    @Test("Given a populated in-memory store, when backing up to new file, then backup successfully")
+    func backupToNewFile() throws {
+        let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
+        try backupFromSampleFileToInMemoryStore(store)
+
+        let temporaryDirectory = FileManager.default.temporaryDirectory
+        let fileURL = temporaryDirectory.appendingPathComponent(UUID().uuidString)
+
+        try #require(try store.save(to: fileURL.path()))
+
+        let tempFile = try SQLiteInterface().openDatabase(path: fileURL.path())
+        defer {
+            do {
+                try SQLiteInterface().close(store: tempFile)
+                try FileManager.default.removeItem(at: fileURL)
+            } catch {
+                Issue.record("Failed to remove database \(error)")
+            }
+        }
+        try assertDatabaseContentMatchesSampleFile(database: tempFile)
     }
 }

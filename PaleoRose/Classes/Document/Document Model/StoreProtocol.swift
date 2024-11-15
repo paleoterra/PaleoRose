@@ -32,6 +32,8 @@ protocol StoreProtocol {
     func createInMemoryStore(identifier: String) throws -> OpaquePointer
     func executeQuery(sqlite: OpaquePointer, query: QueryProtocol) throws -> [[String: Codable]]
     func close(store: OpaquePointer) throws
+    func openDatabase(path: String) throws -> OpaquePointer
+    func backup(source: OpaquePointer, destination: OpaquePointer) throws
 }
 
 extension SQLiteInterface: StoreProtocol {
