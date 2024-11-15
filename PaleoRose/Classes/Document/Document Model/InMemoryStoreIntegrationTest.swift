@@ -154,4 +154,57 @@ struct InMemoryStoreIntegrationTest {
         }
         try assertDatabaseContentMatchesSampleFile(database: tempFile)
     }
+
+    @Test("Given document with no data, when requesting data tables, then return an empty array")
+    func returnEmptyTableListWhenNoData() throws {
+        let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
+
+        let tables = try store.dataTables()
+        #expect(tables.isEmpty)
+    }
+
+    @Test("Given document with data, when requesting data tables, then return array")
+    func returnPopulatedTableListWhenNoData() throws {
+        let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
+        try backupFromSampleFileToInMemoryStore(store)
+
+        let tables = try store.dataTables()
+        print(tables)
+        #expect(tables.count == 1, "Expected 1 table, got \(tables.count)")
+        #expect(tables.first?.name == "rtest")
+    }
+
+    @Test("Given document with data, when requesting datasets then resturn expected array with 2 records")
+    func returnPopulatedDatasets() throws {
+        let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
+        try backupFromSampleFileToInMemoryStore(store)
+
+        let datasets = try store.dataSets()
+        let expectedDataSet = DataSet(
+            _id: 1,
+            NAME: "Test",
+            TABLENAME: "rtest",
+            COLUMNNAME: "_id",
+            PREDICATE: nil,
+            COMMENTS: nil
+        )
+        try #require(datasets.count == 2, "Expected 2 datasets, got \(datasets.count)")
+        #expect(datasets.first == expectedDataSet)
+    }
+
+    @Test("Given document with data, when requesting data for dataset, then return correct Float array")
+    func returnPopulatedDataForDataset() throws {
+        let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
+        try backupFromSampleFileToInMemoryStore(store)
+        let dataSet = DataSet(
+            _id: 1,
+            NAME: "Test",
+            TABLENAME: "rtest",
+            COLUMNNAME: "_id",
+            PREDICATE: nil,
+            COMMENTS: nil
+        )
+        let dataValues = try store.dataSetValues(for: dataSet)
+        #expect(dataValues.count == 63, "Expected 63 records, got \(dataValues.count)")
+    }
 }

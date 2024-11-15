@@ -185,6 +185,38 @@ public struct SQLiteInterface {
         return statement
     }
 
+    /// Returns column information for a given table name
+    ///
+    /// - Parameters:
+    /// - sqlite: Pointer to the database
+    /// - table: Name of the table as a string
+    ///
+    /// - Returns: A ColumnInformation array containing information about all of the columns
+    public func columns(sqlite: OpaquePointer, table: String) throws -> [ColumnInformation] {
+        let sql = Query(sql: "SELECT * FROM \(table)")
+        let statement = try buildStatement(sqlite: sqlite, query: sql)
+        defer {
+            sqlite3_finalize(statement)
+        }
+        sqlite3_step(statement)
+        var columns: [ColumnInformation] = []
+        let columnCount = sqlite3_column_count(statement)
+        for column in 0 ..< columnCount {
+            let name = String(cString: sqlite3_column_name(statement, column))
+            let type = ColumnAffinity(rawValue: sqlite3_column_type(statement, column))
+            let decType = String(cString: sqlite3_column_decltype(statement, column))
+            columns.append(
+                ColumnInformation(
+                    columnIndex: Int(column),
+                    name: name,
+                    type: type,
+                    declairedType: decType
+                )
+            )
+        }
+        return columns
+    }
+
     // MARK: Private API
 
     private func bind(bindings: [Bindable?], statement: OpaquePointer) throws {

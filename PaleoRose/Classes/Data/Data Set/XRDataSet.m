@@ -36,41 +36,37 @@
 
 @implementation XRDataSet
 
+#pragma mark Initers
 
--(id)initWithTable:(NSString *)table column:(NSString *)column forDocument:(NSDocument *)aDoc
+-(id)initWithTable:(NSString *)table column:(NSString *)column db:(sqlite3 *)db
 {
 	if (!(self = [super init])) return nil;
 	if(self)
 	{
-		
-		theDocument = (XRoseDocument *)aDoc;
 		predicate = nil;
 		tableName = table;
 		columnName = column;
 		_theValues = [[NSMutableData alloc] init];
-		if([self readSQL])
+        if([self readSQL:db])
 			return self;
 		else
 			return nil;
-		
 	}
 	return self;
 }
 
--(id)initWithTable:(NSString *)table column:(NSString *)column forDocument:(NSDocument *)aDoc predicate:(NSString *)aPredicate;
+-(id)initWithTable:(NSString *)table column:(NSString *)column db:(sqlite3 *)db predicate:(NSString *)aPredicate;
 {
 	if (!(self = [super init])) return nil;
 	if(self)
 	{
-		
-		theDocument = (XRoseDocument *)aDoc;
 		predicate = nil;
 		tableName = table;
 		columnName = column;
 	
 		predicate = aPredicate;
 		_theValues = [[NSMutableData alloc] init];
-		if([self readSQL])
+        if([self readSQL:db])
 			return self;
 		else
 			return nil;
@@ -79,11 +75,134 @@
 	return self;
 }
 
+-(id)initWithData:(NSData *)data withName:(NSString *)name
+{
+    if (!(self = [super init])) return nil;
+    if(self)
+    {
+        _theValues = [[NSMutableData alloc] init];
+        _name = name;
+        [_theValues appendData:data];
+    }
+    return self;
+}
 
+-(id)initWithName:(NSString *)name tableName:(NSString *)table column:(NSString *)column predicate:(NSString *)aPredicate comments:(NSAttributedString *)comments data:(NSData *)data {
+    if (!(self = [super init])) return nil;
+    if(self)
+    {
+        _theValues = [[NSMutableData alloc] init];
+        _name = name;
+        tableName = table;
+        columnName = column;
+        predicate = aPredicate;
+        _comments = [[NSMutableAttributedString alloc] initWithAttributedString:comments];
+
+        [_theValues appendData:data];
+    }
+    return self;
+}
+
+-(id)initWithXMLTree:(LITMXMLTree *)aTree forVersion:(NSString *)version
+{
+    if(version == nil)
+        return [self initWithVersion1_0XMLTree:aTree];
+    else if([version isEqualToString:@"1.0"])
+        return [self initWithVersion1_0XMLTree:aTree];
+    return nil;
+}
+
+#pragma mark Accessors
 
 -(NSData *)theData
 {
 	return [NSData dataWithData:_theValues];
+}
+
+-(NSString *)name
+{
+    return _name;
+}
+
+-(void)setName:(NSString *)name;
+{
+    _name = name;
+}
+
+-(void)setComments:(NSMutableAttributedString *)aString
+{
+    _comments = aString;
+}
+
+-(NSAttributedString *)comments
+{
+    return _comments;
+}
+
+-(void)setPredicate:(NSString *)newPred
+{
+    predicate = nil;
+    predicate = newPred;
+}
+
+-(NSString *)predicate
+{
+    return predicate;
+}
+-(void)setTableName:(NSString *)newTable
+{
+    tableName = nil;
+    tableName = newTable;
+}
+-(NSString *)tableName
+{
+    return tableName;
+}
+
+-(void)setColumnName:(NSString *)newColumn
+{
+    columnName = nil;
+    columnName = newColumn;
+}
+
+-(NSString *)columnName
+{
+    return columnName;
+}
+
+-(NSDictionary *)dataSetDictionary
+{
+    NSMutableDictionary *theDict = [[NSMutableDictionary alloc] init];
+    //NSLog(@"creating dataSetDictionary");
+    [theDict setObject:_theValues forKey:@"values"];
+    //NSLog(@"1");
+    [theDict setObject:_name forKey:@"name"];
+    //NSLog(@"2");
+    if(_comments)
+        [theDict setObject:_comments forKey:@"comments"];
+
+    return [NSDictionary dictionaryWithDictionary:theDict];
+}
+
+#pragma mark Statistics
+
+-(NSArray *)currentStatistics
+{
+    return _circularStatistics;
+}
+
+-(XRStatistic *)currentStatisticWithName:(NSString *)name
+{
+    NSEnumerator *anEnum =  [_circularStatistics objectEnumerator];
+    XRStatistic *aStat;
+    while(aStat = [anEnum nextObject])
+    {
+        if([aStat.statisticName isEqualToString:name])
+        {
+            return aStat;
+        }
+    }
+    return nil;
 }
 
 -(int)valueCountFromAngle:(float)angle1 toAngle2:(float)angle2
@@ -109,7 +228,6 @@
 		{
 			if((aValue>=angle1)||(aValue<angle2))
 			{
-				
 				count++;
 			}
 		}
@@ -136,41 +254,6 @@
 
 	return count;
 }
-
-
-
--(NSString *)name
-{
-	return _name;
-}
-
--(void)setName:(NSString *)name;
-{
-	_name = name;
-}
-
-
-
-
-
-
-
-
--(void)setComments:(NSMutableAttributedString *)aString
-{
-	_comments = aString;
-}
-
--(NSAttributedString *)comments
-{
-	return _comments;
-}
-
-
-
-
-
-//data statistics
 
 -(NSDictionary *)meanCountWithIncrement:(float)angleIncrement startingAngle:(float)startAngle isBiDirectional:(BOOL)isBiDir
 {
@@ -256,8 +339,6 @@
 	return _circularStatistics;
 }
 
-
-
 -(void)calculateNonSectorStatisticsForBiDirection:(BOOL)isBiDir
 {
 	float sumXVector,sumXVectorCBar;
@@ -299,27 +380,6 @@
 	[_circularStatistics addObject:[self calculateStandardErrorWithN:(int)[_theValues length]/4 rbar:[_circularStatistics objectAtIndex:rbarPosition] kappa:[_circularStatistics objectAtIndex:kappaPosition]]];
 	standErrorPosition = (int)[_circularStatistics count] -1;
 	[_circularStatistics addObject:[self calculateAngleIntervalWithStandardError:[_circularStatistics objectAtIndex:standErrorPosition]]];
-	
-	
-}
-
--(NSArray *)currentStatistics
-{
-	return _circularStatistics;
-}
-
--(XRStatistic *)currentStatisticWithName:(NSString *)name
-{
-	NSEnumerator *anEnum =  [_circularStatistics objectEnumerator];
-	XRStatistic *aStat;
-	while(aStat = [anEnum nextObject])
-	{
-		if([aStat.statisticName isEqualToString:name])
-		{
-			return aStat;
-		}
-	}
-	return nil;
 }
 
 -(void)computeXVector:(BOOL)isBiDir
@@ -516,20 +576,6 @@
 	return result;
 }
 
--(NSDictionary *)dataSetDictionary
-{
-	NSMutableDictionary *theDict = [[NSMutableDictionary alloc] init];
-	//NSLog(@"creating dataSetDictionary");
-	[theDict setObject:_theValues forKey:@"values"];
-	//NSLog(@"1");
-	[theDict setObject:_name forKey:@"name"];
-	//NSLog(@"2");
-	if(_comments)
-		[theDict setObject:_comments forKey:@"comments"];
-	
-	return [NSDictionary dictionaryWithDictionary:theDict];
-}
-
 -(XRStatistic *)chiSquaredWithStartAngle:(float)startAngle sectorSize:(float)sectorSize isBiDir:(BOOL)isBiDir
 {
 	int sectorCount = 360.0/sectorSize;
@@ -585,6 +631,8 @@
 	return theString;
 }
 
+#pragma mark SQL
+
 -(NSString *)buildSQL
 {
 	NSMutableString *aSql = [[NSMutableString alloc] init];
@@ -608,11 +656,11 @@
 	return aSql;
 }
 
--(BOOL)readSQL
+-(BOOL)readSQL:(sqlite3 *)db
 {
 	NSString *theSQL = [self buildSQL];
 	NSString *theCountSQL = [self buildCountSQL];
-    sqlite3 *db = [theDocument documentInMemoryStore];
+
 	sqlite3_stmt *stmt;
 	const char *pzTail;
 	int count = 0, index;
@@ -651,6 +699,7 @@
 	return YES;
 }
 
+// private
 -(BOOL)readSQLFromDB:(sqlite3 *)db
 {
 	NSString *theSQL = [self buildSQL];
@@ -718,45 +767,12 @@
 	}
 	
 	[command appendFormat:@") %@)",command2];
-	//NSLog(command);
 	error = sqlite3_exec(db,[command UTF8String],nil,nil,&errorMsg);
 	if(error!=SQLITE_OK)
 		NSLog(@"error: %s",errorMsg);
 }
-//depreciate
--(id)initWithContentsOfASCIIFile:(NSString *)filePath encoding:(NSStringEncoding)encoding
-{
-	if (!(self = [super init])) return nil;
-	if(self)
-	{
-		NSString *theContents = [[NSString alloc] initWithData:[NSData dataWithContentsOfFile:filePath] encoding:encoding];
-		NSScanner *theScanner = [NSScanner scannerWithString:theContents];
-		float aValue;
-		
-		_name = [filePath lastPathComponent];
-		_theValues = [[NSMutableData alloc] init];
-		while(![theScanner isAtEnd])
-		{
-			if([theScanner scanFloat:&aValue])
-			{
-				if((aValue<=360.0)&&(aValue>=0))
-					[_theValues appendBytes:&aValue length:sizeof(float)];
-			}
-			else
-				break;
-		}
-	}
-	return self;
-}
 
--(id)initWithXMLTree:(LITMXMLTree *)aTree forVersion:(NSString *)version
-{
-	if(version == nil)
-		return [self initWithVersion1_0XMLTree:aTree];
-	else if([version isEqualToString:@"1.0"])
-		return [self initWithVersion1_0XMLTree:aTree];
-	return nil;
-}
+#pragma Init with XML versions
 
 -(id)initWithVersion1_0XMLTree:(LITMXMLTree *)aTree
 {
@@ -778,22 +794,8 @@
 			{
 				aValue = [[aChild contentsString] floatValue];
 				[_theValues appendBytes:&aValue length:sizeof(float)];
-				
 			}
 		}
-		
-	}
-	return self;
-}
-
--(id)initWithData:(NSData *)data withName:(NSString *)name
-{
-	if (!(self = [super init])) return nil;
-	if(self)
-	{
-		_theValues = [[NSMutableData alloc] init];
-		_name = name;
-		[_theValues appendData:data];
 	}
 	return self;
 }
@@ -850,10 +852,13 @@
 	return self;
 }
 
+#pragma mark Mutability
+
 -(void)appendData:(NSData *)data
 {
 	[_theValues appendData:data];
 }
+
 -(void)appendDataFromFile:(NSString *)path encoding:(NSStringEncoding)encoding
 {
 	NSString *theContents = [[NSString alloc] initWithData:[NSData dataWithContentsOfFile:path] encoding:encoding];
@@ -871,7 +876,7 @@
 	
 }
 
-/*****XML*////
+#pragma mark XML
 
 -(LITMXMLTree *)treeForVersion:(NSString *)version
 {
@@ -917,38 +922,31 @@
 	return rootForSetInfo;
 }
 
--(void)setPredicate:(NSString *)newPred
-{
-	predicate = nil;
-	predicate = newPred;
+// unused methods
 
-	
-}
+//-(id)initWithContentsOfASCIIFile:(NSString *)filePath encoding:(NSStringEncoding)encoding
+//{
+//    if (!(self = [super init])) return nil;
+//    if(self)
+//    {
+//        NSString *theContents = [[NSString alloc] initWithData:[NSData dataWithContentsOfFile:filePath] encoding:encoding];
+//        NSScanner *theScanner = [NSScanner scannerWithString:theContents];
+//        float aValue;
+//
+//        _name = [filePath lastPathComponent];
+//        _theValues = [[NSMutableData alloc] init];
+//        while(![theScanner isAtEnd])
+//        {
+//            if([theScanner scanFloat:&aValue])
+//            {
+//                if((aValue<=360.0)&&(aValue>=0))
+//                    [_theValues appendBytes:&aValue length:sizeof(float)];
+//            }
+//            else
+//                break;
+//        }
+//    }
+//    return self;
+//}
 
--(NSString *)predicate
-{
-	return predicate;
-}
--(void)setTableName:(NSString *)newTable
-{
-	tableName = nil;
-	tableName = newTable;
-
-	
-}
--(NSString *)tableName
-{
-	return tableName;
-}
--(void)setColumnName:(NSString *)newColumn
-{
-	columnName = nil;
-	columnName = newColumn;
-
-	
-}
--(NSString *)columnName
-{
-	return columnName;
-}
 @end

@@ -1,5 +1,5 @@
 //
-// StoreProtocol.swift
+// ColumnInformation.swift
 // PaleoRose
 //
 // MIT License
@@ -24,22 +24,30 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import CodableSQLiteNonThread
 import Foundation
+import SQLite3
 
-protocol StoreProtocol {
-    func createInMemoryStore() throws -> OpaquePointer
-    func createInMemoryStore(identifier: String) throws -> OpaquePointer
-    func executeQuery(sqlite: OpaquePointer, query: QueryProtocol) throws -> [[String: Codable]]
-    func executeCodableQuery<T: Codable>(sqlite: OpaquePointer, query: QueryProtocol) throws -> [T]
-    func close(store: OpaquePointer) throws
-    func openDatabase(path: String) throws -> OpaquePointer
-    func backup(source: OpaquePointer, destination: OpaquePointer) throws
-    func columns(sqlite: OpaquePointer, table: String) throws -> [ColumnInformation]
+// swiftlint:disable sorted_enum_cases
+public enum ColumnAffinity: Int32, Codable {
+    case integer = 1 // SQLITE_INTEGER
+    case float = 2 // SQLITE_FLOAT
+    case text = 3 // SQLITE_TEXT
+    case blob = 4 // SQLITE_BLOB
+    case null = 5 // SQLITE_NULL
 }
 
-extension SQLiteInterface: StoreProtocol {
-    func createInMemoryStore() throws -> OpaquePointer {
-        try createInMemoryStore(identifier: UUID().uuidString)
+// swiftlint:enable sorted_enum_cases
+
+public struct ColumnInformation: Codable, Equatable {
+    public let columnIndex: Int
+    public let name: String
+    public let type: ColumnAffinity?
+    public let declairedType: String?
+
+    public init(columnIndex: Int, name: String, type: ColumnAffinity?, declairedType: String?) {
+        self.columnIndex = columnIndex
+        self.name = name
+        self.type = type
+        self.declairedType = declairedType
     }
 }

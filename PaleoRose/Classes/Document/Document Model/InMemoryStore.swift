@@ -31,6 +31,7 @@ import OSLog
 class InMemoryStore: NSObject {
     enum InMemoryStoreError: Error {
         case databaseDoesNotExist
+        case unknownType
     }
 
     enum BackupType {
@@ -83,10 +84,7 @@ class InMemoryStore: NSObject {
     }
 
     func sqlitePointer() throws -> OpaquePointer {
-        guard let store = sqliteStore else {
-            throw InMemoryStoreError.databaseDoesNotExist
-        }
-        return store
+        try validateStore()
     }
 
     func load(from filePath: String) throws {
@@ -97,8 +95,84 @@ class InMemoryStore: NSObject {
         try backup(info: BackupInfo(path: filePath, type: .toFile))
     }
 
+    func dataTables() throws -> [TableSchema] {
+        let sqliteStore = try validateStore()
+        let tables: [TableSchema] = try interface.executeCodableQuery(
+            sqlite: sqliteStore,
+            query: TableSchema.storedValues()
+        )
+        let nonDataTableNames = [
+            WindowControllerSize.tableName,
+            Geometry.tableName,
+            Layer.tableName,
+            Color.tableName,
+            DataSet.tableName,
+            LayerText.tableName,
+            LayerLineArrow.tableName,
+            LayerCore.tableName,
+            LayerGrid.tableName,
+            LayerData.tableName,
+            "sqlite_master",
+            "sqlite_sequence"
+        ]
+        return tables.filter { !nonDataTableNames.contains($0.name) }
+    }
+
+    func dataSets() throws -> [DataSet] {
+        let sqliteStore = try validateStore()
+
+        return try interface.executeCodableQuery(
+            sqlite: sqliteStore,
+            query: DataSet.storedValues()
+        )
+    }
+
+    func dataSetValues(for dataSet: DataSet) throws -> [Float] {
+        let sqliteStore = try validateStore()
+        guard let columnName = dataSet.COLUMNNAME else {
+            throw InMemoryStoreError.databaseDoesNotExist
+        }
+        let values = try interface.executeQuery(
+            sqlite: sqliteStore,
+            query: dataSet.dataQuery()
+        )
+        return try values.compactMap { value in
+            guard let value = value[columnName] else {
+                return nil
+            }
+            if let stringValue = value as? String {
+                return Float(stringValue)
+            }
+            // swiftlint:disable:next legacy_objc_type
+            if let number = value as? NSNumber {
+                return Float(truncating: number)
+            }
+            throw InMemoryStoreError.unknownType
+        }
+    }
+
+    func valueColumnNames(for table: String) throws -> [String] {
+        let valueColumnsTypes: [ColumnAffinity] = [.integer, .float]
+        let sqliteStore = try validateStore()
+        let columns = try interface.columns(sqlite: sqliteStore, table: table)
+        return columns.compactMap { column in
+            if let affinity = column.type, valueColumnsTypes.contains(affinity) {
+                return column.name
+            }
+            return nil
+        }
+    }
+
+    @discardableResult
+    private func validateStore() throws -> OpaquePointer {
+        guard let sqliteStore else {
+            throw InMemoryStoreError.databaseDoesNotExist
+        }
+        return sqliteStore
+    }
+
     private func backup(info: BackupInfo) throws {
-        let store = try sqlitePointer()
+        let store = try validateStore()
         let file = try interface.openDatabase(path: info.path)
         defer {
             closeFile(file: file)

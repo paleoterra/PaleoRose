@@ -87,7 +87,7 @@
     if([typeName isEqualToString:@"XRose"])
     {
         NSError *error = nil;
-        [_documentModel readFromFile:url error:&error];
+        [self.documentModel openFile:url error:&error];
         if (error) {
             NSLog(@"%@", error.localizedDescription);
             return NO;
@@ -102,11 +102,10 @@
 -(BOOL)writeToURL:(NSURL *)url ofType:(NSString *)typeName error:(NSError * _Nullable __autoreleasing *)outError
 {
     NSError *error = nil;
-    NSString *fileName = [url path];//temp save path
     [[self.mainWindowController geometryController]  saveToSQLDB:[self.documentModel store]];
     [self.mainWindowController  saveToSQLDB:[self.documentModel store]];
     [(XRoseTableController *)[self.mainWindowController tableController] saveToSQLDB:[self.documentModel store]];
-    [_documentModel writeToFile:url error:&error];
+    [self.documentModel writeToFile:url error:&error];
     if (error) {
         NSLog(@"%@", error.localizedDescription);
         return NO;
@@ -261,9 +260,9 @@
         {
             XRDataSet *aSet;
             if([controller predicate])
-                aSet = [[XRDataSet alloc] initWithTable:[controller selectedTable] column:[controller selectedColumn] forDocument:self  predicate:[controller predicate]];
+                aSet = [[XRDataSet alloc] initWithTable:[controller selectedTable] column:[controller selectedColumn] db:[self.documentModel store]  predicate:[controller predicate]];
             else
-                aSet = [[XRDataSet alloc] initWithTable:[controller selectedTable] column:[controller selectedColumn] forDocument:self];
+                aSet = [[XRDataSet alloc] initWithTable:[controller selectedTable] column:[controller selectedColumn] db:[self.documentModel store]];
             [aSet setName:[controller selectedName]];
             if(aSet)
             {
@@ -447,96 +446,25 @@
 
 -(NSArray *)retrieveNonTextColumnNamesFromTable:(NSString *)aTableName
 {
-    sqlite3 *db = [self documentInMemoryStore];
-    sqlite3_stmt *stmt;
-    const char *pzTail;
-    int error;
-    NSMutableArray *theColumns = [[NSMutableArray alloc] init];
-
-    error = sqlite3_prepare(db,[[NSString stringWithFormat:@"SELECT * FROM \"%@\" LIMIT 1",aTableName] UTF8String],-1,&stmt,&pzTail);
-    if(error != SQLITE_OK)
-    {
-        NSError *theError = [NSError errorWithDomain:@"SQLITE" code:error userInfo:nil];
-        [self presentError:theError];
-        return nil;
+    NSError *error = nil;
+    NSArray *columns = [self.documentModel possibleColumnNamesWithTable:aTableName error:&error];
+    if (error != nil) {
+        [self presentError:error];
+         return nil;
     }
-    while(sqlite3_step(stmt)==SQLITE_ROW)
-    {
-        int count = sqlite3_column_count(stmt);
-        for(int i=0;i<count;i++)
-        {
-            int columnType = (int)sqlite3_column_type(stmt,i);
-            NSString *columnName = [NSString stringWithUTF8String:(char *)sqlite3_column_name(stmt,i)];
-
-            if((columnType < 3)||(columnType == 5))
-                [theColumns addObject:columnName];
-
-
-        }
-    }
-    sqlite3_finalize(stmt);
-
-    return [NSArray arrayWithArray:theColumns];
-
+    return columns;
 }
 
 -(void)discoverTables
 {
-
-    int error;
-
-    sqlite3_stmt *stmt;
-    const char *zSql;
-    NSString *sql = @"select tbl_name from sqlite_master where type = \"table\" AND tbl_name NOT LIKE \"_w%\" AND tbl_name NOT LIKE \"_g%\" AND tbl_name NOT LIKE \"_l%\" AND tbl_name NOT LIKE \"_c%\" AND tbl_name NOT LIKE \"_d%\"";
-
-    error = sqlite3_prepare([self.documentModel store],[sql UTF8String],-1,&stmt,&zSql);
-    if(error == SQLITE_OK)
-    {
-        [self.tables removeAllObjects];
-        while(sqlite3_step(stmt)!=SQLITE_DONE)
-        {
-            NSString *aString = [NSString stringWithUTF8String:(char *)sqlite3_column_text(stmt,0)];
-            //NSLog(aString);
-            if(![self.tables containsObject:aString])
-                [self.tables addObject:aString];
-        }
-    }
-    else
-    {
-        NSError *theError = [NSError errorWithDomain:@"SQLITE" code:error userInfo:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSString stringWithUTF8String:(char *)sqlite3_errmsg([self.documentModel store])],nil]
-                                                                                                               forKeys:[NSArray arrayWithObjects:@"NSLocalizedFailureReasonErrorKey",nil]]];
-        [self presentError:theError];
-    }
-    sqlite3_finalize(stmt);
+    [self.tables removeAllObjects];
+    [self.tables addObjectsFromArray:[self.documentModel dataTableNames]];
     [self.mainWindowController updateTable];
 }
 
 -(void)loadDatasetsFromDB:(sqlite3 *)db
 {
-    int error,count;
-    const char *pzTail;
-    sqlite3_stmt *stmt;
-    XRDataSet *aSet;
-    error = sqlite3_prepare(db,"SELECT count(*) FROM _datasets",-1,&stmt,&pzTail);
-    if(error!=SQLITE_OK)
-    {
-        NSError *theError = [NSError errorWithDomain:@"SQLITE" code:error userInfo:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSString stringWithUTF8String:(char *)sqlite3_errmsg(db)],nil]
-                                                                                                               forKeys:[NSArray arrayWithObjects:@"NSLocalizedFailureReasonErrorKey",nil]]];
-        [self presentError:theError];
-    }
-    count = 0;
-    while(sqlite3_step(stmt)==SQLITE_ROW)
-    {
-        count = sqlite3_column_int(stmt,0);
-    }
-    sqlite3_finalize(stmt);
-
-    for(int i=1;i<count+1;i++)
-    {
-        aSet = [[XRDataSet alloc] initFromSQL:db forIndex:i];
-        [self.dataSets addObject:aSet];
-        aSet = nil;
-    }
+    self.dataSets = [[NSMutableArray alloc] initWithArray: self.documentModel.dataSets];
 }
 
 #pragma mark Importing Data

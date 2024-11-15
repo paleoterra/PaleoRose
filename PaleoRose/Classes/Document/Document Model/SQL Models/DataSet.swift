@@ -27,17 +27,36 @@
 import CodableSQLiteNonThread
 import Foundation
 
-struct DataSet: TableRepresentable {
+struct DataSet: TableRepresentable, Equatable {
     static var tableName: String = "_datasets"
     static var primaryKey: String? = "_id"
 
     // swiftlint:disable:next identifier_name
-    var _id: Int
-    var NAME: String
-    var TABLENAME: String
-    var COLUMNNAME: String
-    var PREDICATE: String
-    var COMMENTS: String
+    var _id: Int?
+    var NAME: String?
+    var TABLENAME: String?
+    var COLUMNNAME: String?
+    var PREDICATE: String?
+    var COMMENTS: String? // Base 64 encoded
+
+    func decodedComments() -> NSAttributedString? {
+        guard let COMMENTS else { return nil }
+        guard let rtfData = Data(base64Encoded: COMMENTS) else { return nil }
+        return NSAttributedString(rtf: rtfData, documentAttributes: nil)
+    }
+
+    mutating func set(comments: NSAttributedString?) {
+        guard let comments else {
+            COMMENTS = nil
+            return
+        }
+        let range = NSRange(location: 0, length: comments.length)
+        guard let rtfData = comments.rtf(from: range) else {
+            COMMENTS = nil
+            return
+        }
+        COMMENTS = rtfData.base64EncodedString()
+    }
 
     // MARK: - TableRepresentable
 
@@ -61,5 +80,13 @@ struct DataSet: TableRepresentable {
 
     static func deleteQuery() -> any QueryProtocol {
         Query(sql: "")
+    }
+
+    func dataQuery() -> any QueryProtocol {
+        guard let tableName = TABLENAME else {
+            return Query(sql: "")
+        }
+        let predicate = PREDICATE ?? ""
+        return Query(sql: "SELECT * from \(tableName) \(predicate.isEmpty ? "" : "WHERE \(predicate)")")
     }
 }

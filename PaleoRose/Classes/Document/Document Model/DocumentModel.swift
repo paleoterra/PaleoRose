@@ -24,10 +24,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import CodableSQLiteNonThread
 import Foundation
 
 class DocumentModel: NSObject {
     private var inMemoryStore: InMemoryStore
+    var dataTables: [TableSchema] = []
+    @objc var dataSets: [XRDataSet] = []
 
     @available(*, deprecated, message: "This code will become unavailable")
     @objc init(inMemoryStore: InMemoryStore) {
@@ -43,7 +46,42 @@ class DocumentModel: NSObject {
         try inMemoryStore.save(to: file.path)
     }
 
-    @objc func readFromFile(_ file: URL) throws {
+    @objc func openFile(_ file: URL) throws {
         try inMemoryStore.load(from: file.path)
+        dataTables = try inMemoryStore.dataTables()
+        dataSets = try loadDataSets()
+    }
+
+    @objc func dataTableNames() -> [String] {
+        dataTables.map(\.name)
+    }
+
+    @objc func possibleColumnNames(table: String) throws -> [String] {
+        try inMemoryStore.valueColumnNames(for: table)
+    }
+
+    // MARK: - Read From Store
+
+    private func loadFromFile(_ file: URL) throws {
+        try inMemoryStore.load(from: file.path)
+    }
+
+    private func loadDataSets() throws -> [XRDataSet] {
+        let dataSetValues = try inMemoryStore.dataSets().map { dataSet in
+            let values = try inMemoryStore.dataSetValues(for: dataSet)
+            return (dataSet, values)
+        }
+        return dataSetValues.map { dataSet, values in
+            var localValues = values
+            let data = Data(bytes: &localValues, count: MemoryLayout<Float>.size * values.count)
+            return XRDataSet(
+                name: dataSet.NAME ?? "Unnamed",
+                tableName: dataSet.TABLENAME ?? "Unnamed",
+                column: dataSet.COLUMNNAME ?? "Unnamed",
+                predicate: dataSet.PREDICATE ?? "",
+                comments: dataSet.decodedComments() ?? NSMutableAttributedString(),
+                data: data
+            )
+        }
     }
 }

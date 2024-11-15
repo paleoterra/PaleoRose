@@ -118,6 +118,13 @@ struct IntegrationTest {
     @Test("Given creating a test table, it does not throw")
     func createTable() throws {
         let store = try #require(try createInMemoryStore())
+        defer {
+            do {
+                try #require(try sut.close(store: store))
+            } catch {
+                Issue.record("Failed to close database file: \(error)")
+            }
+        }
         try #require(try createTestableTable(store: store))
     }
 
@@ -125,7 +132,13 @@ struct IntegrationTest {
     func insertRecord() throws {
         let store = try #require(try createInMemoryStore())
         try #require(try createTestableTable(store: store))
-
+        defer {
+            do {
+                try #require(try sut.close(store: store))
+            } catch {
+                Issue.record("Failed to close database file: \(error)")
+            }
+        }
         let records = [
             TestableTable.stub(intValue: 1, stringValue: "Test1"),
             TestableTable.stub(intValue: 2, stringValue: "Test2"),
@@ -138,6 +151,13 @@ struct IntegrationTest {
     @Test("Given Create Table, and records inserted, then return correct item count")
     func countRecords() throws {
         let store = try #require(try createInMemoryStore())
+        defer {
+            do {
+                try #require(try sut.close(store: store))
+            } catch {
+                Issue.record("Failed to close database file: \(error)")
+            }
+        }
         try #require(try createTestableTable(store: store))
 
         let records = [
@@ -159,6 +179,13 @@ struct IntegrationTest {
     @Test("Given inserted records, then pull expected records from database")
     func getRectords() throws {
         let store = try #require(try createInMemoryStore())
+        defer {
+            do {
+                try #require(try sut.close(store: store))
+            } catch {
+                Issue.record("Failed to close database file: \(error)")
+            }
+        }
         try #require(try createTestableTable(store: store))
         let value = TestableTable.stub(intValue: 5, stringValue: "Test5")
         let data = try JSONEncoder().encode(value)
@@ -281,5 +308,35 @@ struct IntegrationTest {
         )
         #expect(originalItems == copiedItems)
         #expect(copiedItems == expectedTestableTable)
+    }
+
+    @Test("Given request for columns, then return valid column array")
+    func getColumnArray() throws {
+        let store = try #require(try openTestFile())
+        let expectedColumns: [ColumnInformation] = [
+            .init(columnIndex: 0, name: "intValue", type: .integer, declairedType: "INTEGER"),
+            .init(columnIndex: 1, name: "int32Value", type: .integer, declairedType: "INTEGER"),
+            .init(columnIndex: 2, name: "uintValue", type: .integer, declairedType: "INTEGER"),
+            .init(columnIndex: 3, name: "uint32Value", type: .integer, declairedType: "INTEGER"),
+            .init(columnIndex: 4, name: "int16Value", type: .integer, declairedType: "INTEGER"),
+            .init(columnIndex: 5, name: "uint16Value", type: .integer, declairedType: "INTEGER"),
+            .init(columnIndex: 6, name: "floatValue", type: .float, declairedType: "REAL"),
+            .init(columnIndex: 7, name: "doubleValue", type: .float, declairedType: "DOUBLE"),
+            .init(columnIndex: 8, name: "cgFloatValue", type: .float, declairedType: "DOUBLE"),
+            .init(columnIndex: 9, name: "stringValue", type: .text, declairedType: "TEXT"),
+            .init(columnIndex: 10, name: "optionalString", type: .null, declairedType: "TEXT"),
+            .init(columnIndex: 11, name: "dataStore", type: .null, declairedType: "BLOB")
+        ]
+
+        defer {
+            do {
+                try #require(try sut.close(store: store))
+            } catch {
+                Issue.record("Failed to close database file: \(error)")
+            }
+        }
+        let columns = try sut.columns(sqlite: store, table: "TestableTable")
+
+        #expect(columns == expectedColumns)
     }
 }
