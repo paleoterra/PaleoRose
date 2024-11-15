@@ -35,7 +35,7 @@ protocol StoreProtocol {
     func close(store: OpaquePointer) throws
     func openDatabase(path: String) throws -> OpaquePointer
     func backup(source: OpaquePointer, destination: OpaquePointer) throws
-    func columns(sqlite: OpaquePointer, table: String) throws -> [ColumnInformation] 
+    func columns(sqlite: OpaquePointer, table: String) throws -> [ColumnInformation]
 }
 
 extension SQLiteInterface: StoreProtocol {

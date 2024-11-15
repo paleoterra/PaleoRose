@@ -30,7 +30,6 @@ import Foundation
 
 class MockSqliteInterface: StoreProtocol {
 
-    
     var pointer: OpaquePointer?
 
     var createInMemoryStoreError: Error?

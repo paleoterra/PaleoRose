@@ -213,13 +213,6 @@ struct IntegrationTest {
     @Test("Given existing store url, then open, and then close again")
     func openAndCloseSqliteFileOnDisk() throws {
         let store = try #require(try openTestFile())
-        defer {
-            do {
-                try #require(try sut.close(store: store))
-            } catch {
-                Issue.record("Failed to close database file: \(error)")
-            }
-        }
         try #require(try sut.close(store: store))
     }
 
