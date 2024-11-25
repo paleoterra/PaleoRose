@@ -32,6 +32,9 @@
 #import "XRTableAddColumnController.h"
 #import "XRCalculateAzimuthController.h"
 #import "math.h"
+#import "XRExportGraphicAccessory.h"
+#import <PaleoRose-Swift.h>
+#import "XRoseView.h"
 
 @interface XRoseWindowController()
 @property (nonatomic) FStatisticController *theSheetController;
@@ -686,6 +689,65 @@ NSRect initialRect;
             free(indexes);
         }
         self.azimuthController = nil;
+    }];
+}
+
+-(IBAction)copyPDFImage:(id)sender
+{
+    [self copyPDFToPasteboard];
+}
+
+-(IBAction)exportImage:(id)sender
+{
+    NSSavePanel *sp = [NSSavePanel savePanel];
+    XRExportGraphicAccessory *accessoryView = [XRExportGraphicAccessory exportGraphicAccessoryView];
+    [accessoryView setDelegate:sp];
+    [sp setAccessoryView:accessoryView];
+    [sp setAllowedFileTypes:[NSArray arrayWithObjects:@"pdf",@"tif",@"jpg",@"PDF",@"TIF",@"JPG",nil]];
+    //[sp setExtensionHidden:NO];
+    NSString *baseName;
+    if([self.documentModel fileURL])
+        baseName = [[[self.documentModel fileURL] path ]stringByDeletingPathExtension];
+    else
+    {
+        baseName = NSHomeDirectory();
+        baseName = [baseName stringByAppendingPathComponent:[self.window title]];
+    }
+    [sp setDirectoryURL:[NSURL fileURLWithPath:[baseName stringByDeletingLastPathComponent]]];
+    [sp beginSheetModalForWindow:self.window completionHandler:^(NSInteger result) {
+        if(result == NSModalResponseOK)
+        {
+            NSData *targetData;
+            if((targetData = [(XRoseView *)[self mainView] imageDataForType:[[sp URL] pathExtension]]))
+            {
+                [[NSFileManager defaultManager] createFileAtPath:[[sp URL] path] contents:targetData attributes:nil];
+            }
+        }
+    }];
+}
+
+-(IBAction)generateStatisticsReport:(id)sender
+{
+    NSSavePanel *sp = [NSSavePanel savePanel];
+    NSURL *currentURL = [self.documentModel fileURL];
+    __block NSString *basename = [[currentURL path ] lastPathComponent];
+    if(!basename)
+        basename = [self.window title];
+    [sp setAllowedFileTypes:@[@"txt"]];
+    [sp setDirectoryURL:[currentURL URLByDeletingLastPathComponent]];
+    [sp beginSheetModalForWindow: self.window completionHandler:^(NSInteger result) {
+        if(result == NSModalResponseOK)
+        {
+            NSMutableString *theString = [[NSMutableString alloc] init];
+            [theString appendFormat:@"XRose STATISTICS REPORT FOR FILE: %@\n%@\n\n\n" ,currentURL ,[[NSDate date] descriptionWithLocale:nil]];
+            //now append general geometry issues
+            [theString appendFormat:@"Geometry:\n\tSector Count: %i\n\tSector Size (degrees): %f\n\n",[(XRGeometryController *)self.geometryController  sectorCount],[(XRGeometryController *)self.geometryController  sectorSize]];
+            //have table controller append info
+            [theString appendString:[(XRoseTableController *)self.tableController generateStatisticsString]];
+            if([[NSFileManager defaultManager] fileExistsAtPath:[[sp URL] path]])
+                [[NSFileManager defaultManager] removeItemAtPath:[[sp URL] path] error:nil];
+            [[NSFileManager defaultManager] createFileAtPath:[[sp URL] path] contents:[theString dataUsingEncoding:NSASCIIStringEncoding] attributes:nil];
+        }
     }];
 }
 

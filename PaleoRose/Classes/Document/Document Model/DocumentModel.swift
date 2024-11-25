@@ -31,10 +31,12 @@ class DocumentModel: NSObject {
     private var inMemoryStore: InMemoryStore
     var dataTables: [TableSchema] = []
     @objc var dataSets: [XRDataSet] = []
+    @objc weak var document: NSDocument?
 
     @available(*, deprecated, message: "This code will become unavailable")
-    @objc init(inMemoryStore: InMemoryStore) {
+    @objc init(inMemoryStore: InMemoryStore, document: NSDocument?) {
         self.inMemoryStore = inMemoryStore
+        self.document = document
     }
 
     @available(*, deprecated, message: "This code will become unavailable")
@@ -58,6 +60,13 @@ class DocumentModel: NSObject {
 
     @objc func possibleColumnNames(table: String) throws -> [String] {
         try inMemoryStore.valueColumnNames(for: table)
+    }
+
+    @objc func fileURL() -> URL? {
+        if let document {
+            return document.fileURL
+        }
+        return nil
     }
 
     // MARK: - Read From Store
