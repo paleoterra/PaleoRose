@@ -24,6 +24,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "sqlite3.h"
+#import <PaleoRose-Swift.h>
 @class XRRoseTableController,XRGeometryController,LITMXMLTree;
 @interface XRoseWindowController : NSWindowController <NSToolbarDelegate>
 {
@@ -38,6 +39,8 @@
 	NSMutableArray *tableList;
     __weak IBOutlet id _tableNameTable;
 }
+
+@property (weak) DocumentModel *documentModel;
 
 -(XRRoseTableController *)tableController;
 -(XRGeometryController *)geometryController;

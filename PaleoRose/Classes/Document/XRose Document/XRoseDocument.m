@@ -36,7 +36,7 @@
 #import "XRoseView.h"
 #import "XRFileParser.h"
 #import "XRoseTableController.h"
-#import "XRExportGraphicAccessory.h"
+
 #import "XRStatistic.h"
 #import "XRMakeDatasetController.h"
 #import "LITMXMLTree.h"
@@ -49,7 +49,6 @@
 @interface XRoseDocument()
 
 @property (nonatomic) NSMutableArray *dataSets;
-@property (nonatomic) LITMXMLTree *tempTree;
 
 @property (nonatomic) NSObject *currentSheetController;
 @property (nonatomic) XRTableImporter *tableImporter;
@@ -73,7 +72,7 @@
 		_dataSets = [[NSMutableArray alloc] init];
 		_tables = [[NSMutableArray alloc] init];
         _tableImporter = [[XRTableImporter alloc] init];
-        _documentModel = [[DocumentModel alloc] initInMemoryStore:[[InMemoryStore alloc] init]];
+        _documentModel = [[DocumentModel alloc] initInMemoryStore:[[InMemoryStore alloc] init] document:self];
         [self createDB];
         _didLoad = NO;
 	}
@@ -124,6 +123,7 @@
     XRoseWindowController *aController = [[XRoseWindowController alloc] initWithWindowNibName:@"XRoseDocument"];
     [self addWindowController:aController];
     _mainWindowController = aController;
+    _mainWindowController.documentModel = self.documentModel;
     [[NSNotificationCenter defaultCenter] addObserver:aController selector:@selector(importerCompleted:) name:@"XRTableListChanged" object:nil];
 }
 
@@ -193,6 +193,7 @@
 
 #pragma mark - NSObject
 
+// **** REFACTOR/MOVE
 -(void)awakeFromNib
 {
     if(self.didLoad) {
@@ -216,6 +217,7 @@
     return [self.documentModel store];
 }
 
+// **** REFACTOR/MOVE
 -(NSArray *)tableList
 {
     return self.tables;
@@ -223,6 +225,7 @@
 
 #pragma mark - PR Window Controller Delegate
 
+// **** REFACTOR/MOVE
 -(void)configureDocument
 {
 	if([self.documentModel store] != NULL)
@@ -237,6 +240,7 @@
 	[self discoverTables];
 }
 
+// **** REFACTOR/MOVE
 -(void)addDataLayer:(id)sender
 {
     os_activity_initiate("add data layer", OS_ACTIVITY_FLAG_DEFAULT, ^{
@@ -245,6 +249,7 @@
 	
 }
 
+// **** REFACTOR/MOVE
 -(void)loadDataSet
 {
     XRMakeDatasetController *controller;
@@ -278,85 +283,21 @@
     }];
 }
 
-#pragma mark "Responder" Chain
-
--(IBAction)copyPDFImage:(id)sender
-{
-    [self.mainWindowController copyPDFToPasteboard];
-}
-
--(IBAction)copyTIFFImage:(id)sender
-{
-    [self.mainWindowController copyPDFToPasteboard];
-}
-
--(IBAction)exportImage:(id)sender
-{
-    NSSavePanel *sp = [NSSavePanel savePanel];
-    XRExportGraphicAccessory *accessoryView = [XRExportGraphicAccessory exportGraphicAccessoryView];
-    [accessoryView setDelegate:sp];
-    [sp setAccessoryView:accessoryView];
-    [sp setAllowedFileTypes:[NSArray arrayWithObjects:@"pdf",@"tif",@"jpg",@"PDF",@"TIF",@"JPG",nil]];
-    //[sp setExtensionHidden:NO];
-    NSString *baseName;
-    if([self fileURL])
-        baseName = [[[self fileURL] path ]stringByDeletingPathExtension];
-    else
-    {
-        baseName = NSHomeDirectory();
-        baseName = [baseName stringByAppendingPathComponent:[[self.mainWindowController window] title]];
-    }
-    [sp setDirectoryURL:[NSURL fileURLWithPath:[baseName stringByDeletingLastPathComponent]]];
-    [sp beginSheetModalForWindow:[self.mainWindowController window] completionHandler:^(NSInteger result) {
-        if(result == NSModalResponseOK)
-        {
-            NSData *targetData;
-            if((targetData = [(XRoseView *)[self.mainWindowController mainView] imageDataForType:[[sp URL] pathExtension]]))
-            {
-                [[NSFileManager defaultManager] createFileAtPath:[[sp URL] path] contents:targetData attributes:nil];
-            }
-        }
-    }];
-}
-
--(IBAction)generateStatisticsReport:(id)sender
-{
-    NSSavePanel *sp = [NSSavePanel savePanel];
-    __block NSString *basename = [[[self fileURL] path ]lastPathComponent];
-    if(!basename)
-        basename = [[self.mainWindowController window] title];
-    [sp setAllowedFileTypes:@[@"txt"]];
-    [sp setDirectoryURL:[[self fileURL] URLByDeletingLastPathComponent]];
-    [sp beginSheetModalForWindow:[self.mainWindowController window] completionHandler:^(NSInteger result) {
-        if(result == NSModalResponseOK)
-        {
-            NSMutableString *theString = [[NSMutableString alloc] init];
-            [theString appendFormat:@"XRose STATISTICS REPORT FOR FILE: %@\n%@\n\n\n" ,[self fileURL] ,[[NSDate date] descriptionWithLocale:nil]];
-            //now append general geometry issues
-            [theString appendFormat:@"Geometry:\n\tSector Count: %i\n\tSector Size (degrees): %f\n\n",[(XRGeometryController *)[self.mainWindowController geometryController]  sectorCount],[(XRGeometryController *)[self.mainWindowController geometryController]  sectorSize]];
-            //have table controller append info
-            [theString appendString:[(XRoseTableController *)[self.mainWindowController tableController] generateStatisticsString]];
-            if([[NSFileManager defaultManager] fileExistsAtPath:[[sp URL] path]])
-                [[NSFileManager defaultManager] removeItemAtPath:[[sp URL] path] error:nil];
-            [[NSFileManager defaultManager] createFileAtPath:[[sp URL] path] contents:[theString dataUsingEncoding:NSASCIIStringEncoding] attributes:nil];
-
-            [[NSWorkspace sharedWorkspace] openFile:[[sp URL] path]  withApplication:@"TextEdit"];
-        }
-    }];
-}
-
 #pragma mark Data Sets
 
+// **** REFACTOR/MOVE
 -(void)addDataSet:(XRDataSet *)aSet
 {
     [self.dataSets addObject:aSet];
 }
 
+// **** REFACTOR/MOVE
 -(void)removeDataSet:(XRDataSet *)aSet
 {
     [self.dataSets removeObject:aSet];
 }
 
+// **** REFACTOR/MOVE
 -(XRDataSet *)dataSetWithName:(NSString *)name
 {
     NSEnumerator *anEnum = [self.dataSets objectEnumerator];
@@ -369,6 +310,7 @@
     return nil;
 }
 
+// **** REFACTOR/MOVE
 -(NSString *)FTestStatisticsForSetNames:(NSArray *)setNames biDirectional:(BOOL)isBiDir
 {
     XRDataSet *tempSet1 = [self dataSetWithName:[setNames objectAtIndex:0]];
@@ -425,6 +367,7 @@
 
 #pragma mark - SQLITE CRUD
 
+// **** REFACTOR/MOVE
 -(void)createDB
 {
     if([[self windowControllers] count]) {
@@ -433,6 +376,7 @@
     }
 }
 
+// **** REFACTOR/MOVE
 -(void)datasetsRenameTable:(NSString *)oldName toName:(NSString *)newName
 {
     NSEnumerator *anEnum = [self.dataSets objectEnumerator];
@@ -444,6 +388,7 @@
     }
 }
 
+// **** REFACTOR/MOVE
 -(NSArray *)retrieveNonTextColumnNamesFromTable:(NSString *)aTableName
 {
     NSError *error = nil;
@@ -455,6 +400,7 @@
     return columns;
 }
 
+// **** REFACTOR/MOVE
 -(void)discoverTables
 {
     [self.tables removeAllObjects];
@@ -462,6 +408,7 @@
     [self.mainWindowController updateTable];
 }
 
+// **** REFACTOR/MOVE
 -(void)loadDatasetsFromDB:(sqlite3 *)db
 {
     self.dataSets = [[NSMutableArray alloc] initWithArray: self.documentModel.dataSets];
@@ -469,6 +416,7 @@
 
 #pragma mark Importing Data
 
+// **** RESEARCH
 -(void)importTable:(id)sender
 {
     //NSLog(@"in importTable");
