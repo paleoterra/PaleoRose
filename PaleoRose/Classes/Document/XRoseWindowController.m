@@ -415,18 +415,13 @@ NSRect initialRect;
         if(returnCode == NSModalResponseOK)
         {
             //alter table "table name" add COLUMNNAME DEFINITION
-            sqlite3 *db = [[self document] documentInMemoryStore];
-            int error;
-            char *errorMsg;
-            NSString *command = [NSString stringWithFormat:@"ALTER TABLE \"%@\" ADD COLUMN \"%@\"",[self->tableList objectAtIndex:[self->_tableNameTable selectedRow]],[self.addColumnController columnDefinition]];
-
-            error = sqlite3_exec(db,[command UTF8String],NULL,NULL,&errorMsg);
-            if(error!=SQLITE_OK)
-                NSLog(@"Error: %s",errorMsg);
-            error = sqlite3_exec(db,[[NSString stringWithFormat:@"VACUUM \"%@\"",[self->tableList objectAtIndex:[self->_tableNameTable selectedRow]]] UTF8String],NULL,NULL,&errorMsg);
-            if(error!=SQLITE_OK)
-                NSLog(@"Error: %s",errorMsg);
-
+            NSError *error;
+            NSString *table = [self->tableList objectAtIndex: [self->_tableNameTable selectedRow]];
+            NSString *columnDefinition = [self.addColumnController columnDefinition];
+            [self.documentModel addWithTable:table column:columnDefinition error:&error];
+            if(error != nil) {
+                NSLog(@"Error: %@",error.localizedDescription);
+            }
         }
         self.addColumnController = nil;
     }];
@@ -434,19 +429,14 @@ NSRect initialRect;
 
 -(IBAction)deleteTableAction:(id)sender
 {
+    NSError *error;
 	//deleting a table should also delete all layers and datasets that make use of it.
 	NSString *tableToDelete = [tableList objectAtIndex:[_tableNameTable selectedRow]];
-	sqlite3 *db = [[self document] documentInMemoryStore];
-	int error;
-	char *errorMsg;
-	NSString *command = [NSString stringWithFormat:@"DROP TABLE \"%@\"",tableToDelete];
-	
-	error = sqlite3_exec(db,[command UTF8String],NULL,NULL,&errorMsg);
-	if(error!=SQLITE_OK)
-		NSLog(@"Error: %s",errorMsg);
-	error = sqlite3_exec(db,[[NSString stringWithFormat:@"VACUUM \"%@\"",[tableList objectAtIndex:[_tableNameTable selectedRow]]] UTF8String],NULL,NULL,&errorMsg);
-	if(error!=SQLITE_OK)
-		NSLog(@"Error: %s",errorMsg);
+
+    [self.documentModel deleteWithTable:tableToDelete error:&error];
+    if(error != nil) {
+        NSLog(@"%@", error.localizedDescription);
+    }
 
 	//Table is now deleted.  We must now delete all dependent layers and datasets
 	[_roseTableController deleteLayersForTableName:tableToDelete];

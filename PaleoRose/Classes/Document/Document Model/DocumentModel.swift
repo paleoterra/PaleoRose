@@ -85,6 +85,14 @@ class DocumentModel: NSObject {
         try inMemoryStore.renameTable(from: table, toName: toName)
     }
 
+    @objc func delete(table: String) throws {
+        try inMemoryStore.drop(table: table)
+    }
+
+    @objc func add(table: String, column: String) throws {
+        try inMemoryStore.addColumn(to: table, columnDefinition: column)
+    }
+
     // MARK: - Read From Store
 
     private func loadFromFile(_ file: URL) throws {
