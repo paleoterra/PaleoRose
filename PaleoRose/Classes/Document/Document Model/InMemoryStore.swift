@@ -32,6 +32,7 @@ class InMemoryStore: NSObject {
     enum InMemoryStoreError: Error {
         case databaseDoesNotExist
         case unknownType
+        case unexpectedEmptyResult
     }
 
     enum BackupType {
@@ -161,6 +162,49 @@ class InMemoryStore: NSObject {
             }
             return nil
         }
+    }
+
+    // MARK: - Window Size
+
+    func store(windowSize: CGSize) throws {
+        let sqliteStore = try validateStore()
+        let size = WindowControllerSize(width: windowSize.width, height: windowSize.height)
+        _ = try interface.executeQuery(sqlite: sqliteStore, query: WindowControllerSize.deleteAllRecords()) // No primary key exists
+        var query = WindowControllerSize.insertQuery()
+        query.bindings = try [size.valueBindables(keys: WindowControllerSize.allKeys())]
+        _ = try interface.executeQuery(sqlite: sqliteStore, query: query)
+    }
+
+    func windowSize() throws -> CGSize {
+        let sqliteStore = try validateStore()
+        let sizes: [WindowControllerSize] = try interface.executeCodableQuery(
+            sqlite: sqliteStore,
+            query: WindowControllerSize.storedValues()
+        )
+        if sizes.isEmpty {
+            throw InMemoryStoreError.unexpectedEmptyResult
+        }
+        return CGSize(width: sizes[0].width, height: sizes[0].height)
+    }
+
+    // MARK: - Table Manipulation
+
+    @objc func renameTable(from: String, toName: String) throws {
+        let sqliteStore = try validateStore()
+        let query = Query(sql: "ALTER TABLE \(from) RENAME TO \(toName)")
+        _ = try interface.executeQuery(sqlite: sqliteStore, query: query)
+    }
+
+    @objc func addColumn(to table: String, columnDefinition: String) throws {
+        let sqliteStore = try validateStore()
+        let query = Query(sql: "ALTER TABLE \(table) ADD COLUMN \(columnDefinition)")
+        _ = try interface.executeQuery(sqlite: sqliteStore, query: query)
+    }
+
+    @objc func drop(table: String) throws {
+        let sqliteStore = try validateStore()
+        let query = Query(sql: "DROP TABLE \(table)")
+        _ = try interface.executeQuery(sqlite: sqliteStore, query: query)
     }
 
     @discardableResult

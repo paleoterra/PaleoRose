@@ -111,9 +111,9 @@
 -(LITMXMLTree *)xmlTreeForVersion1_0;
 
 -(void)calculateRelativePositionWithPoint:(NSPoint)target intoRadius:(float *)estimatedRadius intoAngle:(float *)estimatedAngle;
--(void)SQLInitialSaveToDatabase:(sqlite3 *)db;
--(void)setValuesFromSQLDB:(sqlite3 *)db;
--(void)saveToSQLDB:(sqlite3 *)db;
+-(void)SQLInitialSaveToDatabase:(sqlite3 *)db  DEPRECATED_ATTRIBUTE;
+-(void)setValuesFromSQLDB:(sqlite3 *)db  DEPRECATED_ATTRIBUTE;
+-(void)saveToSQLDB:(sqlite3 *)db DEPRECATED_ATTRIBUTE;
 
 -(NSRect)drawingBounds;
 @end

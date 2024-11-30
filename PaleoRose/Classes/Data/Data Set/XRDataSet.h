@@ -46,8 +46,8 @@
 
 #pragma mark init
 
--(id)initWithTable:(NSString *)table column:(NSString *)column db:(sqlite3 *)db;
--(id)initWithTable:(NSString *)table column:(NSString *)column db:(sqlite3 *)db predicate:(NSString *)aPredicate;
+-(id)initWithTable:(NSString *)table column:(NSString *)column db:(sqlite3 *)db DEPRECATED_ATTRIBUTE;
+-(id)initWithTable:(NSString *)table column:(NSString *)column db:(sqlite3 *)db predicate:(NSString *)aPredicate DEPRECATED_ATTRIBUTE;
 -(id)initWithData:(NSData *)theData withName:(NSString *)name;
 -(id)initWithName:(NSString *)name tableName:(NSString *)table column:(NSString *)column predicate:(NSString *)aPredicate comments:(NSAttributedString *)comments data:(NSData *)data;
 #pragma mark accessors
@@ -113,10 +113,10 @@
 
 #pragma mark SQL
 
--(NSString *)buildSQL;
--(BOOL)readSQL:(sqlite3 *)db;
--(void)saveToSQLDB:(sqlite3 *)db;
--(id)initFromSQL:(sqlite3 *)db forIndex:(int)index;
+-(NSString *)buildSQL DEPRECATED_ATTRIBUTE;
+-(BOOL)readSQL:(sqlite3 *)db DEPRECATED_ATTRIBUTE;
+-(void)saveToSQLDB:(sqlite3 *)db DEPRECATED_ATTRIBUTE;
+-(id)initFromSQL:(sqlite3 *)db forIndex:(int)index DEPRECATED_ATTRIBUTE;
 
 #pragma mark Mutability
 -(void)appendData:(NSData *)data;

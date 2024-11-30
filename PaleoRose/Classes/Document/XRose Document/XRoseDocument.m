@@ -102,7 +102,11 @@
 {
     NSError *error = nil;
     [[self.mainWindowController geometryController]  saveToSQLDB:[self.documentModel store]];
-    [self.mainWindowController  saveToSQLDB:[self.documentModel store]];
+    [self.documentModel setWindowSize:[self.mainWindowController window].frame.size error:&error];
+    if (error != nil) {
+        *outError = error;
+        return NO;
+    }
     [(XRoseTableController *)[self.mainWindowController tableController] saveToSQLDB:[self.documentModel store]];
     [self.documentModel writeToFile:url error:&error];
     if (error) {
@@ -200,7 +204,12 @@
         [self loadDatasetsFromDB:[self.documentModel store]];
         [[self.mainWindowController geometryController]  setValuesFromSQLDB:[self.documentModel store]];
 
-        [self.mainWindowController  setValuesFromSQLDB:[self.documentModel store]];
+        CGRect frame = [self.mainWindowController.window frame];
+        frame.size = [self.documentModel windowSize];
+        if (frame.size.width != 0) {
+            [[self.mainWindowController window] setFrame:frame display:YES];
+        }
+        [[self.mainWindowController geometryController] setValuesFromSQLDB:[self.documentModel store]];
 
         [(XRoseTableController *)[self.mainWindowController  tableController] configureControllerWithSQL:[self.documentModel store] withDataSets:self.dataSets];
     }
@@ -230,7 +239,13 @@
 {
 	if([self.documentModel store] != NULL)
 	{
-		[self.mainWindowController  setValuesFromSQLDB:[self.documentModel store]];
+        CGRect frame = [self.mainWindowController.window frame];
+        frame.size = [self.documentModel windowSize];
+        if (frame.size.width != 0) {
+            [[self.mainWindowController window] setFrame:frame display:YES];
+        }
+        [[self.mainWindowController geometryController] setValuesFromSQLDB:[self.documentModel store]];
+
 	}
 	else
 	{
@@ -370,8 +385,12 @@
 // **** REFACTOR/MOVE
 -(void)createDB
 {
+    NSError *error = nil;
     if([[self windowControllers] count]) {
-        [self.mainWindowController SQLInitialSaveToDatabase:[self.documentModel store]];
+        [self.documentModel setWindowSize:[self.mainWindowController window].frame.size error:&error];
+        if (error != nil) {
+            NSLog(@"%@", error.localizedDescription);
+        }
         [[self.mainWindowController geometryController] SQLInitialSaveToDatabase:[self.documentModel store]];
     }
 }

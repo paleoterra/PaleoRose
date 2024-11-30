@@ -53,6 +53,10 @@ public extension TableRepresentable {
         Query(sql: "SELECT * FROM \(tableName);")
     }
 
+    static func deleteAllRecords() -> QueryProtocol {
+        Query(sql: "DELETE FROM \(tableName);")
+    }
+
     /// Assign keys to create bindings
     func valueBindables(keys: [String] = []) throws -> [Bindable?] {
         try bindingArray(keys: keys)

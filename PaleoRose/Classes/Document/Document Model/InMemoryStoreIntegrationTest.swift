@@ -158,7 +158,6 @@ struct InMemoryStoreIntegrationTest {
     @Test("Given document with no data, when requesting data tables, then return an empty array")
     func returnEmptyTableListWhenNoData() throws {
         let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
-
         let tables = try store.dataTables()
         #expect(tables.isEmpty)
     }
@@ -206,5 +205,90 @@ struct InMemoryStoreIntegrationTest {
         )
         let dataValues = try store.dataSetValues(for: dataSet)
         #expect(dataValues.count == 63, "Expected 63 records, got \(dataValues.count)")
+    }
+
+    // MARK: - Window Size
+
+    @Test("Given a window size and empty database, then store the window size and retrieve the same")
+    func storeWindowSize() throws {
+        let expectedWidth: CGFloat = 54
+        let expectedHeight: CGFloat = 90
+
+        let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
+        let size = CGSize(width: expectedWidth, height: expectedHeight)
+        try store.store(windowSize: size)
+        let windowSize = try store.windowSize()
+        #expect(windowSize.width == expectedWidth)
+        #expect(windowSize.height == expectedHeight)
+    }
+
+    @Test("When storing multiple sizes, then store only contains one record matching the last save")
+    func storeMultipleWindowSizes() throws {
+        let expectedWidth: CGFloat = 54
+        let expectedHeight: CGFloat = 90
+
+        let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
+        var size = CGSize(width: expectedWidth - 10, height: expectedHeight - 10)
+        try store.store(windowSize: size)
+
+        size = CGSize(width: expectedWidth - 5, height: expectedHeight - 5)
+        try store.store(windowSize: size)
+
+        size = CGSize(width: expectedWidth + 5, height: expectedHeight + 5)
+        try store.store(windowSize: size)
+
+        size = CGSize(width: expectedWidth, height: expectedHeight)
+        try store.store(windowSize: size)
+
+        let windowSize = try store.windowSize()
+        #expect(windowSize.width == expectedWidth)
+        #expect(windowSize.height == expectedHeight)
+    }
+
+    // MARK: - Rename Table
+
+    @Test("When renaming the table, then the database is updated")
+    func renameTable() throws {
+        let startTable = "rtest"
+        let endTable = "rtest2"
+        let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
+        try backupFromSampleFileToInMemoryStore(store)
+        let startTableNames = try store.dataTables().map(\.tbl_name)
+
+        #expect(startTableNames.contains(startTable))
+        #expect(!startTableNames.contains(endTable))
+        try store.renameTable(from: startTable, toName: endTable)
+        let tableNames = try store.dataTables().map(\.tbl_name)
+        #expect(!tableNames.contains(startTable))
+        #expect(tableNames.contains(endTable))
+    }
+
+    // MARK: - Add Column
+
+    @Test("when attempting to add a column, then the table is successfully changed")
+    func addColumn() throws {
+        let table = "rtest"
+        let column = "newColumn TEXT"
+        let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
+        try backupFromSampleFileToInMemoryStore(store)
+        try store.addColumn(to: table, columnDefinition: column)
+        guard let schema = try store.dataTables().first else {
+            Issue.record("Could not find table")
+            return
+        }
+        print(schema.sql)
+        #expect(schema.sql.contains("newColumn"))
+    }
+
+    // MARK: - Drop Table
+
+    @Test("When dropping table, the table is no longer available")
+    func dropTable() throws {
+        let table = "rtest"
+        let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
+        try backupFromSampleFileToInMemoryStore(store)
+        try store.drop(table: table)
+        let tableNames = try store.dataTables().map(\.tbl_name)
+        #expect(tableNames.isEmpty)
     }
 }

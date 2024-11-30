@@ -344,103 +344,6 @@ NSRect initialRect;
 		[[XRGeometryPropertyInspector defaultGeometryInspector] displayInfoForObject:nil];
 }
 
--(void)SQLInitialSaveToDatabase:(sqlite3 *)db
-{
-	NSRect frame = [[self window] frame];
-	NSString *sqlStatement = [NSString stringWithFormat:@"insert into _windowController VALUES  ( %f, %f)",frame.size.height,frame.size.width];
-	int error;
-	char *errorMsg;
-	error = sqlite3_exec(db,[sqlStatement UTF8String],NULL,NULL,&errorMsg);
-	if(error!=SQLITE_OK)
-		NSLog(@"Error: %s",errorMsg);
-}
-
--(void)saveToSQLDB:(sqlite3 *)db
-{
-	NSRect frame = [[self window] frame];
-	NSString *sqlStatement = [NSString stringWithFormat:@"update _windowController  set height=%f, width=%f",frame.size.height,frame.size.width];
-	int error;
-	char *errorMsg;
-	error = sqlite3_exec(db,[sqlStatement UTF8String],NULL,NULL,&errorMsg);
-	if(error!=SQLITE_OK)
-		NSLog(@"Error: %s",errorMsg);
-	
-
-	
-}
-
--(void)setValuesFromSQLDB:(sqlite3 *)db
-{
-	int error;
-	int columns;
-	sqlite3_stmt *stmt;
-	const char *zSql;
-
-	NSRect newFrame = [[self window] frame];
-	
-	error = sqlite3_prepare(db,"select * from _windowController\0",-1,&stmt,&zSql);
-	if(error != SQLITE_OK)
-	{
-		NSLog(@"error reading file");
-		return;
-	}
-
-	while(sqlite3_step(stmt)!=SQLITE_DONE)
-	{
-		columns = sqlite3_column_count(stmt);
-		for(int i=0;i<columns;i++)
-		{
-			NSString *theString = [NSString stringWithUTF8String:sqlite3_column_name(stmt,i)];
-			if([theString isEqualToString:@"height"])
-				newFrame.size.height= sqlite3_column_double(stmt,i);
-			else if([theString isEqualToString:@"width"])
-				newFrame.size.width= sqlite3_column_double(stmt,i);
-		}
-	}
-
-	sqlite3_finalize(stmt);
-	[[self window] setFrame:newFrame display:YES];
-    [[self geometryController] setValuesFromSQLDB:db];
-
-}
-
-/*- (float)splitView:(NSSplitView *)sender constrainMaxCoordinate:(float)proposedMax ofSubviewAt:(int)offset;
-{
-    NSLog(@"%@ %f %i",[sender identifier],proposedMax,offset);
-    return proposedMax;
-	if([[sender identifier] isEqualToString:@"vsplit"])
-	{
-		NSRect aRect = [sender frame];
-		return (aRect.size.height - 73);
-	}
-	else
-	{
-		NSRect aRect = [sender frame];
-		return (aRect.size.width - 100);
-	}
-    
-	return proposedMax;
-}
-
-- (float)splitView:(NSSplitView *)sender constrainMinCoordinate:(float)proposedMin ofSubviewAt:(int)offset
-{
-	NSLog(@"%@ %f %i",[sender identifier],proposedMin,offset);
-    return proposedMin;
-	if([[sender identifier] isEqualToString:@"vsplit"])
-	{
-	
-		return 80;
-	}
-	else
-	{
-		
-		return 100;
-	}
-	NSLog(@"%f %i",proposedMin,offset);
-	return proposedMin;
-}
-*/
-
 
 - (IBAction)addLayerAction:(id)sender
 {
@@ -491,22 +394,16 @@ NSRect initialRect;
 
 - (void)tableView:(NSTableView *)aTableView setObjectValue:(id)anObject forTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex
 {
+    NSError *error;
 	NSString *oldTableName = [tableList objectAtIndex:rowIndex];
-	[tableList replaceObjectAtIndex:rowIndex withObject:anObject];
-	sqlite3 *db = [[self document] documentInMemoryStore];
-	int error;
-	char *errorMsg;
-	if(![oldTableName isEqualToString:anObject])
-	{
-	NSString *command = [NSString stringWithFormat:@"ALTER TABLE \"%@\" RENAME TO \"%@\"",oldTableName,anObject];
-	
-	error = sqlite3_exec(db,[command UTF8String],NULL,NULL,&errorMsg);
-	if(error!=SQLITE_OK)
-		NSLog(@"Error: %s",errorMsg);
-	}
+	[tableList replaceObjectAtIndex:rowIndex withObject:anObject]; // move
 
+    [self.documentModel renameWithTable:oldTableName toName:anObject error:&error];
+    if(error != nil) {
+        NSLog(@"%@",error.localizedDescription);
+    }
 	//now table has been written, we must update the datasets
-	[[self document] datasetsRenameTable:oldTableName toName:anObject];
+	[[self document] datasetsRenameTable:oldTableName toName:anObject]; // move
 }
 -(IBAction)tableAddColumn:(id)sender
 {

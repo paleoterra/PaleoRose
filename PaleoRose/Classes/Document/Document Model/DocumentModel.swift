@@ -69,6 +69,22 @@ class DocumentModel: NSObject {
         return nil
     }
 
+    @objc func windowSize() -> CGSize {
+        do {
+            return try inMemoryStore.windowSize()
+        } catch {
+            return .zero
+        }
+    }
+
+    @objc func setWindowSize(_ size: CGSize) throws {
+        try inMemoryStore.store(windowSize: size)
+    }
+
+    @objc func rename(table: String, toName: String) throws {
+        try inMemoryStore.renameTable(from: table, toName: toName)
+    }
+
     // MARK: - Read From Store
 
     private func loadFromFile(_ file: URL) throws {
