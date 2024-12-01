@@ -121,7 +121,6 @@
 -(LITMXMLTree *)xmlTreeForVersion1_0;
 
 -(void)calculateRelativePositionWithPoint:(NSPoint)target intoRadius:(float *)estimatedRadius intoAngle:(float *)estimatedAngle;
-//-(void)setValuesFromSQLDB:(sqlite3 *)db  DEPRECATED_ATTRIBUTE;
 
 -(NSRect)drawingBounds;
 @end
