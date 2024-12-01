@@ -58,6 +58,16 @@ public extension TableRepresentable {
     }
 
     /// Assign keys to create bindings
+    ///
+    /// - Parameters:
+    /// - Keys: an array of string keys that are based off of CodingKeys
+    ///
+    /// - Returns: An array of optional Bindable types
+    /// - Throws: Can throw a variety of errors around encoding of values
+    ///
+    /// This method converts properties into Bindable values using string keys.
+    /// This method only supports Bindable types, however.  You must override this method
+    /// if you have custom types.
     func valueBindables(keys: [String] = []) throws -> [Bindable?] {
         try bindingArray(keys: keys)
     }

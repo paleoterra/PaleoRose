@@ -101,7 +101,10 @@
 -(BOOL)writeToURL:(NSURL *)url ofType:(NSString *)typeName error:(NSError * _Nullable __autoreleasing *)outError
 {
     NSError *error = nil;
-    [[self.mainWindowController geometryController]  saveToSQLDB:[self.documentModel store]];
+    [self.documentModel storeWithGeometryController:[self.mainWindowController geometryController] error:&error];
+    if (error != nil) {
+        NSLog(@"Cannot store geometry: %@", [error localizedDescription]);
+    }
     [self.documentModel setWindowSize:[self.mainWindowController window].frame.size error:&error];
     if (error != nil) {
         *outError = error;
@@ -200,16 +203,19 @@
 // **** REFACTOR/MOVE
 -(void)awakeFromNib
 {
+    NSError *error;
     if(self.didLoad) {
         [self loadDatasetsFromDB:[self.documentModel store]];
-        [[self.mainWindowController geometryController]  setValuesFromSQLDB:[self.documentModel store]];
+        [self.documentModel configureWithGeometryController:[self.mainWindowController geometryController] error:&error];
+        if (error != nil) {
+            NSLog(@"Error reading geometry: %@", [error localizedDescription]);
+        }
 
         CGRect frame = [self.mainWindowController.window frame];
         frame.size = [self.documentModel windowSize];
         if (frame.size.width != 0) {
             [[self.mainWindowController window] setFrame:frame display:YES];
         }
-        [[self.mainWindowController geometryController] setValuesFromSQLDB:[self.documentModel store]];
 
         [(XRoseTableController *)[self.mainWindowController  tableController] configureControllerWithSQL:[self.documentModel store] withDataSets:self.dataSets];
     }
@@ -237,6 +243,7 @@
 // **** REFACTOR/MOVE
 -(void)configureDocument
 {
+    NSError *error;
 	if([self.documentModel store] != NULL)
 	{
         CGRect frame = [self.mainWindowController.window frame];
@@ -244,7 +251,10 @@
         if (frame.size.width != 0) {
             [[self.mainWindowController window] setFrame:frame display:YES];
         }
-        [[self.mainWindowController geometryController] setValuesFromSQLDB:[self.documentModel store]];
+        [self.documentModel configureWithGeometryController:[self.mainWindowController geometryController] error:&error];
+        if (error != nil) {
+            NSLog(@"Error configuring document: %@", [error localizedDescription]);
+        }
 
 	}
 	else
@@ -390,8 +400,13 @@
         [self.documentModel setWindowSize:[self.mainWindowController window].frame.size error:&error];
         if (error != nil) {
             NSLog(@"%@", error.localizedDescription);
+            return;
         }
-        [[self.mainWindowController geometryController] SQLInitialSaveToDatabase:[self.documentModel store]];
+        [self.documentModel storeWithGeometryController:[self.mainWindowController geometryController] error:&error];
+        if (error != nil) {
+            NSLog(@"%@", error.localizedDescription);
+            return;
+        }
     }
 }
 

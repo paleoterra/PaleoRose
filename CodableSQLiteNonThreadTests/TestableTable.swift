@@ -28,11 +28,27 @@ import CodableSQLiteNonThread
 import Foundation
 
 struct TestableTable: TableRepresentable, Equatable {
+    enum CodingKeys: String, CodingKey {
+        case boolValue
+        case intValue
+        case int32Value
+        case uintValue
+        case uint32Value
+        case int16Value
+        case uint16Value
+        case floatValue
+        case doubleValue
+        case cgFloatValue
+        case stringValue
+        case optionalString
+        case dataStore
+    }
 
     static var tableName: String = "TestableTable"
 
     static var primaryKey: String?
 
+    var boolValue: Bool
     var intValue: Int
     var int32Value: Int32
     var uintValue: UInt
@@ -47,6 +63,7 @@ struct TestableTable: TableRepresentable, Equatable {
     var dataStore: Data?
 
     static func stub(
+        boolValue: Bool = true,
         intValue: Int = 23212,
         int32Value: Int32 = 1600,
         uintValue: UInt = 4534,
@@ -61,6 +78,7 @@ struct TestableTable: TableRepresentable, Equatable {
         dataStore: Data? = nil
     ) -> Self {
         .init(
+            boolValue: boolValue,
             intValue: intValue,
             int32Value: int32Value,
             uintValue: uintValue,
@@ -82,6 +100,7 @@ struct TestableTable: TableRepresentable, Equatable {
             """
             CREATE TABLE \(tableName)
             (intValue INTEGER PRIMARY KEY,
+            boolValue BOOL not null,
             int32Value INTEGER not null,
             uintValue INTEGER not null,
             uint32Value INTEGER not null,
@@ -101,6 +120,7 @@ struct TestableTable: TableRepresentable, Equatable {
         // sql insert command for TestableTable
         let codingKeys: [CodingKeys] = [
             .intValue,
+            .boolValue,
             .int32Value,
             .uintValue,
             .uint32Value,
@@ -115,7 +135,7 @@ struct TestableTable: TableRepresentable, Equatable {
         ]
         let keys = codingKeys.map(\.stringValue)
 
-        return Query(sql: "INSERT INTO \(tableName) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", keys: keys)
+        return Query(sql: "INSERT INTO \(tableName) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", keys: keys)
     }
 
     static func updateQuery() -> any QueryProtocol {
@@ -126,10 +146,41 @@ struct TestableTable: TableRepresentable, Equatable {
         Query(sql: "")
     }
 
+    public init(
+        boolValue: Bool,
+        intValue: Int,
+        int32Value: Int32,
+        uintValue: UInt,
+        uint32Value: UInt32,
+        int16Value: Int16,
+        uint16Value: UInt16,
+        floatValue: Float,
+        doubleValue: Double,
+        cgFloatValue: CGFloat,
+        stringValue: String,
+        optionalString: String?,
+        dataStore: Data?
+    ) {
+        self.boolValue = boolValue
+        self.intValue = intValue
+        self.int32Value = int32Value
+        self.uintValue = uintValue
+        self.uint32Value = uint32Value
+        self.int16Value = int16Value
+        self.uint16Value = uint16Value
+        self.floatValue = floatValue
+        self.doubleValue = doubleValue
+        self.cgFloatValue = cgFloatValue
+        self.stringValue = stringValue
+        self.optionalString = optionalString
+        self.dataStore = dataStore
+    }
+
     // create encode function
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
 
+        try container.encode(boolValue, forKey: .boolValue)
         try container.encode(intValue, forKey: .intValue)
         try container.encode(int32Value, forKey: .int32Value)
         try container.encode(uintValue, forKey: .uintValue)
@@ -142,5 +193,23 @@ struct TestableTable: TableRepresentable, Equatable {
         try container.encode(stringValue, forKey: .stringValue)
         try container.encode(optionalString, forKey: .optionalString)
         try container.encode(dataStore, forKey: .dataStore)
+    }
+
+    init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        boolValue = try container.decodeSqliteBool(forKey: .boolValue)
+        intValue = try container.decode(Int.self, forKey: .intValue)
+        int32Value = try container.decode(Int32.self, forKey: .int32Value)
+        uintValue = try container.decode(UInt.self, forKey: .uintValue)
+        uint32Value = try container.decode(UInt32.self, forKey: .uint32Value)
+        int16Value = try container.decode(Int16.self, forKey: .int16Value)
+        uint16Value = try container.decode(UInt16.self, forKey: .uint16Value)
+        floatValue = try container.decode(Float.self, forKey: .floatValue)
+        doubleValue = try container.decode(Double.self, forKey: .doubleValue)
+        cgFloatValue = try container.decode(Double.self, forKey: .cgFloatValue)
+        stringValue = try container.decode(String.self, forKey: .stringValue)
+        optionalString = try container.decodeIfPresent(String.self, forKey: .optionalString)
+        dataStore = try container.decodeIfPresent(Data.self, forKey: .dataStore)
     }
 }

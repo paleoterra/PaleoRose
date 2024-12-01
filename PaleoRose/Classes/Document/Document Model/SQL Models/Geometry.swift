@@ -27,12 +27,11 @@
 import CodableSQLiteNonThread
 import Foundation
 
-struct Geometry: TableRepresentable {
+struct Geometry: TableRepresentable, Equatable {
     static var tableName: String = "_geometryController"
     static var primaryKey: String?
 
     // swiftlint:disable:next identifier_name
-    var _id: String
     var isEqualArea: Bool
     var isPercent: Bool
     var MAXCOUNT: Int
@@ -43,9 +42,31 @@ struct Geometry: TableRepresentable {
     var SECTORCOUNT: Int
     var RELATIVESIZE: Float
 
+    init(
+        isEqualArea: Bool,
+        isPercent: Bool,
+        MAXCOUNT: Int,
+        MAXPERCENT: Float,
+        HOLLOWCORE: Float,
+        SECTORSIZE: Float,
+        STARTINGANGLE: Float,
+        SECTORCOUNT: Int,
+        RELATIVESIZE: Float
+    ) {
+        self.isEqualArea = isEqualArea
+        self.isPercent = isPercent
+        self.MAXCOUNT = MAXCOUNT
+        self.MAXPERCENT = MAXPERCENT
+        self.HOLLOWCORE = HOLLOWCORE
+        self.SECTORSIZE = SECTORSIZE
+        self.STARTINGANGLE = STARTINGANGLE
+        self.SECTORCOUNT = SECTORCOUNT
+        self.RELATIVESIZE = RELATIVESIZE
+    }
+
     // MARK: - TableRepresentable
 
-    private static func allKeys() -> [String] {
+    static func allKeys() -> [String] {
         let keys: [CodingKeys] = [
             .isEqualArea,
             .isPercent,
@@ -77,5 +98,18 @@ struct Geometry: TableRepresentable {
 
     static func deleteQuery() -> any QueryProtocol {
         Query(sql: "")
+    }
+
+    init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        isEqualArea = try container.decodeSqliteBool(forKey: .isEqualArea)
+        isPercent = try container.decodeSqliteBool(forKey: .isPercent)
+        MAXCOUNT = try container.decode(Int.self, forKey: .MAXCOUNT)
+        MAXPERCENT = try container.decode(Float.self, forKey: .MAXPERCENT)
+        HOLLOWCORE = try container.decode(Float.self, forKey: .HOLLOWCORE)
+        SECTORSIZE = try container.decode(Float.self, forKey: .SECTORSIZE)
+        STARTINGANGLE = try container.decode(Float.self, forKey: .STARTINGANGLE)
+        SECTORCOUNT = try container.decode(Int.self, forKey: .SECTORCOUNT)
+        RELATIVESIZE = try container.decode(Float.self, forKey: .RELATIVESIZE)
     }
 }

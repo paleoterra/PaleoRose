@@ -93,6 +93,40 @@ class DocumentModel: NSObject {
         try inMemoryStore.addColumn(to: table, columnDefinition: column)
     }
 
+    @objc func store(geometryController: XRGeometryController) throws {
+        let geometry = Geometry(
+            isEqualArea: geometryController.isEqualArea(),
+            isPercent: geometryController.isPercent(),
+            MAXCOUNT: Int(geometryController.geometryMaxCount()),
+            MAXPERCENT: geometryController.geometryMaxPercent(),
+            HOLLOWCORE: geometryController.hollowCoreSize(),
+            SECTORSIZE: geometryController.sectorSize(),
+            STARTINGANGLE: geometryController.startingAngle(),
+            SECTORCOUNT: Int(geometryController.sectorCount()),
+            RELATIVESIZE: geometryController.relativeSizeOfCircleRect()
+        )
+        try inMemoryStore.store(geometry: geometry)
+    }
+
+    @objc func configure(geometryController: XRGeometryController) throws {
+        do {
+            let geometry = try inMemoryStore.geometry()
+            geometryController.configureIsEqualArea(
+                geometry.isEqualArea,
+                isPercent: geometry.isPercent,
+                maxCount: Int32(geometry.MAXCOUNT),
+                maxPercent: geometry.MAXPERCENT,
+                hollowCore: geometry.HOLLOWCORE,
+                sectorSize: geometry.SECTORSIZE,
+                startingAngle: geometry.STARTINGANGLE,
+                sectorCount: Int32(geometry.SECTORCOUNT),
+                relativeSize: geometry.RELATIVESIZE
+            )
+        } catch {
+            return
+        }
+    }
+
     // MARK: - Read From Store
 
     private func loadFromFile(_ file: URL) throws {

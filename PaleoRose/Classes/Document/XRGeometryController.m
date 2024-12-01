@@ -77,6 +77,27 @@
 	theUndoManager = nil;
 }
 
+-(void)configureIsEqualArea:(BOOL)isEqualArea
+                  isPercent:(BOOL)isPercent
+                   maxCount:(int)maxCount
+                 maxPercent:(float)maxPercent
+                 hollowCore:(float)hollowCore
+                 sectorSize:(float)sectorSize
+              startingAngle:(float)startingAngle
+                sectorCount:(int)sectorCount
+               relativeSize:(float)relativeSize {
+    _isPercent = isPercent;
+    _isEqualArea = isEqualArea;
+    _geometryMaxCount = maxCount;
+    _geometryMaxPercent = maxPercent;
+    _hollowCoreSize = hollowCore;
+    _sectorSize = sectorSize;
+    _startingAngle = startingAngle;
+    _sectorCount = sectorCount;
+    _relativeSizeOfCircleRect = relativeSize;
+    [[NSNotificationCenter defaultCenter] postNotificationName:XRGeometryDidChange object:self];
+}
+
 -(void)setUndoManager:(NSUndoManager *)aManager
 {
 	theUndoManager = aManager;
@@ -492,41 +513,6 @@
 	return [NSDictionary dictionaryWithDictionary:theDict];
 }
 
-/*-(void)configureController:(NSDictionary *)settings
-{
-	NSString *tempString;
-	NSLog(@"configuring");
-	if(tempString = [settings objectForKey:@"_isEqualArea"])
-	{
-		if([tempString isEqualToString:@"YES"])
-			_isEqualArea = YES;
-		else
-			_isEqualArea = NO;
-	}
-	if(tempString = [settings objectForKey:@"_isPercent"])
-	{
-		if([tempString isEqualToString:@"YES"])
-			_isPercent = YES;
-		else
-			_isPercent = NO;
-	}
-	
-	if(tempString = [settings objectForKey:@"_geometryMaxCount"])
-		_geometryMaxCount = [tempString intValue];
-	if(tempString = [settings objectForKey:@"_geometryMaxPercent"])
-		_geometryMaxPercent = [tempString floatValue];
-	if(tempString = [settings objectForKey:@"_hollowCoreSize"])
-		_hollowCoreSize = [tempString floatValue];
-	if(tempString = [settings objectForKey:@"_sectorSize"])
-		_sectorSize = [tempString floatValue];
-	if(tempString = [settings objectForKey:@"_startingAngle"])
-		_startingAngle = [tempString floatValue];
-	if(tempString = [settings objectForKey:@"_sectorCount"])
-		_sectorCount = [tempString intValue];
-	[[NSNotificationCenter defaultCenter] postNotificationName:XRGeometryDidChange object:self];
-	
-}*/
-
 -(void)configureController:(LITMXMLTree *)settings forVersion:(NSString *)version
 {
 	NSString *currentVersion = @"1.0";
@@ -633,54 +619,6 @@
 	*estimatedRadius = tempRadius/(_circleRect.size.width/2.0);
 	
 	//NSLog(@"relativePosition %f %f %f",*estimatedAngle,*estimatedRadius,(_circleRect.size.width/2.0));
-}
-
--(void)SQLInitialSaveToDatabase:(sqlite3 *)db
-{
-
-	NSString *sqlStatement = [NSString stringWithFormat:@"insert into _geometryController (MAXCOUNT , MAXPERCENT , HOLLOWCORE , SECTORSIZE , STARTINGANGLE , SECTORCOUNT , RELATIVESIZE) VALUES  ( %i, %f, %f, %f, %f, %i, %f)",_geometryMaxCount,_geometryMaxPercent,_hollowCoreSize,_sectorSize,_startingAngle,_sectorCount,_relativeSizeOfCircleRect];
-	int error;
-	char *errorMsg;
-	//NSLog(@"geometry controller initial save to db");
-	error = sqlite3_exec(db,[sqlStatement UTF8String],NULL,NULL,&errorMsg);
-	if(error!=SQLITE_OK)
-		NSLog(@"Error: %s",errorMsg);
-	if(_isEqualArea)
-		sqlStatement = @"update _geometryController set isEqualArea=\"TRUE\"";
-	else
-		sqlStatement = @"update _geometryController set isEqualArea=\"FALSE\"";
-	error = sqlite3_exec(db,[sqlStatement UTF8String],NULL,NULL,&errorMsg);
-	if(error!=SQLITE_OK)
-		NSLog(@"Error: %s",errorMsg);
-	if(_isPercent)
-		sqlStatement = @"update _geometryController set isPercent=\"TRUE\"";
-	else
-		sqlStatement = @"update _geometryController set isPercent=\"FALSE\"";
-	error = sqlite3_exec(db,[sqlStatement UTF8String],NULL,NULL,&errorMsg);
-	if(error!=SQLITE_OK)
-		NSLog(@"Error: %s",errorMsg);
-}
-
--(void)saveToSQLDB:(sqlite3 *)db
-{
-	NSString *sqlStatement = [NSString stringWithFormat:@"update _geometryController  set MAXCOUNT=%i,  MAXPERCENT=%f, HOLLOWCORE=%f, SECTORSIZE=%f, STARTINGANGLE=%f, SECTORCOUNT=%i, RELATIVESIZE=%f ",_geometryMaxCount,_geometryMaxPercent,_hollowCoreSize,_sectorSize,_startingAngle,_sectorCount,_relativeSizeOfCircleRect];
-	int error;
-	char *errorMsg;
-	error = sqlite3_exec(db,[sqlStatement UTF8String],NULL,NULL,&errorMsg);
-	if(error!=SQLITE_OK)
-		NSLog(@"Error: %s",errorMsg);
-	if(_isEqualArea)
-		sqlStatement = @"update _geometryController set isEqualArea=\"TRUE\"";
-	else
-		sqlStatement = @"update _geometryController set isEqualArea=\"FALSE\"";
-	error = sqlite3_exec(db,[sqlStatement UTF8String],NULL,NULL,&errorMsg);
-	if(error!=SQLITE_OK)
-		NSLog(@"Error: %s",errorMsg);
-	if(_isPercent)
-		sqlStatement = @"update _geometryController set isPercent=\"TRUE\"";
-	else
-		sqlStatement = @"update _geometryController set isPercent=\"FALSE\"";
-	sqlite3_exec(db,[sqlStatement UTF8String],NULL,NULL,&errorMsg);
 }
 
 -(void)setValuesFromSQLDB:(sqlite3 *)db

@@ -291,4 +291,78 @@ struct InMemoryStoreIntegrationTest {
         let tableNames = try store.dataTables().map(\.tbl_name)
         #expect(tableNames.isEmpty)
     }
+
+    // MARK: - Geometry
+
+    @Test("When storing geometry called, then the database is updated")
+    func storeGeometry() throws {
+        let interface = SQLiteInterface()
+        let store = try #require(try InMemoryStore(interface: interface))
+        try backupFromSampleFileToInMemoryStore(store)
+        let geometry = Geometry(
+            isEqualArea: true,
+            isPercent: false,
+            MAXCOUNT: 1,
+            MAXPERCENT: 14.5,
+            HOLLOWCORE: 2.1,
+            SECTORSIZE: 23.2,
+            STARTINGANGLE: 12.0,
+            SECTORCOUNT: 6,
+            RELATIVESIZE: 0.2
+        )
+        try store.store(geometry: geometry)
+        let result: Geometry = try store.geometry()
+        #expect(result == geometry)
+    }
+
+    @Test("When storing geometry called multiple times, then the database has only the latest")
+    func storeGeometryManyTimes() throws {
+        let interface = SQLiteInterface()
+        let store = try #require(try InMemoryStore(interface: interface))
+        try backupFromSampleFileToInMemoryStore(store)
+        var geometry = Geometry(
+            isEqualArea: true,
+            isPercent: false,
+            MAXCOUNT: 1,
+            MAXPERCENT: 14.5,
+            HOLLOWCORE: 2.1,
+            SECTORSIZE: 23.2,
+            STARTINGANGLE: 12.0,
+            SECTORCOUNT: 6,
+            RELATIVESIZE: 0.2
+        )
+        try store.store(geometry: geometry)
+        geometry = Geometry(
+            isEqualArea: true,
+            isPercent: false,
+            MAXCOUNT: 9,
+            MAXPERCENT: 32,
+            HOLLOWCORE: 93,
+            SECTORSIZE: 3,
+            STARTINGANGLE: 9.0,
+            SECTORCOUNT: 15,
+            RELATIVESIZE: 0.5
+        )
+        try store.store(geometry: geometry)
+        geometry = Geometry(
+            isEqualArea: false,
+            isPercent: true,
+            MAXCOUNT: 23,
+            MAXPERCENT: 34,
+            HOLLOWCORE: 96,
+            SECTORSIZE: 60,
+            STARTINGANGLE: 12.0,
+            SECTORCOUNT: 8,
+            RELATIVESIZE: 0.9
+        )
+        try store.store(geometry: geometry)
+        let result: Geometry = try store.geometry()
+        #expect(result == geometry)
+        let countResult: [RecordCount] = try interface.executeCodableQuery(
+            sqlite: store.sqlitePointer(),
+            query: Geometry.countQuery()
+        )
+        let count = try #require(countResult.first)
+        #expect(count.count == 1)
+    }
 }

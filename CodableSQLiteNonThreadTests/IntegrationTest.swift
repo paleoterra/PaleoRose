@@ -32,6 +32,7 @@ struct IntegrationTest {
     let sut = SQLiteInterface()
     let expectedTestableTable: [TestableTable] = [
         .init(
+            boolValue: true,
             intValue: 1,
             int32Value: 2,
             uintValue: 3,
@@ -46,6 +47,7 @@ struct IntegrationTest {
             dataStore: nil
         ),
         .init(
+            boolValue: false,
             intValue: 2,
             int32Value: 3,
             uintValue: 2,
@@ -60,6 +62,7 @@ struct IntegrationTest {
             dataStore: nil
         ),
         .init(
+            boolValue: true,
             intValue: 3,
             int32Value: 33,
             uintValue: 23,
@@ -279,7 +282,7 @@ struct IntegrationTest {
             }
         }
 
-        try #require(try FileManager.default.fileExists(atPath: path))
+        try #require(FileManager.default.fileExists(atPath: path))
 
         let store = try #require(try createInMemoryStore())
         defer {
@@ -325,7 +328,8 @@ struct IntegrationTest {
             .init(columnIndex: 8, name: "cgFloatValue", type: .float, declairedType: "DOUBLE"),
             .init(columnIndex: 9, name: "stringValue", type: .text, declairedType: "TEXT"),
             .init(columnIndex: 10, name: "optionalString", type: .null, declairedType: "TEXT"),
-            .init(columnIndex: 11, name: "dataStore", type: .null, declairedType: "BLOB")
+            .init(columnIndex: 11, name: "dataStore", type: .null, declairedType: "BLOB"),
+            .init(columnIndex: 12, name: "boolValue", type: .integer, declairedType: "BOOL")
         ]
 
         defer {

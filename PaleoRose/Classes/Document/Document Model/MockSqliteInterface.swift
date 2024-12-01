@@ -52,6 +52,8 @@ class MockSqliteInterface: StoreProtocol {
 
     var backupCalled = false
 
+    var columnsToReturn: [ColumnInformation] = []
+
     func createInMemoryStore() throws -> OpaquePointer {
         createInMemoryStoreCalled = true
         if let createInMemoryStoreError {
@@ -116,7 +118,7 @@ class MockSqliteInterface: StoreProtocol {
         backupCalled = true
     }
 
-    var columnsToReturn: [ColumnInformation] = []
+
     func columns(sqlite: OpaquePointer, table: String) throws -> [ColumnInformation] {
         columnsToReturn
     }

@@ -187,6 +187,28 @@ class InMemoryStore: NSObject {
         return CGSize(width: sizes[0].width, height: sizes[0].height)
     }
 
+    // MARK: - Geometry
+
+    func store(geometry: Geometry) throws {
+        let sqliteStore = try validateStore()
+        _ = try interface.executeQuery(sqlite: sqliteStore, query: Geometry.deleteAllRecords())
+        var query = Geometry.insertQuery()
+        query.bindings = try [geometry.valueBindables(keys: Geometry.allKeys())]
+        _ = try interface.executeQuery(sqlite: sqliteStore, query: query)
+    }
+
+    func geometry() throws -> Geometry {
+        let sqliteStore = try validateStore()
+        let geometries: [Geometry] = try interface.executeCodableQuery(
+            sqlite: sqliteStore,
+            query: Geometry.storedValues()
+        )
+        if geometries.isEmpty {
+            throw InMemoryStoreError.unexpectedEmptyResult
+        }
+        return geometries[0]
+    }
+
     // MARK: - Table Manipulation
 
     @objc func renameTable(from: String, toName: String) throws {

@@ -64,7 +64,9 @@ struct BindableTest {
             NSNumber(value: Float(343.4)),
             NSNumber(value: CGFloat(349.4)),
             NSNumber(value: Double(365.456)),
-            NSString("Hello3")
+            NSString("Hello3"),
+            true,
+            false
         ]
     )
     func simpleBindingTest(value: Any) throws {
