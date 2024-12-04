@@ -94,7 +94,26 @@
 -(NSFont *)spokeFont;
 -(void)setRingFont:(NSFont *)font;
 -(NSFont *)ringFont;
-
+-(BOOL)showLabels;
+-(int)fixedRingCount;
+-(int)ringCountIncrement;
+-(float)ringPercentIncrement;
+-(float)ringLabelAngle;
+-(NSString *)ringFontName;
+-(float)ringFontSize;
+-(int)radialsCount;
+-(float)radialsAngle;
+-(int)radialsLabelAlign;
+-(int)radialsCompassPoint;
+-(int)radiansOrder;
+-(NSString *)radianFontName;
+-(float)radianFontSize;
+-(BOOL)radianSectorLock;
+-(BOOL)radianVisible;
+-(BOOL)radianIsPercent;
+-(BOOL)radianTicks;
+-(BOOL)radianMintoTicks;
+-(BOOL)radianLabels;
 
 -(LITMXMLTree *)xmlTreeForVersion1_0Rings;
 -(LITMXMLTree *)xmlTreeForVersion1_0Radials;

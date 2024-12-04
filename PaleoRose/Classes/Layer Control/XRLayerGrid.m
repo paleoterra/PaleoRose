@@ -712,6 +712,86 @@
 	return _ringFont;
 }
 
+-(BOOL)showLabels {
+    return _showRingLabels;
+}
+
+-(int)fixedRingCount {
+    return _fixedRingCount;
+}
+
+-(int)ringCountIncrement {
+    return _ringCountIncrement;
+}
+
+-(float)ringPercentIncrement {
+    return _ringPercentIncrement;
+}
+
+-(float)ringLabelAngle {
+    return _labelAngle;
+}
+
+-(NSString *)ringFontName {
+    return [_ringFont fontName];
+}
+
+-(float)ringFontSize {
+    return [_ringFont pointSize];
+}
+
+-(int)radialsCount {
+    return _spokeCount;
+}
+
+-(float)radialsAngle {
+    return _spokeAngle;
+}
+
+-(int)radialsLabelAlign {
+    return _spokeNumberAlign;
+}
+
+-(int)radialsCompassPoint {
+    return _spokeNumberCompassPoint;
+}
+
+-(int)radiansOrder {
+    return _spokeNumberOrder;
+}
+
+-(NSString *)radianFontName {
+    return [_spokeFont fontName];
+}
+
+-(float)radianFontSize {
+    return [_spokeFont pointSize];
+}
+
+-(BOOL)radianSectorLock {
+    return _spokeSectorLock;
+}
+
+-(BOOL)radianVisible {
+    return _spokesVisible;
+}
+
+-(BOOL)radianIsPercent {
+    return _isPercent;
+}
+
+-(BOOL)radianTicks {
+    return _showTicks;
+}
+
+-(BOOL)radianMintoTicks {
+    return _minorTicks;
+}
+
+-(BOOL)radianLabels {
+    return _showLabels;
+}
+
 -(NSDictionary *)layerSettings
 {
 	NSMutableDictionary *theDict = [NSMutableDictionary dictionaryWithDictionary:[super layerSettings]];

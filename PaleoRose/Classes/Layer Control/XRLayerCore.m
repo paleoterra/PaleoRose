@@ -112,6 +112,13 @@
 	return self;
 }
 
+-(BOOL)coreType {
+    return _coreType;
+}
+
+-(float)radius {
+    return _percentRadius;
+}
 
 -(void)generateGraphics
 {

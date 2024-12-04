@@ -75,6 +75,17 @@ static NSLayoutManager *sharedDrawingLayoutManager(void);
 	[[NSNotificationCenter defaultCenter] postNotificationName:XRLayerRequiresRedraw object:self];
 }
 
+-(NSString *)encodedContents {
+    NSRange aRange;
+    aRange.location = 0;
+    aRange.length = [_contents length];
+    return encodeBase64([_contents RTFFromRange:aRange documentAttributes:@{}]);
+}
+
+-(NSRect)textRect {
+    return textBounds;
+}
+
 - (NSTextStorage *)contents
 {
 	return _contents;

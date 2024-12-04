@@ -40,4 +40,11 @@
 
 -(id)initWithGeometryController:(XRGeometryController *)aController withSet:(XRDataSet *)aSet;
 -(void)configureErrorWithVector:(float)vAngle error:(float)error;
+
+-(int)datasetId;
+-(float)arrowSize;
+-(int)vectorType;
+-(int)arrowType;
+-(BOOL)showVector;
+-(BOOL)showError;
 @end

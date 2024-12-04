@@ -50,4 +50,7 @@
 //static NSLayoutManager *sharedDrawingLayoutManager();
 -(void)displayTextFieldForEditing:(NSEvent *)theEvent;
 -(void)removeTextFieldAfterEditing:(NSEvent *)theEvent;
+
+-(NSString *)encodedContents;
+-(NSRect)textRect;
 @end

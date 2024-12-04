@@ -365,6 +365,29 @@
 	
 }
 
+-(int)datasetId {
+    return 0; // TODO: this doesn't work
+}
+
+-(float)arrowSize {
+    return _arrowSize;
+}
+
+-(int)vectorType {
+    return _type;
+}
+
+-(int)arrowType {
+    return _headType;
+}
+
+-(BOOL)showVector {
+    return _showVector;
+}
+-(BOOL)showError {
+    return _showError;
+}
+
 -(id)initWithGeometryController:(XRGeometryController *)aController sqlDB:(sqlite3 *)db   layerID:(int)layerID 
 {
 	if (!(self = [self initWithGeometryController:aController])) return nil;

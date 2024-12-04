@@ -43,4 +43,6 @@
 }
 
 -(BOOL)coreRadiusIsEditable;
+-(BOOL)coreType;
+-(float)radius;
 @end

@@ -44,7 +44,7 @@ struct Layer: TableRepresentable {
 
     // MARK: - TableRepresentable
 
-    private static func allKeys() -> [String] {
+    static func allKeys() -> [String] {
         let keys: [CodingKeys] = [
             .LAYERID,
             .TYPE,
@@ -74,6 +74,6 @@ struct Layer: TableRepresentable {
     }
 
     static func deleteQuery() -> any QueryProtocol {
-        Query(sql: "")
+        Query(sql: "DELETE FROM _layers WHERE LAYERID = ?")
     }
 }

@@ -36,6 +36,7 @@
 		B41D283D094FC7CA008DF384 /* XRTableImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = B41D283B094FC7CA008DF384 /* XRTableImporter.m */; };
 		B42083B109637969007A74A8 /* PTFMXMLParser.h in Headers */ = {isa = PBXBuildFile; fileRef = B42083AF09637969007A74A8 /* PTFMXMLParser.h */; };
 		B42083B209637969007A74A8 /* PTFMXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B42083B009637969007A74A8 /* PTFMXMLParser.m */; };
+		B4237C992CFE959700E2B510 /* StorageLayerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4237C982CFE959100E2B510 /* StorageLayerFactory.swift */; };
 		B427095D095D2D990059C65A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4270928095D2D990059C65A /* Security.framework */; };
 		B427BD070950B3050063849E /* XRTableImporterDelimiterController.h in Headers */ = {isa = PBXBuildFile; fileRef = B427BD050950B3050063849E /* XRTableImporterDelimiterController.h */; };
 		B427BD080950B3050063849E /* XRTableImporterDelimiterController.m in Sources */ = {isa = PBXBuildFile; fileRef = B427BD060950B3050063849E /* XRTableImporterDelimiterController.m */; };
@@ -279,6 +280,7 @@
 		B41D283B094FC7CA008DF384 /* XRTableImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRTableImporter.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B42083AF09637969007A74A8 /* PTFMXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTFMXMLParser.h; sourceTree = "<group>"; };
 		B42083B009637969007A74A8 /* PTFMXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTFMXMLParser.m; sourceTree = "<group>"; };
+		B4237C982CFE959100E2B510 /* StorageLayerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageLayerFactory.swift; sourceTree = "<group>"; };
 		B4270928095D2D990059C65A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
 		B427BD050950B3050063849E /* XRTableImporterDelimiterController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRTableImporterDelimiterController.h; sourceTree = "<group>"; };
 		B427BD060950B3050063849E /* XRTableImporterDelimiterController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XRTableImporterDelimiterController.m; sourceTree = "<group>"; };
@@ -994,6 +996,7 @@
 		B4F2B17D2C97CB150017E717 /* SQL Models */ = {
 			isa = PBXGroup;
 			children = (
+				B4237C982CFE959100E2B510 /* StorageLayerFactory.swift */,
 				B4F2B17E2C97CB300017E717 /* WindowControllerSize.swift */,
 				B4F2B17F2C97CB300017E717 /* Geometry.swift */,
 				B4F2B1802C97CB300017E717 /* Layer.swift */,
@@ -1394,6 +1397,7 @@
 				B427BD080950B3050063849E /* XRTableImporterDelimiterController.m in Sources */,
 				B4B10C3809529F7F00E6A350 /* XRMakeDatasetController.m in Sources */,
 				B42083B209637969007A74A8 /* PTFMXMLParser.m in Sources */,
+				B4237C992CFE959700E2B510 /* StorageLayerFactory.swift in Sources */,
 				B47DDF510964CDE700C7EF02 /* XRTableImporterXRose.m in Sources */,
 				B4A82FA12A07FA2B00790052 /* LITMAngleFormatter.m in Sources */,
 				B4564ABC096A04A1005E0015 /* XRTableAddColumnController.m in Sources */,

@@ -209,6 +209,29 @@ class InMemoryStore: NSObject {
         return geometries[0]
     }
 
+    // MARK: - Layer
+
+    func store(layers: [Layer]) throws {
+        let sqliteStore = try validateStore()
+        _ = try interface.executeQuery(sqlite: sqliteStore, query: Layer.deleteAllRecords())
+        try layers.forEach { try store(layer: $0) }
+    }
+
+    func store(layer: Layer) throws {
+        let sqliteStore = try validateStore()
+        var deleteQuery = Layer.deleteQuery()
+        deleteQuery.bindings = try [layer.valueBindables(keys: ["LAYERID"])]
+        _ = try interface.executeQuery(sqlite: sqliteStore, query: deleteQuery)
+        var query = Layer.insertQuery()
+        query.bindings = try [layer.valueBindables(keys: Layer.allKeys())]
+        _ = try interface.executeQuery(sqlite: sqliteStore, query: query)
+    }
+
+    func layers() throws -> [Layer] {
+        let sqliteStore = try validateStore()
+        return try interface.executeCodableQuery(sqlite: sqliteStore, query: Layer.storedValues())
+    }
+
     // MARK: - Table Manipulation
 
     @objc func renameTable(from: String, toName: String) throws {

@@ -28,10 +28,15 @@ import CodableSQLiteNonThread
 import Foundation
 
 class DocumentModel: NSObject {
+
+    enum DocumentModelError: Error {
+        case unknownLayerType
+    }
     private var inMemoryStore: InMemoryStore
     var dataTables: [TableSchema] = []
     @objc var dataSets: [XRDataSet] = []
     @objc weak var document: NSDocument?
+    private let storageLayerFactory = StorageLayerFactory()
 
     @available(*, deprecated, message: "This code will become unavailable")
     @objc init(inMemoryStore: InMemoryStore, document: NSDocument?) {
@@ -125,6 +130,42 @@ class DocumentModel: NSObject {
         } catch {
             return
         }
+    }
+
+    // MARK: - Layers
+
+    @objc func storeLayers(_ layers: [XRLayer]) throws {
+        var finalLayers = [Layer]()
+        var textLayers = [LayerText]()
+        var lineArrrowLayers = [LayerLineArrow]()
+        var coreLayers = [LayerCore]()
+        var dataLayers = [LayerData]()
+        var gridLayers = [LayerGrid]()
+        for (id, oldLayer) in layers.enumerated() {
+            finalLayers.append(storageLayerFactory.storageLayer(from: oldLayer, at: id))
+            switch oldLayer {
+            case let textLayer as XRLayerText:
+                throw DocumentModelError.unknownLayerType
+
+            case let lineArrowLayer as  XRLayerLineArrow:
+                throw DocumentModelError.unknownLayerType
+
+            case let coreLayer as  XRLayerCore:
+                throw DocumentModelError.unknownLayerType
+
+            case let dataLayer as  XRLayerData:
+                throw DocumentModelError.unknownLayerType
+
+            case let gridLayer as  XRLayerGrid:
+                gridLayers.append(
+                    storageLayerFactory.storageLayerGrid(from: gridLayer, at: id)
+                )
+
+            default:
+                throw DocumentModelError.unknownLayerType
+            }
+        }
+        try inMemoryStore.store(layers: finalLayers)
     }
 
     // MARK: - Read From Store
