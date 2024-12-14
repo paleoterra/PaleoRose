@@ -26,6 +26,8 @@
 
 import Foundation
 
+// swiftlint:disable indentation_width opening_brace
+
 /// A type must conform to this protocol in order to work with Codable decoding from Sqlite
 public protocol TableRepresentable: Codable {
     static var tableName: String { get }
@@ -53,6 +55,7 @@ public extension TableRepresentable {
         Query(sql: "SELECT * FROM \(tableName);")
     }
 
+    /// Returns SQL to delete  all rows in a table
     static func deleteAllRecords() -> QueryProtocol {
         Query(sql: "DELETE FROM \(tableName);")
     }
@@ -66,7 +69,7 @@ public extension TableRepresentable {
     /// - Throws: Can throw a variety of errors around encoding of values
     ///
     /// This method converts properties into Bindable values using string keys.
-    /// This method only supports Bindable types, however.  You must override this method
+    /// This method only supports Bindable types, however. You must override this method
     /// if you have custom types.
     func valueBindables(keys: [String] = []) throws -> [Bindable?] {
         try bindingArray(keys: keys)

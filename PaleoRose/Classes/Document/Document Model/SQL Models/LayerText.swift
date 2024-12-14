@@ -39,11 +39,20 @@ struct LayerText: TableRepresentable {
     var RECT_POINT_Y: Float
     // swiftlint:disable:next identifier_name
     var RECT_SIZE_WIDTH: Float
+    // swiftlint:disable:next identifier_name
+    var RECT_SIZE_HEIGHT: Float
 
     // MARK: - TableRepresentable
 
     private static func allKeys() -> [String] {
-        let keys: [CodingKeys] = [.LAYERID, .CONTENTS, .RECT_POINT_X, .RECT_POINT_Y, .RECT_SIZE_WIDTH]
+        let keys: [CodingKeys] = [
+            .LAYERID,
+            .CONTENTS,
+            .RECT_POINT_X,
+            .RECT_POINT_Y,
+            .RECT_SIZE_HEIGHT,
+            .RECT_SIZE_WIDTH
+        ]
         return keys.map(\.stringValue)
     }
 

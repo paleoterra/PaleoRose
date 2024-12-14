@@ -40,6 +40,18 @@
 
 -(id)initWithGeometryController:(XRGeometryController *)aController withSet:(XRDataSet *)aSet;
 -(void)configureErrorWithVector:(float)vAngle error:(float)error;
+-(id)initWithIsVisible:(BOOL)visible
+              active:(BOOL)active
+               biDir:(BOOL)isBiDir
+                name:(NSString *)layerName
+          lineWeight:(float)lineWeight
+            maxCount:(int)maxCount
+          maxPercent:(float)maxPercent
+             arrowSize:(float)arrowSize
+            vectorType:(int)vectorType
+             arrowType:(int)arrowType
+            showVector:(BOOL)showVector
+             showError:(BOOL)showError;
 
 -(int)datasetId;
 -(float)arrowSize;

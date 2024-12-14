@@ -73,6 +73,34 @@
 
 -(id)initWithGeometryController:(XRGeometryController *)aController;
 -(id)initWithGeometryController:(XRGeometryController *)aController dictionary:(NSDictionary *)configure;
+
+-(id)initWithIsVisible:(BOOL)visible
+              active:(BOOL)active
+               biDir:(BOOL)isBiDir
+                name:(NSString *)layerName
+          lineWeight:(float)lineWeight
+            maxCount:(int)maxCount
+            maxPercent:(float)maxPercent
+          isFixedCount:(BOOL)isFixedCount
+          ringsVisible:(BOOL)ringsVisible
+        fixedRingCount:(int)fixedRingCount
+    ringCountIncrement:(int)ringCountIncrement
+        showRingLabels:(BOOL)showRingLabels
+            labelAngle:(float)labelAngle
+              ringFont:(NSFont *)ringFont
+          radialsCount:(int)radialsCount
+          radialsAngle:(float)radialsAngle
+ radialsLabelAlignment:(int)radialsLabelAlignment
+   radialsCompassPoint:(int)radialsCompassPoint
+          radialsOrder:(int)radialsOrder
+            radialFont:(NSFont *)radialFont
+     radialsSectorLock:(BOOL)sectorLock
+        radialsVisible:(BOOL)radialsVisible
+      radialsIsPercent:(BOOL)isPercent
+          radialsTicks:(BOOL)radialTicks
+     radialsMinorTicks:(BOOL)radialMinorTicks
+          radialLabels:(BOOL)radialLabels;
+
 -(void)setSpokeCount:(int)newCount;
 -(void)setSpokeAngle:(float)newAngle;
 -(int)spokeCount;

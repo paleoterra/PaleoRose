@@ -28,6 +28,7 @@ import CodableSQLiteNonThread
 @testable import PaleoRose
 import Testing
 
+// swiftlint:disable type_body_length indentation_width
 @Suite(
     "InMemory Store Integration Test",
     .tags(.integration)
@@ -35,7 +36,10 @@ import Testing
 struct InMemoryStoreIntegrationTest {
     private func sampleFilePath() throws -> String {
         guard let bundle = Bundle(identifier: "PaleoTerra.Unit-Tests"),
-              let path = bundle.path(forResource: "rtest1", ofType: "XRose")
+              let path = bundle.path(
+                forResource: "rtest1",
+                ofType: "XRose"
+              )
         else {
             Issue.record("Could not find test file")
             throw SQLiteError.failedToOpen

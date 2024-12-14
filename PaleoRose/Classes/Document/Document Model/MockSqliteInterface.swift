@@ -118,7 +118,6 @@ class MockSqliteInterface: StoreProtocol {
         backupCalled = true
     }
 
-
     func columns(sqlite: OpaquePointer, table: String) throws -> [ColumnInformation] {
         columnsToReturn
     }

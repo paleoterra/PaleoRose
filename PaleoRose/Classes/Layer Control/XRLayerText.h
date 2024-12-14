@@ -30,16 +30,29 @@
 #import "XRLayer.h"
 @class NSLayoutManager;
 @interface XRLayerText : XRLayer <NSTextViewDelegate> {
-	NSTextStorage *_contents;
-	NSRect textBounds;
-	float estimatedRadius;
-	float estimatedAngle;
-	NSTextView *tempView;
-	float gutter;
+    NSTextStorage *_contents;
+    NSRect textBounds;
+    float estimatedRadius;
+    float estimatedAngle;
+    NSTextView *tempView;
+    float gutter;
 }
 
 -(id)initWithGeometryController:(XRGeometryController *)aController parentView:(NSView *)view;
 -(id)initWithGeometryController:(XRGeometryController *)aController xmlTree:(LITMXMLTree *)configureTree forVersion:(NSString *)version withParentView:(NSView *)aParent;
+
+-(id)initWithIsVisible:(BOOL)visible
+                active:(BOOL)active
+                 biDir:(BOOL)isBiDir
+                  name:(NSString *)layerName
+            lineWeight:(float)lineWeight
+              maxCount:(int)maxCount
+            maxPercent:(float)maxPercent
+              contents:(NSData *)contents
+           rectOriginX:(float)rectOriginX
+           rectOriginY:(float)rectOriginY
+             rectWidth:(float)rectWidth
+             rectWidth:(float)rectWidth;
 
 
 - (void)setContents:(id)contents;

@@ -32,6 +32,7 @@ class DocumentModel: NSObject {
     enum DocumentModelError: Error {
         case unknownLayerType
     }
+
     private var inMemoryStore: InMemoryStore
     var dataTables: [TableSchema] = []
     @objc var dataSets: [XRDataSet] = []

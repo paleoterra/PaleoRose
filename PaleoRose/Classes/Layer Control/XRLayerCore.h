@@ -42,6 +42,16 @@
 	float _percentRadius;
 }
 
+-(id)initWithIsVisible:(BOOL)visible
+              active:(BOOL)active
+               biDir:(BOOL)isBiDir
+                name:(NSString *)layerName
+            lineWeight:(float)lineWeight
+              maxCount:(int)maxCount
+            maxPercent:(float)maxPercent
+         percentRadius:(float)percentRadius
+                  type:(BOOL)coreType;
+
 -(BOOL)coreRadiusIsEditable;
 -(BOOL)coreType;
 -(float)radius;

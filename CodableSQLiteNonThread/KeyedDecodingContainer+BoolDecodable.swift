@@ -1,5 +1,5 @@
 //
-// SQLiteColumnProcessor.swift
+// BoolDecodable.swift
 // PaleoRose
 //
 // MIT License
@@ -24,30 +24,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
-import SQLite3
-
-// swiftlint:disable opening_brace indentation_width
-
-struct SQLiteColumnProcessor {
-    let columnProcessors: [Int32: SQLiteColumn] = [
-        SQLITE_INTEGER: SQLiteIntegerColumn(),
-        SQLITE_FLOAT: SQLiteFloatColumn(),
-        SQLITE_TEXT: SQLiteTextColumn(),
-        SQLITE_BLOB: SQLiteBlobColumn(),
-        SQLITE_NULL: SQLiteNullColumn()
-    ]
-
-    func processColumn(statement: OpaquePointer, index: Int32) -> (String, Codable)? {
-        guard let columnName = String(validatingUTF8: sqlite3_column_name(statement, index)) else {
-            return nil
+// swiftlint:disable:next no_extension_access_modifier
+public extension KeyedDecodingContainer {
+    /// Decode BOOL from SQLite
+    func decodeSqliteBool(forKey key: Self.Key) throws -> Bool {
+        do {
+            let value = try decode(Int.self, forKey: key)
+            return value == 1
+        } catch {
+            print("boolValue decode as bool failed: \(error)")
+            let string = try decode(String.self, forKey: key)
+            return string.lowercased() == "true" ? true : false
         }
-        let columnType = sqlite3_column_type(statement, index)
-        if let columnProcessor = columnProcessors[columnType],
-           let returnValue = columnProcessor.value(stmt: statement, index: index)
-        {
-            return (columnName, returnValue)
-        }
-        return nil
     }
 }

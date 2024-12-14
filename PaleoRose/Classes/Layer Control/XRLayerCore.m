@@ -112,6 +112,30 @@
 	return self;
 }
 
+-(id)initWithIsVisible:(BOOL)visible
+              active:(BOOL)active
+               biDir:(BOOL)isBiDir
+                name:(NSString *)layerName
+          lineWeight:(float)lineWeight
+            maxCount:(int)maxCount
+          maxPercent:(float)maxPercent
+         percentRadius:(float)percentRadius
+                  type:(BOOL)coreType{
+    self = [super init];
+    if (self) {
+        _isVisible = visible;
+        _isActive = active;
+        _isBiDir = isBiDir;
+        _layerName = layerName;
+        _lineWeight = lineWeight;
+        _maxCount = maxCount;
+        _maxPercent = maxPercent;
+        _percentRadius = percentRadius;
+        _coreType = coreType;
+    }
+    return self;
+}
+
 -(BOOL)coreType {
     return _coreType;
 }
@@ -287,9 +311,6 @@
 	error = sqlite3_exec(db,[command UTF8String],nil,nil,&errorMsg);
 	if(error!=SQLITE_OK)
 		NSLog(@"error: %s",errorMsg);
-	
-	
-	
 }
 
 -(id)initWithGeometryController:(XRGeometryController *)aController sqlDB:(sqlite3 *)db   layerID:(int)layerID 

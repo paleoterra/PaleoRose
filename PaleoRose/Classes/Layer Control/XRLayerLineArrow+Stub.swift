@@ -1,5 +1,5 @@
 //
-// SQLiteColumnProcessor.swift
+// XRLayerLine+Stub.swift
 // PaleoRose
 //
 // MIT License
@@ -24,30 +24,36 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
-import SQLite3
+import PaleoRose
 
-// swiftlint:disable opening_brace indentation_width
-
-struct SQLiteColumnProcessor {
-    let columnProcessors: [Int32: SQLiteColumn] = [
-        SQLITE_INTEGER: SQLiteIntegerColumn(),
-        SQLITE_FLOAT: SQLiteFloatColumn(),
-        SQLITE_TEXT: SQLiteTextColumn(),
-        SQLITE_BLOB: SQLiteBlobColumn(),
-        SQLITE_NULL: SQLiteNullColumn()
-    ]
-
-    func processColumn(statement: OpaquePointer, index: Int32) -> (String, Codable)? {
-        guard let columnName = String(validatingUTF8: sqlite3_column_name(statement, index)) else {
-            return nil
-        }
-        let columnType = sqlite3_column_type(statement, index)
-        if let columnProcessor = columnProcessors[columnType],
-           let returnValue = columnProcessor.value(stmt: statement, index: index)
-        {
-            return (columnName, returnValue)
-        }
-        return nil
+extension XRLayerLineArrow {
+    static func stub(
+        isVisible: Bool = false,
+        active: Bool = false,
+        biDir: Bool = false,
+        name: String = "XRLayerLineArrow",
+        lineWeight: Float = 0.0,
+        maxCount: Int = 0,
+        maxPercent: Float = 0.0,
+        arrowSize: Float = 2.0,
+        vectorType: Int = 0,
+        arrowType: Int = 0,
+        showVector: Bool = false,
+        showError: Bool = false
+    ) -> XRLayerLineArrow {
+        XRLayerLineArrow(
+            isVisible: isVisible,
+            active: active,
+            biDir: biDir,
+            name: name,
+            lineWeight: lineWeight,
+            maxCount: Int32(maxCount),
+            maxPercent: maxPercent,
+            arrowSize: arrowSize,
+            vectorType: Int32(vectorType),
+            arrowType: Int32(arrowType),
+            showVector: showVector,
+            showError: showError
+        )
     }
 }

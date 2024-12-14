@@ -234,27 +234,68 @@
 				_spokeAngle = [tempstring floatValue];
 			
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		//NSLog(@"5");
+
 		[self generateGraphics];
-		//NSLog(@"graphics %i",[_graphicalObjects count]);
-		//NSLog(@"6");
-		//set graphics
-		//NSLog(@"7");
-		//NSLog([_strokeColor description]);
 	}
 	return self;
+}
+
+-(id)initWithIsVisible:(BOOL)visible
+              active:(BOOL)active
+               biDir:(BOOL)isBiDir
+                name:(NSString *)layerName
+          lineWeight:(float)lineWeight
+            maxCount:(int)maxCount
+          maxPercent:(float)maxPercent
+          isFixedCount:(BOOL)isFixedCount
+          ringsVisible:(BOOL)ringsVisible
+        fixedRingCount:(int)fixedRingCount
+    ringCountIncrement:(int)ringCountIncrement
+        showRingLabels:(BOOL)showRingLabels
+            labelAngle:(float)labelAngle
+              ringFont:(NSFont *)ringFont
+          radialsCount:(int)radialsCount
+          radialsAngle:(float)radialsAngle
+ radialsLabelAlignment:(int)radialsLabelAlignment
+   radialsCompassPoint:(int)radialsCompassPoint
+          radialsOrder:(int)radialsOrder
+            radialFont:(NSFont *)radialFont
+     radialsSectorLock:(BOOL)sectorLock
+        radialsVisible:(BOOL)radialsVisible
+      radialsIsPercent:(BOOL)isPercent
+          radialsTicks:(BOOL)radialTicks
+     radialsMinorTicks:(BOOL)radialMinorTicks
+          radialLabels:(BOOL)radialLabels{
+    self = [super init];
+    if (self) {
+        _isVisible = visible;
+        _isActive = active;
+        _isBiDir = isBiDir;
+        _layerName = layerName;
+        _lineWeight = lineWeight;
+        _maxCount = maxCount;
+        _maxPercent = maxPercent;
+        _fixedCount = isFixedCount;
+        _ringsVisible = ringsVisible;
+        _fixedRingCount = fixedRingCount;
+        _ringCountIncrement = ringCountIncrement;
+        _showRingLabels = showRingLabels;
+        _labelAngle = labelAngle;
+        _ringFont = ringFont;
+        _spokeCount = radialsCount;
+        _spokeAngle = radialsAngle;
+        _spokeNumberAlign = radialsLabelAlignment;
+        _spokeNumberCompassPoint = radialsCompassPoint;
+        _spokeNumberOrder = radialsOrder;
+        _spokeFont = radialFont;
+        _spokeSectorLock = sectorLock;
+        _spokesVisible = radialsVisible;
+        _isPercent = isPercent;
+        _showTicks = radialTicks;
+        _minorTicks = radialMinorTicks;
+        _showLabels = radialLabels;
+    }
+    return self;
 }
 
 -(void)setSpokeCount:(int)newCount

@@ -27,6 +27,8 @@
 import Foundation
 import SQLite3
 
+// swiftlint:disable legacy_objc_type indentation_width
+
 /// A protocol to define value types and classes that can be used in binding
 public protocol Bindable {
 
@@ -178,7 +180,6 @@ extension CGFloat: Bindable {
     }
 }
 
-// swiftlint:disable:next legacy_objc_type
 extension NSNumber: Bindable {
     public func bind(statement: OpaquePointer, index: Int32) throws {
         let type = CFNumberGetType(self)

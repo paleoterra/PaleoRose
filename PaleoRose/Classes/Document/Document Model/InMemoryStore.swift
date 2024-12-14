@@ -169,7 +169,9 @@ class InMemoryStore: NSObject {
     func store(windowSize: CGSize) throws {
         let sqliteStore = try validateStore()
         let size = WindowControllerSize(width: windowSize.width, height: windowSize.height)
-        _ = try interface.executeQuery(sqlite: sqliteStore, query: WindowControllerSize.deleteAllRecords()) // No primary key exists
+        _ = try interface.executeQuery(
+            sqlite: sqliteStore, query: WindowControllerSize.deleteAllRecords()
+        ) // No primary key exists
         var query = WindowControllerSize.insertQuery()
         query.bindings = try [size.valueBindables(keys: WindowControllerSize.allKeys())]
         _ = try interface.executeQuery(sqlite: sqliteStore, query: query)

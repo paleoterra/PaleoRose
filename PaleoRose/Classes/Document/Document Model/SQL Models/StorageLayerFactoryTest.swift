@@ -1,6 +1,6 @@
 //
-// SQLiteColumnProcessor.swift
-// PaleoRose
+// StorageLayerFactoryTest.swift
+// Unit Tests
 //
 // MIT License
 //
@@ -24,30 +24,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
-import SQLite3
+import PaleoRose
+import Testing
 
-// swiftlint:disable opening_brace indentation_width
-
-struct SQLiteColumnProcessor {
-    let columnProcessors: [Int32: SQLiteColumn] = [
-        SQLITE_INTEGER: SQLiteIntegerColumn(),
-        SQLITE_FLOAT: SQLiteFloatColumn(),
-        SQLITE_TEXT: SQLiteTextColumn(),
-        SQLITE_BLOB: SQLiteBlobColumn(),
-        SQLITE_NULL: SQLiteNullColumn()
-    ]
-
-    func processColumn(statement: OpaquePointer, index: Int32) -> (String, Codable)? {
-        guard let columnName = String(validatingUTF8: sqlite3_column_name(statement, index)) else {
-            return nil
-        }
-        let columnType = sqlite3_column_type(statement, index)
-        if let columnProcessor = columnProcessors[columnType],
-           let returnValue = columnProcessor.value(stmt: statement, index: index)
-        {
-            return (columnName, returnValue)
-        }
-        return nil
-    }
+struct StorageLayerFactoryTest {
 }

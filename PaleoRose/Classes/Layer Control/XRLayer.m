@@ -38,6 +38,24 @@
 #import "LITMXMLTree.h"
 
 @implementation XRLayer
+
+-(id)init {
+    self = [super init];
+    if(self) {
+        _graphicalObjects = [[NSMutableArray alloc] init];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(geometryDidChange:) name:XRGeometryDidChange object:geometryController];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(geometryDidChangePercent:) name:XRGeometryDidChangeIsPercent object:geometryController];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(geometryDidChangeSectors:) name:XRGeometryDidChangeSectors object:geometryController];
+        [self setStrokeColor:[NSColor blackColor]];
+        [self setFillColor:[NSColor blackColor]];
+        [self setIsVisible:YES];
+        [self setIsActive:NO];
+        _canFill = YES;
+        _canStroke = YES;
+    }
+    return self;
+}
+
 -(id)initWithGeometryController:(XRGeometryController *)aController
 {
 	if (!(self = [super init])) return nil;

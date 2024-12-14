@@ -60,7 +60,35 @@
 	return self;
 }
 
-
+-(id)initWithIsVisible:(BOOL)visible
+              active:(BOOL)active
+               biDir:(BOOL)isBiDir
+                name:(NSString *)layerName
+          lineWeight:(float)lineWeight
+            maxCount:(int)maxCount
+          maxPercent:(float)maxPercent
+             arrowSize:(float)arrowSize
+            vectorType:(int)vectorType
+             arrowType:(int)arrowType
+            showVector:(BOOL)showVector
+             showError:(BOOL)showError {
+    self = [super init];
+    if (self) {
+        _isVisible = visible;
+        _isActive = active;
+        _isBiDir = isBiDir;
+        _layerName = layerName;
+        _lineWeight = lineWeight;
+        _maxCount = maxCount;
+        _maxPercent = maxPercent;
+        _arrowSize = arrowSize;
+        _type = vectorType;
+        _headType = arrowType;
+        _showVector = showVector;
+        _showError = showError;
+    }
+    return self;
+}
 
 -(void)setLayerName:(NSString *)layerName
 {

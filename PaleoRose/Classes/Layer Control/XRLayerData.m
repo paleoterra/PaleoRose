@@ -549,6 +549,32 @@
 	return nil;
 }
 
+-(id)initWithIsVisible:(BOOL)visible
+              active:(BOOL)active
+               biDir:(BOOL)isBiDir
+                name:(NSString *)layerName
+          lineWeight:(float)lineWeight
+            maxCount:(int)maxCount
+          maxPercent:(float)maxPercent
+              plotType:(int)plotType
+            totalCount:(int)totalCount
+             dotRadius:(float)dotRadius {
+    self = [super init];
+    if (self) {
+        _isVisible = visible;
+        _isActive = active;
+        _isBiDir = isBiDir;
+        _layerName = layerName;
+        _lineWeight = lineWeight;
+        _maxCount = maxCount;
+        _maxPercent = maxPercent;
+        _plotType = plotType;
+        _totalCount = totalCount;
+        _dotRadius = dotRadius;
+    }
+    return self;
+}
+
 -(void)configureWithXMLTree:(LITMXMLTree *)configureTree version:(NSString *)version
 {
 	NSString *currentVersion = @"1.0";

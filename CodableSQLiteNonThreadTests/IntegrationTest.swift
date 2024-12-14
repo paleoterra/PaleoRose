@@ -27,6 +27,8 @@
 import CodableSQLiteNonThread
 import Testing
 
+// swiftlint:disable type_body_length indentation_width
+
 @Suite("IntegrationTest", .tags(.integration))
 struct IntegrationTest {
     let sut = SQLiteInterface()

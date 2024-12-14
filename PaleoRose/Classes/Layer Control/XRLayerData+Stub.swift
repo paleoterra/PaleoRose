@@ -1,5 +1,5 @@
 //
-// BoolDecodable.swift
+// XRLayerData+Stub.swift
 // PaleoRose
 //
 // MIT License
@@ -24,16 +24,32 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// swiftlint:disable:next extension_access_modifier no_extension_access_modifier
-public extension KeyedDecodingContainer {
-    func decodeSqliteBool(forKey key: Self.Key) throws -> Bool {
-        do {
-            let value = try decode(Int.self, forKey: key)
-            return value == 1
-        } catch {
-            print("boolValue decode as bool failed: \(error)")
-            let string = try decode(String.self, forKey: key)
-            return string.lowercased() == "true" ? true : false
-        }
+import PaleoRose
+
+extension XRLayerData {
+    static func stub(
+        isVisible: Bool = false,
+        active: Bool = false,
+        biDir: Bool = false,
+        name: String = "XRLayerData",
+        lineWeight: Float = 0.0,
+        maxCount: Int32 = 0,
+        maxPercent: Float = 0.0,
+        plotType: Int = 0,
+        totalCount: Int = 10,
+        dotRadius: Float = 2.0
+    ) -> XRLayerData {
+        XRLayerData(
+            isVisible: isVisible,
+            active: active,
+            biDir: biDir,
+            name: name,
+            lineWeight: lineWeight,
+            maxCount: maxCount,
+            maxPercent: maxPercent,
+            plotType: Int32(plotType),
+            totalCount: Int32(totalCount),
+            dotRadius: dotRadius
+        )
     }
 }

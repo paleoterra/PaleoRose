@@ -24,10 +24,32 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
+import Cocoa
 
 struct StorageLayerFactory {
 
+    // MARK: - Utility Methods
+
+    func encodeTextStorage(from input: NSTextStorage) -> Data {
+        let range = NSRange(location: 0, length: input.length)
+        let rtfData = input.rtf(from: range)
+        if let base64EncodedString = rtfData?.base64EncodedString(), let data = base64EncodedString.data(using: .utf8) {
+            return data
+        }
+        return Data()
+    }
+
+    func decodeTextStorage(from input: Data) -> NSTextStorage? {
+        guard let base64EncodedString = String(
+            data: input,
+            encoding: .utf8
+        ), let rtfData = base64EncodedString.data(using: .utf8) else {
+            return nil
+        }
+        return NSTextStorage(rtf: rtfData, documentAttributes: nil)
+    }
+
+    // MARK: - Create Storage Layers
     func storageLayer(from inputLayer: XRLayer, at index: Int) -> Layer {
         Layer(
             LAYERID: index,
@@ -53,17 +75,19 @@ struct StorageLayerFactory {
     func storageLayerText(from inputLayer: XRLayerText, at index: Int) -> LayerText {
         LayerText(
             LAYERID: index,
-            CONTENTS: Data(inputLayer.encodedContents().utf8),
+            CONTENTS: encodeTextStorage(from: inputLayer.contents()),
             RECT_POINT_X: Float(inputLayer.textRect().origin.x),
             RECT_POINT_Y: Float(inputLayer.textRect().origin.y),
-            RECT_SIZE_WIDTH: Float(inputLayer.textRect().size.width)
+            RECT_SIZE_WIDTH: Float(inputLayer.textRect().size.width),
+            RECT_SIZE_HEIGHT: Float(inputLayer.textRect().size.height)
         )
     }
 
-    func storageLayerLineArrow(from inputLayer: XRLayerLineArrow, at index: Int) -> LayerLineArrow {
+    // **** PROBLEM
+    func storageLayerLineArrow(from inputLayer: XRLayerLineArrow, at index: Int, dataSetId: Int) -> LayerLineArrow {
         LayerLineArrow(
             LAYERID: index,
-            DATASET: Int(inputLayer.datasetId()),
+            DATASET: dataSetId,
             ARROWSIZE: inputLayer.arrowSize(),
             VECTORTYPE: Int(inputLayer.vectorType()),
             ARROWTYPE: Int(inputLayer.arrowType()),
@@ -100,10 +124,11 @@ struct StorageLayerFactory {
         )
     }
 
-    func storageLayerData(from inputLayer: XRLayerData, at index: Int, dataSet: Int) -> LayerData {
+    // ***** PROBLEM
+    func storageLayerData(from inputLayer: XRLayerData, at index: Int, dataSetId: Int) -> LayerData {
         LayerData(
             LAYERID: index,
-            DATASET: dataSet,
+            DATASET: dataSetId,
             PLOTTYPE: Int(inputLayer.plotType()),
             TOTALCOUNT: Int(inputLayer.totalCount()),
             DOTRADIUS: inputLayer.dotRadius()
