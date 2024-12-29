@@ -1,5 +1,5 @@
 //
-// XRLayerCore.swift
+// XRLayerCore+Stub.swift
 // PaleoRose
 //
 // MIT License

@@ -36,8 +36,8 @@
 		B41D283D094FC7CA008DF384 /* XRTableImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = B41D283B094FC7CA008DF384 /* XRTableImporter.m */; };
 		B42083B109637969007A74A8 /* PTFMXMLParser.h in Headers */ = {isa = PBXBuildFile; fileRef = B42083AF09637969007A74A8 /* PTFMXMLParser.h */; };
 		B42083B209637969007A74A8 /* PTFMXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B42083B009637969007A74A8 /* PTFMXMLParser.m */; };
-		B4237C992CFE959700E2B510 /* StorageLayerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4237C982CFE959100E2B510 /* StorageLayerFactory.swift */; };
-		B4237C9C2D013BE900E2B510 /* StorageLayerFactoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4237C9A2D013BE900E2B510 /* StorageLayerFactoryTest.swift */; };
+		B4237C992CFE959700E2B510 /* StorageModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4237C982CFE959100E2B510 /* StorageModelFactory.swift */; };
+		B4237C9C2D013BE900E2B510 /* StorageModelFactoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4237C9A2D013BE900E2B510 /* StorageModelFactoryTest.swift */; };
 		B427095D095D2D990059C65A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4270928095D2D990059C65A /* Security.framework */; };
 		B427BD070950B3050063849E /* XRTableImporterDelimiterController.h in Headers */ = {isa = PBXBuildFile; fileRef = B427BD050950B3050063849E /* XRTableImporterDelimiterController.h */; };
 		B427BD080950B3050063849E /* XRTableImporterDelimiterController.m in Sources */ = {isa = PBXBuildFile; fileRef = B427BD060950B3050063849E /* XRTableImporterDelimiterController.m */; };
@@ -138,6 +138,13 @@
 		B4AE41BF2D0BD08400E05D96 /* XRLayerGrid+Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AE41BD2D0BD07000E05D96 /* XRLayerGrid+Stub.swift */; };
 		B4AE41C02D0BD08C00E05D96 /* XRLayerData+Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AE41BB2D0BD04D00E05D96 /* XRLayerData+Stub.swift */; };
 		B4AE41C12D0BD09300E05D96 /* XRLayerCore+Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AE41B92D0BD03A00E05D96 /* XRLayerCore+Stub.swift */; };
+		B4AE41C42D14E86700E05D96 /* Layer+Testing.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AE41C22D14E70E00E05D96 /* Layer+Testing.swift */; };
+		B4AE41C72D14EA5900E05D96 /* LayerText+Testing.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AE41C52D14E89900E05D96 /* LayerText+Testing.swift */; };
+		B4AE41CA2D17D76000E05D96 /* LayerLineArrow+Testing.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AE41C82D17D25700E05D96 /* LayerLineArrow+Testing.swift */; };
+		B4AE41CD2D17D77C00E05D96 /* LayerGrid+Testing.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AE41CB2D17D76600E05D96 /* LayerGrid+Testing.swift */; };
+		B4AE41D02D17DA3700E05D96 /* LayerCore+Testing.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AE41CE2D17D9D300E05D96 /* LayerCore+Testing.swift */; };
+		B4AE41D32D17DD2800E05D96 /* LayerData+Testing.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AE41D12D17DD1300E05D96 /* LayerData+Testing.swift */; };
+		B4AE41D62D1E5DC300E05D96 /* XRGeometryController+Testing.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AE41D42D1E5DA300E05D96 /* XRGeometryController+Testing.swift */; };
 		B4AF8C6A2C9CEECA0044A63D /* CodableSQLiteNonThread.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4AF8C602C9CEECA0044A63D /* CodableSQLiteNonThread.framework */; };
 		B4AF8C752C9CEECA0044A63D /* CodableSQLiteNonThread.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4AF8C602C9CEECA0044A63D /* CodableSQLiteNonThread.framework */; };
 		B4AF8C762C9CEECA0044A63D /* CodableSQLiteNonThread.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B4AF8C602C9CEECA0044A63D /* CodableSQLiteNonThread.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -286,8 +293,8 @@
 		B41D283B094FC7CA008DF384 /* XRTableImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRTableImporter.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B42083AF09637969007A74A8 /* PTFMXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTFMXMLParser.h; sourceTree = "<group>"; };
 		B42083B009637969007A74A8 /* PTFMXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTFMXMLParser.m; sourceTree = "<group>"; };
-		B4237C982CFE959100E2B510 /* StorageLayerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageLayerFactory.swift; sourceTree = "<group>"; };
-		B4237C9A2D013BE900E2B510 /* StorageLayerFactoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageLayerFactoryTest.swift; sourceTree = "<group>"; };
+		B4237C982CFE959100E2B510 /* StorageModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageModelFactory.swift; sourceTree = "<group>"; };
+		B4237C9A2D013BE900E2B510 /* StorageModelFactoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageModelFactoryTest.swift; sourceTree = "<group>"; };
 		B4270928095D2D990059C65A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
 		B427BD050950B3050063849E /* XRTableImporterDelimiterController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRTableImporterDelimiterController.h; sourceTree = "<group>"; };
 		B427BD060950B3050063849E /* XRTableImporterDelimiterController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XRTableImporterDelimiterController.m; sourceTree = "<group>"; };
@@ -394,6 +401,13 @@
 		B4AE41B92D0BD03A00E05D96 /* XRLayerCore+Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XRLayerCore+Stub.swift"; sourceTree = "<group>"; };
 		B4AE41BB2D0BD04D00E05D96 /* XRLayerData+Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XRLayerData+Stub.swift"; sourceTree = "<group>"; };
 		B4AE41BD2D0BD07000E05D96 /* XRLayerGrid+Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XRLayerGrid+Stub.swift"; sourceTree = "<group>"; };
+		B4AE41C22D14E70E00E05D96 /* Layer+Testing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Layer+Testing.swift"; sourceTree = "<group>"; };
+		B4AE41C52D14E89900E05D96 /* LayerText+Testing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LayerText+Testing.swift"; sourceTree = "<group>"; };
+		B4AE41C82D17D25700E05D96 /* LayerLineArrow+Testing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LayerLineArrow+Testing.swift"; sourceTree = "<group>"; };
+		B4AE41CB2D17D76600E05D96 /* LayerGrid+Testing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LayerGrid+Testing.swift"; sourceTree = "<group>"; };
+		B4AE41CE2D17D9D300E05D96 /* LayerCore+Testing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LayerCore+Testing.swift"; sourceTree = "<group>"; };
+		B4AE41D12D17DD1300E05D96 /* LayerData+Testing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LayerData+Testing.swift"; sourceTree = "<group>"; };
+		B4AE41D42D1E5DA300E05D96 /* XRGeometryController+Testing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XRGeometryController+Testing.swift"; sourceTree = "<group>"; };
 		B4AF8C602C9CEECA0044A63D /* CodableSQLiteNonThread.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CodableSQLiteNonThread.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4AF8C692C9CEECA0044A63D /* CodableSQLiteNonThreadTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CodableSQLiteNonThreadTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4B0BB691E7E41C900F392DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -613,6 +627,7 @@
 				B48345EF05C23CA100E3F6B7 /* XRoseView.m */,
 				B4852A8205C2E223002212E3 /* XRGeometryController.h */,
 				B4852A8305C2E223002212E3 /* XRGeometryController.m */,
+				B4AE41D42D1E5DA300E05D96 /* XRGeometryController+Testing.swift */,
 				B4149FEA2B24C41D008AE5F4 /* Table Work */,
 			);
 			path = Document;
@@ -1013,18 +1028,24 @@
 		B4F2B17D2C97CB150017E717 /* SQL Models */ = {
 			isa = PBXGroup;
 			children = (
-				B4237C982CFE959100E2B510 /* StorageLayerFactory.swift */,
-				B4237C9A2D013BE900E2B510 /* StorageLayerFactoryTest.swift */,
+				B4237C982CFE959100E2B510 /* StorageModelFactory.swift */,
+				B4237C9A2D013BE900E2B510 /* StorageModelFactoryTest.swift */,
 				B4F2B17E2C97CB300017E717 /* WindowControllerSize.swift */,
 				B4F2B17F2C97CB300017E717 /* Geometry.swift */,
 				B4F2B1802C97CB300017E717 /* Layer.swift */,
+				B4AE41C22D14E70E00E05D96 /* Layer+Testing.swift */,
 				B4F2B1812C97CB300017E717 /* Color.swift */,
 				B4F2B1822C97CB300017E717 /* DataSet.swift */,
 				B4F2B1832C97CB300017E717 /* LayerText.swift */,
+				B4AE41C52D14E89900E05D96 /* LayerText+Testing.swift */,
 				B4F2B1842C97CB300017E717 /* LayerLineArrow.swift */,
+				B4AE41C82D17D25700E05D96 /* LayerLineArrow+Testing.swift */,
 				B4F2B1852C97CB300017E717 /* LayerCore.swift */,
+				B4AE41CE2D17D9D300E05D96 /* LayerCore+Testing.swift */,
 				B4F2B1862C97CB300017E717 /* LayerGrid.swift */,
+				B4AE41CB2D17D76600E05D96 /* LayerGrid+Testing.swift */,
 				B4F2B1872C97CB300017E717 /* LayerData.swift */,
+				B4AE41D12D17DD1300E05D96 /* LayerData+Testing.swift */,
 				B4F2B1882C97CB300017E717 /* Count.swift */,
 			);
 			path = "SQL Models";
@@ -1415,7 +1436,7 @@
 				B427BD080950B3050063849E /* XRTableImporterDelimiterController.m in Sources */,
 				B4B10C3809529F7F00E6A350 /* XRMakeDatasetController.m in Sources */,
 				B42083B209637969007A74A8 /* PTFMXMLParser.m in Sources */,
-				B4237C992CFE959700E2B510 /* StorageLayerFactory.swift in Sources */,
+				B4237C992CFE959700E2B510 /* StorageModelFactory.swift in Sources */,
 				B47DDF510964CDE700C7EF02 /* XRTableImporterXRose.m in Sources */,
 				B4A82FA12A07FA2B00790052 /* LITMAngleFormatter.m in Sources */,
 				B4564ABC096A04A1005E0015 /* XRTableAddColumnController.m in Sources */,
@@ -1442,9 +1463,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4AE41D32D17DD2800E05D96 /* LayerData+Testing.swift in Sources */,
+				B4AE41C42D14E86700E05D96 /* Layer+Testing.swift in Sources */,
+				B4AE41D02D17DA3700E05D96 /* LayerCore+Testing.swift in Sources */,
 				B41C17532CB1C2AF002D19C2 /* Tag.swift in Sources */,
 				B48BBEC82CAA20DC0050852E /* InMemoryStoreTest.swift in Sources */,
-				B4237C9C2D013BE900E2B510 /* StorageLayerFactoryTest.swift in Sources */,
+				B4237C9C2D013BE900E2B510 /* StorageModelFactoryTest.swift in Sources */,
 				B4866BF72CAE039200319712 /* MockSqliteInterface.swift in Sources */,
 				B4AE41B82D0BCEBF00E05D96 /* XRLayerLineArrow+Stub.swift in Sources */,
 				B4AE41BF2D0BD08400E05D96 /* XRLayerGrid+Stub.swift in Sources */,
@@ -1452,7 +1476,11 @@
 				B427CFF21E81EB9E0047F659 /* XRStatisticTests.m in Sources */,
 				B41C17522CB1C278002D19C2 /* InMemoryStoreIntegrationTest.swift in Sources */,
 				B4AE41B52D0BBAF600E05D96 /* XRLayerText+Stub.swift in Sources */,
+				B4AE41CA2D17D76000E05D96 /* LayerLineArrow+Testing.swift in Sources */,
+				B4AE41C72D14EA5900E05D96 /* LayerText+Testing.swift in Sources */,
+				B4AE41D62D1E5DC300E05D96 /* XRGeometryController+Testing.swift in Sources */,
 				B4B0BB881E7E45CB00F392DA /* XRLayerDataTests.m in Sources */,
+				B4AE41CD2D17D77C00E05D96 /* LayerGrid+Testing.swift in Sources */,
 				B4AE41C02D0BD08C00E05D96 /* XRLayerData+Stub.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

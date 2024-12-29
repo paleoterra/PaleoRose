@@ -626,4 +626,40 @@
 	return _mainRect;
 }
 
+- (BOOL)isEqual:(id)other {
+    if (other == self)
+        return YES;
+    if (!other || ![other isKindOfClass:[self class]])
+        return NO;
+    XRGeometryController *rhs = other;
+    if (_isEqualArea != [rhs isEqualArea]) {
+        return false;
+    }
+    if (_isPercent != [rhs isPercent]) {
+        return false;
+    }
+    if (!NSEqualRects(_mainRect, [rhs drawingBounds])) {
+        return false;
+    }
+    if (_geometryMaxCount != rhs.geometryMaxCount) {
+        return false;
+    }
+    if (_hollowCoreSize != rhs.hollowCoreSize) {
+        return false;
+    }
+    if (_sectorSize != rhs.sectorSize) {
+        return false;
+    }
+    if (_startingAngle != rhs.startingAngle) {
+        return false;
+    }
+    if (_sectorCount != rhs.sectorCount) {
+        return false;
+    }
+    if (_relativeSizeOfCircleRect != rhs.relativeSizeOfCircleRect) {
+        return false;
+    }
+    return true;
+}
+
 @end

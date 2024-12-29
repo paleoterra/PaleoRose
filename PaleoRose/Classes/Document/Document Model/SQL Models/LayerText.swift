@@ -32,7 +32,7 @@ struct LayerText: TableRepresentable {
     static var primaryKey: String?
 
     var LAYERID: Int
-    var CONTENTS: Data
+    var CONTENTS: Data // expected to be base 64 encoded RTF data
     // swiftlint:disable:next identifier_name
     var RECT_POINT_X: Float
     // swiftlint:disable:next identifier_name

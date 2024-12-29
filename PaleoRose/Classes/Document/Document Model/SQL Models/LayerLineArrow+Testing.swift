@@ -1,5 +1,5 @@
 //
-// XRLayerLineArrow+Stub.swift
+// LayerLineArrow+Testing.swift
 // PaleoRose
 //
 // MIT License
@@ -24,36 +24,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import PaleoRose
+import Foundation
+@testable import PaleoRose
 
-extension XRLayerLineArrow {
-    static func stub(
-        isVisible: Bool = false,
-        active: Bool = false,
-        biDir: Bool = false,
-        name: String = "XRLayerLineArrow",
-        lineWeight: Float = 0.0,
-        maxCount: Int = 0,
-        maxPercent: Float = 0.0,
-        arrowSize: Float = 2.0,
-        vectorType: Int = 0,
-        arrowType: Int = 0,
-        showVector: Bool = false,
-        showError: Bool = false
-    ) -> XRLayerLineArrow {
-        XRLayerLineArrow(
-            isVisible: isVisible,
-            active: active,
-            biDir: biDir,
-            name: name,
-            lineWeight: lineWeight,
-            maxCount: Int32(maxCount),
-            maxPercent: maxPercent,
-            arrowSize: arrowSize,
-            vectorType: Int32(vectorType),
-            arrowType: Int32(arrowType),
-            showVector: showVector,
-            showError: showError
-        )
+// swiftlint:disable conditional_returns_on_newline
+extension LayerLineArrow {
+
+    func compare(with layer: XRLayerLineArrow, id: Int) -> Bool {
+        guard LAYERID == id else { return false }
+        guard DATASET == layer.datasetId() else { return false }
+        guard ARROWSIZE == layer.arrowSize() else { return false }
+        guard VECTORTYPE == layer.vectorType() else { return false }
+        guard ARROWTYPE == layer.arrowType() else { return false }
+        guard SHOWVECTOR == layer.showVector() else { return false }
+        guard SHOWERROR == layer.showError() else { return false }
+        return true
     }
 }

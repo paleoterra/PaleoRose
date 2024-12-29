@@ -1,5 +1,5 @@
 //
-// XRLayerLineArrow+Stub.swift
+// LayerData+Testing.swift
 // PaleoRose
 //
 // MIT License
@@ -24,36 +24,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import PaleoRose
+import Foundation
+@testable import PaleoRose
 
-extension XRLayerLineArrow {
-    static func stub(
-        isVisible: Bool = false,
-        active: Bool = false,
-        biDir: Bool = false,
-        name: String = "XRLayerLineArrow",
-        lineWeight: Float = 0.0,
-        maxCount: Int = 0,
-        maxPercent: Float = 0.0,
-        arrowSize: Float = 2.0,
-        vectorType: Int = 0,
-        arrowType: Int = 0,
-        showVector: Bool = false,
-        showError: Bool = false
-    ) -> XRLayerLineArrow {
-        XRLayerLineArrow(
-            isVisible: isVisible,
-            active: active,
-            biDir: biDir,
-            name: name,
-            lineWeight: lineWeight,
-            maxCount: Int32(maxCount),
-            maxPercent: maxPercent,
-            arrowSize: arrowSize,
-            vectorType: Int32(vectorType),
-            arrowType: Int32(arrowType),
-            showVector: showVector,
-            showError: showError
-        )
+// swiftlint:disable conditional_returns_on_newline
+
+extension LayerData {
+    func compare(with layer: XRLayerData, id: Int) -> Bool {
+        guard LAYERID == id else { return false }
+        guard DATASET == layer.datasetId() else { return false }
+        guard PLOTTYPE == layer.plotType() else { return false }
+        guard TOTALCOUNT == layer.totalCount() else { return false }
+        guard DOTRADIUS == layer.dotRadius() else { return false }
+        return true
     }
 }

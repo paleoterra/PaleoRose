@@ -1,5 +1,5 @@
 //
-// LayerFactory.swift
+// StorageModelFactory.swift
 // PaleoRose
 //
 // MIT License
@@ -25,8 +25,9 @@
 // SOFTWARE.
 
 import Cocoa
+import CodableSQLiteNonThread
 
-struct StorageLayerFactory {
+struct StorageModelFactory {
 
     // MARK: - Utility Methods
 
@@ -50,7 +51,8 @@ struct StorageLayerFactory {
     }
 
     // MARK: - Create Storage Layers
-    func storageLayer(from inputLayer: XRLayer, at index: Int) -> Layer {
+
+    func storageLayerRoot(from inputLayer: XRLayer, at index: Int) -> Layer {
         Layer(
             LAYERID: index,
             TYPE: inputLayer.type(),
@@ -64,7 +66,7 @@ struct StorageLayerFactory {
         )
     }
 
-    func storageLayer(from inputLayer: XRLayerCore, at index: Int) -> LayerCore {
+    func storageLayerCore(from inputLayer: XRLayerCore, at index: Int) -> LayerCore {
         LayerCore(
             LAYERID: index,
             RADIUS: inputLayer.radius(),
@@ -83,11 +85,10 @@ struct StorageLayerFactory {
         )
     }
 
-    // **** PROBLEM
-    func storageLayerLineArrow(from inputLayer: XRLayerLineArrow, at index: Int, dataSetId: Int) -> LayerLineArrow {
+    func storageLayerLineArrow(from inputLayer: XRLayerLineArrow, at index: Int) -> LayerLineArrow {
         LayerLineArrow(
             LAYERID: index,
-            DATASET: dataSetId,
+            DATASET: Int(inputLayer.datasetId()),
             ARROWSIZE: inputLayer.arrowSize(),
             VECTORTYPE: Int(inputLayer.vectorType()),
             ARROWTYPE: Int(inputLayer.arrowType()),
@@ -124,14 +125,27 @@ struct StorageLayerFactory {
         )
     }
 
-    // ***** PROBLEM
-    func storageLayerData(from inputLayer: XRLayerData, at index: Int, dataSetId: Int) -> LayerData {
+    func storageLayerData(from inputLayer: XRLayerData, at index: Int) -> LayerData {
         LayerData(
             LAYERID: index,
-            DATASET: dataSetId,
+            DATASET: Int(inputLayer.datasetId()),
             PLOTTYPE: Int(inputLayer.plotType()),
             TOTALCOUNT: Int(inputLayer.totalCount()),
             DOTRADIUS: inputLayer.dotRadius()
-            )
+        )
+    }
+
+    func storageGeometry(from geometryController: XRGeometryController) -> Geometry {
+        Geometry(
+            isEqualArea: geometryController.isEqualArea(),
+            isPercent: geometryController.isPercent(),
+            MAXCOUNT: Int(geometryController.geometryMaxCount()),
+            MAXPERCENT: geometryController.geometryMaxPercent(),
+            HOLLOWCORE: geometryController.hollowCoreSize(),
+            SECTORSIZE: geometryController.sectorSize(),
+            STARTINGANGLE: geometryController.startingAngle(),
+            SECTORCOUNT: Int(geometryController.sectorCount()),
+            RELATIVESIZE: geometryController.relativeSizeOfCircleRect()
+        )
     }
 }

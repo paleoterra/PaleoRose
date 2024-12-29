@@ -379,6 +379,10 @@
 	return _dotRadius;
 }
 
+-(int)datasetId {
+    return _theSet.setId;
+}
+
 
 -(void)geometryDidChangeSectors:(NSNotification *)notification
 {
@@ -619,7 +623,7 @@
 	int error;
 	char *errorMsg;
 	[super saveToSQLDB:db layerID:layerID];
-	datasetID = (long long)[self findDatasetIDByName:[_theSet name] inSQLDB:db];
+    datasetID = [_theSet setId];
 	//NSLog(@"dataset2: %i %@ %i",(int)datasetID,[_theSet name],(int)[self findDatasetIDByName:[_theSet name] inSQLDB:db]);
 	
 	[command appendString:@"INSERT INTO _layerData (LAYERID,DATASET,PLOTTYPE,TOTALCOUNT,DOTRADIUS) "];
@@ -646,7 +650,7 @@
 		
 		_lineWeight = 1.0;
 		_dotRadius = 4.0;
-		[super configureWithSQL:db forLayerID:layerID];
+
 		[self configureWithSQL:db forLayerID:layerID];
 		[self calculateSectorValues];
 		[self generateGraphics];
@@ -656,6 +660,7 @@
 
 -(void)configureWithSQL:(sqlite3 *)db forLayerID:(int)layerid
 {
+    [super configureWithSQL:db forLayerID:layerid];
 	int columns;
 
 	sqlite3_stmt *stmt;

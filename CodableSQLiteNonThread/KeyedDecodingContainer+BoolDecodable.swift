@@ -1,5 +1,5 @@
 //
-// BoolDecodable.swift
+// KeyedDecodingContainer+BoolDecodable.swift
 // PaleoRose
 //
 // MIT License

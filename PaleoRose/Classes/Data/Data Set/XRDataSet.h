@@ -41,6 +41,7 @@
 	NSString *predicate;
 	NSString *tableName;
 	NSString *columnName;
+    int _setId;
 
 }
 
@@ -49,13 +50,17 @@
 -(id)initWithTable:(NSString *)table column:(NSString *)column db:(sqlite3 *)db DEPRECATED_ATTRIBUTE;
 -(id)initWithTable:(NSString *)table column:(NSString *)column db:(sqlite3 *)db predicate:(NSString *)aPredicate DEPRECATED_ATTRIBUTE;
 -(id)initWithData:(NSData *)theData withName:(NSString *)name;
--(id)initWithName:(NSString *)name tableName:(NSString *)table column:(NSString *)column predicate:(NSString *)aPredicate comments:(NSAttributedString *)comments data:(NSData *)data;
+-(id)initWithId:(int)setId name:(NSString *)name tableName:(NSString *)table column:(NSString *)column predicate:(NSString *)aPredicate comments:(NSAttributedString *)comments data:(NSData *)data;
 #pragma mark accessors
 
 -(NSData *)theData;
 
 -(NSString *)name;
 -(void)setName:(NSString *)name;
+
+-(int)setId;
+-(void)setId:(int)newId;
+
 
 -(void)setComments:(NSMutableAttributedString *)aString;
 -(NSAttributedString *)comments;

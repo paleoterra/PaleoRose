@@ -470,7 +470,7 @@ NSRect initialRect;
         {
             NSDictionary *results = [self.azimuthController resultDictionary];
 
-            sqlite3 *db = [[self document]documentInMemoryStore];
+            sqlite3 *db = [[self document] documentInMemoryStore];
             sqlite3_stmt *stmt;
             const char *pzTail;
             char *errorMsg;

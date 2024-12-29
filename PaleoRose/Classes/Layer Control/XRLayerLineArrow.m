@@ -370,8 +370,8 @@
 	int error;
 	char *errorMsg;
 	[super saveToSQLDB:db layerID:layerID];
-	datasetID = [self findDatasetIDByName:[_theSet name] inSQLDB:db];
-	
+    datasetID = [_theSet setId];
+
 	if(_showVector)
 		showvector = @"TRUE";
 	else
@@ -394,7 +394,7 @@
 }
 
 -(int)datasetId {
-    return 0; // TODO: this doesn't work
+    return _theSet.setId;
 }
 
 -(float)arrowSize {

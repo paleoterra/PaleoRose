@@ -1,5 +1,5 @@
 //
-// XRLayerLineArrow+Stub.swift
+// XRGeometryController+Testing.swift
 // PaleoRose
 //
 // MIT License
@@ -24,36 +24,33 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import PaleoRose
+import Foundation
+@testable import PaleoRose
 
-extension XRLayerLineArrow {
+extension XRGeometryController {
     static func stub(
-        isVisible: Bool = false,
-        active: Bool = false,
-        biDir: Bool = false,
-        name: String = "XRLayerLineArrow",
-        lineWeight: Float = 0.0,
+        isEqualArea: Bool = false,
+        isPercent: Bool = false,
         maxCount: Int = 0,
-        maxPercent: Float = 0.0,
-        arrowSize: Float = 2.0,
-        vectorType: Int = 0,
-        arrowType: Int = 0,
-        showVector: Bool = false,
-        showError: Bool = false
-    ) -> XRLayerLineArrow {
-        XRLayerLineArrow(
-            isVisible: isVisible,
-            active: active,
-            biDir: biDir,
-            name: name,
-            lineWeight: lineWeight,
+        maxPercent: Float = 0,
+        hollowCore: Float = 0,
+        sectorSize: Float = 0,
+        startingAngle: Float = 0,
+        sectorCount: Int = 0,
+        relativeSize: Float = 0
+    ) -> XRGeometryController {
+        let controller = XRGeometryController()
+        controller.configureIsEqualArea(
+            isEqualArea,
+            isPercent: isPercent,
             maxCount: Int32(maxCount),
             maxPercent: maxPercent,
-            arrowSize: arrowSize,
-            vectorType: Int32(vectorType),
-            arrowType: Int32(arrowType),
-            showVector: showVector,
-            showError: showError
+            hollowCore: hollowCore,
+            sectorSize: sectorSize,
+            startingAngle: startingAngle,
+            sectorCount: Int32(sectorCount),
+            relativeSize: relativeSize
         )
+        return controller
     }
 }

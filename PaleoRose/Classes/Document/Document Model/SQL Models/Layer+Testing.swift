@@ -1,5 +1,5 @@
 //
-// XRLayerLineArrow+Stub.swift
+// Layer+Testing.swift
 // PaleoRose
 //
 // MIT License
@@ -24,36 +24,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import PaleoRose
+import Foundation
+@testable import PaleoRose
 
-extension XRLayerLineArrow {
-    static func stub(
-        isVisible: Bool = false,
-        active: Bool = false,
-        biDir: Bool = false,
-        name: String = "XRLayerLineArrow",
-        lineWeight: Float = 0.0,
-        maxCount: Int = 0,
-        maxPercent: Float = 0.0,
-        arrowSize: Float = 2.0,
-        vectorType: Int = 0,
-        arrowType: Int = 0,
-        showVector: Bool = false,
-        showError: Bool = false
-    ) -> XRLayerLineArrow {
-        XRLayerLineArrow(
-            isVisible: isVisible,
-            active: active,
-            biDir: biDir,
-            name: name,
-            lineWeight: lineWeight,
-            maxCount: Int32(maxCount),
-            maxPercent: maxPercent,
-            arrowSize: arrowSize,
-            vectorType: Int32(vectorType),
-            arrowType: Int32(arrowType),
-            showVector: showVector,
-            showError: showError
-        )
+extension Layer {
+    func compare(with layer: some XRLayer, id: Int) -> Bool {
+        LAYERID == id &&
+            TYPE == layer.type() &&
+            VISIBLE == layer.isVisible() &&
+            ACTIVE == layer.isActive() &&
+            BIDIR == layer.isBiDirectional() &&
+            LAYER_NAME == layer.layerName() &&
+            LINEWEIGHT == layer.lineWeight() &&
+            MAXCOUNT == layer.maxCount() &&
+            MAXPERCENT == layer.maxPercent()
     }
 }

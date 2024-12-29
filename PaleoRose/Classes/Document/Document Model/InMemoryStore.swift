@@ -46,6 +46,7 @@ class InMemoryStore: NSObject {
     }
 
     private var sqliteStore: OpaquePointer?
+    private let storageLayerFactory = StorageModelFactory()
     let interface: StoreProtocol
 
     private let createTableQueries: [QueryProtocol] = [
@@ -191,8 +192,9 @@ class InMemoryStore: NSObject {
 
     // MARK: - Geometry
 
-    func store(geometry: Geometry) throws {
+    func store(geometryController: XRGeometryController) throws {
         let sqliteStore = try validateStore()
+        let geometry = storageLayerFactory.storageGeometry(from: geometryController)
         _ = try interface.executeQuery(sqlite: sqliteStore, query: Geometry.deleteAllRecords())
         var query = Geometry.insertQuery()
         query.bindings = try [geometry.valueBindables(keys: Geometry.allKeys())]
@@ -211,7 +213,45 @@ class InMemoryStore: NSObject {
         return geometries[0]
     }
 
+    func configure(geometryController: XRGeometryController) throws {
+        let geometry = try geometry()
+        geometryController.configureIsEqualArea(
+            geometry.isEqualArea,
+            isPercent: geometry.isPercent,
+            maxCount: Int32(geometry.MAXCOUNT),
+            maxPercent: geometry.MAXPERCENT,
+            hollowCore: geometry.HOLLOWCORE,
+            sectorSize: geometry.SECTORSIZE,
+            startingAngle: geometry.STARTINGANGLE,
+            sectorCount: Int32(geometry.SECTORCOUNT),
+            relativeSize: geometry.RELATIVESIZE
+        )
+    }
+
     // MARK: - Layer
+
+//    func store(layers: [XRLayer]) throws {
+//        let sqliteStore = try validateStore()
+//        try deleteAllLayers(sqliteStore: sqliteStore)
+//        for (index, layer) in layers.enumerated() {
+//
+//        }
+//
+//    }
+
+    private func deleteAllLayers(sqliteStore: OpaquePointer) throws {
+        let deleteQueries = [
+            Layer.deleteAllRecords(),
+            LayerText.deleteAllRecords(),
+            LayerLineArrow.deleteAllRecords(),
+            LayerCore.deleteAllRecords(),
+            LayerGrid.deleteAllRecords(),
+            LayerData.deleteAllRecords()
+        ]
+        try deleteQueries.forEach { query in
+            _ = try interface.executeQuery(sqlite: sqliteStore, query: query)
+        }
+    }
 
     func store(layers: [Layer]) throws {
         let sqliteStore = try validateStore()

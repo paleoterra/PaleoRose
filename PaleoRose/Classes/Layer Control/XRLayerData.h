@@ -68,6 +68,7 @@
 -(int)totalCount;
 -(void)setDotRadius:(float)radius;
 -(float)dotRadius;
+-(int)datasetId;
 
 
 -(void)setStatisticsArray;

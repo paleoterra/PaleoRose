@@ -37,8 +37,8 @@ struct InMemoryStoreIntegrationTest {
     private func sampleFilePath() throws -> String {
         guard let bundle = Bundle(identifier: "PaleoTerra.Unit-Tests"),
               let path = bundle.path(
-                forResource: "rtest1",
-                ofType: "XRose"
+                  forResource: "rtest1",
+                  ofType: "XRose"
               )
         else {
             Issue.record("Could not find test file")
@@ -303,20 +303,20 @@ struct InMemoryStoreIntegrationTest {
         let interface = SQLiteInterface()
         let store = try #require(try InMemoryStore(interface: interface))
         try backupFromSampleFileToInMemoryStore(store)
-        let geometry = Geometry(
+        let controller = XRGeometryController.stub(
             isEqualArea: true,
-            isPercent: false,
-            MAXCOUNT: 1,
-            MAXPERCENT: 14.5,
-            HOLLOWCORE: 2.1,
-            SECTORSIZE: 23.2,
-            STARTINGANGLE: 12.0,
-            SECTORCOUNT: 6,
-            RELATIVESIZE: 0.2
+            maxCount: 1,
+            maxPercent: 14.5,
+            hollowCore: 2.1,
+            sectorSize: 23.2,
+            startingAngle: 12.0,
+            sectorCount: 6,
+            relativeSize: 0.2
         )
-        try store.store(geometry: geometry)
-        let result: Geometry = try store.geometry()
-        #expect(result == geometry)
+        try store.store(geometryController: controller)
+        let resultController = XRGeometryController.stub()
+        try store.configure(geometryController: resultController)
+        #expect(resultController == controller)
     }
 
     @Test("When storing geometry called multiple times, then the database has only the latest")
@@ -324,44 +324,45 @@ struct InMemoryStoreIntegrationTest {
         let interface = SQLiteInterface()
         let store = try #require(try InMemoryStore(interface: interface))
         try backupFromSampleFileToInMemoryStore(store)
-        var geometry = Geometry(
+        let controller = XRGeometryController.stub(
             isEqualArea: true,
-            isPercent: false,
-            MAXCOUNT: 1,
-            MAXPERCENT: 14.5,
-            HOLLOWCORE: 2.1,
-            SECTORSIZE: 23.2,
-            STARTINGANGLE: 12.0,
-            SECTORCOUNT: 6,
-            RELATIVESIZE: 0.2
+            maxCount: 1,
+            maxPercent: 14.5,
+            hollowCore: 2.1,
+            sectorSize: 23.2,
+            startingAngle: 12.0,
+            sectorCount: 6,
+            relativeSize: 0.2
         )
-        try store.store(geometry: geometry)
-        geometry = Geometry(
-            isEqualArea: true,
-            isPercent: false,
-            MAXCOUNT: 9,
-            MAXPERCENT: 32,
-            HOLLOWCORE: 93,
-            SECTORSIZE: 3,
-            STARTINGANGLE: 9.0,
-            SECTORCOUNT: 15,
-            RELATIVESIZE: 0.5
-        )
-        try store.store(geometry: geometry)
-        geometry = Geometry(
-            isEqualArea: false,
-            isPercent: true,
-            MAXCOUNT: 23,
-            MAXPERCENT: 34,
-            HOLLOWCORE: 96,
-            SECTORSIZE: 60,
-            STARTINGANGLE: 12.0,
-            SECTORCOUNT: 8,
-            RELATIVESIZE: 0.9
-        )
-        try store.store(geometry: geometry)
-        let result: Geometry = try store.geometry()
-        #expect(result == geometry)
+        try store.store(geometryController: controller)
+
+        controller.setGeomentryMaxCount(9)
+        controller.setGeomentryMaxPercent(32)
+        controller.setHollowCoreSize(93)
+        controller.setSectorSize(3)
+        controller.setStartingAngle(9)
+        controller.setSectorCount(15)
+        controller.setRelativeSizeOfCircleRect(0.9)
+
+        try store.store(geometryController: controller)
+        controller.setEqualArea(false)
+        controller.setPercent(true)
+        controller.setGeomentryMaxCount(23)
+        controller.setGeomentryMaxPercent(34)
+        controller.setHollowCoreSize(96)
+        controller.setSectorSize(60)
+        controller.setStartingAngle(12)
+        controller.setSectorCount(8)
+        controller.setRelativeSizeOfCircleRect(0.9)
+
+        try store.store(geometryController: controller)
+
+        let newController = XRGeometryController.stub()
+
+        try store.configure(geometryController: newController)
+
+        #expect(newController == controller)
+
         let countResult: [RecordCount] = try interface.executeCodableQuery(
             sqlite: store.sqlitePointer(),
             query: Geometry.countQuery()

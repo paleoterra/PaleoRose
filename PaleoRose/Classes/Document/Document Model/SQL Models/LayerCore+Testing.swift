@@ -1,6 +1,6 @@
 //
-// StorageLayerFactoryTest.swift
-// Unit Tests
+// LayerCore+Testing.swift
+// PaleoRose
 //
 // MIT License
 //
@@ -24,8 +24,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import PaleoRose
-import Testing
+import Foundation
+@testable import PaleoRose
 
-struct StorageLayerFactoryTest {
+// swiftlint:disable conditional_returns_on_newline
+extension LayerCore {
+    func compare(with layer: XRLayerCore, id: Int) -> Bool {
+        guard LAYERID == id else { return false }
+        guard RADIUS == layer.radius() else { return false }
+        guard TYPE == layer.coreType() else { return false }
+        return true
+    }
 }

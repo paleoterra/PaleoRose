@@ -58,17 +58,17 @@ static NSLayoutManager *sharedDrawingLayoutManager(void);
 }
 
 -(id)initWithIsVisible:(BOOL)visible
-              active:(BOOL)active
-               biDir:(BOOL)isBiDir
-                name:(NSString *)layerName
-          lineWeight:(float)lineWeight
-            maxCount:(int)maxCount
-          maxPercent:(float)maxPercent
-            contents:(NSAttributedString *)contents
-         rectOriginX:(float)rectOriginX
-         rectOriginY:(float)rectOriginY
-         recetHeight:(float)rectHeight
-           rectWidth:(float)rectWidth {
+                active:(BOOL)active
+                 biDir:(BOOL)isBiDir
+                  name:(NSString *)layerName
+            lineWeight:(float)lineWeight
+              maxCount:(int)maxCount
+            maxPercent:(float)maxPercent
+              contents:(NSAttributedString *)contents
+           rectOriginX:(float)rectOriginX
+           rectOriginY:(float)rectOriginY
+            rectHeight:(float)rectHeight
+             rectWidth:(float)rectWidth {
     textBounds = NSMakeRect(
                             rectOriginX,
                             rectOriginY,
@@ -77,6 +77,11 @@ static NSLayoutManager *sharedDrawingLayoutManager(void);
                             );
     self = [super init];
     if (self) {
+        _contents = [[NSTextStorage  alloc] init];
+        gutter = 4.0;
+        [self setLayerName:@"Default Text"];
+        [self setContents:@"Text"];
+
         _isVisible = visible;
         _isActive = active;
         _isBiDir = isBiDir;
@@ -85,6 +90,7 @@ static NSLayoutManager *sharedDrawingLayoutManager(void);
         _maxCount = maxCount;
         _maxPercent = maxPercent;
         [self setContents:contents];
+        textBounds = NSMakeRect((CGFloat)rectOriginX, (CGFloat)rectOriginY, (CGFloat)rectWidth, (CGFloat)rectHeight);
 //        [self setContents:[[NSAttributedString alloc] initWithData:decodeBase64([[NSString alloc] initWithData:contents encoding:NSUTF8StringEncoding]) options:@{} documentAttributes:nil error:nil ]];
     }
     return self;
@@ -487,9 +493,6 @@ static NSLayoutManager *sharedDrawingLayoutManager(void) {
     [self setContents:tempString];
     textBounds = aTextRect;
 
-}
-
-- (id)initWithIsVisible:(BOOL)visible active:(BOOL)active biDir:(BOOL)isBiDir name:(NSString *)layerName lineWeight:(float)lineWeight maxCount:(int)maxCount maxPercent:(float)maxPercent contents:(NSData *)contents rectOriginX:(float)rectOriginX rectOriginY:(float)rectOriginY rectWidth:(float)rectWidth rectWidth:(float)rectWidth {
 }
 
 @end

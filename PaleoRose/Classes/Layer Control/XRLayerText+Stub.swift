@@ -36,17 +36,10 @@ extension XRLayerText {
         lineWeight: Float = 0.0,
         maxCount: Int = 0,
         maxPercent: Float = 0.0,
-        contentString: String? = "Content",
-        rect: CGRect = .zero
+        contentString: String = "Text Content",
+        rect: CGRect = CGRect(x: 1, y: 2, width: 3, height: 4)
     ) -> XRLayerText {
-        var contentData: Data?
-        if let contentString {
-            let container = NSTextStorage(string: contentString)
-            let range = NSRange(location: 0, length: contentString.count)
-            var rtf = container.rtf(from: range)
-            contentData = rtf?.base64EncodedData()
-        }
-        return XRLayerText(
+        XRLayerText(
             isVisible: isVisible,
             active: active,
             biDir: biDir,
@@ -54,11 +47,11 @@ extension XRLayerText {
             lineWeight: lineWeight,
             maxCount: Int32(maxCount),
             maxPercent: maxPercent,
-            contents: contentData,
+            contents: NSTextStorage(string: contentString),
             rectOriginX: Float(rect.origin.x),
             rectOriginY: Float(rect.origin.y),
-            rectWidth: Float(rect.size.width),
+            rectHeight: Float(rect.size.width),
             rectWidth: Float(rect.size.height)
-            )
+        )
     }
 }
