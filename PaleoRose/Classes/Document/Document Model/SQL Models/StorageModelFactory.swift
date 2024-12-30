@@ -29,27 +29,6 @@ import CodableSQLiteNonThread
 
 struct StorageModelFactory {
 
-    // MARK: - Utility Methods
-
-    func encodeTextStorage(from input: NSTextStorage) -> Data {
-        let range = NSRange(location: 0, length: input.length)
-        let rtfData = input.rtf(from: range)
-        if let base64EncodedString = rtfData?.base64EncodedString(), let data = base64EncodedString.data(using: .utf8) {
-            return data
-        }
-        return Data()
-    }
-
-    func decodeTextStorage(from input: Data) -> NSTextStorage? {
-        guard let base64EncodedString = String(
-            data: input,
-            encoding: .utf8
-        ), let rtfData = base64EncodedString.data(using: .utf8) else {
-            return nil
-        }
-        return NSTextStorage(rtf: rtfData, documentAttributes: nil)
-    }
-
     // MARK: - Create Storage Layers
 
     func storageLayerRoot(from inputLayer: XRLayer, at index: Int) -> Layer {
@@ -77,7 +56,7 @@ struct StorageModelFactory {
     func storageLayerText(from inputLayer: XRLayerText, at index: Int) -> LayerText {
         LayerText(
             LAYERID: index,
-            CONTENTS: encodeTextStorage(from: inputLayer.contents()),
+            CONTENTS: Encoding.encodeTextStorage(from: inputLayer.contents()),
             RECT_POINT_X: Float(inputLayer.textRect().origin.x),
             RECT_POINT_Y: Float(inputLayer.textRect().origin.y),
             RECT_SIZE_WIDTH: Float(inputLayer.textRect().size.width),
@@ -146,6 +125,109 @@ struct StorageModelFactory {
             STARTINGANGLE: geometryController.startingAngle(),
             SECTORCOUNT: Int(geometryController.sectorCount()),
             RELATIVESIZE: geometryController.relativeSizeOfCircleRect()
+        )
+    }
+
+    // MARK: - Create XRLayer Types
+
+    func createXRLayerText(layer: Layer, textLayer: LayerText) -> XRLayerText {
+
+        XRLayerText(
+            isVisible: layer.VISIBLE,
+            active: layer.ACTIVE,
+            biDir: layer.BIDIR,
+            name: layer.LAYER_NAME,
+            lineWeight: layer.LINEWEIGHT,
+            maxCount: Int32(layer.MAXCOUNT),
+            maxPercent: layer.MAXPERCENT,
+            contents: Encoding.decodeTextStorage(from: textLayer.CONTENTS),
+            rectOriginX: textLayer.RECT_POINT_X,
+            rectOriginY: textLayer.RECT_POINT_Y,
+            rectHeight: textLayer.RECT_SIZE_HEIGHT,
+            rectWidth: textLayer.RECT_SIZE_WIDTH
+        )
+    }
+
+    func createXRLayerLineArrow(layer: Layer, lineArrowLayer: LayerLineArrow) -> XRLayerLineArrow {
+
+        XRLayerLineArrow(
+            isVisible: layer.VISIBLE,
+            active: layer.ACTIVE,
+            biDir: layer.BIDIR,
+            name: layer.LAYER_NAME,
+            lineWeight: layer.LINEWEIGHT,
+            maxCount: Int32(layer.MAXCOUNT),
+            maxPercent: layer.MAXPERCENT,
+            arrowSize: lineArrowLayer.ARROWSIZE,
+            vectorType: Int32(lineArrowLayer.VECTORTYPE),
+            arrowType: Int32(lineArrowLayer.ARROWTYPE),
+            showVector: lineArrowLayer.SHOWVECTOR,
+            showError: lineArrowLayer.SHOWERROR
+        )
+    }
+
+    func createXRLayerCore(layer: Layer, coreLayer: LayerCore) -> XRLayerCore {
+
+        XRLayerCore(
+            isVisible: layer.VISIBLE,
+            active: layer.ACTIVE,
+            biDir: layer.BIDIR,
+            name: layer.LAYER_NAME,
+            lineWeight: layer.LINEWEIGHT,
+            maxCount: Int32(layer.MAXCOUNT),
+            maxPercent: layer.MAXPERCENT,
+            percentRadius: coreLayer.RADIUS,
+            type: coreLayer.TYPE
+        )
+    }
+
+    func createXRLayerData(layer: Layer, dataLayer: LayerData) -> XRLayerData {
+        XRLayerData(
+            isVisible: layer.VISIBLE,
+            active: layer.ACTIVE,
+            biDir: layer.BIDIR,
+            name: layer.LAYER_NAME,
+            lineWeight: layer.LINEWEIGHT,
+            maxCount: Int32(layer.MAXCOUNT),
+            maxPercent: layer.MAXPERCENT,
+            plotType: Int32(dataLayer.PLOTTYPE),
+            totalCount: Int32(dataLayer.TOTALCOUNT),
+            dotRadius: dataLayer.DOTRADIUS
+        )
+    }
+
+    func createXRLayerGrid(layer: Layer, gridLayer: LayerGrid) -> XRLayerGrid {
+        let ringFont = NSFont(name: gridLayer.RINGS_FONTNAME, size: CGFloat(gridLayer.RINGS_FONTSIZE)) ??
+        NSFont.systemFont(ofSize: CGFloat(gridLayer.RINGS_FONTSIZE))
+        let radialFont = NSFont(name: gridLayer.RADIALS_FONT, size: CGFloat(gridLayer.RADIALS_FONTSIZE)) ??
+        NSFont.systemFont(ofSize: CGFloat(gridLayer.RADIALS_FONTSIZE))
+        return XRLayerGrid(
+            isVisible: layer.VISIBLE,
+            active: layer.ACTIVE,
+            biDir: layer.BIDIR,
+            name: layer.LAYER_NAME,
+            lineWeight: layer.LINEWEIGHT,
+            maxCount: Int32(layer.MAXCOUNT),
+            maxPercent: layer.MAXPERCENT,
+            isFixedCount: gridLayer.RINGS_ISFIXEDCOUNT,
+            ringsVisible: gridLayer.RINGS_VISIBLE,
+            fixedRingCount: Int32(gridLayer.RINGS_FIXEDCOUNT),
+            ringCountIncrement: Int32(gridLayer.RINGS_COUNTINCREMENT),
+            showRingLabels: gridLayer.RINGS_LABELS,
+            labelAngle: gridLayer.RINGS_LABELANGLE,
+            ring: ringFont,
+            radialsCount: Int32(gridLayer.RADIALS_COUNT),
+            radialsAngle: gridLayer.RADIALS_ANGLE,
+            radialsLabelAlignment: Int32(gridLayer.RADIALS_LABELALIGN),
+            radialsCompassPoint: Int32(gridLayer.RADIALS_COMPASSPOINT),
+            radialsOrder: Int32(gridLayer.RADIALS_ORDER),
+            radialFont: radialFont,
+            radialsSectorLock: gridLayer.RADIALS_SECTORLOCK,
+            radialsVisible: gridLayer.RADIALS_VISIBLE,
+            radialsIsPercent: gridLayer.RADIALS_ISPERCENT,
+            radialsTicks: gridLayer.RADIALS_TICKS,
+            radialsMinorTicks: gridLayer.RADIALS_MINORTICKS,
+            radialLabels: gridLayer.RADIALS_LABELS
         )
     }
 }

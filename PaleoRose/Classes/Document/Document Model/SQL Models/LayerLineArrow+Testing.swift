@@ -30,6 +30,26 @@ import Foundation
 // swiftlint:disable conditional_returns_on_newline
 extension LayerLineArrow {
 
+    func stub(
+        LAYERID: Int = 1,
+        DATASET: Int = 0,
+        ARROWSIZE: Float = 1.0,
+        VECTORTYPE: Int = 0,
+        ARROWTYPE: Int = 0,
+        SHOWVECTOR: Bool = false,
+        SHOWERROR: Bool = false
+    ) -> LayerLineArrow {
+        LayerLineArrow(
+            LAYERID: LAYERID,
+            DATASET: DATASET,
+            ARROWSIZE: ARROWSIZE,
+            VECTORTYPE: VECTORTYPE,
+            ARROWTYPE: ARROWTYPE,
+            SHOWVECTOR: SHOWVECTOR,
+            SHOWERROR: SHOWERROR
+        )
+    }
+
     func compare(with layer: XRLayerLineArrow, id: Int) -> Bool {
         guard LAYERID == id else { return false }
         guard DATASET == layer.datasetId() else { return false }

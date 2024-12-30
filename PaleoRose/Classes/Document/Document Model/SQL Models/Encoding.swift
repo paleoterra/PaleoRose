@@ -1,5 +1,5 @@
 //
-// LayerData+Testing.swift
+// Encoding.swift
 // PaleoRose
 //
 // MIT License
@@ -25,34 +25,34 @@
 // SOFTWARE.
 
 import Foundation
-@testable import PaleoRose
 
-// swiftlint:disable conditional_returns_on_newline
-
-extension LayerData {
-
-    func stub(
-        LAYERID: Int = 1,
-        DATASET: Int = 0,
-        PLOTTYPE: Int = 0,
-        TOTALCOUNT: Int = 1,
-        DOTRADIUS: Float = 1.0
-    ) -> LayerData {
-        LayerData(
-            LAYERID: LAYERID,
-            DATASET: DATASET,
-            PLOTTYPE: PLOTTYPE,
-            TOTALCOUNT: TOTALCOUNT,
-            DOTRADIUS: DOTRADIUS
-        )
+enum Encoding {
+    static func encodeTextStorage(from input: NSTextStorage) -> Data {
+        let range = NSRange(location: 0, length: input.length)
+        let rtfData = input.rtf(from: range)
+        if let base64EncodedString = rtfData?.base64EncodedString(), let data = base64EncodedString.data(using: .utf8) {
+            return data
+        }
+        return Data()
     }
 
-    func compare(with layer: XRLayerData, id: Int) -> Bool {
-        guard LAYERID == id else { return false }
-        guard DATASET == layer.datasetId() else { return false }
-        guard PLOTTYPE == layer.plotType() else { return false }
-        guard TOTALCOUNT == layer.totalCount() else { return false }
-        guard DOTRADIUS == layer.dotRadius() else { return false }
-        return true
+//    static func decodeAttributedString(from input: Data) -> NSAttributedString? {
+//        guard let base64EncodedString = String(
+//            data: input,
+//            encoding: .utf8
+//        ), let rtfData = base64EncodedString.data(using: .utf8) else {
+//            return nil
+//        }
+//        return NSAttributedString(rtf: rtfData, documentAttributes: nil)
+//    }
+
+    static func decodeTextStorage(from input: Data) -> NSTextStorage? {
+        guard let base64EncodedString = String(
+            data: input,
+            encoding: .utf8
+        ), let rtfData = base64EncodedString.data(using: .utf8) else {
+            return nil
+        }
+        return NSTextStorage(rtf: rtfData, documentAttributes: nil)
     }
 }

@@ -157,6 +157,7 @@
 		B4C08802063069F2001A91F4 /* XRExportGraphicAccessory.h in Headers */ = {isa = PBXBuildFile; fileRef = B4C08800063069F2001A91F4 /* XRExportGraphicAccessory.h */; };
 		B4C08803063069F2001A91F4 /* XRExportGraphicAccessory.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C08801063069F2001A91F4 /* XRExportGraphicAccessory.m */; };
 		B4C7CF7405D7FA190071FD29 /* removeLayer.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B4C7CF7305D7FA180071FD29 /* removeLayer.tiff */; };
+		B4DB28E32D22450300FC6A49 /* Encoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DB28E22D2244FC00FC6A49 /* Encoding.swift */; };
 		B4E0138D05EC4AC500C50D5D /* version.plist in Resources */ = {isa = PBXBuildFile; fileRef = B4E0138C05EC4AC500C50D5D /* version.plist */; };
 		B4E2DE8905C5BD6500714F6F /* XRLayerGrid.h in Headers */ = {isa = PBXBuildFile; fileRef = B4E2DE8705C5BD6500714F6F /* XRLayerGrid.h */; };
 		B4E2DE8A05C5BD6500714F6F /* XRLayerGrid.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E2DE8805C5BD6500714F6F /* XRLayerGrid.m */; };
@@ -421,6 +422,7 @@
 		B4C08800063069F2001A91F4 /* XRExportGraphicAccessory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRExportGraphicAccessory.h; sourceTree = "<group>"; };
 		B4C08801063069F2001A91F4 /* XRExportGraphicAccessory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRExportGraphicAccessory.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B4C7CF7305D7FA180071FD29 /* removeLayer.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = removeLayer.tiff; sourceTree = "<group>"; };
+		B4DB28E22D2244FC00FC6A49 /* Encoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encoding.swift; sourceTree = "<group>"; };
 		B4E0138C05EC4AC500C50D5D /* version.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; path = version.plist; sourceTree = "<group>"; };
 		B4E2DE8705C5BD6500714F6F /* XRLayerGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRLayerGrid.h; sourceTree = "<group>"; };
 		B4E2DE8805C5BD6500714F6F /* XRLayerGrid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRLayerGrid.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -1030,6 +1032,7 @@
 			children = (
 				B4237C982CFE959100E2B510 /* StorageModelFactory.swift */,
 				B4237C9A2D013BE900E2B510 /* StorageModelFactoryTest.swift */,
+				B4DB28E22D2244FC00FC6A49 /* Encoding.swift */,
 				B4F2B17E2C97CB300017E717 /* WindowControllerSize.swift */,
 				B4F2B17F2C97CB300017E717 /* Geometry.swift */,
 				B4F2B1802C97CB300017E717 /* Layer.swift */,
@@ -1394,6 +1397,7 @@
 				B4F2595205C58F28008591BE /* XRGraphicHistogram.m in Sources */,
 				B4866BF42CAE02C900319712 /* StoreProtocol.swift in Sources */,
 				B4F25AE505C59CE6008591BE /* XRGraphicDotDeviation.m in Sources */,
+				B4DB28E32D22450300FC6A49 /* Encoding.swift in Sources */,
 				B4E2DE8A05C5BD6500714F6F /* XRLayerGrid.m in Sources */,
 				B4EE8F7905C5E0A9001BACD3 /* XRGraphicLine.m in Sources */,
 				B47CA2F205C6C5470060A30C /* XRPropertyInspector.m in Sources */,

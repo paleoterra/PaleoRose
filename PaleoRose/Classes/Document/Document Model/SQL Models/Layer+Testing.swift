@@ -27,7 +27,33 @@
 import Foundation
 @testable import PaleoRose
 
+// swiftlint:disable identifier_name
 extension Layer {
+
+    static func stub(
+        LAYERID: Int = 0,
+        TYPE: String = "XRLayerText",
+        VISIBLE: Bool = false,
+        ACTIVE: Bool = false,
+        BIDIR: Bool = false,
+        LAYER_NAME: String = "Test Layer",
+        LINEWEIGHT: Float = 1,
+        MAXCOUNT: Int = 30,
+        MAXPERCENT: Float = 0.34
+    ) -> Layer {
+        Layer(
+            LAYERID: LAYERID,
+            TYPE: TYPE,
+            VISIBLE: VISIBLE,
+            ACTIVE: ACTIVE,
+            BIDIR: BIDIR,
+            LAYER_NAME: LAYER_NAME,
+            LINEWEIGHT: LINEWEIGHT,
+            MAXCOUNT: MAXCOUNT,
+            MAXPERCENT: MAXPERCENT
+        )
+    }
+
     func compare(with layer: some XRLayer, id: Int) -> Bool {
         LAYERID == id &&
             TYPE == layer.type() &&

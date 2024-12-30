@@ -27,18 +27,31 @@
 import Foundation
 @testable import PaleoRose
 
-// // swiftlint:disable conditional_returns_on_newline line_length
+// swiftlint:disable line_length identifier_name indentation_width opening_brace
 extension LayerText {
-    func decodeTextStorage(from input: Data) throws -> NSAttributedString? {
-        guard let rtfData = Data(base64Encoded: input) else {
-            return nil
-        }
-        return try NSAttributedString(data: rtfData, options: [:], documentAttributes: nil)
+
+    static func stub(
+        LAYERID: Int = 1,
+        contents: String = "Text",
+        RECT_POINT_X: Float = 0.0,
+        RECT_POINT_Y: Float = 0.0,
+        RECT_SIZE_WIDTH: Float = 40.0,
+        RECT_SIZE_HEIGHT: Float = 40.0
+    ) -> LayerText {
+        let storage = NSTextStorage(string: contents)
+        return LayerText(
+            LAYERID: LAYERID,
+            CONTENTS: Encoding.encodeTextStorage(from: storage),
+            RECT_POINT_X: RECT_POINT_X,
+            RECT_POINT_Y: RECT_POINT_Y,
+            RECT_SIZE_WIDTH: RECT_SIZE_WIDTH,
+            RECT_SIZE_HEIGHT: RECT_SIZE_HEIGHT
+        )
     }
 
     func compare(with layer: XRLayerText, id: Int) throws -> Bool {
 
-        let attributedString = try decodeTextStorage(from: CONTENTS)
+        let attributedString = Encoding.decodeTextStorage(from: CONTENTS)
         if attributedString?.string != layer.contents()?.string {
             return false
         }

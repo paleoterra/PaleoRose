@@ -89,4 +89,10 @@ struct StorageModelFactoryTest {
 
         #expect(try textLayer.compare(with: original, id: location))
     }
+
+    // MARK: - XRLayer Type Creation
+
+    @Test("Given a layer and layertext, then correctly create XRLayerText")
+    func createTextLayerFromStorage() throws {
+    }
 }

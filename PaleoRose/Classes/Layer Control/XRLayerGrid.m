@@ -265,7 +265,7 @@
       radialsIsPercent:(BOOL)isPercent
           radialsTicks:(BOOL)radialTicks
      radialsMinorTicks:(BOOL)radialMinorTicks
-          radialLabels:(BOOL)radialLabels{
+          radialLabels:(BOOL)radialLabels {
     self = [super init];
     if (self) {
         _isVisible = visible;
