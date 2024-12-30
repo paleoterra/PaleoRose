@@ -85,6 +85,7 @@
           ringsVisible:(BOOL)ringsVisible
         fixedRingCount:(int)fixedRingCount
     ringCountIncrement:(int)ringCountIncrement
+ringPercentIncrement:(float)ringPercentIncrement
         showRingLabels:(BOOL)showRingLabels
             labelAngle:(float)labelAngle
               ringFont:(NSFont *)ringFont

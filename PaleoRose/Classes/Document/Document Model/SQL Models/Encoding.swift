@@ -50,7 +50,7 @@ enum Encoding {
         guard let base64EncodedString = String(
             data: input,
             encoding: .utf8
-        ), let rtfData = base64EncodedString.data(using: .utf8) else {
+        ), let rtfData = Data(base64Encoded: base64EncodedString) else {
             return nil
         }
         return NSTextStorage(rtf: rtfData, documentAttributes: nil)

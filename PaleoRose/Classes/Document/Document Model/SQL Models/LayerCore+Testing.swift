@@ -30,7 +30,7 @@ import Foundation
 // swiftlint:disable conditional_returns_on_newline
 extension LayerCore {
 
-    func stub(
+    static func stub(
         LAYERID: Int = 1,
         TYPE: Bool = false,
         RADIUS: Float = 1.0
@@ -41,6 +41,7 @@ extension LayerCore {
             TYPE: TYPE
         )
     }
+
     func compare(with layer: XRLayerCore, id: Int) -> Bool {
         guard LAYERID == id else { return false }
         guard RADIUS == layer.radius() else { return false }

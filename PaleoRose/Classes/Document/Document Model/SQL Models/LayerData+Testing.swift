@@ -31,7 +31,7 @@ import Foundation
 
 extension LayerData {
 
-    func stub(
+    static func stub(
         LAYERID: Int = 1,
         DATASET: Int = 0,
         PLOTTYPE: Int = 0,

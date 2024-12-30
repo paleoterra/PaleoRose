@@ -30,7 +30,7 @@ import Foundation
 // swiftlint:disable conditional_returns_on_newline
 extension LayerLineArrow {
 
-    func stub(
+    static func stub(
         LAYERID: Int = 1,
         DATASET: Int = 0,
         ARROWSIZE: Float = 1.0,

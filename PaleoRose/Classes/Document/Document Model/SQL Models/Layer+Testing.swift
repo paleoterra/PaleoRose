@@ -27,7 +27,7 @@
 import Foundation
 @testable import PaleoRose
 
-// swiftlint:disable identifier_name
+// swiftlint:disable identifier_name conditional_returns_on_newline
 extension Layer {
 
     static func stub(
@@ -55,14 +55,15 @@ extension Layer {
     }
 
     func compare(with layer: some XRLayer, id: Int) -> Bool {
-        LAYERID == id &&
-            TYPE == layer.type() &&
-            VISIBLE == layer.isVisible() &&
-            ACTIVE == layer.isActive() &&
-            BIDIR == layer.isBiDirectional() &&
-            LAYER_NAME == layer.layerName() &&
-            LINEWEIGHT == layer.lineWeight() &&
-            MAXCOUNT == layer.maxCount() &&
-            MAXPERCENT == layer.maxPercent()
+        guard LAYERID == id else { return false }
+        guard TYPE == layer.type() else { return false }
+        guard VISIBLE == layer.isVisible() else { return false }
+        guard ACTIVE == layer.isActive() else { return false }
+        guard BIDIR == layer.isBiDirectional() else { return false }
+        guard LAYER_NAME == layer.layerName() else { return false }
+        guard LINEWEIGHT == layer.lineWeight() else { return false }
+        guard MAXCOUNT == layer.maxCount() else { return false }
+        guard MAXPERCENT == layer.maxPercent() else { return false }
+        return true
     }
 }

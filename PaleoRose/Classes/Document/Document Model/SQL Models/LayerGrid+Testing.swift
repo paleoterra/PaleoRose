@@ -27,11 +27,11 @@
 import Foundation
 @testable import PaleoRose
 
-// swiftlint:disable conditional_returns_on_newline cyclomatic_complexity
+// swiftlint:disable cyclomatic_complexity identifier_name
 
 extension LayerGrid {
 
-    func stub(
+    static func stub(
         LAYERID: Int = 1,
         RINGS_ISFIXEDCOUNT: Bool = false,
         RINGS_VISIBLE: Bool = false,
@@ -40,14 +40,14 @@ extension LayerGrid {
         RINGS_COUNTINCREMENT: Int = 1,
         RINGS_PERCENTINCREMENT: Float = 0.1,
         RINGS_LABELANGLE: Float = 0.1,
-        RINGS_FONTNAME: String = "Arial",
+        RINGS_FONTNAME: String = "ArialMT",
         RINGS_FONTSIZE: Float = 1.0,
         RADIALS_COUNT: Int = 1,
         RADIALS_ANGLE: Float = 0.1,
         RADIALS_LABELALIGN: Int = 0,
         RADIALS_COMPASSPOINT: Int = 0,
         RADIALS_ORDER: Int = 0,
-        RADIALS_FONT: String = "Arial",
+        RADIALS_FONT: String = "ArialMT",
         RADIALS_FONTSIZE: Float = 1.0,
         RADIALS_SECTORLOCK: Bool = false,
         RADIALS_VISIBLE: Bool = false,
@@ -82,30 +82,101 @@ extension LayerGrid {
             RADIALS_LABELS: RADIALS_LABELS
         )
     }
+
+    // swiftlint:disable:next function_body_length
     func compare(with layer: XRLayerGrid, id: Int) -> Bool {
-        guard LAYERID == id else { return false }
-        guard RINGS_ISFIXEDCOUNT == layer.fixedCount() else { return false }
-        guard RINGS_VISIBLE == layer.isVisible() else { return false }
-        guard RINGS_LABELS == layer.showLabels() else { return false }
-        guard RINGS_FIXEDCOUNT == Int(layer.fixedRingCount()) else { return false }
-        guard RINGS_COUNTINCREMENT == Int(layer.ringCountIncrement()) else { return false }
-        guard RINGS_PERCENTINCREMENT == layer.ringPercentIncrement() else { return false }
-        guard RINGS_LABELANGLE == layer.ringLabelAngle() else { return false }
-        guard RINGS_FONTNAME == layer.ringFontName() else { return false }
-        guard RINGS_FONTSIZE == layer.ringFontSize() else { return false }
-        guard RADIALS_COUNT == Int(layer.radialsCount()) else { return false }
-        guard RADIALS_ANGLE == layer.radialsAngle() else { return false }
-        guard RADIALS_LABELALIGN == Int(layer.radialsLabelAlign()) else { return false }
-        guard RADIALS_COMPASSPOINT == Int(layer.radialsCompassPoint()) else { return false }
-        guard RADIALS_ORDER == Int(layer.radiansOrder()) else { return false }
-        guard RADIALS_FONT == layer.radianFontName() else { return false }
-        guard RADIALS_FONTSIZE == layer.radianFontSize() else { return false }
-        guard RADIALS_SECTORLOCK == layer.radianSectorLock() else { return false }
-        guard RADIALS_VISIBLE == layer.radianVisible() else { return false }
-        guard RADIALS_ISPERCENT == layer.radianIsPercent() else { return false }
-        guard RADIALS_TICKS == layer.radianTicks() else { return false }
-        guard RADIALS_MINORTICKS == layer.radianMintoTicks() else { return false }
-        guard RADIALS_LABELS == layer.radianLabels() else { return false }
+        guard LAYERID == id else {
+            print("LAYERID \(LAYERID) != \(id)")
+            return false
+        }
+        guard RINGS_ISFIXEDCOUNT == layer.fixedCount() else {
+            print("RINGS_ISFIXEDCOUNT \(RINGS_ISFIXEDCOUNT) != \(layer.fixedCount())")
+            return false
+        }
+        guard RINGS_VISIBLE == layer.isVisible() else {
+            print("RINGS_VISIBLE \(RINGS_VISIBLE) != \(layer.isVisible())")
+            return false
+        }
+        guard RINGS_LABELS == layer.showLabels() else {
+            print("RINGS_LABELS \(RINGS_LABELS) != \(layer.showLabels())")
+            return false
+        }
+        guard RINGS_FIXEDCOUNT == Int(layer.fixedRingCount()) else {
+            print("RINGS_FIXEDCOUNT \(RINGS_FIXEDCOUNT) != \(layer.fixedRingCount())")
+            return false
+        }
+        guard RINGS_COUNTINCREMENT == Int(layer.ringCountIncrement()) else {
+            print("RINGS_COUNTINCREMENT \(RINGS_COUNTINCREMENT) != \(layer.ringCountIncrement())")
+            return false
+        }
+        guard RINGS_PERCENTINCREMENT == layer.ringPercentIncrement() else {
+            print("RINGS_PERCENTINCREMENT \(RINGS_PERCENTINCREMENT) != \(String(describing: layer.ringPercentIncrement))")
+            return false
+        }
+        guard RINGS_LABELANGLE == layer.ringLabelAngle() else {
+            print("RINGS_LABELANGLE \(RINGS_LABELANGLE) != \(layer.ringLabelAngle())")
+            return false
+        }
+        guard RINGS_FONTNAME == layer.ringFontName() else {
+            print("RINGS_FONTNAME \(RINGS_FONTNAME) != \(layer.ringFontName() ?? "")")
+            return false
+        }
+        guard RINGS_FONTSIZE == layer.ringFontSize() else {
+            print("RINGS_FONTSIZE \(RINGS_FONTSIZE) != \(String(describing: layer.ringFontSize))")
+            return false
+        }
+        guard RADIALS_COUNT == Int(layer.radialsCount()) else {
+            print("RADIALS_COUNT \(RADIALS_COUNT) != \(layer.radialsCount())")
+            return false
+        }
+        guard RADIALS_ANGLE == layer.radialsAngle() else {
+            print("RADIALS_ANGLE \(RADIALS_ANGLE) != \(layer.radialsAngle())")
+            return false
+        }
+        guard RADIALS_LABELALIGN == Int(layer.radialsLabelAlign()) else {
+            print("RADIALS_LABELALIGN \(RADIALS_LABELALIGN) != \(layer.radialsLabelAlign())")
+            return false
+        }
+        guard RADIALS_COMPASSPOINT == Int(layer.radialsCompassPoint()) else {
+            print("RADIALS_COMPASSPOINT \(RADIALS_COMPASSPOINT) != \(layer.radialsCompassPoint())")
+            return false
+        }
+        guard RADIALS_ORDER == Int(layer.radiansOrder()) else {
+            print("RADIALS_ORDER \(RADIALS_ORDER) != \(layer.radiansOrder())")
+            return false
+        }
+        guard RADIALS_FONT == layer.radianFontName() else {
+            print("RADIALS_FONT \(RADIALS_FONT) != \(layer.radianFontName() ?? "")")
+            return false
+        }
+        guard RADIALS_FONTSIZE == layer.radianFontSize() else {
+            print("RADIALS_FONTSIZE \(RADIALS_FONTSIZE) != \(String(describing: layer.radianFontSize))")
+            return false
+        }
+        guard RADIALS_SECTORLOCK == layer.radianSectorLock() else {
+            print("RADIALS_SECTORLOCK \(RADIALS_SECTORLOCK) != \(layer.radianSectorLock())")
+            return false
+        }
+        guard RADIALS_VISIBLE == layer.radianVisible() else {
+            print("RADIALS_VISIBLE \(RADIALS_VISIBLE) != \(layer.radianVisible())")
+            return false
+        }
+        guard RADIALS_ISPERCENT == layer.radianIsPercent() else {
+            print("RADIALS_ISPERCENT \(RADIALS_ISPERCENT) != \(layer.radianIsPercent())")
+            return false
+        }
+        guard RADIALS_TICKS == layer.radianTicks() else {
+            print("RADIALS_TICKS \(RADIALS_TICKS) != \(layer.radianTicks())")
+            return false
+        }
+        guard RADIALS_MINORTICKS == layer.radianMintoTicks() else {
+            print("RADIALS_MINORTICKS \(RADIALS_MINORTICKS) != \(layer.radianMintoTicks())")
+            return false
+        }
+        guard RADIALS_LABELS == layer.radianLabels() else {
+            print("RADIALS_LABELS \(RADIALS_LABELS) != \(layer.radianLabels())")
+            return false
+        }
         return true
     }
 }

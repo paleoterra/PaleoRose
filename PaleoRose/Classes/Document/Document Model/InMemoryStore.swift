@@ -28,6 +28,7 @@ import CodableSQLiteNonThread
 import Foundation
 import OSLog
 
+// swiftlint:disable type_body_length
 class InMemoryStore: NSObject {
     enum InMemoryStoreError: Error {
         case databaseDoesNotExist

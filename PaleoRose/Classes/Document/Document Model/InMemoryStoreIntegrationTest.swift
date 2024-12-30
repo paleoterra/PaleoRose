@@ -88,7 +88,7 @@ struct InMemoryStoreIntegrationTest {
     func createStoreShouldCreateTables(execptedTable: String, sql: any QueryProtocol) throws {
         let interface = SQLiteInterface()
         let store = try #require(try InMemoryStore(interface: interface))
-        let dbPointer = try #require(try store.store())
+        let dbPointer = try #require(store.store())
         let result: [TableSchema] = try #require(
             try interface.executeCodableQuery(
                 sqlite: dbPointer,
@@ -128,7 +128,7 @@ struct InMemoryStoreIntegrationTest {
 
     @Test("Given sample file, then loading the file will populate the in-memory store")
     func readFileShouldPopulateStore() throws {
-        let store = try #require(try InMemoryStore())
+        let store = try #require(InMemoryStore())
 
         try backupFromSampleFileToInMemoryStore(store)
 

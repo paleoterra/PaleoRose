@@ -198,9 +198,9 @@ struct StorageModelFactory {
 
     func createXRLayerGrid(layer: Layer, gridLayer: LayerGrid) -> XRLayerGrid {
         let ringFont = NSFont(name: gridLayer.RINGS_FONTNAME, size: CGFloat(gridLayer.RINGS_FONTSIZE)) ??
-        NSFont.systemFont(ofSize: CGFloat(gridLayer.RINGS_FONTSIZE))
+            NSFont.systemFont(ofSize: CGFloat(gridLayer.RINGS_FONTSIZE))
         let radialFont = NSFont(name: gridLayer.RADIALS_FONT, size: CGFloat(gridLayer.RADIALS_FONTSIZE)) ??
-        NSFont.systemFont(ofSize: CGFloat(gridLayer.RADIALS_FONTSIZE))
+            NSFont.systemFont(ofSize: CGFloat(gridLayer.RADIALS_FONTSIZE))
         return XRLayerGrid(
             isVisible: layer.VISIBLE,
             active: layer.ACTIVE,
@@ -213,6 +213,7 @@ struct StorageModelFactory {
             ringsVisible: gridLayer.RINGS_VISIBLE,
             fixedRingCount: Int32(gridLayer.RINGS_FIXEDCOUNT),
             ringCountIncrement: Int32(gridLayer.RINGS_COUNTINCREMENT),
+            ringPercentIncrement: gridLayer.RINGS_PERCENTINCREMENT,
             showRingLabels: gridLayer.RINGS_LABELS,
             labelAngle: gridLayer.RINGS_LABELANGLE,
             ring: ringFont,
