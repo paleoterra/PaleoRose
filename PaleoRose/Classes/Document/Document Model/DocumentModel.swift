@@ -27,7 +27,7 @@
 import CodableSQLiteNonThread
 import Foundation
 
-class DocumentModel: NSObject {
+class DocumentModel: NSObject, InMemoryStoreDelegate {
 
     enum DocumentModelError: Error {
         case unknownLayerType
@@ -36,9 +36,12 @@ class DocumentModel: NSObject {
     // MARK: - Properties
 
     private var inMemoryStore: InMemoryStore
-    var dataTables: [TableSchema] = []
+    var tableNames: [String] = []
+    @objc var windowSize: CGSize = .zero
     @objc var dataSets: [XRDataSet] = []
+    var layers: [XRLayer] = []
     @objc weak var document: NSDocument?
+    @objc var geometryController: XRGeometryController?
 
     // MARK: - Deprecated Methods
 
@@ -46,6 +49,8 @@ class DocumentModel: NSObject {
     @objc init(inMemoryStore: InMemoryStore, document: NSDocument?) {
         self.inMemoryStore = inMemoryStore
         self.document = document
+        super.init()
+        inMemoryStore.delegate = self
     }
 
     @available(*, deprecated, message: "This code will become unavailable")
@@ -61,8 +66,6 @@ class DocumentModel: NSObject {
 
     @objc func openFile(_ file: URL) throws {
         try inMemoryStore.load(from: file.path)
-        dataTables = try inMemoryStore.dataTables()
-        dataSets = try loadDataSets()
     }
 
     @objc func fileURL() -> URL? {
@@ -75,19 +78,11 @@ class DocumentModel: NSObject {
     // MARK: - General
 
     @objc func dataTableNames() -> [String] {
-        dataTables.map(\.name)
+        tableNames
     }
 
     @objc func possibleColumnNames(table: String) throws -> [String] {
         try inMemoryStore.valueColumnNames(for: table)
-    }
-
-    @objc func windowSize() -> CGSize {
-        do {
-            return try inMemoryStore.windowSize()
-        } catch {
-            return .zero
-        }
     }
 
     @objc func setWindowSize(_ size: CGSize) throws {
@@ -120,38 +115,8 @@ class DocumentModel: NSObject {
 
     // MARK: - Layers
 
-    @objc func storeLayers(_: [XRLayer]) throws {
-//        var finalLayers = [Layer]()
-//        var textLayers = [LayerText]()
-//        var lineArrrowLayers = [LayerLineArrow]()
-//        var coreLayers = [LayerCore]()
-//        var dataLayers = [LayerData]()
-//        var gridLayers = [LayerGrid]()
-//        for (id, oldLayer) in layers.enumerated() {
-//            finalLayers.append(storageLayerFactory.storageLayer(from: oldLayer, at: id))
-//            switch oldLayer {
-//            case let textLayer as XRLayerText:
-//                throw DocumentModelError.unknownLayerType
-//
-//            case let lineArrowLayer as  XRLayerLineArrow:
-//                throw DocumentModelError.unknownLayerType
-//
-//            case let coreLayer as  XRLayerCore:
-//                throw DocumentModelError.unknownLayerType
-//
-//            case let dataLayer as  XRLayerData:
-//                throw DocumentModelError.unknownLayerType
-//
-//            case let gridLayer as  XRLayerGrid:
-//                gridLayers.append(
-//                    storageLayerFactory.storageLayerGrid(from: gridLayer, at: id)
-//                )
-//
-//            default:
-//                throw DocumentModelError.unknownLayerType
-//            }
-//        }
-//        try inMemoryStore.store(layers: finalLayers)
+    @objc func store(layers: [XRLayer]) throws {
+        try inMemoryStore.store(layers: layers)
     }
 
     // MARK: - Read From Store
@@ -160,23 +125,22 @@ class DocumentModel: NSObject {
         try inMemoryStore.load(from: file.path)
     }
 
-    private func loadDataSets() throws -> [XRDataSet] {
-        let dataSetValues = try inMemoryStore.dataSets().map { dataSet in
-            let values = try inMemoryStore.dataSetValues(for: dataSet)
-            return (dataSet, values)
+    // MARK: - Geometry
+
+    func update(geometry: Geometry) {
+        guard let controller = geometryController else {
+            return
         }
-        return dataSetValues.map { dataSet, values in
-            var localValues = values
-            let data = Data(bytes: &localValues, count: MemoryLayout<Float>.size * values.count)
-            return XRDataSet(
-                id: Int32(dataSet._id ?? -1),
-                name: dataSet.NAME ?? "Unnamed",
-                tableName: dataSet.TABLENAME ?? "Unnamed",
-                column: dataSet.COLUMNNAME ?? "Unnamed",
-                predicate: dataSet.PREDICATE ?? "",
-                comments: dataSet.decodedComments() ?? NSMutableAttributedString(),
-                data: data
-            )
-        }
+        controller.configureIsEqualArea(
+            geometry.isEqualArea,
+            isPercent: geometry.isPercent,
+            maxCount: Int32(geometry.MAXCOUNT),
+            maxPercent: geometry.MAXPERCENT,
+            hollowCore: geometry.HOLLOWCORE,
+            sectorSize: geometry.SECTORSIZE,
+            startingAngle: geometry.STARTINGANGLE,
+            sectorCount: Int32(geometry.SECTORCOUNT),
+            relativeSize: geometry.RELATIVESIZE
+        )
     }
 }

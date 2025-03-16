@@ -35,6 +35,8 @@ extension XRLayerCore {
         lineWeight: Float = 0.0,
         maxCount: Int = 0,
         maxPercent: Float = 0.0,
+        stroke: NSColor = .black,
+        fill: NSColor = .white,
         percentRadius: Float = 0.0,
         type: Bool = false
     ) -> XRLayerCore {
@@ -46,6 +48,8 @@ extension XRLayerCore {
             lineWeight: lineWeight,
             maxCount: Int32(maxCount),
             maxPercent: maxPercent,
+            stroke: stroke,
+            fill: fill,
             percentRadius: percentRadius,
             type: type
         )

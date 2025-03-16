@@ -247,6 +247,8 @@
           lineWeight:(float)lineWeight
             maxCount:(int)maxCount
           maxPercent:(float)maxPercent
+           strokeColor:(NSColor *)strokeColor
+             fillColor:(NSColor *)fillColor
           isFixedCount:(BOOL)isFixedCount
           ringsVisible:(BOOL)ringsVisible
         fixedRingCount:(int)fixedRingCount
@@ -276,6 +278,9 @@
         _lineWeight = lineWeight;
         _maxCount = maxCount;
         _maxPercent = maxPercent;
+        _maxPercent = maxPercent;
+        _strokeColor = strokeColor;
+        _fillColor = fillColor;
         _fixedCount = isFixedCount;
         _ringsVisible = ringsVisible;
         _fixedRingCount = fixedRingCount;
@@ -761,6 +766,10 @@
 
 -(int)fixedRingCount {
     return _fixedRingCount;
+}
+
+-(BOOL)ringsVisible {
+    return _ringsVisible;
 }
 
 -(int)ringCountIncrement {

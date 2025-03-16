@@ -163,9 +163,8 @@ struct TestableTable: TableRepresentable, Equatable {
         )
     }
 
-    static func insertQuery() -> any QueryProtocol {
-        // sql insert command for TestableTable
-        let codingKeys: [CodingKeys] = [
+    static func allKeys() -> [String] {
+        let keys: [CodingKeys] = [
             .intValue,
             .boolValue,
             .int32Value,
@@ -180,7 +179,12 @@ struct TestableTable: TableRepresentable, Equatable {
             .optionalString,
             .dataStore
         ]
-        let keys = codingKeys.map(\.stringValue)
+        return keys.map(\.stringValue)
+    }
+
+    static func insertQuery() -> any QueryProtocol {
+        // sql insert command for TestableTable
+        let keys = Self.allKeys()
 
         return Query(sql: "INSERT INTO \(tableName) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", keys: keys)
     }

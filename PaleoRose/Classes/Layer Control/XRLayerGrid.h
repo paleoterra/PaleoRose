@@ -81,6 +81,8 @@
           lineWeight:(float)lineWeight
             maxCount:(int)maxCount
             maxPercent:(float)maxPercent
+           strokeColor:(NSColor *)strokeColor
+             fillColor:(NSColor *)fillColor
           isFixedCount:(BOOL)isFixedCount
           ringsVisible:(BOOL)ringsVisible
         fixedRingCount:(int)fixedRingCount
@@ -125,6 +127,7 @@ ringPercentIncrement:(float)ringPercentIncrement
 -(NSFont *)ringFont;
 -(BOOL)showLabels;
 -(int)fixedRingCount;
+-(BOOL)ringsVisible;
 -(int)ringCountIncrement;
 -(float)ringPercentIncrement;
 -(float)ringLabelAngle;

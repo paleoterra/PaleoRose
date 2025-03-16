@@ -554,12 +554,14 @@
 }
 
 -(id)initWithIsVisible:(BOOL)visible
-              active:(BOOL)active
-               biDir:(BOOL)isBiDir
-                name:(NSString *)layerName
-          lineWeight:(float)lineWeight
-            maxCount:(int)maxCount
-          maxPercent:(float)maxPercent
+                active:(BOOL)active
+                 biDir:(BOOL)isBiDir
+                  name:(NSString *)layerName
+            lineWeight:(float)lineWeight
+              maxCount:(int)maxCount
+            maxPercent:(float)maxPercent
+           strokeColor:(NSColor *)strokeColor
+             fillColor:(NSColor *)fillColor
               plotType:(int)plotType
             totalCount:(int)totalCount
              dotRadius:(float)dotRadius {
@@ -572,6 +574,9 @@
         _lineWeight = lineWeight;
         _maxCount = maxCount;
         _maxPercent = maxPercent;
+        _maxPercent = maxPercent;
+        _strokeColor = strokeColor;
+        _fillColor = fillColor;
         _plotType = plotType;
         _totalCount = totalCount;
         _dotRadius = dotRadius;

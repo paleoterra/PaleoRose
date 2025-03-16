@@ -58,6 +58,8 @@
           lineWeight:(float)lineWeight
             maxCount:(int)maxCount
             maxPercent:(float)maxPercent
+           strokeColor:(NSColor *)strokeColor
+             fillColor:(NSColor *)fillColor
               plotType:(int)plotType
             totalCount:(int)totalCount
              dotRadius:(float)dotRadius;

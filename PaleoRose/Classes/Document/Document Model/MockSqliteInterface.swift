@@ -66,6 +66,13 @@ class MockSqliteInterface: StoreProtocol {
         return pointer
     }
 
+    func resetMock() {
+        executeQueryResult = []
+        executeQueryResult = []
+        queryAccumulator = []
+        columnsToReturn = []
+    }
+
     func createInMemoryStore(identifier: String) throws -> OpaquePointer {
         createInMemoryStoreIdentifierCalled = true
         if let createInMemoryStoreError {

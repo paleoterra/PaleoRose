@@ -33,6 +33,7 @@ public protocol TableRepresentable: Codable {
     static var tableName: String { get }
     static var primaryKey: String? { get }
 
+    static func allKeys() -> [String]
     static func createTableQuery() -> QueryProtocol
     static func insertQuery() -> QueryProtocol
     static func updateQuery() -> QueryProtocol

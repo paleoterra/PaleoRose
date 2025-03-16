@@ -113,12 +113,14 @@
 }
 
 -(id)initWithIsVisible:(BOOL)visible
-              active:(BOOL)active
-               biDir:(BOOL)isBiDir
-                name:(NSString *)layerName
-          lineWeight:(float)lineWeight
-            maxCount:(int)maxCount
-          maxPercent:(float)maxPercent
+                active:(BOOL)active
+                 biDir:(BOOL)isBiDir
+                  name:(NSString *)layerName
+            lineWeight:(float)lineWeight
+              maxCount:(int)maxCount
+            maxPercent:(float)maxPercent
+           strokeColor:(NSColor *)strokeColor
+             fillColor:(NSColor *)fillColor
          percentRadius:(float)percentRadius
                   type:(BOOL)coreType{
     self = [super init];
@@ -130,6 +132,9 @@
         _lineWeight = lineWeight;
         _maxCount = maxCount;
         _maxPercent = maxPercent;
+        _maxPercent = maxPercent;
+        _strokeColor = strokeColor;
+        _fillColor = fillColor;
         _percentRadius = percentRadius;
         _coreType = coreType;
     }

@@ -38,6 +38,7 @@
 		B42083B209637969007A74A8 /* PTFMXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B42083B009637969007A74A8 /* PTFMXMLParser.m */; };
 		B4237C992CFE959700E2B510 /* StorageModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4237C982CFE959100E2B510 /* StorageModelFactory.swift */; };
 		B4237C9C2D013BE900E2B510 /* StorageModelFactoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4237C9A2D013BE900E2B510 /* StorageModelFactoryTest.swift */; };
+		B423AB6D2D472DB1002474C7 /* MockInMemoryStoreDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B423AB6C2D472DA6002474C7 /* MockInMemoryStoreDelegate.swift */; };
 		B427095D095D2D990059C65A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4270928095D2D990059C65A /* Security.framework */; };
 		B427BD070950B3050063849E /* XRTableImporterDelimiterController.h in Headers */ = {isa = PBXBuildFile; fileRef = B427BD050950B3050063849E /* XRTableImporterDelimiterController.h */; };
 		B427BD080950B3050063849E /* XRTableImporterDelimiterController.m in Sources */ = {isa = PBXBuildFile; fileRef = B427BD060950B3050063849E /* XRTableImporterDelimiterController.m */; };
@@ -114,6 +115,7 @@
 		B486E29B1E7B775600F1ADAA /* XRVectorInspector.xib in Resources */ = {isa = PBXBuildFile; fileRef = B486E2991E7B775600F1ADAA /* XRVectorInspector.xib */; };
 		B486E29D1E7B850300F1ADAA /* AppendDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = B486E29C1E7B850300F1ADAA /* AppendDialog.xib */; };
 		B486E29F1E7B9C2300F1ADAA /* XRCreateDatasetSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = B486E29E1E7B9C2300F1ADAA /* XRCreateDatasetSheet.xib */; };
+		B48871EB2D8783360065AEFE /* LayerIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48871EA2D8783360065AEFE /* LayerIdentifiable.swift */; };
 		B48B89FB05C794C500248F96 /* XRDataInspector.h in Headers */ = {isa = PBXBuildFile; fileRef = B48B89F905C794C500248F96 /* XRDataInspector.h */; };
 		B48B89FC05C794C500248F96 /* XRDataInspector.m in Sources */ = {isa = PBXBuildFile; fileRef = B48B89FA05C794C500248F96 /* XRDataInspector.m */; };
 		B48BBEC12CAA1BFA0050852E /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48BBEC02CAA1BF40050852E /* Logger.swift */; };
@@ -158,6 +160,7 @@
 		B4C08803063069F2001A91F4 /* XRExportGraphicAccessory.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C08801063069F2001A91F4 /* XRExportGraphicAccessory.m */; };
 		B4C7CF7405D7FA190071FD29 /* removeLayer.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B4C7CF7305D7FA180071FD29 /* removeLayer.tiff */; };
 		B4DB28E32D22450300FC6A49 /* Encoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DB28E22D2244FC00FC6A49 /* Encoding.swift */; };
+		B4DF2D932D580C6E00F6345B /* CommonUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DF2D922D580C6E00F6345B /* CommonUtilities.swift */; };
 		B4E0138D05EC4AC500C50D5D /* version.plist in Resources */ = {isa = PBXBuildFile; fileRef = B4E0138C05EC4AC500C50D5D /* version.plist */; };
 		B4E2DE8905C5BD6500714F6F /* XRLayerGrid.h in Headers */ = {isa = PBXBuildFile; fileRef = B4E2DE8705C5BD6500714F6F /* XRLayerGrid.h */; };
 		B4E2DE8A05C5BD6500714F6F /* XRLayerGrid.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E2DE8805C5BD6500714F6F /* XRLayerGrid.m */; };
@@ -296,6 +299,7 @@
 		B42083B009637969007A74A8 /* PTFMXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTFMXMLParser.m; sourceTree = "<group>"; };
 		B4237C982CFE959100E2B510 /* StorageModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageModelFactory.swift; sourceTree = "<group>"; };
 		B4237C9A2D013BE900E2B510 /* StorageModelFactoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageModelFactoryTest.swift; sourceTree = "<group>"; };
+		B423AB6C2D472DA6002474C7 /* MockInMemoryStoreDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockInMemoryStoreDelegate.swift; sourceTree = "<group>"; };
 		B4270928095D2D990059C65A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
 		B427BD050950B3050063849E /* XRTableImporterDelimiterController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRTableImporterDelimiterController.h; sourceTree = "<group>"; };
 		B427BD060950B3050063849E /* XRTableImporterDelimiterController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XRTableImporterDelimiterController.m; sourceTree = "<group>"; };
@@ -378,6 +382,7 @@
 		B486E2791E7B76A500F1ADAA /* XRTableAddColumnSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XRTableAddColumnSheet.xib; sourceTree = "<group>"; };
 		B486E29C1E7B850300F1ADAA /* AppendDialog.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppendDialog.xib; sourceTree = "<group>"; };
 		B486E29E1E7B9C2300F1ADAA /* XRCreateDatasetSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XRCreateDatasetSheet.xib; sourceTree = "<group>"; };
+		B48871EA2D8783360065AEFE /* LayerIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerIdentifiable.swift; sourceTree = "<group>"; };
 		B48B89F905C794C500248F96 /* XRDataInspector.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRDataInspector.h; sourceTree = "<group>"; };
 		B48B89FA05C794C500248F96 /* XRDataInspector.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRDataInspector.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B48BBEC02CAA1BF40050852E /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -423,6 +428,7 @@
 		B4C08801063069F2001A91F4 /* XRExportGraphicAccessory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRExportGraphicAccessory.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B4C7CF7305D7FA180071FD29 /* removeLayer.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = removeLayer.tiff; sourceTree = "<group>"; };
 		B4DB28E22D2244FC00FC6A49 /* Encoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encoding.swift; sourceTree = "<group>"; };
+		B4DF2D922D580C6E00F6345B /* CommonUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonUtilities.swift; sourceTree = "<group>"; };
 		B4E0138C05EC4AC500C50D5D /* version.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; path = version.plist; sourceTree = "<group>"; };
 		B4E2DE8705C5BD6500714F6F /* XRLayerGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRLayerGrid.h; sourceTree = "<group>"; };
 		B4E2DE8805C5BD6500714F6F /* XRLayerGrid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRLayerGrid.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -1011,6 +1017,7 @@
 				B4866BF32CAE02C300319712 /* StoreProtocol.swift */,
 				B4866BF52CAE033800319712 /* MockSqliteInterface.swift */,
 				B48BBEC62CAA20C70050852E /* InMemoryStoreTest.swift */,
+				B423AB6C2D472DA6002474C7 /* MockInMemoryStoreDelegate.swift */,
 				B41C17502CB1C1B0002D19C2 /* InMemoryStoreIntegrationTest.swift */,
 				B4F2B17D2C97CB150017E717 /* SQL Models */,
 			);
@@ -1023,6 +1030,7 @@
 				B41C18102CC1A9E4002D19C2 /* rtest1.XRose */,
 				B4B0BB691E7E41C900F392DA /* Info.plist */,
 				B41C174D2CB0E45C002D19C2 /* Tag.swift */,
+				B4DF2D922D580C6E00F6345B /* CommonUtilities.swift */,
 			);
 			path = "Unit Tests";
 			sourceTree = "<group>";
@@ -1031,6 +1039,7 @@
 			isa = PBXGroup;
 			children = (
 				B4237C982CFE959100E2B510 /* StorageModelFactory.swift */,
+				B48871EA2D8783360065AEFE /* LayerIdentifiable.swift */,
 				B4237C9A2D013BE900E2B510 /* StorageModelFactoryTest.swift */,
 				B4DB28E22D2244FC00FC6A49 /* Encoding.swift */,
 				B4F2B17E2C97CB300017E717 /* WindowControllerSize.swift */,
@@ -1399,6 +1408,7 @@
 				B4F25AE505C59CE6008591BE /* XRGraphicDotDeviation.m in Sources */,
 				B4DB28E32D22450300FC6A49 /* Encoding.swift in Sources */,
 				B4E2DE8A05C5BD6500714F6F /* XRLayerGrid.m in Sources */,
+				B423AB6D2D472DB1002474C7 /* MockInMemoryStoreDelegate.swift in Sources */,
 				B4EE8F7905C5E0A9001BACD3 /* XRGraphicLine.m in Sources */,
 				B47CA2F205C6C5470060A30C /* XRPropertyInspector.m in Sources */,
 				B47CA37905C6CB150060A30C /* XREmptyInspectorController.m in Sources */,
@@ -1422,6 +1432,7 @@
 				B4F2B18B2C97CB300017E717 /* Layer.swift in Sources */,
 				B4F2B18C2C97CB300017E717 /* LayerText.swift in Sources */,
 				B4F2B18D2C97CB300017E717 /* LayerGrid.swift in Sources */,
+				B48871EB2D8783360065AEFE /* LayerIdentifiable.swift in Sources */,
 				B4F2B18E2C97CB300017E717 /* LayerLineArrow.swift in Sources */,
 				B4F2B18F2C97CB300017E717 /* LayerCore.swift in Sources */,
 				B4F2B1902C97CB300017E717 /* Geometry.swift in Sources */,
@@ -1476,6 +1487,7 @@
 				B4866BF72CAE039200319712 /* MockSqliteInterface.swift in Sources */,
 				B4AE41B82D0BCEBF00E05D96 /* XRLayerLineArrow+Stub.swift in Sources */,
 				B4AE41BF2D0BD08400E05D96 /* XRLayerGrid+Stub.swift in Sources */,
+				B4DF2D932D580C6E00F6345B /* CommonUtilities.swift in Sources */,
 				B4AE41C12D0BD09300E05D96 /* XRLayerCore+Stub.swift in Sources */,
 				B427CFF21E81EB9E0047F659 /* XRStatisticTests.m in Sources */,
 				B41C17522CB1C278002D19C2 /* InMemoryStoreIntegrationTest.swift in Sources */,

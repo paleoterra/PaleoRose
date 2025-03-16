@@ -1,10 +1,10 @@
 //
-// LayerCore.swift
+// LayerIdentifiable.swift
 // PaleoRose
 //
 // MIT License
 //
-// Copyright (c) 2024 to present Thomas L. Moore.
+// Copyright (c) 2025 to present Thomas L. Moore.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,37 +24,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import CodableSQLiteNonThread
-import Foundation
-
-struct LayerCore: TableRepresentable, LayerIdentifiable {
-    static var tableName: String = "_layerCore"
-    static var primaryKey: String?
-
-    var LAYERID: Int
-    var RADIUS: Float
-    var TYPE: Bool
-
-    // MARK: - TableRepresentable
-
-    static func allKeys() -> [String] {
-        let keys: [CodingKeys] = [.LAYERID, .RADIUS, .TYPE]
-        return keys.map(\.stringValue)
-    }
-
-    static func createTableQuery() -> any QueryProtocol {
-        Query(sql: "CREATE TABLE IF NOT EXISTS _layerCore (LAYERID INTEGER PRIMARY KEY, RADIUS REAL, TYPE BOOL)")
-    }
-
-    static func insertQuery() -> any QueryProtocol {
-        Query(sql: "INSERT INTO _layerCore (LAYERID, RADIUS, TYPE) VALUES (?,?,?);")
-    }
-
-    static func updateQuery() -> any QueryProtocol {
-        Query(sql: "")
-    }
-
-    static func deleteQuery() -> any QueryProtocol {
-        Query(sql: "")
-    }
+protocol LayerIdentifiable {
+    var LAYERID: Int { get }
 }

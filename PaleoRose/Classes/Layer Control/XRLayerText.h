@@ -42,17 +42,19 @@
 -(id)initWithGeometryController:(XRGeometryController *)aController xmlTree:(LITMXMLTree *)configureTree forVersion:(NSString *)version withParentView:(NSView *)aParent;
 
 -(id)initWithIsVisible:(BOOL)visible
-              active:(BOOL)active
-               biDir:(BOOL)isBiDir
-                name:(NSString *)layerName
-          lineWeight:(float)lineWeight
-            maxCount:(int)maxCount
-          maxPercent:(float)maxPercent
-            contents:(NSAttributedString *)contents
-         rectOriginX:(float)rectOriginX
-         rectOriginY:(float)rectOriginY
-         rectHeight:(float)rectHeight
-           rectWidth:(float)rectWidth ;
+                active:(BOOL)active
+                 biDir:(BOOL)isBiDir
+                  name:(NSString *)layerName
+            lineWeight:(float)lineWeight
+              maxCount:(int)maxCount
+            maxPercent:(float)maxPercent
+           strokeColor:(NSColor *)strokeColor
+             fillColor:(NSColor *)fillColor
+              contents:(NSAttributedString *)contents
+           rectOriginX:(float)rectOriginX
+           rectOriginY:(float)rectOriginY
+            rectHeight:(float)rectHeight
+             rectWidth:(float)rectWidth ;
 
 
 - (void)setContents:(id)contents;

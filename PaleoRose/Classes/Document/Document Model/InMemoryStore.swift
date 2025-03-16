@@ -28,12 +28,22 @@ import CodableSQLiteNonThread
 import Foundation
 import OSLog
 
-// swiftlint:disable type_body_length
+protocol InMemoryStoreDelegate: AnyObject {
+    var tableNames: [String] { get set }
+    var windowSize: CGSize { get set }
+    var dataSets: [XRDataSet] { get set }
+    var layers: [XRLayer] { get set }
+
+    func update(geometry: Geometry)
+}
+
+// swiftlint:disable type_body_length file_length
 class InMemoryStore: NSObject {
     enum InMemoryStoreError: Error {
         case databaseDoesNotExist
         case unknownType
         case unexpectedEmptyResult
+        case invalidLayersStore
     }
 
     enum BackupType {
@@ -48,7 +58,12 @@ class InMemoryStore: NSObject {
 
     private var sqliteStore: OpaquePointer?
     private let storageLayerFactory = StorageModelFactory()
+    private let storedWindowSizes: [WindowControllerSize] = []
+    private var storedColors: [Color] = []
+    private var storedDataSets: [DataSet] = []
     let interface: StoreProtocol
+
+    weak var delegate: InMemoryStoreDelegate?
 
     private let createTableQueries: [QueryProtocol] = [
         WindowControllerSize.createTableQuery(),
@@ -98,8 +113,66 @@ class InMemoryStore: NSObject {
         try backup(info: BackupInfo(path: filePath, type: .toFile))
     }
 
-    func dataTables() throws -> [TableSchema] {
+    // MARK: - Read All
+
+    func readFromStore(completion: @escaping (Result<Bool, Error>) -> Void) {
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            guard let self else {
+                completion(.failure(InMemoryStoreError.databaseDoesNotExist))
+                return
+            }
+            do {
+                let sqliteStore = try validateStore()
+                // directly settable values
+                let tableNames = try tableNames(sqliteStore: sqliteStore)
+                DispatchQueue.main.async { [weak self] in
+                    self?.delegate?.tableNames = tableNames
+                }
+                do {
+                    let windowSize = try windowSize(sqliteStore: sqliteStore)
+                    DispatchQueue.main.async { [weak self] in
+                        self?.delegate?.windowSize = windowSize
+                    }
+                } catch InMemoryStoreError.unexpectedEmptyResult {
+                    print("Window size not found")
+                } catch {
+                    throw error
+                }
+                do {
+                    let geometry = try geometry(sqliteStore: sqliteStore)
+                    DispatchQueue.main.async { [weak self] in
+                        self?.delegate?.update(geometry: geometry)
+                    }
+                } catch InMemoryStoreError.unexpectedEmptyResult {
+                    print("Window size not found")
+                } catch {
+                    throw error
+                }
+                // requires additional processing
+                let dataSets = try dataSets(sqliteStore: sqliteStore)
+                DispatchQueue.main.async { [weak self] in
+                    self?.delegate?.dataSets = dataSets
+                }
+                let layers = try readLayers(sqliteStore: sqliteStore)
+                DispatchQueue.main.async { [weak self] in
+                    self?.delegate?.layers = layers
+                }
+                completion(.success(true))
+            } catch {
+                completion(.failure(error))
+            }
+        }
+    }
+
+    // MARK: - Tables
+
+    func tableNames(sqliteStore: OpaquePointer) throws -> [String] {
         let sqliteStore = try validateStore()
+        let tables = try tableMetadata(sqliteStore: sqliteStore)
+        return tables.map(\.name)
+    }
+
+    private func tableMetadata(sqliteStore: OpaquePointer) throws -> [TableSchema] {
         let tables: [TableSchema] = try interface.executeCodableQuery(
             sqlite: sqliteStore,
             query: TableSchema.storedValues()
@@ -121,14 +194,123 @@ class InMemoryStore: NSObject {
         return tables.filter { !nonDataTableNames.contains($0.name) }
     }
 
-    func dataSets() throws -> [DataSet] {
-        let sqliteStore = try validateStore()
+    // MARK: - BEGIN READING TABLES
 
-        return try interface.executeCodableQuery(
+    // MARK: - Read Table Names
+
+    private func dataSets(sqliteStore: OpaquePointer) throws -> [XRDataSet] {
+        let sets: [DataSet] = try interface.executeCodableQuery(
             sqlite: sqliteStore,
             query: DataSet.storedValues()
         )
+        return try sets.map { set in
+            let values = try dataSetValues(for: set)
+            let data = Data(bytes: values, count: MemoryLayout<Float>.size * values.count)
+            return XRDataSet(
+                id: Int32(set._id ?? -1),
+                name: set.NAME ?? "Unnamed",
+                tableName: set.TABLENAME ?? "Unnamed",
+                column: set.COLUMNNAME ?? "Unnamed",
+                predicate: set.PREDICATE ?? "",
+                comments: set.decodedComments() ?? NSMutableAttributedString(),
+                data: data
+            )
+        }
     }
+
+    // MARK: - Read Window Size
+
+    func windowSize(sqliteStore: OpaquePointer) throws -> CGSize {
+        let sqliteStore = try validateStore()
+        let sizes: [WindowControllerSize] = try interface.executeCodableQuery(
+            sqlite: sqliteStore,
+            query: WindowControllerSize.storedValues()
+        )
+        if sizes.isEmpty {
+            throw InMemoryStoreError.unexpectedEmptyResult
+        }
+        return CGSize(width: sizes[0].width, height: sizes[0].height)
+    }
+
+    private func readWindowSize(sqliteStore: OpaquePointer) throws -> [WindowControllerSize] {
+        let sizes: [WindowControllerSize] = try interface.executeCodableQuery(
+            sqlite: sqliteStore,
+            query: WindowControllerSize.storedValues()
+        )
+        if sizes.isEmpty {
+            throw InMemoryStoreError.unexpectedEmptyResult
+        }
+        return sizes
+    }
+
+    // MARK: - Read Geometry
+
+    func geometry(sqliteStore: OpaquePointer) throws -> Geometry {
+        let geometries: [Geometry] = try interface.executeCodableQuery(
+            sqlite: sqliteStore,
+            query: Geometry.storedValues()
+        )
+        if geometries.isEmpty {
+            throw InMemoryStoreError.unexpectedEmptyResult
+        }
+        return geometries[0]
+    }
+
+    // MARK: - Read Colors
+
+    private func readColors(sqliteStore: OpaquePointer) throws -> [Color] {
+        try interface.executeCodableQuery(
+            sqlite: sqliteStore,
+            query: Color.storedValues()
+        )
+    }
+
+    // MARK: - Read Layers
+
+    private func readLayerTable(sqliteStore: OpaquePointer) throws -> [Layer] {
+        try interface.executeCodableQuery(sqlite: sqliteStore, query: Layer.storedValues())
+    }
+
+    private func readLayerTextTable(sqliteStore: OpaquePointer) throws -> [LayerText] {
+        try interface.executeCodableQuery(sqlite: sqliteStore, query: LayerText.storedValues())
+    }
+
+    private func readLayerLineArrowTable(sqliteStore: OpaquePointer) throws -> [LayerLineArrow] {
+        try interface.executeCodableQuery(sqlite: sqliteStore, query: LayerLineArrow.storedValues())
+    }
+
+    private func readLayerCoreTable(sqliteStore: OpaquePointer) throws -> [LayerCore] {
+        try interface.executeCodableQuery(sqlite: sqliteStore, query: LayerCore.storedValues())
+    }
+
+    private func readLayerGridTable(sqliteStore: OpaquePointer) throws -> [LayerGrid] {
+        try interface.executeCodableQuery(sqlite: sqliteStore, query: LayerGrid.storedValues())
+    }
+
+    private func readLayerDataTable(sqliteStore: OpaquePointer) throws -> [LayerData] {
+        try interface.executeCodableQuery(sqlite: sqliteStore, query: LayerData.storedValues())
+    }
+
+    // MARK: - END READING TABLES
+
+    // MARK: - BEGIN PROCESSING READ TABLES
+
+    // MARK: - END PROCESSING READ TABLES
+
+    // MARK: - Write Window Size
+
+    func store(windowSize: CGSize) throws {
+        let sqliteStore = try validateStore()
+        let size = WindowControllerSize(width: windowSize.width, height: windowSize.height)
+        _ = try interface.executeQuery(
+            sqlite: sqliteStore, query: WindowControllerSize.deleteAllRecords()
+        ) // No primary key exists
+        var query = WindowControllerSize.insertQuery()
+        query.bindings = try [size.valueBindables(keys: WindowControllerSize.allKeys())]
+        _ = try interface.executeQuery(sqlite: sqliteStore, query: query)
+    }
+
+    // MARK: - Data Sets
 
     func dataSetValues(for dataSet: DataSet) throws -> [Float] {
         let sqliteStore = try validateStore()
@@ -166,31 +348,6 @@ class InMemoryStore: NSObject {
         }
     }
 
-    // MARK: - Window Size
-
-    func store(windowSize: CGSize) throws {
-        let sqliteStore = try validateStore()
-        let size = WindowControllerSize(width: windowSize.width, height: windowSize.height)
-        _ = try interface.executeQuery(
-            sqlite: sqliteStore, query: WindowControllerSize.deleteAllRecords()
-        ) // No primary key exists
-        var query = WindowControllerSize.insertQuery()
-        query.bindings = try [size.valueBindables(keys: WindowControllerSize.allKeys())]
-        _ = try interface.executeQuery(sqlite: sqliteStore, query: query)
-    }
-
-    func windowSize() throws -> CGSize {
-        let sqliteStore = try validateStore()
-        let sizes: [WindowControllerSize] = try interface.executeCodableQuery(
-            sqlite: sqliteStore,
-            query: WindowControllerSize.storedValues()
-        )
-        if sizes.isEmpty {
-            throw InMemoryStoreError.unexpectedEmptyResult
-        }
-        return CGSize(width: sizes[0].width, height: sizes[0].height)
-    }
-
     // MARK: - Geometry
 
     func store(geometryController: XRGeometryController) throws {
@@ -202,20 +359,9 @@ class InMemoryStore: NSObject {
         _ = try interface.executeQuery(sqlite: sqliteStore, query: query)
     }
 
-    func geometry() throws -> Geometry {
-        let sqliteStore = try validateStore()
-        let geometries: [Geometry] = try interface.executeCodableQuery(
-            sqlite: sqliteStore,
-            query: Geometry.storedValues()
-        )
-        if geometries.isEmpty {
-            throw InMemoryStoreError.unexpectedEmptyResult
-        }
-        return geometries[0]
-    }
-
     func configure(geometryController: XRGeometryController) throws {
-        let geometry = try geometry()
+        let sqliteStore = try validateStore()
+        let geometry = try geometry(sqliteStore: sqliteStore)
         geometryController.configureIsEqualArea(
             geometry.isEqualArea,
             isPercent: geometry.isPercent,
@@ -229,16 +375,43 @@ class InMemoryStore: NSObject {
         )
     }
 
-    // MARK: - Layer
+    // MARK: - Colors
 
-//    func store(layers: [XRLayer]) throws {
-//        let sqliteStore = try validateStore()
-//        try deleteAllLayers(sqliteStore: sqliteStore)
-//        for (index, layer) in layers.enumerated() {
-//
-//        }
-//
-//    }
+    private func storeColors(sqliteStore: OpaquePointer) throws {
+        _ = try interface.executeQuery(
+            sqlite: sqliteStore,
+            query: Color.deleteAllRecords()
+        )
+        var query = Color.insertQuery()
+        query.bindings = try storedColors.map { color in
+            try color.valueBindables(keys: Color.allKeys())
+        }
+        _ = try interface.executeQuery(
+            sqlite: sqliteStore,
+            query: query
+        )
+    }
+
+    // MARK: - Storing Layers
+
+    func store(layers: [XRLayer]) throws {
+        let sqliteStore = try validateStore()
+        try deleteAllLayers(sqliteStore: sqliteStore)
+        for (index, layer) in layers.enumerated() {
+            print("Storing layer \(index)")
+            try store(layer: layer, at: index, in: sqliteStore)
+        }
+    }
+
+    private func store(layer: XRLayer, at index: Int, in sqliteStore: OpaquePointer) throws {
+        try storageLayerFactory.storageLayers(from: layer, at: index)
+            .forEach { storageLayer in
+                let layerType = type(of: storageLayer)
+                var query = layerType.insertQuery()
+                query.bindings = try [storageLayer.valueBindables(keys: layerType.allKeys())]
+                _ = try interface.executeQuery(sqlite: sqliteStore, query: query)
+            }
+    }
 
     private func deleteAllLayers(sqliteStore: OpaquePointer) throws {
         let deleteQueries = [
@@ -254,25 +427,33 @@ class InMemoryStore: NSObject {
         }
     }
 
-    func store(layers: [Layer]) throws {
-        let sqliteStore = try validateStore()
-        _ = try interface.executeQuery(sqlite: sqliteStore, query: Layer.deleteAllRecords())
-        try layers.forEach { try store(layer: $0) }
-    }
+    // MARK: - Reading Layers
 
-    func store(layer: Layer) throws {
+    func readLayers(sqliteStore: OpaquePointer) throws -> [XRLayer] {
         let sqliteStore = try validateStore()
-        var deleteQuery = Layer.deleteQuery()
-        deleteQuery.bindings = try [layer.valueBindables(keys: ["LAYERID"])]
-        _ = try interface.executeQuery(sqlite: sqliteStore, query: deleteQuery)
-        var query = Layer.insertQuery()
-        query.bindings = try [layer.valueBindables(keys: Layer.allKeys())]
-        _ = try interface.executeQuery(sqlite: sqliteStore, query: query)
-    }
-
-    func layers() throws -> [Layer] {
-        let sqliteStore = try validateStore()
-        return try interface.executeCodableQuery(sqlite: sqliteStore, query: Layer.storedValues())
+        let layers = try readLayerTable(sqliteStore: sqliteStore)
+        var typeLayers: [String: [LayerIdentifiable]] = [:]
+        let layerTexts = try readLayerTextTable(sqliteStore: sqliteStore)
+        typeLayers["XRLayerText"] = layerTexts
+        let layerLineArrows = try readLayerLineArrowTable(sqliteStore: sqliteStore)
+        typeLayers["XRLayerLineArrow"] = layerLineArrows
+        let layerCores = try readLayerCoreTable(sqliteStore: sqliteStore)
+        typeLayers["XRLayerCore"] = layerCores
+        let layerGrids = try readLayerGridTable(sqliteStore: sqliteStore)
+        typeLayers["XRLayerGrid"] = layerGrids
+        let layerDatas = try readLayerDataTable(sqliteStore: sqliteStore)
+        typeLayers["XRLayerData"] = layerDatas
+        let colors = try readColors(sqliteStore: sqliteStore)
+        storageLayerFactory.set(colors: colors)
+        var xrLayers: [XRLayer] = []
+        for layer in layers {
+            guard let typeLayerArray = typeLayers[layer.TYPE], let typeLayer = typeLayerArray.first(where: { $0.LAYERID == layer.LAYERID }) else {
+                throw InMemoryStoreError.invalidLayersStore
+            }
+            let newLayer = try storageLayerFactory.createXRLayer(baseLayer: layer, targetLayer: typeLayer)
+            xrLayers.append(newLayer)
+        }
+        return xrLayers
     }
 
     // MARK: - Table Manipulation

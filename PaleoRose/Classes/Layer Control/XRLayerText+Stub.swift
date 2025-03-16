@@ -36,6 +36,8 @@ extension XRLayerText {
         lineWeight: Float = 0.0,
         maxCount: Int = 0,
         maxPercent: Float = 0.0,
+        stroke: NSColor = .black,
+        fill: NSColor = .white,
         contentString: String = "Text Content",
         rect: CGRect = CGRect(x: 1, y: 2, width: 3, height: 4)
     ) -> XRLayerText {
@@ -47,6 +49,8 @@ extension XRLayerText {
             lineWeight: lineWeight,
             maxCount: Int32(maxCount),
             maxPercent: maxPercent,
+            stroke: stroke,
+            fill: fill,
             contents: NSTextStorage(string: contentString),
             rectOriginX: Float(rect.origin.x),
             rectOriginY: Float(rect.origin.y),

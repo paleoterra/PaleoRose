@@ -39,7 +39,9 @@ extension Layer {
         LAYER_NAME: String = "Test Layer",
         LINEWEIGHT: Float = 1,
         MAXCOUNT: Int = 30,
-        MAXPERCENT: Float = 0.34
+        MAXPERCENT: Float = 0.34,
+        STROKECOLORID: Int = 0,
+        FILLCOLORID: Int = 1
     ) -> Layer {
         Layer(
             LAYERID: LAYERID,
@@ -50,7 +52,9 @@ extension Layer {
             LAYER_NAME: LAYER_NAME,
             LINEWEIGHT: LINEWEIGHT,
             MAXCOUNT: MAXCOUNT,
-            MAXPERCENT: MAXPERCENT
+            MAXPERCENT: MAXPERCENT,
+            STROKECOLORID: STROKECOLORID,
+            FILLCOLORID: FILLCOLORID
         )
     }
 

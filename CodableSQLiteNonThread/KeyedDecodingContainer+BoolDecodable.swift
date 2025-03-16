@@ -29,12 +29,22 @@ public extension KeyedDecodingContainer {
     /// Decode BOOL from SQLite
     func decodeSqliteBool(forKey key: Self.Key) throws -> Bool {
         do {
+            return try decode(Bool.self, forKey: key)
+        } catch {
+            print("decodeSqliteBool failed: \(error)")
+        }
+        do {
             let value = try decode(Int.self, forKey: key)
             return value == 1
         } catch {
             print("boolValue decode as bool failed: \(error)")
+        }
+        do {
             let string = try decode(String.self, forKey: key)
             return string.lowercased() == "true" ? true : false
+        } catch {
+            print("boolValue decode as string failed: \(error)")
+            throw error
         }
     }
 }

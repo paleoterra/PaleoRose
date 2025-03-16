@@ -212,7 +212,7 @@
         }
 
         CGRect frame = [self.mainWindowController.window frame];
-        frame.size = [self.documentModel windowSize];
+        frame.size = self.documentModel.windowSize;
         if (frame.size.width != 0) {
             [[self.mainWindowController window] setFrame:frame display:YES];
         }

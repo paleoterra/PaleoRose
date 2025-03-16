@@ -64,6 +64,8 @@ static NSLayoutManager *sharedDrawingLayoutManager(void);
             lineWeight:(float)lineWeight
               maxCount:(int)maxCount
             maxPercent:(float)maxPercent
+           strokeColor:(NSColor *)strokeColor
+             fillColor:(NSColor *)fillColor
               contents:(NSAttributedString *)contents
            rectOriginX:(float)rectOriginX
            rectOriginY:(float)rectOriginY
@@ -89,6 +91,8 @@ static NSLayoutManager *sharedDrawingLayoutManager(void);
         _lineWeight = lineWeight;
         _maxCount = maxCount;
         _maxPercent = maxPercent;
+        _strokeColor = strokeColor;
+        _fillColor = fillColor;
         [self setContents:contents];
         textBounds = NSMakeRect((CGFloat)rectOriginX, (CGFloat)rectOriginY, (CGFloat)rectWidth, (CGFloat)rectHeight);
 //        [self setContents:[[NSAttributedString alloc] initWithData:decodeBase64([[NSString alloc] initWithData:contents encoding:NSUTF8StringEncoding]) options:@{} documentAttributes:nil error:nil ]];

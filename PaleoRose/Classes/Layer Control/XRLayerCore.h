@@ -49,6 +49,8 @@
             lineWeight:(float)lineWeight
               maxCount:(int)maxCount
             maxPercent:(float)maxPercent
+           strokeColor:(NSColor *)strokeColor
+             fillColor:(NSColor *)fillColor
          percentRadius:(float)percentRadius
                   type:(BOOL)coreType;
 

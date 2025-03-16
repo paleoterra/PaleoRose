@@ -35,6 +35,8 @@ extension XRLayerData {
         lineWeight: Float = 0.0,
         maxCount: Int32 = 0,
         maxPercent: Float = 0.0,
+        stroke: NSColor = NSColor.black,
+        fill: NSColor = NSColor.white,
         plotType: Int = 0,
         totalCount: Int = 10,
         dotRadius: Float = 2.0
@@ -47,6 +49,8 @@ extension XRLayerData {
             lineWeight: lineWeight,
             maxCount: maxCount,
             maxPercent: maxPercent,
+            stroke: stroke,
+            fill: fill,
             plotType: Int32(plotType),
             totalCount: Int32(totalCount),
             dotRadius: dotRadius

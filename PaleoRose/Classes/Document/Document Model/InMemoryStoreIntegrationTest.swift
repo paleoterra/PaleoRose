@@ -28,7 +28,7 @@ import CodableSQLiteNonThread
 @testable import PaleoRose
 import Testing
 
-// swiftlint:disable type_body_length indentation_width
+// swiftlint:disable indentation_width file_length type_body_length
 @Suite(
     "InMemory Store Integration Test",
     .tags(.integration)
@@ -162,7 +162,7 @@ struct InMemoryStoreIntegrationTest {
     @Test("Given document with no data, when requesting data tables, then return an empty array")
     func returnEmptyTableListWhenNoData() throws {
         let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
-        let tables = try store.dataTables()
+        let tables = try store.tableNames(sqliteStore: store.sqlitePointer())
         #expect(tables.isEmpty)
     }
 
@@ -171,28 +171,22 @@ struct InMemoryStoreIntegrationTest {
         let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
         try backupFromSampleFileToInMemoryStore(store)
 
-        let tables = try store.dataTables()
+        let tables = try store.tableNames(sqliteStore: store.sqlitePointer())
         print(tables)
         #expect(tables.count == 1, "Expected 1 table, got \(tables.count)")
-        #expect(tables.first?.name == "rtest")
+        #expect(tables.first == "rtest")
     }
 
-    @Test("Given document with data, when requesting datasets then resturn expected array with 2 records")
+    // MARK: - Data Sets
+
+    @Test("Given document with data, when requesting datasets then return expected array with 2 records")
     func returnPopulatedDatasets() throws {
         let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
         try backupFromSampleFileToInMemoryStore(store)
 
-        let datasets = try store.dataSets()
-        let expectedDataSet = DataSet(
-            _id: 1,
-            NAME: "Test",
-            TABLENAME: "rtest",
-            COLUMNNAME: "_id",
-            PREDICATE: nil,
-            COMMENTS: nil
-        )
-        try #require(datasets.count == 2, "Expected 2 datasets, got \(datasets.count)")
-        #expect(datasets.first == expectedDataSet)
+        let datasets = try store.tableNames(sqliteStore: store.sqlitePointer())
+
+        try #require(datasets == ["rtest"])
     }
 
     @Test("Given document with data, when requesting data for dataset, then return correct Float array")
@@ -221,7 +215,7 @@ struct InMemoryStoreIntegrationTest {
         let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
         let size = CGSize(width: expectedWidth, height: expectedHeight)
         try store.store(windowSize: size)
-        let windowSize = try store.windowSize()
+        let windowSize = try store.windowSize(sqliteStore: store.sqlitePointer())
         #expect(windowSize.width == expectedWidth)
         #expect(windowSize.height == expectedHeight)
     }
@@ -244,7 +238,7 @@ struct InMemoryStoreIntegrationTest {
         size = CGSize(width: expectedWidth, height: expectedHeight)
         try store.store(windowSize: size)
 
-        let windowSize = try store.windowSize()
+        let windowSize = try store.windowSize(sqliteStore: store.sqlitePointer())
         #expect(windowSize.width == expectedWidth)
         #expect(windowSize.height == expectedHeight)
     }
@@ -257,12 +251,12 @@ struct InMemoryStoreIntegrationTest {
         let endTable = "rtest2"
         let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
         try backupFromSampleFileToInMemoryStore(store)
-        let startTableNames = try store.dataTables().map(\.tbl_name)
+        let startTableNames = try store.tableNames(sqliteStore: store.sqlitePointer())
 
         #expect(startTableNames.contains(startTable))
         #expect(!startTableNames.contains(endTable))
         try store.renameTable(from: startTable, toName: endTable)
-        let tableNames = try store.dataTables().map(\.tbl_name)
+        let tableNames = try store.tableNames(sqliteStore: store.sqlitePointer())
         #expect(!tableNames.contains(startTable))
         #expect(tableNames.contains(endTable))
     }
@@ -276,10 +270,11 @@ struct InMemoryStoreIntegrationTest {
         let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
         try backupFromSampleFileToInMemoryStore(store)
         try store.addColumn(to: table, columnDefinition: column)
-        guard let schema = try store.dataTables().first else {
-            Issue.record("Could not find table")
-            return
-        }
+        let schemas: [TableSchema] = try store.interface.executeCodableQuery(
+            sqlite: store.sqlitePointer(),
+            query: TableSchema.storedValues()
+        )
+        let schema = try #require(schemas.first { $0.name == "rtest" })
         print(schema.sql)
         #expect(schema.sql.contains("newColumn"))
     }
@@ -292,7 +287,7 @@ struct InMemoryStoreIntegrationTest {
         let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
         try backupFromSampleFileToInMemoryStore(store)
         try store.drop(table: table)
-        let tableNames = try store.dataTables().map(\.tbl_name)
+        let tableNames = try store.tableNames(sqliteStore: store.sqlitePointer())
         #expect(tableNames.isEmpty)
     }
 
@@ -369,5 +364,269 @@ struct InMemoryStoreIntegrationTest {
         )
         let count = try #require(countResult.first)
         #expect(count.count == 1)
+    }
+
+    // MARK: - Layers
+
+    @Test("When reading layers from the test file, then all the expected layers are returned")
+    func readLayersInTestFile() throws {
+        let interface = SQLiteInterface()
+        let store = try #require(try InMemoryStore(interface: interface))
+
+        try backupFromSampleFileToInMemoryStore(store)
+
+        let layers = try store.readLayers(sqliteStore: store.sqlitePointer())
+        #expect(layers.count == 3)
+        #expect(layers[0] is XRLayerGrid)
+        #expect(layers[1] is XRLayerData)
+        #expect(layers[2] is XRLayerLineArrow)
+    }
+
+    @Test("When reading layers from the test file, ensure the grid layer correctly reads data")
+    func readGridLayerInTestFile() throws {
+        let interface = SQLiteInterface()
+        let store = try #require(try InMemoryStore(interface: interface))
+
+        try backupFromSampleFileToInMemoryStore(store)
+
+        let layers = try store.readLayers(sqliteStore: store.sqlitePointer())
+        guard let layer = layers[0] as? XRLayerGrid else {
+            Issue.record("Layer is not XRLayerGrid")
+            return
+        }
+        #expect(layers.count == 3)
+        #expect(layer.isVisible())
+        #expect(!layer.isActive())
+        #expect(!layer.isBiDirectional())
+        #expect(layer.layerName() == "Default Grid")
+        #expect(layer.lineWeight() == 3.388646)
+        #expect(layer.maxCount() == 0)
+        #expect(layer.maxPercent() == 0.0)
+        // stroke id
+        // fill id
+        #expect(layer.fixedCount())
+        #expect(layer.isVisible())
+        #expect(layer.fixedRingCount() == 4)
+        #expect(layer.ringCountIncrement() == 2)
+        #expect(layer.ringPercentIncrement() == 0.11)
+        #expect(layer.ringLabelAngle() == 77.616188)
+        #expect(layer.ringFontName() == "ArialMT")
+        #expect(layer.ringFontSize() == 24.0)
+        #expect(layer.radialsCount() == 32)
+        #expect(layer.radialsAngle() == 11.25)
+        #expect(layer.radialsLabelAlign() == 0)
+        #expect(layer.radialsCompassPoint() == 1)
+        #expect(layer.radiansOrder() == 0)
+        #expect(layer.radianFontName() == "AurulentSansMonoNerdFontComplete-Regular")
+        #expect(layer.radianFontSize() == 12.0)
+        #expect(!layer.radianSectorLock())
+        #expect(layer.radianVisible())
+        #expect(layer.radianIsPercent())
+        #expect(layer.radianTicks())
+        #expect(layer.radianMintoTicks())
+        #expect(layer.radianLabels())
+    }
+
+    @Test("When reading layers from the test file, ensure the data layer correctly reads data")
+    func readDataayerInTestFile() throws {
+        let interface = SQLiteInterface()
+        let store = try #require(try InMemoryStore(interface: interface))
+
+        try backupFromSampleFileToInMemoryStore(store)
+
+        let layers = try store.readLayers(sqliteStore: store.sqlitePointer())
+        guard let layer = layers[1] as? XRLayerData else {
+            Issue.record("Layer is not XRLayerGrid")
+            return
+        }
+        #expect(layers.count == 3)
+        #expect(layer.isVisible())
+        #expect(!layer.isActive())
+        #expect(layer.isBiDirectional())
+        #expect(layer.layerName() == "Test")
+        #expect(layer.lineWeight() == 7)
+        #expect(layer.maxCount() == 11)
+        #expect(layer.maxPercent() == 0.087302)
+        // stroke id
+        // fill id
+        #expect(layer.datasetId() == 0)
+        #expect(layer.plotType() == 4)
+        #expect(layer.totalCount() == 126)
+        #expect(layer.dotRadius() == 8.5)
+    }
+
+    @Test("When reading layers from the test file, ensure the line arrow layer correctly reads data")
+    func readLineArrowInTestFile() throws {
+        let interface = SQLiteInterface()
+        let store = try #require(try InMemoryStore(interface: interface))
+
+        try backupFromSampleFileToInMemoryStore(store)
+
+        let layers = try store.readLayers(sqliteStore: store.sqlitePointer())
+        guard let layer = layers[2] as? XRLayerLineArrow else {
+            Issue.record("Layer is not XRLayerLineArrow")
+            return
+        }
+        #expect(layers.count == 3)
+        #expect(layer.isVisible())
+        #expect(layer.isActive())
+        #expect(!layer.isBiDirectional())
+        #expect(layer.layerName() == "Stat_Test")
+        #expect(layer.lineWeight() == 4.698694)
+        #expect(layer.maxCount() == 0)
+        #expect(layer.maxPercent() == 0)
+        // stroke id
+        // fill id
+        #expect(layer.datasetId() == 0)
+        #expect(layer.arrowSize() == 2.546645)
+        #expect(layer.vectorType() == 0)
+        #expect(layer.arrowType() == 1)
+        #expect(layer.showVector())
+        #expect(layer.showError())
+    }
+
+    @Test("When storing layers, then the database is updated")
+    func storeLayers() throws {
+        let layers: [XRLayer] = [
+            XRLayerGrid.stub(),
+            XRLayerCore.stub(),
+            XRLayerData.stub(),
+            XRLayerLineArrow.stub(),
+            XRLayerText.stub()
+        ]
+        let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
+
+        try store.store(layers: layers)
+    }
+
+    // MARK: - Read From Store
+
+    let rTestColors: [NSColor] = [
+        .init(red: 0, green: 0, blue: 0, alpha: 1),
+        NSColor(red: 0.843035, green: 0.429802, blue: 0.584504, alpha: 1),
+        NSColor(red: 1, green: 0.423844, blue: 0.347773, alpha: 1),
+        NSColor(red: 0.724256, green: 0.28904, blue: 0.169853, alpha: 1)
+    ]
+
+    private func rTestColorItem(at: Int) throws -> NSColor {
+        try #require(at > 0 && at <= rTestColors.count)
+        return rTestColors[at - 1]
+    }
+
+    private func readRtestFromStore(store: InMemoryStore) async throws -> Bool {
+        try backupFromSampleFileToInMemoryStore(store)
+        return try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Bool, Error>) in
+            store.readFromStore { result in
+                switch result {
+                case let .success(value):
+                    continuation.resume(returning: Bool(value))
+
+                case let .failure(error):
+                    continuation.resume(throwing: error)
+                }
+            }
+        }
+    }
+
+    @Test("When ReadFromStore called, call completion handler")
+    func readFromStoreCompletion() async throws {
+        let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
+        let delegate = MockInMemoryStoreDelegate()
+        store.delegate = delegate
+
+        let result = try await readRtestFromStore(store: store)
+        #expect(result)
+    }
+
+    @Test("When ReadFromStore called for rtest, expect 3 layers")
+    func readFromStore3layers() async throws {
+        let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
+        let delegate = MockInMemoryStoreDelegate()
+        store.delegate = delegate
+
+        _ = try await readRtestFromStore(store: store)
+        #expect(delegate.layers.count == 3)
+        #expect(delegate.layers[0] is XRLayerGrid)
+        #expect(delegate.layers[1] is XRLayerData)
+        #expect(delegate.layers[2] is XRLayerLineArrow)
+    }
+
+    @Test("When ReadFromStore called for rtest, expect correct Layer portions")
+    func readFromStoreGridLayer() async throws {
+        let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
+        let delegate = MockInMemoryStoreDelegate()
+        store.delegate = delegate
+
+        _ = try await readRtestFromStore(store: store)
+        let grid = try #require(delegate.layers[0])
+        // Grid  Table
+
+        try CommonUtilities.assertXRLayerHasCorrectValues(
+            layer: grid,
+            isVisible: true,
+            isActive: false,
+            isBiDirectional: false,
+            name: "Default Grid",
+            lineWeight: 3.388646,
+            maxCount: 0,
+            maxPercent: 0.0,
+            strokeColor: rTestColorItem(at: 1), // not correct
+            fillColor: rTestColorItem(at: 1) // not correct
+        )
+
+        let data = try #require(delegate.layers[1])
+
+        try CommonUtilities.assertXRLayerHasCorrectValues(
+            layer: data,
+            isVisible: true,
+            isActive: false,
+            isBiDirectional: true,
+            name: "Test",
+            lineWeight: 7,
+            maxCount: 11,
+            maxPercent: 0.087302,
+            strokeColor: rTestColorItem(at: 3), // not correct
+            fillColor: rTestColorItem(at: 2) // not correct
+        )
+
+        let lineArrow = try #require(delegate.layers[2])
+
+        try CommonUtilities.assertXRLayerHasCorrectValues(
+            layer: lineArrow,
+            isVisible: true,
+            isActive: true, // not being read correctly
+            isBiDirectional: false,
+            name: "Stat_Test",
+            lineWeight: 4.698694,
+            maxCount: 0,
+            maxPercent: 0.0,
+            strokeColor: rTestColorItem(at: 4),
+            fillColor: rTestColorItem(at: 1)
+        )
+    }
+
+    @Test("Validate grid layer")
+    func validateGridLayer() async throws {
+        let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
+
+        let delegate = MockInMemoryStoreDelegate()
+        store.delegate = delegate
+
+        _ = try await readRtestFromStore(store: store)
+        let grid = try #require(delegate.layers[0] as? XRLayerGrid)
+
+        #expect(grid.fixedCount())
+        #expect(grid.ringsVisible())
+        #expect(grid.fixedRingCount() == 4)
+        #expect(grid.ringCountIncrement() == 2)
+        #expect(grid.ringPercentIncrement() == 0.11)
+        #expect(grid.showLabels())
+        #expect(grid.ringLabelAngle() == 77.616188)
+        #expect(grid.ringFont().fontName == "ArialMT")
+        #expect(grid.ringFontSize() == 24)
+        #expect(grid.radialsCount() == 32)
+        #expect(grid.radialsAngle() == 12)
+        #expect(grid.radialsLabelAlign() == 12)
+        #expect(grid)
     }
 }

@@ -41,7 +41,7 @@ struct DataSet: TableRepresentable, Equatable {
 
     // MARK: - TableRepresentable
 
-    private static func allKeys() -> [String] {
+    static func allKeys() -> [String] {
         let keys: [CodingKeys] = [.NAME, .TABLENAME, .COLUMNNAME, .PREDICATE, .COMMENTS]
         return keys.map(\.stringValue)
     }

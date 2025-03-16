@@ -47,6 +47,8 @@
           lineWeight:(float)lineWeight
             maxCount:(int)maxCount
           maxPercent:(float)maxPercent
+           strokeColor:(NSColor *)strokeColor
+             fillColor:(NSColor *)fillColor
              arrowSize:(float)arrowSize
             vectorType:(int)vectorType
              arrowType:(int)arrowType

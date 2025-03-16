@@ -27,9 +27,78 @@
 import Cocoa
 import CodableSQLiteNonThread
 
-struct StorageModelFactory {
+// swiftlint:disable type_body_length
+class StorageModelFactory {
+
+    enum StorageModelFactoryError: Error {
+        case invalidLayerIdentifiable
+    }
+
+    var colors: [Color] = []
+    let defaultStrokeColor: NSColor = .init(red: 0, green: 0, blue: 0, alpha: 1)
+    let defaultFillColor: NSColor = .init(red: 1, green: 1, blue: 1, alpha: 1)
+
+    func set(colors: [Color]) {
+        clearColors()
+        self.colors = colors
+    }
+
+    func clearColors() {
+        colors.removeAll()
+    }
+
+    func strokeColor(id: Int) -> NSColor {
+        guard let color = color(id: id) else {
+            return defaultStrokeColor
+        }
+        return color
+    }
+
+    func fillColor(id: Int) -> NSColor {
+        guard let color = color(id: id) else {
+            return defaultFillColor
+        }
+        return color
+    }
+
+    func color(id: Int) -> NSColor? {
+        guard let color = colors.first(where: { $0.COLORID == id }) else {
+            return nil
+        }
+        return NSColor(
+            red: CGFloat(color.RED),
+            green: CGFloat(color.GREEN),
+            blue: CGFloat(color.BLUE),
+            alpha: CGFloat(color.ALPHA)
+        )
+    }
 
     // MARK: - Create Storage Layers
+
+    func storageLayers(from inputLayer: XRLayer, at index: Int) -> [TableRepresentable] {
+        var layers = [TableRepresentable]()
+        layers.append(storageLayerRoot(from: inputLayer, at: index))
+        switch inputLayer {
+        case let layer as XRLayerCore:
+            layers.append(storageLayerCore(from: layer, at: index))
+
+        case let layer as XRLayerText:
+            layers.append(storageLayerText(from: layer, at: index))
+
+        case let layer as XRLayerLineArrow:
+            layers.append(storageLayerLineArrow(from: layer, at: index))
+
+        case let layer as XRLayerGrid:
+            layers.append(storageLayerGrid(from: layer, at: index))
+
+        case let layer as XRLayerData:
+            layers.append(storageLayerData(from: layer, at: index))
+
+        default:
+            break
+        }
+        return layers
+    }
 
     func storageLayerRoot(from inputLayer: XRLayer, at index: Int) -> Layer {
         Layer(
@@ -41,7 +110,9 @@ struct StorageModelFactory {
             LAYER_NAME: inputLayer.layerName(),
             LINEWEIGHT: inputLayer.lineWeight(),
             MAXCOUNT: Int(inputLayer.maxCount()),
-            MAXPERCENT: Float(inputLayer.maxPercent())
+            MAXPERCENT: Float(inputLayer.maxPercent()),
+            STROKECOLORID: 0,
+            FILLCOLORID: 0
         )
     }
 
@@ -130,6 +201,28 @@ struct StorageModelFactory {
 
     // MARK: - Create XRLayer Types
 
+    func createXRLayer(baseLayer: Layer, targetLayer: LayerIdentifiable) throws -> XRLayer {
+        switch targetLayer {
+        case let layer as LayerText:
+            return createXRLayerText(layer: baseLayer, textLayer: layer)
+
+        case let layer as LayerLineArrow:
+            return createXRLayerLineArrow(layer: baseLayer, lineArrowLayer: layer)
+
+        case let layer as LayerCore:
+            return createXRLayerCore(layer: baseLayer, coreLayer: layer)
+
+        case let layer as LayerGrid:
+            return createXRLayerGrid(layer: baseLayer, gridLayer: layer)
+
+        case let layer as LayerData:
+            return createXRLayerData(layer: baseLayer, dataLayer: layer)
+
+        default:
+            throw StorageModelFactoryError.invalidLayerIdentifiable
+        }
+    }
+
     func createXRLayerText(layer: Layer, textLayer: LayerText) -> XRLayerText {
 
         XRLayerText(
@@ -140,6 +233,8 @@ struct StorageModelFactory {
             lineWeight: layer.LINEWEIGHT,
             maxCount: Int32(layer.MAXCOUNT),
             maxPercent: layer.MAXPERCENT,
+            stroke: strokeColor(id: layer.STROKECOLORID),
+            fill: fillColor(id: layer.FILLCOLORID),
             contents: Encoding.decodeTextStorage(from: textLayer.CONTENTS),
             rectOriginX: textLayer.RECT_POINT_X,
             rectOriginY: textLayer.RECT_POINT_Y,
@@ -158,6 +253,8 @@ struct StorageModelFactory {
             lineWeight: layer.LINEWEIGHT,
             maxCount: Int32(layer.MAXCOUNT),
             maxPercent: layer.MAXPERCENT,
+            stroke: strokeColor(id: layer.STROKECOLORID),
+            fill: fillColor(id: layer.FILLCOLORID),
             arrowSize: lineArrowLayer.ARROWSIZE,
             vectorType: Int32(lineArrowLayer.VECTORTYPE),
             arrowType: Int32(lineArrowLayer.ARROWTYPE),
@@ -176,6 +273,8 @@ struct StorageModelFactory {
             lineWeight: layer.LINEWEIGHT,
             maxCount: Int32(layer.MAXCOUNT),
             maxPercent: layer.MAXPERCENT,
+            stroke: strokeColor(id: layer.STROKECOLORID),
+            fill: fillColor(id: layer.FILLCOLORID),
             percentRadius: coreLayer.RADIUS,
             type: coreLayer.TYPE
         )
@@ -190,6 +289,8 @@ struct StorageModelFactory {
             lineWeight: layer.LINEWEIGHT,
             maxCount: Int32(layer.MAXCOUNT),
             maxPercent: layer.MAXPERCENT,
+            stroke: strokeColor(id: layer.STROKECOLORID),
+            fill: fillColor(id: layer.FILLCOLORID),
             plotType: Int32(dataLayer.PLOTTYPE),
             totalCount: Int32(dataLayer.TOTALCOUNT),
             dotRadius: dataLayer.DOTRADIUS
@@ -209,6 +310,8 @@ struct StorageModelFactory {
             lineWeight: layer.LINEWEIGHT,
             maxCount: Int32(layer.MAXCOUNT),
             maxPercent: layer.MAXPERCENT,
+            stroke: strokeColor(id: layer.STROKECOLORID),
+            fill: fillColor(id: layer.FILLCOLORID),
             isFixedCount: gridLayer.RINGS_ISFIXEDCOUNT,
             ringsVisible: gridLayer.RINGS_VISIBLE,
             fixedRingCount: Int32(gridLayer.RINGS_FIXEDCOUNT),

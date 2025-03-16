@@ -27,7 +27,7 @@
 import CodableSQLiteNonThread
 import Foundation
 
-struct LayerText: TableRepresentable {
+struct LayerText: TableRepresentable, LayerIdentifiable {
     static var tableName: String = "_layerText"
     static var primaryKey: String?
 
@@ -44,7 +44,7 @@ struct LayerText: TableRepresentable {
 
     // MARK: - TableRepresentable
 
-    private static func allKeys() -> [String] {
+    static func allKeys() -> [String] {
         let keys: [CodingKeys] = [
             .LAYERID,
             .CONTENTS,
@@ -62,7 +62,8 @@ struct LayerText: TableRepresentable {
     }
 
     static func insertQuery() -> any QueryProtocol {
-        Query(sql: "")
+        // swiftlint:disable:next line_length
+        Query(sql: "INSERT INTO _layerText (LAYERID,CONTENTS,RECT_POINT_X,RECT_POINT_Y,RECT_SIZE_HEIGHT,RECT_SIZE_WIDTH) values (?,?,?,?,?,?)")
     }
 
     static func updateQuery() -> any QueryProtocol {

@@ -39,7 +39,7 @@ public struct TableSchema: TableRepresentable {
 
     // MARK: - TableRepresentable
 
-    private static func allKeys() -> [String] {
+    public static func allKeys() -> [String] {
         let keys: [CodingKeys] = [.type, .name, .tbl_name, .rootpage, .sql]
         return keys.map(\.stringValue)
     }
