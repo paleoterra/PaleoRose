@@ -54,8 +54,6 @@
 		B43D613906345207001B863E /* FStatisticController.m in Sources */ = {isa = PBXBuildFile; fileRef = B43D613706345207001B863E /* FStatisticController.m */; };
 		B43D613A06345207001B863E /* FStatisticController.h in Headers */ = {isa = PBXBuildFile; fileRef = B43D613806345207001B863E /* FStatisticController.h */; };
 		B447A960062B002B00154420 /* logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B447A95F062B002B00154420 /* logo.jpg */; };
-		B447A965062B021A00154420 /* AboutPanelController.h in Headers */ = {isa = PBXBuildFile; fileRef = B447A963062B021A00154420 /* AboutPanelController.h */; };
-		B447A966062B021A00154420 /* AboutPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = B447A964062B021A00154420 /* AboutPanelController.m */; };
 		B44B08A705CFE9D200C6E8D3 /* xroseapp.icns in Resources */ = {isa = PBXBuildFile; fileRef = B44B08A505CFE9D200C6E8D3 /* xroseapp.icns */; };
 		B44B08A805CFE9D200C6E8D3 /* xroseDocIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = B44B08A605CFE9D200C6E8D3 /* xroseDocIcon.icns */; };
 		B44D357605C5578500D7823C /* XRGraphicPetal.h in Headers */ = {isa = PBXBuildFile; fileRef = B44D357405C5578500D7823C /* XRGraphicPetal.h */; };
@@ -191,6 +189,7 @@
 		B4F2B1912C97CB300017E717 /* Count.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F2B1882C97CB300017E717 /* Count.swift */; };
 		B4F2B1922C97CB300017E717 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F2B1812C97CB300017E717 /* Color.swift */; };
 		B4F2B1932C97CB300017E717 /* DataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F2B1822C97CB300017E717 /* DataSet.swift */; };
+		B4F32D272DE10C36001F198A /* AboutPanelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49D7EDA2DDECB450046A8B8 /* AboutPanelController.swift */; };
 		B4F929FD05D35D3A00EAAED0 /* XRLayerCore.h in Headers */ = {isa = PBXBuildFile; fileRef = B4F929FB05D35D3A00EAAED0 /* XRLayerCore.h */; };
 		B4F929FE05D35D3A00EAAED0 /* XRLayerCore.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F929FC05D35D3A00EAAED0 /* XRLayerCore.m */; };
 /* End PBXBuildFile section */
@@ -333,8 +332,6 @@
 		B442674F2B3F881300749923 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B442E69D2A48E9F300466763 /* PaleoRose-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PaleoRose-Bridging-Header.h"; sourceTree = "<group>"; };
 		B447A95F062B002B00154420 /* logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = logo.jpg; sourceTree = "<group>"; };
-		B447A963062B021A00154420 /* AboutPanelController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = AboutPanelController.h; sourceTree = "<group>"; };
-		B447A964062B021A00154420 /* AboutPanelController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = AboutPanelController.m; sourceTree = "<group>"; };
 		B44B08A505CFE9D200C6E8D3 /* xroseapp.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = xroseapp.icns; sourceTree = "<group>"; };
 		B44B08A605CFE9D200C6E8D3 /* xroseDocIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = xroseDocIcon.icns; sourceTree = "<group>"; };
 		B44D357405C5578500D7823C /* XRGraphicPetal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRGraphicPetal.h; sourceTree = "<group>"; };
@@ -961,8 +958,6 @@
 		B4149FFD2B24CA10008AE5F4 /* Main View */ = {
 			isa = PBXGroup;
 			children = (
-				B447A963062B021A00154420 /* AboutPanelController.h */,
-				B447A964062B021A00154420 /* AboutPanelController.m */,
 				B49D7EDA2DDECB450046A8B8 /* AboutPanelController.swift */,
 				B486E27E1E7B76FB00F1ADAA /* MainMenu.xib */,
 				B435676A096DA4C000DCF143 /* XRPreferencePanelController.h */,
@@ -1219,7 +1214,6 @@
 				B4F08861060914150000CF7A /* XRVStatCreatePanelController.h in Headers */,
 				B464E642060956DE009C1C89 /* XRGeometryPropertyInspector.h in Headers */,
 				B4324D0A06187FFF0083AE8A /* XRLayerText.h in Headers */,
-				B447A965062B021A00154420 /* AboutPanelController.h in Headers */,
 				B4C08802063069F2001A91F4 /* XRExportGraphicAccessory.h in Headers */,
 				B43D613A06345207001B863E /* FStatisticController.h in Headers */,
 				B41D283C094FC7CA008DF384 /* XRTableImporter.h in Headers */,
@@ -1504,6 +1498,7 @@
 				B411E6ED05C3855000C22F3E /* XRLayer.m in Sources */,
 				B411E75105C386DA00C22F3E /* XRDataSet.m in Sources */,
 				B411E7F505C396A400C22F3E /* XRAppendDialogController.m in Sources */,
+				B4F32D272DE10C36001F198A /* AboutPanelController.swift in Sources */,
 				B411E84D05C397D000C22F3E /* XREncodingAccessoryView.m in Sources */,
 				B4815B7105C44C0200403360 /* XRLayerData.m in Sources */,
 				B461B87205C4E1DA00738D23 /* XRGraphicKite.m in Sources */,
@@ -1552,7 +1547,6 @@
 				B4324D0B06187FFF0083AE8A /* XRLayerText.m in Sources */,
 				B48BBEC12CAA1BFA0050852E /* Logger.swift in Sources */,
 				B4A82F982A07F87A00790052 /* LITMXMLTree.m in Sources */,
-				B447A966062B021A00154420 /* AboutPanelController.m in Sources */,
 				B4C08803063069F2001A91F4 /* XRExportGraphicAccessory.m in Sources */,
 				B43D613906345207001B863E /* FStatisticController.m in Sources */,
 				B41D283D094FC7CA008DF384 /* XRTableImporter.m in Sources */,
