@@ -26,8 +26,9 @@
 
 import Foundation
 @testable import PaleoRose
+import Testing
 
-// swiftlint:disable line_length identifier_name indentation_width opening_brace
+// swiftlint:disable line_length identifier_name indentation_width
 extension LayerText {
 
     static func stub(
@@ -49,25 +50,35 @@ extension LayerText {
         )
     }
 
-    func compare(with layer: XRLayerText, id: Int) throws -> Bool {
-
+    func compare(
+        with layer: XRLayerText,
+        id: Int,
+        fileId: String = #file,
+        filePath: String = #filePath,
+        line: Int = #line,
+        column: Int = #column,
+    ) throws {
+        let sourceLocation = SourceLocation(fileID: fileId, filePath: filePath, line: line, column: column)
         let attributedString = Encoding.decodeTextStorage(from: CONTENTS)
-        if attributedString?.string != layer.contents()?.string {
-            return false
-        }
+        #expect(attributedString?.string == layer.contents()?.string, "\(String(describing: attributedString?.string)) != \(String(describing: layer.contents()?.string))", sourceLocation: sourceLocation)
+
         let layerFont: NSFont? = attributedString?.attributes(at: 0, effectiveRange: nil)[NSAttributedString.Key.font] as? NSFont
         let xrLayerFont: NSFont? = layer.contents().attributes(at: 0, effectiveRange: nil)[NSAttributedString.Key.font] as? NSFont
-        if layerFont != xrLayerFont {
-            return false
-        }
-        if LAYERID == id,
-           RECT_POINT_X == Float(layer.textRect().origin.x),
-           RECT_POINT_Y == Float(layer.textRect().origin.y),
-           RECT_SIZE_WIDTH == Float(layer.textRect().size.width),
-           RECT_SIZE_HEIGHT == Float(layer.textRect().size.height)
-        {
-            return true
-        }
-        return false
+
+        #expect(layerFont == xrLayerFont, "compare: layerFont mismatch", sourceLocation: sourceLocation)
+
+        #expect(LAYERID == id, "layerid != id", sourceLocation: sourceLocation)
+        #expect(RECT_POINT_X == Float(layer.textRect().origin.x),
+                "RECT_POINT_X = layer",
+                sourceLocation: sourceLocation)
+        #expect(RECT_POINT_Y == Float(layer.textRect().origin.y),
+                "RECT_POINT_Y = layer",
+                sourceLocation: sourceLocation)
+        #expect(RECT_SIZE_WIDTH == Float(layer.textRect().size.width),
+                "RECT_SIZE_WIDTH = layer",
+                sourceLocation: sourceLocation)
+        #expect(RECT_SIZE_HEIGHT == Float(layer.textRect().size.height),
+                "RECT_SIZE_HEIGHT = layer",
+                sourceLocation: sourceLocation)
     }
 }

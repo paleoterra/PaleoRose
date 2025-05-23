@@ -125,21 +125,21 @@ struct IntegrationTest {
         let store = try #require(try createInMemoryStore())
         defer {
             do {
-                try #require(try sut.close(store: store))
+                try sut.close(store: store)
             } catch {
                 Issue.record("Failed to close database file: \(error)")
             }
         }
-        try #require(try createTestableTable(store: store))
+        try createTestableTable(store: store)
     }
 
     @Test("Given Created Table, when inserting new record, it does not throw")
     func insertRecord() throws {
         let store = try #require(try createInMemoryStore())
-        try #require(try createTestableTable(store: store))
+        try createTestableTable(store: store)
         defer {
             do {
-                try #require(try sut.close(store: store))
+                try sut.close(store: store)
             } catch {
                 Issue.record("Failed to close database file: \(error)")
             }
@@ -150,20 +150,20 @@ struct IntegrationTest {
             TestableTable.stub(intValue: 3, stringValue: "Test3")
         ]
 
-        try #require(try insert(records: records, intoStore: store))
+        try insert(records: records, intoStore: store)
     }
 
 //    @Test("Given Create Table, and records inserted, then return correct item count")
 //    func countRecords() throws {
-//        let store = try #require(try createInMemoryStore())
+//        let store = try createInMemoryStore())
 //        defer {
 //            do {
-//                try #require(try sut.close(store: store))
+//                try sut.close(store: store))
 //            } catch {
 //                Issue.record("Failed to close database file: \(error)")
 //            }
 //        }
-//        try #require(try createTestableTable(store: store))
+//        try createTestableTable(store: store))
 //
 //        let records = [
 //            TestableTable.stub(intValue: 4, stringValue: "Test4"),
@@ -172,7 +172,7 @@ struct IntegrationTest {
 //            TestableTable.stub(intValue: 7, stringValue: "Test7")
 //        ]
 //
-//        try #require(try insert(records: records, intoStore: store))
+//        try insert(records: records, intoStore: store))
 //
 //        let query = TestableTable.countQuery()
 //        let countResult: RecordCount = try #require(
@@ -183,15 +183,15 @@ struct IntegrationTest {
 
 //    @Test("Given inserted records, then pull expected records from database")
 //    func getRectords() throws {
-//        let store = try #require(try createInMemoryStore())
+//        let store = try createInMemoryStore())
 //        defer {
 //            do {
-//                try #require(try sut.close(store: store))
+//                try sut.close(store: store))
 //            } catch {
 //                Issue.record("Failed to close database file: \(error)")
 //            }
 //        }
-//        try #require(try createTestableTable(store: store))
+//        try createTestableTable(store: store))
 //        let value = TestableTable.stub(intValue: 5, stringValue: "Test5")
 //        let data = try JSONEncoder().encode(value)
 //
@@ -207,7 +207,7 @@ struct IntegrationTest {
 //            )
 //        ]
 //
-//        try #require(try insert(records: records, intoStore: store))
+//        try insert(records: records, intoStore: store))
 //        let fromDatabase: [TestableTable] = try #require(
 //            try sut.executeCodableQuery(sqlite: store, query: TestableTable.storedValues())
 //        )
@@ -217,16 +217,16 @@ struct IntegrationTest {
 
     @Test("Given existing store url, then open, and then close again")
     func openAndCloseSqliteFileOnDisk() throws {
-        let store = try #require(try openTestFile())
-        try #require(try sut.close(store: store))
+        let store = try openTestFile()
+        try sut.close(store: store)
     }
 
 //    @Test("Given database on disk, open file and read testable table, then verify records")
 //    func readDataFromDisk() throws {
-//        let file = try #require(try openTestFile())
+//        let file = try openTestFile())
 //        defer {
 //            do {
-//                try #require(try sut.close(store: file))
+//                try sut.close(store: file))
 //            } catch {
 //                Issue.record("Failed to close database file: \(error)")
 //            }
@@ -240,18 +240,18 @@ struct IntegrationTest {
 //
 //    @Test("Given sqlite file, when backing up to in-memory, then data copied")
 //    func backupFromDiskToInMemory() throws {
-//        let file = try #require(try openTestFile())
+//        let file = try openTestFile())
 //        defer {
 //            do {
-//                try #require(try sut.close(store: file))
+//                try sut.close(store: file))
 //            } catch {
 //                Issue.record("Failed to close database file: \(error)")
 //            }
 //        }
-//        let store = try #require(try createInMemoryStore())
+//        let store = try createInMemoryStore())
 //        defer {
 //            do {
-//                try #require(try sut.close(store: store))
+//                try sut.close(store: store))
 //            } catch {
 //                Issue.record("Failed to close database store: \(error)")
 //            }
@@ -274,11 +274,11 @@ struct IntegrationTest {
 //        let temporaryDirectory = try temporaryDirectory()
 //        let filename = UUID().uuidString
 //        let path = temporaryDirectory.appendingPathComponent(filename).path
-//        let file = try #require(try sut.openDatabase(path: path))
+//        let file = try sut.openDatabase(path: path))
 //        defer {
 //            do {
-//                try #require(try sut.close(store: file))
-//                try #require(try FileManager.default.removeItem(atPath: path))
+//                try sut.close(store: file))
+//                try FileManager.default.removeItem(atPath: path))
 //            } catch {
 //                Issue.record("Failed to close or delete database file: \(error)")
 //            }
@@ -286,10 +286,10 @@ struct IntegrationTest {
 //
 //        try #require(FileManager.default.fileExists(atPath: path))
 //
-//        let store = try #require(try createInMemoryStore())
+//        let store = try createInMemoryStore())
 //        defer {
 //            do {
-//                try #require(try sut.close(store: store))
+//                try sut.close(store: store))
 //            } catch {
 //                Issue.record("Failed to close database store: \(error)")
 //            }
@@ -317,7 +317,7 @@ struct IntegrationTest {
 
     @Test("Given request for columns, then return valid column array")
     func getColumnArray() throws {
-        let store = try #require(try openTestFile())
+        let store = try openTestFile()
         let expectedColumns: [ColumnInformation] = [
             .init(columnIndex: 0, name: "intValue", type: .integer, declairedType: "INTEGER"),
             .init(columnIndex: 1, name: "int32Value", type: .integer, declairedType: "INTEGER"),
@@ -336,7 +336,7 @@ struct IntegrationTest {
 
         defer {
             do {
-                try #require(try sut.close(store: store))
+                try sut.close(store: store)
             } catch {
                 Issue.record("Failed to close database file: \(error)")
             }

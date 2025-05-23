@@ -144,7 +144,7 @@ ringPercentIncrement:(float)ringPercentIncrement
 -(BOOL)radianVisible;
 -(BOOL)radianIsPercent;
 -(BOOL)radianTicks;
--(BOOL)radianMintoTicks;
+-(BOOL)radianMinorTicks;
 -(BOOL)radianLabels;
 
 -(LITMXMLTree *)xmlTreeForVersion1_0Rings;

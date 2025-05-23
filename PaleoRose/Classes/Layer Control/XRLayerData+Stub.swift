@@ -25,6 +25,7 @@
 // SOFTWARE.
 
 import PaleoRose
+import Testing
 
 extension XRLayerData {
     static func stub(
@@ -55,5 +56,39 @@ extension XRLayerData {
             totalCount: Int32(totalCount),
             dotRadius: dotRadius
         )
+    }
+
+    // swiftlint:disable:next function_parameter_count
+    func verify(
+        isVisible: Bool,
+        active: Bool,
+        biDir: Bool,
+        name: String,
+        lineWeight: Float,
+        maxCount: Int32,
+        maxPercent: Float,
+        stroke: NSColor,
+        fill: NSColor,
+        plotType: Int,
+        totalCount: Int,
+        dotRadius: Float,
+        fileId: String = #file,
+        filePath: String = #filePath,
+        line: Int = #line,
+        column: Int = #column
+    ) {
+        let sourceLocation = SourceLocation(fileID: fileId, filePath: filePath, line: line, column: column)
+        #expect(self.isVisible() == isVisible, sourceLocation: sourceLocation)
+        #expect(isActive() == active, sourceLocation: sourceLocation)
+        #expect(isBiDirectional() == biDir, sourceLocation: sourceLocation)
+        #expect(layerName() == name, sourceLocation: sourceLocation)
+        #expect(self.lineWeight() == lineWeight, sourceLocation: sourceLocation)
+        #expect(self.maxCount() == maxCount, sourceLocation: sourceLocation)
+        #expect(self.maxPercent() == maxPercent, sourceLocation: sourceLocation)
+        #expect(strokeColor() == stroke, sourceLocation: sourceLocation)
+        #expect(fillColor() == fill, sourceLocation: sourceLocation)
+        #expect(self.plotType() == plotType, sourceLocation: sourceLocation)
+        #expect(self.totalCount() == totalCount, sourceLocation: sourceLocation)
+        #expect(self.dotRadius() == dotRadius, sourceLocation: sourceLocation)
     }
 }

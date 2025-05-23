@@ -25,6 +25,7 @@
 // SOFTWARE.
 
 import PaleoRose
+import Testing
 
 extension XRLayerGrid {
     static func stub(
@@ -89,5 +90,74 @@ extension XRLayerGrid {
             radialsMinorTicks: radialsMinorTicks,
             radialLabels: radialLabels
         )
+    }
+
+    // swiftlint:disable:next function_parameter_count
+    func verify(
+        isVisible: Bool,
+        active: Bool,
+        biDir: Bool,
+        name: String,
+        lineWeight: Float,
+        maxCount: Int32,
+        maxPercent: Float,
+//        stroke: NSColor,
+//        fill: NSColor,
+        isFixedCount: Bool,
+        ringsVisible: Bool,
+        fixedRingCount: Int,
+        ringCountIncrement: Int,
+        ringPercentIncrement: Float,
+        showRingLabels: Bool,
+        labelAngle: Float,
+        ringFont: NSFont,
+        radialsCount: Int,
+        radialsAngle: Float,
+        radialsLabelAlignment: Int,
+        radialsCompassPoint: Int,
+        radialsOrder: Int,
+        radialFont: NSFont,
+        radialsSectorLock: Bool,
+        radialsVisible: Bool,
+        radialsIsPercent: Bool,
+        radialsTicks: Bool,
+        radialsMinorTicks: Bool,
+        radialLabels: Bool,
+        fileId: String = #file,
+        filePath: String = #filePath,
+        line: Int = #line,
+        column: Int = #column
+    ) {
+        let sourceLocation = SourceLocation(fileID: fileId, filePath: filePath, line: line, column: column)
+        #expect(self.isVisible() == isVisible, sourceLocation: sourceLocation)
+        #expect(isActive() == active, sourceLocation: sourceLocation)
+        #expect(isBiDirectional() == biDir, sourceLocation: sourceLocation)
+        #expect(layerName() == name, sourceLocation: sourceLocation)
+        #expect(self.lineWeight() == lineWeight, sourceLocation: sourceLocation)
+        #expect(self.maxCount() == maxCount, sourceLocation: sourceLocation)
+        #expect(self.maxPercent() == maxPercent, sourceLocation: sourceLocation)
+        // stroke id
+        // fill id
+        #expect(fixedCount() == isFixedCount, sourceLocation: sourceLocation)
+        #expect(self.ringsVisible() == ringsVisible, sourceLocation: sourceLocation)
+        #expect(self.fixedRingCount() == fixedRingCount, sourceLocation: sourceLocation)
+        #expect(self.ringCountIncrement() == ringCountIncrement, sourceLocation: sourceLocation)
+        #expect(self.ringPercentIncrement() == ringPercentIncrement, sourceLocation: sourceLocation)
+        #expect(ringLabelAngle() == labelAngle, sourceLocation: sourceLocation)
+        #expect(ringFontName() == ringFont.fontName, sourceLocation: sourceLocation)
+        #expect(ringFontSize() == Float(ringFont.pointSize), sourceLocation: sourceLocation)
+        #expect(self.radialsCount() == radialsCount, sourceLocation: sourceLocation)
+        #expect(self.radialsAngle() == radialsAngle, sourceLocation: sourceLocation)
+        #expect(radialsLabelAlign() == radialsLabelAlignment, sourceLocation: sourceLocation)
+        #expect(self.radialsCompassPoint() == radialsCompassPoint, sourceLocation: sourceLocation)
+        #expect(radiansOrder() == radialsOrder, sourceLocation: sourceLocation)
+        #expect(radianFontName() == radialFont.fontName, sourceLocation: sourceLocation)
+        #expect(radianFontSize() == Float(radialFont.pointSize), sourceLocation: sourceLocation)
+        #expect(radianSectorLock() == radialsSectorLock, sourceLocation: sourceLocation)
+        #expect(radianVisible() == radialsVisible, sourceLocation: sourceLocation)
+        #expect(radianIsPercent() == radialsIsPercent, "radiansIsPercent \(radianIsPercent())", sourceLocation: sourceLocation)
+        #expect(radianTicks() == radialsTicks, sourceLocation: sourceLocation)
+        #expect(radianMinorTicks() == radialsMinorTicks, sourceLocation: sourceLocation)
+        #expect(radianLabels() == radialLabels, sourceLocation: sourceLocation)
     }
 }

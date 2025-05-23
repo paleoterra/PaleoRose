@@ -201,7 +201,9 @@
 	//possibly post notification.
 	while(aGraphic = [anEnum nextObject])
 	{
-		[aGraphic setFillColor:_fillColor];
+        if([aGraphic respondsToSelector:@selector(setFillColor:)]) {
+            [aGraphic setFillColor:_fillColor];
+        }
 	}
 	//NSLog(@"set fill color %@",[[self class] description]);
 	[[NSNotificationCenter defaultCenter] postNotificationName:XRLayerRequiresRedraw object:self];
@@ -258,7 +260,7 @@
 	//NSLog(@"resetColorImage %i",[_graphicalObjects count]);
 	if([_graphicalObjects count] > 0)
 	{
-		if([[_graphicalObjects objectAtIndex:0] drawsFill])
+		if([[_graphicalObjects objectAtIndex:0] respondsToSelector:@selector(drawsFill)] && [[_graphicalObjects objectAtIndex:0] drawsFill])
 		{
 			//NSLog(@"draws fill");
 			[_fillColor set];

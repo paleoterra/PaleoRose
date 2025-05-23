@@ -170,7 +170,7 @@ class StorageModelFactory {
             RADIALS_VISIBLE: inputLayer.radianVisible(),
             RADIALS_ISPERCENT: inputLayer.radianIsPercent(),
             RADIALS_TICKS: inputLayer.radianTicks(),
-            RADIALS_MINORTICKS: inputLayer.radianMintoTicks(),
+            RADIALS_MINORTICKS: inputLayer.radianMinorTicks(),
             RADIALS_LABELS: inputLayer.radianLabels()
         )
     }
@@ -302,6 +302,7 @@ class StorageModelFactory {
             NSFont.systemFont(ofSize: CGFloat(gridLayer.RINGS_FONTSIZE))
         let radialFont = NSFont(name: gridLayer.RADIALS_FONT, size: CGFloat(gridLayer.RADIALS_FONTSIZE)) ??
             NSFont.systemFont(ofSize: CGFloat(gridLayer.RADIALS_FONTSIZE))
+        print("createXRLayerGrid radians percent \(gridLayer.RADIALS_ISPERCENT)")
         return XRLayerGrid(
             isVisible: layer.VISIBLE,
             active: layer.ACTIVE,

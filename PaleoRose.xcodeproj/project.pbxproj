@@ -389,6 +389,60 @@
 		B48BBEC62CAA20C70050852E /* InMemoryStoreTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryStoreTest.swift; sourceTree = "<group>"; };
 		B4950EFE05DD286A00C711DC /* XRGraphicCircleLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRGraphicCircleLabel.h; sourceTree = "<group>"; };
 		B4950EFF05DD286A00C711DC /* XRGraphicCircleLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRGraphicCircleLabel.m; sourceTree = "<group>"; };
+		B49D7EB32DDEC80C0046A8B8 /* XRDataSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRDataSet.swift; sourceTree = "<group>"; };
+		B49D7EB42DDEC81D0046A8B8 /* XRMakeDatasetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRMakeDatasetController.swift; sourceTree = "<group>"; };
+		B49D7EB52DDEC8400046A8B8 /* XRStatistic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRStatistic.swift; sourceTree = "<group>"; };
+		B49D7EB62DDEC8720046A8B8 /* XRCalculateAzimuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRCalculateAzimuthController.swift; sourceTree = "<group>"; };
+		B49D7EB72DDEC87E0046A8B8 /* XRTableAddColumnController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRTableAddColumnController.swift; sourceTree = "<group>"; };
+		B49D7EB82DDEC8F10046A8B8 /* XRoseDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRoseDocument.swift; sourceTree = "<group>"; };
+		B49D7EB92DDEC91A0046A8B8 /* XRoseTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRoseTableController.swift; sourceTree = "<group>"; };
+		B49D7EBA2DDEC9240046A8B8 /* XRoseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRoseView.swift; sourceTree = "<group>"; };
+		B49D7EBC2DDEC9350046A8B8 /* XRoseWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRoseWindowController.swift; sourceTree = "<group>"; };
+		B49D7EBD2DDEC96D0046A8B8 /* LITMAngleFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LITMAngleFormatter.swift; sourceTree = "<group>"; };
+		B49D7EBE2DDEC9760046A8B8 /* LITMPercentFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LITMPercentFormatter.swift; sourceTree = "<group>"; };
+		B49D7EC02DDEC9A10046A8B8 /* LITMArrowHead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LITMArrowHead.swift; sourceTree = "<group>"; };
+		B49D7EC12DDEC9BA0046A8B8 /* XRAppearanceProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRAppearanceProviding.swift; sourceTree = "<group>"; };
+		B49D7EC22DDEC9BA0046A8B8 /* XRGeometryProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGeometryProviding.swift; sourceTree = "<group>"; };
+		B49D7EC32DDEC9C70046A8B8 /* XRGraphic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphic.swift; sourceTree = "<group>"; };
+		B49D7EC42DDEC9CE0046A8B8 /* XRGraphicCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicCircle.swift; sourceTree = "<group>"; };
+		B49D7EC62DDEC9D80046A8B8 /* XRGraphicCircleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicCircleLabel.swift; sourceTree = "<group>"; };
+		B49D7EC72DDEC9E40046A8B8 /* XRGraphicDot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicDot.swift; sourceTree = "<group>"; };
+		B49D7EC82DDEC9F00046A8B8 /* XRGraphicDotDeviation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicDotDeviation.swift; sourceTree = "<group>"; };
+		B49D7ECA2DDEC9FF0046A8B8 /* XRGraphicHistogram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicHistogram.swift; sourceTree = "<group>"; };
+		B49D7ECC2DDECA1C0046A8B8 /* XRGraphicKite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicKite.swift; sourceTree = "<group>"; };
+		B49D7ECD2DDECA260046A8B8 /* XRGraphicLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicLine.swift; sourceTree = "<group>"; };
+		B49D7ECE2DDECA310046A8B8 /* XRGraphicPetal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicPetal.swift; sourceTree = "<group>"; };
+		B49D7ED02DDECA3F0046A8B8 /* XRSelectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRSelectable.swift; sourceTree = "<group>"; };
+		B49D7ED12DDECA9B0046A8B8 /* XRAppendDialogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRAppendDialogController.swift; sourceTree = "<group>"; };
+		B49D7ED22DDECAB40046A8B8 /* FStatisticController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FStatisticController.swift; sourceTree = "<group>"; };
+		B49D7ED42DDECB2B0046A8B8 /* XRLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRLayer.swift; sourceTree = "<group>"; };
+		B49D7ED52DDECB2B0046A8B8 /* XRLayerCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRLayerCore.swift; sourceTree = "<group>"; };
+		B49D7ED62DDECB2B0046A8B8 /* XRLayerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRLayerData.swift; sourceTree = "<group>"; };
+		B49D7ED72DDECB2B0046A8B8 /* XRLayerGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRLayerGrid.swift; sourceTree = "<group>"; };
+		B49D7ED82DDECB2B0046A8B8 /* XRLayerLineArrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRLayerLineArrow.swift; sourceTree = "<group>"; };
+		B49D7ED92DDECB2B0046A8B8 /* XRLayerText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRLayerText.swift; sourceTree = "<group>"; };
+		B49D7EDA2DDECB450046A8B8 /* AboutPanelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutPanelController.swift; sourceTree = "<group>"; };
+		B49D7EDB2DDECB510046A8B8 /* XRPreferencePanelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRPreferencePanelController.swift; sourceTree = "<group>"; };
+		B49D7EDC2DDECB8F0046A8B8 /* XRTableImporterDelimiterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRTableImporterDelimiterController.swift; sourceTree = "<group>"; };
+		B49D7EDD2DDECB9C0046A8B8 /* PTFMXMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTFMXMLParser.swift; sourceTree = "<group>"; };
+		B49D7EDE2DDECBB80046A8B8 /* XRTableImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRTableImporter.swift; sourceTree = "<group>"; };
+		B49D7EDF2DDECBDA0046A8B8 /* LITMXMLBinaryEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LITMXMLBinaryEncoding.swift; sourceTree = "<group>"; };
+		B49D7EE02DDECBDA0046A8B8 /* LITMXMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LITMXMLParser.swift; sourceTree = "<group>"; };
+		B49D7EE12DDECBDA0046A8B8 /* LITMXMLTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LITMXMLTree.swift; sourceTree = "<group>"; };
+		B49D7EE22DDECC050046A8B8 /* XRFileParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRFileParser.swift; sourceTree = "<group>"; };
+		B49D7EE32DDECC050046A8B8 /* XRFileParser1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRFileParser1.swift; sourceTree = "<group>"; };
+		B49D7EE42DDECE4C0046A8B8 /* XRVStatCreatePanelController 2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XRVStatCreatePanelController 2.swift"; sourceTree = "<group>"; };
+		B49D7EE52DDECEB50046A8B8 /* XRCoreInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRCoreInspector.swift; sourceTree = "<group>"; };
+		B49D7EE62DDECEC60046A8B8 /* XRDataInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRDataInspector.swift; sourceTree = "<group>"; };
+		B49D7EE72DDECFBA0046A8B8 /* XRGeometryPropertyInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGeometryPropertyInspector.swift; sourceTree = "<group>"; };
+		B49D7EE82DDECFBA0046A8B8 /* XRPropertyInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRPropertyInspector.swift; sourceTree = "<group>"; };
+		B49D7EE92DDECFD60046A8B8 /* XRGridInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGridInspector.swift; sourceTree = "<group>"; };
+		B49D7EEA2DDED06C0046A8B8 /* XRGeometryInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGeometryInspector.swift; sourceTree = "<group>"; };
+		B49D7EEB2DDED0810046A8B8 /* XREmptyInspectorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XREmptyInspectorController.swift; sourceTree = "<group>"; };
+		B49D7EEC2DDED0930046A8B8 /* XRVectorInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRVectorInspector.swift; sourceTree = "<group>"; };
+		B49D7EED2DDED1A40046A8B8 /* XRTableImporterXRose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRTableImporterXRose.swift; sourceTree = "<group>"; };
+		B49D7EEE2DDED1DE0046A8B8 /* XRExportGraphicAccessory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRExportGraphicAccessory.swift; sourceTree = "<group>"; };
+		B49D7EEF2DDED1E90046A8B8 /* XREncodingAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XREncodingAccessoryView.swift; sourceTree = "<group>"; };
 		B4A82F932A07F87900790052 /* LITMXMLNodeProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LITMXMLNodeProtocol.h; sourceTree = "<group>"; };
 		B4A82F942A07F87900790052 /* LITMXMLTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LITMXMLTree.h; sourceTree = "<group>"; };
 		B4A82F952A07F87A00790052 /* LITMXMLTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LITMXMLTree.m; sourceTree = "<group>"; };
@@ -573,6 +627,7 @@
 			children = (
 				B41D283A094FC7CA008DF384 /* XRTableImporter.h */,
 				B41D283B094FC7CA008DF384 /* XRTableImporter.m */,
+				B49D7EDE2DDECBB80046A8B8 /* XRTableImporter.swift */,
 				B4149FFB2B24C976008AE5F4 /* XML Parser */,
 				B4149FFA2B24C952008AE5F4 /* XRose Importer Sheet */,
 				B4149FF92B24C92C008AE5F4 /* Delimiter Controller */,
@@ -608,6 +663,9 @@
 				B4A82F932A07F87900790052 /* LITMXMLNodeProtocol.h */,
 				B4A82F942A07F87900790052 /* LITMXMLTree.h */,
 				B4A82F952A07F87A00790052 /* LITMXMLTree.m */,
+				B49D7EDF2DDECBDA0046A8B8 /* LITMXMLBinaryEncoding.swift */,
+				B49D7EE02DDECBDA0046A8B8 /* LITMXMLParser.swift */,
+				B49D7EE12DDECBDA0046A8B8 /* LITMXMLTree.swift */,
 			);
 			path = "XML Parsing";
 			sourceTree = "<group>";
@@ -629,10 +687,13 @@
 				B414A0042B24CB37008AE5F4 /* XRose Document */,
 				B48345D005C23B3000E3F6B7 /* XRoseWindowController.h */,
 				B48345D105C23B3000E3F6B7 /* XRoseWindowController.m */,
+				B49D7EBC2DDEC9350046A8B8 /* XRoseWindowController.swift */,
 				B48345D405C23B3D00E3F6B7 /* XRoseTableController.h */,
 				B48345D505C23B3D00E3F6B7 /* XRoseTableController.m */,
+				B49D7EB92DDEC91A0046A8B8 /* XRoseTableController.swift */,
 				B48345EE05C23CA100E3F6B7 /* XRoseView.h */,
 				B48345EF05C23CA100E3F6B7 /* XRoseView.m */,
+				B49D7EBA2DDEC9240046A8B8 /* XRoseView.swift */,
 				B4852A8205C2E223002212E3 /* XRGeometryController.h */,
 				B4852A8305C2E223002212E3 /* XRGeometryController.m */,
 				B4AE41D42D1E5DA300E05D96 /* XRGeometryController+Testing.swift */,
@@ -647,9 +708,11 @@
 				B42FE3AB096AEB99007E9DC5 /* XRCalculateAzimuthController.h */,
 				B42FE3AA096AEB99007E9DC5 /* XRCalculateAzimuthController.m */,
 				B486E2771E7B769300F1ADAA /* XRCalculateAzimuthSheet.xib */,
+				B49D7EB62DDEC8720046A8B8 /* XRCalculateAzimuthController.swift */,
 				B4564AB9096A04A1005E0015 /* XRTableAddColumnController.h */,
 				B4564ABA096A04A1005E0015 /* XRTableAddColumnController.m */,
 				B486E2791E7B76A500F1ADAA /* XRTableAddColumnSheet.xib */,
+				B49D7EB72DDEC87E0046A8B8 /* XRTableAddColumnController.swift */,
 			);
 			path = "Table Work";
 			sourceTree = "<group>";
@@ -675,6 +738,12 @@
 				B4E2DE8705C5BD6500714F6F /* XRLayerGrid.h */,
 				B4E2DE8805C5BD6500714F6F /* XRLayerGrid.m */,
 				B4AE41BD2D0BD07000E05D96 /* XRLayerGrid+Stub.swift */,
+				B49D7ED42DDECB2B0046A8B8 /* XRLayer.swift */,
+				B49D7ED52DDECB2B0046A8B8 /* XRLayerCore.swift */,
+				B49D7ED62DDECB2B0046A8B8 /* XRLayerData.swift */,
+				B49D7ED72DDECB2B0046A8B8 /* XRLayerGrid.swift */,
+				B49D7ED82DDECB2B0046A8B8 /* XRLayerLineArrow.swift */,
+				B49D7ED92DDECB2B0046A8B8 /* XRLayerText.swift */,
 			);
 			path = "Layer Control";
 			sourceTree = "<group>";
@@ -684,24 +753,37 @@
 			children = (
 				B4A82FAA2A07FB8700790052 /* LITMArrowHead.h */,
 				B4A82FAB2A07FB8800790052 /* LITMArrowHead.m */,
+				B49D7EC02DDEC9A10046A8B8 /* LITMArrowHead.swift */,
 				B411E50505C35F5500C22F3E /* XRGraphic.h */,
 				B411E50605C35F5500C22F3E /* XRGraphic.m */,
+				B49D7EC32DDEC9C70046A8B8 /* XRGraphic.swift */,
 				B411E5DC05C3651400C22F3E /* XRGraphicCircle.h */,
 				B411E5DD05C3651400C22F3E /* XRGraphicCircle.m */,
+				B49D7EC42DDEC9CE0046A8B8 /* XRGraphicCircle.swift */,
 				B4950EFE05DD286A00C711DC /* XRGraphicCircleLabel.h */,
 				B4950EFF05DD286A00C711DC /* XRGraphicCircleLabel.m */,
+				B49D7EC62DDEC9D80046A8B8 /* XRGraphicCircleLabel.swift */,
 				B4EE8F7605C5E0A9001BACD3 /* XRGraphicLine.h */,
 				B4EE8F7705C5E0A9001BACD3 /* XRGraphicLine.m */,
+				B49D7ECD2DDECA260046A8B8 /* XRGraphicLine.swift */,
 				B461B86F05C4E1DA00738D23 /* XRGraphicKite.h */,
 				B461B87005C4E1DA00738D23 /* XRGraphicKite.m */,
+				B49D7ECC2DDECA1C0046A8B8 /* XRGraphicKite.swift */,
 				B44D357405C5578500D7823C /* XRGraphicPetal.h */,
 				B44D357505C5578500D7823C /* XRGraphicPetal.m */,
+				B49D7ECE2DDECA310046A8B8 /* XRGraphicPetal.swift */,
 				B4F257AB05C58578008591BE /* XRGraphicDot.h */,
 				B4F257AC05C58578008591BE /* XRGraphicDot.m */,
+				B49D7EC72DDEC9E40046A8B8 /* XRGraphicDot.swift */,
 				B4F2594F05C58F28008591BE /* XRGraphicHistogram.h */,
 				B4F2595005C58F28008591BE /* XRGraphicHistogram.m */,
+				B49D7ECA2DDEC9FF0046A8B8 /* XRGraphicHistogram.swift */,
 				B4F25AE205C59CE6008591BE /* XRGraphicDotDeviation.h */,
 				B4F25AE305C59CE6008591BE /* XRGraphicDotDeviation.m */,
+				B49D7EC82DDEC9F00046A8B8 /* XRGraphicDotDeviation.swift */,
+				B49D7EC12DDEC9BA0046A8B8 /* XRAppearanceProviding.swift */,
+				B49D7EC22DDEC9BA0046A8B8 /* XRGeometryProviding.swift */,
+				B49D7ED02DDECA3F0046A8B8 /* XRSelectable.swift */,
 			);
 			path = Graphics;
 			sourceTree = "<group>";
@@ -713,8 +795,10 @@
 				B4149FEE2B24C47E008AE5F4 /* Property Inspector */,
 				B4C08800063069F2001A91F4 /* XRExportGraphicAccessory.h */,
 				B4C08801063069F2001A91F4 /* XRExportGraphicAccessory.m */,
+				B49D7EEE2DDED1DE0046A8B8 /* XRExportGraphicAccessory.swift */,
 				B411E84A05C397D000C22F3E /* XREncodingAccessoryView.h */,
 				B411E84B05C397D000C22F3E /* XREncodingAccessoryView.m */,
+				B49D7EEF2DDED1E90046A8B8 /* XREncodingAccessoryView.swift */,
 				B414A0022B24CAE2008AE5F4 /* Append Dialog Controller */,
 				B414A0032B24CB15008AE5F4 /* F Statistic Sheet */,
 			);
@@ -749,6 +833,7 @@
 				B4F0885F060914150000CF7A /* XRVStatCreatePanelController.h */,
 				B4F08860060914150000CF7A /* XRVStatCreatePanelController.m */,
 				B486E2811E7B770A00F1ADAA /* XRVStatPanel.xib */,
+				B49D7EE42DDECE4C0046A8B8 /* XRVStatCreatePanelController 2.swift */,
 			);
 			path = "Panels and Sheets";
 			sourceTree = "<group>";
@@ -760,6 +845,8 @@
 				B4E5F8BF05FC63A00011788E /* XRFileParser.m */,
 				B4E5F90B05FC679E0011788E /* XRFileParser1.h */,
 				B4E5F90C05FC679E0011788E /* XRFileParser1.m */,
+				B49D7EE22DDECC050046A8B8 /* XRFileParser.swift */,
+				B49D7EE32DDECC050046A8B8 /* XRFileParser1.swift */,
 			);
 			path = "XRose File";
 			sourceTree = "<group>";
@@ -832,6 +919,7 @@
 				B427BD050950B3050063849E /* XRTableImporterDelimiterController.h */,
 				B427BD060950B3050063849E /* XRTableImporterDelimiterController.m */,
 				B486E2741E7B765400F1ADAA /* XRTableInitialTextController.xib */,
+				B49D7EDC2DDECB8F0046A8B8 /* XRTableImporterDelimiterController.swift */,
 			);
 			path = "Delimiter Controller";
 			sourceTree = "<group>";
@@ -842,6 +930,7 @@
 				B47DDF4E0964CDE700C7EF02 /* XRTableImporterXRose.h */,
 				B47DDF4F0964CDE700C7EF02 /* XRTableImporterXRose.m */,
 				B486E2721E7B761B00F1ADAA /* XRTableImporterXRoseSheet.xib */,
+				B49D7EED2DDED1A40046A8B8 /* XRTableImporterXRose.swift */,
 			);
 			path = "XRose Importer Sheet";
 			sourceTree = "<group>";
@@ -851,6 +940,7 @@
 			children = (
 				B42083AF09637969007A74A8 /* PTFMXMLParser.h */,
 				B42083B009637969007A74A8 /* PTFMXMLParser.m */,
+				B49D7EDD2DDECB9C0046A8B8 /* PTFMXMLParser.swift */,
 			);
 			path = "XML Parser";
 			sourceTree = "<group>";
@@ -860,8 +950,10 @@
 			children = (
 				B4A82F9E2A07FA2B00790052 /* LITMAngleFormatter.h */,
 				B4A82F9F2A07FA2B00790052 /* LITMAngleFormatter.m */,
+				B49D7EBD2DDEC96D0046A8B8 /* LITMAngleFormatter.swift */,
 				B4A82FA72A07FB7300790052 /* LITMPercentFormatter.h */,
 				B4A82FA62A07FB7300790052 /* LITMPercentFormatter.m */,
+				B49D7EBE2DDEC9760046A8B8 /* LITMPercentFormatter.swift */,
 			);
 			path = Formatters;
 			sourceTree = "<group>";
@@ -871,9 +963,11 @@
 			children = (
 				B447A963062B021A00154420 /* AboutPanelController.h */,
 				B447A964062B021A00154420 /* AboutPanelController.m */,
+				B49D7EDA2DDECB450046A8B8 /* AboutPanelController.swift */,
 				B486E27E1E7B76FB00F1ADAA /* MainMenu.xib */,
 				B435676A096DA4C000DCF143 /* XRPreferencePanelController.h */,
 				B435676B096DA4C000DCF143 /* XRPreferencePanelController.m */,
+				B49D7EDB2DDECB510046A8B8 /* XRPreferencePanelController.swift */,
 			);
 			path = "Main View";
 			sourceTree = "<group>";
@@ -884,6 +978,7 @@
 				B441FEFB05CB725300F9A0F9 /* XRStatistic.h */,
 				B441FEFC05CB725300F9A0F9 /* XRStatistic.m */,
 				B427CFF11E81EB9E0047F659 /* XRStatisticTests.m */,
+				B49D7EB52DDEC8400046A8B8 /* XRStatistic.swift */,
 			);
 			path = Statistic;
 			sourceTree = "<group>";
@@ -893,6 +988,7 @@
 			children = (
 				B411E74E05C386DA00C22F3E /* XRDataSet.h */,
 				B411E74F05C386DA00C22F3E /* XRDataSet.m */,
+				B49D7EB32DDEC80C0046A8B8 /* XRDataSet.swift */,
 			);
 			path = "Data Set";
 			sourceTree = "<group>";
@@ -903,6 +999,7 @@
 				B4B10C3709529F7F00E6A350 /* XRMakeDatasetController.h */,
 				B4B10C3609529F7F00E6A350 /* XRMakeDatasetController.m */,
 				B486E29E1E7B9C2300F1ADAA /* XRCreateDatasetSheet.xib */,
+				B49D7EB42DDEC81D0046A8B8 /* XRMakeDatasetController.swift */,
 			);
 			path = "Make Dataset Sheet";
 			sourceTree = "<group>";
@@ -913,6 +1010,7 @@
 				B411E7F105C396A400C22F3E /* XRAppendDialogController.h */,
 				B411E7F205C396A400C22F3E /* XRAppendDialogController.m */,
 				B486E29C1E7B850300F1ADAA /* AppendDialog.xib */,
+				B49D7ED12DDECA9B0046A8B8 /* XRAppendDialogController.swift */,
 			);
 			path = "Append Dialog Controller";
 			sourceTree = "<group>";
@@ -923,6 +1021,7 @@
 				B43D613706345207001B863E /* FStatisticController.m */,
 				B43D613806345207001B863E /* FStatisticController.h */,
 				B486E2841E7B770F00F1ADAA /* FStatisticSheet.xib */,
+				B49D7ED22DDECAB40046A8B8 /* FStatisticController.swift */,
 			);
 			path = "F Statistic Sheet";
 			sourceTree = "<group>";
@@ -933,6 +1032,7 @@
 				B48345CC05C238B500E3F6B7 /* XRoseDocument.h */,
 				B48345CD05C238B500E3F6B7 /* XRoseDocument.m */,
 				B486E27B1E7B76EB00F1ADAA /* XRoseDocument.xib */,
+				B49D7EB82DDEC8F10046A8B8 /* XRoseDocument.swift */,
 			);
 			path = "XRose Document";
 			sourceTree = "<group>";
@@ -943,6 +1043,7 @@
 				B452504B05D427F1008338E8 /* XRCoreInspector.h */,
 				B452504C05D427F1008338E8 /* XRCoreInspector.m */,
 				B486E2871E7B772E00F1ADAA /* XRLayerCore.xib */,
+				B49D7EE52DDECEB50046A8B8 /* XRCoreInspector.swift */,
 			);
 			path = "Core Inspector";
 			sourceTree = "<group>";
@@ -953,6 +1054,7 @@
 				B4BF9C1305CD6B110047E8CF /* XRGridInspector.h */,
 				B4BF9C1405CD6B110047E8CF /* XRGridInspector.m */,
 				B486E28A1E7B773300F1ADAA /* XRGridInspector.xib */,
+				B49D7EE92DDECFD60046A8B8 /* XRGridInspector.swift */,
 			);
 			path = "Grid Inspector";
 			sourceTree = "<group>";
@@ -963,6 +1065,7 @@
 				B47CA41105C6D56D0060A30C /* XRGeometryInspector.h */,
 				B47CA41205C6D56D0060A30C /* XRGeometryInspector.m */,
 				B486E2901E7B774000F1ADAA /* XRGeometryInspector.xib */,
+				B49D7EEA2DDED06C0046A8B8 /* XRGeometryInspector.swift */,
 			);
 			path = "Geometry Inspector";
 			sourceTree = "<group>";
@@ -973,6 +1076,7 @@
 				B47CA37805C6CB150060A30C /* XREmptyInspectorController.h */,
 				B47CA37705C6CB150060A30C /* XREmptyInspectorController.m */,
 				B486E2931E7B774600F1ADAA /* XREmptyInspector.xib */,
+				B49D7EEB2DDED0810046A8B8 /* XREmptyInspectorController.swift */,
 			);
 			path = "Empty Inspector";
 			sourceTree = "<group>";
@@ -983,6 +1087,7 @@
 				B48B89F905C794C500248F96 /* XRDataInspector.h */,
 				B48B89FA05C794C500248F96 /* XRDataInspector.m */,
 				B486E28D1E7B773900F1ADAA /* XRDataInspector.xib */,
+				B49D7EE62DDECEC60046A8B8 /* XRDataInspector.swift */,
 			);
 			path = "Data Inspector";
 			sourceTree = "<group>";
@@ -993,6 +1098,7 @@
 				B46C6D270607F2A2000620E7 /* XRVectorInspector.h */,
 				B46C6D280607F2A2000620E7 /* XRVectorInspector.m */,
 				B486E2991E7B775600F1ADAA /* XRVectorInspector.xib */,
+				B49D7EEC2DDED0930046A8B8 /* XRVectorInspector.swift */,
 			);
 			path = "Vector Inspector";
 			sourceTree = "<group>";
@@ -1005,6 +1111,8 @@
 				B47CA2EF05C6C5470060A30C /* XRPropertyInspector.h */,
 				B47CA2F005C6C5470060A30C /* XRPropertyInspector.m */,
 				B486E2961E7B774E00F1ADAA /* XRPropertyInspector.xib */,
+				B49D7EE72DDECFBA0046A8B8 /* XRGeometryPropertyInspector.swift */,
+				B49D7EE82DDECFBA0046A8B8 /* XRPropertyInspector.swift */,
 			);
 			path = "Property Inspector";
 			sourceTree = "<group>";

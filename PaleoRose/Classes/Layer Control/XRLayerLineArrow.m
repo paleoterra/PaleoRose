@@ -258,8 +258,8 @@
     //possibly post notification.
     for(int i=0;i<[_graphicalObjects count];i++)
     {
-        if(![[_graphicalObjects objectAtIndex:i] isKindOfClass:[NSBezierPath class]])
-            [[_graphicalObjects objectAtIndex:1] setColor:_strokeColor];
+        if([[_graphicalObjects objectAtIndex:i] respondsToSelector:@selector(setColor:)])
+            [[_graphicalObjects objectAtIndex:i] setColor:_strokeColor];
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:XRLayerRequiresRedraw object:self];
     [[NSNotificationCenter defaultCenter] postNotificationName:XRLayerInspectorRequiresReload object:self];

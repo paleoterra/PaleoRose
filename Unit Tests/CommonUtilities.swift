@@ -37,8 +37,8 @@ enum CommonUtilities {
         guard let lhsComponents = lhs.cgColor.components, let rhsComponents = rhs.cgColor.components else {
             throw CommonUtilityError.invalidColor
         }
-        let lhsStrings = CommonUtilities.convertComponentsToString(lhsComponents)
-        let rhsStrings = CommonUtilities.convertComponentsToString(rhsComponents)
+        let lhsStrings = Self.convertComponentsToString(lhsComponents)
+        let rhsStrings = Self.convertComponentsToString(rhsComponents)
         print(lhsStrings)
         print(rhsStrings)
         print(lhsStrings == rhsStrings)
@@ -59,6 +59,7 @@ enum CommonUtilities {
         return strings
     }
 
+    // swiftlint:disable:next function_default_parameter_at_end function_parameter_count
     static func assertXRLayerHasCorrectValues(
         layer: XRLayer,
         isVisible: Bool = true,

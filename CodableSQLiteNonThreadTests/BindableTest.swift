@@ -74,7 +74,7 @@ struct BindableTest {
 
         let statement = try interface.buildStatement(sqlite: database, query: TestableTable.insertQuery())
         let tvalue = try #require(value as? Bindable)
-        try #require(try interface.bind(tvalue, to: statement, at: 1))
+        try interface.bind(tvalue, to: statement, at: 1)
     }
 
     @Test("Given a nil value, then bind an NSNUll")
@@ -82,7 +82,7 @@ struct BindableTest {
         let database = try buildDatabase()
         let value: Int32? = nil
         let statement = try interface.buildStatement(sqlite: database, query: TestableTable.insertQuery())
-        try #require(try interface.bind(value, to: statement, at: 1))
+        try interface.bind(value, to: statement, at: 1)
     }
 }
 

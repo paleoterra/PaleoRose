@@ -1,0 +1,52 @@
+PaleoRose/Classes/Interface Items/Panels and Sheets/XRVStatCreatePanelController.swift
+PaleoRose/Classes/Interface Items/Property Inspector/Inspector Views/Core Inspector/XRCoreInspector.swift
+PaleoRose/Classes/Interface Items/Property Inspector/Inspector Views/Geometry Inspector/XRGeometryInspector.swift
+PaleoRose/Classes/Interface Items/Property Inspector/Inspector Views/Property Inspector/XRGeometryPropertyInspector.swift
+PaleoRose/Classes/Interface Items/Property Inspector/Inspector Views/Property Inspector/XRPropertyInspector.swift
+PaleoRose/Classes/Interface Items/Property Inspector/Inspector Views/Vector Inspector/XRVectorInspector.swift
+PaleoRose/Classes/Interface Items/Property Inspector/Inspector Views/Grid Inspector/XRGridInspector.swift
+PaleoRose/Classes/Interface Items/Property Inspector/Inspector Views/Data Inspector/XRDataInspector.swift
+PaleoRose/Classes/Interface Items/Property Inspector/Inspector Views/Empty Inspector/XREmptyInspectorController.swift
+PaleoRose/Classes/Interface Items/Append Dialog Controller/XRAppendDialogController.swift
+PaleoRose/Classes/Interface Items/XREncodingAccessoryView.swift
+PaleoRose/Classes/Interface Items/F Statistic Sheet/FStatisticController.swift
+PaleoRose/Classes/Interface Items/XRExportGraphicAccessory.swift
+PaleoRose/Classes/Formatters/LITMPercentFormatter.swift
+PaleoRose/Classes/Formatters/LITMAngleFormatter.swift
+PaleoRose/Classes/Document/XRoseView.swift
+PaleoRose/Classes/Document/XRoseWindowController.swift
+PaleoRose/Classes/Document/Table Work/XRTableAddColumnController.swift
+PaleoRose/Classes/Document/Table Work/XRCalculateAzimuthController.swift
+PaleoRose/Classes/Document/XRoseTableController.swift
+PaleoRose/Classes/Document/XRose Document/XRoseDocument.swift
+PaleoRose/Classes/Document/XRGeometryController.swift
+PaleoRose/Classes/Main View/AboutPanelController.swift
+PaleoRose/Classes/Main View/XRPreferencePanelController.swift
+PaleoRose/Classes/XRose File/XRFileParser1.swift
+PaleoRose/Classes/XRose File/XRFileParser.swift
+PaleoRose/Classes/XML Parsing/LITMXMLParser.swift
+PaleoRose/Classes/XML Parsing/LITMXMLBinaryEncoding.swift
+PaleoRose/Classes/XML Parsing/LITMXMLTree.swift
+PaleoRose/Classes/Layer Control/XRLayerData.swift
+PaleoRose/Classes/Layer Control/XRLayer.swift
+PaleoRose/Classes/Layer Control/XRLayerText.swift
+PaleoRose/Classes/Layer Control/XRLayerGrid.swift
+PaleoRose/Classes/Layer Control/XRLayerCore.swift
+PaleoRose/Classes/Layer Control/XRLayerLineArrow.swift
+PaleoRose/Classes/Table Importing/XML Parser/PTFMXMLParser.swift
+PaleoRose/Classes/Table Importing/XRose Importer Sheet/XRTableImporterXRose.swift
+PaleoRose/Classes/Table Importing/Delimiter Controller/XRTableImporterDelimiterController.swift
+PaleoRose/Classes/Table Importing/XRTableImporter.swift
+PaleoRose/Classes/Graphics/XRGraphic.swift
+PaleoRose/Classes/Graphics/LITMArrowHead.swift
+PaleoRose/Classes/Graphics/XRGraphicCircleLabel.swift
+PaleoRose/Classes/Graphics/XRGraphicDotDeviation.swift
+PaleoRose/Classes/Graphics/XRGraphicCircle.swift
+PaleoRose/Classes/Graphics/XRGraphicKite.swift
+PaleoRose/Classes/Graphics/XRGraphicLine.swift
+PaleoRose/Classes/Graphics/XRGraphicHistogram.swift
+PaleoRose/Classes/Graphics/XRGraphicPetal.swift
+PaleoRose/Classes/Graphics/XRGraphicDot.swift
+PaleoRose/Classes/Data/Make Dataset Sheet/XRMakeDatasetController.swift
+PaleoRose/Classes/Data/Data Set/XRDataSet.swift
+PaleoRose/Classes/Data/Statistic/XRStatistic.swift

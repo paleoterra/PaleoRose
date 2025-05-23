@@ -169,8 +169,8 @@ extension LayerGrid {
             print("RADIALS_TICKS \(RADIALS_TICKS) != \(layer.radianTicks())")
             return false
         }
-        guard RADIALS_MINORTICKS == layer.radianMintoTicks() else {
-            print("RADIALS_MINORTICKS \(RADIALS_MINORTICKS) != \(layer.radianMintoTicks())")
+        guard RADIALS_MINORTICKS == layer.radianMinorTicks() else {
+            print("RADIALS_MINORTICKS \(RADIALS_MINORTICKS) != \(layer.radianMinorTicks())")
             return false
         }
         guard RADIALS_LABELS == layer.radianLabels() else {

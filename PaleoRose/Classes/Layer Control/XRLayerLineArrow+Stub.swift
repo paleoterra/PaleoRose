@@ -25,6 +25,7 @@
 // SOFTWARE.
 
 import PaleoRose
+import Testing
 
 extension XRLayerLineArrow {
     static func stub(
@@ -59,5 +60,43 @@ extension XRLayerLineArrow {
             showVector: showVector,
             showError: showError
         )
+    }
+
+    // swiftlint:disable:next function_parameter_count
+    func verify(
+        isVisible: Bool,
+        active: Bool,
+        biDir: Bool,
+        name: String,
+        lineWeight: Float,
+        maxCount: Int,
+        maxPercent: Float,
+        stroke: NSColor,
+        fill: NSColor,
+        arrowSize: Float,
+        vectorType: Int,
+        arrowType: Int,
+        showVector: Bool,
+        showError: Bool,
+        fileId: String = #file,
+        filePath: String = #filePath,
+        line: Int = #line,
+        column: Int = #column
+    ) {
+        let sourceLocation = SourceLocation(fileID: fileId, filePath: filePath, line: line, column: column)
+        #expect(self.isVisible() == isVisible, sourceLocation: sourceLocation)
+        #expect(isActive() == active, sourceLocation: sourceLocation)
+        #expect(isBiDirectional() == biDir, sourceLocation: sourceLocation)
+        #expect(layerName() == name, sourceLocation: sourceLocation)
+        #expect(self.lineWeight() == lineWeight, sourceLocation: sourceLocation)
+        #expect(self.maxCount() == maxCount, sourceLocation: sourceLocation)
+        #expect(self.maxPercent() == maxPercent, sourceLocation: sourceLocation)
+        #expect(strokeColor() == stroke, sourceLocation: sourceLocation)
+        #expect(fillColor() == fill, sourceLocation: sourceLocation)
+        #expect(self.arrowSize() == arrowSize, sourceLocation: sourceLocation)
+        #expect(self.vectorType() == vectorType, sourceLocation: sourceLocation)
+        #expect(self.arrowType() == arrowType, sourceLocation: sourceLocation)
+        #expect(self.showVector() == showVector, sourceLocation: sourceLocation)
+        #expect(self.showError() == showError, sourceLocation: sourceLocation)
     }
 }

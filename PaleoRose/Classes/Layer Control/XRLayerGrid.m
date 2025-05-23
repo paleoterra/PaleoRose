@@ -836,7 +836,7 @@
     return _showTicks;
 }
 
--(BOOL)radianMintoTicks {
+-(BOOL)radianMinorTicks {
     return _minorTicks;
 }
 

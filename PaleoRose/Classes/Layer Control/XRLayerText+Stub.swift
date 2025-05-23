@@ -25,6 +25,7 @@
 // SOFTWARE.
 
 import PaleoRose
+import Testing
 
 extension XRLayerText {
 
@@ -57,5 +58,38 @@ extension XRLayerText {
             rectHeight: Float(rect.size.width),
             rectWidth: Float(rect.size.height)
         )
+    }
+
+    // swiftlint:disable:next function_parameter_count
+    func verify(
+        isVisible: Bool,
+        active: Bool,
+        biDir: Bool,
+        name: String,
+        lineWeight: Float,
+        maxCount: Int,
+        maxPercent: Float,
+        stroke: NSColor,
+        fill: NSColor,
+        contentString: String,
+        rect: CGRect,
+        fileId: String = #file,
+        filePath: String = #filePath,
+        line: Int = #line,
+        column: Int = #column
+    ) {
+        let sourceLocation = SourceLocation(fileID: fileId, filePath: filePath, line: line, column: column)
+
+        #expect(self.isVisible() == isVisible, sourceLocation: sourceLocation)
+        #expect(isActive() == active, sourceLocation: sourceLocation)
+        #expect(isBiDirectional() == biDir, sourceLocation: sourceLocation)
+        #expect(layerName() == name, sourceLocation: sourceLocation)
+        #expect(self.lineWeight() == lineWeight, sourceLocation: sourceLocation)
+        #expect(self.maxCount() == maxCount, sourceLocation: sourceLocation)
+        #expect(self.maxPercent() == maxPercent, sourceLocation: sourceLocation)
+        #expect(strokeColor() == stroke, sourceLocation: sourceLocation)
+        #expect(fillColor() == fill, sourceLocation: sourceLocation)
+        #expect(contents().string == contentString, sourceLocation: sourceLocation)
+        #expect(textRect() == rect, sourceLocation: sourceLocation)
     }
 }

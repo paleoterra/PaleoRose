@@ -260,7 +260,7 @@ struct InMemoryStoreTest {
         // swiftlint:disable:next line_length
         #expect(sqlStrings.contains("INSERT INTO _layers (LAYERID, TYPE, VISIBLE, ACTIVE, BIDIR, LAYER_NAME, LINEWEIGHT, MAXCOUNT, MAXPERCENT, STROKECOLORID, FILLCOLORID) VALUES (?,?,?,?,?,?,?,?,?,?,?)"))
         // swiftlint:disable:next line_length
-        #expect(sqlStrings.contains("INSERT INTO _layerGrid (LAYERID, RINGS_ISFIXEDCOUNT, RINGS_VISIBLE, RINGS_LABELS, RINGS_FIXEDCOUNT, RINGS_COUNTINCREMENT, RINGS_PERCENTINCREMENT, RINGS_LABELANGLE, RINGS_FONTNAME, RINGS_FONTSIZE,  RADIALS_COUNT, RADIALS_ANGLE, RADIALS_LABELALIGN, RADIALS_COMPASSPOINT, RADIALS_ORDER, RADIALS_FONT, RADIALS_FONTSIZE, RADIALS_SECTORLOCK, RADIALS_VISIBLE, RADIALS_ISPERCENT, RADIALS_TICKS, RADIALS_MINORTICKS, RADIALS_LABELS) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);"))
+        #expect(sqlStrings.contains("INSERT INTO _layerGrid (LAYERID, RINGS_ISFIXEDCOUNT, RINGS_VISIBLE, RINGS_LABELS, RINGS_FIXEDCOUNT, RINGS_COUNTINCREMENT, RINGS_PERCENTINCREMENT, RINGS_LABELANGLE, RINGS_FONTNAME, RINGS_FONTSIZE,  RADIALS_COUNT, RADIALS_ANGLE, RADIALS_LABELALIGN, RADIALS_COMPASSPOINT, RADIALS_ORDER, RADIALS_FONT, RADIALS_FONTSIZE, RADIALS_SECTORLOCK, RADIALS_VISIBLE, RADIALS_ISPERCENT, RADIALS_TICKS, RADIALS_MINORTICKS, RADIALS_LABELS) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);"))
     }
 
     @Test("Given an XRLayerData, then attempt to store the layer")
@@ -274,7 +274,7 @@ struct InMemoryStoreTest {
             }
         }
         let layer = XRLayerData.stub()
-        let store = try #require(try InMemoryStore(interface: sqliteInterface))
+        let store = try InMemoryStore(interface: sqliteInterface)
         sqliteInterface.resetMock()
         try store.store(layers: [layer])
         #expect(sqliteInterface.queryAccumulator.count >= 8)

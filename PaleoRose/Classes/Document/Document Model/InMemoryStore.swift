@@ -115,23 +115,29 @@ class InMemoryStore: NSObject {
 
     // MARK: - Read All
 
+    // swiftlint:disable:next function_body_length
     func readFromStore(completion: @escaping (Result<Bool, Error>) -> Void) {
+        // swiftlint:disable:next closure_body_length
         DispatchQueue.global(qos: .background).async { [weak self] in
             guard let self else {
                 completion(.failure(InMemoryStoreError.databaseDoesNotExist))
                 return
             }
             do {
+                let group = DispatchGroup()
                 let sqliteStore = try validateStore()
                 // directly settable values
                 let tableNames = try tableNames(sqliteStore: sqliteStore)
+                group.enter()
                 DispatchQueue.main.async { [weak self] in
                     self?.delegate?.tableNames = tableNames
+                    group.leave()
                 }
                 do {
                     let windowSize = try windowSize(sqliteStore: sqliteStore)
                     DispatchQueue.main.async { [weak self] in
                         self?.delegate?.windowSize = windowSize
+                        group.leave()
                     }
                 } catch InMemoryStoreError.unexpectedEmptyResult {
                     print("Window size not found")
@@ -140,8 +146,10 @@ class InMemoryStore: NSObject {
                 }
                 do {
                     let geometry = try geometry(sqliteStore: sqliteStore)
+                    group.enter()
                     DispatchQueue.main.async { [weak self] in
                         self?.delegate?.update(geometry: geometry)
+                        group.leave()
                     }
                 } catch InMemoryStoreError.unexpectedEmptyResult {
                     print("Window size not found")
@@ -150,12 +158,17 @@ class InMemoryStore: NSObject {
                 }
                 // requires additional processing
                 let dataSets = try dataSets(sqliteStore: sqliteStore)
+
+                group.enter()
                 DispatchQueue.main.async { [weak self] in
                     self?.delegate?.dataSets = dataSets
+                    group.leave()
                 }
                 let layers = try readLayers(sqliteStore: sqliteStore)
+                group.enter()
                 DispatchQueue.main.async { [weak self] in
                     self?.delegate?.layers = layers
+                    group.leave()
                 }
                 completion(.success(true))
             } catch {
@@ -440,6 +453,7 @@ class InMemoryStore: NSObject {
         let layerCores = try readLayerCoreTable(sqliteStore: sqliteStore)
         typeLayers["XRLayerCore"] = layerCores
         let layerGrids = try readLayerGridTable(sqliteStore: sqliteStore)
+        print("radials is percent \(layerGrids[0].RADIALS_ISPERCENT)")
         typeLayers["XRLayerGrid"] = layerGrids
         let layerDatas = try readLayerDataTable(sqliteStore: sqliteStore)
         typeLayers["XRLayerData"] = layerDatas
@@ -447,7 +461,8 @@ class InMemoryStore: NSObject {
         storageLayerFactory.set(colors: colors)
         var xrLayers: [XRLayer] = []
         for layer in layers {
-            guard let typeLayerArray = typeLayers[layer.TYPE], let typeLayer = typeLayerArray.first(where: { $0.LAYERID == layer.LAYERID }) else {
+            guard let typeLayerArray = typeLayers[layer.TYPE],
+                let typeLayer = typeLayerArray.first(where: { $0.LAYERID == layer.LAYERID }) else {
                 throw InMemoryStoreError.invalidLayersStore
             }
             let newLayer = try storageLayerFactory.createXRLayer(baseLayer: layer, targetLayer: typeLayer)
@@ -513,7 +528,7 @@ class InMemoryStore: NSObject {
             sqliteStore = store
             try configureStore(store: store)
         } catch {
-            logError(error: "Error creating in-memory store: \(error)")
+            logError(error: "Error creating in-memory store at setupDatabase: \(error)")
             throw error
         }
     }

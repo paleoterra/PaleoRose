@@ -39,7 +39,7 @@ struct StorageModelFactoryTest {
 
         let textLayer = sut.storageLayerText(from: original, at: location)
 
-        #expect(try textLayer.compare(with: original, id: location))
+        try textLayer.compare(with: original, id: location)
     }
 
     @Test("Given a layer line arrow, then generate the correct storage layers")
@@ -101,7 +101,7 @@ struct StorageModelFactoryTest {
         let xrLayer = sut.createXRLayerText(layer: layer, textLayer: textLayer)
 
         #expect(layer.compare(with: xrLayer, id: layerid))
-        #expect(try textLayer.compare(with: xrLayer, id: layerid))
+        try textLayer.compare(with: xrLayer, id: layerid)
     }
 
     @Test("Given a layer and line arrow, then correctly create XRLayerLineArrow")

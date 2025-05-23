@@ -28,7 +28,7 @@ import CodableSQLiteNonThread
 @testable import PaleoRose
 import Testing
 
-// swiftlint:disable indentation_width file_length type_body_length
+// swiftlint:disable indentation_width file_length type_body_length type_contents_order
 @Suite(
     "InMemory Store Integration Test",
     .tags(.integration)
@@ -87,7 +87,7 @@ struct InMemoryStoreIntegrationTest {
     )
     func createStoreShouldCreateTables(execptedTable: String, sql: any QueryProtocol) throws {
         let interface = SQLiteInterface()
-        let store = try #require(try InMemoryStore(interface: interface))
+        let store = try InMemoryStore(interface: interface)
         let dbPointer = try #require(store.store())
         let result: [TableSchema] = try #require(
             try interface.executeCodableQuery(
@@ -139,13 +139,13 @@ struct InMemoryStoreIntegrationTest {
 
     @Test("Given a populated in-memory store, when backing up to new file, then backup successfully")
     func backupToNewFile() throws {
-        let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
+        let store = try InMemoryStore(interface: SQLiteInterface())
         try backupFromSampleFileToInMemoryStore(store)
 
         let temporaryDirectory = FileManager.default.temporaryDirectory
         let fileURL = temporaryDirectory.appendingPathComponent(UUID().uuidString)
 
-        try #require(try store.save(to: fileURL.path()))
+        try store.save(to: fileURL.path())
 
         let tempFile = try SQLiteInterface().openDatabase(path: fileURL.path())
         defer {
@@ -161,14 +161,14 @@ struct InMemoryStoreIntegrationTest {
 
     @Test("Given document with no data, when requesting data tables, then return an empty array")
     func returnEmptyTableListWhenNoData() throws {
-        let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
+        let store = try InMemoryStore(interface: SQLiteInterface())
         let tables = try store.tableNames(sqliteStore: store.sqlitePointer())
         #expect(tables.isEmpty)
     }
 
     @Test("Given document with data, when requesting data tables, then return array")
     func returnPopulatedTableListWhenNoData() throws {
-        let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
+        let store = try InMemoryStore(interface: SQLiteInterface())
         try backupFromSampleFileToInMemoryStore(store)
 
         let tables = try store.tableNames(sqliteStore: store.sqlitePointer())
@@ -181,7 +181,7 @@ struct InMemoryStoreIntegrationTest {
 
     @Test("Given document with data, when requesting datasets then return expected array with 2 records")
     func returnPopulatedDatasets() throws {
-        let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
+        let store = try InMemoryStore(interface: SQLiteInterface())
         try backupFromSampleFileToInMemoryStore(store)
 
         let datasets = try store.tableNames(sqliteStore: store.sqlitePointer())
@@ -191,7 +191,7 @@ struct InMemoryStoreIntegrationTest {
 
     @Test("Given document with data, when requesting data for dataset, then return correct Float array")
     func returnPopulatedDataForDataset() throws {
-        let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
+        let store = try InMemoryStore(interface: SQLiteInterface())
         try backupFromSampleFileToInMemoryStore(store)
         let dataSet = DataSet(
             _id: 1,
@@ -212,7 +212,7 @@ struct InMemoryStoreIntegrationTest {
         let expectedWidth: CGFloat = 54
         let expectedHeight: CGFloat = 90
 
-        let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
+        let store = try InMemoryStore(interface: SQLiteInterface())
         let size = CGSize(width: expectedWidth, height: expectedHeight)
         try store.store(windowSize: size)
         let windowSize = try store.windowSize(sqliteStore: store.sqlitePointer())
@@ -225,7 +225,7 @@ struct InMemoryStoreIntegrationTest {
         let expectedWidth: CGFloat = 54
         let expectedHeight: CGFloat = 90
 
-        let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
+        let store = try InMemoryStore(interface: SQLiteInterface())
         var size = CGSize(width: expectedWidth - 10, height: expectedHeight - 10)
         try store.store(windowSize: size)
 
@@ -249,7 +249,7 @@ struct InMemoryStoreIntegrationTest {
     func renameTable() throws {
         let startTable = "rtest"
         let endTable = "rtest2"
-        let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
+        let store = try InMemoryStore(interface: SQLiteInterface())
         try backupFromSampleFileToInMemoryStore(store)
         let startTableNames = try store.tableNames(sqliteStore: store.sqlitePointer())
 
@@ -267,7 +267,7 @@ struct InMemoryStoreIntegrationTest {
     func addColumn() throws {
         let table = "rtest"
         let column = "newColumn TEXT"
-        let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
+        let store = try InMemoryStore(interface: SQLiteInterface())
         try backupFromSampleFileToInMemoryStore(store)
         try store.addColumn(to: table, columnDefinition: column)
         let schemas: [TableSchema] = try store.interface.executeCodableQuery(
@@ -284,7 +284,7 @@ struct InMemoryStoreIntegrationTest {
     @Test("When dropping table, the table is no longer available")
     func dropTable() throws {
         let table = "rtest"
-        let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
+        let store = try InMemoryStore(interface: SQLiteInterface())
         try backupFromSampleFileToInMemoryStore(store)
         try store.drop(table: table)
         let tableNames = try store.tableNames(sqliteStore: store.sqlitePointer())
@@ -296,7 +296,7 @@ struct InMemoryStoreIntegrationTest {
     @Test("When storing geometry called, then the database is updated")
     func storeGeometry() throws {
         let interface = SQLiteInterface()
-        let store = try #require(try InMemoryStore(interface: interface))
+        let store = try InMemoryStore(interface: interface)
         try backupFromSampleFileToInMemoryStore(store)
         let controller = XRGeometryController.stub(
             isEqualArea: true,
@@ -317,7 +317,7 @@ struct InMemoryStoreIntegrationTest {
     @Test("When storing geometry called multiple times, then the database has only the latest")
     func storeGeometryManyTimes() throws {
         let interface = SQLiteInterface()
-        let store = try #require(try InMemoryStore(interface: interface))
+        let store = try InMemoryStore(interface: interface)
         try backupFromSampleFileToInMemoryStore(store)
         let controller = XRGeometryController.stub(
             isEqualArea: true,
@@ -371,7 +371,7 @@ struct InMemoryStoreIntegrationTest {
     @Test("When reading layers from the test file, then all the expected layers are returned")
     func readLayersInTestFile() throws {
         let interface = SQLiteInterface()
-        let store = try #require(try InMemoryStore(interface: interface))
+        let store = try InMemoryStore(interface: interface)
 
         try backupFromSampleFileToInMemoryStore(store)
 
@@ -385,7 +385,7 @@ struct InMemoryStoreIntegrationTest {
     @Test("When reading layers from the test file, ensure the grid layer correctly reads data")
     func readGridLayerInTestFile() throws {
         let interface = SQLiteInterface()
-        let store = try #require(try InMemoryStore(interface: interface))
+        let store = try InMemoryStore(interface: interface)
 
         try backupFromSampleFileToInMemoryStore(store)
 
@@ -395,42 +395,48 @@ struct InMemoryStoreIntegrationTest {
             return
         }
         #expect(layers.count == 3)
-        #expect(layer.isVisible())
-        #expect(!layer.isActive())
-        #expect(!layer.isBiDirectional())
-        #expect(layer.layerName() == "Default Grid")
-        #expect(layer.lineWeight() == 3.388646)
-        #expect(layer.maxCount() == 0)
-        #expect(layer.maxPercent() == 0.0)
+        if !layer.radianIsPercent() {
+            print("fail")
+        }
+        layer.verify(
+            isVisible: true,
+            active: false,
+            biDir: false,
+            name: "Default Grid",
+            lineWeight: 3.388646,
+            maxCount: 0,
+            maxPercent: 0.0,
+            isFixedCount: true,
+            ringsVisible: true,
+            fixedRingCount: 4,
+            ringCountIncrement: 2,
+            ringPercentIncrement: 0.11,
+            showRingLabels: true,
+            labelAngle: 77.616188,
+            // swiftlint:disable:next force_unwrapping
+            ringFont: NSFont(name: "ArialMT", size: 24.0)!,
+            radialsCount: 32,
+            radialsAngle: 11.25,
+            radialsLabelAlignment: 0,
+            radialsCompassPoint: 1,
+            radialsOrder: 0,
+            // swiftlint:disable:next force_unwrapping
+            radialFont: NSFont(name: "AurulentSansMonoNerdFontComplete-Regular", size: 12.0)!,
+            radialsSectorLock: false,
+            radialsVisible: true,
+            radialsIsPercent: true,
+            radialsTicks: true,
+            radialsMinorTicks: true,
+            radialLabels: true
+        )
         // stroke id
         // fill id
-        #expect(layer.fixedCount())
-        #expect(layer.isVisible())
-        #expect(layer.fixedRingCount() == 4)
-        #expect(layer.ringCountIncrement() == 2)
-        #expect(layer.ringPercentIncrement() == 0.11)
-        #expect(layer.ringLabelAngle() == 77.616188)
-        #expect(layer.ringFontName() == "ArialMT")
-        #expect(layer.ringFontSize() == 24.0)
-        #expect(layer.radialsCount() == 32)
-        #expect(layer.radialsAngle() == 11.25)
-        #expect(layer.radialsLabelAlign() == 0)
-        #expect(layer.radialsCompassPoint() == 1)
-        #expect(layer.radiansOrder() == 0)
-        #expect(layer.radianFontName() == "AurulentSansMonoNerdFontComplete-Regular")
-        #expect(layer.radianFontSize() == 12.0)
-        #expect(!layer.radianSectorLock())
-        #expect(layer.radianVisible())
-        #expect(layer.radianIsPercent())
-        #expect(layer.radianTicks())
-        #expect(layer.radianMintoTicks())
-        #expect(layer.radianLabels())
     }
 
     @Test("When reading layers from the test file, ensure the data layer correctly reads data")
-    func readDataayerInTestFile() throws {
+    func readDataLayerInTestFile() throws {
         let interface = SQLiteInterface()
-        let store = try #require(try InMemoryStore(interface: interface))
+        let store = try InMemoryStore(interface: interface)
 
         try backupFromSampleFileToInMemoryStore(store)
 
@@ -458,7 +464,7 @@ struct InMemoryStoreIntegrationTest {
     @Test("When reading layers from the test file, ensure the line arrow layer correctly reads data")
     func readLineArrowInTestFile() throws {
         let interface = SQLiteInterface()
-        let store = try #require(try InMemoryStore(interface: interface))
+        let store = try InMemoryStore(interface: interface)
 
         try backupFromSampleFileToInMemoryStore(store)
 
@@ -494,23 +500,25 @@ struct InMemoryStoreIntegrationTest {
             XRLayerLineArrow.stub(),
             XRLayerText.stub()
         ]
-        let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
+        let store = try InMemoryStore(interface: SQLiteInterface())
 
         try store.store(layers: layers)
     }
 
     // MARK: - Read From Store
 
+    // swiftlint:disable object_literal
     let rTestColors: [NSColor] = [
         .init(red: 0, green: 0, blue: 0, alpha: 1),
         NSColor(red: 0.843035, green: 0.429802, blue: 0.584504, alpha: 1),
         NSColor(red: 1, green: 0.423844, blue: 0.347773, alpha: 1),
         NSColor(red: 0.724256, green: 0.28904, blue: 0.169853, alpha: 1)
     ]
+    // swiftlint:enable object_literal
 
-    private func rTestColorItem(at: Int) throws -> NSColor {
-        try #require(at > 0 && at <= rTestColors.count)
-        return rTestColors[at - 1]
+    private func rTestColorItem(atIndex: Int) throws -> NSColor {
+        try #require(atIndex > 0 && atIndex <= rTestColors.count)
+        return rTestColors[atIndex - 1]
     }
 
     private func readRtestFromStore(store: InMemoryStore) async throws -> Bool {
@@ -530,7 +538,7 @@ struct InMemoryStoreIntegrationTest {
 
     @Test("When ReadFromStore called, call completion handler")
     func readFromStoreCompletion() async throws {
-        let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
+        let store = try InMemoryStore(interface: SQLiteInterface())
         let delegate = MockInMemoryStoreDelegate()
         store.delegate = delegate
 
@@ -540,12 +548,12 @@ struct InMemoryStoreIntegrationTest {
 
     @Test("When ReadFromStore called for rtest, expect 3 layers")
     func readFromStore3layers() async throws {
-        let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
+        let store = try InMemoryStore(interface: SQLiteInterface())
         let delegate = MockInMemoryStoreDelegate()
         store.delegate = delegate
 
         _ = try await readRtestFromStore(store: store)
-        #expect(delegate.layers.count == 3)
+        try #require(delegate.layers.count == 3)
         #expect(delegate.layers[0] is XRLayerGrid)
         #expect(delegate.layers[1] is XRLayerData)
         #expect(delegate.layers[2] is XRLayerLineArrow)
@@ -553,12 +561,14 @@ struct InMemoryStoreIntegrationTest {
 
     @Test("When ReadFromStore called for rtest, expect correct Layer portions")
     func readFromStoreGridLayer() async throws {
-        let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
+        let store = try InMemoryStore(interface: SQLiteInterface())
         let delegate = MockInMemoryStoreDelegate()
         store.delegate = delegate
 
         _ = try await readRtestFromStore(store: store)
-        let grid = try #require(delegate.layers[0])
+        print("Layer count: \(delegate.layers.count)")
+        try #require(delegate.layers.count == 3)
+        let grid = delegate.layers[0]
         // Grid  Table
 
         try CommonUtilities.assertXRLayerHasCorrectValues(
@@ -570,11 +580,11 @@ struct InMemoryStoreIntegrationTest {
             lineWeight: 3.388646,
             maxCount: 0,
             maxPercent: 0.0,
-            strokeColor: rTestColorItem(at: 1), // not correct
-            fillColor: rTestColorItem(at: 1) // not correct
+            strokeColor: rTestColorItem(atIndex: 1), // not correct
+            fillColor: rTestColorItem(atIndex: 1) // not correct
         )
 
-        let data = try #require(delegate.layers[1])
+        let data = delegate.layers[1]
 
         try CommonUtilities.assertXRLayerHasCorrectValues(
             layer: data,
@@ -585,8 +595,8 @@ struct InMemoryStoreIntegrationTest {
             lineWeight: 7,
             maxCount: 11,
             maxPercent: 0.087302,
-            strokeColor: rTestColorItem(at: 3), // not correct
-            fillColor: rTestColorItem(at: 2) // not correct
+            strokeColor: rTestColorItem(atIndex: 3), // not correct
+            fillColor: rTestColorItem(atIndex: 2) // not correct
         )
 
         let lineArrow = try #require(delegate.layers[2])
@@ -600,19 +610,21 @@ struct InMemoryStoreIntegrationTest {
             lineWeight: 4.698694,
             maxCount: 0,
             maxPercent: 0.0,
-            strokeColor: rTestColorItem(at: 4),
-            fillColor: rTestColorItem(at: 1)
+            strokeColor: rTestColorItem(atIndex: 4),
+            fillColor: rTestColorItem(atIndex: 1)
         )
     }
 
     @Test("Validate grid layer")
     func validateGridLayer() async throws {
-        let store = try #require(try InMemoryStore(interface: SQLiteInterface()))
+        let store = try InMemoryStore(interface: SQLiteInterface())
 
         let delegate = MockInMemoryStoreDelegate()
         store.delegate = delegate
 
         _ = try await readRtestFromStore(store: store)
+        print("Layer count: \(delegate.layers.count)")
+        try #require(delegate.layers.count == 3)
         let grid = try #require(delegate.layers[0] as? XRLayerGrid)
 
         #expect(grid.fixedCount())
@@ -625,8 +637,17 @@ struct InMemoryStoreIntegrationTest {
         #expect(grid.ringFont().fontName == "ArialMT")
         #expect(grid.ringFontSize() == 24)
         #expect(grid.radialsCount() == 32)
-        #expect(grid.radialsAngle() == 12)
-        #expect(grid.radialsLabelAlign() == 12)
-        #expect(grid)
+        #expect(grid.radialsAngle() == 11.25)
+        #expect(grid.radialsLabelAlign() == 0)
+        #expect(grid.radialsCompassPoint() == 1)
+        #expect(grid.radiansOrder() == 0)
+        #expect(grid.spokeFont().fontName == "AurulentSansMonoNerdFontComplete-Regular")
+        #expect(grid.radianFontSize() == 12.0)
+        #expect(!grid.radianSectorLock())
+        #expect(grid.radianVisible())
+        #expect(grid.radianIsPercent())
+        #expect(grid.radianTicks())
+        #expect(grid.radianMinorTicks())
+        #expect(grid.radianLabels())
     }
 }
