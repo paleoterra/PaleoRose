@@ -39,28 +39,9 @@ struct DataSet: TableRepresentable, Equatable {
     var PREDICATE: String?
     var COMMENTS: String? // Base 64 encoded
 
-    func decodedComments() -> NSAttributedString? {
-        guard let COMMENTS else { return nil }
-        guard let rtfData = Data(base64Encoded: COMMENTS) else { return nil }
-        return NSAttributedString(rtf: rtfData, documentAttributes: nil)
-    }
-
-    mutating func set(comments: NSAttributedString?) {
-        guard let comments else {
-            COMMENTS = nil
-            return
-        }
-        let range = NSRange(location: 0, length: comments.length)
-        guard let rtfData = comments.rtf(from: range) else {
-            COMMENTS = nil
-            return
-        }
-        COMMENTS = rtfData.base64EncodedString()
-    }
-
     // MARK: - TableRepresentable
 
-    private static func allKeys() -> [String] {
+    static func allKeys() -> [String] {
         let keys: [CodingKeys] = [.NAME, .TABLENAME, .COLUMNNAME, .PREDICATE, .COMMENTS]
         return keys.map(\.stringValue)
     }
@@ -80,6 +61,29 @@ struct DataSet: TableRepresentable, Equatable {
 
     static func deleteQuery() -> any QueryProtocol {
         Query(sql: "")
+    }
+
+    func decodedComments() -> NSAttributedString? {
+        guard let COMMENTS else {
+            return nil
+        }
+        guard let rtfData = Data(base64Encoded: COMMENTS) else {
+            return nil
+        }
+        return NSAttributedString(rtf: rtfData, documentAttributes: nil)
+    }
+
+    mutating func set(comments: NSAttributedString?) {
+        guard let comments else {
+            COMMENTS = nil
+            return
+        }
+        let range = NSRange(location: 0, length: comments.length)
+        guard let rtfData = comments.rtf(from: range) else {
+            COMMENTS = nil
+            return
+        }
+        COMMENTS = rtfData.base64EncodedString()
     }
 
     func dataQuery() -> any QueryProtocol {

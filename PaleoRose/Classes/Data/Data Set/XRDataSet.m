@@ -87,12 +87,13 @@
     return self;
 }
 
--(id)initWithName:(NSString *)name tableName:(NSString *)table column:(NSString *)column predicate:(NSString *)aPredicate comments:(NSAttributedString *)comments data:(NSData *)data {
+-(id)initWithId:(int)setId name:(NSString *)name tableName:(NSString *)table column:(NSString *)column predicate:(NSString *)aPredicate comments:(NSAttributedString *)comments data:(NSData *)data {
     if (!(self = [super init])) return nil;
     if(self)
     {
         _theValues = [[NSMutableData alloc] init];
         _name = name;
+        _setId = setId;
         tableName = table;
         columnName = column;
         predicate = aPredicate;
@@ -122,6 +123,14 @@
 -(NSString *)name
 {
     return _name;
+}
+
+-(int)setId {
+    return _setId;
+}
+
+-(void)setId:(int)newId {
+    _setId = newId;
 }
 
 -(void)setName:(NSString *)name;

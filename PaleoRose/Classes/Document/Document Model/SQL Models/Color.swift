@@ -39,7 +39,7 @@ struct Color: TableRepresentable {
 
     // MARK: - TableRepresentable
 
-    private static func allKeys() -> [String] {
+    static func allKeys() -> [String] {
         let keys: [CodingKeys] = [.COLORID, .RED, .BLUE, .GREEN, .ALPHA]
         return keys.map(\.stringValue)
     }
@@ -50,7 +50,7 @@ struct Color: TableRepresentable {
     }
 
     static func insertQuery() -> any QueryProtocol {
-        Query(sql: "")
+        Query(sql: "INSERT INTO _colors (COLORID, RED, BLUE, GREEN, ALPHA) VALUES (?,?,?,?);")
     }
 
     static func updateQuery() -> any QueryProtocol {
@@ -59,5 +59,11 @@ struct Color: TableRepresentable {
 
     static func deleteQuery() -> any QueryProtocol {
         Query(sql: "")
+    }
+
+    // MARK: - Conversion
+
+    func nsColor() -> NSColor {
+        NSColor(red: CGFloat(RED), green: CGFloat(GREEN), blue: CGFloat(BLUE), alpha: CGFloat(ALPHA))
     }
 }

@@ -48,16 +48,16 @@
     sqlite3 *inMemoryStore;
 }
 
--(id)initWithTableArray:(NSArray *)tables inMemoryDocument:(sqlite3 *)db;
+-(id)initWithTableArray:(NSArray *)tables inMemoryDocument:(sqlite3 *)db DEPRECATED_ATTRIBUTE;
 -(NSString *)selectedTable;
 -(NSString *)selectedColumn;
 -(NSString *)selectedName;
 - (IBAction)cancel:(id)sender;
 - (IBAction)create:(id)sender;
-- (IBAction)selectColumns:(id)sender;
+- (IBAction)selectColumns:(id)sender DEPRECATED_ATTRIBUTE;
 - (IBAction)showAdvancedSelect:(id)sender;
 - (IBAction)addPopupText:(id)sender;
-- (IBAction)validatePredicate:(id)sender;
+- (IBAction)validatePredicate:(id)sender DEPRECATED_ATTRIBUTE;
 -(void)setValid:(BOOL)isValid;
 -(NSString *)predicate;
 @end

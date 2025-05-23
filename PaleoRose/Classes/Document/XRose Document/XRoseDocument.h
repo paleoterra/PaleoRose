@@ -40,13 +40,13 @@
 -(void)configureDocument;
 
 
--(NSString *)FTestStatisticsForSetNames:(NSArray *)setNames biDirectional:(BOOL)isBiDir;
+-(NSString *)FTestStatisticsForSetNames:(NSArray *)setNames biDirectional:(BOOL)isBiDir DEPRECATED_ATTRIBUTE;
 
 -(void)importTable:(id)sender;
 
 -(void)discoverTables;
 
--(sqlite3 *)documentInMemoryStore;
+-(sqlite3 *)documentInMemoryStore DEPRECATED_ATTRIBUTE;
 -(void)datasetsRenameTable:(NSString *)oldName toName:(NSString *)newName;
 -(NSArray *)tableList;
 -(NSArray *)retrieveNonTextColumnNamesFromTable:(NSString *)aTableName;

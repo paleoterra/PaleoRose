@@ -73,6 +73,6 @@
 -(void)handleMouseEvent:(NSEvent *)anEvent;
 -(XRLayer *)activeLayerWithPoint:(NSPoint )aPoint;
 -(NSString *)generateStatisticsString;
--(void)configureControllerWithSQL:(sqlite3 *)db withDataSets:(NSArray *)datasets;
--(void)saveToSQLDB:(sqlite3 *)db;
+-(void)configureControllerWithSQL:(sqlite3 *)db withDataSets:(NSArray *)datasets  DEPRECATED_ATTRIBUTE;
+-(void)saveToSQLDB:(sqlite3 *)db DEPRECATED_ATTRIBUTE;
 @end

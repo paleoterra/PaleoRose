@@ -27,7 +27,7 @@
 import CodableSQLiteNonThread
 import Foundation
 
-struct LayerLineArrow: TableRepresentable {
+struct LayerLineArrow: TableRepresentable, LayerIdentifiable {
     static var tableName: String = "_layerLineArrow"
 
     static var primaryKey: String?
@@ -42,7 +42,7 @@ struct LayerLineArrow: TableRepresentable {
 
     // MARK: - TableRepresentable
 
-    private static func allKeys() -> [String] {
+    static func allKeys() -> [String] {
         let keys: [CodingKeys] = [.LAYERID, .DATASET, .ARROWSIZE, .VECTORTYPE, .ARROWTYPE, .SHOWVECTOR, .SHOWERROR]
         return keys.map(\.stringValue)
     }
@@ -53,7 +53,8 @@ struct LayerLineArrow: TableRepresentable {
     }
 
     static func insertQuery() -> any QueryProtocol {
-        Query(sql: "")
+        // swiftlint:disable:next line_length
+        Query(sql: "INSERT INTO _layerLineArrow (LAYERID, DATASET, ARROWSIZE, VECTORTYPE, ARROWTYPE, SHOWVECTOR, SHOWERROR) VALUES (?,?,?,?,?,?,?);")
     }
 
     static func updateQuery() -> any QueryProtocol {

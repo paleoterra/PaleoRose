@@ -28,7 +28,7 @@ import CodableSQLiteNonThread
 import Foundation
 
 // swiftlint:disable identifier_name
-struct LayerGrid: TableRepresentable {
+struct LayerGrid: TableRepresentable, LayerIdentifiable {
     static var tableName: String = "_layerGrid"
 
     static var primaryKey: String?
@@ -59,7 +59,7 @@ struct LayerGrid: TableRepresentable {
 
     // MARK: - TableRepresentable
 
-    private static func allKeys() -> [String] {
+    static func allKeys() -> [String] {
         let keys: [CodingKeys] = [
             .LAYERID,
             .RINGS_ISFIXEDCOUNT,
@@ -94,7 +94,8 @@ struct LayerGrid: TableRepresentable {
     }
 
     static func insertQuery() -> any QueryProtocol {
-        Query(sql: "")
+        // swiftlint:disable:next line_length
+        Query(sql: "INSERT INTO _layerGrid (LAYERID, RINGS_ISFIXEDCOUNT, RINGS_VISIBLE, RINGS_LABELS, RINGS_FIXEDCOUNT, RINGS_COUNTINCREMENT, RINGS_PERCENTINCREMENT, RINGS_LABELANGLE, RINGS_FONTNAME, RINGS_FONTSIZE,  RADIALS_COUNT, RADIALS_ANGLE, RADIALS_LABELALIGN, RADIALS_COMPASSPOINT, RADIALS_ORDER, RADIALS_FONT, RADIALS_FONTSIZE, RADIALS_SECTORLOCK, RADIALS_VISIBLE, RADIALS_ISPERCENT, RADIALS_TICKS, RADIALS_MINORTICKS, RADIALS_LABELS) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);")
     }
 
     static func updateQuery() -> any QueryProtocol {

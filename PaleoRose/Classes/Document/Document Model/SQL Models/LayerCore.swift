@@ -27,7 +27,7 @@
 import CodableSQLiteNonThread
 import Foundation
 
-struct LayerCore: TableRepresentable {
+struct LayerCore: TableRepresentable, LayerIdentifiable {
     static var tableName: String = "_layerCore"
     static var primaryKey: String?
 
@@ -37,7 +37,7 @@ struct LayerCore: TableRepresentable {
 
     // MARK: - TableRepresentable
 
-    private static func allKeys() -> [String] {
+    static func allKeys() -> [String] {
         let keys: [CodingKeys] = [.LAYERID, .RADIUS, .TYPE]
         return keys.map(\.stringValue)
     }
@@ -47,7 +47,7 @@ struct LayerCore: TableRepresentable {
     }
 
     static func insertQuery() -> any QueryProtocol {
-        Query(sql: "")
+        Query(sql: "INSERT INTO _layerCore (LAYERID, RADIUS, TYPE) VALUES (?,?,?);")
     }
 
     static func updateQuery() -> any QueryProtocol {

@@ -379,6 +379,10 @@
 	return _dotRadius;
 }
 
+-(int)datasetId {
+    return _theSet.setId;
+}
+
 
 -(void)geometryDidChangeSectors:(NSNotification *)notification
 {
@@ -549,6 +553,37 @@
 	return nil;
 }
 
+-(id)initWithIsVisible:(BOOL)visible
+                active:(BOOL)active
+                 biDir:(BOOL)isBiDir
+                  name:(NSString *)layerName
+            lineWeight:(float)lineWeight
+              maxCount:(int)maxCount
+            maxPercent:(float)maxPercent
+           strokeColor:(NSColor *)strokeColor
+             fillColor:(NSColor *)fillColor
+              plotType:(int)plotType
+            totalCount:(int)totalCount
+             dotRadius:(float)dotRadius {
+    self = [super init];
+    if (self) {
+        _isVisible = visible;
+        _isActive = active;
+        _isBiDir = isBiDir;
+        _layerName = layerName;
+        _lineWeight = lineWeight;
+        _maxCount = maxCount;
+        _maxPercent = maxPercent;
+        _maxPercent = maxPercent;
+        _strokeColor = strokeColor;
+        _fillColor = fillColor;
+        _plotType = plotType;
+        _totalCount = totalCount;
+        _dotRadius = dotRadius;
+    }
+    return self;
+}
+
 -(void)configureWithXMLTree:(LITMXMLTree *)configureTree version:(NSString *)version
 {
 	NSString *currentVersion = @"1.0";
@@ -593,7 +628,7 @@
 	int error;
 	char *errorMsg;
 	[super saveToSQLDB:db layerID:layerID];
-	datasetID = (long long)[self findDatasetIDByName:[_theSet name] inSQLDB:db];
+    datasetID = [_theSet setId];
 	//NSLog(@"dataset2: %i %@ %i",(int)datasetID,[_theSet name],(int)[self findDatasetIDByName:[_theSet name] inSQLDB:db]);
 	
 	[command appendString:@"INSERT INTO _layerData (LAYERID,DATASET,PLOTTYPE,TOTALCOUNT,DOTRADIUS) "];
@@ -620,7 +655,7 @@
 		
 		_lineWeight = 1.0;
 		_dotRadius = 4.0;
-		[super configureWithSQL:db forLayerID:layerID];
+
 		[self configureWithSQL:db forLayerID:layerID];
 		[self calculateSectorValues];
 		[self generateGraphics];
@@ -630,6 +665,7 @@
 
 -(void)configureWithSQL:(sqlite3 *)db forLayerID:(int)layerid
 {
+    [super configureWithSQL:db forLayerID:layerid];
 	int columns;
 
 	sqlite3_stmt *stmt;

@@ -57,8 +57,16 @@ struct InMemoryStoreTest {
     }
 
     @Test("Creating and clearing with ObjC init the object does not crash")
-    func createObject() {
-        var sut: InMemoryStore? = InMemoryStore()
+    func createObject() throws {
+        let pointer = try assignSqlitePointerToInterface()
+        defer {
+            do {
+                try closePointer(pointer: pointer)
+            } catch {
+                Issue.record("Failed to close pointer: \(error)")
+            }
+        }
+        var sut: InMemoryStore? = try InMemoryStore(interface: sqliteInterface)
         #expect(sut != nil)
         sut = nil
         #expect(sut == nil)
@@ -141,5 +149,139 @@ struct InMemoryStoreTest {
         let expectedPointerInt = Int(bitPattern: expectedPointer)
         let pointerInt = Int(bitPattern: pointer)
         #expect(pointerInt == expectedPointerInt)
+    }
+
+    // MARK: - Layer Storage
+
+    @Test("Given an XRLayer, then attempt to remove all layers")
+    func onStoreLayersDeleteAllLayers() throws {
+        let expectedPointer = try assignSqlitePointerToInterface()
+        defer {
+            do {
+                try closePointer(pointer: expectedPointer)
+            } catch {
+                Issue.record("Failed to close pointer: \(error)")
+            }
+        }
+        let layer = XRLayerText.stub()
+        let store = try #require(try InMemoryStore(interface: sqliteInterface))
+        sqliteInterface.resetMock()
+        try store.store(layers: [layer])
+        #expect(sqliteInterface.queryAccumulator.count >= 6)
+        let sqlStrings = sqliteInterface.queryAccumulator.map(\.sql)
+        #expect(sqlStrings.contains("DELETE FROM _layers;"))
+        #expect(sqlStrings.contains("DELETE FROM _layerLineArrow;"))
+        #expect(sqlStrings.contains("DELETE FROM _layerCore;"))
+        #expect(sqlStrings.contains("DELETE FROM _layerGrid;"))
+        #expect(sqlStrings.contains("DELETE FROM _layerData;"))
+    }
+
+    @Test("Given an XRLayerText, then attempt to store the layer")
+    func storeXRLayerText() throws {
+        let expectedPointer = try assignSqlitePointerToInterface()
+        defer {
+            do {
+                try closePointer(pointer: expectedPointer)
+            } catch {
+                Issue.record("Failed to close pointer: \(error)")
+            }
+        }
+        let layer = XRLayerText.stub()
+        let store = try #require(try InMemoryStore(interface: sqliteInterface))
+        sqliteInterface.resetMock()
+        try store.store(layers: [layer])
+        #expect(sqliteInterface.queryAccumulator.count >= 8)
+        let sqlStrings = sqliteInterface.queryAccumulator.map(\.sql)
+        // swiftlint:disable:next line_length
+        #expect(sqlStrings.contains("INSERT INTO _layers (LAYERID, TYPE, VISIBLE, ACTIVE, BIDIR, LAYER_NAME, LINEWEIGHT, MAXCOUNT, MAXPERCENT, STROKECOLORID, FILLCOLORID) VALUES (?,?,?,?,?,?,?,?,?,?,?)"))
+        // swiftlint:disable:next line_length
+        #expect(sqlStrings.contains("INSERT INTO _layerText (LAYERID,CONTENTS,RECT_POINT_X,RECT_POINT_Y,RECT_SIZE_HEIGHT,RECT_SIZE_WIDTH) values (?,?,?,?,?,?)"))
+    }
+
+    @Test("Given an XRLayerLineArrow, then attempt to store the layer")
+    func storeXRLayerLineArrow() throws {
+        let expectedPointer = try assignSqlitePointerToInterface()
+        defer {
+            do {
+                try closePointer(pointer: expectedPointer)
+            } catch {
+                Issue.record("Failed to close pointer: \(error)")
+            }
+        }
+        let layer = XRLayerLineArrow.stub()
+        let store = try #require(try InMemoryStore(interface: sqliteInterface))
+        sqliteInterface.resetMock()
+        try store.store(layers: [layer])
+        #expect(sqliteInterface.queryAccumulator.count >= 8)
+        let sqlStrings = sqliteInterface.queryAccumulator.map(\.sql)
+        // swiftlint:disable:next line_length
+        #expect(sqlStrings.contains("INSERT INTO _layers (LAYERID, TYPE, VISIBLE, ACTIVE, BIDIR, LAYER_NAME, LINEWEIGHT, MAXCOUNT, MAXPERCENT, STROKECOLORID, FILLCOLORID) VALUES (?,?,?,?,?,?,?,?,?,?,?)"))
+        // swiftlint:disable:next line_length
+        #expect(sqlStrings.contains("INSERT INTO _layerLineArrow (LAYERID, DATASET, ARROWSIZE, VECTORTYPE, ARROWTYPE, SHOWVECTOR, SHOWERROR) VALUES (?,?,?,?,?,?,?);"))
+    }
+
+    @Test("Given an XRLayerCore, then attempt to store the layer")
+    func storeXRLayerCore() throws {
+        let expectedPointer = try assignSqlitePointerToInterface()
+        defer {
+            do {
+                try closePointer(pointer: expectedPointer)
+            } catch {
+                Issue.record("Failed to close pointer: \(error)")
+            }
+        }
+        let layer = XRLayerCore.stub()
+        let store = try #require(try InMemoryStore(interface: sqliteInterface))
+        sqliteInterface.resetMock()
+        try store.store(layers: [layer])
+        #expect(sqliteInterface.queryAccumulator.count >= 8)
+        let sqlStrings = sqliteInterface.queryAccumulator.map(\.sql)
+        // swiftlint:disable:next line_length
+        #expect(sqlStrings.contains("INSERT INTO _layers (LAYERID, TYPE, VISIBLE, ACTIVE, BIDIR, LAYER_NAME, LINEWEIGHT, MAXCOUNT, MAXPERCENT, STROKECOLORID, FILLCOLORID) VALUES (?,?,?,?,?,?,?,?,?,?,?)"))
+        #expect(sqlStrings.contains("INSERT INTO _layerCore (LAYERID, RADIUS, TYPE) VALUES (?,?,?);"))
+    }
+
+    @Test("Given an XRLayerGrid, then attempt to store the layer")
+    func storeXRLayerGrid() throws {
+        let expectedPointer = try assignSqlitePointerToInterface()
+        defer {
+            do {
+                try closePointer(pointer: expectedPointer)
+            } catch {
+                Issue.record("Failed to close pointer: \(error)")
+            }
+        }
+        let layer = XRLayerGrid.stub()
+        let store = try #require(try InMemoryStore(interface: sqliteInterface))
+        sqliteInterface.resetMock()
+        try store.store(layers: [layer])
+        #expect(sqliteInterface.queryAccumulator.count >= 8)
+        let sqlStrings = sqliteInterface.queryAccumulator.map(\.sql)
+        // swiftlint:disable:next line_length
+        #expect(sqlStrings.contains("INSERT INTO _layers (LAYERID, TYPE, VISIBLE, ACTIVE, BIDIR, LAYER_NAME, LINEWEIGHT, MAXCOUNT, MAXPERCENT, STROKECOLORID, FILLCOLORID) VALUES (?,?,?,?,?,?,?,?,?,?,?)"))
+        // swiftlint:disable:next line_length
+        #expect(sqlStrings.contains("INSERT INTO _layerGrid (LAYERID, RINGS_ISFIXEDCOUNT, RINGS_VISIBLE, RINGS_LABELS, RINGS_FIXEDCOUNT, RINGS_COUNTINCREMENT, RINGS_PERCENTINCREMENT, RINGS_LABELANGLE, RINGS_FONTNAME, RINGS_FONTSIZE,  RADIALS_COUNT, RADIALS_ANGLE, RADIALS_LABELALIGN, RADIALS_COMPASSPOINT, RADIALS_ORDER, RADIALS_FONT, RADIALS_FONTSIZE, RADIALS_SECTORLOCK, RADIALS_VISIBLE, RADIALS_ISPERCENT, RADIALS_TICKS, RADIALS_MINORTICKS, RADIALS_LABELS) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);"))
+    }
+
+    @Test("Given an XRLayerData, then attempt to store the layer")
+    func storeXRLayerData() throws {
+        let expectedPointer = try assignSqlitePointerToInterface()
+        defer {
+            do {
+                try closePointer(pointer: expectedPointer)
+            } catch {
+                Issue.record("Failed to close pointer: \(error)")
+            }
+        }
+        let layer = XRLayerData.stub()
+        let store = try InMemoryStore(interface: sqliteInterface)
+        sqliteInterface.resetMock()
+        try store.store(layers: [layer])
+        #expect(sqliteInterface.queryAccumulator.count >= 8)
+        let sqlStrings = sqliteInterface.queryAccumulator.map(\.sql)
+        // swiftlint:disable:next line_length
+        #expect(sqlStrings.contains("INSERT INTO _layers (LAYERID, TYPE, VISIBLE, ACTIVE, BIDIR, LAYER_NAME, LINEWEIGHT, MAXCOUNT, MAXPERCENT, STROKECOLORID, FILLCOLORID) VALUES (?,?,?,?,?,?,?,?,?,?,?)"))
+        // swiftlint:disable:next line_length
+        #expect(sqlStrings.contains("INSERT INTO _layerData (LAYERID,DATASET,PLOTTYPE,TOTALCOUNT,DOTRADIUS) VALUES (?,?,?,?,?);"))
     }
 }

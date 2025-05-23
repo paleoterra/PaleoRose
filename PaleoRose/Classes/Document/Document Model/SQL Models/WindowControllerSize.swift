@@ -36,7 +36,7 @@ struct WindowControllerSize: TableRepresentable {
 
     // MARK: - TableRepresentable
 
-    private static func allKeys() -> [String] {
+    static func allKeys() -> [String] {
         let keys: [CodingKeys] = [.width, .height]
         return keys.map(\.stringValue)
     }
@@ -47,7 +47,7 @@ struct WindowControllerSize: TableRepresentable {
 
     static func insertQuery() -> any QueryProtocol {
         Query(
-            sql: "INSERT INTO _windowController (width, height) VALUES  (?, ?)",
+            sql: "INSERT INTO _windowController (width, height) VALUES  (?, ?);",
             keys: allKeys()
         )
     }

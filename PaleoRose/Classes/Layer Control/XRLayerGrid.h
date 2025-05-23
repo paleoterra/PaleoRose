@@ -73,6 +73,37 @@
 
 -(id)initWithGeometryController:(XRGeometryController *)aController;
 -(id)initWithGeometryController:(XRGeometryController *)aController dictionary:(NSDictionary *)configure;
+
+-(id)initWithIsVisible:(BOOL)visible
+              active:(BOOL)active
+               biDir:(BOOL)isBiDir
+                name:(NSString *)layerName
+          lineWeight:(float)lineWeight
+            maxCount:(int)maxCount
+            maxPercent:(float)maxPercent
+           strokeColor:(NSColor *)strokeColor
+             fillColor:(NSColor *)fillColor
+          isFixedCount:(BOOL)isFixedCount
+          ringsVisible:(BOOL)ringsVisible
+        fixedRingCount:(int)fixedRingCount
+    ringCountIncrement:(int)ringCountIncrement
+ringPercentIncrement:(float)ringPercentIncrement
+        showRingLabels:(BOOL)showRingLabels
+            labelAngle:(float)labelAngle
+              ringFont:(NSFont *)ringFont
+          radialsCount:(int)radialsCount
+          radialsAngle:(float)radialsAngle
+ radialsLabelAlignment:(int)radialsLabelAlignment
+   radialsCompassPoint:(int)radialsCompassPoint
+          radialsOrder:(int)radialsOrder
+            radialFont:(NSFont *)radialFont
+     radialsSectorLock:(BOOL)sectorLock
+        radialsVisible:(BOOL)radialsVisible
+      radialsIsPercent:(BOOL)isPercent
+          radialsTicks:(BOOL)radialTicks
+     radialsMinorTicks:(BOOL)radialMinorTicks
+          radialLabels:(BOOL)radialLabels;
+
 -(void)setSpokeCount:(int)newCount;
 -(void)setSpokeAngle:(float)newAngle;
 -(int)spokeCount;
@@ -94,7 +125,27 @@
 -(NSFont *)spokeFont;
 -(void)setRingFont:(NSFont *)font;
 -(NSFont *)ringFont;
-
+-(BOOL)showLabels;
+-(int)fixedRingCount;
+-(BOOL)ringsVisible;
+-(int)ringCountIncrement;
+-(float)ringPercentIncrement;
+-(float)ringLabelAngle;
+-(NSString *)ringFontName;
+-(float)ringFontSize;
+-(int)radialsCount;
+-(float)radialsAngle;
+-(int)radialsLabelAlign;
+-(int)radialsCompassPoint;
+-(int)radiansOrder;
+-(NSString *)radianFontName;
+-(float)radianFontSize;
+-(BOOL)radianSectorLock;
+-(BOOL)radianVisible;
+-(BOOL)radianIsPercent;
+-(BOOL)radianTicks;
+-(BOOL)radianMinorTicks;
+-(BOOL)radianLabels;
 
 -(LITMXMLTree *)xmlTreeForVersion1_0Rings;
 -(LITMXMLTree *)xmlTreeForVersion1_0Radials;

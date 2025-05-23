@@ -64,7 +64,9 @@ struct BindableTest {
             NSNumber(value: Float(343.4)),
             NSNumber(value: CGFloat(349.4)),
             NSNumber(value: Double(365.456)),
-            NSString("Hello3")
+            NSString("Hello3"),
+            true,
+            false
         ]
     )
     func simpleBindingTest(value: Any) throws {
@@ -72,7 +74,7 @@ struct BindableTest {
 
         let statement = try interface.buildStatement(sqlite: database, query: TestableTable.insertQuery())
         let tvalue = try #require(value as? Bindable)
-        try #require(try interface.bind(tvalue, to: statement, at: 1))
+        try interface.bind(tvalue, to: statement, at: 1)
     }
 
     @Test("Given a nil value, then bind an NSNUll")
@@ -80,7 +82,7 @@ struct BindableTest {
         let database = try buildDatabase()
         let value: Int32? = nil
         let statement = try interface.buildStatement(sqlite: database, query: TestableTable.insertQuery())
-        try #require(try interface.bind(value, to: statement, at: 1))
+        try interface.bind(value, to: statement, at: 1)
     }
 }
 

@@ -31,15 +31,15 @@
 
 @interface LITMXMLTree : NSObject <LITMXMLNodeProtocol> {
     //basic tree management
-    LITMXMLTree *_nodeParent;
-    NSMutableArray *_nodeChildren;
-    NSString *elementContents;//accessor done
-    NSString *elementName;//accessor done
-    NSMutableDictionary *elementAttributes;//accessor done
-    NSMutableArray *attributeOrder;//accessor done
-    NSString *elementType;
+//    LITMXMLTree *_nodeParent;
+//    NSMutableArray *_nodeChildren;
+//    NSString *elementContents;//accessor done
+//    NSString *elementName;//accessor done
+//    NSMutableDictionary *elementAttributes;//accessor done
+//    NSMutableArray *attributeOrder;//accessor done
+//    NSString *elementType;
     int _level;
-    BOOL isClosed;
+//    BOOL isClosed;
 }
 
 @property (strong) LITMXMLTree *_nodeParent;

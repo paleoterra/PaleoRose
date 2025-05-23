@@ -27,22 +27,38 @@
 import CodableSQLiteNonThread
 import Foundation
 
-class DocumentModel: NSObject {
+class DocumentModel: NSObject, InMemoryStoreDelegate {
+
+    enum DocumentModelError: Error {
+        case unknownLayerType
+    }
+
+    // MARK: - Properties
+
     private var inMemoryStore: InMemoryStore
-    var dataTables: [TableSchema] = []
+    var tableNames: [String] = []
+    @objc var windowSize: CGSize = .zero
     @objc var dataSets: [XRDataSet] = []
+    var layers: [XRLayer] = []
     @objc weak var document: NSDocument?
+    @objc var geometryController: XRGeometryController?
+
+    // MARK: - Deprecated Methods
 
     @available(*, deprecated, message: "This code will become unavailable")
     @objc init(inMemoryStore: InMemoryStore, document: NSDocument?) {
         self.inMemoryStore = inMemoryStore
         self.document = document
+        super.init()
+        inMemoryStore.delegate = self
     }
 
     @available(*, deprecated, message: "This code will become unavailable")
-    @objc func store() -> OpaquePointer? {
+    @objc func memoryStore() -> OpaquePointer? {
         inMemoryStore.store()
     }
+
+    // MARK: - File Management
 
     @objc func writeToFile(_ file: URL) throws {
         try inMemoryStore.save(to: file.path)
@@ -50,16 +66,6 @@ class DocumentModel: NSObject {
 
     @objc func openFile(_ file: URL) throws {
         try inMemoryStore.load(from: file.path)
-        dataTables = try inMemoryStore.dataTables()
-        dataSets = try loadDataSets()
-    }
-
-    @objc func dataTableNames() -> [String] {
-        dataTables.map(\.name)
-    }
-
-    @objc func possibleColumnNames(table: String) throws -> [String] {
-        try inMemoryStore.valueColumnNames(for: table)
     }
 
     @objc func fileURL() -> URL? {
@@ -69,28 +75,72 @@ class DocumentModel: NSObject {
         return nil
     }
 
+    // MARK: - General
+
+    @objc func dataTableNames() -> [String] {
+        tableNames
+    }
+
+    @objc func possibleColumnNames(table: String) throws -> [String] {
+        try inMemoryStore.valueColumnNames(for: table)
+    }
+
+    @objc func setWindowSize(_ size: CGSize) throws {
+        try inMemoryStore.store(windowSize: size)
+    }
+
+    @objc func rename(table: String, toName: String) throws {
+        try inMemoryStore.renameTable(from: table, toName: toName)
+    }
+
+    @objc func delete(table: String) throws {
+        try inMemoryStore.drop(table: table)
+    }
+
+    @objc func add(table: String, column: String) throws {
+        try inMemoryStore.addColumn(to: table, columnDefinition: column)
+    }
+
+    @objc func store(geometryController: XRGeometryController) throws {
+        try inMemoryStore.store(geometryController: geometryController)
+    }
+
+    @objc func configure(geometryController: XRGeometryController) throws {
+        do {
+            try inMemoryStore.configure(geometryController: geometryController)
+        } catch {
+            return
+        }
+    }
+
+    // MARK: - Layers
+
+    @objc func store(layers: [XRLayer]) throws {
+        try inMemoryStore.store(layers: layers)
+    }
+
     // MARK: - Read From Store
 
     private func loadFromFile(_ file: URL) throws {
         try inMemoryStore.load(from: file.path)
     }
 
-    private func loadDataSets() throws -> [XRDataSet] {
-        let dataSetValues = try inMemoryStore.dataSets().map { dataSet in
-            let values = try inMemoryStore.dataSetValues(for: dataSet)
-            return (dataSet, values)
+    // MARK: - Geometry
+
+    func update(geometry: Geometry) {
+        guard let controller = geometryController else {
+            return
         }
-        return dataSetValues.map { dataSet, values in
-            var localValues = values
-            let data = Data(bytes: &localValues, count: MemoryLayout<Float>.size * values.count)
-            return XRDataSet(
-                name: dataSet.NAME ?? "Unnamed",
-                tableName: dataSet.TABLENAME ?? "Unnamed",
-                column: dataSet.COLUMNNAME ?? "Unnamed",
-                predicate: dataSet.PREDICATE ?? "",
-                comments: dataSet.decodedComments() ?? NSMutableAttributedString(),
-                data: data
-            )
-        }
+        controller.configureIsEqualArea(
+            geometry.isEqualArea,
+            isPercent: geometry.isPercent,
+            maxCount: Int32(geometry.MAXCOUNT),
+            maxPercent: geometry.MAXPERCENT,
+            hollowCore: geometry.HOLLOWCORE,
+            sectorSize: geometry.SECTORSIZE,
+            startingAngle: geometry.STARTINGANGLE,
+            sectorCount: Int32(geometry.SECTORCOUNT),
+            relativeSize: geometry.RELATIVESIZE
+        )
     }
 }

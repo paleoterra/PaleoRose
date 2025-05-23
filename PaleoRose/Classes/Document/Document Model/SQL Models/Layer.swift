@@ -27,7 +27,7 @@
 import CodableSQLiteNonThread
 import Foundation
 
-struct Layer: TableRepresentable {
+struct Layer: TableRepresentable, LayerIdentifiable {
     static var tableName: String = "_layers"
     static var primaryKey: String?
 
@@ -41,10 +41,12 @@ struct Layer: TableRepresentable {
     var LINEWEIGHT: Float
     var MAXCOUNT: Int
     var MAXPERCENT: Float
+    var STROKECOLORID: Int
+    var FILLCOLORID: Int
 
     // MARK: - TableRepresentable
 
-    private static func allKeys() -> [String] {
+    static func allKeys() -> [String] {
         let keys: [CodingKeys] = [
             .LAYERID,
             .TYPE,
@@ -54,7 +56,9 @@ struct Layer: TableRepresentable {
             .LAYER_NAME,
             .LINEWEIGHT,
             .MAXCOUNT,
-            .MAXPERCENT
+            .MAXPERCENT,
+            .STROKECOLORID,
+            .FILLCOLORID
         ]
 
         return keys.map(\.stringValue)
@@ -62,11 +66,12 @@ struct Layer: TableRepresentable {
 
     static func createTableQuery() -> any QueryProtocol {
         // swiftlint:disable:next line_length
-        Query(sql: "CREATE TABLE IF NOT EXISTS _layers (LAYERID INTEGER PRIMARY KEY AUTOINCREMENT, TYPE TEXT, VISIBLE BOOL, ACTIVE BOOL, BIDIR BOOL, LAYER_NAME TEXT, LINEWEIGHT REAL, MAXCOUNT INTEGER, MAXPERCENT REAL);")
+        Query(sql: "CREATE TABLE IF NOT EXISTS _layers (LAYERID INTEGER PRIMARY KEY AUTOINCREMENT, TYPE TEXT, VISIBLE BOOL, ACTIVE BOOL, BIDIR BOOL, LAYER_NAME TEXT, LINEWEIGHT REAL, MAXCOUNT INTEGER, MAXPERCENT REAL, STROKECOLORID, FILLCOLORID INTEGER );")
     }
 
     static func insertQuery() -> any QueryProtocol {
-        Query(sql: "")
+        // swiftlint:disable:next line_length
+        Query(sql: "INSERT INTO _layers (LAYERID, TYPE, VISIBLE, ACTIVE, BIDIR, LAYER_NAME, LINEWEIGHT, MAXCOUNT, MAXPERCENT, STROKECOLORID, FILLCOLORID) VALUES (?,?,?,?,?,?,?,?,?,?,?)")
     }
 
     static func updateQuery() -> any QueryProtocol {
@@ -74,6 +79,6 @@ struct Layer: TableRepresentable {
     }
 
     static func deleteQuery() -> any QueryProtocol {
-        Query(sql: "")
+        Query(sql: "DELETE FROM _layers WHERE LAYERID = ?")
     }
 }

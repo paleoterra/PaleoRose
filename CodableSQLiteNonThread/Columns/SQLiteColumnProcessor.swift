@@ -27,25 +27,43 @@
 import Foundation
 import SQLite3
 
+// swiftlint:disable opening_brace indentation_width
+
 struct SQLiteColumnProcessor {
+    let sqliteBool: Int32 = 1000
+    let boolNameArray = ["bool", "boolean", "bit"]
     let columnProcessors: [Int32: SQLiteColumn] = [
         SQLITE_INTEGER: SQLiteIntegerColumn(),
         SQLITE_FLOAT: SQLiteFloatColumn(),
         SQLITE_TEXT: SQLiteTextColumn(),
         SQLITE_BLOB: SQLiteBlobColumn(),
-        SQLITE_NULL: SQLiteNullColumn()
+        SQLITE_NULL: SQLiteNullColumn(),
+        1000: SQLiteBoolColumn()
     ]
 
     func processColumn(statement: OpaquePointer, index: Int32) -> (String, Codable)? {
         guard let columnName = String(validatingUTF8: sqlite3_column_name(statement, index)) else {
             return nil
         }
-        let columnType = sqlite3_column_type(statement, index)
+        let columnType = getColumnType(statement: statement, index: index)
+
         if let columnProcessor = columnProcessors[columnType],
            let returnValue = columnProcessor.value(stmt: statement, index: index)
         {
             return (columnName, returnValue)
         }
         return nil
+    }
+
+    private func getColumnType(statement: OpaquePointer, index: Int32) -> Int32 {
+        var columnType = sqlite3_column_type(statement, index)
+        if let declaredTypePointer = sqlite3_column_decltype(statement, index) {
+            let declaredType = String(cString: sqlite3_column_decltype(statement, index))
+            if boolNameArray.contains(declaredType.lowercased()) {
+                columnType = sqliteBool
+            }
+        }
+
+        return columnType
     }
 }

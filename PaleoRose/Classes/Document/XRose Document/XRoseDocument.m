@@ -101,9 +101,16 @@
 -(BOOL)writeToURL:(NSURL *)url ofType:(NSString *)typeName error:(NSError * _Nullable __autoreleasing *)outError
 {
     NSError *error = nil;
-    [[self.mainWindowController geometryController]  saveToSQLDB:[self.documentModel store]];
-    [self.mainWindowController  saveToSQLDB:[self.documentModel store]];
-    [(XRoseTableController *)[self.mainWindowController tableController] saveToSQLDB:[self.documentModel store]];
+    [self.documentModel storeWithGeometryController:[self.mainWindowController geometryController] error:&error];
+    if (error != nil) {
+        NSLog(@"Cannot store geometry: %@", [error localizedDescription]);
+    }
+    [self.documentModel setWindowSize:[self.mainWindowController window].frame.size error:&error];
+    if (error != nil) {
+        *outError = error;
+        return NO;
+    }
+    [(XRoseTableController *)[self.mainWindowController tableController] saveToSQLDB:[self.documentModel memoryStore]];
     [self.documentModel writeToFile:url error:&error];
     if (error) {
         NSLog(@"%@", error.localizedDescription);
@@ -196,13 +203,21 @@
 // **** REFACTOR/MOVE
 -(void)awakeFromNib
 {
+    NSError *error;
     if(self.didLoad) {
-        [self loadDatasetsFromDB:[self.documentModel store]];
-        [[self.mainWindowController geometryController]  setValuesFromSQLDB:[self.documentModel store]];
+        [self loadDatasetsFromDB:[self.documentModel memoryStore]];
+        [self.documentModel configureWithGeometryController:[self.mainWindowController geometryController] error:&error];
+        if (error != nil) {
+            NSLog(@"Error reading geometry: %@", [error localizedDescription]);
+        }
 
-        [self.mainWindowController  setValuesFromSQLDB:[self.documentModel store]];
+        CGRect frame = [self.mainWindowController.window frame];
+        frame.size = self.documentModel.windowSize;
+        if (frame.size.width != 0) {
+            [[self.mainWindowController window] setFrame:frame display:YES];
+        }
 
-        [(XRoseTableController *)[self.mainWindowController  tableController] configureControllerWithSQL:[self.documentModel store] withDataSets:self.dataSets];
+        [(XRoseTableController *)[self.mainWindowController  tableController] configureControllerWithSQL:[self.documentModel memoryStore] withDataSets:self.dataSets];
     }
     else {
 
@@ -214,7 +229,7 @@
 
 -(sqlite3 *)documentInMemoryStore
 {
-    return [self.documentModel store];
+    return [self.documentModel memoryStore];
 }
 
 // **** REFACTOR/MOVE
@@ -228,9 +243,19 @@
 // **** REFACTOR/MOVE
 -(void)configureDocument
 {
-	if([self.documentModel store] != NULL)
+    NSError *error;
+	if([self.documentModel memoryStore] != NULL)
 	{
-		[self.mainWindowController  setValuesFromSQLDB:[self.documentModel store]];
+        CGRect frame = [self.mainWindowController.window frame];
+        frame.size = [self.documentModel windowSize];
+        if (frame.size.width != 0) {
+            [[self.mainWindowController window] setFrame:frame display:YES];
+        }
+        [self.documentModel configureWithGeometryController:[self.mainWindowController geometryController] error:&error];
+        if (error != nil) {
+            NSLog(@"Error configuring document: %@", [error localizedDescription]);
+        }
+
 	}
 	else
 	{
@@ -254,9 +279,9 @@
 {
     XRMakeDatasetController *controller;
     if([self fileURL])
-        controller = [[XRMakeDatasetController alloc] initWithTableArray:self.tables inMemoryDocument:[self.documentModel store]];
+        controller = [[XRMakeDatasetController alloc] initWithTableArray:self.tables inMemoryDocument:[self.documentModel memoryStore]];
     else
-        controller = [[XRMakeDatasetController alloc] initWithTableArray:self.tables inMemoryDocument:[self.documentModel store]];
+        controller = [[XRMakeDatasetController alloc] initWithTableArray:self.tables inMemoryDocument:[self.documentModel memoryStore]];
     self.currentSheetController = controller;
     [[self.mainWindowController window]
      beginSheet:[controller window]
@@ -265,9 +290,9 @@
         {
             XRDataSet *aSet;
             if([controller predicate])
-                aSet = [[XRDataSet alloc] initWithTable:[controller selectedTable] column:[controller selectedColumn] db:[self.documentModel store]  predicate:[controller predicate]];
+                aSet = [[XRDataSet alloc] initWithTable:[controller selectedTable] column:[controller selectedColumn] db:[self.documentModel memoryStore]  predicate:[controller predicate]];
             else
-                aSet = [[XRDataSet alloc] initWithTable:[controller selectedTable] column:[controller selectedColumn] db:[self.documentModel store]];
+                aSet = [[XRDataSet alloc] initWithTable:[controller selectedTable] column:[controller selectedColumn] db:[self.documentModel memoryStore]];
             [aSet setName:[controller selectedName]];
             if(aSet)
             {
@@ -370,9 +395,18 @@
 // **** REFACTOR/MOVE
 -(void)createDB
 {
+    NSError *error = nil;
     if([[self windowControllers] count]) {
-        [self.mainWindowController SQLInitialSaveToDatabase:[self.documentModel store]];
-        [[self.mainWindowController geometryController] SQLInitialSaveToDatabase:[self.documentModel store]];
+        [self.documentModel setWindowSize:[self.mainWindowController window].frame.size error:&error];
+        if (error != nil) {
+            NSLog(@"%@", error.localizedDescription);
+            return;
+        }
+        [self.documentModel storeWithGeometryController:[self.mainWindowController geometryController] error:&error];
+        if (error != nil) {
+            NSLog(@"%@", error.localizedDescription);
+            return;
+        }
     }
 }
 

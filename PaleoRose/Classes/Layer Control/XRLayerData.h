@@ -50,12 +50,27 @@
 }
 -(id)initWithGeometryController:(XRGeometryController *)aController withSet:(XRDataSet *)aSet;
 -(id)initWithGeometryController:(XRGeometryController *)aController  withSet:(XRDataSet *)aSet dictionary:(NSDictionary *)configure;
+
+-(id)initWithIsVisible:(BOOL)visible
+              active:(BOOL)active
+               biDir:(BOOL)isBiDir
+                name:(NSString *)layerName
+          lineWeight:(float)lineWeight
+            maxCount:(int)maxCount
+            maxPercent:(float)maxPercent
+           strokeColor:(NSColor *)strokeColor
+             fillColor:(NSColor *)fillColor
+              plotType:(int)plotType
+            totalCount:(int)totalCount
+             dotRadius:(float)dotRadius;
+
 -(void)setPlotType:(int)newType;
 -(int)plotType;
 -(void)calculateSectorValues;
 -(int)totalCount;
 -(void)setDotRadius:(float)radius;
 -(float)dotRadius;
+-(int)datasetId;
 
 
 -(void)setStatisticsArray;

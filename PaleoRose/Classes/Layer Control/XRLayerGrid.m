@@ -234,27 +234,75 @@
 				_spokeAngle = [tempstring floatValue];
 			
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		//NSLog(@"5");
+
 		[self generateGraphics];
-		//NSLog(@"graphics %i",[_graphicalObjects count]);
-		//NSLog(@"6");
-		//set graphics
-		//NSLog(@"7");
-		//NSLog([_strokeColor description]);
 	}
 	return self;
+}
+
+-(id)initWithIsVisible:(BOOL)visible
+              active:(BOOL)active
+               biDir:(BOOL)isBiDir
+                name:(NSString *)layerName
+          lineWeight:(float)lineWeight
+            maxCount:(int)maxCount
+          maxPercent:(float)maxPercent
+           strokeColor:(NSColor *)strokeColor
+             fillColor:(NSColor *)fillColor
+          isFixedCount:(BOOL)isFixedCount
+          ringsVisible:(BOOL)ringsVisible
+        fixedRingCount:(int)fixedRingCount
+    ringCountIncrement:(int)ringCountIncrement
+    ringPercentIncrement:(float)ringPercentIncrement
+        showRingLabels:(BOOL)showRingLabels
+            labelAngle:(float)labelAngle
+              ringFont:(NSFont *)ringFont
+          radialsCount:(int)radialsCount
+          radialsAngle:(float)radialsAngle
+ radialsLabelAlignment:(int)radialsLabelAlignment
+   radialsCompassPoint:(int)radialsCompassPoint
+          radialsOrder:(int)radialsOrder
+            radialFont:(NSFont *)radialFont
+     radialsSectorLock:(BOOL)sectorLock
+        radialsVisible:(BOOL)radialsVisible
+      radialsIsPercent:(BOOL)isPercent
+          radialsTicks:(BOOL)radialTicks
+     radialsMinorTicks:(BOOL)radialMinorTicks
+          radialLabels:(BOOL)radialLabels {
+    self = [super init];
+    if (self) {
+        _isVisible = visible;
+        _isActive = active;
+        _isBiDir = isBiDir;
+        _layerName = layerName;
+        _lineWeight = lineWeight;
+        _maxCount = maxCount;
+        _maxPercent = maxPercent;
+        _maxPercent = maxPercent;
+        _strokeColor = strokeColor;
+        _fillColor = fillColor;
+        _fixedCount = isFixedCount;
+        _ringsVisible = ringsVisible;
+        _fixedRingCount = fixedRingCount;
+        _ringCountIncrement = ringCountIncrement;
+        _ringPercentIncrement = ringPercentIncrement;
+        _showRingLabels = showRingLabels;
+        _labelAngle = labelAngle;
+        _ringFont = ringFont;
+        _spokeCount = radialsCount;
+        _spokeAngle = radialsAngle;
+        _spokeNumberAlign = radialsLabelAlignment;
+        _spokeNumberCompassPoint = radialsCompassPoint;
+        _spokeNumberOrder = radialsOrder;
+        _spokeFont = radialFont;
+        _spokeSectorLock = sectorLock;
+        _spokesVisible = radialsVisible;
+        _isPercent = isPercent;
+        _showTicks = radialTicks;
+        _minorTicks = radialMinorTicks;
+        _showLabels = radialLabels;
+    }
+    return self;
 }
 
 -(void)setSpokeCount:(int)newCount
@@ -710,6 +758,90 @@
 -(NSFont *)ringFont
 {
 	return _ringFont;
+}
+
+-(BOOL)showLabels {
+    return _showRingLabels;
+}
+
+-(int)fixedRingCount {
+    return _fixedRingCount;
+}
+
+-(BOOL)ringsVisible {
+    return _ringsVisible;
+}
+
+-(int)ringCountIncrement {
+    return _ringCountIncrement;
+}
+
+-(float)ringPercentIncrement {
+    return _ringPercentIncrement;
+}
+
+-(float)ringLabelAngle {
+    return _labelAngle;
+}
+
+-(NSString *)ringFontName {
+    return [_ringFont fontName];
+}
+
+-(float)ringFontSize {
+    return [_ringFont pointSize];
+}
+
+-(int)radialsCount {
+    return _spokeCount;
+}
+
+-(float)radialsAngle {
+    return _spokeAngle;
+}
+
+-(int)radialsLabelAlign {
+    return _spokeNumberAlign;
+}
+
+-(int)radialsCompassPoint {
+    return _spokeNumberCompassPoint;
+}
+
+-(int)radiansOrder {
+    return _spokeNumberOrder;
+}
+
+-(NSString *)radianFontName {
+    return [_spokeFont fontName];
+}
+
+-(float)radianFontSize {
+    return [_spokeFont pointSize];
+}
+
+-(BOOL)radianSectorLock {
+    return _spokeSectorLock;
+}
+
+-(BOOL)radianVisible {
+    return _spokesVisible;
+}
+
+-(BOOL)radianIsPercent {
+    return _isPercent;
+}
+
+-(BOOL)radianTicks {
+    return _showTicks;
+}
+
+-(BOOL)radianMinorTicks {
+    return _minorTicks;
+}
+
+-(BOOL)radianLabels {
+    return _showLabels;
 }
 
 -(NSDictionary *)layerSettings

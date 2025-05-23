@@ -27,23 +27,32 @@
 import CodableSQLiteNonThread
 import Foundation
 
-struct LayerText: TableRepresentable {
+struct LayerText: TableRepresentable, LayerIdentifiable {
     static var tableName: String = "_layerText"
     static var primaryKey: String?
 
     var LAYERID: Int
-    var CONTENTS: Data
+    var CONTENTS: Data // expected to be base 64 encoded RTF data
     // swiftlint:disable:next identifier_name
     var RECT_POINT_X: Float
     // swiftlint:disable:next identifier_name
     var RECT_POINT_Y: Float
     // swiftlint:disable:next identifier_name
     var RECT_SIZE_WIDTH: Float
+    // swiftlint:disable:next identifier_name
+    var RECT_SIZE_HEIGHT: Float
 
     // MARK: - TableRepresentable
 
-    private static func allKeys() -> [String] {
-        let keys: [CodingKeys] = [.LAYERID, .CONTENTS, .RECT_POINT_X, .RECT_POINT_Y, .RECT_SIZE_WIDTH]
+    static func allKeys() -> [String] {
+        let keys: [CodingKeys] = [
+            .LAYERID,
+            .CONTENTS,
+            .RECT_POINT_X,
+            .RECT_POINT_Y,
+            .RECT_SIZE_HEIGHT,
+            .RECT_SIZE_WIDTH
+        ]
         return keys.map(\.stringValue)
     }
 
@@ -53,7 +62,8 @@ struct LayerText: TableRepresentable {
     }
 
     static func insertQuery() -> any QueryProtocol {
-        Query(sql: "")
+        // swiftlint:disable:next line_length
+        Query(sql: "INSERT INTO _layerText (LAYERID,CONTENTS,RECT_POINT_X,RECT_POINT_Y,RECT_SIZE_HEIGHT,RECT_SIZE_WIDTH) values (?,?,?,?,?,?)")
     }
 
     static func updateQuery() -> any QueryProtocol {

@@ -27,6 +27,8 @@
 import Foundation
 import SQLite3
 
+// swiftlint:disable legacy_objc_type indentation_width
+
 /// A protocol to define value types and classes that can be used in binding
 public protocol Bindable {
 
@@ -55,6 +57,11 @@ extension Bindable {
         }
         let result = sqlite3_bind_blob(statement, index, bytes, Int32(data.count), nil)
         try checkError(value: data, sqliteStatus: result)
+    }
+
+    func bindBoolean(_ value: Bool, to statement: OpaquePointer, at index: Int32) throws {
+        let result = sqlite3_bind_int64(statement, index, Int64(value ? 1 : 0))
+        try checkError(value: value, sqliteStatus: result)
     }
 
     func bindInteger32(_ value: Int32, to statement: OpaquePointer, at index: Int32) throws {
@@ -173,13 +180,16 @@ extension CGFloat: Bindable {
     }
 }
 
-// swiftlint:disable:next legacy_objc_type
 extension NSNumber: Bindable {
     public func bind(statement: OpaquePointer, index: Int32) throws {
         let type = CFNumberGetType(self)
         switch type {
         case .sInt8Type, .sInt16Type, .sInt32Type, .shortType, .charType:
+//            if isBoolNumber(num: self) {
+//                try bindString(boolValue ? "TRUE" : "FALSE", to: statement, at: index)
+//            } else {
             try bindInteger32(Int32(truncating: self), to: statement, at: index)
+//            }
 
         case .longType, .longLongType, .intType, .cfIndexType, .sInt64Type, .nsIntegerType:
             try bindInteger64(Int64(truncating: self), to: statement, at: index)
@@ -190,6 +200,12 @@ extension NSNumber: Bindable {
         default:
             throw SQLiteError.sqliteBindingError("Unknown NSNumber type: \(type).")
         }
+    }
+
+    private func isBoolNumber(num: NSNumber) -> Bool {
+        let boolID = CFBooleanGetTypeID() // the type ID of CFBoolean
+        let numID = CFGetTypeID(num) // the type ID of num
+        return numID == boolID
     }
 }
 
@@ -215,5 +231,11 @@ extension NSNull: Bindable {
 extension Data: Bindable {
     public func bind(statement: OpaquePointer, index: Int32) throws {
         try bindData(self, to: statement, at: index)
+    }
+}
+
+extension Bool: Bindable {
+    public func bind(statement: OpaquePointer, index: Int32) throws {
+        try bindInteger64(Int64(self ? 1 : 0), to: statement, at: index)
     }
 }

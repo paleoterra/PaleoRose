@@ -49,14 +49,8 @@
 -(NSView *)mainView;
 -(LITMXMLTree *)windowControllerXMLSettings;
 -(void)setWindowSettingsWithXMLTree:(LITMXMLTree *)tree;
-//- (float)splitView:(NSSplitView *)sender constrainMaxCoordinate:(float)proposedMax ofSubviewAt:(int)offset;
-//- (float)splitView:(NSSplitView *)sender constrainMinCoordinate:(float)proposedMin ofSubviewAt:(int)offset;
 
 
-
--(void)SQLInitialSaveToDatabase:(sqlite3 *)db;
--(void)saveToSQLDB:(sqlite3 *)db;
--(void)setValuesFromSQLDB:(sqlite3 *)db;
 -(void)setTableList:(NSMutableArray *)aList;
 - (IBAction)addLayerAction:(id)sender;
 - (IBAction)deleteLayerAction:(id)sender;
