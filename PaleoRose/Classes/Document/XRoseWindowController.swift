@@ -17,22 +17,22 @@ import SQLite3
     var tableDataList: [Any]? = nil
     weak var tableNameTableView: AnyObject?
 
-    @objc func getTableController() -> AnyObject? { return nil }
-    @objc func getGeometryController() -> AnyObject? { return nil }
+    @objc func getTableController() -> AnyObject? { nil }
+    @objc func getGeometryController() -> AnyObject? { nil }
     @objc func copyPDFToPasteboard() {}
     @objc func copyTIFFToPasteboard() {}
-    @objc func getMainView() -> NSView? { return nil }
-    @objc func getWindowControllerXMLSettings() -> LITMXMLTree? { return nil }
+    @objc func getMainView() -> NSView? { nil }
+    @objc func getWindowControllerXMLSettings() -> LITMXMLTree? { nil }
     @objc func setWindowSettings(withXMLTree xmlTree: LITMXMLTree) {}
     @objc func setTableDataList(_ tableDataArray: [Any]) { tableDataList = tableDataArray }
-    @objc func windowControllerXMLSettings() -> LITMXMLTree? { return nil }
+    @objc func windowControllerXMLSettings() -> LITMXMLTree? { nil }
     @objc func setWindowSettings(withXMLTree tree: LITMXMLTree) {}
     @objc func setTableList(_ tableArray: [Any]) { tableList = tableArray }
-    @IBAction func addLayerAction(_ sender: Any?) {}
-    @IBAction func deleteLayerAction(_ sender: Any?) {}
-    @IBAction func importTableAction(_ sender: Any?) {}
-    @IBAction func deleteTableAction(_ sender: Any?) {}
+    @IBAction func addLayerAction(_: Any?) {}
+    @IBAction func deleteLayerAction(_: Any?) {}
+    @IBAction func importTableAction(_: Any?) {}
+    @IBAction func deleteTableAction(_: Any?) {}
     @objc func updateTable() {}
     @objc func performAzimuthFromVector() {}
-    @objc func importerCompleted(_ notification: Notification) {}
+    @objc func importerCompleted(_: Notification) {}
 }

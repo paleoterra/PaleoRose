@@ -23,32 +23,32 @@
 import Cocoa
 
 @objc class XRTableAddColumnController: NSObject {
-    @IBOutlet private weak var columnName: NSTextField!
-    @IBOutlet private weak var typePopup: NSPopUpButton!
-    @IBOutlet private weak var window: NSWindow!
-    
+    @IBOutlet private var columnName: NSTextField!
+    @IBOutlet private var typePopup: NSPopUpButton!
+    @IBOutlet private var window: NSWindow!
+
     override init() {
         super.init()
         Bundle.main.loadNibNamed("XRTableAddColumnSheet", owner: self, topLevelObjects: nil)
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         columnName.stringValue = "New Column"
     }
-    
+
     // MARK: - Actions
-    
-    @IBAction func addColumn(_ sender: Any) {
+
+    @IBAction func addColumn(_: Any) {
         NSApp.endSheet(window, returnCode: .OK)
     }
-    
-    @IBAction func cancel(_ sender: Any) {
+
+    @IBAction func cancel(_: Any) {
         NSApp.endSheet(window, returnCode: .cancel)
     }
-    
+
     // MARK: - Public API
-    
+
     @objc var columnDefinition: String {
         String(format: "\"%@\" %@", columnName.stringValue, typePopup.titleOfSelectedItem ?? "")
     }

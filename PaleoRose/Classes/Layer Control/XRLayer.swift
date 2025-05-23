@@ -36,7 +36,7 @@ let XRLayerGraphicObjectArray = "Graphics"
 
 @objc class XRLayer: NSObject {
     // MARK: - Properties
-    
+
     private var graphicalObjects: [XRGraphic] = []
     private var isVisible: Bool = true {
         didSet {
@@ -46,6 +46,7 @@ let XRLayerGraphicObjectArray = "Graphics"
             }
         }
     }
+
     private var isActive: Bool = false
     private var strokeColor: NSColor = .black {
         didSet {
@@ -55,6 +56,7 @@ let XRLayerGraphicObjectArray = "Graphics"
             NotificationCenter.default.post(name: NSNotification.Name(XRLayerInspectorRequiresReload), object: self)
         }
     }
+
     private var fillColor: NSColor = .black {
         didSet {
             resetColorImage()
@@ -63,66 +65,67 @@ let XRLayerGraphicObjectArray = "Graphics"
             NotificationCenter.default.post(name: NSNotification.Name(XRLayerInspectorRequiresReload), object: self)
         }
     }
+
     private var layerName: String = ""
     private var isBiDir: Bool = false
     private var lineWeight: Float = 1.0
-    private var maxCount: Int = 0  // Should be set when sector size is set
+    private var maxCount: Int = 0 // Should be set when sector size is set
     private var maxPercent: Float = 0.0
     private var anImage: NSImage?
     private var canFill: Bool = true
     private var canStroke: Bool = true
     private weak var geometryController: XRGeometryController?
     private weak var dataSet: XRDataSet?
-    
+
     // MARK: - Class Methods
-    
+
     @objc class func classTag() -> String {
-        return "Layer"
+        "Layer"
     }
-    
+
     // MARK: - Initialization
-    
+
     @objc override init() {
         super.init()
         setupNotifications()
         setupDefaults()
     }
-    
+
     @objc init(geometryController: XRGeometryController) {
         super.init()
         self.geometryController = geometryController
         setupNotifications()
         setupDefaults()
     }
-    
+
     @objc init(geometryController: XRGeometryController, dictionary: [String: Any]) {
         super.init()
         self.geometryController = geometryController
         setupNotifications()
         configureSelf(with: dictionary)
     }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
+
     // MARK: - Setup Methods
-    
+
     private func setupNotifications() {
         NotificationCenter.default.addObserver(self,
-                                            selector: #selector(geometryDidChange(_:)),
-                                            name: NSNotification.Name("XRGeometryDidChange"),
-                                            object: geometryController)
+                                               selector: #selector(geometryDidChange(_:)),
+                                               name: NSNotification.Name("XRGeometryDidChange"),
+                                               object: geometryController)
         NotificationCenter.default.addObserver(self,
-                                            selector: #selector(geometryDidChangePercent(_:)),
-                                            name: NSNotification.Name("XRGeometryDidChangeIsPercent"),
-                                            object: geometryController)
+                                               selector: #selector(geometryDidChangePercent(_:)),
+                                               name: NSNotification.Name("XRGeometryDidChangeIsPercent"),
+                                               object: geometryController)
         NotificationCenter.default.addObserver(self,
-                                            selector: #selector(geometryDidChangeSectors(_:)),
-                                            name: NSNotification.Name("XRGeometryDidChangeSectors"),
-                                            object: geometryController)
+                                               selector: #selector(geometryDidChangeSectors(_:)),
+                                               name: NSNotification.Name("XRGeometryDidChangeSectors"),
+                                               object: geometryController)
     }
-    
+
     private func setupDefaults() {
         strokeColor = .black
         fillColor = .black
@@ -131,7 +134,7 @@ let XRLayerGraphicObjectArray = "Graphics"
         canFill = true
         canStroke = true
     }
-    
+
     private func configureSelf(with dictionary: [String: Any]) {
         if let color = dictionary["Stroke_Color"] as? NSColor {
             strokeColor = color
@@ -161,131 +164,131 @@ let XRLayerGraphicObjectArray = "Graphics"
             maxPercent = Float(percent) ?? 0.0
         }
     }
-    
+
     // MARK: - Public Methods
-    
+
     @objc func getIsVisible() -> Bool {
-        return isVisible
+        isVisible
     }
-    
+
     @objc func setIsVisible(_ visible: Bool) {
         isVisible = visible
     }
-    
+
     @objc func getIsActive() -> Bool {
-        return isActive
+        isActive
     }
-    
+
     @objc func setIsActive(_ active: Bool) {
         isActive = active
     }
-    
+
     @objc func getStrokeColor() -> NSColor {
-        return strokeColor
+        strokeColor
     }
-    
+
     @objc func setStrokeColor(_ color: NSColor) {
         strokeColor = color
     }
-    
+
     @objc func getFillColor() -> NSColor {
-        return fillColor
+        fillColor
     }
-    
+
     @objc func setFillColor(_ color: NSColor) {
         fillColor = color
     }
-    
+
     @objc func getLayerName() -> String {
-        return layerName
+        layerName
     }
-    
+
     @objc func setLayerName(_ name: String) {
         layerName = name
     }
-    
+
     @objc func getIsBiDirectional() -> Bool {
-        return isBiDir
+        isBiDir
     }
-    
+
     @objc func setBiDirectional(_ biDir: Bool) {
         isBiDir = biDir
     }
-    
+
     @objc func resetColorImage() {
         let imageRect = NSRect(x: 0, y: 0, width: 16, height: 16)
         anImage = NSImage(size: imageRect.size)
-        
+
         anImage?.lockFocus()
         NSGraphicsContext.current?.imageInterpolation = .high
-        
+
         let path = NSBezierPath(rect: imageRect)
         fillColor.setFill()
         path.fill()
-        
+
         strokeColor.setStroke()
         path.stroke()
-        
+
         anImage?.unlockFocus()
     }
-    
+
     @objc func colorImage() -> NSImage? {
         if anImage == nil {
             resetColorImage()
         }
         return anImage
     }
-    
+
     @objc func generateGraphics() {
         // To be implemented by subclasses
     }
-    
-    @objc func draw(_ rect: NSRect) {
+
+    @objc func draw(_: NSRect) {
         // To be implemented by subclasses
     }
-    
+
     // MARK: - Notification Handlers
-    
-    @objc func geometryDidChange(_ notification: Notification) {
+
+    @objc func geometryDidChange(_: Notification) {
         // To be implemented by subclasses
     }
-    
-    @objc func geometryDidChangePercent(_ notification: Notification) {
+
+    @objc func geometryDidChangePercent(_: Notification) {
         // To be implemented by subclasses
     }
-    
-    @objc func geometryDidChangeSectors(_ notification: Notification) {
+
+    @objc func geometryDidChangeSectors(_: Notification) {
         // To be implemented by subclasses
     }
-    
+
     // MARK: - Properties
-    
+
     @objc func getMaxCount() -> Int {
-        return maxCount
+        maxCount
     }
-    
+
     @objc func getMaxPercent() -> Float {
-        return maxPercent
+        maxPercent
     }
-    
+
     @objc func setLineWeight(_ weight: Float) {
         lineWeight = weight
     }
-    
+
     @objc func getLineWeight() -> Float {
-        return lineWeight
+        lineWeight
     }
-    
+
     @objc func setDataSet(_ set: XRDataSet?) {
         dataSet = set
     }
-    
+
     @objc func getDataSet() -> XRDataSet? {
-        return dataSet
+        dataSet
     }
-    
+
     // MARK: - Layer Settings
-    
+
     @objc func layerSettings() -> [String: Any] {
         var settings: [String: Any] = [:]
         settings["TYPE"] = Self.classTag()
@@ -298,43 +301,45 @@ let XRLayerGraphicObjectArray = "Graphics"
         settings["Max_Percent"] = String(format: "%.1f", maxPercent)
         return settings
     }
-    
+
     // MARK: - XML Support
-    
+
     @objc func baseXMLTree(forVersion version: String) -> LITMXMLTree {
         switch version {
         case "1.0":
-            return baseXMLTree1_0()
+            baseXMLTree1_0()
         default:
-            return LITMXMLTree()
+            LITMXMLTree()
         }
     }
-    
+
     @objc func baseXMLTree1_0() -> LITMXMLTree {
         let tree = LITMXMLTree()
         let settings = layerSettings()
         let attributeOrder = ["TYPE", "VISIBLE", "ACTIVE", "BIDIR"]
-        
+
         for key in attributeOrder {
             if let value = settings[key] as? String {
                 tree.addAttribute(key, value: value)
             }
         }
-        
+
         return tree
     }
-    
+
     @objc class func layer(withGeometryController controller: XRGeometryController,
-                          xmlTree configureTree: LITMXMLTree,
-                          forVersion version: String,
-                          withParentView parentView: NSView) -> XRLayer? {
+                           xmlTree configureTree: LITMXMLTree,
+                           forVersion version: String,
+                           withParentView parentView: NSView) -> XRLayer?
+    {
         guard let attributes = configureTree.attributesDictionary() as? [String: String],
-              let type = attributes["TYPE"] else {
+              let type = attributes["TYPE"]
+        else {
             return nil
         }
-        
+
         let layer: XRLayer?
-        
+
         switch type {
         case XRLayerCore.classTag():
             layer = XRLayerCore(geometryController: controller)
@@ -349,13 +354,13 @@ let XRLayerGraphicObjectArray = "Graphics"
         default:
             return nil
         }
-        
+
         layer?.configureBase(withXMLTree: configureTree, version: version)
         layer?.configure(withXMLTree: configureTree, version: version)
-        
+
         return layer
     }
-    
+
     @objc func configureBase(withXMLTree configureTree: LITMXMLTree, version: String) {
         switch version {
         case "1.0":
@@ -364,7 +369,7 @@ let XRLayerGraphicObjectArray = "Graphics"
             break
         }
     }
-    
+
     @objc func configureBase(withXMLTree1_0 configureTree: LITMXMLTree) {
         if let attributes = configureTree.attributesDictionary() as? [String: String] {
             isVisible = attributes["VISIBLE"] == "YES"
@@ -372,17 +377,17 @@ let XRLayerGraphicObjectArray = "Graphics"
             isBiDir = attributes["BIDIR"] == "YES"
         }
     }
-    
+
     @objc func configure(withXMLTree configureTree: LITMXMLTree, version: String) {
         // To be implemented by subclasses
     }
-    
+
     @objc func configure(withXMLTree1_0 configureTree: LITMXMLTree) {
         // To be implemented by subclasses
     }
-    
+
     @objc func xmlTree(forVersion version: String) -> LITMXMLTree {
         // To be implemented by subclasses
-        return LITMXMLTree()
+        LITMXMLTree()
     }
 }

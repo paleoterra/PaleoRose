@@ -45,89 +45,90 @@ enum XRStatisticName {
 
 @objc class XRStatistic: NSObject {
     // MARK: - Properties
-    
+
     @objc var statisticName: String
     @objc var ASCIIName: String?
     @objc var valueString: String = ""
-    
+
     private var isEmpty: Bool = false
     private var isFloat: Bool = false
     private var formatter: Formatter?
     private var value: NSNumber?
-    
+
     // MARK: - Initialization
-    
+
     override init() {
-        self.statisticName = ""
+        statisticName = ""
         super.init()
-        self.isEmpty = false
+        isEmpty = false
     }
-    
+
     @objc static func emptyStatistic(withName name: String) -> XRStatistic {
         let stat = XRStatistic()
         stat.statisticName = name
         stat.isEmpty = true
         return stat
     }
-    
+
     @objc static func statistic(withName name: String, floatValue: Float) -> XRStatistic {
         let stat = XRStatistic()
         stat.statisticName = name
         stat.setFloat(floatValue)
         return stat
     }
-    
+
     @objc static func statistic(withName name: String, intValue: Int32) -> XRStatistic {
         let stat = XRStatistic()
         stat.statisticName = name
         stat.setInt(intValue)
         return stat
     }
-    
+
     // MARK: - Public API
-    
+
     @objc var ASCIINameString: String {
         ASCIIName ?? statisticName
     }
-    
+
     @objc func setFloat(_ floatValue: Float) {
-    isFloat = true
-    self.value = NSNumber(value: floatValue)
-    if let formatter = formatter {
-        valueString = formatter.string(for: self.value) ?? String(format: "%.6f", floatValue)
-    } else {
-        valueString = String(format: "%.6f", floatValue)
+        isFloat = true
+        value = NSNumber(value: floatValue)
+        if let formatter {
+            valueString = formatter.string(for: value) ?? String(format: "%.6f", floatValue)
+        } else {
+            valueString = String(format: "%.6f", floatValue)
+        }
     }
-}
-    
+
     @objc func floatValue() -> Float {
         value?.floatValue ?? 0.0
     }
-    
+
     @objc func setInt(_ value: Int32) {
         isFloat = false
         self.value = NSNumber(value: value)
-        
-        if let formatter = formatter {
+
+        if let formatter {
             valueString = formatter.string(for: self.value) ?? String(value)
         } else {
             valueString = String(value)
         }
     }
-    
+
     @objc func intValue() -> Int32 {
         value?.int32Value ?? 0
     }
-    
+
     @objc func setFormatter(_ formatter: Formatter) {
         self.formatter = formatter
-        if let value = value {
+        if let value {
             valueString = formatter.string(for: value) ?? valueString
         }
     }
-    
+
     @objc func setEmpty(_ empty: Bool) {
         isEmpty = empty
     }
 }
+
 // swiftlint:enable identifier_name

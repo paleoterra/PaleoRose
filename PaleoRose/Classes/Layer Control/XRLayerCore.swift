@@ -34,19 +34,19 @@ let XRLayerCoreXMLCoreRadius = "CORE_RADIUS"
 
 @objc class XRLayerCore: XRLayer {
     // MARK: - Properties
-    
+
     private var coreType: Bool = XRLayerCoreTypeOverlay
     private var corePattern: NSImage?
     private var percentRadius: Float = 0.0
-    
+
     // MARK: - Class Methods
-    
+
     override class func classTag() -> String {
-        return "Core"
+        "Core"
     }
-    
+
     // MARK: - Initialization
-    
+
     @objc init(isVisible: Bool,
                active: Bool,
                biDir: Bool,
@@ -57,9 +57,10 @@ let XRLayerCoreXMLCoreRadius = "CORE_RADIUS"
                strokeColor: NSColor,
                fillColor: NSColor,
                percentRadius: Float,
-               type: Bool) {
+               type: Bool)
+    {
         super.init()
-        
+
         setIsVisible(isVisible)
         setIsActive(active)
         setBiDirectional(biDir)
@@ -70,52 +71,52 @@ let XRLayerCoreXMLCoreRadius = "CORE_RADIUS"
         setStrokeColor(strokeColor)
         setFillColor(fillColor)
         self.percentRadius = percentRadius
-        self.coreType = type
+        coreType = type
     }
-    
+
     required init(geometryController: XRGeometryController) {
         super.init(geometryController: geometryController)
     }
-    
+
     required init(geometryController: XRGeometryController, dictionary: [String: Any]) {
         super.init(geometryController: geometryController, dictionary: dictionary)
-        
+
         if let radiusStr = dictionary["Core_Radius"] as? String {
             percentRadius = Float(radiusStr) ?? 0.0
         }
-        
+
         if let typeStr = dictionary["Core_Type"] as? String {
             coreType = (typeStr == "YES")
         }
     }
-    
-    required override init() {
+
+    override required init() {
         super.init()
     }
-    
+
     // MARK: - Core Properties
-    
+
     @objc func coreRadiusIsEditable() -> Bool {
-        return true
+        true
     }
-    
+
     @objc func getCoreType() -> Bool {
-        return coreType
+        coreType
     }
-    
+
     @objc func getRadius() -> Float {
-        return percentRadius
+        percentRadius
     }
-    
+
     // MARK: - XML Support
-    
+
     override func xmlTree(forVersion version: String) -> LITMXMLTree {
         let tree = super.baseXMLTree(forVersion: version)
         tree.addAttribute(XRLayerCoreXMLCoreType, value: coreType ? "YES" : "NO")
         tree.addAttribute(XRLayerCoreXMLCoreRadius, value: String(format: "%.1f", percentRadius))
         return tree
     }
-    
+
     override func configure(withXMLTree1_0 configureTree: LITMXMLTree) {
         if let attributes = configureTree.attributesDictionary() as? [String: String] {
             coreType = attributes[XRLayerCoreXMLCoreType] == "YES"
@@ -124,30 +125,30 @@ let XRLayerCoreXMLCoreRadius = "CORE_RADIUS"
             }
         }
     }
-    
+
     // MARK: - Drawing
-    
+
     override func generateGraphics() {
         // Implement core-specific graphics generation
     }
-    
-    override func draw(_ rect: NSRect) {
+
+    override func draw(_: NSRect) {
         // Implement core-specific drawing
     }
-    
+
     // MARK: - Notification Handlers
-    
-    override func geometryDidChange(_ notification: Notification) {
+
+    override func geometryDidChange(_: Notification) {
         generateGraphics()
         NotificationCenter.default.post(name: NSNotification.Name(XRLayerRequiresRedraw), object: self)
     }
-    
-    override func geometryDidChangePercent(_ notification: Notification) {
+
+    override func geometryDidChangePercent(_: Notification) {
         generateGraphics()
         NotificationCenter.default.post(name: NSNotification.Name(XRLayerRequiresRedraw), object: self)
     }
-    
-    override func geometryDidChangeSectors(_ notification: Notification) {
+
+    override func geometryDidChangeSectors(_: Notification) {
         generateGraphics()
         NotificationCenter.default.post(name: NSNotification.Name(XRLayerRequiresRedraw), object: self)
     }

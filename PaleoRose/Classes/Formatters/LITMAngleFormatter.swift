@@ -29,13 +29,14 @@ class LITMAngleFormatter: Formatter {
         }
         return nil
     }
-    
+
     override func getObjectValue(_ obj: AutoreleasingUnsafeMutablePointer<AnyObject?>?,
-                               for string: String,
-                               errorDescription error: AutoreleasingUnsafeMutablePointer<NSString?>?) -> Bool {
+                                 for string: String,
+                                 errorDescription error: AutoreleasingUnsafeMutablePointer<NSString?>?) -> Bool
+    {
         let scanner = Scanner(string: string)
         var value: Float = 0.0
-        
+
         if scanner.scanFloat(&value) {
             obj?.pointee = NSNumber(value: value)
             return true

@@ -24,45 +24,48 @@ import Cocoa
 
 class XRGraphicHistogram: XRGraphic {
     // MARK: - Properties
+
     private var histIncrement: Int
     private var percent: CGFloat
     private var count: Int
-    
+
     // MARK: - Initialization
+
     init(controller: XRGeometryController, increment: Int, value: NSNumber) {
-        self.histIncrement = increment
-        self.percent = CGFloat(value.floatValue)
-        self.count = value.intValue
-        
+        histIncrement = increment
+        percent = CGFloat(value.floatValue)
+        count = value.intValue
+
         super.init(controller: controller)
-        
+
         setLineWidth(4.0)
         setDrawsFill(true)
         calculateGeometry()
     }
-    
+
     // MARK: - Geometry Methods
+
     override func calculateGeometry() {
         guard let controller = geometryController else { return }
-        
+
         let size = controller.sectorSize
         let start = controller.startingAngle
-        
+
         // Calculate angles
         var angle1 = (CGFloat(histIncrement) * size) + (0.5 * size) + start
         if angle1 > 360.0 {
             angle1 -= 360.0
         }
-        
+
         let path = NSBezierPath()
-        
+
         if controller.isPercent {
             // Start point
             var radius = controller.radius(ofPercentValue: 0.0)
             var point = NSPoint(x: 0.0, y: radius)
             var targetPoint = controller.rotation(ofPoint: point, byAngle: angle1)
             path.move(to: targetPoint)
-            
+
             // End point
             radius = controller.radius(ofPercentValue: percent)
             point = NSPoint(x: 0.0, y: radius)
@@ -74,26 +77,27 @@ class XRGraphicHistogram: XRGraphic {
             var point = NSPoint(x: 0.0, y: radius)
             var targetPoint = controller.rotation(ofPoint: point, byAngle: angle1)
             path.move(to: targetPoint)
-            
+
             // End point
             radius = controller.radius(ofCount: count)
             point = NSPoint(x: 0.0, y: radius)
             targetPoint = controller.rotation(ofPoint: point, byAngle: angle1)
             path.line(to: targetPoint)
         }
-        
+
         path.lineWidth = getLineWidth()
         drawingPath = path
     }
-    
+
     // MARK: - Settings Dictionary
+
     override var graphicSettings: [String: Any] {
         var settings = super.graphicSettings
-        
+
         settings["_histIncrement"] = String(format: "%d", histIncrement)
         settings["_percent"] = String(format: "%f", percent)
         settings["_count"] = String(format: "%d", count)
-        
+
         return settings
     }
 }

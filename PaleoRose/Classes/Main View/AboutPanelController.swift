@@ -25,16 +25,16 @@
 import Cocoa
 
 @objc class AboutPanelController: NSObject {
-    @IBOutlet private weak var buildNumber: NSTextField!
-    @IBOutlet private weak var panel: NSPanel!
-    
+    @IBOutlet private var buildNumber: NSTextField!
+    @IBOutlet private var panel: NSPanel!
+
     @IBAction func showAboutPanel(_ sender: Any?) {
         let screenRect = NSScreen.main?.frame ?? .zero
         var panelRect = panel.frame
-        
+
         panelRect.origin.x = (screenRect.width - panelRect.width) / 2.0
         panelRect.origin.y = (screenRect.height - panelRect.height) / 2.0
-        
+
         panel.setFrame(panelRect, display: true)
         panel.makeKey()
         panel.orderFront(sender)

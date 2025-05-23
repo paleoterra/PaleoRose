@@ -37,10 +37,10 @@ let XRLayerGridDefaultLineWidth = "XRLayerGridDefaultLineWidth"
 
 @objc class XRLayerGrid: XRLayer {
     // MARK: - Properties
-    
+
     private var spokeCount: Int = 0
     private var spokeAngle: Float = 0.0
-    
+
     // Ring properties
     private var fixedCount: Bool = false
     private var ringsVisible: Bool = true
@@ -50,16 +50,16 @@ let XRLayerGridDefaultLineWidth = "XRLayerGridDefaultLineWidth"
     private var showRingLabels: Bool = true
     private var labelAngle: Float = 0.0
     private var ringFont: NSFont?
-    
+
     // Spoke properties
     private var spokeSectorLock: Bool = false
     private var spokesVisible: Bool = true
     private var isPercent: Bool = false
-    
+
     // Tick mark properties
     private var showTicks: Bool = true
     private var minorTicks: Bool = false
-    
+
     // Line label properties
     private var showLabels: Bool = true
     private var pointsOnly: Bool = false
@@ -67,15 +67,15 @@ let XRLayerGridDefaultLineWidth = "XRLayerGridDefaultLineWidth"
     private var spokeNumberCompassPoint: Int = 0
     private var spokeNumberOrder: Int = 0
     private var spokeFont: NSFont?
-    
+
     // MARK: - Class Methods
-    
+
     override class func classTag() -> String {
-        return "Grid"
+        "Grid"
     }
-    
+
     // MARK: - Initialization
-    
+
     @objc init(isVisible: Bool,
                active: Bool,
                biDir: Bool,
@@ -100,9 +100,10 @@ let XRLayerGridDefaultLineWidth = "XRLayerGridDefaultLineWidth"
                radialsOrder: Int,
                radialFont: NSFont,
                radialsSectorLock: Bool,
-               radialsVisible: Bool) {
+               radialsVisible: Bool)
+    {
         super.init()
-        
+
         setIsVisible(isVisible)
         setIsActive(active)
         setBiDirectional(biDir)
@@ -112,8 +113,8 @@ let XRLayerGridDefaultLineWidth = "XRLayerGridDefaultLineWidth"
         self.maxPercent = maxPercent
         setStrokeColor(strokeColor)
         setFillColor(fillColor)
-        
-        self.fixedCount = isFixedCount
+
+        fixedCount = isFixedCount
         self.ringsVisible = ringsVisible
         self.fixedRingCount = fixedRingCount
         self.ringCountIncrement = ringCountIncrement
@@ -121,34 +122,34 @@ let XRLayerGridDefaultLineWidth = "XRLayerGridDefaultLineWidth"
         self.showRingLabels = showRingLabels
         self.labelAngle = labelAngle
         self.ringFont = ringFont
-        
-        self.spokeCount = radialsCount
-        self.spokeAngle = radialsAngle
-        self.spokeNumberAlign = radialsLabelAlignment
-        self.spokeNumberCompassPoint = radialsCompassPoint
-        self.spokeNumberOrder = radialsOrder
-        self.spokeFont = radialFont
-        self.spokeSectorLock = radialsSectorLock
-        self.spokesVisible = radialsVisible
+
+        spokeCount = radialsCount
+        spokeAngle = radialsAngle
+        spokeNumberAlign = radialsLabelAlignment
+        spokeNumberCompassPoint = radialsCompassPoint
+        spokeNumberOrder = radialsOrder
+        spokeFont = radialFont
+        spokeSectorLock = radialsSectorLock
+        spokesVisible = radialsVisible
     }
-    
+
     required init(geometryController: XRGeometryController) {
         super.init(geometryController: geometryController)
         setupDefaults()
     }
-    
+
     required init(geometryController: XRGeometryController, dictionary: [String: Any]) {
         super.init(geometryController: geometryController, dictionary: dictionary)
         configureSelf(with: dictionary)
     }
-    
-    required override init() {
+
+    override required init() {
         super.init()
         setupDefaults()
     }
-    
+
     // MARK: - Setup Methods
-    
+
     private func setupDefaults() {
         // Set default values from user defaults or constants
         let defaults = UserDefaults.standard
@@ -158,7 +159,7 @@ let XRLayerGridDefaultLineWidth = "XRLayerGridDefaultLineWidth"
         fixedRingCount = defaults.integer(forKey: XRLayerGridDefaultRingFixedCount)
         spokeSectorLock = defaults.bool(forKey: XRLayerGridDefaultSectorLock)
     }
-    
+
     private func configureSelf(with dictionary: [String: Any]) {
         if let count = dictionary["Spoke_Count"] as? Int {
             spokeCount = count
@@ -168,47 +169,47 @@ let XRLayerGridDefaultLineWidth = "XRLayerGridDefaultLineWidth"
         }
         // Configure other properties from dictionary
     }
-    
+
     // MARK: - Public Methods
-    
+
     @objc func setSpokeCount(_ count: Int) {
         spokeCount = count
         generateGraphics()
         NotificationCenter.default.post(name: NSNotification.Name(XRLayerRequiresRedraw), object: self)
     }
-    
+
     @objc func getSpokeCount() -> Int {
-        return spokeCount
+        spokeCount
     }
-    
+
     @objc func setSpokeAngle(_ angle: Float) {
         spokeAngle = angle
         generateGraphics()
         NotificationCenter.default.post(name: NSNotification.Name(XRLayerRequiresRedraw), object: self)
     }
-    
+
     @objc func getSpokeAngle() -> Float {
-        return spokeAngle
+        spokeAngle
     }
-    
+
     // MARK: - Ring Methods
-    
+
     @objc func setFixedCount(_ fixed: Bool) {
         fixedCount = fixed
         generateGraphics()
         NotificationCenter.default.post(name: NSNotification.Name(XRLayerRequiresRedraw), object: self)
     }
-    
+
     @objc func getFixedCount() -> Bool {
-        return fixedCount
+        fixedCount
     }
-    
+
     // MARK: - XML Support
-    
+
     @objc func xmlTree1_0Rings() -> LITMXMLTree {
         let tree = LITMXMLTree()
         tree.elementName = "rings"
-        
+
         // Add ring-specific attributes
         tree.addAttribute("fixed_count", value: fixedCount ? "YES" : "NO")
         tree.addAttribute("visible", value: ringsVisible ? "YES" : "NO")
@@ -217,14 +218,14 @@ let XRLayerGridDefaultLineWidth = "XRLayerGridDefaultLineWidth"
         tree.addAttribute("ring_percent_increment", value: String(format: "%.1f", ringPercentIncrement))
         tree.addAttribute("show_labels", value: showRingLabels ? "YES" : "NO")
         tree.addAttribute("label_angle", value: String(format: "%.1f", labelAngle))
-        
+
         return tree
     }
-    
+
     @objc func xmlTree1_0Radials() -> LITMXMLTree {
         let tree = LITMXMLTree()
         tree.elementName = "radials"
-        
+
         // Add radial-specific attributes
         tree.addAttribute("count", value: String(spokeCount))
         tree.addAttribute("angle", value: String(format: "%.1f", spokeAngle))
@@ -235,13 +236,13 @@ let XRLayerGridDefaultLineWidth = "XRLayerGridDefaultLineWidth"
         tree.addAttribute("label_align", value: String(spokeNumberAlign))
         tree.addAttribute("compass_point", value: String(spokeNumberCompassPoint))
         tree.addAttribute("order", value: String(spokeNumberOrder))
-        
+
         return tree
     }
-    
+
     override func configure(withXMLTree1_0 configureTree: LITMXMLTree) {
         super.configure(withXMLTree1_0: configureTree)
-        
+
         for child in configureTree.children() {
             switch child.elementName {
             case "rings":
@@ -253,7 +254,7 @@ let XRLayerGridDefaultLineWidth = "XRLayerGridDefaultLineWidth"
             }
         }
     }
-    
+
     private func configureRings(from tree: LITMXMLTree) {
         if let attributes = tree.attributesDictionary() as? [String: String] {
             fixedCount = attributes["fixed_count"] == "YES"
@@ -265,7 +266,7 @@ let XRLayerGridDefaultLineWidth = "XRLayerGridDefaultLineWidth"
             labelAngle = Float(attributes["label_angle"] ?? "0.0") ?? 0.0
         }
     }
-    
+
     private func configureRadials(from tree: LITMXMLTree) {
         if let attributes = tree.attributesDictionary() as? [String: String] {
             spokeCount = Int(attributes["count"] ?? "0") ?? 0
@@ -279,9 +280,9 @@ let XRLayerGridDefaultLineWidth = "XRLayerGridDefaultLineWidth"
             spokeNumberOrder = Int(attributes["order"] ?? "0") ?? 0
         }
     }
-    
+
     // MARK: - Drawing
-    
+
     override func generateGraphics() {
         if spokesVisible {
             generateSpokes()
@@ -290,16 +291,16 @@ let XRLayerGridDefaultLineWidth = "XRLayerGridDefaultLineWidth"
             generateRings()
         }
     }
-    
+
     private func generateSpokes() {
         // Implement spoke graphics generation
     }
-    
+
     private func generateRings() {
         // Implement ring graphics generation
     }
-    
-    override func draw(_ rect: NSRect) {
+
+    override func draw(_: NSRect) {
         // Draw grid graphics
     }
 }

@@ -26,9 +26,9 @@ import Cocoa
 
 @objc class XRFileParser1: XRFileParser {
     // MARK: - Common Layer Methods
-    
+
     @objc func commonLayerAttributeOrder() -> [String] {
-        return [
+        [
             "name",
             "isVisible",
             "isLocked",
@@ -37,10 +37,10 @@ import Cocoa
             "blendMode"
         ]
     }
-    
+
     @objc func commonLayerAttributes(fromDictionary dict: [String: Any]) -> [String: Any] {
         var attributes: [String: Any] = [:]
-        
+
         if let name = dict["name"] as? String {
             attributes["name"] = name
         }
@@ -59,32 +59,32 @@ import Cocoa
         if let blendMode = dict["blendMode"] as? Int {
             attributes["blendMode"] = "\(blendMode)"
         }
-        
+
         return attributes
     }
-    
+
     // MARK: - Color Methods
-    
+
     @objc func tree(from color: NSColor, withName name: String) -> LITMXMLTree {
         let tree = LITMXMLTree()
         tree.elementName = "color"
-        
+
         let calibratedColor = color.usingColorSpace(.genericRGB) ?? color
         var red: CGFloat = 0
         var green: CGFloat = 0
         var blue: CGFloat = 0
         var alpha: CGFloat = 0
         calibratedColor.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
-        
+
         tree.addAttribute("name", value: name)
         tree.addAttribute("red", value: String(format: "%.3f", red))
         tree.addAttribute("green", value: String(format: "%.3f", green))
         tree.addAttribute("blue", value: String(format: "%.3f", blue))
         tree.addAttribute("alpha", value: String(format: "%.3f", alpha))
-        
+
         return tree
     }
-    
+
     @objc func color(fromTree tree: LITMXMLTree) -> NSColor? {
         guard let attributes = tree.attributesDictionary() as? [String: String],
               let redStr = attributes["red"],
@@ -94,54 +94,56 @@ import Cocoa
               let red = Double(redStr),
               let green = Double(greenStr),
               let blue = Double(blueStr),
-              let alpha = Double(alphaStr) else {
+              let alpha = Double(alphaStr)
+        else {
             return nil
         }
-        
+
         return NSColor(red: CGFloat(red),
-                      green: CGFloat(green),
-                      blue: CGFloat(blue),
-                      alpha: CGFloat(alpha))
+                       green: CGFloat(green),
+                       blue: CGFloat(blue),
+                       alpha: CGFloat(alpha))
     }
-    
+
     // MARK: - Font Methods
-    
+
     @objc func tree(from font: NSFont) -> LITMXMLTree {
         let tree = LITMXMLTree()
         tree.elementName = "font"
-        
+
         tree.addAttribute("name", value: font.fontName)
         tree.addAttribute("size", value: String(format: "%.1f", font.pointSize))
-        
+
         return tree
     }
-    
+
     @objc func font(fromTree tree: LITMXMLTree) -> NSFont? {
         guard let attributes = tree.attributesDictionary() as? [String: String],
               let name = attributes["name"],
               let sizeStr = attributes["size"],
-              let size = Double(sizeStr) else {
+              let size = Double(sizeStr)
+        else {
             return nil
         }
-        
+
         return NSFont(name: name, size: CGFloat(size))
     }
-    
+
     // MARK: - Data Methods
-    
+
     @objc func tree(fromDataDictionary dict: [String: Any]) -> LITMXMLTree {
         let tree = LITMXMLTree()
         tree.elementName = "data"
-        
+
         // Add data attributes and children based on dictionary content
         // Implementation depends on data structure
-        
+
         return tree
     }
-    
+
     @objc func convertLayerTree(toDictionary tree: LITMXMLTree) -> [String: Any] {
         var dict: [String: Any] = [:]
-        
+
         if let attributes = tree.attributesDictionary() as? [String: String] {
             // Convert common layer attributes
             dict["name"] = attributes["name"]
@@ -155,35 +157,35 @@ import Cocoa
                 dict["blendMode"] = blendMode
             }
         }
-        
+
         return dict
     }
-    
+
     // MARK: - Attributed String Methods
-    
+
     @objc func attributedString(fromXMLTree tree: LITMXMLTree) -> NSAttributedString? {
         guard let content = tree.contentsString() as String? else {
             return nil
         }
-        
+
         let attributes: [NSAttributedString.Key: Any] = [:]
         // Add attributes based on XML tree
-        
+
         return NSAttributedString(string: content, attributes: attributes)
     }
-    
+
     // MARK: - Override Methods
-    
+
     override func documentBaseTree() -> LITMXMLTree {
         let tree = LITMXMLTree()
         tree.elementName = "XRoseDocument"
         tree.addAttribute("VERSION", value: "1.0")
         return tree
     }
-    
+
     override func dictionary(forDocumentTree tree: LITMXMLTree) -> [String: Any]? {
         var dict: [String: Any] = [:]
-        
+
         for child in tree.children() {
             switch child.elementName {
             case "geometrySettings":
@@ -194,7 +196,7 @@ import Cocoa
                 break
             }
         }
-        
+
         return dict
     }
 }

@@ -34,7 +34,7 @@ extension Notification.Name {
 
 @objc class XRDataSet: NSObject {
     // MARK: - Properties
-    
+
     private var values: NSMutableData
     @objc private(set) var name: String
     private var comments: NSMutableAttributedString?
@@ -43,183 +43,183 @@ extension Notification.Name {
     @objc var tableName: String?
     @objc var columnName: String?
     @objc private(set) var setId: Int32 = 0
-    
+
     // MARK: - Initialization
-    
+
     @objc init(table: String, column: String, db: OpaquePointer?) {
-        self.values = NSMutableData()
-        self.name = ""
-        self.tableName = table
-        self.columnName = column
+        values = NSMutableData()
+        name = ""
+        tableName = table
+        columnName = column
         super.init()
-        
+
         guard readSQL(db: db) else { return }
     }
-    
+
     @objc init(table: String, column: String, db: OpaquePointer?, predicate: String) {
-        self.values = NSMutableData()
-        self.name = ""
-        self.tableName = table
-        self.columnName = column
+        values = NSMutableData()
+        name = ""
+        tableName = table
+        columnName = column
         self.predicate = predicate
         super.init()
-        
+
         guard readSQL(db: db) else { return }
     }
-    
+
     @objc init(data: Data, name: String) {
-        self.values = NSMutableData()
+        values = NSMutableData()
         self.name = name
         super.init()
-        self.values.append(data)
+        values.append(data)
     }
-    
+
     @objc init(id: Int32, name: String, tableName: String, column: String, predicate: String?, comments: NSAttributedString?, data: Data) {
-        self.values = NSMutableData()
+        values = NSMutableData()
         self.name = name
-        self.setId = id
+        setId = id
         self.tableName = tableName
-        self.columnName = column
+        columnName = column
         self.predicate = predicate
         super.init()
-        
-        if let comments = comments {
+
+        if let comments {
             self.comments = NSMutableAttributedString(attributedString: comments)
         }
-        self.values.append(data)
+        values.append(data)
     }
-    
+
     // MARK: - Public API
-    
+
     @objc var theData: Data {
         values as Data
     }
-    
+
     @objc func setId(_ newId: Int32) {
         setId = newId
     }
-    
+
     @objc func setName(_ newName: String) {
         name = newName
     }
-    
+
     @objc func setComments(_ comments: NSMutableAttributedString) {
         self.comments = comments
     }
-    
+
     @objc var commentsString: NSAttributedString? {
         comments
     }
-    
+
     @objc var dataSetDictionary: [String: Any] {
         var dict: [String: Any] = [
             "values": values,
             "name": name
         ]
-        if let comments = comments {
+        if let comments {
             dict["comments"] = comments
         }
         return dict
     }
-    
+
     // MARK: - Statistics
-    
+
     @objc var currentStatistics: [XRStatistic] {
         circularStatistics
     }
-    
+
     @objc func currentStatistic(withName name: String) -> XRStatistic? {
         circularStatistics.first { $0.statisticName == name }
     }
-    
+
     @objc func valueCount(fromAngle startAngle: Float, toAngle2 endAngle: Float) -> Int32 {
-    valueCount(fromAngle: startAngle, toAngle2: endAngle, biDirectional: false)
-}
-    
+        valueCount(fromAngle: startAngle, toAngle2: endAngle, biDirectional: false)
+    }
+
     @objc func valueCount(fromAngle startAngle: Float, toAngle2 endAngle: Float, biDirectional: Bool) -> Int32 {
-    var valueCountResult: Int32 = 0
-    values.withUnsafeBytes { buffer in
-        guard let pointer = buffer.baseAddress?.assumingMemoryBound(to: Float.self) else { return }
-        let floatCount = values.length / MemoryLayout<Float>.size
-        for index in 0..<floatCount {
-            var angleValue = pointer[index]
-            if biDirectional {
-                angleValue = angleValue.truncatingRemainder(dividingBy: 180.0)
-                if angleValue < 0 {
-                    angleValue += 180.0
+        var valueCountResult: Int32 = 0
+        values.withUnsafeBytes { buffer in
+            guard let pointer = buffer.baseAddress?.assumingMemoryBound(to: Float.self) else { return }
+            let floatCount = values.length / MemoryLayout<Float>.size
+            for index in 0 ..< floatCount {
+                var angleValue = pointer[index]
+                if biDirectional {
+                    angleValue = angleValue.truncatingRemainder(dividingBy: 180.0)
+                    if angleValue < 0 {
+                        angleValue += 180.0
+                    }
+                } else {
+                    angleValue = angleValue.truncatingRemainder(dividingBy: 360.0)
+                    if angleValue < 0 {
+                        angleValue += 360.0
+                    }
                 }
-            } else {
-                angleValue = angleValue.truncatingRemainder(dividingBy: 360.0)
-                if angleValue < 0 {
-                    angleValue += 360.0
+                if angleValue >= startAngle, angleValue <= endAngle {
+                    valueCountResult += 1
                 }
-            }
-            if angleValue >= startAngle && angleValue <= endAngle {
-                valueCountResult += 1
             }
         }
+        return valueCountResult
     }
-    return valueCountResult
-}
-    
+
     @objc func meanCount(withIncrement angleIncrement: Float, startingAngle: Float, isBiDirectional: Bool) -> [String: Any] {
-    var countArray: [Int32] = []
-    var angleArray: [Float] = []
-    var currentAngle = startingAngle
-    let maxAngle = isBiDirectional ? 180.0 : 360.0
-    while currentAngle < maxAngle {
-        let count = valueCount(fromAngle: currentAngle, toAngle2: currentAngle + angleIncrement, biDirectional: isBiDirectional)
-        countArray.append(count)
-        angleArray.append(currentAngle)
-        currentAngle += angleIncrement
+        var countArray: [Int32] = []
+        var angleArray: [Float] = []
+        var currentAngle = startingAngle
+        let maxAngle = isBiDirectional ? 180.0 : 360.0
+        while currentAngle < maxAngle {
+            let count = valueCount(fromAngle: currentAngle, toAngle2: currentAngle + angleIncrement, biDirectional: isBiDirectional)
+            countArray.append(count)
+            angleArray.append(currentAngle)
+            currentAngle += angleIncrement
+        }
+        return [
+            "counts": countArray,
+            "angles": angleArray
+        ]
     }
-    return [
-        "counts": countArray,
-        "angles": angleArray
-    ]
-}
-    
+
     @objc func standardDeviation(_ floatValues: [Float], mean: Float) -> Float {
-    let sumSquares = floatValues.reduce(0.0) { sum, value in
-        sum + pow(value - mean, 2)
+        let sumSquares = floatValues.reduce(0.0) { sum, value in
+            sum + pow(value - mean, 2)
+        }
+        return sqrt(sumSquares / Float(floatValues.count - 1))
     }
-    return sqrt(sumSquares / Float(floatValues.count - 1))
-}
-    
+
     // MARK: - Private Methods
-    
+
     private func readSQL(db: OpaquePointer?) -> Bool {
-        guard let db = db else { return false }
-        
+        guard let db else { return false }
+
         var sql = "SELECT \"\(columnName ?? "")\" FROM \"\(tableName ?? "")\""
-        if let predicate = predicate {
+        if let predicate {
             sql += " WHERE \(predicate)"
         }
-        
+
         var statement: OpaquePointer?
         guard sqlite3_prepare_v2(db, sql, -1, &statement, nil) == SQLITE_OK else {
             return false
         }
-        
+
         while sqlite3_step(statement) == SQLITE_ROW {
             let value = sqlite3_column_double(statement, 0)
             let floatValue = Float(value)
             values.append(&floatValue, length: MemoryLayout<Float>.size)
         }
-        
+
         sqlite3_finalize(statement)
         return true
     }
-    
+
     private func computeVectors(isBiDir: Bool) -> (xVector: Float, yVector: Float) {
         var sumX: Float = 0
         var sumY: Float = 0
-        
+
         values.withUnsafeBytes { buffer in
             guard let ptr = buffer.baseAddress?.assumingMemoryBound(to: Float.self) else { return }
             let count = values.length / MemoryLayout<Float>.size
-            
-            for index in 0..<count {
+
+            for index in 0 ..< count {
                 var angle = ptr[index]
                 if isBiDir {
                     angle = angle.truncatingRemainder(dividingBy: 180.0)
@@ -233,7 +233,7 @@ extension Notification.Name {
                 sumY += sin(radians)
             }
         }
-        
+
         return (sumX, sumY)
     }
 }

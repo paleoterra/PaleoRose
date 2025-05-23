@@ -24,72 +24,72 @@ import Cocoa
 
 class XRGraphicKite: XRGraphic {
     // MARK: - Properties
+
     private var angles: [NSNumber]
     private var values: [NSNumber]
-    
+
     // MARK: - Initialization
+
     init(controller: XRGeometryController, angles: [NSNumber], values: [NSNumber]) {
         self.angles = angles
         self.values = values
-        
+
         super.init(controller: controller)
-        
+
         setDrawsFill(true)
         setFillColor(.white)
         calculateGeometry()
     }
-    
+
     // MARK: - Geometry Methods
+
     override func calculateGeometry() {
         guard let controller = geometryController else { return }
-        
+
         let path = NSBezierPath()
-        
+
         if let lastValue = values.last, let lastAngle = angles.last {
             // Initial point setup
-            let radius: CGFloat
-            if controller.isPercent {
-                radius = controller.radius(ofPercentValue: lastValue.doubleValue)
+            let radius: CGFloat = if controller.isPercent {
+                controller.radius(ofPercentValue: lastValue.doubleValue)
             } else {
-                radius = controller.radius(ofCount: lastValue.intValue)
+                controller.radius(ofCount: lastValue.intValue)
             }
-            
+
             var point = NSPoint(x: 0.0, y: radius)
             var targetPoint = controller.rotation(ofPoint: point, byAngle: lastAngle.doubleValue)
             path.move(to: targetPoint)
-            
+
             // Draw lines to each point
-            for index in 0..<angles.count {
-                let radius: CGFloat
-                if controller.isPercent {
-                    radius = controller.radius(ofPercentValue: values[index].doubleValue)
+            for index in 0 ..< angles.count {
+                let radius: CGFloat = if controller.isPercent {
+                    controller.radius(ofPercentValue: values[index].doubleValue)
                 } else {
-                    radius = controller.radius(ofCount: values[index].intValue)
+                    controller.radius(ofCount: values[index].intValue)
                 }
-                
+
                 point = NSPoint(x: 0.0, y: radius)
                 targetPoint = controller.rotation(ofPoint: point, byAngle: angles[i].doubleValue)
                 path.line(to: targetPoint)
             }
-            
+
             // Add hollow core if needed
             if controller.hollowCoreSize > 0.0 {
                 let centroid = NSPoint(x: 0.0, y: 0.0)
-                let coreRadius: CGFloat
-                if controller.isPercent {
-                    coreRadius = controller.radius(ofPercentValue: 0.0)
+                let coreRadius: CGFloat = if controller.isPercent {
+                    controller.radius(ofPercentValue: 0.0)
                 } else {
-                    coreRadius = controller.radius(ofCount: 0)
+                    controller.radius(ofCount: 0)
                 }
-                
+
                 let coreRect = NSRect(x: centroid.x - coreRadius,
-                                    y: centroid.y - coreRadius,
-                                    width: 2 * coreRadius,
-                                    height: 2 * coreRadius)
+                                      y: centroid.y - coreRadius,
+                                      width: 2 * coreRadius,
+                                      height: 2 * coreRadius)
                 path.appendOval(in: coreRect)
             }
         }
-        
+
         drawingPath = path
     }
 }

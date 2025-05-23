@@ -30,7 +30,7 @@ import SQLite3
 
 @objc class PTFMXMLParser: NSObject, XMLParserDelegate {
     // MARK: - Properties
-    
+
     private var tableDefinition: [[String: String]] = []
     private var dataRows: [[Any]] = []
     private var isValid: Bool = false
@@ -41,48 +41,48 @@ import SQLite3
     private var hasData: Bool = false
     private var tableName: String = ""
     private var tableStep: Int = 0
-    
+
     // MARK: - Initialization
-    
+
     @objc init?(xmlAtPath path: String) {
         guard let url = URL(fileURLWithPath: path) else { return nil }
         guard let xmlParser = XMLParser(contentsOf: url) else { return nil }
-        
-        self.parser = xmlParser
+
+        parser = xmlParser
         super.init()
-        
+
         parser.delegate = self
         isValid = parser.parse()
     }
-    
+
     // MARK: - XMLParserDelegate
-    
+
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String: String] = [:]) {
         switch elementName {
         case "FMPXMLRESULT":
             correctType = true
-            
+
         case "DATABASE":
             tableName = attributeDict["NAME"] ?? ""
-            
+
         case "FIELD":
             tableDefinition.append(attributeDict)
-            
+
         case "ROW":
             currentRow = []
-            
+
         case "COL":
             hasData = false
-            
+
         case "DATA":
             hasData = true
             currentContents = NSMutableString()
-            
+
         default:
             break
         }
     }
-    
+
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         switch elementName {
         case "ROW":
@@ -90,12 +90,12 @@ import SQLite3
                 dataRows.append(row)
                 currentRow = nil
             }
-            
+
         case "COL":
             if !hasData {
                 currentRow?.append(NSNull())
             }
-            
+
         case "DATA":
             if let contents = currentContents as? String {
                 currentRow?.append(contents)
@@ -107,25 +107,25 @@ import SQLite3
             break
         }
     }
-    
+
     func parser(_ parser: XMLParser, foundCharacters string: String) {
         currentContents?.append(string)
     }
-    
+
     // MARK: - Public API
-    
+
     @objc var isCorrectType: Bool {
         correctType
     }
-    
+
     @objc var isValidParse: Bool {
         isValid
     }
-    
+
     @objc var rowCount: Int {
         dataRows.count
     }
-    
+
     @objc func stepTableName() {
         if tableStep == 0 {
             tableName += "_1"
@@ -137,85 +137,85 @@ import SQLite3
             tableStep += 1
         }
     }
-    
+
     @objc func sqliteTableSchema() -> String {
         var schema = "CREATE TABLE \"\(tableName)\" (\n_id INTEGER PRIMARY KEY,\n"
-        
+
         for (index, field) in tableDefinition.enumerated() {
             let name = field["NAME"] ?? ""
             let type = field["TYPE"] ?? ""
-            
+
             if index == tableDefinition.count - 1 {
                 schema += "\(name) \(type)\n)"
             } else {
                 schema += "\(name) \(type),\n"
             }
         }
-        
+
         return schema
     }
-    
+
     @objc func sqliteCommand(forRow row: Int) -> String {
         guard row < dataRows.count else { return "" }
-        
+
         let rowArray = dataRows[row]
         var command = assembleSQLITEInsertBase()
         command += "VALUES ("
-        
+
         for (index, value) in rowArray.enumerated() {
             if value is NSNull {
                 command += "NULL"
             } else {
                 command += "\"\(value)\""
             }
-            
+
             if index < rowArray.count - 1 {
                 command += ","
             } else {
                 command += ")"
             }
         }
-        
+
         return command
     }
-    
+
     @objc func writeToSQLITE(_ db: OpaquePointer?, withError error: NSErrorPointer) -> Bool {
-        guard let db = db else { return false }
-        
+        guard let db else { return false }
+
         let schemaSQL = sqliteTableSchema()
         var errorMsg: UnsafeMutablePointer<Int8>?
-        
+
         if sqlite3_exec(db, schemaSQL, nil, nil, &errorMsg) != SQLITE_OK {
-            if let error = error {
+            if let error {
                 error.pointee = NSError(domain: "PTFMXMLParser",
-                                      code: 1,
-                                      userInfo: [NSLocalizedDescriptionKey: String(cString: errorMsg!)])
+                                        code: 1,
+                                        userInfo: [NSLocalizedDescriptionKey: String(cString: errorMsg!)])
             }
             sqlite3_free(errorMsg)
             return false
         }
-        
-        for row in 0..<dataRows.count {
+
+        for row in 0 ..< dataRows.count {
             let command = sqliteCommand(forRow: row)
             if sqlite3_exec(db, command, nil, nil, &errorMsg) != SQLITE_OK {
-                if let error = error {
+                if let error {
                     error.pointee = NSError(domain: "PTFMXMLParser",
-                                          code: 2,
-                                          userInfo: [NSLocalizedDescriptionKey: String(cString: errorMsg!)])
+                                            code: 2,
+                                            userInfo: [NSLocalizedDescriptionKey: String(cString: errorMsg!)])
                 }
                 sqlite3_free(errorMsg)
                 return false
             }
         }
-        
+
         return true
     }
-    
+
     // MARK: - Private Methods
-    
+
     private func assembleSQLITEInsertBase() -> String {
         var base = "INSERT INTO \"\(tableName)\" ("
-        
+
         for (index, field) in tableDefinition.enumerated() {
             if let name = field["NAME"] {
                 if index == tableDefinition.count - 1 {
@@ -225,7 +225,7 @@ import SQLite3
                 }
             }
         }
-        
+
         return base
     }
 }

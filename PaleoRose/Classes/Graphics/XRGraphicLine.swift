@@ -23,6 +23,7 @@
 import Cocoa
 
 // MARK: - Constants
+
 enum XRGraphicLineTickType: Int {
     case none = 0
     case minor = 1
@@ -46,6 +47,7 @@ enum XRGraphicLineNumberCompassPoint: Int {
 
 class XRGraphicLine: XRGraphic {
     // MARK: - Properties
+
     private var relativePercent: CGFloat = 1.0
     private var angleSetting: CGFloat = 0.0
     private var tickType: XRGraphicLineTickType = .none
@@ -58,84 +60,89 @@ class XRGraphicLine: XRGraphic {
     private var spokePointOnly: Bool = false
     private var lineLabel: NSMutableAttributedString?
     private var labelTransform: NSAffineTransform?
-    
+
     // MARK: - Initialization
+
     override init(controller: XRGeometryController) {
-        self.currentFont = NSFont(name: "Arial-Black", size: 12) ?? NSFont.systemFont(ofSize: 12)
+        currentFont = NSFont(name: "Arial-Black", size: 12) ?? NSFont.systemFont(ofSize: 12)
         super.init(controller: controller)
         setLineLabel()
     }
-    
+
     // MARK: - Spoke Methods
+
     func setSpokeAngle(_ angle: CGFloat) {
         angleSetting = angle
         setLineLabel()
         calculateGeometry()
     }
-    
+
     func spokeAngle() -> CGFloat {
-        return angleSetting
+        angleSetting
     }
-    
+
     func setPointsOnly(_ value: Bool) {
         spokePointOnly = value
         setLineLabel()
     }
-    
+
     // MARK: - Tick Methods
+
     func setTickType(_ type: XRGraphicLineTickType) {
         tickType = type
         calculateGeometry()
     }
-    
+
     func getTickType() -> XRGraphicLineTickType {
-        return tickType
+        tickType
     }
-    
+
     func setShowTick(_ show: Bool) {
         showTick = show
         calculateGeometry()
     }
-    
+
     // MARK: - Label Methods
+
     func setShowLabel(_ show: Bool) {
         showLabel = show
     }
-    
+
     func setNumberAlignment(_ alignment: XRGraphicLineNumberAlign) {
         spokeNumberAlign = alignment
     }
-    
+
     func setNumberOrder(_ order: XRGraphicLineNumberingOrder) {
         spokeNumberOrder = order
         setLineLabel()
     }
-    
+
     func setNumberPoints(_ pointRule: XRGraphicLineNumberCompassPoint) {
         spokeNumberCompassPoint = pointRule
         setLineLabel()
     }
-    
+
     func setFont(_ font: NSFont) {
         currentFont = font
         calculateGeometry()
     }
-    
+
     func getFont() -> NSFont {
-        return currentFont
+        currentFont
     }
-    
+
     // MARK: - Geometry Methods
+
     override func calculateGeometry() {
         guard let controller = geometryController else { return }
-        
+
         var radius = controller.radius(ofRelativePercent: 0.0)
         var point = NSPoint(x: 0.0, y: radius)
         point = controller.rotation(ofPoint: point, byAngle: angleSetting)
-        
+
         let path = NSBezierPath()
         path.move(to: point)
-        
+
         if tickType == .none || !showTick {
             radius = controller.radius(ofRelativePercent: relativePercent)
         } else if tickType == .minor {
@@ -143,31 +150,30 @@ class XRGraphicLine: XRGraphic {
         } else {
             radius = controller.unrestrictedRadius(ofRelativePercent: relativePercent + 0.1)
         }
-        
+
         point = NSPoint(x: 0.0, y: radius)
         point = controller.rotation(ofPoint: point, byAngle: angleSetting)
         path.line(to: point)
-        
+
         drawingPath = path
         setLabelTransform()
     }
-    
+
     // MARK: - Label Transform Methods
+
     private func setLineLabel() {
         let angle = Double(angleSetting)
         var labelText = ""
-        
+
         if angle == 0.0 || angle == 90.0 || angle == 180.0 || angle == 270.0 || angle == 360.0 {
             if spokeNumberCompassPoint == .points {
-                labelText = {
-                    switch angle {
-                    case 0.0, 360.0: return "N"
-                    case 90.0: return "E"
-                    case 180.0: return "S"
-                    case 270.0: return "W"
-                    default: return ""
-                    }
-                }()
+                labelText = switch angle {
+                case 0.0, 360.0: "N"
+                case 90.0: "E"
+                case 180.0: "S"
+                case 270.0: "W"
+                default: ""
+                }
             } else {
                 labelText = formatAngle(angle)
             }
@@ -179,37 +185,37 @@ class XRGraphicLine: XRGraphic {
                 labelText = formatAngle(workAngle)
             }
         }
-        
+
         lineLabel = NSMutableAttributedString(string: labelText)
         setLabelTransform()
     }
-    
+
     private func formatAngle(_ angle: Double) -> String {
-        return angle == floor(angle) ? String(format: "%d", Int(angle)) : String(format: "%.1f", angle)
+        angle == floor(angle) ? String(format: "%d", Int(angle)) : String(format: "%.1f", angle)
     }
-    
+
     private func calculateQuadrantAngle(_ angle: Double) -> Double {
         if angle <= 90.0 {
-            return angle
+            angle
         } else if angle <= 180.0 {
-            return 180.0 - angle
+            180.0 - angle
         } else if angle <= 270.0 {
-            return angle - 180.0
+            angle - 180.0
         } else {
-            return 360.0 - angle
+            360.0 - angle
         }
     }
-    
+
     private func setLabelTransform() {
         guard let label = lineLabel else { return }
-        
+
         let range = NSRange(location: 0, length: label.length)
         let attributes: [NSAttributedString.Key: Any] = [
             .font: currentFont,
             .foregroundColor: getStrokeColor()
         ]
         label.setAttributes(attributes, range: range)
-        
+
         labelTransform = NSAffineTransform()
         if spokeNumberAlign == .horizontal {
             appendHorizontalTransform()
@@ -217,29 +223,29 @@ class XRGraphicLine: XRGraphic {
             appendParallelTransform()
         }
     }
-    
+
     private func appendHorizontalTransform() {
         guard let transform = labelTransform, let label = lineLabel else { return }
         guard let controller = geometryController else { return }
-        
+
         let size = label.size()
         let displacement = controller.unrestrictedRadius(ofRelativePercent: relativePercent + 0.2)
         let rotationAngle = angleSetting - 90.0
-        
+
         transform.translate(x: -0.5 * size.width, y: -0.5 * size.height)
         transform.rotate(byDegrees: -rotationAngle)
         transform.translate(x: displacement, y: 0.0)
         transform.rotate(byDegrees: rotationAngle)
     }
-    
+
     private func appendParallelTransform() {
         guard let transform = labelTransform, let label = lineLabel else { return }
         guard let controller = geometryController else { return }
-        
+
         let size = label.size()
         let displacement = controller.unrestrictedRadius(ofRelativePercent: relativePercent + 0.1)
         let rotationAngle = 90.0 - angleSetting
-        
+
         if angleSetting == 0.0 {
             transform.translate(x: -0.5 * size.width, y: displacement)
         } else if angleSetting == 180.0 {
@@ -256,34 +262,36 @@ class XRGraphicLine: XRGraphic {
             }
         }
     }
-    
+
     // MARK: - Drawing
+
     override func draw(_ dirtyRect: NSRect) {
         guard let path = drawingPath, NSIntersectsRect(dirtyRect, path.bounds) else { return }
-        
+
         NSGraphicsContext.saveGraphicsState()
-        
+
         getStrokeColor().set()
         path.stroke()
-        
+
         if getDrawsFill() {
             getFillColor().set()
             path.fill()
         }
-        
+
         if showLabel, let transform = labelTransform, let label = lineLabel {
             transform.concat()
             label.draw(at: .zero)
         }
-        
+
         NSGraphicsContext.restoreGraphicsState()
         setNeedsDisplay(false)
     }
-    
+
     // MARK: - Settings Dictionary
+
     override var graphicSettings: [String: Any] {
         var settings = super.graphicSettings
-        
+
         settings["_relativePercent"] = String(format: "%f", relativePercent)
         settings["_angleSetting"] = String(format: "%f", angleSetting)
         settings["_tickType"] = String(format: "%d", tickType.rawValue)
@@ -294,7 +302,7 @@ class XRGraphicLine: XRGraphic {
         settings["_showLabel"] = showLabel ? "YES" : "NO"
         settings["_lineLabel"] = lineLabel as Any
         settings["_currentFont"] = currentFont
-        
+
         return settings
     }
 }
