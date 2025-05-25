@@ -25,12 +25,43 @@
 // SOFTWARE.
 
 import Cocoa
+import SwiftUI
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
-    private let applicationDefaults = ApplicationDefaults()
+    // MARK: - Properties
+
+    private var aboutWindow: NSWindow?
+
+    // MARK: - Application Lifecycle
 
     func applicationDidFinishLaunching(_: Notification) {
         NSColorPanel.shared.showsAlpha = true
+    }
+
+    // MARK: - Actions
+
+    @IBAction @objc private func showAboutWindow(_: Any?) {
+        if aboutWindow == nil {
+            let window = NSWindow(
+                contentRect: NSRect(x: 0, y: 0, width: 400, height: 250),
+                styleMask: [.titled, .closable, .miniaturizable],
+                backing: .buffered,
+                defer: false
+            )
+            window.center()
+            window.title = "About \(applicationName)"
+
+            let contentView = NSHostingView(rootView: AboutView())
+            window.contentView = contentView
+            aboutWindow = window
+        }
+
+        aboutWindow?.makeKeyAndOrderFront(nil)
+        NSApp.activate(ignoringOtherApps: true)
+    }
+
+    private var applicationName: String {
+        Bundle.main.object(forInfoDictionaryKey: kCFBundleNameKey as String) as? String ?? ""
     }
 }
