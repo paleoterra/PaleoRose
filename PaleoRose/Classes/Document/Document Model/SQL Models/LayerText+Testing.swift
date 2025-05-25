@@ -56,7 +56,7 @@ extension LayerText {
         fileId: String = #file,
         filePath: String = #filePath,
         line: Int = #line,
-        column: Int = #column,
+        column: Int = #column
     ) throws {
         let sourceLocation = SourceLocation(fileID: fileId, filePath: filePath, line: line, column: column)
         let attributedString = Encoding.decodeTextStorage(from: CONTENTS)
