@@ -25,17 +25,17 @@
 import Cocoa
 
 @objc class XRPreferencePanelController: NSObject {
-    @IBOutlet private weak var vectorCalcPopUp: NSPopUpButton!
-    
+    @IBOutlet private var vectorCalcPopUp: NSPopUpButton!
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+
         let defaults = UserDefaults.standard
         let selectedIndex = defaults.integer(forKey: "vectorCalculationMethod")
         vectorCalcPopUp.selectItem(at: selectedIndex)
     }
-    
-    @IBAction func changeVectorCalc(_ sender: Any) {
+
+    @IBAction func changeVectorCalc(_: Any) {
         let defaults = UserDefaults.standard
         defaults.set(vectorCalcPopUp.indexOfSelectedItem, forKey: "vectorCalculationMethod")
     }

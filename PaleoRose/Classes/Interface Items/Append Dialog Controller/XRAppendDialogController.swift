@@ -4,13 +4,13 @@
 import Cocoa
 
 @objc class XRAppendDialogController: NSWindowController {
-    @IBOutlet weak var popupButton: NSPopUpButton?
+    @IBOutlet var popupButton: NSPopUpButton?
     var titlesArray: [String] = []
-    
-    @IBAction func append(_ sender: Any?) {}
-    @IBAction func cancel(_ sender: Any?) {}
-    @IBAction func new(_ sender: Any?) {}
-    @objc func popup() -> NSPopUpButton? { return popupButton }
-    @objc func titleOfSelectedSet() -> String? { return popupButton?.titleOfSelectedItem }
+
+    @IBAction func append(_: Any?) {}
+    @IBAction func cancel(_: Any?) {}
+    @IBAction func new(_: Any?) {}
+    @objc func popup() -> NSPopUpButton? { popupButton }
+    @objc func titleOfSelectedSet() -> String? { popupButton?.titleOfSelectedItem }
     @objc func setDataSetArray(_ dataSetTitles: [String]) { titlesArray = dataSetTitles }
 }

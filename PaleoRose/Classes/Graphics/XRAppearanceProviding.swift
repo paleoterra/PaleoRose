@@ -26,22 +26,22 @@ import Cocoa
 protocol XRAppearanceProviding {
     /// Whether the graphic should be filled
     var fills: Bool { get set }
-    
+
     /// The stroke color of the graphic
     var stroke: NSColor { get set }
-    
+
     /// The fill color of the graphic
     var fill: NSColor { get set }
-    
+
     /// The line width of the graphic
     var width: CGFloat { get set }
-    
+
     /// Reset colors to their default values
     func resetColors()
-    
+
     /// Set the alpha component of both stroke and fill colors
     func setAlpha(_ alpha: CGFloat)
-    
+
     /// Set both stroke and fill colors
     func setColors(stroke: NSColor, fill: NSColor)
 }
@@ -52,13 +52,13 @@ extension XRAppearanceProviding {
         stroke = .black
         fill = .black
     }
-    
+
     func setAlpha(_ alpha: CGFloat) {
         let clampedAlpha = min(alpha, 1.0)
         stroke = stroke.withAlphaComponent(clampedAlpha) ?? stroke
         fill = fill.withAlphaComponent(clampedAlpha) ?? fill
     }
-    
+
     func setColors(stroke: NSColor, fill: NSColor) {
         self.stroke = stroke
         self.fill = fill

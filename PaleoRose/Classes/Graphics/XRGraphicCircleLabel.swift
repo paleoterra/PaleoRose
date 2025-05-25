@@ -24,6 +24,7 @@ import Cocoa
 
 class XRGraphicCircleLabel: XRGraphicCircle {
     // MARK: - Properties
+
     private var showLabel: Bool = false
     private var labelAngle: CGFloat = 0.0
     private var label: NSMutableAttributedString?
@@ -32,8 +33,9 @@ class XRGraphicCircleLabel: XRGraphicCircle {
     private var labelPoint: NSPoint = .zero
     private var labelSize: NSSize = .zero
     private var isCore: Bool = false
-    
+
     // MARK: - Initialization
+
     override init(controller: XRGeometryController) {
         super.init(controller: controller)
         showLabel = true
@@ -41,7 +43,7 @@ class XRGraphicCircleLabel: XRGraphicCircle {
         labelFont = NSFont(name: "Arial-Black", size: 12)
         labelPoint = .zero
     }
-    
+
     override convenience init(coreCircleWithController controller: XRGeometryController) {
         self.init(controller: controller)
         showLabel = false
@@ -51,51 +53,52 @@ class XRGraphicCircleLabel: XRGraphicCircle {
         setCountSetting(0)
         calculateGeometry()
     }
-    
+
     // MARK: - Font Methods
+
     func setFont(_ newFont: NSFont) {
         labelFont = newFont
         calculateGeometry()
     }
-    
+
     func getFont() -> NSFont? {
-        return labelFont
+        labelFont
     }
-    
+
     // MARK: - Label Methods
+
     func setShowLabel(_ show: Bool) {
         showLabel = show
     }
-    
+
     func getShowLabel() -> Bool {
-        return showLabel
+        showLabel
     }
-    
+
     func setLabelAngle(_ newAngle: CGFloat) {
         labelAngle = newAngle
         calculateGeometry()
     }
-    
+
     func getLabelAngle() -> CGFloat {
-        return labelAngle
+        labelAngle
     }
-    
+
     private func computeLabelText() {
         guard let controller = geometryController else { return }
-        
+
         isPercent = controller.isPercent
-        
-        let labelText: String
-        if isPercent {
-            labelText = String(format: "%3.1f %c", (percentSetting * 100.0), "%")
+
+        let labelText = if isPercent {
+            String(format: "%3.1f %c", percentSetting * 100.0, "%")
         } else if getIsFixed() {
-            labelText = String(format: "%3.1f", (percentSetting * CGFloat(controller.geometryMaxCount)))
+            String(format: "%3.1f", percentSetting * CGFloat(controller.geometryMaxCount))
         } else {
-            labelText = String(format: "%d", getCountSetting())
+            String(format: "%d", getCountSetting())
         }
-        
+
         label = NSMutableAttributedString(string: labelText)
-        
+
         if let font = labelFont {
             let attributes: [NSAttributedString.Key: Any] = [
                 .font: font,
@@ -104,17 +107,17 @@ class XRGraphicCircleLabel: XRGraphicCircle {
             label?.setAttributes(attributes, range: NSRange(location: 0, length: label?.length ?? 0))
         }
     }
-    
+
     private func computeTransform() {
         transform = AffineTransform.identity.rotated(by: .pi * (360.0 - labelAngle) / 180.0)
     }
-    
+
     override func calculateGeometry() {
         computeLabelText()
         computeTransform()
-        
+
         guard let controller = geometryController else { return }
-        
+
         if !showLabel || isCore {
             if (controller.isPercent || getIsFixed()) || (!controller.isPercent && getIsFixed()) {
                 drawingPath = NSBezierPath(ovalIn: controller.circleRect(forPercent: percentSetting))
@@ -122,50 +125,49 @@ class XRGraphicCircleLabel: XRGraphicCircle {
                 drawingPath = NSBezierPath(ovalIn: controller.circleRect(forCount: getCountSetting()))
             }
         } else {
-            let radius: CGFloat
-            if (controller.isPercent || getIsFixed()) || (!controller.isPercent && getIsFixed()) {
-                radius = controller.radius(ofPercentValue: percentSetting)
+            let radius: CGFloat = if (controller.isPercent || getIsFixed()) || (!controller.isPercent && getIsFixed()) {
+                controller.radius(ofPercentValue: percentSetting)
             } else {
-                radius = controller.radius(ofCount: getCountSetting())
+                controller.radius(ofCount: getCountSetting())
             }
-            
+
             if let labelSize = label?.size() {
                 let angle = controller.degrees(fromRadians: atan((0.52 * labelSize.width) / radius))
                 drawingPath = NSBezierPath()
                 drawingPath?.appendArc(withCenter: .zero,
-                                     radius: radius,
-                                     startAngle: 90 + angle,
-                                     endAngle: 90 - angle)
+                                       radius: radius,
+                                       startAngle: 90 + angle,
+                                       endAngle: 90 - angle)
                 labelPoint = NSPoint(x: 0 - (0.5 * labelSize.width),
-                                   y: radius - (0.5 * labelSize.height))
+                                     y: radius - (0.5 * labelSize.height))
             }
         }
-        
+
         drawingPath?.lineWidth = getLineWidth()
     }
-    
+
     override func draw(in rect: NSRect) {
         computeLabelText()
-        
+
         guard let path = drawingPath,
               NSIntersectsRect(rect, path.bounds) else { return }
-        
+
         NSGraphicsContext.saveGraphicsState()
-        
+
         getStrokeColor().set()
-        
+
         transform?.transform()
         path.stroke()
-        
+
         if getDrawsFill() {
             getFillColor().set()
             path.fill()
         }
-        
-        if showLabel && !isCore {
+
+        if showLabel, !isCore {
             label?.draw(at: labelPoint)
         }
-        
+
         NSGraphicsContext.restoreGraphicsState()
         setNeedsDisplay(false)
     }

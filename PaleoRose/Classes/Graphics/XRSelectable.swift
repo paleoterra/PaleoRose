@@ -26,13 +26,13 @@ import Cocoa
 protocol XRSelectable: AnyObject {
     /// Whether the graphic is currently selected
     var selected: Bool { get set }
-    
+
     /// Whether the graphic can be selected
     var isSelectable: Bool { get }
-    
+
     /// Select the graphic if it is selectable
     func select()
-    
+
     /// Deselect the graphic if it is selectable
     func deselect()
 }
@@ -40,12 +40,12 @@ protocol XRSelectable: AnyObject {
 /// Default implementation of selection methods
 extension XRSelectable {
     var isSelectable: Bool { true }
-    
+
     func select() {
         guard isSelectable else { return }
         selected = true
     }
-    
+
     func deselect() {
         guard isSelectable else { return }
         selected = false

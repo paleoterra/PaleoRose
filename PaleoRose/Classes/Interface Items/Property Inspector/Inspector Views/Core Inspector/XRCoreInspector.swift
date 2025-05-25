@@ -9,12 +9,13 @@ import Cocoa
 
 final class XRCoreInspector: NSObject {
     // MARK: - Properties
+
     private var objectController: NSObjectController!
     private var viewPopup: NSPopUpButton!
     private weak var _object: XRLayerCore?
-    
+
     var inspectedObject: XRLayerCore? {
-        get { return _object }
+        get { _object }
         set {
             _object = newValue
             objectController.content = _object
@@ -22,19 +23,22 @@ final class XRCoreInspector: NSObject {
             changeView(viewPopup)
         }
     }
-    
+
     // MARK: - Initialization
+
     override init() {
         super.init()
         Bundle.main.loadNibNamed("XRLayerCore", owner: self, topLevelObjects: nil)
     }
-    
+
     // MARK: - View Management
-    @objc private func changeView(_ sender: NSPopUpButton) {
+
+    @objc private func changeView(_: NSPopUpButton) {
         // Implementation for view change logic
     }
-    
+
     // MARK: - Deinitialization
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }

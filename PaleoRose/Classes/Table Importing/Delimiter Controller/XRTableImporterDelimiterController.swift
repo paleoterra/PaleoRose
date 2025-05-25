@@ -26,62 +26,62 @@ import Cocoa
 
 @objc class XRTableImporterDelimiterController: NSObject {
     // MARK: - Properties
-    
+
     @objc private(set) var tableName: String = ""
     @objc private var columnTitles: Int = 0
     @objc private var delimiterFieldValue: String = ""
     @objc private var delimiterPopup: Int = 0
     @objc private var encodingValue: Int = 0
-    
-    @IBOutlet private weak var window: NSWindow!
-    @IBOutlet private weak var tableNameField: NSTextField!
-    @IBOutlet private weak var delimiterField: NSTextField!
-    
+
+    @IBOutlet private var window: NSWindow!
+    @IBOutlet private var tableNameField: NSTextField!
+    @IBOutlet private var delimiterField: NSTextField!
+
     // MARK: - Initialization
-    
+
     @objc init?(path: String) {
         super.init()
-        
+
         guard Bundle.main.loadNibNamed("XRTableInitialTextController", owner: self, topLevelObjects: nil) else {
             return nil
         }
-        
+
         if !path.isEmpty {
             tableName = (path as NSString).lastPathComponent.deletingPathExtension
         } else {
             tableName = "Untitled_Table"
         }
-        
+
         delimiterFieldValue = ", "
         columnTitles = NSControl.StateValue.on.rawValue
     }
-    
+
     // MARK: - Actions
-    
-    @IBAction func cancelImport(_ sender: Any) {
+
+    @IBAction func cancelImport(_: Any) {
         window.sheetParent?.endSheet(window, returnCode: .cancel)
     }
-    
-    @IBAction func import(_ sender: Any) {
+
+    @IBAction func import (_: Any) {
         window.sheetParent?.endSheet(window, returnCode: .OK)
     }
-    
+
     // MARK: - Public API
-    
+
     @objc var activateDelimiterField: Bool {
         delimiterPopup > 0
     }
-    
+
     override class func keyPathsForValuesAffecting(_ key: String) -> Set<String> {
         var keyPaths = super.keyPathsForValuesAffecting(key)
-        
+
         if key == "activateDelimiterField" {
             keyPaths.insert("delimiterPopup")
         }
-        
+
         return keyPaths
     }
-    
+
     @objc var results: [String: Any] {
         var dict: [String: Any] = [
             "tableName": tableName,
@@ -89,25 +89,24 @@ import Cocoa
             "delimiterPopup": delimiterPopup,
             "delimiterFieldValue": delimiterFieldValue
         ]
-        
-        let encoding: String.Encoding
-        switch encodingValue {
+
+        let encoding: String.Encoding = switch encodingValue {
         case 0:
-            encoding = .ascii
+            .ascii
         case 1:
-            encoding = .macOSRoman
+            .macOSRoman
         case 2:
-            encoding = .windowsCP1254
+            .windowsCP1254
         case 3:
-            encoding = .utf8
+            .utf8
         case 4:
-            encoding = .isoLatin1
+            .isoLatin1
         case 5:
-            encoding = .isoLatin2
+            .isoLatin2
         default:
-            encoding = .ascii
+            .ascii
         }
-        
+
         dict["encodingValue"] = encoding.rawValue
         return dict
     }

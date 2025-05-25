@@ -39,36 +39,36 @@ let XRLayerDataStatisticsDidChange = "XRLayerDataStatisticsDidChange"
 
 @objc class XRLayerData: XRLayer {
     // MARK: - Properties
-    
+
     private var theSet: XRDataSet?
     private var plotType: XRLayerDataPlotType = .petal
     private var totalCount: Int = 0
     private var dotRadius: Float = 0.0
-    
+
     private var sectorValues: [Float] = []
     private var sectorValuesCount: [Int] = []
     private var statistics: [Any] = []
-    
+
     // MARK: - Class Methods
-    
+
     override class func classTag() -> String {
-        return "Data"
+        "Data"
     }
-    
+
     // MARK: - Initialization
-    
+
     @objc init(geometryController: XRGeometryController, withSet set: XRDataSet) {
         super.init(geometryController: geometryController)
         theSet = set
         setupDefaults()
     }
-    
+
     @objc init(geometryController: XRGeometryController, withSet set: XRDataSet, dictionary: [String: Any]) {
         super.init(geometryController: geometryController, dictionary: dictionary)
         theSet = set
         configureSelf(with: dictionary)
     }
-    
+
     @objc init(isVisible: Bool,
                active: Bool,
                biDir: Bool,
@@ -80,9 +80,10 @@ let XRLayerDataStatisticsDidChange = "XRLayerDataStatisticsDidChange"
                fillColor: NSColor,
                plotType: Int,
                totalCount: Int,
-               dotRadius: Float) {
+               dotRadius: Float)
+    {
         super.init()
-        
+
         setIsVisible(isVisible)
         setIsActive(active)
         setBiDirectional(biDir)
@@ -96,130 +97,131 @@ let XRLayerDataStatisticsDidChange = "XRLayerDataStatisticsDidChange"
         self.totalCount = totalCount
         self.dotRadius = dotRadius
     }
-    
+
     required init(geometryController: XRGeometryController) {
         super.init(geometryController: geometryController)
     }
-    
+
     required init(geometryController: XRGeometryController, dictionary: [String: Any]) {
         super.init(geometryController: geometryController, dictionary: dictionary)
     }
-    
-    required override init() {
+
+    override required init() {
         super.init()
     }
-    
+
     // MARK: - Setup Methods
-    
+
     private func setupDefaults() {
         plotType = .petal
         dotRadius = 3.0
         calculateSectorValues()
     }
-    
+
     private func configureSelf(with dictionary: [String: Any]) {
         if let plotTypeInt = dictionary["Plot_Type"] as? Int {
             plotType = XRLayerDataPlotType(rawValue: plotTypeInt) ?? .petal
         }
-        
+
         if let radius = dictionary["Dot_Radius"] as? String {
             dotRadius = Float(radius) ?? 3.0
         }
-        
+
         calculateSectorValues()
     }
-    
+
     // MARK: - Public Methods
-    
+
     @objc func setPlotType(_ newType: Int) {
         guard let type = XRLayerDataPlotType(rawValue: newType) else { return }
         plotType = type
         generateGraphics()
         NotificationCenter.default.post(name: NSNotification.Name(XRLayerRequiresRedraw), object: self)
     }
-    
+
     @objc func getPlotType() -> Int {
-        return plotType.rawValue
+        plotType.rawValue
     }
-    
+
     @objc func calculateSectorValues() {
         sectorValues.removeAll()
         sectorValuesCount.removeAll()
-        
+
         // Calculate sector values based on dataset
         // Implementation depends on data structure
-        
+
         setStatisticsArray()
     }
-    
+
     @objc func getTotalCount() -> Int {
-        return totalCount
+        totalCount
     }
-    
+
     @objc func setDotRadius(_ radius: Float) {
         dotRadius = radius
         generateGraphics()
         NotificationCenter.default.post(name: NSNotification.Name(XRLayerRequiresRedraw), object: self)
     }
-    
+
     @objc func getDotRadius() -> Float {
-        return dotRadius
+        dotRadius
     }
-    
+
     @objc func getDatasetId() -> Int {
-        return theSet?.datasetId ?? -1
+        theSet?.datasetId ?? -1
     }
-    
+
     // MARK: - Statistics
-    
+
     @objc func setStatisticsArray() {
         statistics.removeAll()
         // Calculate statistics based on sector values
         // Implementation depends on statistics requirements
-        
+
         NotificationCenter.default.post(name: NSNotification.Name(XRLayerDataStatisticsDidChange), object: self)
     }
-    
+
     @objc func statisticsArray() -> [Any] {
-        return statistics
+        statistics
     }
-    
+
     @objc override func getDataSet() -> XRDataSet? {
-        return theSet
+        theSet
     }
-    
+
     // MARK: - XML Support
-    
+
     @objc func xmlTree1_0() -> LITMXMLTree {
         let tree = super.baseXMLTree(forVersion: "1.0")
         tree.addAttribute("Plot_Type", value: String(plotType.rawValue))
         tree.addAttribute("Dot_Radius", value: String(format: "%.1f", dotRadius))
-        
+
         if let datasetId = theSet?.datasetId {
             tree.addAttribute("Dataset_ID", value: String(datasetId))
         }
-        
+
         return tree
     }
-    
+
     override func configure(withXMLTree1_0 configureTree: LITMXMLTree) {
         super.configure(withXMLTree1_0: configureTree)
-        
+
         if let attributes = configureTree.attributesDictionary() as? [String: String] {
             if let plotTypeStr = attributes["Plot_Type"],
                let plotTypeInt = Int(plotTypeStr),
-               let type = XRLayerDataPlotType(rawValue: plotTypeInt) {
+               let type = XRLayerDataPlotType(rawValue: plotTypeInt)
+            {
                 plotType = type
             }
-            
+
             if let radiusStr = attributes["Dot_Radius"] {
                 dotRadius = Float(radiusStr) ?? 3.0
             }
         }
     }
-    
+
     // MARK: - Drawing
-    
+
     override func generateGraphics() {
         // Generate graphics based on plot type
         switch plotType {
@@ -235,40 +237,40 @@ let XRLayerDataStatisticsDidChange = "XRLayerDataStatisticsDidChange"
             generateKiteGraphics()
         }
     }
-    
+
     private func generatePetalGraphics() {
         // Implement petal graphics generation
     }
-    
+
     private func generateHistogramGraphics() {
         // Implement histogram graphics generation
     }
-    
+
     private func generateDotGraphics() {
         // Implement dot graphics generation
     }
-    
+
     private func generateDotDeviationGraphics() {
         // Implement dot deviation graphics generation
     }
-    
+
     private func generateKiteGraphics() {
         // Implement kite graphics generation
     }
-    
-    override func draw(_ rect: NSRect) {
+
+    override func draw(_: NSRect) {
         // Draw graphics based on plot type
     }
-    
+
     // MARK: - Notification Handlers
-    
-    override func geometryDidChange(_ notification: Notification) {
+
+    override func geometryDidChange(_: Notification) {
         calculateSectorValues()
         generateGraphics()
         NotificationCenter.default.post(name: NSNotification.Name(XRLayerRequiresRedraw), object: self)
     }
-    
-    override func geometryDidChangePercent(_ notification: Notification) {
+
+    override func geometryDidChangePercent(_: Notification) {
         calculateSectorValues()
         generateGraphics()
         NotificationCenter.default.post(name: NSNotification.Name(XRLayerRequiresRedraw), object: self)

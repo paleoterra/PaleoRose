@@ -4,17 +4,17 @@
 import Cocoa
 
 @objc class FStatisticController: NSWindowController {
-    @IBOutlet weak var layerNameField1: AnyObject?
-    @IBOutlet weak var layerNameField2: AnyObject?
-    @IBOutlet weak var cancelButton: AnyObject?
-    @IBOutlet weak var executeButton: AnyObject?
-    @IBOutlet weak var biDirectionalSwitch: AnyObject?
+    @IBOutlet var layerNameField1: AnyObject?
+    @IBOutlet var layerNameField2: AnyObject?
+    @IBOutlet var cancelButton: AnyObject?
+    @IBOutlet var executeButton: AnyObject?
+    @IBOutlet var biDirectionalSwitch: AnyObject?
     var layerArray: [Any] = []
-    
-    @IBAction func calculateSheet(_ sender: Any?) {}
-    @IBAction func cancelSheet(_ sender: Any?) {}
-    @objc func setLayerNames(_ nameList: [String]) {}
-    @objc func selectedItems() -> [Any] { return [] }
-    @objc func isBiDirectional() -> Bool { return false }
+
+    @IBAction func calculateSheet(_: Any?) {}
+    @IBAction func cancelSheet(_: Any?) {}
+    @objc func setLayerNames(_: [String]) {}
+    @objc func selectedItems() -> [Any] { [] }
+    @objc func isBiDirectional() -> Bool { false }
     @objc func populateLayers() {}
 }

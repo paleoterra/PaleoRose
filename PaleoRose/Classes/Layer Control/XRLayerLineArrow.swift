@@ -26,28 +26,28 @@ import Cocoa
 
 @objc class XRLayerLineArrow: XRLayer {
     // MARK: - Properties
-    
+
     private var theSet: XRDataSet?
     private var arrowSize: Float = 10.0
     private var type: Int = 0
     private var headType: Int = 0
     private var showVector: Bool = true
     private var showError: Bool = false
-    
+
     // MARK: - Class Methods
-    
+
     override class func classTag() -> String {
-        return "LineArrow"
+        "LineArrow"
     }
-    
+
     // MARK: - Initialization
-    
+
     @objc init(geometryController: XRGeometryController, withSet set: XRDataSet) {
         super.init(geometryController: geometryController)
         theSet = set
         setupDefaults()
     }
-    
+
     @objc init(isVisible: Bool,
                active: Bool,
                biDir: Bool,
@@ -61,9 +61,10 @@ import Cocoa
                vectorType: Int,
                arrowType: Int,
                showVector: Bool,
-               showError: Bool) {
+               showError: Bool)
+    {
         super.init()
-        
+
         setIsVisible(isVisible)
         setIsActive(active)
         setBiDirectional(biDir)
@@ -73,30 +74,30 @@ import Cocoa
         self.maxPercent = maxPercent
         setStrokeColor(strokeColor)
         setFillColor(fillColor)
-        
+
         self.arrowSize = arrowSize
-        self.type = vectorType
-        self.headType = arrowType
+        type = vectorType
+        headType = arrowType
         self.showVector = showVector
         self.showError = showError
     }
-    
+
     required init(geometryController: XRGeometryController) {
         super.init(geometryController: geometryController)
     }
-    
+
     required init(geometryController: XRGeometryController, dictionary: [String: Any]) {
         super.init(geometryController: geometryController, dictionary: dictionary)
         configureSelf(with: dictionary)
     }
-    
-    required override init() {
+
+    override required init() {
         super.init()
         setupDefaults()
     }
-    
+
     // MARK: - Setup Methods
-    
+
     private func setupDefaults() {
         arrowSize = 10.0
         type = 0
@@ -104,7 +105,7 @@ import Cocoa
         showVector = true
         showError = false
     }
-    
+
     private func configureSelf(with dictionary: [String: Any]) {
         if let size = dictionary["Arrow_Size"] as? Float {
             arrowSize = size
@@ -122,60 +123,60 @@ import Cocoa
             showError = (showErr == "YES")
         }
     }
-    
+
     // MARK: - Public Methods
-    
+
     @objc func configureError(withVector vAngle: Float, error: Float) {
         // Configure error settings for vector and error angles
         generateGraphics()
         NotificationCenter.default.post(name: NSNotification.Name(XRLayerRequiresRedraw), object: self)
     }
-    
+
     @objc func getDatasetId() -> Int {
-        return theSet?.datasetId ?? -1
+        theSet?.datasetId ?? -1
     }
-    
+
     @objc func getArrowSize() -> Float {
-        return arrowSize
+        arrowSize
     }
-    
+
     @objc func getVectorType() -> Int {
-        return type
+        type
     }
-    
+
     @objc func getArrowType() -> Int {
-        return headType
+        headType
     }
-    
+
     @objc func getShowVector() -> Bool {
-        return showVector
+        showVector
     }
-    
+
     @objc func getShowError() -> Bool {
-        return showError
+        showError
     }
-    
+
     // MARK: - XML Support
-    
+
     override func xmlTree(forVersion version: String) -> LITMXMLTree {
         let tree = super.baseXMLTree(forVersion: version)
-        
+
         tree.addAttribute("Arrow_Size", value: String(format: "%.1f", arrowSize))
         tree.addAttribute("Vector_Type", value: String(type))
         tree.addAttribute("Arrow_Type", value: String(headType))
         tree.addAttribute("Show_Vector", value: showVector ? "YES" : "NO")
         tree.addAttribute("Show_Error", value: showError ? "YES" : "NO")
-        
+
         if let datasetId = theSet?.datasetId {
             tree.addAttribute("Dataset_ID", value: String(datasetId))
         }
-        
+
         return tree
     }
-    
+
     override func configure(withXMLTree1_0 configureTree: LITMXMLTree) {
         super.configure(withXMLTree1_0: configureTree)
-        
+
         if let attributes = configureTree.attributesDictionary() as? [String: String] {
             if let sizeStr = attributes["Arrow_Size"] {
                 arrowSize = Float(sizeStr) ?? 10.0
@@ -190,9 +191,9 @@ import Cocoa
             showError = attributes["Show_Error"] == "YES"
         }
     }
-    
+
     // MARK: - Drawing
-    
+
     override func generateGraphics() {
         // Generate line and arrow graphics based on settings
         if showVector {
@@ -202,22 +203,22 @@ import Cocoa
             generateErrorGraphics()
         }
     }
-    
+
     private func generateVectorGraphics() {
         // Implement vector graphics generation
     }
-    
+
     private func generateErrorGraphics() {
         // Implement error graphics generation
     }
-    
-    override func draw(_ rect: NSRect) {
+
+    override func draw(_: NSRect) {
         // Draw line and arrow graphics
     }
-    
+
     // MARK: - Notification Handlers
-    
-    override func geometryDidChange(_ notification: Notification) {
+
+    override func geometryDidChange(_: Notification) {
         generateGraphics()
         NotificationCenter.default.post(name: NSNotification.Name(XRLayerRequiresRedraw), object: self)
     }

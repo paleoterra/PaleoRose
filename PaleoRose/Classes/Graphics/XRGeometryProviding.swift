@@ -26,19 +26,19 @@ import Cocoa
 protocol XRGeometryProviding {
     /// The path used for drawing the graphic
     var drawingPath: NSBezierPath? { get set }
-    
+
     /// The bounds of the graphic
     var bounds: NSRect { get }
-    
+
     /// Whether the graphic needs to be redrawn
     var needsRedraw: Bool { get set }
-    
+
     /// Calculate the geometry of the graphic
     func calculateGeometry()
-    
+
     /// Test if a point is within the graphic's bounds
     func hitTest(_ point: NSPoint) -> Bool
-    
+
     /// Draw the graphic in the given rectangle
     func draw(in rect: NSRect)
 }

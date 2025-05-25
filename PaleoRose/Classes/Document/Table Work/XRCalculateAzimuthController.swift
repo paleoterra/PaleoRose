@@ -24,67 +24,67 @@ import Cocoa
 
 @objc class XRCalculateAzimuthController: NSObject {
     // MARK: - Outlets
-    
-    @IBOutlet private weak var tableNamePop: NSPopUpButton!
-    @IBOutlet private weak var targetPop: NSPopUpButton!
-    @IBOutlet private weak var window: NSWindow!
-    @IBOutlet private weak var xVectorPop: NSPopUpButton!
-    @IBOutlet private weak var yVectorPop: NSPopUpButton!
-    
+
+    @IBOutlet private var tableNamePop: NSPopUpButton!
+    @IBOutlet private var targetPop: NSPopUpButton!
+    @IBOutlet private var window: NSWindow!
+    @IBOutlet private var xVectorPop: NSPopUpButton!
+    @IBOutlet private var yVectorPop: NSPopUpButton!
+
     // MARK: - Properties
-    
+
     private var tables: [String] = []
     private var columnList: [String] = []
     private let initialSelectedIndex: Int
     private weak var document: XRoseDocument?
-    
+
     // MARK: - Initialization
-    
+
     @objc init(document: XRoseDocument, itemSelectedAtIndex index: Int) {
         self.document = document
-        self.initialSelectedIndex = index
+        initialSelectedIndex = index
         super.init()
         Bundle.main.loadNibNamed("XRCalculateAzimuthSheet", owner: self, topLevelObjects: nil)
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        guard let document = document else { return }
-        
+
+        guard let document else { return }
+
         tables = document.tableList()
-        
+
         tableNamePop.removeAllItems()
         tableNamePop.addItems(withTitles: tables)
         tableNamePop.selectItem(at: initialSelectedIndex)
-        
+
         populateSelectedColumns(self)
     }
-    
+
     // MARK: - Actions
-    
-    @IBAction func execute(_ sender: Any) {
+
+    @IBAction func execute(_: Any) {
         NSApp.endSheet(window, returnCode: .OK)
     }
-    
-    @IBAction func cancel(_ sender: Any) {
+
+    @IBAction func cancel(_: Any) {
         NSApp.endSheet(window, returnCode: .cancel)
     }
-    
-    @IBAction func populateSelectedColumns(_ sender: Any) {
-        guard let document = document,
+
+    @IBAction func populateSelectedColumns(_: Any) {
+        guard let document,
               let selectedTable = tableNamePop.titleOfSelectedItem else { return }
-        
+
         let populateItems = document.retrieveNonTextColumnNames(fromTable: selectedTable)
-        
+
         for popup in [xVectorPop, yVectorPop, targetPop] {
             popup?.removeAllItems()
             popup?.addItems(withTitles: populateItems)
         }
     }
-    
+
     // MARK: - Public API
-    
+
     @objc var resultDictionary: [String: String] {
         [
             "table": tableNamePop.titleOfSelectedItem ?? "",

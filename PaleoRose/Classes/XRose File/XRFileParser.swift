@@ -26,171 +26,172 @@ import Foundation
 
 @objc class XRFileParser: NSObject {
     // MARK: - Static Methods
-    
+
     @objc static func currentVersionXML(fromDictionary dictionary: [String: Any]) -> Data {
-    let parser = XRFileParser1()
-    var baseString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-    let xmlTree = parser.documentBaseTree()
-    if let geometrySettings = dictionary["geometrySettings"] as? [String: Any] {
-        xmlTree.addChild(parser.treeForGeometryController(dictionary: geometrySettings))
+        let parser = XRFileParser1()
+        var baseString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+        let xmlTree = parser.documentBaseTree()
+        if let geometrySettings = dictionary["geometrySettings"] as? [String: Any] {
+            xmlTree.addChild(parser.treeForGeometryController(dictionary: geometrySettings))
+        }
+        if let layersSettings = dictionary["layersSettings"] as? [String: Any] {
+            xmlTree.addChild(parser.treeForTableController(dictionary: layersSettings))
+        }
+        baseString += xmlTree.xml()
+        return baseString.data(using: .utf8) ?? Data()
     }
-    if let layersSettings = dictionary["layersSettings"] as? [String: Any] {
-        xmlTree.addChild(parser.treeForTableController(dictionary: layersSettings))
-    }
-    baseString += xmlTree.xml()
-    return baseString.data(using: .utf8) ?? Data()
-}
-    
+
     @objc static func xml(fromDictionary dict: [String: Any], forVersion version: String) -> Data? {
-        return nil
+        nil
     }
-    
+
     @objc static func file(fromXMLData data: Data) -> [String: Any]? {
         guard let parser = LITMXMLParser.xmlParser(for: data).treeArray().first,
               let version = parser.attributesDictionary()["VERSION"] as? String,
-              version == "1.0" else {
+              version == "1.0"
+        else {
             return nil
         }
-        
+
         let fileParser = XRFileParser1()
         return fileParser.dictionary(forDocumentTree: parser)
     }
-    
+
     // MARK: - Instance Methods
-    
+
     @objc func documentBaseTree() -> LITMXMLTree? {
-        return nil
+        nil
     }
-    
+
     @objc func dictionary(forDocumentTree tree: LITMXMLTree) -> [String: Any]? {
-        return nil
+        nil
     }
-    
+
     @objc func treeForDataSet(dictionary dict: [String: Any]) -> LITMXMLTree? {
-        return nil
+        nil
     }
-    
+
     @objc func dictionary(forDataSetXMLTree tree: LITMXMLTree) -> [String: Any]? {
-        return nil
+        nil
     }
-    
+
     @objc func treeForGeometryController(dictionary dict: [String: Any]) -> LITMXMLTree? {
-        return nil
+        nil
     }
-    
+
     @objc func dictionary(forGeometryControllerXMLTree tree: LITMXMLTree) -> [String: Any]? {
-        return nil
+        nil
     }
-    
+
     @objc func treeForTableController(dictionary dict: [String: Any]) -> LITMXMLTree? {
-        return nil
+        nil
     }
-    
+
     @objc func dictionary(forTableControllerXMLTree tree: LITMXMLTree) -> [String: Any]? {
-        return nil
+        nil
     }
-    
+
     @objc func treeForLayer(dictionary dict: [String: Any]) -> LITMXMLTree? {
-        return nil
+        nil
     }
-    
+
     @objc func dictionary(forLayerXMLTree tree: LITMXMLTree) -> [String: Any]? {
-        return nil
+        nil
     }
-    
+
     @objc func treeForDataLayer(dictionary dict: [String: Any]) -> LITMXMLTree? {
-        return nil
+        nil
     }
-    
+
     @objc func dictionary(forDataLayerXMLTree tree: LITMXMLTree) -> [String: Any]? {
-        return nil
+        nil
     }
-    
+
     @objc func treeForGridLayer(dictionary dict: [String: Any]) -> LITMXMLTree? {
-        return nil
+        nil
     }
-    
+
     @objc func dictionary(forGridLayerXMLTree tree: LITMXMLTree) -> [String: Any]? {
-        return nil
+        nil
     }
-    
+
     @objc func treeForCoreLayer(dictionary dict: [String: Any]) -> LITMXMLTree? {
-        return nil
+        nil
     }
-    
+
     @objc func dictionary(forCoreLayerXMLTree tree: LITMXMLTree) -> [String: Any]? {
-        return nil
+        nil
     }
-    
+
     @objc func treeForGraphic(dictionary dict: [String: Any]) -> LITMXMLTree? {
-        return nil
+        nil
     }
-    
+
     @objc func dictionary(forGraphicXMLTree tree: LITMXMLTree) -> [String: Any]? {
-        return nil
+        nil
     }
-    
+
     @objc func treeForGraphicCircle(dictionary dict: [String: Any]) -> LITMXMLTree? {
-        return nil
+        nil
     }
-    
+
     @objc func dictionary(forGraphicCircleXMLTree tree: LITMXMLTree) -> [String: Any]? {
-        return nil
+        nil
     }
-    
+
     @objc func treeForGraphicCircleLabel(dictionary dict: [String: Any]) -> LITMXMLTree? {
-        return nil
+        nil
     }
-    
+
     @objc func dictionary(forGraphicCircleLabelXMLTree tree: LITMXMLTree) -> [String: Any]? {
-        return nil
+        nil
     }
-    
+
     @objc func treeForGraphicLine(dictionary dict: [String: Any]) -> LITMXMLTree? {
-        return nil
+        nil
     }
-    
+
     @objc func dictionary(forGraphicLineXMLTree tree: LITMXMLTree) -> [String: Any]? {
-        return nil
+        nil
     }
-    
+
     @objc func treeForGraphicKite(dictionary dict: [String: Any]) -> LITMXMLTree? {
-        return nil
+        nil
     }
-    
+
     @objc func dictionary(forGraphicKiteXMLTree tree: LITMXMLTree) -> [String: Any]? {
-        return nil
+        nil
     }
-    
+
     @objc func treeForGraphicPetal(dictionary dict: [String: Any]) -> LITMXMLTree? {
-        return nil
+        nil
     }
-    
+
     @objc func dictionary(forGraphicPetalXMLTree tree: LITMXMLTree) -> [String: Any]? {
-        return nil
+        nil
     }
-    
+
     @objc func treeForGraphicDot(dictionary dict: [String: Any]) -> LITMXMLTree? {
-        return nil
+        nil
     }
-    
+
     @objc func dictionary(forGraphicDotXMLTree tree: LITMXMLTree) -> [String: Any]? {
-        return nil
+        nil
     }
-    
+
     @objc func treeForGraphicHistogram(dictionary dict: [String: Any]) -> LITMXMLTree? {
-        return nil
+        nil
     }
-    
+
     @objc func dictionary(forGraphicHistogramXMLTree tree: LITMXMLTree) -> [String: Any]? {
-        return nil
+        nil
     }
-    
+
     @objc func treeForGraphicDotDeviation(dictionary dict: [String: Any]) -> LITMXMLTree? {
-        return nil
+        nil
     }
-    
+
     @objc func dictionary(forGraphicDotDeviationXMLTree tree: LITMXMLTree) -> [String: Any]? {
-        return nil
+        nil
     }
 }

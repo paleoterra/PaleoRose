@@ -29,18 +29,19 @@ class LITMPercentFormatter: Formatter {
         }
         return "0 %"
     }
-    
+
     override func getObjectValue(_ obj: AutoreleasingUnsafeMutablePointer<AnyObject?>?,
-                               for string: String,
-                               errorDescription error: AutoreleasingUnsafeMutablePointer<NSString?>?) -> Bool {
+                                 for string: String,
+                                 errorDescription error: AutoreleasingUnsafeMutablePointer<NSString?>?) -> Bool
+    {
         let scanner = Scanner(string: string)
         var result: Float = 0.0
-        
+
         if scanner.scanFloat(&result) {
             obj?.pointee = NSNumber(value: result / 100.0)
             return true
         }
-        
+
         return false
     }
 }

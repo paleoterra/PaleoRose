@@ -54,8 +54,6 @@
 		B43D613906345207001B863E /* FStatisticController.m in Sources */ = {isa = PBXBuildFile; fileRef = B43D613706345207001B863E /* FStatisticController.m */; };
 		B43D613A06345207001B863E /* FStatisticController.h in Headers */ = {isa = PBXBuildFile; fileRef = B43D613806345207001B863E /* FStatisticController.h */; };
 		B447A960062B002B00154420 /* logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B447A95F062B002B00154420 /* logo.jpg */; };
-		B447A965062B021A00154420 /* AboutPanelController.h in Headers */ = {isa = PBXBuildFile; fileRef = B447A963062B021A00154420 /* AboutPanelController.h */; };
-		B447A966062B021A00154420 /* AboutPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = B447A964062B021A00154420 /* AboutPanelController.m */; };
 		B44B08A705CFE9D200C6E8D3 /* xroseapp.icns in Resources */ = {isa = PBXBuildFile; fileRef = B44B08A505CFE9D200C6E8D3 /* xroseapp.icns */; };
 		B44B08A805CFE9D200C6E8D3 /* xroseDocIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = B44B08A605CFE9D200C6E8D3 /* xroseDocIcon.icns */; };
 		B44D357605C5578500D7823C /* XRGraphicPetal.h in Headers */ = {isa = PBXBuildFile; fileRef = B44D357405C5578500D7823C /* XRGraphicPetal.h */; };
@@ -70,6 +68,8 @@
 		B461B87105C4E1DA00738D23 /* XRGraphicKite.h in Headers */ = {isa = PBXBuildFile; fileRef = B461B86F05C4E1DA00738D23 /* XRGraphicKite.h */; };
 		B461B87205C4E1DA00738D23 /* XRGraphicKite.m in Sources */ = {isa = PBXBuildFile; fileRef = B461B87005C4E1DA00738D23 /* XRGraphicKite.m */; };
 		B461BA3D05C4F84C00738D23 /* LayerDrawerImageAddLayer.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B461BA3C05C4F84C00738D23 /* LayerDrawerImageAddLayer.tiff */; };
+		B463B60A2DE2AD51006B6C7C /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B463B6062DE2AD51006B6C7C /* AboutView.swift */; };
+		B463B60B2DE2AD51006B6C7C /* AboutWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B463B6072DE2AD51006B6C7C /* AboutWindowController.swift */; };
 		B464E642060956DE009C1C89 /* XRGeometryPropertyInspector.h in Headers */ = {isa = PBXBuildFile; fileRef = B464E640060956DE009C1C89 /* XRGeometryPropertyInspector.h */; };
 		B464E643060956DE009C1C89 /* XRGeometryPropertyInspector.m in Sources */ = {isa = PBXBuildFile; fileRef = B464E641060956DE009C1C89 /* XRGeometryPropertyInspector.m */; };
 		B464E72106095B82009C1C89 /* geometryInspector.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B464E72006095B82009C1C89 /* geometryInspector.tiff */; };
@@ -333,8 +333,6 @@
 		B442674F2B3F881300749923 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B442E69D2A48E9F300466763 /* PaleoRose-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PaleoRose-Bridging-Header.h"; sourceTree = "<group>"; };
 		B447A95F062B002B00154420 /* logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = logo.jpg; sourceTree = "<group>"; };
-		B447A963062B021A00154420 /* AboutPanelController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = AboutPanelController.h; sourceTree = "<group>"; };
-		B447A964062B021A00154420 /* AboutPanelController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = AboutPanelController.m; sourceTree = "<group>"; };
 		B44B08A505CFE9D200C6E8D3 /* xroseapp.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = xroseapp.icns; sourceTree = "<group>"; };
 		B44B08A605CFE9D200C6E8D3 /* xroseDocIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = xroseDocIcon.icns; sourceTree = "<group>"; };
 		B44D357405C5578500D7823C /* XRGraphicPetal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRGraphicPetal.h; sourceTree = "<group>"; };
@@ -349,6 +347,8 @@
 		B461B86F05C4E1DA00738D23 /* XRGraphicKite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRGraphicKite.h; sourceTree = "<group>"; };
 		B461B87005C4E1DA00738D23 /* XRGraphicKite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRGraphicKite.m; sourceTree = "<group>"; };
 		B461BA3C05C4F84C00738D23 /* LayerDrawerImageAddLayer.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = LayerDrawerImageAddLayer.tiff; sourceTree = "<group>"; };
+		B463B6062DE2AD51006B6C7C /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		B463B6072DE2AD51006B6C7C /* AboutWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutWindowController.swift; sourceTree = "<group>"; };
 		B464E640060956DE009C1C89 /* XRGeometryPropertyInspector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRGeometryPropertyInspector.h; sourceTree = "<group>"; };
 		B464E641060956DE009C1C89 /* XRGeometryPropertyInspector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRGeometryPropertyInspector.m; sourceTree = "<group>"; };
 		B464E72006095B82009C1C89 /* geometryInspector.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = geometryInspector.tiff; sourceTree = "<group>"; };
@@ -421,7 +421,6 @@
 		B49D7ED72DDECB2B0046A8B8 /* XRLayerGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRLayerGrid.swift; sourceTree = "<group>"; };
 		B49D7ED82DDECB2B0046A8B8 /* XRLayerLineArrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRLayerLineArrow.swift; sourceTree = "<group>"; };
 		B49D7ED92DDECB2B0046A8B8 /* XRLayerText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRLayerText.swift; sourceTree = "<group>"; };
-		B49D7EDA2DDECB450046A8B8 /* AboutPanelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutPanelController.swift; sourceTree = "<group>"; };
 		B49D7EDB2DDECB510046A8B8 /* XRPreferencePanelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRPreferencePanelController.swift; sourceTree = "<group>"; };
 		B49D7EDC2DDECB8F0046A8B8 /* XRTableImporterDelimiterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRTableImporterDelimiterController.swift; sourceTree = "<group>"; };
 		B49D7EDD2DDECB9C0046A8B8 /* PTFMXMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTFMXMLParser.swift; sourceTree = "<group>"; };
@@ -905,6 +904,7 @@
 				B41266702B6EDF4C00E1C385 /* AppDelegate.swift */,
 				B41266722B6EE09300E1C385 /* ApplicationDefaults.swift */,
 				B442E69D2A48E9F300466763 /* PaleoRose-Bridging-Header.h */,
+				B463B6092DE2AD51006B6C7C /* Views */,
 				B4149FE42B24C2FA008AE5F4 /* Classes */,
 				B4149FF32B24C607008AE5F4 /* XRoseDocs */,
 				B4149FF42B24C653008AE5F4 /* Resources */,
@@ -961,9 +961,6 @@
 		B4149FFD2B24CA10008AE5F4 /* Main View */ = {
 			isa = PBXGroup;
 			children = (
-				B447A963062B021A00154420 /* AboutPanelController.h */,
-				B447A964062B021A00154420 /* AboutPanelController.m */,
-				B49D7EDA2DDECB450046A8B8 /* AboutPanelController.swift */,
 				B486E27E1E7B76FB00F1ADAA /* MainMenu.xib */,
 				B435676A096DA4C000DCF143 /* XRPreferencePanelController.h */,
 				B435676B096DA4C000DCF143 /* XRPreferencePanelController.m */,
@@ -1132,6 +1129,23 @@
 			path = "Document Model";
 			sourceTree = "<group>";
 		};
+		B463B6082DE2AD51006B6C7C /* About */ = {
+			isa = PBXGroup;
+			children = (
+				B463B6062DE2AD51006B6C7C /* AboutView.swift */,
+				B463B6072DE2AD51006B6C7C /* AboutWindowController.swift */,
+			);
+			path = About;
+			sourceTree = "<group>";
+		};
+		B463B6092DE2AD51006B6C7C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B463B6082DE2AD51006B6C7C /* About */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		B4B0BB661E7E41C900F392DA /* Unit Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -1219,7 +1233,6 @@
 				B4F08861060914150000CF7A /* XRVStatCreatePanelController.h in Headers */,
 				B464E642060956DE009C1C89 /* XRGeometryPropertyInspector.h in Headers */,
 				B4324D0A06187FFF0083AE8A /* XRLayerText.h in Headers */,
-				B447A965062B021A00154420 /* AboutPanelController.h in Headers */,
 				B4C08802063069F2001A91F4 /* XRExportGraphicAccessory.h in Headers */,
 				B43D613A06345207001B863E /* FStatisticController.h in Headers */,
 				B41D283C094FC7CA008DF384 /* XRTableImporter.h in Headers */,
@@ -1552,7 +1565,6 @@
 				B4324D0B06187FFF0083AE8A /* XRLayerText.m in Sources */,
 				B48BBEC12CAA1BFA0050852E /* Logger.swift in Sources */,
 				B4A82F982A07F87A00790052 /* LITMXMLTree.m in Sources */,
-				B447A966062B021A00154420 /* AboutPanelController.m in Sources */,
 				B4C08803063069F2001A91F4 /* XRExportGraphicAccessory.m in Sources */,
 				B43D613906345207001B863E /* FStatisticController.m in Sources */,
 				B41D283D094FC7CA008DF384 /* XRTableImporter.m in Sources */,
@@ -1563,6 +1575,8 @@
 				B47DDF510964CDE700C7EF02 /* XRTableImporterXRose.m in Sources */,
 				B4A82FA12A07FA2B00790052 /* LITMAngleFormatter.m in Sources */,
 				B4564ABC096A04A1005E0015 /* XRTableAddColumnController.m in Sources */,
+				B463B60A2DE2AD51006B6C7C /* AboutView.swift in Sources */,
+				B463B60B2DE2AD51006B6C7C /* AboutWindowController.swift in Sources */,
 				B42FE3AC096AEB99007E9DC5 /* XRCalculateAzimuthController.m in Sources */,
 				B435676D096DA4C000DCF143 /* XRPreferencePanelController.m in Sources */,
 			);
@@ -1782,7 +1796,7 @@
 					"@executable_path/../Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.paleoterra.paleorose;
 				PRODUCT_NAME = PaleoRose;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1830,7 +1844,7 @@
 					"@executable_path/../Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.paleoterra.paleorose;
 				PRODUCT_NAME = PaleoRose;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1888,7 +1902,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
@@ -1934,7 +1948,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
 			};
@@ -1979,7 +1993,7 @@
 					"@loader_path/Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
@@ -2032,7 +2046,7 @@
 					"@loader_path/Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
@@ -2072,7 +2086,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GENERATE_INFOPLIST_FILE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -2104,7 +2118,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GENERATE_INFOPLIST_FILE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
