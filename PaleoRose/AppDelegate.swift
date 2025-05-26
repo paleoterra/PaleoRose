@@ -48,16 +48,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func showAboutWindow(_: Any?) {
+        let width: CGFloat = 400
+        let height: CGFloat = 250
         if aboutWindow == nil {
             let window = NSWindow(
-                contentRect: NSRect(x: 0, y: 0, width: 400, height: 250),
+                contentRect: NSRect(x: 0, y: 0, width: width, height: height),
                 styleMask: [.titled, .closable, .miniaturizable],
                 backing: .buffered,
                 defer: false
             )
+            
             window.center()
             window.title = "About \(applicationName)"
-            window.contentView = NSHostingView(rootView: Text("About \(applicationName)"))
+            window.contentView = NSHostingView(rootView: AboutView())
             aboutWindow = window
         }
         aboutWindow?.makeKeyAndOrderFront(nil)
