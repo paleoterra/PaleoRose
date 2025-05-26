@@ -34,6 +34,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private var aboutWindow: NSWindow?
     private var settingsWindowController: SettingsWindowController?
 
+    private var applicationName: String {
+        Bundle.main.object(forInfoDictionaryKey: kCFBundleNameKey as String) as? String ?? ""
+    }
+
+    // MARK: - Menu Actions
+    // swiftlint:disable:next prohibited_interface_builder
+    @IBAction private func showSettings(_ sender: Any?) {
+        showSettingsWindow(sender)
+    }
+
+    // swiftlint:disable:next prohibited_interface_builder
+    @IBAction private func showAbout(_ sender: Any?) {
+        showAboutWindow(sender)
+    }
+
     // MARK: - Application Lifecycle
 
     func applicationDidFinishLaunching(_: Notification) {
@@ -57,7 +72,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 backing: .buffered,
                 defer: false
             )
-            
+
             window.center()
             window.title = "About \(applicationName)"
             window.contentView = NSHostingView(rootView: AboutView())
@@ -65,20 +80,5 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         aboutWindow?.makeKeyAndOrderFront(nil)
         NSApp.activate(ignoringOtherApps: true)
-    }
-
-    private var applicationName: String {
-        Bundle.main.object(forInfoDictionaryKey: kCFBundleNameKey as String) as? String ?? ""
-    }
-
-    // MARK: - Menu Actions
-    // swiftlint:disable:next prohibited_interface_builder
-    @IBAction private func showSettings(_ sender: Any?) {
-        showSettingsWindow(sender)
-    }
-
-    // swiftlint:disable:next prohibited_interface_builder
-    @IBAction private func showAbout(_ sender: Any?) {
-        showAboutWindow(sender)
     }
 }

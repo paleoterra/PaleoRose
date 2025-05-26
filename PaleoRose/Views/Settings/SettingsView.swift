@@ -1,21 +1,25 @@
 import SwiftUI
+import SwiftUICore
 
 /// A view that displays application settings.
 /// Currently supports configuring the vector calculation method.
 public struct SettingsView: View {
     // MARK: - Properties
 
-    @AppStorage("vectorCalculationMethod") private var vectorCalcMethod = 0
+    @DefaultsStorage(.vectorCalculationMethod, defaultValue: 0) private var vectorCalcMethod: Int
     @State private var showingHelp = false
 
-    private let methods = [
-        (0, "Vector-Doubling", "Standard method for most cases"),
-        (1, "Standard", "Alternative method for specific use cases")
+    // MARK: - Private Properties
+
+    private let vectorCalculationMethods = [
+        (id: 0, name: "Vector-Doubling", description: "Standard method for most cases"),
+        (id: 1, name: "Standard", description: "Alternative method for specific use cases")
     ]
 
     // MARK: - Body
 
     public var body: some View {
+        // swiftlint:disable:next closure_body_length
         VStack(alignment: .leading, spacing: 20) {
             // Header
             VStack(alignment: .leading, spacing: 4) {
@@ -35,7 +39,7 @@ public struct SettingsView: View {
                 HStack {
                     Text("Vector Calculation Method")
                         .font(.headline)
-
+                    // swiftlint:disable:next multiple_closures_with_trailing_closure
                     Button(action: { showingHelp = true }) {
                         Image(systemName: "questionmark.circle")
                             .foregroundColor(.accentColor)
@@ -45,19 +49,21 @@ public struct SettingsView: View {
                 }
 
                 Picker("Vector Calculation Method", selection: $vectorCalcMethod) {
-                    ForEach(methods, id: \.0) { id, name, _ in
-                        Text(name).tag(id)
+                    ForEach(vectorCalculationMethods, id: \.id) { method in
+                        Text(method.name).tag(method.id)
                     }
                 }
                 .pickerStyle(.radioGroup)
                 .padding(.leading, 8)
 
-                if let description = methods.first(where: { $0.0 == vectorCalcMethod })?.2 {
-                    Text(description)
+                if let selectedMethod = vectorCalculationMethods.first(where: { $0.id == vectorCalcMethod }) {
+                    Text(selectedMethod.description)
                         .font(.caption)
                         .foregroundColor(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
                         .padding(.leading, 8)
                         .transition(.opacity)
+                        .animation(.easeInOut, value: vectorCalcMethod)
                 }
             }
 

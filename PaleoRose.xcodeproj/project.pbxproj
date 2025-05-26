@@ -34,6 +34,9 @@
 		B41C18132CC2B5E7002D19C2 /* rtest1.XRose in Resources */ = {isa = PBXBuildFile; fileRef = B41C18102CC1A9E4002D19C2 /* rtest1.XRose */; };
 		B41C85B12DE4A24A0053C9C9 /* SettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41C85AF2DE4A24A0053C9C9 /* SettingsWindowController.swift */; };
 		B41C85B32DE4A2550053C9C9 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41C85AE2DE4A24A0053C9C9 /* SettingsView.swift */; };
+		B41C86B22DE4B9C20053C9C9 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41C86B02DE4B9C20053C9C9 /* UserDefaults+Extensions.swift */; };
+		B41C86B42DE4BE930053C9C9 /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41C86B32DE4BE8B0053C9C9 /* UserDefaultsKey.swift */; };
+		B41C86B62DE4BEE20053C9C9 /* DefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41C86B52DE4BEDC0053C9C9 /* DefaultsStorage.swift */; };
 		B41D283C094FC7CA008DF384 /* XRTableImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = B41D283A094FC7CA008DF384 /* XRTableImporter.h */; };
 		B41D283D094FC7CA008DF384 /* XRTableImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = B41D283B094FC7CA008DF384 /* XRTableImporter.m */; };
 		B42083B109637969007A74A8 /* PTFMXMLParser.h in Headers */ = {isa = PBXBuildFile; fileRef = B42083AF09637969007A74A8 /* PTFMXMLParser.h */; };
@@ -297,6 +300,9 @@
 		B41C18102CC1A9E4002D19C2 /* rtest1.XRose */ = {isa = PBXFileReference; lastKnownFileType = file; path = rtest1.XRose; sourceTree = "<group>"; };
 		B41C85AE2DE4A24A0053C9C9 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		B41C85AF2DE4A24A0053C9C9 /* SettingsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindowController.swift; sourceTree = "<group>"; };
+		B41C86B02DE4B9C20053C9C9 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
+		B41C86B32DE4BE8B0053C9C9 /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
+		B41C86B52DE4BEDC0053C9C9 /* DefaultsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsStorage.swift; sourceTree = "<group>"; };
 		B41D283A094FC7CA008DF384 /* XRTableImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRTableImporter.h; sourceTree = "<group>"; };
 		B41D283B094FC7CA008DF384 /* XRTableImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRTableImporter.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B42083AF09637969007A74A8 /* PTFMXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTFMXMLParser.h; sourceTree = "<group>"; };
@@ -903,6 +909,7 @@
 		B4149FF82B24C838008AE5F4 /* PaleoRose */ = {
 			isa = PBXGroup;
 			children = (
+				B41C86B12DE4B9C20053C9C9 /* Utilities */,
 				32DBCF750370BD2300C91783 /* PaleoRose_Prefix.pch */,
 				B442674F2B3F881300749923 /* Info.plist */,
 				B41266702B6EDF4C00E1C385 /* AppDelegate.swift */,
@@ -1125,6 +1132,16 @@
 				B41C85AF2DE4A24A0053C9C9 /* SettingsWindowController.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		B41C86B12DE4B9C20053C9C9 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				B41C86B02DE4B9C20053C9C9 /* UserDefaults+Extensions.swift */,
+				B41C86B52DE4BEDC0053C9C9 /* DefaultsStorage.swift */,
+				B41C86B32DE4BE8B0053C9C9 /* UserDefaultsKey.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		B439AB352C83CEF500252574 /* Document Model */ = {
@@ -1537,6 +1554,7 @@
 				B44D357705C5578500D7823C /* XRGraphicPetal.m in Sources */,
 				B4A82F9C2A07F8A400790052 /* LITMXMLBinaryEncoding.m in Sources */,
 				B4F257AE05C58578008591BE /* XRGraphicDot.m in Sources */,
+				B41C86B62DE4BEE20053C9C9 /* DefaultsStorage.swift in Sources */,
 				B4A82FAD2A07FB8800790052 /* LITMArrowHead.m in Sources */,
 				B4F2595205C58F28008591BE /* XRGraphicHistogram.m in Sources */,
 				B4866BF42CAE02C900319712 /* StoreProtocol.swift in Sources */,
@@ -1573,6 +1591,7 @@
 				B4F2B18F2C97CB300017E717 /* LayerCore.swift in Sources */,
 				B4F2B1902C97CB300017E717 /* Geometry.swift in Sources */,
 				B4F2B1912C97CB300017E717 /* Count.swift in Sources */,
+				B41C86B42DE4BE930053C9C9 /* UserDefaultsKey.swift in Sources */,
 				B4F2B1922C97CB300017E717 /* Color.swift in Sources */,
 				B4F2B1932C97CB300017E717 /* DataSet.swift in Sources */,
 				B4F08862060914150000CF7A /* XRVStatCreatePanelController.m in Sources */,
@@ -1590,6 +1609,7 @@
 				B4237C992CFE959700E2B510 /* StorageModelFactory.swift in Sources */,
 				B47DDF510964CDE700C7EF02 /* XRTableImporterXRose.m in Sources */,
 				B4A82FA12A07FA2B00790052 /* LITMAngleFormatter.m in Sources */,
+				B41C86B22DE4B9C20053C9C9 /* UserDefaults+Extensions.swift in Sources */,
 				B4564ABC096A04A1005E0015 /* XRTableAddColumnController.m in Sources */,
 				B463B60A2DE2AD51006B6C7C /* AboutView.swift in Sources */,
 				B463B60B2DE2AD51006B6C7C /* AboutWindowController.swift in Sources */,

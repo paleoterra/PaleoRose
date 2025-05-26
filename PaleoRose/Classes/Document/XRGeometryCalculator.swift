@@ -103,9 +103,8 @@ enum XRGeometryCalculator {
         if parameters.isEqualArea {
             let area = percent * (.pi * pow(effectiveRadius, 2))
             return sqrt(area / .pi) + parameters.hollowRadius
-        } else {
-            return parameters.hollowRadius + effectiveRadius * percent
         }
+        return parameters.hollowRadius + effectiveRadius * percent
     }
 
     static func circleRect(forRadius radius: CGFloat, center: NSPoint) -> NSRect {
