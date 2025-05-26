@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23727"/>
-        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication"/>
@@ -11,21 +10,21 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <menu title="MainMenu" systemMenu="main" id="29" userLabel="MainMenu">
             <items>
-                <menuItem title="XRose" id="56">
-                    <menu key="submenu" title="XRose" systemMenu="apple" id="57">
+                <menuItem title="PaleoRose" id="56">
+                    <menu key="submenu" title="PaleoRose" systemMenu="apple" id="57">
                         <items>
-                            <menuItem title="About XRose" id="58">
+                            <menuItem title="About PaleoRose" id="58">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="showAboutWindow:" target="210" id="poU-cs-0Ji"/>
+                                    <action selector="showAbout:" target="210" id="6fX-ie-kxx"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="202">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Preferences…" keyEquivalent="," id="129">
+                            <menuItem title="Settings…" keyEquivalent="," id="129">
                                 <connections>
-                                    <action selector="makeKeyAndOrderFront:" target="371" id="373"/>
+                                    <action selector="showSettings:" target="210" id="1wv-Gd-zLm"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="143">
@@ -560,54 +559,5 @@
         </menu>
         <customObject id="210" userLabel="AppDelegate" customClass="AppDelegate" customModule="PaleoRose" customModuleProvider="target"/>
         <customObject id="272" userLabel="Font Manager" customClass="NSFontManager"/>
-        <window title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="371" userLabel="prefs" customClass="NSPanel">
-            <windowStyleMask key="styleMask" titled="YES" closable="YES" utility="YES"/>
-            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="217" y="417" width="360" height="107"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1055"/>
-            <view key="contentView" autoresizesSubviews="NO" id="372">
-                <rect key="frame" x="0.0" y="0.0" width="360" height="107"/>
-                <autoresizingMask key="autoresizingMask"/>
-                <subviews>
-                    <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="374">
-                        <rect key="frame" x="17" y="49" width="169" height="16"/>
-                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Mean Vector Calc. Method:" id="390">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                    <popUpButton imageHugsTitle="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="375">
-                        <rect key="frame" x="204" y="42" width="139" height="25"/>
-                        <popUpButtonCell key="cell" type="push" title="Vector-Doubling" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="379" id="391">
-                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="message"/>
-                            <menu key="menu" title="OtherViews" id="376">
-                                <items>
-                                    <menuItem title="Vector-Doubling" state="on" id="379"/>
-                                    <menuItem title="Standard" id="378"/>
-                                </items>
-                            </menu>
-                        </popUpButtonCell>
-                        <connections>
-                            <action selector="changeVectorCalc:" target="380" id="382"/>
-                        </connections>
-                    </popUpButton>
-                </subviews>
-                <constraints>
-                    <constraint firstItem="375" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="374" secondAttribute="trailing" constant="8" symbolic="YES" id="GxO-d1-SRY"/>
-                    <constraint firstItem="374" firstAttribute="leading" secondItem="372" secondAttribute="leading" constant="19" id="MaW-CQ-cw3"/>
-                    <constraint firstItem="374" firstAttribute="top" secondItem="372" secondAttribute="top" constant="42" id="QYx-Fb-nYT"/>
-                    <constraint firstItem="375" firstAttribute="firstBaseline" secondItem="374" secondAttribute="firstBaseline" id="bGa-8M-HlT"/>
-                    <constraint firstAttribute="trailing" secondItem="375" secondAttribute="trailing" constant="21" id="wra-gQ-hA6"/>
-                </constraints>
-            </view>
-            <point key="canvasLocation" x="-131" y="-383.5"/>
-        </window>
-        <customObject id="380" userLabel="XRPreferencePanelController" customClass="XRPreferencePanelController">
-            <connections>
-                <outlet property="vectorCalcPopUp" destination="375" id="381"/>
-            </connections>
-        </customObject>
     </objects>
 </document>

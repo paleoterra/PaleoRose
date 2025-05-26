@@ -32,6 +32,8 @@
 		B41C17522CB1C278002D19C2 /* InMemoryStoreIntegrationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41C17502CB1C1B0002D19C2 /* InMemoryStoreIntegrationTest.swift */; };
 		B41C17532CB1C2AF002D19C2 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41C174D2CB0E45C002D19C2 /* Tag.swift */; };
 		B41C18132CC2B5E7002D19C2 /* rtest1.XRose in Resources */ = {isa = PBXBuildFile; fileRef = B41C18102CC1A9E4002D19C2 /* rtest1.XRose */; };
+		B41C85B12DE4A24A0053C9C9 /* SettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41C85AF2DE4A24A0053C9C9 /* SettingsWindowController.swift */; };
+		B41C85B32DE4A2550053C9C9 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41C85AE2DE4A24A0053C9C9 /* SettingsView.swift */; };
 		B41D283C094FC7CA008DF384 /* XRTableImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = B41D283A094FC7CA008DF384 /* XRTableImporter.h */; };
 		B41D283D094FC7CA008DF384 /* XRTableImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = B41D283B094FC7CA008DF384 /* XRTableImporter.m */; };
 		B42083B109637969007A74A8 /* PTFMXMLParser.h in Headers */ = {isa = PBXBuildFile; fileRef = B42083AF09637969007A74A8 /* PTFMXMLParser.h */; };
@@ -293,6 +295,8 @@
 		B41C174D2CB0E45C002D19C2 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		B41C17502CB1C1B0002D19C2 /* InMemoryStoreIntegrationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryStoreIntegrationTest.swift; sourceTree = "<group>"; };
 		B41C18102CC1A9E4002D19C2 /* rtest1.XRose */ = {isa = PBXFileReference; lastKnownFileType = file; path = rtest1.XRose; sourceTree = "<group>"; };
+		B41C85AE2DE4A24A0053C9C9 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		B41C85AF2DE4A24A0053C9C9 /* SettingsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindowController.swift; sourceTree = "<group>"; };
 		B41D283A094FC7CA008DF384 /* XRTableImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRTableImporter.h; sourceTree = "<group>"; };
 		B41D283B094FC7CA008DF384 /* XRTableImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRTableImporter.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B42083AF09637969007A74A8 /* PTFMXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTFMXMLParser.h; sourceTree = "<group>"; };
@@ -1114,6 +1118,15 @@
 			path = "Property Inspector";
 			sourceTree = "<group>";
 		};
+		B41C85B02DE4A24A0053C9C9 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				B41C85AE2DE4A24A0053C9C9 /* SettingsView.swift */,
+				B41C85AF2DE4A24A0053C9C9 /* SettingsWindowController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		B439AB352C83CEF500252574 /* Document Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1142,6 +1155,7 @@
 			isa = PBXGroup;
 			children = (
 				B463B6082DE2AD51006B6C7C /* About */,
+				B41C85B02DE4A24A0053C9C9 /* Settings */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1542,6 +1556,7 @@
 				B452504E05D427F1008338E8 /* XRCoreInspector.m in Sources */,
 				B4950F0105DD286A00C711DC /* XRGraphicCircleLabel.m in Sources */,
 				B414A00D2B24CD24008AE5F4 /* XRStatistic.m in Sources */,
+				B41C85B32DE4A2550053C9C9 /* SettingsView.swift in Sources */,
 				B4E5F8C105FC63A00011788E /* XRFileParser.m in Sources */,
 				B41266712B6EDF4C00E1C385 /* AppDelegate.swift in Sources */,
 				B4E5F90E05FC679E0011788E /* XRFileParser1.m in Sources */,
@@ -1568,6 +1583,7 @@
 				B4C08803063069F2001A91F4 /* XRExportGraphicAccessory.m in Sources */,
 				B43D613906345207001B863E /* FStatisticController.m in Sources */,
 				B41D283D094FC7CA008DF384 /* XRTableImporter.m in Sources */,
+				B41C85B12DE4A24A0053C9C9 /* SettingsWindowController.swift in Sources */,
 				B427BD080950B3050063849E /* XRTableImporterDelimiterController.m in Sources */,
 				B4B10C3809529F7F00E6A350 /* XRMakeDatasetController.m in Sources */,
 				B42083B209637969007A74A8 /* PTFMXMLParser.m in Sources */,
