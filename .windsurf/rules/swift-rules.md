@@ -11,7 +11,7 @@ trigger: always_on
 
 ### Documentation Requirements
 - Include the standard open source preamble comments at the top of each new Swift file
-- Document all public APIs using `///` style documentation
+- Document all non-private APIs using `///` style documentation
 - Include parameter descriptions, return values, and possible errors
 - Add `// MARK: -` comments to organize code into logical sections
 - Use `// TODO:`, `// FIXME:`, and `// NOTE:` for temporary or important notes

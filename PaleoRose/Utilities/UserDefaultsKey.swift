@@ -27,20 +27,36 @@
 import Foundation
 import SwiftUICore
 
-/// A type-safe wrapper around UserDefaults keys
+/// A type-safe enumeration of keys used to access values in UserDefaults.
 ///
-/// Usage:
+/// This enum provides a centralized and type-safe way to access UserDefaults values
+/// throughout the application, reducing the risk of typos and making it easier to
+/// maintain and refactor the codebase.
+///
+/// ## Usage
+///
+/// ### Setting a value:
+/// ```swift
+/// UserDefaults.standard.set(true, forKey: .isEqualArea)
 /// ```
-/// // Setting a value
-/// UserDefaults.standard.set(true, forKey: .someBooleanKey)
 ///
-/// // Getting a value
-/// let value = UserDefaults.standard.bool(forKey: .someBooleanKey)
-///
-/// // With @AppStorage
-/// @AppStorage(UserDefaults.Key.someBooleanKey.rawValue) var someValue = false
+/// ### Getting a value:
+/// ```swift
+/// let isEqualArea = UserDefaults.standard.bool(forKey: .isEqualArea)
 /// ```
-enum UserDefaultsKey: String, CaseIterable {
+///
+/// ### With @AppStorage:
+/// ```swift
+/// @AppStorage(UserDefaultsKey.isEqualArea.rawValue) var isEqualArea = false
+/// ```
+///
+/// ### With @DefaultsStorage:
+/// ```swift
+/// @DefaultsStorage(.isEqualArea, defaultValue: false) var isEqualArea
+/// ```
+///
+/// - Note: All keys are prefixed with their respective component to avoid naming conflicts.
+public enum UserDefaultsKey: String, CaseIterable {
     // swiftlint:disable sorted_enum_cases
     // MARK: - Vector Calculation
     case vectorCalculationMethod = "vectorCalculationMethod"
