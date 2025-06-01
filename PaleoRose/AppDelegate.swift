@@ -32,6 +32,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // MARK: - Properties
 
     private var aboutWindow: NSWindow?
+    private var settingsWindowController: SettingsWindowController?
+
+    private var applicationName: String {
+        Bundle.main.object(forInfoDictionaryKey: kCFBundleNameKey as String) as? String ?? ""
+    }
+
+    // MARK: - Menu Actions
+
+    // swiftlint:disable:next prohibited_interface_builder
+    @IBAction private func showSettings(_ sender: Any?) {
+        showSettingsWindow(sender)
+    }
+
+    // swiftlint:disable:next prohibited_interface_builder
+    @IBAction private func showAbout(_ sender: Any?) {
+        showAboutWindow(sender)
+    }
 
     // MARK: - Application Lifecycle
 
@@ -41,27 +58,28 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     // MARK: - Actions
 
-    @IBAction @objc private func showAboutWindow(_: Any?) {
+    private func showSettingsWindow(_ sender: Any?) {
+        settingsWindowController = SettingsWindowController()
+        settingsWindowController?.showWindow(sender)
+    }
+
+    private func showAboutWindow(_: Any?) {
+        let width: CGFloat = 400
+        let height: CGFloat = 250
         if aboutWindow == nil {
             let window = NSWindow(
-                contentRect: NSRect(x: 0, y: 0, width: 400, height: 250),
+                contentRect: NSRect(x: 0, y: 0, width: width, height: height),
                 styleMask: [.titled, .closable, .miniaturizable],
                 backing: .buffered,
                 defer: false
             )
+
             window.center()
             window.title = "About \(applicationName)"
-
-            let contentView = NSHostingView(rootView: AboutView())
-            window.contentView = contentView
+            window.contentView = NSHostingView(rootView: AboutView())
             aboutWindow = window
         }
-
         aboutWindow?.makeKeyAndOrderFront(nil)
         NSApp.activate(ignoringOtherApps: true)
-    }
-
-    private var applicationName: String {
-        Bundle.main.object(forInfoDictionaryKey: kCFBundleNameKey as String) as? String ?? ""
     }
 }

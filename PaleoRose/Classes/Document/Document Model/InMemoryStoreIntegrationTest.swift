@@ -128,7 +128,7 @@ struct InMemoryStoreIntegrationTest {
 
     @Test("Given sample file, then loading the file will populate the in-memory store")
     func readFileShouldPopulateStore() throws {
-        let store = try #require(InMemoryStore())
+        let store = try InMemoryStore(interface: SQLiteInterface())
 
         try backupFromSampleFileToInMemoryStore(store)
 

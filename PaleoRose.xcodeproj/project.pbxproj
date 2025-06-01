@@ -32,6 +32,15 @@
 		B41C17522CB1C278002D19C2 /* InMemoryStoreIntegrationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41C17502CB1C1B0002D19C2 /* InMemoryStoreIntegrationTest.swift */; };
 		B41C17532CB1C2AF002D19C2 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41C174D2CB0E45C002D19C2 /* Tag.swift */; };
 		B41C18132CC2B5E7002D19C2 /* rtest1.XRose in Resources */ = {isa = PBXBuildFile; fileRef = B41C18102CC1A9E4002D19C2 /* rtest1.XRose */; };
+		B41C85B12DE4A24A0053C9C9 /* SettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41C85AF2DE4A24A0053C9C9 /* SettingsWindowController.swift */; };
+		B41C85B32DE4A2550053C9C9 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41C85AE2DE4A24A0053C9C9 /* SettingsView.swift */; };
+		B41C86B22DE4B9C20053C9C9 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41C86B02DE4B9C20053C9C9 /* UserDefaults+Extensions.swift */; };
+		B41C86B42DE4BE930053C9C9 /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41C86B32DE4BE8B0053C9C9 /* UserDefaultsKey.swift */; };
+		B41C86B62DE4BEE20053C9C9 /* DefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41C86B52DE4BEDC0053C9C9 /* DefaultsStorage.swift */; };
+		B41C87402DE4D8070053C9C9 /* DefaultsStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41C873A2DE4D7EC0053C9C9 /* DefaultsStorageTests.swift */; };
+		B41C87412DE4D8070053C9C9 /* UserDefaultsKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41C873C2DE4D7EC0053C9C9 /* UserDefaultsKeyTests.swift */; };
+		B41C87422DE4D8070053C9C9 /* UserDefaultsExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41C873B2DE4D7EC0053C9C9 /* UserDefaultsExtensionsTests.swift */; };
+		B41C87442DE4DC070053C9C9 /* CommonUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41C87432DE4DC070053C9C9 /* CommonUtilities.swift */; };
 		B41D283C094FC7CA008DF384 /* XRTableImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = B41D283A094FC7CA008DF384 /* XRTableImporter.h */; };
 		B41D283D094FC7CA008DF384 /* XRTableImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = B41D283B094FC7CA008DF384 /* XRTableImporter.m */; };
 		B42083B109637969007A74A8 /* PTFMXMLParser.h in Headers */ = {isa = PBXBuildFile; fileRef = B42083AF09637969007A74A8 /* PTFMXMLParser.h */; };
@@ -160,7 +169,6 @@
 		B4C08803063069F2001A91F4 /* XRExportGraphicAccessory.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C08801063069F2001A91F4 /* XRExportGraphicAccessory.m */; };
 		B4C7CF7405D7FA190071FD29 /* removeLayer.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B4C7CF7305D7FA180071FD29 /* removeLayer.tiff */; };
 		B4DB28E32D22450300FC6A49 /* Encoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DB28E22D2244FC00FC6A49 /* Encoding.swift */; };
-		B4DF2D932D580C6E00F6345B /* CommonUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DF2D922D580C6E00F6345B /* CommonUtilities.swift */; };
 		B4E0138D05EC4AC500C50D5D /* version.plist in Resources */ = {isa = PBXBuildFile; fileRef = B4E0138C05EC4AC500C50D5D /* version.plist */; };
 		B4E2DE8905C5BD6500714F6F /* XRLayerGrid.h in Headers */ = {isa = PBXBuildFile; fileRef = B4E2DE8705C5BD6500714F6F /* XRLayerGrid.h */; };
 		B4E2DE8A05C5BD6500714F6F /* XRLayerGrid.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E2DE8805C5BD6500714F6F /* XRLayerGrid.m */; };
@@ -293,6 +301,15 @@
 		B41C174D2CB0E45C002D19C2 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		B41C17502CB1C1B0002D19C2 /* InMemoryStoreIntegrationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryStoreIntegrationTest.swift; sourceTree = "<group>"; };
 		B41C18102CC1A9E4002D19C2 /* rtest1.XRose */ = {isa = PBXFileReference; lastKnownFileType = file; path = rtest1.XRose; sourceTree = "<group>"; };
+		B41C85AE2DE4A24A0053C9C9 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		B41C85AF2DE4A24A0053C9C9 /* SettingsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindowController.swift; sourceTree = "<group>"; };
+		B41C86B02DE4B9C20053C9C9 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
+		B41C86B32DE4BE8B0053C9C9 /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
+		B41C86B52DE4BEDC0053C9C9 /* DefaultsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsStorage.swift; sourceTree = "<group>"; };
+		B41C873A2DE4D7EC0053C9C9 /* DefaultsStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsStorageTests.swift; sourceTree = "<group>"; };
+		B41C873B2DE4D7EC0053C9C9 /* UserDefaultsExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtensionsTests.swift; sourceTree = "<group>"; };
+		B41C873C2DE4D7EC0053C9C9 /* UserDefaultsKeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeyTests.swift; sourceTree = "<group>"; };
+		B41C87432DE4DC070053C9C9 /* CommonUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonUtilities.swift; sourceTree = "<group>"; };
 		B41D283A094FC7CA008DF384 /* XRTableImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRTableImporter.h; sourceTree = "<group>"; };
 		B41D283B094FC7CA008DF384 /* XRTableImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRTableImporter.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B42083AF09637969007A74A8 /* PTFMXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTFMXMLParser.h; sourceTree = "<group>"; };
@@ -481,7 +498,6 @@
 		B4C08801063069F2001A91F4 /* XRExportGraphicAccessory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRExportGraphicAccessory.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B4C7CF7305D7FA180071FD29 /* removeLayer.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = removeLayer.tiff; sourceTree = "<group>"; };
 		B4DB28E22D2244FC00FC6A49 /* Encoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encoding.swift; sourceTree = "<group>"; };
-		B4DF2D922D580C6E00F6345B /* CommonUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonUtilities.swift; sourceTree = "<group>"; };
 		B4E0138C05EC4AC500C50D5D /* version.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; path = version.plist; sourceTree = "<group>"; };
 		B4E2DE8705C5BD6500714F6F /* XRLayerGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRLayerGrid.h; sourceTree = "<group>"; };
 		B4E2DE8805C5BD6500714F6F /* XRLayerGrid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRLayerGrid.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -899,6 +915,7 @@
 		B4149FF82B24C838008AE5F4 /* PaleoRose */ = {
 			isa = PBXGroup;
 			children = (
+				B41C86B12DE4B9C20053C9C9 /* Utilities */,
 				32DBCF750370BD2300C91783 /* PaleoRose_Prefix.pch */,
 				B442674F2B3F881300749923 /* Info.plist */,
 				B41266702B6EDF4C00E1C385 /* AppDelegate.swift */,
@@ -1114,6 +1131,28 @@
 			path = "Property Inspector";
 			sourceTree = "<group>";
 		};
+		B41C85B02DE4A24A0053C9C9 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				B41C85AE2DE4A24A0053C9C9 /* SettingsView.swift */,
+				B41C85AF2DE4A24A0053C9C9 /* SettingsWindowController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		B41C86B12DE4B9C20053C9C9 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				B41C873A2DE4D7EC0053C9C9 /* DefaultsStorageTests.swift */,
+				B41C873B2DE4D7EC0053C9C9 /* UserDefaultsExtensionsTests.swift */,
+				B41C873C2DE4D7EC0053C9C9 /* UserDefaultsKeyTests.swift */,
+				B41C86B02DE4B9C20053C9C9 /* UserDefaults+Extensions.swift */,
+				B41C86B52DE4BEDC0053C9C9 /* DefaultsStorage.swift */,
+				B41C86B32DE4BE8B0053C9C9 /* UserDefaultsKey.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		B439AB352C83CEF500252574 /* Document Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1142,6 +1181,7 @@
 			isa = PBXGroup;
 			children = (
 				B463B6082DE2AD51006B6C7C /* About */,
+				B41C85B02DE4A24A0053C9C9 /* Settings */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1151,8 +1191,8 @@
 			children = (
 				B41C18102CC1A9E4002D19C2 /* rtest1.XRose */,
 				B4B0BB691E7E41C900F392DA /* Info.plist */,
+				B41C87432DE4DC070053C9C9 /* CommonUtilities.swift */,
 				B41C174D2CB0E45C002D19C2 /* Tag.swift */,
-				B4DF2D922D580C6E00F6345B /* CommonUtilities.swift */,
 			);
 			path = "Unit Tests";
 			sourceTree = "<group>";
@@ -1523,6 +1563,7 @@
 				B44D357705C5578500D7823C /* XRGraphicPetal.m in Sources */,
 				B4A82F9C2A07F8A400790052 /* LITMXMLBinaryEncoding.m in Sources */,
 				B4F257AE05C58578008591BE /* XRGraphicDot.m in Sources */,
+				B41C86B62DE4BEE20053C9C9 /* DefaultsStorage.swift in Sources */,
 				B4A82FAD2A07FB8800790052 /* LITMArrowHead.m in Sources */,
 				B4F2595205C58F28008591BE /* XRGraphicHistogram.m in Sources */,
 				B4866BF42CAE02C900319712 /* StoreProtocol.swift in Sources */,
@@ -1542,6 +1583,7 @@
 				B452504E05D427F1008338E8 /* XRCoreInspector.m in Sources */,
 				B4950F0105DD286A00C711DC /* XRGraphicCircleLabel.m in Sources */,
 				B414A00D2B24CD24008AE5F4 /* XRStatistic.m in Sources */,
+				B41C85B32DE4A2550053C9C9 /* SettingsView.swift in Sources */,
 				B4E5F8C105FC63A00011788E /* XRFileParser.m in Sources */,
 				B41266712B6EDF4C00E1C385 /* AppDelegate.swift in Sources */,
 				B4E5F90E05FC679E0011788E /* XRFileParser1.m in Sources */,
@@ -1558,6 +1600,7 @@
 				B4F2B18F2C97CB300017E717 /* LayerCore.swift in Sources */,
 				B4F2B1902C97CB300017E717 /* Geometry.swift in Sources */,
 				B4F2B1912C97CB300017E717 /* Count.swift in Sources */,
+				B41C86B42DE4BE930053C9C9 /* UserDefaultsKey.swift in Sources */,
 				B4F2B1922C97CB300017E717 /* Color.swift in Sources */,
 				B4F2B1932C97CB300017E717 /* DataSet.swift in Sources */,
 				B4F08862060914150000CF7A /* XRVStatCreatePanelController.m in Sources */,
@@ -1568,12 +1611,14 @@
 				B4C08803063069F2001A91F4 /* XRExportGraphicAccessory.m in Sources */,
 				B43D613906345207001B863E /* FStatisticController.m in Sources */,
 				B41D283D094FC7CA008DF384 /* XRTableImporter.m in Sources */,
+				B41C85B12DE4A24A0053C9C9 /* SettingsWindowController.swift in Sources */,
 				B427BD080950B3050063849E /* XRTableImporterDelimiterController.m in Sources */,
 				B4B10C3809529F7F00E6A350 /* XRMakeDatasetController.m in Sources */,
 				B42083B209637969007A74A8 /* PTFMXMLParser.m in Sources */,
 				B4237C992CFE959700E2B510 /* StorageModelFactory.swift in Sources */,
 				B47DDF510964CDE700C7EF02 /* XRTableImporterXRose.m in Sources */,
 				B4A82FA12A07FA2B00790052 /* LITMAngleFormatter.m in Sources */,
+				B41C86B22DE4B9C20053C9C9 /* UserDefaults+Extensions.swift in Sources */,
 				B4564ABC096A04A1005E0015 /* XRTableAddColumnController.m in Sources */,
 				B463B60A2DE2AD51006B6C7C /* AboutView.swift in Sources */,
 				B463B60B2DE2AD51006B6C7C /* AboutWindowController.swift in Sources */,
@@ -1609,13 +1654,16 @@
 				B4866BF72CAE039200319712 /* MockSqliteInterface.swift in Sources */,
 				B4AE41B82D0BCEBF00E05D96 /* XRLayerLineArrow+Stub.swift in Sources */,
 				B4AE41BF2D0BD08400E05D96 /* XRLayerGrid+Stub.swift in Sources */,
-				B4DF2D932D580C6E00F6345B /* CommonUtilities.swift in Sources */,
 				B4AE41C12D0BD09300E05D96 /* XRLayerCore+Stub.swift in Sources */,
 				B427CFF21E81EB9E0047F659 /* XRStatisticTests.m in Sources */,
+				B41C87402DE4D8070053C9C9 /* DefaultsStorageTests.swift in Sources */,
+				B41C87412DE4D8070053C9C9 /* UserDefaultsKeyTests.swift in Sources */,
+				B41C87422DE4D8070053C9C9 /* UserDefaultsExtensionsTests.swift in Sources */,
 				B41C17522CB1C278002D19C2 /* InMemoryStoreIntegrationTest.swift in Sources */,
 				B4AE41B52D0BBAF600E05D96 /* XRLayerText+Stub.swift in Sources */,
 				B4AE41CA2D17D76000E05D96 /* LayerLineArrow+Testing.swift in Sources */,
 				B4AE41C72D14EA5900E05D96 /* LayerText+Testing.swift in Sources */,
+				B41C87442DE4DC070053C9C9 /* CommonUtilities.swift in Sources */,
 				B4AE41D62D1E5DC300E05D96 /* XRGeometryController+Testing.swift in Sources */,
 				B4B0BB881E7E45CB00F392DA /* XRLayerDataTests.m in Sources */,
 				B4AE41CD2D17D77C00E05D96 /* LayerGrid+Testing.swift in Sources */,
