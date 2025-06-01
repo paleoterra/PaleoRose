@@ -39,6 +39,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     // MARK: - Menu Actions
+
     // swiftlint:disable:next prohibited_interface_builder
     @IBAction private func showSettings(_ sender: Any?) {
         showSettingsWindow(sender)

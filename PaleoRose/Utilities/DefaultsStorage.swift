@@ -1,171 +1,135 @@
 //
-// DefaultsStorage.swift
-// PaleoRose
+//  DefaultsStorage.swift
+//  PaleoRose
 //
-// MIT License
+//  MIT License
 //
-// Copyright (c) 2025 to present Thomas L. Moore.
+//  Copyright (c) 2025 to present Thomas L. Moore.
 //
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
 //
-// The above copyright notice and this permission notice shall be included in all
-// copies or substantial portions of the Software.
+//  The above copyright notice and this permission notice shall be included in all
+//  copies or substantial portions of the Software.
 //
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-// SOFTWARE.
+//  DefaultsStorage.swift
+//  PaleoRose
+//
+//  Created by Thomas Moore on 5/26/25.
+//  Copyright 2025 PaleoRose. All rights reserved.
+//
 
 import Foundation
-import SwiftUICore
+import SwiftUI
+
+/// Enum defining all UserDefaults keys used in the application
+public enum DefaultsKey: String, CaseIterable {
+    /// The method used for vector calculation
+    case vectorCalculationMethod
+
+    // Add more cases here as needed
+}
 
 /// A property wrapper that provides type-safe access to UserDefaults with support for SwiftUI bindings.
-///
-/// Usage:
-/// ```
-/// @DefaultsStorage(.someKey, defaultValue: 0) private var someValue: Int
-/// ```
-///
-/// - Note: This property wrapper automatically persists values to UserDefaults and updates the view
-///   when the value changes.
 @propertyWrapper
 public struct DefaultsStorage<Value>: DynamicProperty {
     // MARK: - Properties
 
-    /// The current value stored in UserDefaults, or the default value if none exists.
-    @State private var value: Value
-
-    /// The key used to store the value in UserDefaults.
-    private let key: UserDefaultsKey
-
-    /// The default value to use when no value is found in UserDefaults.
+    private let key: DefaultsKey
     private let defaultValue: Value
+    private let defaults: UserDefaults
 
-    // MARK: - Property Wrapper Requirements
-
-    /// The underlying value referenced by the property wrapper.
-    ///
-    /// The wrapped value provides direct access to the stored value and automatically
-    /// persists changes to UserDefaults.
-    public var wrappedValue: Value {
-        get {
-            value
-        }
-        nonmutating set {
-            value = newValue
-            UserDefaults.standard.set(newValue, forKey: key.rawValue)
-        }
-    }
-
-    // MARK: - Projected Value
-
-    /// A binding to the value that can be used with SwiftUI controls.
-    ///
-    /// Use the projected value to create a two-way binding to the stored value.
-    /// For example:
-    /// ```
-    /// Toggle("Enabled", isOn: $isEnabled)
-    /// ```
-    public var projectedValue: Binding<Value> {
-        Binding(
-            get: { wrappedValue },
-            set: { wrappedValue = $0 }
-        )
-    }
+    // SwiftUI state to trigger UI updates
+    @ObservedObject private var notifier = DefaultsChangeNotifier()
 
     // MARK: - Initialization
 
-    /// Creates a property that can read and write to UserDefaults.
-    ///
+    /// Creates a new `DefaultsStorage` instance with the specified key and default value.
     /// - Parameters:
-    ///   - wrappedValue: The default value to use if no value is found in UserDefaults.
-    ///   - key: The key to use to store the value in UserDefaults.
-    public init(wrappedValue: Value, _ key: UserDefaultsKey) {
-        self.key = key
-        self.defaultValue = wrappedValue
-
-        // Initialize _value with the current value from UserDefaults
-        if let value = UserDefaults.standard.value(forKey: key.rawValue) as? Value {
-            _value = State(initialValue: value)
-        } else {
-            _value = State(initialValue: wrappedValue)
-        }
-    }
-
-    /// Creates a property that can read and write to UserDefaults.
-    ///
-    /// This initializer provides an alternative syntax for creating a `DefaultsStorage`
-    /// property by taking the key as the first parameter and the default value as a
-    /// separate parameter.
-    ///
-    /// - Parameters:
-    ///   - key: The key to use to store the value in UserDefaults.
-    ///   - defaultValue: The default value to use if no value is found in UserDefaults.
-    ///
-    /// ## Example:
-    /// ```swift
-    /// @DefaultsStorage(.vectorCalculationMethod, defaultValue: 0)
-    /// private var vectorCalcMethod: Int
-    /// ```
-    public init(_ key: UserDefaultsKey, defaultValue: Value) {
+    ///   - key: The enum key identifying the UserDefaults value
+    ///   - defaultValue: The default value to use if no value exists in UserDefaults
+    ///   - defaults: The UserDefaults instance to use (defaults to .standard)
+    public init(_ key: DefaultsKey, defaultValue: Value, defaults: UserDefaults = .standard) {
         self.key = key
         self.defaultValue = defaultValue
+        self.defaults = defaults
 
-        // Initialize _value with the current value from UserDefaults if it exists,
-        // otherwise use the provided default value
-        if let value = UserDefaults.standard.value(forKey: key.rawValue) as? Value {
-            _value = State(initialValue: value)
-        } else {
-            _value = State(initialValue: defaultValue)
+        // Save default value to UserDefaults if it doesn't exist
+        if defaults.object(forKey: key.rawValue) == nil {
+            defaults.set(defaultValue, forKey: key.rawValue)
+            defaults.synchronize()
         }
     }
 
-    // MARK: - DynamicProperty Conformance
+    /// Creates a new `DefaultsStorage` instance using the property wrapper syntax.
+    /// - Parameters:
+    ///   - wrappedValue: The default value
+    ///   - key: The enum key
+    ///   - defaults: The UserDefaults instance
+    public init(wrappedValue: Value, _ key: DefaultsKey, defaults: UserDefaults = .standard) {
+        self.init(key, defaultValue: wrappedValue, defaults: defaults)
+    }
 
-    /// Updates the stored value from UserDefaults.
-    ///
-    /// This method is called automatically by SwiftUI as part of the view update process.
-    /// It ensures that the stored value is in sync with the current value in UserDefaults.
-    ///
-    /// - Important: This method is part of the `DynamicProperty` protocol conformance and
-    ///   is automatically called by SwiftUI. You should not call this method directly.
-    ///
-    /// - Note: If the value in UserDefaults has been changed by another part of the app
-    ///   (e.g., through direct UserDefaults access), this method will update the local
-    ///   `@State` value to reflect that change, triggering a view update if needed.
-    public func update() {
-        if let value = UserDefaults.standard.value(forKey: key.rawValue) as? Value {
-            self.value = value
-        } else {
-            self.value = defaultValue
+    // MARK: - Property Wrapper
+
+    public var wrappedValue: Value {
+        get {
+            // Get the current value from UserDefaults
+            defaults.object(forKey: key.rawValue) as? Value ?? defaultValue
         }
+        nonmutating set {
+            // Write the new value to UserDefaults
+            defaults.set(newValue, forKey: key.rawValue)
+            defaults.synchronize()
+
+            // Notify SwiftUI that the value changed
+            notifier.objectWillChange.send()
+        }
+    }
+
+    public var projectedValue: Binding<Value> {
+        Binding(
+            get: { wrappedValue },
+            set: { newValue in
+                // Write directly to UserDefaults
+                defaults.set(newValue, forKey: key.rawValue)
+                defaults.synchronize()
+
+                // Notify SwiftUI that the value changed
+                notifier.objectWillChange.send()
+            }
+        )
+    }
+
+    // MARK: - DynamicProperty
+
+    public mutating func update() {
+        // We rely on the @ObservedObject to trigger updates
     }
 }
 
-// MARK: - Example Usage
+// MARK: - SwiftUI Support
 
-/*
-// In your view:
-struct SettingsView: View {
-    @DefaultsStorage(\.vectorCalculationMethod) private var vectorCalcMethod = 0
+/// Helper class that notifies SwiftUI when values change
+private class DefaultsChangeNotifier: ObservableObject {}
 
-    var body: some View {
-        Picker("Vector Calculation Method", selection: $vectorCalcMethod) {
-            Text("Vector-Doubling").tag(0)
-            Text("Standard").tag(1)
-        }
+// MARK: - Testing Support
+
+// Make these methods accessible only in test code
+extension DefaultsStorage {
+    /// Helper for testing - directly accesses UserDefaults
+    func test_setValue(_ newValue: Value) {
+        // Write directly to UserDefaults
+        defaults.set(newValue, forKey: key.rawValue)
+        defaults.synchronize()
+        notifier.objectWillChange.send()
     }
-}
 
-// In your AppKit code:
-let method = UserDefaults.standard.integer(forKey: .vectorCalculationMethod)
-UserDefaults.standard.set(1, forKey: .vectorCalculationMethod)
-*/
+    /// Helper for testing - directly reads from UserDefaults
+    // swiftlint:disable:next identifier_name
+    var _testValue: Value { wrappedValue }
+}

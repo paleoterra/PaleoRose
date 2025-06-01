@@ -58,16 +58,20 @@ import SwiftUICore
 /// - Note: All keys are prefixed with their respective component to avoid naming conflicts.
 public enum UserDefaultsKey: String, CaseIterable {
     // swiftlint:disable sorted_enum_cases
+
     // MARK: - Vector Calculation
-    case vectorCalculationMethod = "vectorCalculationMethod"
+
+    case vectorCalculationMethod
 
     // MARK: - Geometry Settings
+
     case isEqualArea = "XRGeometryDefaultKeyEqualArea"
     case isPercent = "XRGeometryDefaultKeyPercent"
     case sectorSize = "XRGeometryDefaultKeySectorSize"
     case startingAngle = "XRGeometryDefaultKeyStartingAngle"
 
     // MARK: - Layer Grid Settings
+
     case spokeCount = "XRLayerGridDefaultSpokeCount"
     case spokeAngle = "XRLayerGridDefaultSpokeAngle"
     case ringCountIncrement = "XRLayerGridDefaultRingCount"
@@ -78,6 +82,7 @@ public enum UserDefaultsKey: String, CaseIterable {
     case gridLineWidth = "XRLayerGridDefaultLineWidth"
 
     // MARK: - Layer Data Settings
+
     case layerDataType = "XRLayerDataDefaultKeyType"
     // swiftlint:enable sorted_enum_cases
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>FileType</key>
+    <string>XRose Test File</string>
+    <key>Version</key>
+    <string>1.0</string>
+    <key>CreationDate</key>
+    <date>2024-01-16T00:00:00Z</date>
+    <key>TestData</key>
+    <array>
+        <dict>
+            <key>id</key>
+            <string>test1</string>
+            <key>type</key>
+            <string>sample</string>
+            <key>data</key>
+            <string>test data</string>
+        </dict>
+    </array>
+</dict>
+</plist>

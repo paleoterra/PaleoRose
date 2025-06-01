@@ -6,7 +6,10 @@ import SwiftUICore
 public struct SettingsView: View {
     // MARK: - Properties
 
-    @DefaultsStorage(.vectorCalculationMethod, defaultValue: 0) private var vectorCalcMethod: Int
+    @DefaultsStorage(
+        .vectorCalculationMethod,
+        defaultValue: 0
+    ) private var vectorCalcMethod: Int
     @State private var showingHelp = false
 
     // MARK: - Private Properties
