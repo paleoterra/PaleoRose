@@ -56,8 +56,6 @@
 		B42FE3AD096AEB99007E9DC5 /* XRCalculateAzimuthController.h in Headers */ = {isa = PBXBuildFile; fileRef = B42FE3AB096AEB99007E9DC5 /* XRCalculateAzimuthController.h */; };
 		B4324D0A06187FFF0083AE8A /* XRLayerText.h in Headers */ = {isa = PBXBuildFile; fileRef = B4324D0806187FFF0083AE8A /* XRLayerText.h */; };
 		B4324D0B06187FFF0083AE8A /* XRLayerText.m in Sources */ = {isa = PBXBuildFile; fileRef = B4324D0906187FFF0083AE8A /* XRLayerText.m */; };
-		B435676C096DA4C000DCF143 /* XRPreferencePanelController.h in Headers */ = {isa = PBXBuildFile; fileRef = B435676A096DA4C000DCF143 /* XRPreferencePanelController.h */; };
-		B435676D096DA4C000DCF143 /* XRPreferencePanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = B435676B096DA4C000DCF143 /* XRPreferencePanelController.m */; };
 		B439AB372C83CF7900252574 /* DocumentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B439AB362C83CF7900252574 /* DocumentModel.swift */; };
 		B439AB392C83D01700252574 /* InMemoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B439AB382C83D01700252574 /* InMemoryStore.swift */; };
 		B43D613906345207001B863E /* FStatisticController.m in Sources */ = {isa = PBXBuildFile; fileRef = B43D613706345207001B863E /* FStatisticController.m */; };
@@ -339,8 +337,6 @@
 		B4339BFC2B82BC360016F4E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/XRDataInspector.xib; sourceTree = "<group>"; };
 		B4339BFD2B82BC360016F4E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/XRVectorInspector.xib; sourceTree = "<group>"; };
 		B4339BFE2B82BC360016F4E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FStatisticSheet.xib; sourceTree = "<group>"; };
-		B435676A096DA4C000DCF143 /* XRPreferencePanelController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRPreferencePanelController.h; sourceTree = "<group>"; };
-		B435676B096DA4C000DCF143 /* XRPreferencePanelController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XRPreferencePanelController.m; sourceTree = "<group>"; };
 		B439AB362C83CF7900252574 /* DocumentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentModel.swift; sourceTree = "<group>"; };
 		B439AB382C83D01700252574 /* InMemoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryStore.swift; sourceTree = "<group>"; };
 		B43D613706345207001B863E /* FStatisticController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = FStatisticController.m; sourceTree = "<group>"; };
@@ -438,7 +434,6 @@
 		B49D7ED72DDECB2B0046A8B8 /* XRLayerGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRLayerGrid.swift; sourceTree = "<group>"; };
 		B49D7ED82DDECB2B0046A8B8 /* XRLayerLineArrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRLayerLineArrow.swift; sourceTree = "<group>"; };
 		B49D7ED92DDECB2B0046A8B8 /* XRLayerText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRLayerText.swift; sourceTree = "<group>"; };
-		B49D7EDB2DDECB510046A8B8 /* XRPreferencePanelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRPreferencePanelController.swift; sourceTree = "<group>"; };
 		B49D7EDC2DDECB8F0046A8B8 /* XRTableImporterDelimiterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRTableImporterDelimiterController.swift; sourceTree = "<group>"; };
 		B49D7EDD2DDECB9C0046A8B8 /* PTFMXMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTFMXMLParser.swift; sourceTree = "<group>"; };
 		B49D7EDE2DDECBB80046A8B8 /* XRTableImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRTableImporter.swift; sourceTree = "<group>"; };
@@ -979,9 +974,6 @@
 			isa = PBXGroup;
 			children = (
 				B486E27E1E7B76FB00F1ADAA /* MainMenu.xib */,
-				B435676A096DA4C000DCF143 /* XRPreferencePanelController.h */,
-				B435676B096DA4C000DCF143 /* XRPreferencePanelController.m */,
-				B49D7EDB2DDECB510046A8B8 /* XRPreferencePanelController.swift */,
 			);
 			path = "Main View";
 			sourceTree = "<group>";
@@ -1283,7 +1275,6 @@
 				B4564ABB096A04A1005E0015 /* XRTableAddColumnController.h in Headers */,
 				B4A82FA42A07FA8900790052 /* LITMXMLParser.h in Headers */,
 				B42FE3AD096AEB99007E9DC5 /* XRCalculateAzimuthController.h in Headers */,
-				B435676C096DA4C000DCF143 /* XRPreferencePanelController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1623,7 +1614,6 @@
 				B463B60A2DE2AD51006B6C7C /* AboutView.swift in Sources */,
 				B463B60B2DE2AD51006B6C7C /* AboutWindowController.swift in Sources */,
 				B42FE3AC096AEB99007E9DC5 /* XRCalculateAzimuthController.m in Sources */,
-				B435676D096DA4C000DCF143 /* XRPreferencePanelController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

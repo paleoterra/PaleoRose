@@ -14,15 +14,13 @@ trigger: always_on
 - Document all non-private APIs using `///` style documentation
 - Include parameter descriptions, return values, and possible errors
 - Add `// MARK: -` comments to organize code into logical sections
-- Use `// TODO:`, `// FIXME:`, and `// NOTE:` for temporary or important notes
 
 ## Testing Requirements
 ### Unit Testing
 - Use Swift Testing framework for all unit tests
-- Follow the naming convention: `test_methodName_condition_expectedResult`
 - Structure tests with clear Arrange-Act-Assert sections
 - Mock all external dependencies
-- use parameterization to test multiple cases
+- use parameterization with Swift Testing to test multiple cases
 
 ### UI & Performance Testing
 - Use XCTest for UI and performance testing
@@ -53,6 +51,10 @@ trigger: always_on
 - Use appropriate animation for state changes
 
 ## Technical Constraints
+### General
+- Use SOLID principles whenver possible
+- Structure code for testability
+
 ### File Management
 - Do not modify or update xib, nib, or storyboard files
 - Do not modify Xcode project files directly
