@@ -23,7 +23,7 @@
 
 #import "XRGeometryInspector.h"
 #import "XRGeometryController.h"
-#import "LITMAngleFormatter.h"
+#import <PaleoRose-Swift.h>
 @implementation XRGeometryInspector
 
 -(id)init
@@ -50,7 +50,6 @@
 	//NSLog(@"setInspectedObject");
 	_object = anObject;
 	NSNumberFormatter *aFormatter;
-	LITMAngleFormatter *angleFormatter;
 	//populate fields
 	if([ _object isEqualArea])
 		[_gridTypePopup selectItemAtIndex:0];
@@ -92,8 +91,7 @@
 	[_countStepper setMaxValue:720.0];
 	[_countStepper setMinValue:4.0];
 	[_countStepper setIncrement:1.0];
-	angleFormatter = [[LITMAngleFormatter alloc] init]  ;
-	[_sectorAngle setFormatter:angleFormatter];
+    [_sectorAngle setFormatter:[FormatterFactory angleFormatter]];
 	[_sectorAngle setFloatValue:[_object sectorSize]];
 	[_countStepper setIntValue:(int)(360.0/[_sectorAngle floatValue])];
 	[_sectorCount takeFloatValueFrom:_countStepper];
@@ -102,7 +100,7 @@
 	[_startAngleStepper setIncrement:1.0];
 	[_startAngleStepper setMaxValue:[_sectorAngle floatValue]];
 	[_startAngleStepper setFloatValue:[_object startingAngle]];
-	[_startAngleTextBox setFormatter:angleFormatter];
+	[_startAngleTextBox setFormatter:[FormatterFactory angleFormatter]];
 	[_startAngleTextBox takeFloatValueFrom:_startAngleStepper];
 
 }

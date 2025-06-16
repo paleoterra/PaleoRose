@@ -1,12 +1,10 @@
 //
-//  LITMAngleFormatter.m
-//  LITMAppKit
-//
-//  Created by Tom Moore on Tue Jan 27 2004.
+// FormatterFactor.swift
+// PaleoRose
 //
 // MIT License
 //
-// Copyright (c) 2004 to present Thomas L. Moore.
+// Copyright (c) 2025 to present Thomas L. Moore.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,34 +24,22 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+@objc class FormatterFactory: NSObject {
+    @objc static func angleFormatter() -> NumberFormatter {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 2
+        formatter.minimumFractionDigits = 2
+        formatter.positiveSuffix = "°"
+        formatter.negativeSuffix = "°"
+        return formatter
+    }
 
-#import "LITMAngleFormatter.h"
-
-
-@implementation LITMAngleFormatter
-
--(NSString *) stringForObjectValue:(id)anObject
-{
-	if([anObject isKindOfClass:[NSNumber class]])
-		return [NSString stringWithFormat:@"%.2f%@",[anObject floatValue],[NSString stringWithUTF8String:"°"]];
-	return nil;
+    @objc static func percentFormatter() -> NumberFormatter {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .percent
+        formatter.maximumFractionDigits = 2
+        formatter.minimumFractionDigits = 2
+        return formatter
+    }
 }
-
-- (BOOL)getObjectValue:(id *)anObject forString:(NSString *)string errorDescription:(NSString **)error
-{
-	BOOL returnValue = NO;
-	NSScanner *scanner = [NSScanner scannerWithString:string];
-	float aValue;
-	if([scanner scanFloat:&aValue])
-	{
-		returnValue = YES;
-		if(anObject)
-			*anObject = [NSNumber numberWithFloat:aValue];
-		
-	} else {
-		if(error)
-			*error = @"angle formatter didn't work";
-	}
-	return returnValue;
-}
-@end

@@ -23,8 +23,7 @@
 
 #import "XRGridInspector.h"
 #import "XRLayerGrid.h"
-#import "LITMPercentFormatter.h"
-
+#import <PaleoRose-Swift.h>
 @implementation XRGridInspector
 -(id)init
 {
@@ -48,7 +47,7 @@
 
 -(void)awakeFromNib
 {
-	[_ringPercentBox setFormatter:[[LITMPercentFormatter alloc] init]];
+    [_ringPercentBox setFormatter:[FormatterFactory percentFormatter]];
 }
 
 -(void)setInspectedObject:(XRLayerGrid *)anObject

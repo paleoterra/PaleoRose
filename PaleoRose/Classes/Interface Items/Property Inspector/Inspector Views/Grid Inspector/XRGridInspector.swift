@@ -61,7 +61,7 @@ final class XRGridInspector: NSViewController {
 
     private func configureView() {
         // Additional view configuration
-        ringPercentBox.formatter = LITMPercentFormatter()
+        ringPercentBox.formatter = FormatterFactory.percentFormatter()
     }
 
     // MARK: - Public Methods
