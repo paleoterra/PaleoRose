@@ -134,12 +134,8 @@
 		B4A82F982A07F87A00790052 /* LITMXMLTree.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A82F952A07F87A00790052 /* LITMXMLTree.m */; };
 		B4A82F9B2A07F8A400790052 /* LITMXMLBinaryEncoding.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A82F992A07F8A400790052 /* LITMXMLBinaryEncoding.h */; };
 		B4A82F9C2A07F8A400790052 /* LITMXMLBinaryEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A82F9A2A07F8A400790052 /* LITMXMLBinaryEncoding.m */; };
-		B4A82FA02A07FA2B00790052 /* LITMAngleFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A82F9E2A07FA2B00790052 /* LITMAngleFormatter.h */; };
-		B4A82FA12A07FA2B00790052 /* LITMAngleFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A82F9F2A07FA2B00790052 /* LITMAngleFormatter.m */; };
 		B4A82FA42A07FA8900790052 /* LITMXMLParser.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A82FA22A07FA8900790052 /* LITMXMLParser.h */; };
 		B4A82FA52A07FA8900790052 /* LITMXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A82FA32A07FA8900790052 /* LITMXMLParser.m */; };
-		B4A82FA82A07FB7300790052 /* LITMPercentFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A82FA62A07FB7300790052 /* LITMPercentFormatter.m */; };
-		B4A82FA92A07FB7300790052 /* LITMPercentFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A82FA72A07FB7300790052 /* LITMPercentFormatter.h */; };
 		B4A82FAC2A07FB8800790052 /* LITMArrowHead.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A82FAA2A07FB8700790052 /* LITMArrowHead.h */; };
 		B4A82FAD2A07FB8800790052 /* LITMArrowHead.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A82FAB2A07FB8800790052 /* LITMArrowHead.m */; };
 		B4AE41B52D0BBAF600E05D96 /* XRLayerText+Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AE41B32D0BBAF600E05D96 /* XRLayerText+Stub.swift */; };
@@ -168,6 +164,7 @@
 		B4C7CF7405D7FA190071FD29 /* removeLayer.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B4C7CF7305D7FA180071FD29 /* removeLayer.tiff */; };
 		B4DB28E32D22450300FC6A49 /* Encoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DB28E22D2244FC00FC6A49 /* Encoding.swift */; };
 		B4E0138D05EC4AC500C50D5D /* version.plist in Resources */ = {isa = PBXBuildFile; fileRef = B4E0138C05EC4AC500C50D5D /* version.plist */; };
+		B4E22DA82DFF701200A9AFE0 /* FormatterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E22DA72DFF700D00A9AFE0 /* FormatterFactory.swift */; };
 		B4E2DE8905C5BD6500714F6F /* XRLayerGrid.h in Headers */ = {isa = PBXBuildFile; fileRef = B4E2DE8705C5BD6500714F6F /* XRLayerGrid.h */; };
 		B4E2DE8A05C5BD6500714F6F /* XRLayerGrid.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E2DE8805C5BD6500714F6F /* XRLayerGrid.m */; };
 		B4E5F8C005FC63A00011788E /* XRFileParser.h in Headers */ = {isa = PBXBuildFile; fileRef = B4E5F8BE05FC63A00011788E /* XRFileParser.h */; };
@@ -411,8 +408,6 @@
 		B49D7EB92DDEC91A0046A8B8 /* XRoseTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRoseTableController.swift; sourceTree = "<group>"; };
 		B49D7EBA2DDEC9240046A8B8 /* XRoseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRoseView.swift; sourceTree = "<group>"; };
 		B49D7EBC2DDEC9350046A8B8 /* XRoseWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRoseWindowController.swift; sourceTree = "<group>"; };
-		B49D7EBD2DDEC96D0046A8B8 /* LITMAngleFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LITMAngleFormatter.swift; sourceTree = "<group>"; };
-		B49D7EBE2DDEC9760046A8B8 /* LITMPercentFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LITMPercentFormatter.swift; sourceTree = "<group>"; };
 		B49D7EC02DDEC9A10046A8B8 /* LITMArrowHead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LITMArrowHead.swift; sourceTree = "<group>"; };
 		B49D7EC12DDEC9BA0046A8B8 /* XRAppearanceProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRAppearanceProviding.swift; sourceTree = "<group>"; };
 		B49D7EC22DDEC9BA0046A8B8 /* XRGeometryProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGeometryProviding.swift; sourceTree = "<group>"; };
@@ -459,12 +454,8 @@
 		B4A82F952A07F87A00790052 /* LITMXMLTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LITMXMLTree.m; sourceTree = "<group>"; };
 		B4A82F992A07F8A400790052 /* LITMXMLBinaryEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LITMXMLBinaryEncoding.h; sourceTree = "<group>"; };
 		B4A82F9A2A07F8A400790052 /* LITMXMLBinaryEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LITMXMLBinaryEncoding.m; sourceTree = "<group>"; };
-		B4A82F9E2A07FA2B00790052 /* LITMAngleFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LITMAngleFormatter.h; sourceTree = "<group>"; };
-		B4A82F9F2A07FA2B00790052 /* LITMAngleFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LITMAngleFormatter.m; sourceTree = "<group>"; };
 		B4A82FA22A07FA8900790052 /* LITMXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LITMXMLParser.h; sourceTree = "<group>"; };
 		B4A82FA32A07FA8900790052 /* LITMXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LITMXMLParser.m; sourceTree = "<group>"; };
-		B4A82FA62A07FB7300790052 /* LITMPercentFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LITMPercentFormatter.m; sourceTree = "<group>"; };
-		B4A82FA72A07FB7300790052 /* LITMPercentFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LITMPercentFormatter.h; sourceTree = "<group>"; };
 		B4A82FAA2A07FB8700790052 /* LITMArrowHead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LITMArrowHead.h; sourceTree = "<group>"; };
 		B4A82FAB2A07FB8800790052 /* LITMArrowHead.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LITMArrowHead.m; sourceTree = "<group>"; };
 		B4AE41B32D0BBAF600E05D96 /* XRLayerText+Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XRLayerText+Stub.swift"; sourceTree = "<group>"; };
@@ -494,6 +485,7 @@
 		B4C7CF7305D7FA180071FD29 /* removeLayer.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = removeLayer.tiff; sourceTree = "<group>"; };
 		B4DB28E22D2244FC00FC6A49 /* Encoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encoding.swift; sourceTree = "<group>"; };
 		B4E0138C05EC4AC500C50D5D /* version.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; path = version.plist; sourceTree = "<group>"; };
+		B4E22DA72DFF700D00A9AFE0 /* FormatterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatterFactory.swift; sourceTree = "<group>"; };
 		B4E2DE8705C5BD6500714F6F /* XRLayerGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRLayerGrid.h; sourceTree = "<group>"; };
 		B4E2DE8805C5BD6500714F6F /* XRLayerGrid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRLayerGrid.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B4E5F8BE05FC63A00011788E /* XRFileParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRFileParser.h; sourceTree = "<group>"; };
@@ -960,12 +952,7 @@
 		B4149FFC2B24C9A9008AE5F4 /* Formatters */ = {
 			isa = PBXGroup;
 			children = (
-				B4A82F9E2A07FA2B00790052 /* LITMAngleFormatter.h */,
-				B4A82F9F2A07FA2B00790052 /* LITMAngleFormatter.m */,
-				B49D7EBD2DDEC96D0046A8B8 /* LITMAngleFormatter.swift */,
-				B4A82FA72A07FB7300790052 /* LITMPercentFormatter.h */,
-				B4A82FA62A07FB7300790052 /* LITMPercentFormatter.m */,
-				B49D7EBE2DDEC9760046A8B8 /* LITMPercentFormatter.swift */,
+				B4E22DA72DFF700D00A9AFE0 /* FormatterFactory.swift */,
 			);
 			path = Formatters;
 			sourceTree = "<group>";
@@ -1233,14 +1220,12 @@
 				B4A82F972A07F87A00790052 /* LITMXMLTree.h in Headers */,
 				B4852A8405C2E223002212E3 /* XRGeometryController.h in Headers */,
 				B411E50705C35F5500C22F3E /* XRGraphic.h in Headers */,
-				B4A82FA92A07FB7300790052 /* LITMPercentFormatter.h in Headers */,
 				B411E5DE05C3651400C22F3E /* XRGraphicCircle.h in Headers */,
 				B411E6EC05C3855000C22F3E /* XRLayer.h in Headers */,
 				B411E75005C386DA00C22F3E /* XRDataSet.h in Headers */,
 				B411E7F405C396A400C22F3E /* XRAppendDialogController.h in Headers */,
 				B411E84C05C397D000C22F3E /* XREncodingAccessoryView.h in Headers */,
 				B4815B7005C44C0200403360 /* XRLayerData.h in Headers */,
-				B4A82FA02A07FA2B00790052 /* LITMAngleFormatter.h in Headers */,
 				B461B87105C4E1DA00738D23 /* XRGraphicKite.h in Headers */,
 				B44D357605C5578500D7823C /* XRGraphicPetal.h in Headers */,
 				B4F257AD05C58578008591BE /* XRGraphicDot.h in Headers */,
@@ -1543,6 +1528,7 @@
 				B48345D705C23B3D00E3F6B7 /* XRoseTableController.m in Sources */,
 				B48345F105C23CA100E3F6B7 /* XRoseView.m in Sources */,
 				B4852A8505C2E223002212E3 /* XRGeometryController.m in Sources */,
+				B4E22DA82DFF701200A9AFE0 /* FormatterFactory.swift in Sources */,
 				B411E50805C35F5500C22F3E /* XRGraphic.m in Sources */,
 				B411E5DF05C3651400C22F3E /* XRGraphicCircle.m in Sources */,
 				B411E6ED05C3855000C22F3E /* XRLayer.m in Sources */,
@@ -1568,7 +1554,6 @@
 				B47CA41405C6D56D0060A30C /* XRGeometryInspector.m in Sources */,
 				B48B89FC05C794C500248F96 /* XRDataInspector.m in Sources */,
 				B439AB392C83D01700252574 /* InMemoryStore.swift in Sources */,
-				B4A82FA82A07FB7300790052 /* LITMPercentFormatter.m in Sources */,
 				B4BF9C1605CD6B110047E8CF /* XRGridInspector.m in Sources */,
 				B4F929FE05D35D3A00EAAED0 /* XRLayerCore.m in Sources */,
 				B452504E05D427F1008338E8 /* XRCoreInspector.m in Sources */,
@@ -1608,7 +1593,6 @@
 				B42083B209637969007A74A8 /* PTFMXMLParser.m in Sources */,
 				B4237C992CFE959700E2B510 /* StorageModelFactory.swift in Sources */,
 				B47DDF510964CDE700C7EF02 /* XRTableImporterXRose.m in Sources */,
-				B4A82FA12A07FA2B00790052 /* LITMAngleFormatter.m in Sources */,
 				B41C86B22DE4B9C20053C9C9 /* UserDefaults+Extensions.swift in Sources */,
 				B4564ABC096A04A1005E0015 /* XRTableAddColumnController.m in Sources */,
 				B463B60A2DE2AD51006B6C7C /* AboutView.swift in Sources */,
