@@ -408,19 +408,6 @@
 		B49D7EB92DDEC91A0046A8B8 /* XRoseTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRoseTableController.swift; sourceTree = "<group>"; };
 		B49D7EBA2DDEC9240046A8B8 /* XRoseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRoseView.swift; sourceTree = "<group>"; };
 		B49D7EBC2DDEC9350046A8B8 /* XRoseWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRoseWindowController.swift; sourceTree = "<group>"; };
-		B49D7EC02DDEC9A10046A8B8 /* LITMArrowHead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LITMArrowHead.swift; sourceTree = "<group>"; };
-		B49D7EC12DDEC9BA0046A8B8 /* XRAppearanceProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRAppearanceProviding.swift; sourceTree = "<group>"; };
-		B49D7EC22DDEC9BA0046A8B8 /* XRGeometryProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGeometryProviding.swift; sourceTree = "<group>"; };
-		B49D7EC32DDEC9C70046A8B8 /* XRGraphic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphic.swift; sourceTree = "<group>"; };
-		B49D7EC42DDEC9CE0046A8B8 /* XRGraphicCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicCircle.swift; sourceTree = "<group>"; };
-		B49D7EC62DDEC9D80046A8B8 /* XRGraphicCircleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicCircleLabel.swift; sourceTree = "<group>"; };
-		B49D7EC72DDEC9E40046A8B8 /* XRGraphicDot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicDot.swift; sourceTree = "<group>"; };
-		B49D7EC82DDEC9F00046A8B8 /* XRGraphicDotDeviation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicDotDeviation.swift; sourceTree = "<group>"; };
-		B49D7ECA2DDEC9FF0046A8B8 /* XRGraphicHistogram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicHistogram.swift; sourceTree = "<group>"; };
-		B49D7ECC2DDECA1C0046A8B8 /* XRGraphicKite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicKite.swift; sourceTree = "<group>"; };
-		B49D7ECD2DDECA260046A8B8 /* XRGraphicLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicLine.swift; sourceTree = "<group>"; };
-		B49D7ECE2DDECA310046A8B8 /* XRGraphicPetal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicPetal.swift; sourceTree = "<group>"; };
-		B49D7ED02DDECA3F0046A8B8 /* XRSelectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRSelectable.swift; sourceTree = "<group>"; };
 		B49D7ED12DDECA9B0046A8B8 /* XRAppendDialogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRAppendDialogController.swift; sourceTree = "<group>"; };
 		B49D7ED22DDECAB40046A8B8 /* FStatisticController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FStatisticController.swift; sourceTree = "<group>"; };
 		B49D7ED42DDECB2B0046A8B8 /* XRLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRLayer.swift; sourceTree = "<group>"; };
@@ -755,37 +742,24 @@
 			children = (
 				B4A82FAA2A07FB8700790052 /* LITMArrowHead.h */,
 				B4A82FAB2A07FB8800790052 /* LITMArrowHead.m */,
-				B49D7EC02DDEC9A10046A8B8 /* LITMArrowHead.swift */,
 				B411E50505C35F5500C22F3E /* XRGraphic.h */,
 				B411E50605C35F5500C22F3E /* XRGraphic.m */,
-				B49D7EC32DDEC9C70046A8B8 /* XRGraphic.swift */,
 				B411E5DC05C3651400C22F3E /* XRGraphicCircle.h */,
 				B411E5DD05C3651400C22F3E /* XRGraphicCircle.m */,
-				B49D7EC42DDEC9CE0046A8B8 /* XRGraphicCircle.swift */,
 				B4950EFE05DD286A00C711DC /* XRGraphicCircleLabel.h */,
 				B4950EFF05DD286A00C711DC /* XRGraphicCircleLabel.m */,
-				B49D7EC62DDEC9D80046A8B8 /* XRGraphicCircleLabel.swift */,
 				B4EE8F7605C5E0A9001BACD3 /* XRGraphicLine.h */,
 				B4EE8F7705C5E0A9001BACD3 /* XRGraphicLine.m */,
-				B49D7ECD2DDECA260046A8B8 /* XRGraphicLine.swift */,
 				B461B86F05C4E1DA00738D23 /* XRGraphicKite.h */,
 				B461B87005C4E1DA00738D23 /* XRGraphicKite.m */,
-				B49D7ECC2DDECA1C0046A8B8 /* XRGraphicKite.swift */,
 				B44D357405C5578500D7823C /* XRGraphicPetal.h */,
 				B44D357505C5578500D7823C /* XRGraphicPetal.m */,
-				B49D7ECE2DDECA310046A8B8 /* XRGraphicPetal.swift */,
 				B4F257AB05C58578008591BE /* XRGraphicDot.h */,
 				B4F257AC05C58578008591BE /* XRGraphicDot.m */,
-				B49D7EC72DDEC9E40046A8B8 /* XRGraphicDot.swift */,
 				B4F2594F05C58F28008591BE /* XRGraphicHistogram.h */,
 				B4F2595005C58F28008591BE /* XRGraphicHistogram.m */,
-				B49D7ECA2DDEC9FF0046A8B8 /* XRGraphicHistogram.swift */,
 				B4F25AE205C59CE6008591BE /* XRGraphicDotDeviation.h */,
 				B4F25AE305C59CE6008591BE /* XRGraphicDotDeviation.m */,
-				B49D7EC82DDEC9F00046A8B8 /* XRGraphicDotDeviation.swift */,
-				B49D7EC12DDEC9BA0046A8B8 /* XRAppearanceProviding.swift */,
-				B49D7EC22DDEC9BA0046A8B8 /* XRGeometryProviding.swift */,
-				B49D7ED02DDECA3F0046A8B8 /* XRSelectable.swift */,
 			);
 			path = Graphics;
 			sourceTree = "<group>";
