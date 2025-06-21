@@ -52,6 +52,7 @@
 		B427BD070950B3050063849E /* XRTableImporterDelimiterController.h in Headers */ = {isa = PBXBuildFile; fileRef = B427BD050950B3050063849E /* XRTableImporterDelimiterController.h */; };
 		B427BD080950B3050063849E /* XRTableImporterDelimiterController.m in Sources */ = {isa = PBXBuildFile; fileRef = B427BD060950B3050063849E /* XRTableImporterDelimiterController.m */; };
 		B427CFF21E81EB9E0047F659 /* XRStatisticTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B427CFF11E81EB9E0047F659 /* XRStatisticTests.m */; };
+		B42D167B2E07409A003B00F1 /* XRGraphicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42D167A2E07409A003B00F1 /* XRGraphicTests.swift */; };
 		B42FE3AC096AEB99007E9DC5 /* XRCalculateAzimuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = B42FE3AA096AEB99007E9DC5 /* XRCalculateAzimuthController.m */; };
 		B42FE3AD096AEB99007E9DC5 /* XRCalculateAzimuthController.h in Headers */ = {isa = PBXBuildFile; fileRef = B42FE3AB096AEB99007E9DC5 /* XRCalculateAzimuthController.h */; };
 		B4324D0A06187FFF0083AE8A /* XRLayerText.h in Headers */ = {isa = PBXBuildFile; fileRef = B4324D0806187FFF0083AE8A /* XRLayerText.h */; };
@@ -316,6 +317,7 @@
 		B427BD050950B3050063849E /* XRTableImporterDelimiterController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRTableImporterDelimiterController.h; sourceTree = "<group>"; };
 		B427BD060950B3050063849E /* XRTableImporterDelimiterController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XRTableImporterDelimiterController.m; sourceTree = "<group>"; };
 		B427CFF11E81EB9E0047F659 /* XRStatisticTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRStatisticTests.m; sourceTree = "<group>"; };
+		B42D167A2E07409A003B00F1 /* XRGraphicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicTests.swift; sourceTree = "<group>"; };
 		B42FE3AA096AEB99007E9DC5 /* XRCalculateAzimuthController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XRCalculateAzimuthController.m; sourceTree = "<group>"; };
 		B42FE3AB096AEB99007E9DC5 /* XRCalculateAzimuthController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRCalculateAzimuthController.h; sourceTree = "<group>"; };
 		B4324D0806187FFF0083AE8A /* XRLayerText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRLayerText.h; sourceTree = "<group>"; };
@@ -744,6 +746,7 @@
 				B4A82FAB2A07FB8800790052 /* LITMArrowHead.m */,
 				B411E50505C35F5500C22F3E /* XRGraphic.h */,
 				B411E50605C35F5500C22F3E /* XRGraphic.m */,
+				B42D167A2E07409A003B00F1 /* XRGraphicTests.swift */,
 				B411E5DC05C3651400C22F3E /* XRGraphicCircle.h */,
 				B411E5DD05C3651400C22F3E /* XRGraphicCircle.m */,
 				B4950EFE05DD286A00C711DC /* XRGraphicCircleLabel.h */,
@@ -1611,6 +1614,7 @@
 				B4AE41B52D0BBAF600E05D96 /* XRLayerText+Stub.swift in Sources */,
 				B4AE41CA2D17D76000E05D96 /* LayerLineArrow+Testing.swift in Sources */,
 				B4AE41C72D14EA5900E05D96 /* LayerText+Testing.swift in Sources */,
+				B42D167B2E07409A003B00F1 /* XRGraphicTests.swift in Sources */,
 				B41C87442DE4DC070053C9C9 /* CommonUtilities.swift in Sources */,
 				B4AE41D62D1E5DC300E05D96 /* XRGeometryController+Testing.swift in Sources */,
 				B4B0BB881E7E45CB00F392DA /* XRLayerDataTests.m in Sources */,

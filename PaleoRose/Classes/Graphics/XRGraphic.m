@@ -281,31 +281,6 @@
 	return YES;
 }
 
--(NSData *)dataFromColor:(NSColor *)aColor
-{
-	CGFloat red1,blue1,green1,alpha1;
-	NSMutableData *mutDat = [[NSMutableData alloc] init];
-    NSColor *newColor = [aColor colorUsingColorSpace:[NSColorSpace deviceRGBColorSpace]];
-	[newColor getRed:&red1 green:&green1 blue:&blue1 alpha:&alpha1];
-	[mutDat appendBytes:&red1 length:sizeof(float)];
-	[mutDat appendBytes:&green1 length:sizeof(float)];
-	[mutDat appendBytes:&blue1 length:sizeof(float)];
-	[mutDat appendBytes:&alpha1 length:sizeof(float)];
-	return [NSData dataWithData:mutDat];
-}
-
--(NSColor *)colorFromData:(NSData *)data
-{
-	float values[4];
-
-	NSColor *aColor;
-    [data getBytes:values length: [data length]];
-	aColor = [NSColor colorWithCalibratedRed:values[0] green:values[1] blue:values[2] alpha:values[3]];
-		
-		return aColor;
-	
-}
-
 -(NSDictionary *)graphicSettings
 {
 	NSMutableDictionary *theDict = [[NSMutableDictionary alloc] init];

@@ -93,8 +93,6 @@
 
 
 -(BOOL)compareColor:(NSColor *)color1 withColor:(NSColor *)color2;
--(NSData *)dataFromColor:(NSColor *)aColor;
--(NSColor *)colorFromData:(NSData *)data;
 
 -(NSDictionary *)graphicSettings;
 @end
