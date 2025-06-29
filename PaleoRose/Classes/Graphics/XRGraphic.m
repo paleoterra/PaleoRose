@@ -49,32 +49,24 @@
 		_strokeColor = [NSColor blackColor];
 		_lineWidth = 1.0;
 		_needsDisplay = YES;
-		_isSelected = NO;
 		_drawsFill = NO;
-		geometryController = controller;//not retained.
-		//[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(geometryDidChange:) name:XRGeometryDidChange object:geometryController];
-		//[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(geometryDidChange:) name:XRGeometryDidChangeIsPercent object:geometryController];
+		geometryController = controller;
 	}
 	return self;
 }
-
-
 
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-//calculate Rose Geometry
 
 -(void)geometryDidChange:(NSNotification *)aNotification
 {
-	//NSLog(@"geometryDidChange");
 	[self calculateGeometry];
 }
 
 -(void)calculateGeometry
 {
-	//NSLog(@"XRGraphic calculateGeometry");
 	//here subclasses must set up the geometry of the graphic object.
 }
 
@@ -89,10 +81,6 @@
     return _needsDisplay;
 }
 
-
-
-//tests whether an object is within a rect.  If so, then needs display will return a YES
-
 -(NSRect)drawingRect;//if this object needs redrawing, then use this to get its rect
 {
     return [_drawingPath bounds];
@@ -100,7 +88,6 @@
 
 -(void)drawRect:(NSRect)aRect
 {
-
     @try {
     if(NSIntersectsRect(aRect,[_drawingPath bounds]))
     {  
@@ -125,51 +112,11 @@
 	}
 }
 
-
-//hit test
 - (BOOL)hitTest:(NSPoint)point
 {
     return NO;
 }
 
-//selection
--(BOOL)isSelected
-{
-    return NO;//not selectable
-}
-
--(void)setSelected:(BOOL)newSelection
-{
-    return;//not selectable
-}
-
--(void)selectGraphic
-{
-    return;
-}
--(void)deselectGraphic
-{
-    return;
-}
-
-//inspector info
--(NSDictionary *)inspectorInfo
-{
-    NSDictionary *theDict = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:_fillColor,
-		_strokeColor,
-		[NSNumber numberWithFloat:_lineWidth],
-		[NSNumber numberWithBool:_drawsFill],
-		nil]
-														forKeys:[NSArray arrayWithObjects:XRGraphicKeyFillColor,
-															XRGraphicKeyStrokeColor,
-															XRGraphicKeyLineWidth,
-															XRGraphicKeyDrawsFill,
-															nil]];
-    return theDict;
-}
-
-
-//Color
 -(void)setDrawsFill:(BOOL)fill
 {
     _drawsFill = fill;
@@ -219,10 +166,8 @@
     NSColor *temp;
     if(alpha>1)
     {
-        //NSLog(@"invalid alpha value");
         alpha = 1.0;
     }
-    //do stroke
     if(!_strokeColor)
         [self setDefaultStrokeColor];
     temp = [_strokeColor colorWithAlphaComponent:alpha];
@@ -262,23 +207,6 @@
 -(float)lineWidth
 {
 	return _lineWidth;
-}
-
-
-
--(BOOL)compareColor:(NSColor *)color1 withColor:(NSColor *)color2
-{
-    NSColor *color1a = [color1 colorUsingColorSpace:[NSColorSpace deviceRGBColorSpace]];;
-    NSColor *color2a = [color2 colorUsingColorSpace:[NSColorSpace deviceRGBColorSpace]];;
-	if([color1a redComponent]!=[color2a redComponent])
-		return NO;
-	if([color1a greenComponent]!=[color2a greenComponent])
-		return NO;
-	if([color1a blueComponent]!=[color2a blueComponent])
-		return NO;
-	if([color1a alphaComponent]!=[color2a alphaComponent])
-		return NO;
-	return YES;
 }
 
 -(NSDictionary *)graphicSettings

@@ -41,38 +41,21 @@
 	float _lineWidth;
     BOOL _needsDisplay;
     BOOL _drawsFill;
-    BOOL _isSelected;
 	__weak XRGeometryController *geometryController;
 }
 
-//Initialization
 -(id)initWithController:(XRGeometryController *)controller;
-//calculate Rose Geometry
 -(void)geometryDidChange:(NSNotification *)aNotification;
 -(void)calculateGeometry;
 
-//redraw
 -(void)setNeedsDisplay:(BOOL)display;
 -(BOOL)needsDisplay;
-//tests whether an object is within a rect.  If so, then needs display will return a YES
--(NSRect)drawingRect;//if this object needs redrawing, then use this to get its rect
+
+-(NSRect)drawingRect;
 -(void)drawRect:(NSRect )aRect;
 
-
-	//hit test
 - (BOOL)hitTest:(NSPoint)point;
 
-	//selection
--(BOOL)isSelected;
--(void)setSelected:(BOOL)newSelection;
--(void)selectGraphic;
--(void)deselectGraphic;
-
-	//inspector info
--(NSDictionary *)inspectorInfo;
-
-
-	//Color
 -(void)setDrawsFill:(BOOL)fill;
 -(BOOL)drawsFill;
 
@@ -90,9 +73,6 @@
 
 -(void)setLineWidth:(float)newWeight;
 -(float)lineWidth;
-
-
--(BOOL)compareColor:(NSColor *)color1 withColor:(NSColor *)color2;
 
 -(NSDictionary *)graphicSettings;
 @end

@@ -82,4 +82,32 @@ enum CommonUtilities {
         #expect(try assertEqualColors(lhs: layer.strokeColor(), rhs: strokeColor))
         #expect(try assertEqualColors(lhs: layer.fillColor(), rhs: fillColor))
     }
+
+    static func verifyEqualColorsWithAlpha(lhs: NSColor, rhs: NSColor) throws {
+        try verifyEqualColors(lhs: lhs, rhs: rhs, componentCount: 4)
+    }
+
+    static func verifyEqualColorsWithOutAlpha(lhs: NSColor, rhs: NSColor) throws {
+        try verifyEqualColors(lhs: lhs, rhs: rhs, componentCount: 3)
+    }
+
+    private static func verifyEqualColors(lhs: NSColor, rhs: NSColor, componentCount: Int) throws {
+        let colorSpace = try #require(CGColorSpace(name: CGColorSpace.sRGB))
+        let lhsCG = try #require(lhs.cgColor.converted(
+            to: colorSpace,
+            intent: .defaultIntent,
+            options: nil
+        ))
+        let rhsCG = try #require(rhs.cgColor.converted(
+            to: colorSpace,
+            intent: .defaultIntent,
+            options: nil
+        ))
+        let components1 = try #require(lhsCG.components)
+        let components2 = try #require(rhsCG.components)
+        let colorMatches = zip(components1.prefix(componentCount), components2.prefix(componentCount)).allSatisfy {
+            $0.isApproximatelyEqual(to: $1, absoluteTolerance: 0.01)
+        }
+        #expect(colorMatches, "Color doesn't match expected color")
+    }
 }

@@ -52,7 +52,6 @@
 		B427BD070950B3050063849E /* XRTableImporterDelimiterController.h in Headers */ = {isa = PBXBuildFile; fileRef = B427BD050950B3050063849E /* XRTableImporterDelimiterController.h */; };
 		B427BD080950B3050063849E /* XRTableImporterDelimiterController.m in Sources */ = {isa = PBXBuildFile; fileRef = B427BD060950B3050063849E /* XRTableImporterDelimiterController.m */; };
 		B427CFF21E81EB9E0047F659 /* XRStatisticTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B427CFF11E81EB9E0047F659 /* XRStatisticTests.m */; };
-		B42D167B2E07409A003B00F1 /* XRGraphicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42D167A2E07409A003B00F1 /* XRGraphicTests.swift */; };
 		B42FE3AC096AEB99007E9DC5 /* XRCalculateAzimuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = B42FE3AA096AEB99007E9DC5 /* XRCalculateAzimuthController.m */; };
 		B42FE3AD096AEB99007E9DC5 /* XRCalculateAzimuthController.h in Headers */ = {isa = PBXBuildFile; fileRef = B42FE3AB096AEB99007E9DC5 /* XRCalculateAzimuthController.h */; };
 		B4324D0A06187FFF0083AE8A /* XRLayerText.h in Headers */ = {isa = PBXBuildFile; fileRef = B4324D0806187FFF0083AE8A /* XRLayerText.h */; };
@@ -163,6 +162,9 @@
 		B4C08802063069F2001A91F4 /* XRExportGraphicAccessory.h in Headers */ = {isa = PBXBuildFile; fileRef = B4C08800063069F2001A91F4 /* XRExportGraphicAccessory.h */; };
 		B4C08803063069F2001A91F4 /* XRExportGraphicAccessory.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C08801063069F2001A91F4 /* XRExportGraphicAccessory.m */; };
 		B4C7CF7405D7FA190071FD29 /* removeLayer.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B4C7CF7305D7FA180071FD29 /* removeLayer.tiff */; };
+		B4CC53462E1043A200067436 /* Numerics in Frameworks */ = {isa = PBXBuildFile; productRef = B4CC53452E1043A200067436 /* Numerics */; };
+		B4CC53482E10593000067436 /* XRGraphicCircleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4CC53472E10593000067436 /* XRGraphicCircleTests.swift */; };
+		B4CC534A2E10594A00067436 /* MockGeometryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4CC53492E10594A00067436 /* MockGeometryController.swift */; };
 		B4DB28E32D22450300FC6A49 /* Encoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DB28E22D2244FC00FC6A49 /* Encoding.swift */; };
 		B4E0138D05EC4AC500C50D5D /* version.plist in Resources */ = {isa = PBXBuildFile; fileRef = B4E0138C05EC4AC500C50D5D /* version.plist */; };
 		B4E22DA82DFF701200A9AFE0 /* FormatterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E22DA72DFF700D00A9AFE0 /* FormatterFactory.swift */; };
@@ -317,7 +319,6 @@
 		B427BD050950B3050063849E /* XRTableImporterDelimiterController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRTableImporterDelimiterController.h; sourceTree = "<group>"; };
 		B427BD060950B3050063849E /* XRTableImporterDelimiterController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XRTableImporterDelimiterController.m; sourceTree = "<group>"; };
 		B427CFF11E81EB9E0047F659 /* XRStatisticTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRStatisticTests.m; sourceTree = "<group>"; };
-		B42D167A2E07409A003B00F1 /* XRGraphicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicTests.swift; sourceTree = "<group>"; };
 		B42FE3AA096AEB99007E9DC5 /* XRCalculateAzimuthController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XRCalculateAzimuthController.m; sourceTree = "<group>"; };
 		B42FE3AB096AEB99007E9DC5 /* XRCalculateAzimuthController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRCalculateAzimuthController.h; sourceTree = "<group>"; };
 		B4324D0806187FFF0083AE8A /* XRLayerText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRLayerText.h; sourceTree = "<group>"; };
@@ -472,6 +473,8 @@
 		B4C08800063069F2001A91F4 /* XRExportGraphicAccessory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRExportGraphicAccessory.h; sourceTree = "<group>"; };
 		B4C08801063069F2001A91F4 /* XRExportGraphicAccessory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRExportGraphicAccessory.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B4C7CF7305D7FA180071FD29 /* removeLayer.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = removeLayer.tiff; sourceTree = "<group>"; };
+		B4CC53472E10593000067436 /* XRGraphicCircleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicCircleTests.swift; sourceTree = "<group>"; };
+		B4CC53492E10594A00067436 /* MockGeometryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGeometryController.swift; sourceTree = "<group>"; };
 		B4DB28E22D2244FC00FC6A49 /* Encoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encoding.swift; sourceTree = "<group>"; };
 		B4E0138C05EC4AC500C50D5D /* version.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; path = version.plist; sourceTree = "<group>"; };
 		B4E22DA72DFF700D00A9AFE0 /* FormatterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatterFactory.swift; sourceTree = "<group>"; };
@@ -554,6 +557,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4CC53462E1043A200067436 /* Numerics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -746,9 +750,9 @@
 				B4A82FAB2A07FB8800790052 /* LITMArrowHead.m */,
 				B411E50505C35F5500C22F3E /* XRGraphic.h */,
 				B411E50605C35F5500C22F3E /* XRGraphic.m */,
-				B42D167A2E07409A003B00F1 /* XRGraphicTests.swift */,
 				B411E5DC05C3651400C22F3E /* XRGraphicCircle.h */,
 				B411E5DD05C3651400C22F3E /* XRGraphicCircle.m */,
+				B4CC53472E10593000067436 /* XRGraphicCircleTests.swift */,
 				B4950EFE05DD286A00C711DC /* XRGraphicCircleLabel.h */,
 				B4950EFF05DD286A00C711DC /* XRGraphicCircleLabel.m */,
 				B4EE8F7605C5E0A9001BACD3 /* XRGraphicLine.h */,
@@ -1149,6 +1153,7 @@
 				B4B0BB691E7E41C900F392DA /* Info.plist */,
 				B41C87432DE4DC070053C9C9 /* CommonUtilities.swift */,
 				B41C174D2CB0E45C002D19C2 /* Tag.swift */,
+				B4CC53492E10594A00067436 /* MockGeometryController.swift */,
 			);
 			path = "Unit Tests";
 			sourceTree = "<group>";
@@ -1375,6 +1380,9 @@
 				Base,
 			);
 			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* XRose */;
+			packageReferences = (
+				B4CC53442E1043A200067436 /* XCRemoteSwiftPackageReference "swift-numerics" */,
+			);
 			productRefGroup = 19C28FB0FE9D524F11CA2CBB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1608,13 +1616,14 @@
 				B4AE41C12D0BD09300E05D96 /* XRLayerCore+Stub.swift in Sources */,
 				B427CFF21E81EB9E0047F659 /* XRStatisticTests.m in Sources */,
 				B41C87402DE4D8070053C9C9 /* DefaultsStorageTests.swift in Sources */,
+				B4CC534A2E10594A00067436 /* MockGeometryController.swift in Sources */,
 				B41C87412DE4D8070053C9C9 /* UserDefaultsKeyTests.swift in Sources */,
 				B41C87422DE4D8070053C9C9 /* UserDefaultsExtensionsTests.swift in Sources */,
 				B41C17522CB1C278002D19C2 /* InMemoryStoreIntegrationTest.swift in Sources */,
 				B4AE41B52D0BBAF600E05D96 /* XRLayerText+Stub.swift in Sources */,
 				B4AE41CA2D17D76000E05D96 /* LayerLineArrow+Testing.swift in Sources */,
 				B4AE41C72D14EA5900E05D96 /* LayerText+Testing.swift in Sources */,
-				B42D167B2E07409A003B00F1 /* XRGraphicTests.swift in Sources */,
+				B4CC53482E10593000067436 /* XRGraphicCircleTests.swift in Sources */,
 				B41C87442DE4DC070053C9C9 /* CommonUtilities.swift in Sources */,
 				B4AE41D62D1E5DC300E05D96 /* XRGeometryController+Testing.swift in Sources */,
 				B4B0BB881E7E45CB00F392DA /* XRLayerDataTests.m in Sources */,
@@ -1866,6 +1875,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -1914,6 +1924,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -2314,6 +2325,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B4CC53442E1043A200067436 /* XCRemoteSwiftPackageReference "swift-numerics" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-numerics.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B4CC53452E1043A200067436 /* Numerics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B4CC53442E1043A200067436 /* XCRemoteSwiftPackageReference "swift-numerics" */;
+			productName = Numerics;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
 }

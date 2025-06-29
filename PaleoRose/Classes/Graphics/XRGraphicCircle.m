@@ -36,7 +36,6 @@
 	if (!(self = [super initWithController:aController])) return nil;
 	if(self)
 	{
-
 		_countSetting = 0;
 		_percentSetting = 0.0;
 		_isPercent = [aController isPercent];
@@ -46,18 +45,14 @@
 	return self;
 }
 
-
-
 -(void)setCountSetting:(int)count
 {
-	//NSLog(@"setCountSetting %i %i",_countSetting,count);
 	if(_countSetting != count)
 	{
 		_countSetting = count;
 		_isPercent = NO;
 		_isGeometryPercent = NO;
 		[self calculateGeometry];
-		
 	}
 }
 
@@ -74,9 +69,7 @@
 		_isPercent = YES;
 		_isGeometryPercent = NO;
 		[self calculateGeometry];
-		
 	}
-
 }
 
 -(void)setGeometryPercent:(float)percent
