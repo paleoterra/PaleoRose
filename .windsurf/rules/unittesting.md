@@ -4,7 +4,7 @@ description: Apply when creating any unit test
 ---
 
 Unit tests must be done with Swift Testing framework
-- Do not use XCTest and do not use any XCTest asserts, such as XCTAssertTrue
+- Do not use XCTest, XCTestCase, etc. and do not use any XCTest asserts, such as XCTAssertTrue
 - @docs https://developer.apple.com/documentation/testing
 - Use the numerics package to handle floating point equality with accurracy
 - Use test arguments instead of multiple tests or tests with loops

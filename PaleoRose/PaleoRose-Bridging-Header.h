@@ -12,3 +12,4 @@
 #import "XRLayerGrid.h"
 #import "XRGraphic.h"
 #import "XRGraphicCircle.h"
+#import "XRGraphicCircleLabel.h"

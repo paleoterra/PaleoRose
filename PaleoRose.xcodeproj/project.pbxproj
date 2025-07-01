@@ -101,6 +101,7 @@
 		B48345D705C23B3D00E3F6B7 /* XRoseTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = B48345D505C23B3D00E3F6B7 /* XRoseTableController.m */; };
 		B48345F005C23CA100E3F6B7 /* XRoseView.h in Headers */ = {isa = PBXBuildFile; fileRef = B48345EE05C23CA100E3F6B7 /* XRoseView.h */; };
 		B48345F105C23CA100E3F6B7 /* XRoseView.m in Sources */ = {isa = PBXBuildFile; fileRef = B48345EF05C23CA100E3F6B7 /* XRoseView.m */; };
+		B48430862E1193E500E126C0 /* XRGraphicCircleLabelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48430852E1193E500E126C0 /* XRGraphicCircleLabelTests.swift */; };
 		B4852A8405C2E223002212E3 /* XRGeometryController.h in Headers */ = {isa = PBXBuildFile; fileRef = B4852A8205C2E223002212E3 /* XRGeometryController.h */; };
 		B4852A8505C2E223002212E3 /* XRGeometryController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4852A8305C2E223002212E3 /* XRGeometryController.m */; };
 		B4866BF42CAE02C900319712 /* StoreProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4866BF32CAE02C300319712 /* StoreProtocol.swift */; };
@@ -386,6 +387,7 @@
 		B48345D505C23B3D00E3F6B7 /* XRoseTableController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRoseTableController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B48345EE05C23CA100E3F6B7 /* XRoseView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRoseView.h; sourceTree = "<group>"; };
 		B48345EF05C23CA100E3F6B7 /* XRoseView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XRoseView.m; sourceTree = "<group>"; };
+		B48430852E1193E500E126C0 /* XRGraphicCircleLabelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicCircleLabelTests.swift; sourceTree = "<group>"; };
 		B4852A8205C2E223002212E3 /* XRGeometryController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRGeometryController.h; sourceTree = "<group>"; };
 		B4852A8305C2E223002212E3 /* XRGeometryController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XRGeometryController.m; sourceTree = "<group>"; };
 		B4866BF32CAE02C300319712 /* StoreProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreProtocol.swift; sourceTree = "<group>"; };
@@ -755,6 +757,7 @@
 				B4CC53472E10593000067436 /* XRGraphicCircleTests.swift */,
 				B4950EFE05DD286A00C711DC /* XRGraphicCircleLabel.h */,
 				B4950EFF05DD286A00C711DC /* XRGraphicCircleLabel.m */,
+				B48430852E1193E500E126C0 /* XRGraphicCircleLabelTests.swift */,
 				B4EE8F7605C5E0A9001BACD3 /* XRGraphicLine.h */,
 				B4EE8F7705C5E0A9001BACD3 /* XRGraphicLine.m */,
 				B461B86F05C4E1DA00738D23 /* XRGraphicKite.h */,
@@ -1605,6 +1608,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4AE41D32D17DD2800E05D96 /* LayerData+Testing.swift in Sources */,
+				B48430862E1193E500E126C0 /* XRGraphicCircleLabelTests.swift in Sources */,
 				B4AE41C42D14E86700E05D96 /* Layer+Testing.swift in Sources */,
 				B4AE41D02D17DA3700E05D96 /* LayerCore+Testing.swift in Sources */,
 				B41C17532CB1C2AF002D19C2 /* Tag.swift in Sources */,

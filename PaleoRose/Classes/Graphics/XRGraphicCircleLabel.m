@@ -51,7 +51,6 @@
 
 -(id)initWithController:(XRGeometryController *)controller
 {
-
 	if (!(self = [super initWithController:controller])) return nil;
 	if(self)
 	{
@@ -60,7 +59,6 @@
 		_labelFont = [NSFont fontWithName:@"Arial-Black" size:12];
 		_labelPoint = NSMakePoint(0.0,0.0);
 	}
-
 	return self;
 }
 
@@ -186,14 +184,8 @@
         }
         if((_showLabel)&&(!_isCore))
 		{
-			//(@"at draw");
-			//NSLog([_label description]);
-			
 			[_label drawAtPoint:_labelPoint];
-			
 		}
-
-		
         [NSGraphicsContext restoreGraphicsState];
         [self setNeedsDisplay:NO];
     }
@@ -201,16 +193,14 @@
 
 -(void)setGeometryPercent:(float)percent
 {
-	
 	_percentSetting = percent*[geometryController geometryMaxPercent];
-	//NSLog(@"percentSetting %f",_percentSetting);
 	[self calculateGeometry];
 }
 
 -(NSDictionary *)graphicSettings
 {
 	NSMutableDictionary *theDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];
-	//NSLog(@"graphic  circle label");
+
 	if(_showLabel)
 		[theDict setObject:@"YES" forKey:@"_showLabel"];
 	else
@@ -225,9 +215,6 @@
 	else
 		[theDict setObject:@"NO" forKey:@"_isCore"];
 
-	//NSLog(@"end graphic  circle label");
-	
-	
 	return [NSDictionary dictionaryWithDictionary:theDict];
 }
 
