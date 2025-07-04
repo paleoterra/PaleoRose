@@ -2,7 +2,7 @@ import Numerics
 @testable import PaleoRose
 import Testing
 
-// swiftlint:disable file_length
+// swiftlint:disable file_length type_body_length
 @MainActor
 struct XRGraphicCircleTests {
 
@@ -19,51 +19,19 @@ struct XRGraphicCircleTests {
         )
     }
 
-    private func validateGraphicSettings(
-        testObject: XRGraphicCircle,
-        expectedGraphicType: String = "Circle",
-        expectedFillColor: NSColor = .black,
-        expectedStrokeColor: NSColor = .black,
-        expectedLineWidth: String = "1.000000",
-        expectedCountSetting: String = "0",
-        expectedPercentSetting: String = "0.000000",
-        expectedGeometryPercent: String = "0.000000",
-        expectedIsGeometryPercent: String = "NO",
-        expectedIsPercent: String = "NO",
-        expectedIsFixedCount: String = "NO"
-
-    ) throws {
-        let settings = try #require(
-            testObject.graphicSettings() as? [String: Any],
-            "Failed to get graphic settings"
-        )
-
-        let graphicType = try #require(settings["GraphicType"] as? String)
-        let fillColor = try #require(settings["_fillColor"] as? NSColor)
-        let strokeColor = try #require(settings["_strokeColor"] as? NSColor)
-        let lineWidth = try #require(settings["_lineWidth"] as? String)
-
-        // class
-        let countSetting = try #require(settings["_countSetting"] as? String)
-        let percentSetting = try #require(settings["_percentSetting"] as? String)
-        let geometryPercent = try #require(settings["_geometryPercent"] as? String)
-        let isGeometryPercent = try #require(settings["_isGeometryPercent"] as? String)
-        let isPercent = try #require(settings["_isPercent"] as? String)
-        let isFixedCount = try #require(settings["_isFixedCount"] as? String)
-
-        #expect(graphicType == expectedGraphicType, "Type should be \(expectedGraphicType)")
-        #expect(
-            fillColor.cgColor.components == NSColor.black.cgColor.components,
-            "Fill color should be \(expectedFillColor)"
-        )
-        #expect(strokeColor.cgColor.components == expectedStrokeColor.cgColor.components, "Stroke color should be \(expectedStrokeColor)")
-        #expect(lineWidth == expectedLineWidth, "Line width should be \(expectedLineWidth)")
-        #expect(countSetting == expectedCountSetting, "Count setting should be \(expectedCountSetting)")
-        #expect(percentSetting == expectedPercentSetting, "Percent setting should be \(expectedPercentSetting)")
-        #expect(geometryPercent == expectedGeometryPercent, "Geometry percent should be \(expectedGeometryPercent)")
-        #expect(isGeometryPercent == expectedIsGeometryPercent, "Is geometry percent should be \(expectedIsGeometryPercent)")
-        #expect(isPercent == expectedIsPercent, "Is percent should be \(expectedIsPercent)")
-        #expect(isFixedCount == expectedIsFixedCount, "Fix count should be \(expectedIsFixedCount)")
+    private func defaultGraphicSettings() -> [AnyHashable: Any] {
+        [
+            "GraphicType": "Circle",
+            "_fillColor": NSColor.black,
+            "_strokeColor": NSColor.black,
+            "_lineWidth": "1.000000",
+            "_countSetting": "0",
+            "_percentSetting": "0.000000",
+            "_geometryPercent": "0.000000",
+            "_isGeometryPercent": "NO",
+            "_isPercent": "NO",
+            "_isFixedCount": "NO"
+        ]
     }
 
     private func transparencyCompare(
@@ -77,7 +45,10 @@ struct XRGraphicCircleTests {
         #expect(fillColor.alphaComponent.isApproximatelyEqual(to: CGFloat(expectedAlpha)))
 
         // Convert all colors to a common color space (sRGB) for comparison
-        try CommonUtilities.verifyEqualColorsWithOutAlpha(lhs: strokeColor, rhs: expectedBaseStrokeColor)
+        try CommonUtilities.verifyEqualColorsWithOutAlpha(
+            lhs: strokeColor,
+            rhs: expectedBaseStrokeColor
+        )
         try CommonUtilities.verifyEqualColorsWithOutAlpha(lhs: fillColor, rhs: expectedBaseFillColor)
     }
 
@@ -425,8 +396,11 @@ struct XRGraphicCircleTests {
         // Given
         let controller = buildController()
         let circle = try buildTestObject(controller: controller)
-
-        try validateGraphicSettings(testObject: circle)
+        try CommonUtilities
+            .compareGraphicSettings(
+                values: circle.graphicSettings(),
+                expected: defaultGraphicSettings()
+            )
     }
 
     @Test("graphicSettings should include correct properties for set percent")
@@ -435,12 +409,15 @@ struct XRGraphicCircleTests {
         let controller = buildController()
         let circle = try buildTestObject(controller: controller)
         circle.setPercentSetting(75.5)
-        try validateGraphicSettings(
-            testObject: circle,
-            expectedPercentSetting: "75.500000",
-            expectedGeometryPercent: "75.500000", // is this a bug?
-            expectedIsPercent: "YES"
-        )
+        var expectedSettings = defaultGraphicSettings()
+        expectedSettings["_isPercent"] = "YES"
+        expectedSettings["_percentSetting"] = "75.500000"
+        expectedSettings["_geometryPercent"] = "75.500000"
+        try CommonUtilities
+            .compareGraphicSettings(
+                values: circle.graphicSettings(),
+                expected: expectedSettings
+            )
     }
 
     @Test("graphicSettings should include correct properties for set geometry percent")
@@ -449,10 +426,15 @@ struct XRGraphicCircleTests {
         let controller = buildController()
         let circle = try buildTestObject(controller: controller)
         circle.setGeometryPercent(0.45)
-        try validateGraphicSettings(
-            testObject: circle,
-            expectedIsGeometryPercent: "YES"
-        )
+
+        var expectedSettings = defaultGraphicSettings()
+        expectedSettings["_isPercent"] = "NO"
+        expectedSettings["_isGeometryPercent"] = "YES"
+        try CommonUtilities
+            .compareGraphicSettings(
+                values: circle.graphicSettings(),
+                expected: expectedSettings
+            )
     }
 
     @Test("graphicSettings should include correct properties for is fixed count")
@@ -461,10 +443,13 @@ struct XRGraphicCircleTests {
         let controller = buildController()
         let circle = try buildTestObject(controller: controller)
         circle.setIsFixed(true)
-        try validateGraphicSettings(
-            testObject: circle,
-            expectedIsFixedCount: "YES"
-        )
+        var expectedSettings = defaultGraphicSettings()
+        expectedSettings["_isFixedCount"] = "YES"
+        try CommonUtilities
+            .compareGraphicSettings(
+                values: circle.graphicSettings(),
+                expected: expectedSettings
+            )
     }
 
     // MARK: - Transparency Tests
@@ -592,4 +577,4 @@ struct XRGraphicCircleTests {
     }
 }
 
-// swiftlint:enable file_length
+// swiftlint:enable file_length type_body_length

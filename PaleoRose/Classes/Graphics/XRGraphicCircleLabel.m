@@ -207,7 +207,7 @@
 		[theDict setObject:@"NO" forKey:@"_showLabel"];
 	
 	[theDict setObject:[NSString stringWithFormat:@"%f",_labelAngle] forKey:@"_labelAngle"];
-	[theDict setObject:_label forKey:@"Label"];
+    [theDict setObject:_label.string forKey:@"Label"];
 	[theDict setObject:_labelFont forKey:@"_labelFont"];
 	
 	if(_isCore)

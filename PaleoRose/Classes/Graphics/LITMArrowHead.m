@@ -123,16 +123,6 @@
 
 }
 
-
-/*-(void)positionAtLineEndpoint:(NSPoint)aPoint previousPoint:(NSPoint)sourcePoint
-{
-	float angle;
-	[_positionTransform release];
-	_positionTransform = [[NSAffineTransform transform] translateXBy:aPoint.x yBy:aPoint.y];
-	[_positionTransform rotateByDegrees:angle];
-}*/
-
-
 -(void)drawRect:(NSRect)rect
 {
 
@@ -155,6 +145,5 @@
 	[NSGraphicsContext restoreGraphicsState];
 
 }
-
 
 @end

@@ -102,6 +102,8 @@
 		B48345F005C23CA100E3F6B7 /* XRoseView.h in Headers */ = {isa = PBXBuildFile; fileRef = B48345EE05C23CA100E3F6B7 /* XRoseView.h */; };
 		B48345F105C23CA100E3F6B7 /* XRoseView.m in Sources */ = {isa = PBXBuildFile; fileRef = B48345EF05C23CA100E3F6B7 /* XRoseView.m */; };
 		B48430862E1193E500E126C0 /* XRGraphicCircleLabelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48430852E1193E500E126C0 /* XRGraphicCircleLabelTests.swift */; };
+		B48430882E1486D100E126C0 /* LITMArrowHeadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48430872E1486D100E126C0 /* LITMArrowHeadTests.swift */; };
+		B484308A2E1487C900E126C0 /* XRGraphicDotDeviationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48430892E1487C900E126C0 /* XRGraphicDotDeviationTests.swift */; };
 		B4852A8405C2E223002212E3 /* XRGeometryController.h in Headers */ = {isa = PBXBuildFile; fileRef = B4852A8205C2E223002212E3 /* XRGeometryController.h */; };
 		B4852A8505C2E223002212E3 /* XRGeometryController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4852A8305C2E223002212E3 /* XRGeometryController.m */; };
 		B4866BF42CAE02C900319712 /* StoreProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4866BF32CAE02C300319712 /* StoreProtocol.swift */; };
@@ -388,6 +390,8 @@
 		B48345EE05C23CA100E3F6B7 /* XRoseView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRoseView.h; sourceTree = "<group>"; };
 		B48345EF05C23CA100E3F6B7 /* XRoseView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XRoseView.m; sourceTree = "<group>"; };
 		B48430852E1193E500E126C0 /* XRGraphicCircleLabelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicCircleLabelTests.swift; sourceTree = "<group>"; };
+		B48430872E1486D100E126C0 /* LITMArrowHeadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LITMArrowHeadTests.swift; sourceTree = "<group>"; };
+		B48430892E1487C900E126C0 /* XRGraphicDotDeviationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicDotDeviationTests.swift; sourceTree = "<group>"; };
 		B4852A8205C2E223002212E3 /* XRGeometryController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRGeometryController.h; sourceTree = "<group>"; };
 		B4852A8305C2E223002212E3 /* XRGeometryController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XRGeometryController.m; sourceTree = "<group>"; };
 		B4866BF32CAE02C300319712 /* StoreProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreProtocol.swift; sourceTree = "<group>"; };
@@ -750,6 +754,7 @@
 			children = (
 				B4A82FAA2A07FB8700790052 /* LITMArrowHead.h */,
 				B4A82FAB2A07FB8800790052 /* LITMArrowHead.m */,
+				B48430872E1486D100E126C0 /* LITMArrowHeadTests.swift */,
 				B411E50505C35F5500C22F3E /* XRGraphic.h */,
 				B411E50605C35F5500C22F3E /* XRGraphic.m */,
 				B411E5DC05C3651400C22F3E /* XRGraphicCircle.h */,
@@ -770,6 +775,7 @@
 				B4F2595005C58F28008591BE /* XRGraphicHistogram.m */,
 				B4F25AE205C59CE6008591BE /* XRGraphicDotDeviation.h */,
 				B4F25AE305C59CE6008591BE /* XRGraphicDotDeviation.m */,
+				B48430892E1487C900E126C0 /* XRGraphicDotDeviationTests.swift */,
 			);
 			path = Graphics;
 			sourceTree = "<group>";
@@ -1612,6 +1618,7 @@
 				B4AE41C42D14E86700E05D96 /* Layer+Testing.swift in Sources */,
 				B4AE41D02D17DA3700E05D96 /* LayerCore+Testing.swift in Sources */,
 				B41C17532CB1C2AF002D19C2 /* Tag.swift in Sources */,
+				B48430882E1486D100E126C0 /* LITMArrowHeadTests.swift in Sources */,
 				B48BBEC82CAA20DC0050852E /* InMemoryStoreTest.swift in Sources */,
 				B4237C9C2D013BE900E2B510 /* StorageModelFactoryTest.swift in Sources */,
 				B4866BF72CAE039200319712 /* MockSqliteInterface.swift in Sources */,
@@ -1622,6 +1629,7 @@
 				B41C87402DE4D8070053C9C9 /* DefaultsStorageTests.swift in Sources */,
 				B4CC534A2E10594A00067436 /* MockGeometryController.swift in Sources */,
 				B41C87412DE4D8070053C9C9 /* UserDefaultsKeyTests.swift in Sources */,
+				B484308A2E1487C900E126C0 /* XRGraphicDotDeviationTests.swift in Sources */,
 				B41C87422DE4D8070053C9C9 /* UserDefaultsExtensionsTests.swift in Sources */,
 				B41C17522CB1C278002D19C2 /* InMemoryStoreIntegrationTest.swift in Sources */,
 				B4AE41B52D0BBAF600E05D96 /* XRLayerText+Stub.swift in Sources */,

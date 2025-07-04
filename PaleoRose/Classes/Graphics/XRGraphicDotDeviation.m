@@ -93,7 +93,6 @@
 		}
 		else
 		{
-
 			shortfall = (int)(ceil(_mean -(float)_count));
 
 			if(shortfall >0)
@@ -125,7 +124,6 @@
 	{
 		if(_count>_mean)
 		{
-
 			excess = (int)(ceil((float)_count -_mean));
 			for(int i=0;i<excess;i++)
 			{
@@ -139,7 +137,6 @@
 		}
 		else
 		{
-
 			shortfall = (int)(ceil(_mean -(float)_count));
 			if(shortfall >0)
 			{
@@ -164,10 +161,7 @@
 				[_drawingPath appendBezierPathWithOvalInRect:aRect];
 			}
 		}
-		
 	}
-
-	
 }
 
 -(void)setDotSize:(float)newSize

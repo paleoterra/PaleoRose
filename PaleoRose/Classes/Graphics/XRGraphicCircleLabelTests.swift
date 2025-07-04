@@ -33,6 +33,26 @@ struct XRGraphicCircleLabelTests {
         return label
     }
 
+    private func defaultSettings() -> [AnyHashable: Any] {
+        [
+            "GraphicType": "LabelCircle",
+            "Label": "0",
+            "_isGeometryPercent": "NO",
+            "_isPercent": "NO",
+            "_percentSetting": "0.000000",
+            "_labelFont": ".AppleSystemUIFont 14.00 pt. P [] (0x141f06450) fobj=0x141f06450, spc=3.79",
+            "_lineWidth": "1.000000",
+            "_countSetting": "0",
+            "_labelAngle": "0.000000",
+            "_isFixedCount": "NO",
+            "_strokeColor": NSColor.black,
+            "_fillColor": NSColor.black,
+            "_showLabel": "YES",
+            "_isCore": "NO",
+            "_geometryPercent": "0.000000"
+        ]
+    }
+
     // MARK: - Initialization Tests
 
     @Test("initWithController should initialize with default values")
@@ -64,6 +84,13 @@ struct XRGraphicCircleLabelTests {
 
         // When
         let label = try #require(XRGraphicCircleLabel(coreCircleWith: controller))
+        label.setFont(NSFont(name: "Arial-Black", size: 12))
+        label.computeLabelText()
+        var expectedSettings = defaultSettings()
+        expectedSettings["_showLabel"] = "NO"
+        expectedSettings["_isCore"] = "YES"
+
+        let settings = try #require(label.graphicSettings())
 
         // Then
         #expect(label.show() == false, "Core label showLabel should be false")
@@ -72,6 +99,12 @@ struct XRGraphicCircleLabelTests {
             "Default labelAngle should be 0.0"
         )
         #expect(label.countSetting() == 0, "Core label countSetting should be 0")
+
+        try CommonUtilities
+            .compareGraphicSettings(
+                values: settings,
+                expected: expectedSettings
+            )
     }
 
     // MARK: - Property Tests
@@ -175,29 +208,20 @@ struct XRGraphicCircleLabelTests {
         label.setShow(true)
         label.setLabelAngle(30.0)
         label.setFont(NSFont.systemFont(ofSize: 14.0))
+        label.computeLabelText()
+
+        var expectedSettings = defaultSettings()
+        expectedSettings["_labelAngle"] = "30.000000"
 
         // When
         let settings = try #require(label.graphicSettings())
 
-        let graphicType = try #require(settings["GraphicType"] as? String)
-        let fillColor = try #require(settings["_fillColor"] as? NSColor)
-        let strokeColor = try #require(settings["_strokeColor"] as? NSColor)
-        let lineWidth = try #require(settings["_lineWidth"] as? String)
-
-        // Then
-        #expect(graphicType == "LabelCircle", "Type should be LabelCircle")
-        #expect(
-            fillColor.cgColor.components == NSColor.black.cgColor.components,
-            "Fill color should be black"
-        )
-        #expect(strokeColor.cgColor.components == NSColor.black.cgColor.components, "Stroke color should be black")
-        #expect(lineWidth == "1.000000", "Line width should be 1.0")
-
-        #expect(settings["_showLabel"] as? String == "YES", "showLabel should be YES in settings")
-        #expect(settings["_labelAngle"] as? String != nil, "labelAngle should be in settings")
-        #expect(settings["Label"] is NSAttributedString, "Label should be an NSAttributedString in settings")
-        #expect(settings["_labelFont"] is NSFont, "labelFont should be an NSFont in settings")
-        #expect(settings["_isCore"] as? String == "NO", "isCore should be NO in settings")
+        // then
+        try CommonUtilities
+            .compareGraphicSettings(
+                values: settings,
+                expected: expectedSettings
+            )
     }
 
     // MARK: - Label Text Computation Tests
@@ -268,8 +292,46 @@ struct XRGraphicCircleLabelTests {
         // Then - Verify the transform is created
         // Note: We can't directly test the transform values, but we can verify the method runs without errors
         // and that the transform is applied during drawing
-        let transform = label.value(forKey: "theTransform") as? NSAffineTransform
+        let transform = label.value(forKey: "theTransform") as? AffineTransform
         #expect(transform != nil, "Transform should be created")
+    }
+
+    @Test("Set geometry percent")
+    func setGeometryPercent() throws {
+        let controller = buildController()
+        let label = try buildTestObject(controller: controller)
+
+        label.setGeometryPercent(0.7)
+        var expectedSettings = defaultSettings()
+        expectedSettings["_labelAngle"] = "0.000000"
+        expectedSettings["_geometryPercent"] = "70.000000"
+        expectedSettings["_percentSetting"] = "70.000000"
+
+        let settings = try #require(label.graphicSettings())
+        try CommonUtilities
+            .compareGraphicSettings(
+                values: settings,
+                expected: expectedSettings
+            )
+    }
+
+    @Test("Show label to NO")
+    func testShowLabelToNo() throws {
+        let controller = buildController()
+        let label = try buildTestObject(controller: controller)
+
+        label.setShow(false)
+        var expectedSettings = defaultSettings()
+        expectedSettings["_showLabel"] = "NO"
+        expectedSettings["_labelAngle"] = "0.000000"
+        label.setShow(false)
+        label.computeLabelText()
+        let settings = try #require(label.graphicSettings())
+        try CommonUtilities
+            .compareGraphicSettings(
+                values: settings,
+                expected: expectedSettings
+            )
     }
 }
 
