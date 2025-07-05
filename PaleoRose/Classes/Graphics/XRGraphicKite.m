@@ -101,7 +101,6 @@
 	}
 }
 
-
 -(NSDictionary *)graphicSettings
 {
 	NSMutableDictionary *theDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];

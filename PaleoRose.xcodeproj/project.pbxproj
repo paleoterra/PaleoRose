@@ -134,6 +134,7 @@
 		B4950F0105DD286A00C711DC /* XRGraphicCircleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4950EFF05DD286A00C711DC /* XRGraphicCircleLabel.m */; };
 		B4A23EF72E18951700EDE135 /* XRGraphicDotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A23EF62E18951700EDE135 /* XRGraphicDotTests.swift */; };
 		B4A23EF92E19668900EDE135 /* XRGraphicHistogramTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A23EF82E19668900EDE135 /* XRGraphicHistogramTests.swift */; };
+		B4A23EFB2E196D1800EDE135 /* XRGraphicKiteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A23EFA2E196D1800EDE135 /* XRGraphicKiteTests.swift */; };
 		B4A82F962A07F87A00790052 /* LITMXMLNodeProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A82F932A07F87900790052 /* LITMXMLNodeProtocol.h */; };
 		B4A82F972A07F87A00790052 /* LITMXMLTree.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A82F942A07F87900790052 /* LITMXMLTree.h */; };
 		B4A82F982A07F87A00790052 /* LITMXMLTree.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A82F952A07F87A00790052 /* LITMXMLTree.m */; };
@@ -449,6 +450,7 @@
 		B49D7EEF2DDED1E90046A8B8 /* XREncodingAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XREncodingAccessoryView.swift; sourceTree = "<group>"; };
 		B4A23EF62E18951700EDE135 /* XRGraphicDotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicDotTests.swift; sourceTree = "<group>"; };
 		B4A23EF82E19668900EDE135 /* XRGraphicHistogramTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicHistogramTests.swift; sourceTree = "<group>"; };
+		B4A23EFA2E196D1800EDE135 /* XRGraphicKiteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicKiteTests.swift; sourceTree = "<group>"; };
 		B4A82F932A07F87900790052 /* LITMXMLNodeProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LITMXMLNodeProtocol.h; sourceTree = "<group>"; };
 		B4A82F942A07F87900790052 /* LITMXMLTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LITMXMLTree.h; sourceTree = "<group>"; };
 		B4A82F952A07F87A00790052 /* LITMXMLTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LITMXMLTree.m; sourceTree = "<group>"; };
@@ -771,6 +773,7 @@
 				B4EE8F7705C5E0A9001BACD3 /* XRGraphicLine.m */,
 				B461B86F05C4E1DA00738D23 /* XRGraphicKite.h */,
 				B461B87005C4E1DA00738D23 /* XRGraphicKite.m */,
+				B4A23EFA2E196D1800EDE135 /* XRGraphicKiteTests.swift */,
 				B44D357405C5578500D7823C /* XRGraphicPetal.h */,
 				B44D357505C5578500D7823C /* XRGraphicPetal.m */,
 				B4F257AB05C58578008591BE /* XRGraphicDot.h */,
@@ -1626,6 +1629,7 @@
 				B41C17532CB1C2AF002D19C2 /* Tag.swift in Sources */,
 				B48430882E1486D100E126C0 /* LITMArrowHeadTests.swift in Sources */,
 				B48BBEC82CAA20DC0050852E /* InMemoryStoreTest.swift in Sources */,
+				B4A23EFB2E196D1800EDE135 /* XRGraphicKiteTests.swift in Sources */,
 				B4A23EF72E18951700EDE135 /* XRGraphicDotTests.swift in Sources */,
 				B4237C9C2D013BE900E2B510 /* StorageModelFactoryTest.swift in Sources */,
 				B4866BF72CAE039200319712 /* MockSqliteInterface.swift in Sources */,
