@@ -18,3 +18,4 @@
 #import "XRGraphicLine.h"
 #import "XRGraphicPetal.h"
 #import "LITMArrowHead.h"
+#import "XRGraphicDot.h"
