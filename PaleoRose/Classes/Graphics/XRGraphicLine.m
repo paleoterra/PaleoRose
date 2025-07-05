@@ -289,9 +289,7 @@
 	//transform 1.  Shift the text down by half the height.
 	if((double)_angleSetting == 0.0) 
 	{
-		
 		[_labelTransform translateXBy:(-0.5*theSize.width) yBy:displacement];
-		
 	}
 	else if((double)_angleSetting == 180.0)
 		[_labelTransform translateXBy:(-0.5*theSize.width) yBy:(displacement+theSize.height)*-1];
@@ -311,8 +309,6 @@
 			[_labelTransform translateXBy:displacement yBy:0.0];
 			[_labelTransform translateXBy:0.0 yBy:(-0.5*theSize.height)];
 		}
-		
-		
 	}
 }
 
