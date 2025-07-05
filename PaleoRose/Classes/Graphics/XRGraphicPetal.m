@@ -49,8 +49,6 @@
 
 -(void)calculateGeometry
 {
-
-	
 	NSPoint aPoint,targetPoint;
 	float radius;
 	float angle1;

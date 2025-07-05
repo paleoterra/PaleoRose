@@ -20,3 +20,4 @@
 #import "LITMArrowHead.h"
 #import "XRGraphicDot.h"
 #import "XRGraphicKite.h"
+#import "XRGraphicPetal.h"

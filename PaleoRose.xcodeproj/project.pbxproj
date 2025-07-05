@@ -136,6 +136,7 @@
 		B4A23EF92E19668900EDE135 /* XRGraphicHistogramTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A23EF82E19668900EDE135 /* XRGraphicHistogramTests.swift */; };
 		B4A23EFB2E196D1800EDE135 /* XRGraphicKiteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A23EFA2E196D1800EDE135 /* XRGraphicKiteTests.swift */; };
 		B4A23EFD2E19960100EDE135 /* XRGraphicLineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A23EFC2E19960100EDE135 /* XRGraphicLineTests.swift */; };
+		B4A23EFF2E19C49E00EDE135 /* XRGraphicPetalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A23EFE2E19C49E00EDE135 /* XRGraphicPetalTests.swift */; };
 		B4A82F962A07F87A00790052 /* LITMXMLNodeProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A82F932A07F87900790052 /* LITMXMLNodeProtocol.h */; };
 		B4A82F972A07F87A00790052 /* LITMXMLTree.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A82F942A07F87900790052 /* LITMXMLTree.h */; };
 		B4A82F982A07F87A00790052 /* LITMXMLTree.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A82F952A07F87A00790052 /* LITMXMLTree.m */; };
@@ -453,6 +454,7 @@
 		B4A23EF82E19668900EDE135 /* XRGraphicHistogramTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicHistogramTests.swift; sourceTree = "<group>"; };
 		B4A23EFA2E196D1800EDE135 /* XRGraphicKiteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicKiteTests.swift; sourceTree = "<group>"; };
 		B4A23EFC2E19960100EDE135 /* XRGraphicLineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicLineTests.swift; sourceTree = "<group>"; };
+		B4A23EFE2E19C49E00EDE135 /* XRGraphicPetalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicPetalTests.swift; sourceTree = "<group>"; };
 		B4A82F932A07F87900790052 /* LITMXMLNodeProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LITMXMLNodeProtocol.h; sourceTree = "<group>"; };
 		B4A82F942A07F87900790052 /* LITMXMLTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LITMXMLTree.h; sourceTree = "<group>"; };
 		B4A82F952A07F87A00790052 /* LITMXMLTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LITMXMLTree.m; sourceTree = "<group>"; };
@@ -779,6 +781,7 @@
 				B4A23EFA2E196D1800EDE135 /* XRGraphicKiteTests.swift */,
 				B44D357405C5578500D7823C /* XRGraphicPetal.h */,
 				B44D357505C5578500D7823C /* XRGraphicPetal.m */,
+				B4A23EFE2E19C49E00EDE135 /* XRGraphicPetalTests.swift */,
 				B4F257AB05C58578008591BE /* XRGraphicDot.h */,
 				B4F257AC05C58578008591BE /* XRGraphicDot.m */,
 				B4A23EF62E18951700EDE135 /* XRGraphicDotTests.swift */,
@@ -1647,6 +1650,7 @@
 				B41C87422DE4D8070053C9C9 /* UserDefaultsExtensionsTests.swift in Sources */,
 				B41C17522CB1C278002D19C2 /* InMemoryStoreIntegrationTest.swift in Sources */,
 				B4AE41B52D0BBAF600E05D96 /* XRLayerText+Stub.swift in Sources */,
+				B4A23EFF2E19C49E00EDE135 /* XRGraphicPetalTests.swift in Sources */,
 				B4A23EFD2E19960100EDE135 /* XRGraphicLineTests.swift in Sources */,
 				B4AE41CA2D17D76000E05D96 /* LayerLineArrow+Testing.swift in Sources */,
 				B4AE41C72D14EA5900E05D96 /* LayerText+Testing.swift in Sources */,
