@@ -133,6 +133,7 @@
 		B4950F0005DD286A00C711DC /* XRGraphicCircleLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = B4950EFE05DD286A00C711DC /* XRGraphicCircleLabel.h */; };
 		B4950F0105DD286A00C711DC /* XRGraphicCircleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4950EFF05DD286A00C711DC /* XRGraphicCircleLabel.m */; };
 		B4A23EF72E18951700EDE135 /* XRGraphicDotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A23EF62E18951700EDE135 /* XRGraphicDotTests.swift */; };
+		B4A23EF92E19668900EDE135 /* XRGraphicHistogramTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A23EF82E19668900EDE135 /* XRGraphicHistogramTests.swift */; };
 		B4A82F962A07F87A00790052 /* LITMXMLNodeProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A82F932A07F87900790052 /* LITMXMLNodeProtocol.h */; };
 		B4A82F972A07F87A00790052 /* LITMXMLTree.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A82F942A07F87900790052 /* LITMXMLTree.h */; };
 		B4A82F982A07F87A00790052 /* LITMXMLTree.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A82F952A07F87A00790052 /* LITMXMLTree.m */; };
@@ -447,6 +448,7 @@
 		B49D7EEE2DDED1DE0046A8B8 /* XRExportGraphicAccessory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRExportGraphicAccessory.swift; sourceTree = "<group>"; };
 		B49D7EEF2DDED1E90046A8B8 /* XREncodingAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XREncodingAccessoryView.swift; sourceTree = "<group>"; };
 		B4A23EF62E18951700EDE135 /* XRGraphicDotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicDotTests.swift; sourceTree = "<group>"; };
+		B4A23EF82E19668900EDE135 /* XRGraphicHistogramTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicHistogramTests.swift; sourceTree = "<group>"; };
 		B4A82F932A07F87900790052 /* LITMXMLNodeProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LITMXMLNodeProtocol.h; sourceTree = "<group>"; };
 		B4A82F942A07F87900790052 /* LITMXMLTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LITMXMLTree.h; sourceTree = "<group>"; };
 		B4A82F952A07F87A00790052 /* LITMXMLTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LITMXMLTree.m; sourceTree = "<group>"; };
@@ -776,6 +778,7 @@
 				B4A23EF62E18951700EDE135 /* XRGraphicDotTests.swift */,
 				B4F2594F05C58F28008591BE /* XRGraphicHistogram.h */,
 				B4F2595005C58F28008591BE /* XRGraphicHistogram.m */,
+				B4A23EF82E19668900EDE135 /* XRGraphicHistogramTests.swift */,
 				B4F25AE205C59CE6008591BE /* XRGraphicDotDeviation.h */,
 				B4F25AE305C59CE6008591BE /* XRGraphicDotDeviation.m */,
 				B48430892E1487C900E126C0 /* XRGraphicDotDeviationTests.swift */,
@@ -1645,6 +1648,7 @@
 				B4B0BB881E7E45CB00F392DA /* XRLayerDataTests.m in Sources */,
 				B4AE41CD2D17D77C00E05D96 /* LayerGrid+Testing.swift in Sources */,
 				B4AE41C02D0BD08C00E05D96 /* XRLayerData+Stub.swift in Sources */,
+				B4A23EF92E19668900EDE135 /* XRGraphicHistogramTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
