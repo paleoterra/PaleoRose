@@ -52,37 +52,37 @@
 	NSPoint aPoint,targetPoint;
 	float radius;
 	float angle1;
-	float size = [geometryController sectorSize];
-	float start = [geometryController startingAngle];
+	float size = [self.geometryController sectorSize];
+	float start = [self.geometryController startingAngle];
 	//step 1. find the angles
 	angle1 = (_histIncrement * size)+(0.5 * size) + start;
 
 	if(angle1>360.0)
 		angle1 = angle1 - 360.0;
 	self.drawingPath = [NSBezierPath bezierPath];
-	if([geometryController isPercent])
+	if([self.geometryController isPercent])
 	{
-		radius = [geometryController radiusOfPercentValue:0.0];
+		radius = [self.geometryController radiusOfPercentValue:0.0];
 		aPoint = NSMakePoint(0.0,radius);
-		targetPoint = [geometryController rotationOfPoint:aPoint byAngle:angle1];
+		targetPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle1];
 		[self.drawingPath moveToPoint:targetPoint];
 
-		radius = [geometryController radiusOfPercentValue:_percent];
+		radius = [self.geometryController radiusOfPercentValue:_percent];
 		aPoint = NSMakePoint(0.0,radius);
-		targetPoint = [geometryController rotationOfPoint:aPoint byAngle:angle1];
+		targetPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle1];
 		[self.drawingPath lineToPoint:targetPoint];
 
 	}
 	else
 	{
-		radius = [geometryController radiusOfCount:0];
+		radius = [self.geometryController radiusOfCount:0];
 		aPoint = NSMakePoint(0.0,radius);
-		targetPoint = [geometryController rotationOfPoint:aPoint byAngle:angle1];
+		targetPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle1];
 		[self.drawingPath moveToPoint:targetPoint];
 
-		radius = [geometryController radiusOfCount:_count];
+		radius = [self.geometryController radiusOfCount:_count];
 		aPoint = NSMakePoint(0.0,radius);
-		targetPoint = [geometryController rotationOfPoint:aPoint byAngle:angle1];
+		targetPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle1];
 		[self.drawingPath lineToPoint:targetPoint];
 
 	}

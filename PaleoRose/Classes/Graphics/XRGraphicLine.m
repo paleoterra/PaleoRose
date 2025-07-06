@@ -67,21 +67,21 @@
 	NSPoint aPoint;
 
 	aPoint = NSMakePoint(0.0,0.0);
-	radius = [geometryController radiusOfRelativePercent:0.0];
+	radius = [self.geometryController radiusOfRelativePercent:0.0];
 	aPoint.y = radius;
-	aPoint = [geometryController rotationOfPoint:aPoint byAngle:_angleSetting];
+	aPoint = [self.geometryController rotationOfPoint:aPoint byAngle:_angleSetting];
 	self.drawingPath = [[NSBezierPath alloc] init];
 	[self.drawingPath moveToPoint:aPoint];
 	if((_tickType == XRGraphicLineTickTypeNone)||(!_showTick))
-		radius = [geometryController radiusOfRelativePercent:_relativePercent];
+		radius = [self.geometryController radiusOfRelativePercent:_relativePercent];
 	else if(_tickType == XRGraphicLineTickTypeMinor)
-		radius = [geometryController unrestrictedRadiusOfRelativePercent:(_relativePercent+ 0.05)];
+		radius = [self.geometryController unrestrictedRadiusOfRelativePercent:(_relativePercent+ 0.05)];
 	else
-		radius = [geometryController unrestrictedRadiusOfRelativePercent:(_relativePercent+ 0.1)];
+		radius = [self.geometryController unrestrictedRadiusOfRelativePercent:(_relativePercent+ 0.1)];
 	aPoint = NSMakePoint(0.0,0.0);
 	aPoint.y = radius;
 
-	aPoint = [geometryController rotationOfPoint:aPoint byAngle:_angleSetting];
+	aPoint = [self.geometryController rotationOfPoint:aPoint byAngle:_angleSetting];
 	[self.drawingPath lineToPoint:aPoint];
 	
 	
@@ -228,7 +228,7 @@
         [self.strokeColor set];
 		//NSLog(@"width %f",[self.drawingPath lineWidth]);
         [self.drawingPath stroke];
-        if(_drawsFill)
+        if(self.drawsFill)
         {	
             [self.fillColor set];
             [self.drawingPath fill];
@@ -261,7 +261,7 @@
 -(void)appendHorizontalTransform
 {
 	NSSize theSize = [_lineLabel size];
-	float displacement = [geometryController unrestrictedRadiusOfRelativePercent:(_relativePercent + .2)];
+	float displacement = [self.geometryController unrestrictedRadiusOfRelativePercent:(_relativePercent + .2)];
 	float rotationAngle;
 	//step 1. shift to the center point
 	[_labelTransform translateXBy:(-0.5*theSize.width) yBy:(-0.5*theSize.height)];
@@ -283,7 +283,7 @@
 	
 	NSSize theSize = [_lineLabel size];
 	
-	float displacement = [geometryController unrestrictedRadiusOfRelativePercent:(_relativePercent + 0.1)];
+	float displacement = [self.geometryController unrestrictedRadiusOfRelativePercent:(_relativePercent + 0.1)];
 	float rotationAngle = 90-_angleSetting;
 	//[_labelTransform translateXBy:(-0.5*theSize.width) yBy:(-0.5*theSize.height)];
 	//transform 1.  Shift the text down by half the height.

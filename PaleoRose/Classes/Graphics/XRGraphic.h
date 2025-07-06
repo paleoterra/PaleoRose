@@ -32,33 +32,29 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class XRGeometryController;
 
-@interface XRGraphic : NSObject {
-    BOOL _needsDisplay;
-    BOOL _drawsFill;
-	__weak XRGeometryController *geometryController;
-}
+@interface XRGraphic : NSObject
 
+@property(nonatomic, weak) XRGeometryController *geometryController;
 @property (nonatomic, nullable) NSBezierPath *drawingPath;
 @property (nonatomic, nullable) NSColor *fillColor;
 @property (nonatomic, nullable) NSColor *strokeColor;
-//@property (readwrite) BOOL drawsFill;
+@property (readwrite) BOOL drawsFill;
 @property (readwrite) float lineWidth;
-//@property (readwrite) BOOL needsDisplay;
+@property (readwrite) BOOL needsDisplay;
 
--(id)initWithController:(XRGeometryController *)controller;
+
+#pragma mark initialization
+-(instancetype)init NS_UNAVAILABLE;
+-(instancetype)initWithController:(XRGeometryController *)controller;
+
 -(void)geometryDidChange:(NSNotification *)aNotification;
--(void)calculateGeometry;
 
--(void)setNeedsDisplay:(BOOL)display;
--(BOOL)needsDisplay;
+-(void)calculateGeometry;
 
 -(NSRect)drawingRect;
 -(void)drawRect:(NSRect )aRect;
 
 - (BOOL)hitTest:(NSPoint)point;
-
--(void)setDrawsFill:(BOOL)fill;
--(BOOL)drawsFill;
 
 -(void)setDefaultStrokeColor;
 
@@ -67,7 +63,6 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)setLineColor:(nullable NSColor *)aLineColor fillColor:(nullable NSColor *)aFillColor;
 
 -(void)setTransparency:(float)alpha;
-
 
 -(NSDictionary *)graphicSettings;
 @end

@@ -59,8 +59,8 @@
 	float radius;
 	int excess;
 	int shortfall;
-	float startAngle = [geometryController startingAngle];
-	float step = [geometryController sectorSize];
+	float startAngle = [self.geometryController startingAngle];
+	float step = [self.geometryController sectorSize];
 	float angle = startAngle + (step * ((float)_angleIncrement +0.5));
 	
 	NSRect aRect;
@@ -69,7 +69,7 @@
 	self.drawingPath = [[NSBezierPath alloc] init];
 	aRect.size = NSMakeSize(_dotSize,_dotSize);
 	
-	if([geometryController isPercent])
+	if([self.geometryController isPercent])
 	{
 
 		if(_count>_mean)
@@ -80,9 +80,9 @@
 			for(int i=0;i<excess;i++)
 			{
 
-				radius = [geometryController radiusOfPercentValue:(float)(i+1+(int)floor(_mean))/(float)_totalCount];
+				radius = [self.geometryController radiusOfPercentValue:(float)(i+1+(int)floor(_mean))/(float)_totalCount];
 				aPoint = NSMakePoint(0.0,radius);
-				aPoint = [geometryController rotationOfPoint:aPoint byAngle:angle];
+				aPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle];
 
 				aRect.origin.x = aPoint.x - (_dotSize * 0.5);
 				aRect.origin.y = aPoint.y - (_dotSize * 0.5);
@@ -100,9 +100,9 @@
 			for(int i=0;i<shortfall;i++)
 			{
 				
-				radius = [geometryController radiusOfPercentValue:(float)((int)ceil(_mean) - (i + 1))/(float)_totalCount];
+				radius = [self.geometryController radiusOfPercentValue:(float)((int)ceil(_mean) - (i + 1))/(float)_totalCount];
 				aPoint = NSMakePoint(0.0,radius);
-				aPoint = [geometryController rotationOfPoint:aPoint byAngle:angle];
+				aPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle];
 				aRect.origin.x = aPoint.x - (_dotSize * 0.5);
 				aRect.origin.y = aPoint.y - (_dotSize * 0.5);
 				[self.drawingPath appendBezierPathWithOvalInRect:aRect];
@@ -110,9 +110,9 @@
 			}
 			else
 			{
-				radius = [geometryController radiusOfPercentValue:(float)((int)ceil(_mean))/(float)_totalCount];
+				radius = [self.geometryController radiusOfPercentValue:(float)((int)ceil(_mean))/(float)_totalCount];
 				aPoint = NSMakePoint(0.0,radius);
-				aPoint = [geometryController rotationOfPoint:aPoint byAngle:angle];
+				aPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle];
 				aRect.origin.x = aPoint.x - (_dotSize * 0.5);
 				aRect.origin.y = aPoint.y - (_dotSize * 0.5);
 				[self.drawingPath appendBezierPathWithOvalInRect:aRect];
@@ -127,9 +127,9 @@
 			excess = (int)(ceil((float)_count -_mean));
 			for(int i=0;i<excess;i++)
 			{
-				radius = [geometryController radiusOfCount:(float)(i+1+(int)floor(_mean))];
+				radius = [self.geometryController radiusOfCount:(float)(i+1+(int)floor(_mean))];
 				aPoint = NSMakePoint(0.0,radius);
-				aPoint = [geometryController rotationOfPoint:aPoint byAngle:angle];
+				aPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle];
 				aRect.origin.x = aPoint.x - (_dotSize * 0.5);
 				aRect.origin.y = aPoint.y - (_dotSize * 0.5);
 				[self.drawingPath appendBezierPathWithOvalInRect:aRect];
@@ -142,9 +142,9 @@
 			{
 				for(int i=0;i<shortfall;i++)
 				{
-					radius = [geometryController radiusOfCount:((int)ceil(_mean) - (i + 1))];
+					radius = [self.geometryController radiusOfCount:((int)ceil(_mean) - (i + 1))];
 					aPoint = NSMakePoint(0.0,radius);
-					aPoint = [geometryController rotationOfPoint:aPoint byAngle:angle];
+					aPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle];
 					aRect.origin.x = aPoint.x - (_dotSize * 0.5);
 					aRect.origin.y = aPoint.y - (_dotSize * 0.5);
 					//[self.drawingPath appendBezierPathWithOvalInRect:aRect];
@@ -153,9 +153,9 @@
 			}
 			else
 			{
-				radius = [geometryController radiusOfPercentValue:(float)((int)ceil(_mean))/(float)_totalCount];
+				radius = [self.geometryController radiusOfPercentValue:(float)((int)ceil(_mean))/(float)_totalCount];
 				aPoint = NSMakePoint(0.0,radius);
-				aPoint = [geometryController rotationOfPoint:aPoint byAngle:angle];
+				aPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle];
 				aRect.origin.x = aPoint.x - (_dotSize * 0.5);
 				aRect.origin.y = aPoint.y - (_dotSize * 0.5);
 				[self.drawingPath appendBezierPathWithOvalInRect:aRect];

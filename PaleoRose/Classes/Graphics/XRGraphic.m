@@ -30,160 +30,107 @@
 #import "XRGeometryController.h"
 #import <math.h>
 
-@interface XRGraphic()
-
-@end
-
 @implementation XRGraphic
 
--(id)initWithController:(XRGeometryController *)controller
-{
-	if (!(self = [super init])) return nil;
-	if(self)
-	{
-		self.fillColor = [NSColor blackColor];
-		self.strokeColor = [NSColor blackColor];
-		self.lineWidth = 1.0;
-		_needsDisplay = YES;
-		_drawsFill = NO;
-		geometryController = controller;
+-(instancetype)initWithController:(XRGeometryController *)controller {
+    if (!(self = [super init])) return nil;
+    if(self)
+    {
+        self.fillColor = [NSColor blackColor];
+        self.strokeColor = [NSColor blackColor];
+        self.lineWidth = 1.0;
+        _needsDisplay = YES;
+        _drawsFill = NO;
+        _geometryController = controller;
 
         [self addObserver:self
-                      forKeyPath:@"lineWidth"
-                         options:NSKeyValueObservingOptionNew |
-                                 NSKeyValueObservingOptionOld
-                         context:NULL];
-	}
-	return self;
+               forKeyPath:@"lineWidth"
+                  options:NSKeyValueObservingOptionNew |
+         NSKeyValueObservingOptionOld
+                  context:NULL];
+    }
+    return self;
 }
 
--(void)dealloc
-{
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
+-(void)geometryDidChange:(NSNotification *)aNotification {
+    [self calculateGeometry];
 }
 
--(void)geometryDidChange:(NSNotification *)aNotification
-{
-	[self calculateGeometry];
+-(void)calculateGeometry {
+    //here subclasses must set up the geometry of the graphic object.
 }
 
--(void)calculateGeometry
-{
-	//here subclasses must set up the geometry of the graphic object.
-}
-
-//redraw
--(void)setNeedsDisplay:(BOOL)display
-{
-    _needsDisplay = display;
-}
-
--(BOOL)needsDisplay
-{
-    return _needsDisplay;
-}
-
--(NSRect)drawingRect;//if this object needs redrawing, then use this to get its rect
-{
+-(NSRect)drawingRect {
     return [self.drawingPath bounds];
 }
 
--(void)drawRect:(NSRect)aRect
-{
+-(void)drawRect:(NSRect)aRect {
     @try {
-    if(NSIntersectsRect(aRect,[self.drawingPath bounds]))
-    {
-        [NSGraphicsContext saveGraphicsState];
-        
-        [self.strokeColor set];
-        [self.drawingPath stroke];
-        if(_drawsFill)
-        {	
-            [self.fillColor set];
-            [self.drawingPath fill];
+        if(NSIntersectsRect(aRect,[self.drawingPath bounds])) {
+            [NSGraphicsContext saveGraphicsState];
+
+            [self.strokeColor set];
+            [self.drawingPath stroke];
+            if(_drawsFill) {
+                [self.fillColor set];
+                [self.drawingPath fill];
+            }
+            [NSGraphicsContext restoreGraphicsState];
+            self.needsDisplay = false;
         }
-        
-        [NSGraphicsContext restoreGraphicsState];
-        [self setNeedsDisplay:NO];
     }
-	}
-	@catch (NSException *exception){
-		NSLog(@"%@:drawRect: Caught %@: %@",[self className], [exception name], [exception reason]);
-	
-	}
+    @catch (NSException *exception){
+        NSLog(@"%@:drawRect: Caught %@: %@",[self className], [exception name], [exception reason]);
+    }
 }
 
-- (BOOL)hitTest:(NSPoint)point
-{
+- (BOOL)hitTest:(NSPoint)point {
     return NO;
 }
 
--(void)setDrawsFill:(BOOL)fill
-{
-    _drawsFill = fill;
-}
-
--(BOOL)drawsFill
-{
-    return _drawsFill;
-}
-
--(void)setDefaultStrokeColor
-{
+-(void)setDefaultStrokeColor {
     self.strokeColor = [NSColor blackColor];
     return;
 }
 
--(void)setDefaultFillColor
-{
+-(void)setDefaultFillColor {
     self.fillColor = [NSColor blackColor];
 }
 
--(void)setTransparency:(float)alpha
-{
+-(void)setTransparency:(float)alpha {
     NSColor *temp;
-    if(alpha>1)
-    {
-        alpha = 1.0;
-    }
+    float clampedAlpha = MAX(0.0, MIN(alpha, 1.0));
     if(!self.strokeColor)
         [self setDefaultStrokeColor];
-    temp = [self.strokeColor colorWithAlphaComponent:alpha];
-    if(temp)
-    {
+    temp = [self.strokeColor colorWithAlphaComponent:clampedAlpha];
+    if(temp) {
         self.strokeColor = temp;
     }
     temp = nil;
-    
+
     if(!self.fillColor)
         [self setDefaultFillColor];
-    temp = [self.fillColor colorWithAlphaComponent:alpha];
-    if(temp)
-    {
+    temp = [self.fillColor colorWithAlphaComponent:clampedAlpha];
+    if(temp) {
         self.fillColor = temp;
     }
     return;
-    
 }
 
-
--(void)setLineColor:(NSColor *)aLineColor fillColor:(NSColor *)aFillColor
-{
-	self.strokeColor = aLineColor;
-	self.fillColor = aFillColor;
-
+-(void)setLineColor:(NSColor *)aLineColor fillColor:(NSColor *)aFillColor {
+    self.strokeColor = aLineColor;
+    self.fillColor = aFillColor;
 }
 
--(NSDictionary *)graphicSettings
-{
-	NSMutableDictionary *theDict = [[NSMutableDictionary alloc] init];
-	[theDict setObject:@"Graphic" forKey:@"GraphicType"];
-	
-	[theDict setObject:self.fillColor forKey:@"_fillColor"];
-	[theDict setObject:self.strokeColor forKey:@"_strokeColor"];
+-(NSDictionary *)graphicSettings {
+    NSMutableDictionary *theDict = [[NSMutableDictionary alloc] init];
+    [theDict setObject:@"Graphic" forKey:@"GraphicType"];
+
+    [theDict setObject:self.fillColor forKey:@"_fillColor"];
+    [theDict setObject:self.strokeColor forKey:@"_strokeColor"];
     [theDict setObject:[NSString stringWithFormat:@"%f",self.lineWidth] forKey:@"_lineWidth"];
-	//NSLog(@"end general graphic");
-	return [NSDictionary dictionaryWithDictionary:theDict];
+    //NSLog(@"end general graphic");
+    return [NSDictionary dictionaryWithDictionary:theDict];
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {

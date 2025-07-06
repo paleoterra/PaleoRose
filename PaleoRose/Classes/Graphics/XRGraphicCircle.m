@@ -75,7 +75,7 @@
 -(void)setGeometryPercent:(float)percent
 {
 	_isGeometryPercent = YES;
-	self.drawingPath = [NSBezierPath bezierPathWithOvalInRect:[geometryController circleRectForGeometryPercent:percent]];
+	self.drawingPath = [NSBezierPath bezierPathWithOvalInRect:[self.geometryController circleRectForGeometryPercent:percent]];
 }
 
 -(float)percent
@@ -86,13 +86,13 @@
 -(void)calculateGeometry
 {
 	
-	if([geometryController isPercent])
+	if([self.geometryController isPercent])
 	{
-		self.drawingPath = [NSBezierPath bezierPathWithOvalInRect:[geometryController circleRectForPercent:_percentSetting]];
+		self.drawingPath = [NSBezierPath bezierPathWithOvalInRect:[self.geometryController circleRectForPercent:_percentSetting]];
 	}
 	else
 	{
-		self.drawingPath = [NSBezierPath bezierPathWithOvalInRect:[geometryController circleRectForCount:_countSetting]];
+		self.drawingPath = [NSBezierPath bezierPathWithOvalInRect:[self.geometryController circleRectForCount:_countSetting]];
 	}
 }
 

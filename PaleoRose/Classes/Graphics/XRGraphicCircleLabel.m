@@ -101,12 +101,12 @@
 
 	NSRange aRange;
 	aRange.location = 0;
-	_isPercent = [geometryController isPercent];
-	
+    _isPercent = [self.geometryController isPercent];
+
 	if(_isPercent)
 		_label = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%3.1f %c",(_percentSetting * 100.0),'%']];
 	else if(_isFixedCount)
-		_label = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%3.1f",(_percentSetting * (float)[geometryController geometryMaxCount])]];
+        _label = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%3.1f",(_percentSetting * (float)[self.geometryController geometryMaxCount])]];
 	else
 		_label = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%i",_countSetting]];
 	
@@ -121,41 +121,34 @@
 
 -(void)computeTransform
 {
-	
 	theTransform = [NSAffineTransform transform];
-	//NSLog(@"Rotation angle: %f",_labelAngle);
 	[theTransform rotateByDegrees:360.0-_labelAngle];
-
-	
 }
 
 -(void)calculateGeometry
 {
-	//NSLog(@"calc geom 1");
 	[self computeLabelText];
-	//NSLog(@"calc geom 2");
 	[self computeTransform];
-	//NSLog(@"calc geom 3");
 	if((!_showLabel)||(_isCore))
 	{
-		if((([geometryController isPercent])||(_isFixedCount))||((![geometryController isPercent])&&(_isFixedCount)))
+        if((([self.geometryController isPercent])||(_isFixedCount))||((![self.geometryController isPercent])&&(_isFixedCount)))
 		{
-			self.drawingPath = [NSBezierPath bezierPathWithOvalInRect:[geometryController circleRectForPercent:_percentSetting]];
+            self.drawingPath = [NSBezierPath bezierPathWithOvalInRect:[self.geometryController circleRectForPercent:_percentSetting]];
 		}
 		else
 		{
-			self.drawingPath = [NSBezierPath bezierPathWithOvalInRect:[geometryController circleRectForCount:_countSetting]];
+            self.drawingPath = [NSBezierPath bezierPathWithOvalInRect:[self.geometryController circleRectForCount:_countSetting]];
 		}
 	}
 	else
 	{
 		float radius,angle;
 
-		if((([geometryController isPercent])||(_isFixedCount))||((![geometryController isPercent])&&(_isFixedCount)))
-			radius = [geometryController radiusOfPercentValue:_percentSetting];
+        if((([self.geometryController isPercent])||(_isFixedCount))||((![self.geometryController isPercent])&&(_isFixedCount)))
+            radius = [self.geometryController radiusOfPercentValue:_percentSetting];
 		else
-			radius = [geometryController radiusOfCount:_countSetting];
-		angle = [geometryController degreesFromRadians:atan((0.52*[_label size].width)/radius)];
+            radius = [self.geometryController radiusOfCount:_countSetting];
+        angle = [self.geometryController degreesFromRadians:atan((0.52*[_label size].width)/radius)];
 		self.drawingPath = [NSBezierPath bezierPath];
 		[self.drawingPath appendBezierPathWithArcWithCenter:NSMakePoint(0.0,0.0) radius:radius startAngle:90+angle endAngle:90-angle];
 		_labelPoint = NSMakePoint(0 - (0.5*[_label size].width),radius - (0.5*[_label size].height));
@@ -177,7 +170,7 @@
 
 		[theTransform concat];
 		[self.drawingPath stroke];
-        if(_drawsFill)
+        if(self.drawsFill)
         {	
             [self.fillColor set];
             [self.drawingPath fill];
@@ -193,7 +186,7 @@
 
 -(void)setGeometryPercent:(float)percent
 {
-	_percentSetting = percent*[geometryController geometryMaxPercent];
+    _percentSetting = percent*[self.geometryController geometryMaxPercent];
 	[self calculateGeometry];
 }
 

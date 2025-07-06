@@ -39,10 +39,26 @@ struct XRGraphicCircleTests {
         expectedBaseStrokeColor: NSColor,
         expectedBaseFillColor: NSColor,
         strokeColor: NSColor,
-        fillColor: NSColor
+        fillColor: NSColor,
+        fileID: String = #fileID,
+        filePath: String = #filePath,
+        line: Int = #line,
+        column: Int = #column
     ) throws {
-        #expect(strokeColor.alphaComponent.isApproximatelyEqual(to: CGFloat(expectedAlpha)))
-        #expect(fillColor.alphaComponent.isApproximatelyEqual(to: CGFloat(expectedAlpha)))
+
+        let sourceLocation = SourceLocation(
+            fileID: fileID,
+            filePath: filePath,
+            line: line,
+            column: column
+        )
+        #expect(
+            strokeColor.alphaComponent
+                .isApproximatelyEqual(to: CGFloat(expectedAlpha)),
+            sourceLocation: sourceLocation
+        )
+        #expect(fillColor.alphaComponent.isApproximatelyEqual(to: CGFloat(expectedAlpha)),
+                sourceLocation: sourceLocation)
 
         // Convert all colors to a common color space (sRGB) for comparison
         try CommonUtilities.verifyEqualColorsWithOutAlpha(
@@ -68,8 +84,8 @@ struct XRGraphicCircleTests {
         )
         #expect(circle.strokeColor == .black, "Default stroke color should be black")
         #expect(circle.lineWidth == 1.0, "Default line width should be 1.0")
-        #expect(circle.needsDisplay() == true, "Default needs display should be true")
-        #expect(circle.drawsFill() == false, "Default draws fill should be false")
+        #expect(circle.needsDisplay == true, "Default needs display should be true")
+        #expect(circle.drawsFill == false, "Default draws fill should be false")
         // Verify default values
         #expect(circle.countSetting() == 0, "Default count should be 0")
         #expect(circle.percent() == 0.0, "Default percent should be 0.0")
@@ -458,8 +474,8 @@ struct XRGraphicCircleTests {
         "setTransparency should update alpha components of colors",
         arguments: [
             (0.5, 0.5), // normal
-            (2.0, 1.0) // , // out of range -  high
-//            (-0.1, 0.0) // out of range -  low
+            (2.0, 1.0), // , // out of range -  high
+            (-0.1, 0.0) // out of range -  low
         ]
     )
     func testSetTransparency(values: (Float, Float)) throws {
@@ -519,22 +535,22 @@ struct XRGraphicCircleTests {
         let circle = try buildTestObject(controller: controller)
 
         // When - Set to true
-        circle.setDrawsFill(true)
+        circle.drawsFill = true
 
         // Then
-        #expect(circle.drawsFill() == true, "Draws fill should be true")
+        #expect(circle.drawsFill == true, "Draws fill should be true")
 
         // When - Set to false
-        circle.setDrawsFill(false)
+        circle.drawsFill = false
 
         // Then
-        #expect(circle.drawsFill() == false, "Draws fill should be false")
+        #expect(circle.drawsFill == false, "Draws fill should be false")
 
         // When - Set to true again
-        circle.setDrawsFill(true)
+        circle.drawsFill = true
 
         // Then
-        #expect(circle.drawsFill() == true, "Draws fill should be true after toggling")
+        #expect(circle.drawsFill == true, "Draws fill should be true after toggling")
     }
 
     // MARK: - Line and Fill Color Tests
