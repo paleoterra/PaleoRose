@@ -90,7 +90,7 @@ struct XRGraphicCircleLabelTests {
         expectedSettings["_showLabel"] = "NO"
         expectedSettings["_isCore"] = "YES"
 
-        let settings = try #require(label.graphicSettings())
+        let settings = label.graphicSettings()
 
         // Then
         #expect(label.show() == false, "Core label showLabel should be false")

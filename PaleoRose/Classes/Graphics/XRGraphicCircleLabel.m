@@ -113,7 +113,7 @@
 	aRange.length = [_label length];
 	
 	if(_labelFont)
-		[_label setAttributes:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:_labelFont,_strokeColor,nil]
+		[_label setAttributes:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:_labelFont,self.strokeColor,nil]
 														  forKeys:[NSArray arrayWithObjects:NSFontAttributeName,NSForegroundColorAttributeName,nil]] range:aRange];
 	
 	//NSLog([_label description]);
@@ -173,13 +173,13 @@
     {  
         [NSGraphicsContext saveGraphicsState];
 
-        [_strokeColor set];
-		
+        [self.strokeColor set];
+
 		[theTransform concat];
 		[_drawingPath stroke];
         if(_drawsFill)
         {	
-            [_fillColor set];
+            [self.fillColor set];
             [_drawingPath fill];
         }
         if((_showLabel)&&(!_isCore))

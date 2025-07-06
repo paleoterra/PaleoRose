@@ -63,10 +63,10 @@ struct XRGraphicCircleTests {
         // Then
         // Verify super values
         #expect(
-            circle.fillColor() == .black,
+            circle.fillColor == .black,
             "Default fill color should be black"
         )
-        #expect(circle.strokeColor() == .black, "Default stroke color should be black")
+        #expect(circle.strokeColor == .black, "Default stroke color should be black")
         #expect(circle.lineWidth() == 1.0, "Default line width should be 1.0")
         #expect(circle.needsDisplay() == true, "Default needs display should be true")
         #expect(circle.drawsFill() == false, "Default draws fill should be false")
@@ -280,11 +280,11 @@ struct XRGraphicCircleTests {
         let testColor = NSColor.red
 
         // When
-        circle.setFill(testColor)
+        circle.fillColor = testColor
 
         // Then
         #expect(
-            circle.fillColor() == testColor,
+            circle.fillColor == testColor,
             "Fill color should be set correctly"
         )
     }
@@ -297,11 +297,11 @@ struct XRGraphicCircleTests {
         let testColor = NSColor.blue
 
         // When
-        circle.setStroke(testColor)
+        circle.strokeColor = testColor
 
         // Then
         #expect(
-            circle.strokeColor() == testColor,
+            circle.strokeColor == testColor,
             "Stroke color should be set correctly"
         )
     }
@@ -482,8 +482,8 @@ struct XRGraphicCircleTests {
             expectedAlpha: expectedAlpha,
             expectedBaseStrokeColor: baseStrokeColor,
             expectedBaseFillColor: baseFillColor,
-            strokeColor: #require(circle.strokeColor()),
-            fillColor: #require(circle.fillColor())
+            strokeColor: #require(circle.strokeColor),
+            fillColor: #require(circle.fillColor)
         )
     }
 
@@ -495,8 +495,8 @@ struct XRGraphicCircleTests {
         let testAlpha: Float = 0.5
 
         // Set colors to nil (simulate cleared colors)
-        circle.setStroke(nil)
-        circle.setFill(nil)
+        circle.strokeColor = nil
+        circle.fillColor = nil
 
         // When - This should not crash
         circle.setTransparency(testAlpha)
@@ -505,8 +505,8 @@ struct XRGraphicCircleTests {
             expectedAlpha: testAlpha,
             expectedBaseStrokeColor: NSColor.black,
             expectedBaseFillColor: NSColor.black,
-            strokeColor: #require(circle.strokeColor()),
-            fillColor: #require(circle.fillColor())
+            strokeColor: #require(circle.strokeColor),
+            fillColor: #require(circle.fillColor)
         )
     }
 
@@ -551,8 +551,8 @@ struct XRGraphicCircleTests {
         circle.setLineColor(testStrokeColor, fill: testFillColor)
 
         // Then
-        let strokeColor = try #require(circle.strokeColor())
-        let fillColor = try #require(circle.fillColor())
+        let strokeColor = try #require(circle.strokeColor)
+        let fillColor = try #require(circle.fillColor)
 
         // Verify colors match exactly
         try CommonUtilities.verifyEqualColorsWithAlpha(lhs: strokeColor, rhs: testStrokeColor)
@@ -572,8 +572,8 @@ struct XRGraphicCircleTests {
         circle.setLineColor(nil, fill: nil)
 
         // Then - Verify default colors are used (black for both in this case)
-        #expect(circle.strokeColor() == nil)
-        #expect(circle.fillColor() == nil) // this shouldn't happen
+        #expect(circle.strokeColor == nil)
+        #expect(circle.fillColor == nil) // this shouldn't happen
     }
 }
 

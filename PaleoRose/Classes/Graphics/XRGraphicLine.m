@@ -225,12 +225,12 @@
     {  
         [NSGraphicsContext saveGraphicsState];
         
-        [_strokeColor set];
+        [self.strokeColor set];
 		//NSLog(@"width %f",[_drawingPath lineWidth]);
         [_drawingPath stroke];
         if(_drawsFill)
         {	
-            [_fillColor set];
+            [self.fillColor set];
             [_drawingPath fill];
         }
         if(_showLabel)
@@ -249,7 +249,7 @@
 	NSRange labelRange;
 	labelRange.location = 0;
 	labelRange.length = [_lineLabel length];
-	[_lineLabel setAttributes:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:_currentFont,_strokeColor,nil]
+	[_lineLabel setAttributes:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:_currentFont,self.strokeColor,nil]
 														   forKeys:[NSArray arrayWithObjects:NSFontAttributeName,NSForegroundColorAttributeName,nil]] range:labelRange];
 	_labelTransform = [NSAffineTransform transform];
 	if(_spokeNumberAlign == XRGraphicLineNumberAlignHorizontal)

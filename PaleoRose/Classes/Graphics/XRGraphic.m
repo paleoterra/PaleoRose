@@ -45,8 +45,8 @@
 	if (!(self = [super init])) return nil;
 	if(self)
 	{
-		_fillColor = [NSColor blackColor];
-		_strokeColor = [NSColor blackColor];
+		self.fillColor = [NSColor blackColor];
+		self.strokeColor = [NSColor blackColor];
 		_lineWidth = 1.0;
 		_needsDisplay = YES;
 		_drawsFill = NO;
@@ -93,12 +93,12 @@
     {  
         [NSGraphicsContext saveGraphicsState];
         
-        [_strokeColor set];
+        [self.strokeColor set];
 		//NSLog(@"width %f",[_drawingPath lineWidth]);
         [_drawingPath stroke];
         if(_drawsFill)
         {	
-            [_fillColor set];
+            [self.fillColor set];
             [_drawingPath fill];
         }
         
@@ -127,38 +127,15 @@
     return _drawsFill;
 }
 
--(NSColor *)strokeColor
-{
-    return _strokeColor;
-}
-
--(void)setStrokeColor:(NSColor *)aColor
-{
-	_strokeColor = aColor;
-	
-    return;
-}
-
 -(void)setDefaultStrokeColor
 {
-    _strokeColor = [NSColor blackColor];
-    return;
-}
-
--(NSColor *)fillColor
-{
-    return _fillColor;
-}
-
--(void)setFillColor:(NSColor *)aColor
-{
-	_fillColor = aColor;
+    self.strokeColor = [NSColor blackColor];
     return;
 }
 
 -(void)setDefaultFillColor
 {
-    _fillColor = [NSColor blackColor];
+    self.fillColor = [NSColor blackColor];
 }
 
 -(void)setTransparency:(float)alpha
@@ -168,21 +145,21 @@
     {
         alpha = 1.0;
     }
-    if(!_strokeColor)
+    if(!self.strokeColor)
         [self setDefaultStrokeColor];
-    temp = [_strokeColor colorWithAlphaComponent:alpha];
+    temp = [self.strokeColor colorWithAlphaComponent:alpha];
     if(temp)
     {
-        _strokeColor = temp;
+        self.strokeColor = temp;
     }
     temp = nil;
     
-    if(!_fillColor)
+    if(!self.fillColor)
         [self setDefaultFillColor];
-    temp = [_fillColor colorWithAlphaComponent:alpha];
+    temp = [self.fillColor colorWithAlphaComponent:alpha];
     if(temp)
     {
-        _fillColor = temp;
+        self.fillColor = temp;
     }
     return;
     
@@ -191,8 +168,8 @@
 
 -(void)setLineColor:(NSColor *)aLineColor fillColor:(NSColor *)aFillColor
 {
-	_strokeColor = aLineColor;
-	_fillColor = aFillColor;
+	self.strokeColor = aLineColor;
+	self.fillColor = aFillColor;
 
 }
 
@@ -232,8 +209,8 @@
 	else
 		[theDict setObject:@"Graphic" forKey:@"GraphicType"];
 	
-	[theDict setObject:_fillColor forKey:@"_fillColor"];
-	[theDict setObject:_strokeColor forKey:@"_strokeColor"];
+	[theDict setObject:self.fillColor forKey:@"_fillColor"];
+	[theDict setObject:self.strokeColor forKey:@"_strokeColor"];
     [theDict setObject:[NSString stringWithFormat:@"%f",_lineWidth] forKey:@"_lineWidth"];
 	//NSLog(@"end general graphic");
 	return [NSDictionary dictionaryWithDictionary:theDict];

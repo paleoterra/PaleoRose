@@ -56,7 +56,7 @@ struct XRGraphicDotDeviationTests {
 
         // Then
         #expect(dotDeviation.lineWidth() == 1.0, "Default lineWidth should be 1.0")
-        #expect(dotDeviation.strokeColor() == .black, "Default strokeColor should be black")
+        #expect(dotDeviation.strokeColor == .black, "Default strokeColor should be black")
 
         try CommonUtilities.compareGraphicSettings(values: settings, expected: expectedSettings)
     }
@@ -77,7 +77,7 @@ struct XRGraphicDotDeviationTests {
 
         // Then
         #expect(dotDeviation.lineWidth() == 1.0, "Default lineWidth should be 1.0")
-        #expect(dotDeviation.strokeColor() == .black, "Default strokeColor should be black")
+        #expect(dotDeviation.strokeColor == .black, "Default strokeColor should be black")
 
         try CommonUtilities.compareGraphicSettings(values: settings, expected: expectedSettings)
     }
@@ -111,7 +111,7 @@ struct XRGraphicDotDeviationTests {
 
         // Configure some custom values
         dotDeviation.setLineWidth(2.0)
-        dotDeviation.setStroke(.red)
+        dotDeviation.strokeColor = .red
         var expectedSettings = defaultSettings()
         expectedSettings["_angleIncrement"] = "3"
         expectedSettings["_totalCount"] = "32"

@@ -39,7 +39,7 @@
 		_angles = angles;
 		_values = values;
 		_drawsFill = YES;
-		_fillColor = [NSColor colorWithCalibratedWhite:1.0 alpha:1.0];
+		self.fillColor = [NSColor colorWithCalibratedWhite:1.0 alpha:1.0];
 		[self calculateGeometry];
 	}
 	return self;

@@ -28,21 +28,22 @@
 
 #import <Cocoa/Cocoa.h>
 
-#define XRGraphicKeyFillColor @"XRGraphicKeyFillColor"
-#define XRGraphicKeyStrokeColor @"XRGraphicKeyStrokeColor"
-#define XRGraphicKeyLineWidth @"XRGraphicKeyLineWidth"
-#define XRGraphicKeyDrawsFill @"XRGraphicKeyDrawsFill"
+NS_ASSUME_NONNULL_BEGIN
 
-@class XRGeometryController,LITMXMLTree;
+@class XRGeometryController;
+
 @interface XRGraphic : NSObject {
+
+
 	NSBezierPath *_drawingPath;
-    NSColor *_fillColor;
-    NSColor *_strokeColor;
 	float _lineWidth;
     BOOL _needsDisplay;
     BOOL _drawsFill;
 	__weak XRGeometryController *geometryController;
 }
+
+@property (nonatomic, nullable) NSColor *fillColor;
+@property (nonatomic, nullable) NSColor *strokeColor;
 
 -(id)initWithController:(XRGeometryController *)controller;
 -(void)geometryDidChange:(NSNotification *)aNotification;
@@ -59,15 +60,11 @@
 -(void)setDrawsFill:(BOOL)fill;
 -(BOOL)drawsFill;
 
--(NSColor *)strokeColor;
--(void)setStrokeColor:(NSColor *)aColor;
 -(void)setDefaultStrokeColor;
 
--(NSColor *)fillColor;
--(void)setFillColor:(NSColor *)aColor;
 -(void)setDefaultFillColor;
 
--(void)setLineColor:(NSColor *)aLineColor fillColor:(NSColor *)aFillColor;
+-(void)setLineColor:(nullable NSColor *)aLineColor fillColor:(nullable NSColor *)aFillColor;
 
 -(void)setTransparency:(float)alpha;
 
@@ -76,3 +73,5 @@
 
 -(NSDictionary *)graphicSettings;
 @end
+
+NS_ASSUME_NONNULL_END
