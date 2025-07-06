@@ -93,8 +93,8 @@
 -(NSDictionary *)graphicSettings
 {
 	NSMutableDictionary *theDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];
-	
-	
+    [theDict setObject:@"Histogram" forKey:@"GraphicType"];
+
 	[theDict setObject:[NSString stringWithFormat:@"%i",_histIncrement] forKey:@"_histIncrement"];
 	[theDict setObject:[NSString stringWithFormat:@"%f",_percent] forKey:@"_percent"];
 	[theDict setObject:[NSString stringWithFormat:@"%i",_count] forKey:@"_count"];

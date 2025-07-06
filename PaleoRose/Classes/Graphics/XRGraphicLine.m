@@ -348,8 +348,8 @@
 -(NSDictionary *)graphicSettings
 {
 	NSMutableDictionary *theDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];
-	//NSLog(@"graphic  line label");
-	
+    [theDict setObject:@"Line" forKey:@"GraphicType"];
+
 	[theDict setObject:[NSString stringWithFormat:@"%f",_relativePercent] forKey:@"_relativePercent"];
 	
 	[theDict setObject:[NSString stringWithFormat:@"%f",_angleSetting] forKey:@"_angleSetting"];

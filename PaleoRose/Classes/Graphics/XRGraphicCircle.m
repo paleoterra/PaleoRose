@@ -111,6 +111,8 @@
 -(NSDictionary *)graphicSettings
 {
 	NSMutableDictionary *theDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];
+    [theDict setObject:@"Circle" forKey:@"GraphicType"];
+
 	[theDict setObject:[NSString stringWithFormat:@"%i",_countSetting] forKey:@"_countSetting"];
 	[theDict setObject:[NSString stringWithFormat:@"%f",_percentSetting] forKey:@"_percentSetting"];
 	[theDict setObject:[NSString stringWithFormat:@"%f",_percentSetting] forKey:@"_geometryPercent"];

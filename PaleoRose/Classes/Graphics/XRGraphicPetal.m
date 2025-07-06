@@ -155,7 +155,8 @@
 {
 	NSMutableDictionary *theDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];
 	
-	
+    [theDict setObject:@"Petal" forKey:@"GraphicType"];
+
 	[theDict setObject:[NSString stringWithFormat:@"%i",_petalIncrement] forKey:@"_petalIncrement"];
 	[theDict setObject:[NSString stringWithFormat:@"%f",_maxRadius] forKey:@"_maxRadius"];
 	

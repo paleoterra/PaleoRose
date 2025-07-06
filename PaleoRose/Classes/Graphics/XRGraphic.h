@@ -33,8 +33,6 @@ NS_ASSUME_NONNULL_BEGIN
 @class XRGeometryController;
 
 @interface XRGraphic : NSObject {
-
-
 	NSBezierPath *_drawingPath;
 	float _lineWidth;
     BOOL _needsDisplay;

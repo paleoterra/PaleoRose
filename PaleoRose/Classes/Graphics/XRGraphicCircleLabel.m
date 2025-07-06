@@ -200,7 +200,7 @@
 -(NSDictionary *)graphicSettings
 {
 	NSMutableDictionary *theDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];
-
+    [theDict setObject:@"LabelCircle" forKey:@"GraphicType"];
 	if(_showLabel)
 		[theDict setObject:@"YES" forKey:@"_showLabel"];
 	else

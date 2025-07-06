@@ -30,14 +30,10 @@
 #import "XRGeometryController.h"
 #import <math.h>
 
-#import "XRGraphicCircle.h"
-#import "XRGraphicCircleLabel.h"
-#import "XRGraphicLine.h"
-#import "XRGraphicKite.h"
-#import "XRGraphicPetal.h"
-#import "XRGraphicDot.h"
-#import "XRGraphicHistogram.h"
-#import "XRGraphicDotDeviation.h"
+@interface XRGraphic() {
+}
+@end
+
 @implementation XRGraphic
 
 -(id)initWithController:(XRGeometryController *)controller
@@ -189,25 +185,7 @@
 -(NSDictionary *)graphicSettings
 {
 	NSMutableDictionary *theDict = [[NSMutableDictionary alloc] init];
-	//NSLog(@"general graphic");
-	if([self isKindOfClass:[XRGraphicCircleLabel class]])
-		[theDict setObject:@"LabelCircle" forKey:@"GraphicType"];
-	else if ([self isKindOfClass:[XRGraphicCircle class]])
-		[theDict setObject:@"Circle" forKey:@"GraphicType"];
-	else if ([self isKindOfClass:[XRGraphicLine class]])
-		[theDict setObject:@"Line" forKey:@"GraphicType"];
-	else if ([self isKindOfClass:[XRGraphicKite class]])
-		[theDict setObject:@"Kite" forKey:@"GraphicType"];
-	else if ([self isKindOfClass:[XRGraphicPetal class]])
-		[theDict setObject:@"Petal" forKey:@"GraphicType"];
-	else if ([self isKindOfClass:[XRGraphicDot class]])
-		[theDict setObject:@"Dot" forKey:@"GraphicType"];
-	else if ([self isKindOfClass:[XRGraphicHistogram class]])
-		[theDict setObject:@"Histogram" forKey:@"GraphicType"];
-	else if ([self isKindOfClass:[XRGraphicDotDeviation class]])
-		[theDict setObject:@"DotDeviation" forKey:@"GraphicType"];
-	else
-		[theDict setObject:@"Graphic" forKey:@"GraphicType"];
+	[theDict setObject:@"Graphic" forKey:@"GraphicType"];
 	
 	[theDict setObject:self.fillColor forKey:@"_fillColor"];
 	[theDict setObject:self.strokeColor forKey:@"_strokeColor"];

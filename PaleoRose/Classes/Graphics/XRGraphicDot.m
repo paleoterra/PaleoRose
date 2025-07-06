@@ -97,8 +97,8 @@
 -(NSDictionary *)graphicSettings
 {
 	NSMutableDictionary *theDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];
-	
-	
+    [theDict setObject:@"Dot" forKey:@"GraphicType"];
+
 	[theDict setObject:[NSString stringWithFormat:@"%i",_angleIncrement] forKey:@"_angleIncrement"];
 	[theDict setObject:[NSString stringWithFormat:@"%i",_totalCount] forKey:@"_totalCount"];
 	[theDict setObject:[NSString stringWithFormat:@"%i",_count] forKey:@"_count"];
