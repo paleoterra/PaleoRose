@@ -66,7 +66,7 @@
 	NSRect aRect;
 	NSPoint aPoint;
 
-	_drawingPath = [[NSBezierPath alloc] init];
+	self.drawingPath = [[NSBezierPath alloc] init];
 	aRect.size = NSMakeSize(_dotSize,_dotSize);
 	
 	if([geometryController isPercent])
@@ -87,7 +87,7 @@
 				aRect.origin.x = aPoint.x - (_dotSize * 0.5);
 				aRect.origin.y = aPoint.y - (_dotSize * 0.5);
 
-				[_drawingPath appendBezierPathWithOvalInRect:aRect];
+				[self.drawingPath appendBezierPathWithOvalInRect:aRect];
 
 			}
 		}
@@ -105,7 +105,7 @@
 				aPoint = [geometryController rotationOfPoint:aPoint byAngle:angle];
 				aRect.origin.x = aPoint.x - (_dotSize * 0.5);
 				aRect.origin.y = aPoint.y - (_dotSize * 0.5);
-				[_drawingPath appendBezierPathWithOvalInRect:aRect];
+				[self.drawingPath appendBezierPathWithOvalInRect:aRect];
 			}
 			}
 			else
@@ -115,7 +115,7 @@
 				aPoint = [geometryController rotationOfPoint:aPoint byAngle:angle];
 				aRect.origin.x = aPoint.x - (_dotSize * 0.5);
 				aRect.origin.y = aPoint.y - (_dotSize * 0.5);
-				[_drawingPath appendBezierPathWithOvalInRect:aRect];
+				[self.drawingPath appendBezierPathWithOvalInRect:aRect];
 			}
 		}
 			
@@ -132,7 +132,7 @@
 				aPoint = [geometryController rotationOfPoint:aPoint byAngle:angle];
 				aRect.origin.x = aPoint.x - (_dotSize * 0.5);
 				aRect.origin.y = aPoint.y - (_dotSize * 0.5);
-				[_drawingPath appendBezierPathWithOvalInRect:aRect];
+				[self.drawingPath appendBezierPathWithOvalInRect:aRect];
 			}
 		}
 		else
@@ -147,7 +147,7 @@
 					aPoint = [geometryController rotationOfPoint:aPoint byAngle:angle];
 					aRect.origin.x = aPoint.x - (_dotSize * 0.5);
 					aRect.origin.y = aPoint.y - (_dotSize * 0.5);
-					//[_drawingPath appendBezierPathWithOvalInRect:aRect];
+					//[self.drawingPath appendBezierPathWithOvalInRect:aRect];
 				}
 			
 			}
@@ -158,7 +158,7 @@
 				aPoint = [geometryController rotationOfPoint:aPoint byAngle:angle];
 				aRect.origin.x = aPoint.x - (_dotSize * 0.5);
 				aRect.origin.y = aPoint.y - (_dotSize * 0.5);
-				[_drawingPath appendBezierPathWithOvalInRect:aRect];
+				[self.drawingPath appendBezierPathWithOvalInRect:aRect];
 			}
 		}
 	}

@@ -59,18 +59,18 @@
 
 	if(angle1>360.0)
 		angle1 = angle1 - 360.0;
-	_drawingPath = [NSBezierPath bezierPath];
+	self.drawingPath = [NSBezierPath bezierPath];
 	if([geometryController isPercent])
 	{
 		radius = [geometryController radiusOfPercentValue:0.0];
 		aPoint = NSMakePoint(0.0,radius);
 		targetPoint = [geometryController rotationOfPoint:aPoint byAngle:angle1];
-		[_drawingPath moveToPoint:targetPoint];
+		[self.drawingPath moveToPoint:targetPoint];
 		
 		radius = [geometryController radiusOfPercentValue:_percent];
 		aPoint = NSMakePoint(0.0,radius);
 		targetPoint = [geometryController rotationOfPoint:aPoint byAngle:angle1];
-		[_drawingPath lineToPoint:targetPoint];
+		[self.drawingPath lineToPoint:targetPoint];
 		
 	}
 	else
@@ -78,15 +78,15 @@
 		radius = [geometryController radiusOfCount:0];
 		aPoint = NSMakePoint(0.0,radius);
 		targetPoint = [geometryController rotationOfPoint:aPoint byAngle:angle1];
-		[_drawingPath moveToPoint:targetPoint];
+		[self.drawingPath moveToPoint:targetPoint];
 		
 		radius = [geometryController radiusOfCount:_count];
 		aPoint = NSMakePoint(0.0,radius);
 		targetPoint = [geometryController rotationOfPoint:aPoint byAngle:angle1];
-		[_drawingPath lineToPoint:targetPoint];
+		[self.drawingPath lineToPoint:targetPoint];
 		
 	}
-	[_drawingPath setLineWidth:_lineWidth];
+	[self.drawingPath setLineWidth:_lineWidth];
 }
 
 

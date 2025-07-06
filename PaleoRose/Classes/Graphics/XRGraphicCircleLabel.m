@@ -140,11 +140,11 @@
 	{
 		if((([geometryController isPercent])||(_isFixedCount))||((![geometryController isPercent])&&(_isFixedCount)))
 		{
-			_drawingPath = [NSBezierPath bezierPathWithOvalInRect:[geometryController circleRectForPercent:_percentSetting]];
+			self.drawingPath = [NSBezierPath bezierPathWithOvalInRect:[geometryController circleRectForPercent:_percentSetting]];
 		}
 		else
 		{
-			_drawingPath = [NSBezierPath bezierPathWithOvalInRect:[geometryController circleRectForCount:_countSetting]];
+			self.drawingPath = [NSBezierPath bezierPathWithOvalInRect:[geometryController circleRectForCount:_countSetting]];
 		}
 	}
 	else
@@ -156,31 +156,31 @@
 		else
 			radius = [geometryController radiusOfCount:_countSetting];
 		angle = [geometryController degreesFromRadians:atan((0.52*[_label size].width)/radius)];
-		_drawingPath = [NSBezierPath bezierPath];
-		[_drawingPath appendBezierPathWithArcWithCenter:NSMakePoint(0.0,0.0) radius:radius startAngle:90+angle endAngle:90-angle];
+		self.drawingPath = [NSBezierPath bezierPath];
+		[self.drawingPath appendBezierPathWithArcWithCenter:NSMakePoint(0.0,0.0) radius:radius startAngle:90+angle endAngle:90-angle];
 		_labelPoint = NSMakePoint(0 - (0.5*[_label size].width),radius - (0.5*[_label size].height));
 
 
 				
 	}
-	[_drawingPath setLineWidth:_lineWidth];
+	[self.drawingPath setLineWidth:_lineWidth];
 }
 
 -(void)drawRect:(NSRect)aRect
 {
     [self computeLabelText];
-    if(NSIntersectsRect(aRect,[_drawingPath bounds]))
+    if(NSIntersectsRect(aRect,[self.drawingPath bounds]))
     {  
         [NSGraphicsContext saveGraphicsState];
 
         [self.strokeColor set];
 
 		[theTransform concat];
-		[_drawingPath stroke];
+		[self.drawingPath stroke];
         if(_drawsFill)
         {	
             [self.fillColor set];
-            [_drawingPath fill];
+            [self.drawingPath fill];
         }
         if((_showLabel)&&(!_isCore))
 		{

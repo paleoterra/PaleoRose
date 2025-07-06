@@ -30,8 +30,8 @@
 #import "XRGeometryController.h"
 #import <math.h>
 
-@interface XRGraphic() {
-}
+@interface XRGraphic()
+
 @end
 
 @implementation XRGraphic
@@ -79,23 +79,22 @@
 
 -(NSRect)drawingRect;//if this object needs redrawing, then use this to get its rect
 {
-    return [_drawingPath bounds];
+    return [self.drawingPath bounds];
 }
 
 -(void)drawRect:(NSRect)aRect
 {
     @try {
-    if(NSIntersectsRect(aRect,[_drawingPath bounds]))
-    {  
+    if(NSIntersectsRect(aRect,[self.drawingPath bounds]))
+    {
         [NSGraphicsContext saveGraphicsState];
         
         [self.strokeColor set];
-		//NSLog(@"width %f",[_drawingPath lineWidth]);
-        [_drawingPath stroke];
+        [self.drawingPath stroke];
         if(_drawsFill)
         {	
             [self.fillColor set];
-            [_drawingPath fill];
+            [self.drawingPath fill];
         }
         
         [NSGraphicsContext restoreGraphicsState];
@@ -172,8 +171,8 @@
 -(void)setLineWidth:(float)newWeight
 {
 	_lineWidth = newWeight;
-	if(_drawingPath)
-		[_drawingPath setLineWidth:_lineWidth];
+	if(self.drawingPath)
+		[self.drawingPath setLineWidth:_lineWidth];
 
 }
 

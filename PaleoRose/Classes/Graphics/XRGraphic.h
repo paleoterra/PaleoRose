@@ -33,13 +33,13 @@ NS_ASSUME_NONNULL_BEGIN
 @class XRGeometryController;
 
 @interface XRGraphic : NSObject {
-	NSBezierPath *_drawingPath;
 	float _lineWidth;
     BOOL _needsDisplay;
     BOOL _drawsFill;
 	__weak XRGeometryController *geometryController;
 }
 
+@property (nonatomic, nullable) NSBezierPath *drawingPath;
 @property (nonatomic, nullable) NSColor *fillColor;
 @property (nonatomic, nullable) NSColor *strokeColor;
 

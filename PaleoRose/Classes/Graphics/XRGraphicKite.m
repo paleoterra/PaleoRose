@@ -50,14 +50,14 @@
 	NSUInteger count = [_angles count];
 	NSPoint aPoint,targetPoint;
 	float radius;
-	_drawingPath = [NSBezierPath bezierPath];
+	self.drawingPath = [NSBezierPath bezierPath];
 	if([geometryController isPercent])
 	{
 		radius = [geometryController radiusOfPercentValue:[[_values lastObject] doubleValue]];
 		aPoint.x = 0.0;
 		aPoint.y = radius;
 		targetPoint = [geometryController rotationOfPoint:aPoint byAngle:[[_angles lastObject] doubleValue]];
-		[_drawingPath moveToPoint:targetPoint];
+		[self.drawingPath moveToPoint:targetPoint];
 		for(int i=0;i<count;i++)
 		{
 			//NSLog(@"value: %f angle %f", [[_values objectAtIndex:i] floatValue],[[_angles objectAtIndex:i] floatValue]);
@@ -65,7 +65,7 @@
 			aPoint.x = 0.0;
 			aPoint.y = radius;
 			targetPoint = [geometryController rotationOfPoint:aPoint byAngle:[[_angles objectAtIndex:i] doubleValue]];
-			[_drawingPath lineToPoint:targetPoint];
+			[self.drawingPath lineToPoint:targetPoint];
 		}
 		
 	}
@@ -75,7 +75,7 @@
 		aPoint.x = 0.0;
 		aPoint.y = radius;
 		targetPoint = [geometryController rotationOfPoint:aPoint byAngle:[[_angles lastObject] doubleValue]];
-		[_drawingPath moveToPoint:targetPoint];
+		[self.drawingPath moveToPoint:targetPoint];
 
 		for(int i=0;i<count;i++)
 		{
@@ -83,7 +83,7 @@
 			aPoint.x = 0.0;
 			aPoint.y = radius;
 			targetPoint = [geometryController rotationOfPoint:aPoint byAngle:[[_angles objectAtIndex:i] doubleValue]];
-			[_drawingPath lineToPoint:targetPoint];
+			[self.drawingPath lineToPoint:targetPoint];
 			
 		}
 	}
@@ -96,8 +96,8 @@
 		else
 			radius = [geometryController radiusOfCount:0];
 		aRect = NSMakeRect(centroid.x - radius,centroid.y - radius,2* radius,2* radius);
-		[_drawingPath appendBezierPathWithOvalInRect:aRect];
-		//[_drawingPath moveToPoint:targetPoint];
+		[self.drawingPath appendBezierPathWithOvalInRect:aRect];
+		//[self.drawingPath moveToPoint:targetPoint];
 	}
 }
 

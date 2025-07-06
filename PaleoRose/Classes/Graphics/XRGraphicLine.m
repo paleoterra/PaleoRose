@@ -70,8 +70,8 @@
 	radius = [geometryController radiusOfRelativePercent:0.0];
 	aPoint.y = radius;
 	aPoint = [geometryController rotationOfPoint:aPoint byAngle:_angleSetting];
-	_drawingPath = [[NSBezierPath alloc] init];
-	[_drawingPath moveToPoint:aPoint];
+	self.drawingPath = [[NSBezierPath alloc] init];
+	[self.drawingPath moveToPoint:aPoint];
 	if((_tickType == XRGraphicLineTickTypeNone)||(!_showTick))
 		radius = [geometryController radiusOfRelativePercent:_relativePercent];
 	else if(_tickType == XRGraphicLineTickTypeMinor)
@@ -82,7 +82,7 @@
 	aPoint.y = radius;
 
 	aPoint = [geometryController rotationOfPoint:aPoint byAngle:_angleSetting];
-	[_drawingPath lineToPoint:aPoint];
+	[self.drawingPath lineToPoint:aPoint];
 	
 	
 	[self setLabelTransform];		
@@ -221,17 +221,17 @@
 {
     //NSLog(@"drawing graphic");
     
-    if(NSIntersectsRect(aRect,[_drawingPath bounds]))
+    if(NSIntersectsRect(aRect,[self.drawingPath bounds]))
     {  
         [NSGraphicsContext saveGraphicsState];
         
         [self.strokeColor set];
-		//NSLog(@"width %f",[_drawingPath lineWidth]);
-        [_drawingPath stroke];
+		//NSLog(@"width %f",[self.drawingPath lineWidth]);
+        [self.drawingPath stroke];
         if(_drawsFill)
         {	
             [self.fillColor set];
-            [_drawingPath fill];
+            [self.drawingPath fill];
         }
         if(_showLabel)
 		{
