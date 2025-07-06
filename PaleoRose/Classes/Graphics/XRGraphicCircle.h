@@ -35,15 +35,18 @@
 	float _geometryPercent;
 	BOOL _isGeometryPercent;
 	BOOL _isPercent;
-	BOOL _isFixedCount;
 }
 
--(id)initCoreCircleWithController:(XRGeometryController *)aController;//for cores (0 values) only.  Use the standard initializer for all others
+@property (readwrite) BOOL isFixedCount;
+
+-(instancetype)initWithController:(XRGeometryController *)controller;
+-(instancetype)initCoreCircleWithController:(XRGeometryController *)aController;//for cores (0 values) only.  Use the standard initializer for all others
+
 -(void)setCountSetting:(int)count;
 -(int)countSetting;
+
 -(void)setPercentSetting:(float)percent;
 -(float)percent;
+
 -(void)setGeometryPercent:(float)percent;
--(void)setIsFixed:(BOOL)isFixed;
--(BOOL)isFixed;
 @end

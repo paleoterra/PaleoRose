@@ -265,7 +265,7 @@ struct XRGraphicCircleLabelTests {
         controller.mockIsPercent = false
         controller.mockGeometryMaxCount = 100
         let label = try buildTestObject(controller: controller)
-        label.setIsFixed(true)
+        label.isFixedCount = true
         label.setPercentSetting(0.30)
 
         // When

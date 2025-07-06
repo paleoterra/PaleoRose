@@ -42,8 +42,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readwrite) float lineWidth;
 @property (readwrite) BOOL needsDisplay;
 
-
-#pragma mark initialization
 -(instancetype)init NS_UNAVAILABLE;
 -(instancetype)initWithController:(XRGeometryController *)controller;
 

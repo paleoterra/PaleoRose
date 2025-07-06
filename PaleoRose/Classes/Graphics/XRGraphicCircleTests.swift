@@ -89,7 +89,7 @@ struct XRGraphicCircleTests {
         // Verify default values
         #expect(circle.countSetting() == 0, "Default count should be 0")
         #expect(circle.percent() == 0.0, "Default percent should be 0.0")
-        #expect(!circle.isFixed(), "Default fixed state should be false")
+        #expect(!circle.isFixedCount, "Default fixed state should be false")
     }
 
     // MARK: - Count and Percentage Tests
@@ -161,15 +161,15 @@ struct XRGraphicCircleTests {
         let circle = try buildTestObject(controller: controller)
 
         // Test default value
-        #expect(!circle.isFixed(), "Default fixed state should be false")
+        #expect(!circle.isFixedCount, "Default fixed state should be false")
 
         // Test setting to true
-        circle.setIsFixed(true)
-        #expect(circle.isFixed(), "Fixed state should be true after setting to true")
+        circle.isFixedCount = true
+        #expect(circle.isFixedCount, "Fixed state should be true after setting to true")
 
         // Test setting back to false
-        circle.setIsFixed(false)
-        #expect(!circle.isFixed(), "Fixed state should be false after setting to false")
+        circle.isFixedCount = false
+        #expect(!circle.isFixedCount, "Fixed state should be false after setting to false")
     }
 
     //    // MARK: - Equality
@@ -383,7 +383,7 @@ struct XRGraphicCircleTests {
         // Then
         #expect(circle.countSetting() == 0, "Default count should be 0")
         #expect(circle.percent() == 0.0, "Default percent should be 0.0")
-        #expect(circle.isFixed() == false, "Default fixed state should be false")
+        #expect(circle.isFixedCount == false, "Default fixed state should be false")
     }
 
     // MARK: - Percent Tests
@@ -458,7 +458,7 @@ struct XRGraphicCircleTests {
         // Given
         let controller = buildController()
         let circle = try buildTestObject(controller: controller)
-        circle.setIsFixed(true)
+        circle.isFixedCount = true
         var expectedSettings = defaultGraphicSettings()
         expectedSettings["_isFixedCount"] = "YES"
         try CommonUtilities

@@ -31,10 +31,19 @@
 
 @implementation XRGraphicCircle
 
--(id)initCoreCircleWithController:(XRGeometryController *)aController
-{
-	if (!(self = [super initWithController:aController])) return nil;
-	if(self)
+-(instancetype)initWithController:(XRGeometryController *)controller {
+    if(self = [super initWithController:controller]) {
+        _countSetting = 0;
+        _percentSetting = 0.0;
+        _isPercent = [controller isPercent];
+        if([self isMemberOfClass:[XRGraphicCircle class]])
+            [self calculateGeometry];
+    }
+    return self;
+}
+
+-(id)initCoreCircleWithController:(XRGeometryController *)aController {
+	if(self = [super initWithController:aController])
 	{
 		_countSetting = 0;
 		_percentSetting = 0.0;
@@ -45,10 +54,8 @@
 	return self;
 }
 
--(void)setCountSetting:(int)count
-{
-	if(_countSetting != count)
-	{
+-(void)setCountSetting:(int)count {
+	if(_countSetting != count) {
 		_countSetting = count;
 		_isPercent = NO;
 		_isGeometryPercent = NO;
@@ -56,13 +63,11 @@
 	}
 }
 
--(int)countSetting
-{
+-(int)countSetting {
 	return _countSetting;
 }
 
--(void)setPercentSetting:(float)percent
-{
+-(void)setPercentSetting:(float)percent {
 	if(_percentSetting != percent)
 	{
 		_percentSetting = percent;
@@ -72,19 +77,16 @@
 	}
 }
 
--(void)setGeometryPercent:(float)percent
-{
+-(void)setGeometryPercent:(float)percent {
 	_isGeometryPercent = YES;
 	self.drawingPath = [NSBezierPath bezierPathWithOvalInRect:[self.geometryController circleRectForGeometryPercent:percent]];
 }
 
--(float)percent
-{
+-(float)percent {
 	return _percentSetting;
 }
 
--(void)calculateGeometry
-{
+-(void)calculateGeometry {
 	
 	if([self.geometryController isPercent])
 	{
@@ -96,18 +98,7 @@
 	}
 }
 
--(void)setIsFixed:(BOOL)isFixed
-{
-	_isFixedCount = isFixed;
-}
-
--(BOOL)isFixed
-{
-	return _isFixedCount;
-}
-
--(NSDictionary *)graphicSettings
-{
+-(NSDictionary *)graphicSettings {
 	NSMutableDictionary *theDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];
     [theDict setObject:@"Circle" forKey:@"GraphicType"];
 

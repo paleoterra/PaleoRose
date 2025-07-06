@@ -472,7 +472,7 @@
 	{
 		percent = (float)(i+1)/(float)_fixedRingCount;
 		aCircle = [[XRGraphicCircleLabel alloc] initWithController:geometryController];
-		[aCircle setIsFixed:YES];
+        aCircle.isFixedCount = YES;
 		[aCircle setGeometryPercent:percent];
 		[aCircle setLineWidth:_lineWeight];
 		
@@ -531,7 +531,7 @@
 			[aCircle setLabelAngle:_labelAngle];
 			[aCircle setShowLabel:_showRingLabels];
 			[aCircle setFont:_ringFont];
-			[aCircle setIsFixed:NO];
+            aCircle.isFixedCount = NO;
 			[_graphicalObjects addObject:aCircle];
 			
 		}
@@ -550,7 +550,7 @@
 			[aCircle setLabelAngle:_labelAngle];
 			[aCircle setShowLabel:_showRingLabels];
 			[aCircle setFont:_ringFont];
-			[aCircle setIsFixed:NO];
+            aCircle.isFixedCount = NO;
 
 			[_graphicalObjects addObject:aCircle];
 
@@ -572,7 +572,7 @@
 			[aCircle setLabelAngle:_labelAngle];
 			[aCircle setShowLabel:_showRingLabels];
 			[aCircle setFont:_ringFont];
-			[aCircle setIsFixed:NO];
+            aCircle.isFixedCount = NO;
 			[_graphicalObjects addObject:aCircle];
 		}
 		if([geometryController hollowCoreSize]>0.0)//core boundary
@@ -584,7 +584,7 @@
 			[aCircle setLabelAngle:_labelAngle];
 			[aCircle setShowLabel:_showRingLabels];
 			[aCircle setFont:_ringFont];
-			[aCircle setIsFixed:NO];
+            aCircle.isFixedCount = NO;
 			[_graphicalObjects addObject:aCircle];
 		}
 	}
