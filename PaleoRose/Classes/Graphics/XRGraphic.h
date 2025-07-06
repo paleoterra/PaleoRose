@@ -33,7 +33,6 @@ NS_ASSUME_NONNULL_BEGIN
 @class XRGeometryController;
 
 @interface XRGraphic : NSObject {
-	float _lineWidth;
     BOOL _needsDisplay;
     BOOL _drawsFill;
 	__weak XRGeometryController *geometryController;
@@ -42,6 +41,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, nullable) NSBezierPath *drawingPath;
 @property (nonatomic, nullable) NSColor *fillColor;
 @property (nonatomic, nullable) NSColor *strokeColor;
+//@property (readwrite) BOOL drawsFill;
+@property (readwrite) float lineWidth;
+//@property (readwrite) BOOL needsDisplay;
 
 -(id)initWithController:(XRGeometryController *)controller;
 -(void)geometryDidChange:(NSNotification *)aNotification;
@@ -66,8 +68,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)setTransparency:(float)alpha;
 
--(void)setLineWidth:(float)newWeight;
--(float)lineWidth;
 
 -(NSDictionary *)graphicSettings;
 @end

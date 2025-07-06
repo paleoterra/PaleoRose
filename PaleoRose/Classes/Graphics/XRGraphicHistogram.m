@@ -38,7 +38,7 @@
 		_histIncrement = increment;
 		_percent = [aNumber floatValue];
 		_count = [aNumber intValue];
-		_lineWidth = 4.0;
+		self.lineWidth = 4.0;
 		[self setDrawsFill:YES];
 		[self calculateGeometry];
 	}
@@ -66,12 +66,12 @@
 		aPoint = NSMakePoint(0.0,radius);
 		targetPoint = [geometryController rotationOfPoint:aPoint byAngle:angle1];
 		[self.drawingPath moveToPoint:targetPoint];
-		
+
 		radius = [geometryController radiusOfPercentValue:_percent];
 		aPoint = NSMakePoint(0.0,radius);
 		targetPoint = [geometryController rotationOfPoint:aPoint byAngle:angle1];
 		[self.drawingPath lineToPoint:targetPoint];
-		
+
 	}
 	else
 	{
@@ -79,14 +79,14 @@
 		aPoint = NSMakePoint(0.0,radius);
 		targetPoint = [geometryController rotationOfPoint:aPoint byAngle:angle1];
 		[self.drawingPath moveToPoint:targetPoint];
-		
+
 		radius = [geometryController radiusOfCount:_count];
 		aPoint = NSMakePoint(0.0,radius);
 		targetPoint = [geometryController rotationOfPoint:aPoint byAngle:angle1];
 		[self.drawingPath lineToPoint:targetPoint];
-		
+
 	}
-	[self.drawingPath setLineWidth:_lineWidth];
+	[self.drawingPath setLineWidth:self.lineWidth];
 }
 
 

@@ -52,10 +52,10 @@ struct XRGraphicDotDeviationTests {
         let dotDeviation = try buildBasicTestObject(controller: controller)
 
         let expectedSettings = defaultSettings()
-        let settings = try #require(dotDeviation.graphicSettings())
+        let settings = dotDeviation.graphicSettings()
 
         // Then
-        #expect(dotDeviation.lineWidth() == 1.0, "Default lineWidth should be 1.0")
+        #expect(dotDeviation.lineWidth == 1.0, "Default lineWidth should be 1.0")
         #expect(dotDeviation.strokeColor == .black, "Default strokeColor should be black")
 
         try CommonUtilities.compareGraphicSettings(values: settings, expected: expectedSettings)
@@ -73,10 +73,10 @@ struct XRGraphicDotDeviationTests {
         expectedSettings["_angleIncrement"] = "3"
         expectedSettings["_totalCount"] = "32"
         expectedSettings["_dotSize"] = "4.000000"
-        let settings = try #require(dotDeviation.graphicSettings())
+        let settings = dotDeviation.graphicSettings()
 
         // Then
-        #expect(dotDeviation.lineWidth() == 1.0, "Default lineWidth should be 1.0")
+        #expect(dotDeviation.lineWidth == 1.0, "Default lineWidth should be 1.0")
         #expect(dotDeviation.strokeColor == .black, "Default strokeColor should be black")
 
         try CommonUtilities.compareGraphicSettings(values: settings, expected: expectedSettings)
@@ -92,11 +92,11 @@ struct XRGraphicDotDeviationTests {
         let testWidth: Float = 2.5
 
         // When
-        dotDeviation.setLineWidth(testWidth)
+        dotDeviation.lineWidth = testWidth
 
         // Then
         #expect(
-            dotDeviation.lineWidth().isApproximatelyEqual(to: testWidth, relativeTolerance: 0.001),
+            dotDeviation.lineWidth.isApproximatelyEqual(to: testWidth, relativeTolerance: 0.001),
             "lineWidth should be \(testWidth) after setting"
         )
     }
@@ -110,7 +110,7 @@ struct XRGraphicDotDeviationTests {
         let dotDeviation = try buildTestObject(controller: controller)
 
         // Configure some custom values
-        dotDeviation.setLineWidth(2.0)
+        dotDeviation.lineWidth = 2.0
         dotDeviation.strokeColor = .red
         var expectedSettings = defaultSettings()
         expectedSettings["_angleIncrement"] = "3"
@@ -119,7 +119,7 @@ struct XRGraphicDotDeviationTests {
         expectedSettings["_lineWidth"] = "2.000000"
         expectedSettings["_strokeColor"] = NSColor.red
         // When
-        let settings = try #require(dotDeviation.graphicSettings())
+        let settings = dotDeviation.graphicSettings()
 
         try CommonUtilities.compareGraphicSettings(values: settings, expected: expectedSettings)
     }

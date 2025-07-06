@@ -43,10 +43,16 @@
 	{
 		self.fillColor = [NSColor blackColor];
 		self.strokeColor = [NSColor blackColor];
-		_lineWidth = 1.0;
+		self.lineWidth = 1.0;
 		_needsDisplay = YES;
 		_drawsFill = NO;
 		geometryController = controller;
+
+        [self addObserver:self
+                      forKeyPath:@"lineWidth"
+                         options:NSKeyValueObservingOptionNew |
+                                 NSKeyValueObservingOptionOld
+                         context:NULL];
 	}
 	return self;
 }
@@ -168,19 +174,6 @@
 
 }
 
--(void)setLineWidth:(float)newWeight
-{
-	_lineWidth = newWeight;
-	if(self.drawingPath)
-		[self.drawingPath setLineWidth:_lineWidth];
-
-}
-
--(float)lineWidth
-{
-	return _lineWidth;
-}
-
 -(NSDictionary *)graphicSettings
 {
 	NSMutableDictionary *theDict = [[NSMutableDictionary alloc] init];
@@ -188,9 +181,16 @@
 	
 	[theDict setObject:self.fillColor forKey:@"_fillColor"];
 	[theDict setObject:self.strokeColor forKey:@"_strokeColor"];
-    [theDict setObject:[NSString stringWithFormat:@"%f",_lineWidth] forKey:@"_lineWidth"];
+    [theDict setObject:[NSString stringWithFormat:@"%f",self.lineWidth] forKey:@"_lineWidth"];
 	//NSLog(@"end general graphic");
 	return [NSDictionary dictionaryWithDictionary:theDict];
 }
 
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+
+    if ([keyPath isEqualToString:@"lineWidth"]) {
+        if(self.drawingPath)
+            [self.drawingPath setLineWidth:self.lineWidth];
+    }
+}
 @end

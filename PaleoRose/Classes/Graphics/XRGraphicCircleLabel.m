@@ -163,7 +163,7 @@
 
 				
 	}
-	[self.drawingPath setLineWidth:_lineWidth];
+	[self.drawingPath setLineWidth:self.lineWidth];
 }
 
 -(void)drawRect:(NSRect)aRect

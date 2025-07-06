@@ -47,7 +47,7 @@ struct XRGraphicLineTests {
         let expectedSettings = try defaultSettings()
 
         // Then
-        let settings = try #require(line.graphicSettings())
+        let settings = line.graphicSettings()
         try CommonUtilities
             .compareGraphicSettings(
                 values: settings,
@@ -65,11 +65,11 @@ struct XRGraphicLineTests {
         let testWidth: Float = 2.5
 
         // When
-        line.setLineWidth(testWidth)
+        line.lineWidth = testWidth
 
         // Then
         #expect(
-            line.lineWidth().isApproximatelyEqual(to: testWidth, relativeTolerance: 0.001),
+            line.lineWidth.isApproximatelyEqual(to: testWidth, relativeTolerance: 0.001),
             "lineWidth should be \(testWidth) after setting"
         )
     }
@@ -92,7 +92,7 @@ struct XRGraphicLineTests {
             "Spoke angle was \(line.spokeAngle()), should be \(testAngle)"
         )
 
-        let settings = try #require(line.graphicSettings())
+        let settings = line.graphicSettings()
         try CommonUtilities
             .compareGraphicSettings(
                 values: settings,
@@ -114,7 +114,7 @@ struct XRGraphicLineTests {
         expectedSettings["_tickType"] = "\(tickType)"
 
         line.setTickType(tickType)
-        let settings = try #require(line.graphicSettings())
+        let settings = line.graphicSettings()
         #expect(line.tickType() == tickType)
         try CommonUtilities.compareGraphicSettings(values: settings, expected: expectedSettings)
     }
@@ -133,7 +133,7 @@ struct XRGraphicLineTests {
         expectedSettings["_showTick"] = showTick ? "YES" : "NO"
 
         line.setShowTick(showTick)
-        let settings = try #require(line.graphicSettings())
+        let settings = line.graphicSettings()
 
         try CommonUtilities.compareGraphicSettings(values: settings, expected: expectedSettings)
     }
@@ -152,7 +152,7 @@ struct XRGraphicLineTests {
         expectedSettings["_showLabel"] = showLabel ? "YES" : "NO"
 
         line.setShowlabel(showLabel)
-        let settings = try #require(line.graphicSettings())
+        let settings = line.graphicSettings()
 
         try CommonUtilities.compareGraphicSettings(values: settings, expected: expectedSettings)
     }
@@ -176,7 +176,7 @@ struct XRGraphicLineTests {
         #expect(line.font().fontName == fontInfo.name)
         #expect(line.font().pointSize == fontInfo.size)
 
-        let settings = try #require(line.graphicSettings())
+        let settings = line.graphicSettings()
 
         try CommonUtilities.compareGraphicSettings(values: settings, expected: expectedSettings)
     }

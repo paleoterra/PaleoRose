@@ -46,9 +46,9 @@ struct XRGraphicKiteTests {
         var expectedSettings = defaultSettings()
         expectedSettings["_fillColor"] = NSColor.black
 
-        let settings = try #require(kite.graphicSettings())
+        let settings = kite.graphicSettings()
         // Then
-        #expect(kite.lineWidth() == 1.0, "Default lineWidth should be 1.0")
+        #expect(kite.lineWidth == 1.0, "Default lineWidth should be 1.0")
 
         try CommonUtilities.compareGraphicSettings(values: settings, expected: expectedSettings)
     }
@@ -62,9 +62,9 @@ struct XRGraphicKiteTests {
         let kite = try buildTestObject(controller: controller)
         let expectedSettings = defaultSettings()
 
-        let settings = try #require(kite.graphicSettings())
+        let settings = kite.graphicSettings()
         // Then
-        #expect(kite.lineWidth() == 1.0, "Default lineWidth should be 1.0")
+        #expect(kite.lineWidth == 1.0, "Default lineWidth should be 1.0")
 
         try CommonUtilities.compareGraphicSettings(values: settings, expected: expectedSettings)
     }

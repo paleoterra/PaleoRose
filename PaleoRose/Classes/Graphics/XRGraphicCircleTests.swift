@@ -67,7 +67,7 @@ struct XRGraphicCircleTests {
             "Default fill color should be black"
         )
         #expect(circle.strokeColor == .black, "Default stroke color should be black")
-        #expect(circle.lineWidth() == 1.0, "Default line width should be 1.0")
+        #expect(circle.lineWidth == 1.0, "Default line width should be 1.0")
         #expect(circle.needsDisplay() == true, "Default needs display should be true")
         #expect(circle.drawsFill() == false, "Default draws fill should be false")
         // Verify default values
