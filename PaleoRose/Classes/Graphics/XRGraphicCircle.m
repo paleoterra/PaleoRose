@@ -35,7 +35,7 @@
     if(self = [super initWithController:controller]) {
         _isPercent = [controller isPercent];
         [self registerForKVO];
-        if([self isMemberOfClass:[XRGraphicCircle class]])
+        if([self isMemberOfClass:[XRGraphicCircle class]]) // this prevents calculating geometry twice for circle labels
             [self calculateGeometry];
     }
     return self;

@@ -40,7 +40,7 @@
 	{
 		_showLabel = NO;
 		_labelPoint = NSMakePoint(0.0,0.0);
-		_isPercent = [aController isPercent];
+		self.isPercent = [aController isPercent];
 		_isCore = YES;
 		self.percentSetting = 0.0;
 		self.countSetting = 0;
@@ -101,9 +101,9 @@
 
 	NSRange aRange;
 	aRange.location = 0;
-    _isPercent = [self.geometryController isPercent];
+    self.isPercent = [self.geometryController isPercent];
 
-	if(_isPercent)
+	if(self.isPercent)
 		_label = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%3.1f %c",(self.percentSetting * 100.0),'%']];
 	else if(self.isFixedCount)
         _label = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%3.1f",(self.percentSetting * (float)[self.geometryController geometryMaxCount])]];
@@ -113,7 +113,7 @@
 	aRange.length = [_label length];
 	
 	if(_labelFont)
-		[_label setAttributes:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:_labelFont,self.strokeColor,nil]
+		[_label setAttributes:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:_labelFont, self.strokeColor,nil]
 														  forKeys:[NSArray arrayWithObjects:NSFontAttributeName,NSForegroundColorAttributeName,nil]] range:aRange];
 	
 	//NSLog([_label description]);
