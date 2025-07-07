@@ -33,9 +33,8 @@
 
 -(instancetype)initWithController:(XRGeometryController *)controller {
     if(self = [super initWithController:controller]) {
-        _countSetting = 0;
-        _percentSetting = 0.0;
         _isPercent = [controller isPercent];
+        [self registerForKVO];
         if([self isMemberOfClass:[XRGraphicCircle class]])
             [self calculateGeometry];
     }
@@ -45,8 +44,9 @@
 -(id)initCoreCircleWithController:(XRGeometryController *)aController {
 	if(self = [super initWithController:aController])
 	{
-		_countSetting = 0;
+        self.countSetting = 0;
 		_percentSetting = 0.0;
+        [self registerForKVO];
 		_isPercent = [aController isPercent];
 		if([self isMemberOfClass:[XRGraphicCircle class]])
 			[self calculateGeometry];
@@ -54,36 +54,23 @@
 	return self;
 }
 
--(void)setCountSetting:(int)count {
-	if(_countSetting != count) {
-		_countSetting = count;
-		_isPercent = NO;
-		_isGeometryPercent = NO;
-		[self calculateGeometry];
-	}
-}
+-(void)registerForKVO {
+    [self addObserver:self
+           forKeyPath:@"countSetting"
+              options:NSKeyValueObservingOptionNew |
+     NSKeyValueObservingOptionOld
+              context:NULL];
+    [self addObserver:self
+           forKeyPath:@"percentSetting"
+              options:NSKeyValueObservingOptionNew |
+     NSKeyValueObservingOptionOld
+              context:NULL];
 
--(int)countSetting {
-	return _countSetting;
-}
-
--(void)setPercentSetting:(float)percent {
-	if(_percentSetting != percent)
-	{
-		_percentSetting = percent;
-		_isPercent = YES;
-		_isGeometryPercent = NO;
-		[self calculateGeometry];
-	}
 }
 
 -(void)setGeometryPercent:(float)percent {
 	_isGeometryPercent = YES;
 	self.drawingPath = [NSBezierPath bezierPathWithOvalInRect:[self.geometryController circleRectForGeometryPercent:percent]];
-}
-
--(float)percent {
-	return _percentSetting;
 }
 
 -(void)calculateGeometry {
@@ -102,7 +89,7 @@
 	NSMutableDictionary *theDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];
     [theDict setObject:@"Circle" forKey:@"GraphicType"];
 
-	[theDict setObject:[NSString stringWithFormat:@"%i",_countSetting] forKey:@"_countSetting"];
+	[theDict setObject:[NSString stringWithFormat:@"%i", self.countSetting] forKey:@"_countSetting"];
 	[theDict setObject:[NSString stringWithFormat:@"%f",_percentSetting] forKey:@"_percentSetting"];
 	[theDict setObject:[NSString stringWithFormat:@"%f",_percentSetting] forKey:@"_geometryPercent"];
 	if(_isGeometryPercent)
@@ -123,4 +110,19 @@
 	return [NSDictionary dictionaryWithDictionary:theDict];
 }
 
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    [super observeValueForKeyPath:keyPath
+                             ofObject:object
+                               change:change
+                              context:context];
+    if ([keyPath isEqualToString:@"countSetting"]) {
+        _isPercent = NO;
+        _isGeometryPercent = NO;
+        [self calculateGeometry];
+    } else if ([keyPath isEqualToString:@"percentSetting"]) {
+        _isPercent = YES;
+        _isGeometryPercent = NO;
+        [self calculateGeometry];
+    }
+}
 @end

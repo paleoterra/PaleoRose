@@ -98,7 +98,7 @@ struct XRGraphicCircleLabelTests {
             label.labelAngle().isApproximatelyEqual(to: 0.0, relativeTolerance: 0.001),
             "Default labelAngle should be 0.0"
         )
-        #expect(label.countSetting() == 0, "Core label countSetting should be 0")
+        #expect(label.countSetting == 0, "Core label countSetting should be 0")
 
         try CommonUtilities
             .compareGraphicSettings(
@@ -232,7 +232,7 @@ struct XRGraphicCircleLabelTests {
         let controller = buildController()
         controller.mockIsPercent = true
         let label = try buildTestObject(controller: controller)
-        label.setPercentSetting(0.5) // 50%
+        label.percentSetting = 0.5 // 50%
 
         // When
         label.computeLabelText()
@@ -248,7 +248,7 @@ struct XRGraphicCircleLabelTests {
         let controller = buildController()
         controller.mockIsPercent = false
         let label = try buildTestObject(controller: controller)
-        label.setCountSetting(42)
+        label.countSetting = 42
 
         // When
         label.computeLabelText()
@@ -266,7 +266,7 @@ struct XRGraphicCircleLabelTests {
         controller.mockGeometryMaxCount = 100
         let label = try buildTestObject(controller: controller)
         label.isFixedCount = true
-        label.setPercentSetting(0.30)
+        label.percentSetting = 0.30
 
         // When
         label.computeLabelText()

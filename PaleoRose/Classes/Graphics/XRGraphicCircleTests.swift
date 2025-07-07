@@ -57,8 +57,7 @@ struct XRGraphicCircleTests {
                 .isApproximatelyEqual(to: CGFloat(expectedAlpha)),
             sourceLocation: sourceLocation
         )
-        #expect(fillColor.alphaComponent.isApproximatelyEqual(to: CGFloat(expectedAlpha)),
-                sourceLocation: sourceLocation)
+        #expect(fillColor.alphaComponent.isApproximatelyEqual(to: CGFloat(expectedAlpha)), sourceLocation: sourceLocation)
 
         // Convert all colors to a common color space (sRGB) for comparison
         try CommonUtilities.verifyEqualColorsWithOutAlpha(
@@ -87,8 +86,8 @@ struct XRGraphicCircleTests {
         #expect(circle.needsDisplay == true, "Default needs display should be true")
         #expect(circle.drawsFill == false, "Default draws fill should be false")
         // Verify default values
-        #expect(circle.countSetting() == 0, "Default count should be 0")
-        #expect(circle.percent() == 0.0, "Default percent should be 0.0")
+        #expect(circle.countSetting == 0, "Default count should be 0")
+        #expect(circle.percentSetting == 0.0, "Default percent should be 0.0")
         #expect(!circle.isFixedCount, "Default fixed state should be false")
     }
 
@@ -103,11 +102,11 @@ struct XRGraphicCircleTests {
         let expectedCount: Int32 = 42
 
         // When
-        circle.setCountSetting(expectedCount)
+        circle.countSetting = expectedCount
 
         // Then
         #expect(
-            circle.countSetting() == expectedCount,
+            circle.countSetting == expectedCount,
             "Count should be set correctly"
         )
     }
@@ -120,11 +119,11 @@ struct XRGraphicCircleTests {
         let expectedPercent: Float = 0.75
 
         // When
-        circle.setPercentSetting(expectedPercent)
+        circle.percentSetting = expectedPercent
 
         // Then
         #expect(
-            circle.percent().isApproximatelyEqual(
+            circle.percentSetting.isApproximatelyEqual(
                 to: expectedPercent,
                 absoluteTolerance: .ulpOfOne
             ),
@@ -140,11 +139,11 @@ struct XRGraphicCircleTests {
         let testPercent: Float = 60.0
 
         // When
-        circle.setPercentSetting(testPercent)
+        circle.percentSetting = testPercent
 
         // Then
         #expect(
-            circle.percent().isApproximatelyEqual(
+            circle.percentSetting.isApproximatelyEqual(
                 to: testPercent,
                 absoluteTolerance: 0.001
             ),
@@ -381,8 +380,8 @@ struct XRGraphicCircleTests {
         )
 
         // Then
-        #expect(circle.countSetting() == 0, "Default count should be 0")
-        #expect(circle.percent() == 0.0, "Default percent should be 0.0")
+        #expect(circle.countSetting == 0, "Default count should be 0")
+        #expect(circle.percentSetting == 0.0, "Default percent should be 0.0")
         #expect(circle.isFixedCount == false, "Default fixed state should be false")
     }
 
@@ -396,11 +395,11 @@ struct XRGraphicCircleTests {
         let expectedPercent: Float = 75.5
 
         // When
-        circle.setPercentSetting(expectedPercent)
+        circle.percentSetting = expectedPercent
 
         // Then
         #expect(
-            circle.percent() == expectedPercent,
+            circle.percentSetting == expectedPercent,
             "Percent should return the set value"
         )
     }
@@ -424,7 +423,7 @@ struct XRGraphicCircleTests {
         // Given
         let controller = buildController()
         let circle = try buildTestObject(controller: controller)
-        circle.setPercentSetting(75.5)
+        circle.percentSetting = 75.5
         var expectedSettings = defaultGraphicSettings()
         expectedSettings["_isPercent"] = "YES"
         expectedSettings["_percentSetting"] = "75.500000"

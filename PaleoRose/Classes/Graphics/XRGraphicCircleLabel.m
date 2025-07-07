@@ -42,8 +42,8 @@
 		_labelPoint = NSMakePoint(0.0,0.0);
 		_isPercent = [aController isPercent];
 		_isCore = YES;
-		_percentSetting = 0.0;
-		_countSetting = 0;
+		self.percentSetting = 0.0;
+		self.countSetting = 0;
 		[self calculateGeometry];
 	}
 	return self;
@@ -104,12 +104,12 @@
     _isPercent = [self.geometryController isPercent];
 
 	if(_isPercent)
-		_label = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%3.1f %c",(_percentSetting * 100.0),'%']];
+		_label = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%3.1f %c",(self.percentSetting * 100.0),'%']];
 	else if(self.isFixedCount)
-        _label = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%3.1f",(_percentSetting * (float)[self.geometryController geometryMaxCount])]];
+        _label = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%3.1f",(self.percentSetting * (float)[self.geometryController geometryMaxCount])]];
 	else
-		_label = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%i",_countSetting]];
-	
+		_label = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%i",self.countSetting]];
+
 	aRange.length = [_label length];
 	
 	if(_labelFont)
@@ -133,11 +133,11 @@
 	{
         if((([self.geometryController isPercent])||(self.isFixedCount))||((![self.geometryController isPercent])&&(self.isFixedCount)))
 		{
-            self.drawingPath = [NSBezierPath bezierPathWithOvalInRect:[self.geometryController circleRectForPercent:_percentSetting]];
+            self.drawingPath = [NSBezierPath bezierPathWithOvalInRect:[self.geometryController circleRectForPercent:self.percentSetting]];
 		}
 		else
 		{
-            self.drawingPath = [NSBezierPath bezierPathWithOvalInRect:[self.geometryController circleRectForCount:_countSetting]];
+            self.drawingPath = [NSBezierPath bezierPathWithOvalInRect:[self.geometryController circleRectForCount:self.countSetting]];
 		}
 	}
 	else
@@ -145,9 +145,9 @@
 		float radius,angle;
 
         if((([self.geometryController isPercent])||(self.isFixedCount))||((![self.geometryController isPercent])&&(self.isFixedCount)))
-            radius = [self.geometryController radiusOfPercentValue:_percentSetting];
+            radius = [self.geometryController radiusOfPercentValue:self.percentSetting];
 		else
-            radius = [self.geometryController radiusOfCount:_countSetting];
+            radius = [self.geometryController radiusOfCount:self.countSetting];
         angle = [self.geometryController degreesFromRadians:atan((0.52*[_label size].width)/radius)];
 		self.drawingPath = [NSBezierPath bezierPath];
 		[self.drawingPath appendBezierPathWithArcWithCenter:NSMakePoint(0.0,0.0) radius:radius startAngle:90+angle endAngle:90-angle];
@@ -186,7 +186,7 @@
 
 -(void)setGeometryPercent:(float)percent
 {
-    _percentSetting = percent*[self.geometryController geometryMaxPercent];
+    self.percentSetting = percent*[self.geometryController geometryMaxPercent];
 	[self calculateGeometry];
 }
 
