@@ -38,13 +38,14 @@
 	
 	if(self)
 	{
-		_showLabel = NO;
+		self.showLabel = NO;
 		_labelPoint = NSMakePoint(0.0,0.0);
 		self.isPercent = [aController isPercent];
 		_isCore = YES;
 		self.percentSetting = 0.0;
 		self.countSetting = 0;
 		[self calculateGeometry];
+        [self registerForKVO];
 	}
 	return self;
 }
@@ -58,8 +59,17 @@
 		_isCore = NO;
 		_labelFont = [NSFont fontWithName:@"Arial-Black" size:12];
 		_labelPoint = NSMakePoint(0.0,0.0);
+        [self registerForKVO];
 	}
 	return self;
+}
+
+-(void)registerForKVO {
+    [self addObserver:self
+           forKeyPath:@"labelAngle"
+              options:NSKeyValueObservingOptionNew |
+     NSKeyValueObservingOptionOld
+              context:NULL];
 }
 
 -(void)setFont:(NSFont *)newFont
@@ -71,29 +81,6 @@
 -(NSFont *)font
 {
 	return _labelFont;
-}
-
--(void)setShowLabel:(BOOL)showLabel
-{
-	_showLabel = showLabel;
-}
-
--(BOOL)showLabel
-{
-	return _showLabel;
-}
-
--(void)setLabelAngle:(float)newAngle
-{
-	_labelAngle = newAngle;
-
-	[self calculateGeometry];
-
-}
-
--(float)labelAngle
-{
-	return _labelAngle;
 }
 
 -(void)computeLabelText
@@ -209,6 +196,16 @@
 		[theDict setObject:@"NO" forKey:@"_isCore"];
 
 	return [NSDictionary dictionaryWithDictionary:theDict];
+}
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    [super observeValueForKeyPath:keyPath
+                             ofObject:object
+                               change:change
+                              context:context];
+    if ([keyPath isEqualToString:@"labelAngle"]) {
+        [self calculateGeometry];
+    }
 }
 
 @end

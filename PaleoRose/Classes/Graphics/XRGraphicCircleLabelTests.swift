@@ -29,7 +29,7 @@ struct XRGraphicCircleLabelTests {
 
     private func buildCoreTestObject(controller: MockGeometryController) throws -> XRGraphicCircleLabel {
         let label = try buildTestObject(controller: controller)
-        label.setShow(false)
+        label.showLabel = false
         return label
     }
 
@@ -64,10 +64,10 @@ struct XRGraphicCircleLabelTests {
         let label = try buildTestObject(controller: controller)
 
         // Then
-        #expect(label.show() == true, "Default showLabel should be true")
+        #expect(label.showLabel == true, "Default showLabel should be true")
         #expect(
             label
-                .labelAngle().isApproximatelyEqual(to: 0.0, relativeTolerance: 0.001)
+                .labelAngle.isApproximatelyEqual(to: 0.0, relativeTolerance: 0.001)
         )
         #expect(label.font() != nil, "Default font should not be nil")
         #expect(
@@ -93,9 +93,9 @@ struct XRGraphicCircleLabelTests {
         let settings = label.graphicSettings()
 
         // Then
-        #expect(label.show() == false, "Core label showLabel should be false")
+        #expect(label.showLabel == false, "Core label showLabel should be false")
         #expect(
-            label.labelAngle().isApproximatelyEqual(to: 0.0, relativeTolerance: 0.001),
+            label.labelAngle.isApproximatelyEqual(to: 0.0, relativeTolerance: 0.001),
             "Default labelAngle should be 0.0"
         )
         #expect(label.countSetting == 0, "Core label countSetting should be 0")
@@ -116,16 +116,16 @@ struct XRGraphicCircleLabelTests {
         let label = try buildTestObject(controller: controller)
 
         // When - Set to false
-        label.setShow(false)
+        label.showLabel = false
 
         // Then
-        #expect(label.show() == false, "showLabel should be false after setting to false")
+        #expect(label.showLabel == false, "showLabel should be false after setting to false")
 
         // When - Set back to true
-        label.setShow(true)
+        label.showLabel = true
 
         // Then
-        #expect(label.show() == true, "showLabel should be true after setting back to true")
+        #expect(label.showLabel == true, "showLabel should be true after setting back to true")
     }
 
     @Test("setLabelAngle should update label angle and trigger geometry update")
@@ -136,11 +136,11 @@ struct XRGraphicCircleLabelTests {
         let testAngle: Float = 45.0
 
         // When
-        label.setLabelAngle(testAngle)
+        label.labelAngle = testAngle
 
         // Then
         #expect(
-            label.labelAngle().isApproximatelyEqual(to: 45.0, relativeTolerance: 0.001),
+            label.labelAngle.isApproximatelyEqual(to: 45.0, relativeTolerance: 0.001),
             "labelAngle should be 45.0 after setting"
         )
     }
@@ -162,24 +162,6 @@ struct XRGraphicCircleLabelTests {
             "Font size should be 14.0 after setting"
         )
     }
-
-    // MARK: - Geometry Calculation Tests
-
-//    @Test("calculateGeometry should compute correct geometry for non-core label")
-//    func testCalculateGeometryNonCore() throws {
-//        // Given
-//        let controller = buildController()
-//        let label = try buildTestObject(controller: controller)
-//
-//        // When
-//        label.calculateGeometry()
-//
-//        // Then - Verify the drawing path is created
-//        // Note: We can't directly access _drawingPath, but we can verify side effects
-//        let drawingRect = label.drawingRect()
-//        #expect(drawingRect.width > 0, "Drawing rect width should be greater than 0")
-//        #expect(drawingRect.height > 0, "Drawing rect height should be greater than 0")
-//    }
 
     @Test("calculateGeometry should compute correct geometry for core label")
     func testCalculateGeometryCore() throws {
@@ -205,8 +187,8 @@ struct XRGraphicCircleLabelTests {
         let label = try buildTestObject(controller: controller)
 
         // Configure some custom values
-        label.setShow(true)
-        label.setLabelAngle(30.0)
+        label.showLabel = true
+        label.labelAngle = 30.0
         label.setFont(NSFont.systemFont(ofSize: 14.0))
         label.computeLabelText()
 
@@ -214,7 +196,7 @@ struct XRGraphicCircleLabelTests {
         expectedSettings["_labelAngle"] = "30.000000"
 
         // When
-        let settings = try #require(label.graphicSettings())
+        let settings = label.graphicSettings()
 
         // then
         try CommonUtilities
@@ -284,7 +266,7 @@ struct XRGraphicCircleLabelTests {
         let controller = buildController()
         let label = try buildTestObject(controller: controller)
         let testAngle: Float = 90.0
-        label.setLabelAngle(testAngle)
+        label.labelAngle = testAngle
 
         // When
         label.computeTransform()
@@ -307,7 +289,7 @@ struct XRGraphicCircleLabelTests {
         expectedSettings["_geometryPercent"] = "70.000000"
         expectedSettings["_percentSetting"] = "70.000000"
 
-        let settings = try #require(label.graphicSettings())
+        let settings = label.graphicSettings()
         try CommonUtilities
             .compareGraphicSettings(
                 values: settings,
@@ -320,13 +302,13 @@ struct XRGraphicCircleLabelTests {
         let controller = buildController()
         let label = try buildTestObject(controller: controller)
 
-        label.setShow(false)
+        label.showLabel = false
         var expectedSettings = defaultSettings()
         expectedSettings["_showLabel"] = "NO"
         expectedSettings["_labelAngle"] = "0.000000"
-        label.setShow(false)
+        label.showLabel = false
         label.computeLabelText()
-        let settings = try #require(label.graphicSettings())
+        let settings = label.graphicSettings()
         try CommonUtilities
             .compareGraphicSettings(
                 values: settings,
