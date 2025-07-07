@@ -29,8 +29,13 @@
 #import "XRGraphicCircleLabel.h"
 #import "XRGeometryController.h"
 #import "math.h"
-@implementation XRGraphicCircleLabel
 
+@interface XRGraphicCircleLabel()
+@property (nonatomic, strong, nullable) NSMutableAttributedString *label;
+@property (readwrite) BOOL isCore;
+@end
+
+@implementation XRGraphicCircleLabel
 
 -(id)initCoreCircleWithController:(XRGeometryController *)aController
 {

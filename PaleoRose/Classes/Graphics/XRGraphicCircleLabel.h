@@ -31,12 +31,10 @@
 
 
 @interface XRGraphicCircleLabel : XRGraphicCircle {
-	NSMutableAttributedString *_label;
 	NSFont *_labelFont;
 	NSAffineTransform *theTransform;
 	NSPoint _labelPoint;
 	NSSize _labelSize;
-	BOOL _isCore;
 }
 
 @property (readwrite) BOOL showLabel;
