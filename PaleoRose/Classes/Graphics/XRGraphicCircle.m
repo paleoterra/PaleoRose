@@ -65,11 +65,10 @@
               options:NSKeyValueObservingOptionNew |
      NSKeyValueObservingOptionOld
               context:NULL];
-
 }
 
 -(void)setGeometryPercent:(float)percent {
-	_isGeometryPercent = YES;
+	self.isGeometryPercent = YES;
 	self.drawingPath = [NSBezierPath bezierPathWithOvalInRect:[self.geometryController circleRectForGeometryPercent:percent]];
 }
 
@@ -92,7 +91,7 @@
 	[theDict setObject:[NSString stringWithFormat:@"%i", self.countSetting] forKey:@"_countSetting"];
 	[theDict setObject:[NSString stringWithFormat:@"%f",_percentSetting] forKey:@"_percentSetting"];
 	[theDict setObject:[NSString stringWithFormat:@"%f",_percentSetting] forKey:@"_geometryPercent"];
-	if(_isGeometryPercent)
+	if(self.isGeometryPercent)
 		[theDict setObject:@"YES" forKey:@"_isGeometryPercent"];
 	else
 		[theDict setObject:@"NO" forKey:@"_isGeometryPercent"];
@@ -117,11 +116,11 @@
                               context:context];
     if ([keyPath isEqualToString:@"countSetting"]) {
         _isPercent = NO;
-        _isGeometryPercent = NO;
+        self.isGeometryPercent = NO;
         [self calculateGeometry];
     } else if ([keyPath isEqualToString:@"percentSetting"]) {
         _isPercent = YES;
-        _isGeometryPercent = NO;
+        self.isGeometryPercent = NO;
         [self calculateGeometry];
     }
 }

@@ -30,13 +30,13 @@
 #import "XRGraphic.h"
 
 @interface XRGraphicCircle : XRGraphic {
-	BOOL _isGeometryPercent;
 	BOOL _isPercent;
 }
 
 @property (readwrite) BOOL isFixedCount;
 @property (readwrite) int countSetting;
 @property (readwrite) float percentSetting;
+@property (readwrite) BOOL isGeometryPercent;
 
 -(instancetype)initWithController:(XRGeometryController *)controller;
 -(instancetype)initCoreCircleWithController:(XRGeometryController *)aController;//for cores (0 values) only.  Use the standard initializer for all others
