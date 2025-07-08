@@ -47,9 +47,6 @@
 #define XRGraphicLineNumberPoints		1
 
 @interface XRGraphicLine : XRGraphic {
-
-	float _relativePercent;
-	float _angleSetting;
 	int _tickType;
 	BOOL _showTick;
 	NSFont *_labelFont;

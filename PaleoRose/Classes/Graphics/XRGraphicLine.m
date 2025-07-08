@@ -29,6 +29,11 @@
 #import "XRGraphicLine.h"
 #import "XRGeometryController.h"
 
+@interface XRGraphicLine()
+@property (readwrite) float relativePercent;
+@property (readwrite) float angleSetting;
+@end
+
 @implementation XRGraphicLine
 -(id)initWithController:(XRGeometryController *)aController
 {
