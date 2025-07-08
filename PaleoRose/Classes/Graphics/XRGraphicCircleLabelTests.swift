@@ -69,12 +69,12 @@ struct XRGraphicCircleLabelTests {
             label
                 .labelAngle.isApproximatelyEqual(to: 0.0, relativeTolerance: 0.001)
         )
-        #expect(label.font() != nil, "Default font should not be nil")
+        let currentFont = try #require(label.labelFont)
         #expect(
-            label.font().pointSize.isApproximatelyEqual(to: 12.0, relativeTolerance: 0.001),
+            currentFont.pointSize.isApproximatelyEqual(to: 12.0, relativeTolerance: 0.001),
             "Default font size should be 12.0"
         )
-        #expect(label.font().fontName.contains("Arial-Black"), "Default font should be Arial-Black")
+        #expect(currentFont.fontName.contains("Arial-Black"), "Default font should be Arial-Black")
     }
 
     @Test("initCoreCircleWithController should initialize core label with default values")
@@ -84,7 +84,7 @@ struct XRGraphicCircleLabelTests {
 
         // When
         let label = try #require(XRGraphicCircleLabel(coreCircleWith: controller))
-        label.setFont(NSFont(name: "Arial-Black", size: 12))
+        label.labelFont = NSFont(name: "Arial-Black", size: 12)
         label.computeLabelText()
         var expectedSettings = defaultSettings()
         expectedSettings["_showLabel"] = "NO"
@@ -153,12 +153,12 @@ struct XRGraphicCircleLabelTests {
         let newFont = NSFont.systemFont(ofSize: 14.0)
 
         // When
-        label.setFont(newFont)
+        label.labelFont = newFont
 
         // Then
-        let currentFont = label.font()
+        let currentFont = try #require(label.labelFont)
         #expect(
-            label.font().pointSize.isApproximatelyEqual(to: 14.0, relativeTolerance: 0.001),
+            currentFont.pointSize.isApproximatelyEqual(to: 14.0, relativeTolerance: 0.001),
             "Font size should be 14.0 after setting"
         )
     }
@@ -189,7 +189,7 @@ struct XRGraphicCircleLabelTests {
         // Configure some custom values
         label.showLabel = true
         label.labelAngle = 30.0
-        label.setFont(NSFont.systemFont(ofSize: 14.0))
+        label.labelFont = NSFont.systemFont(ofSize: 14.0)
         label.computeLabelText()
 
         var expectedSettings = defaultSettings()

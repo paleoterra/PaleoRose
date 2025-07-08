@@ -479,7 +479,7 @@
 		[aCircle setLabelAngle:_labelAngle];
 		[aCircle setShowLabel:_showRingLabels];
 
-		[aCircle setFont:_ringFont];
+		aCircle.labelFont = _ringFont;
 		[aCircle setStrokeColor:_strokeColor];
 		[_graphicalObjects addObject:aCircle];
 		
@@ -493,7 +493,7 @@
 		
 		[aCircle setLabelAngle:_labelAngle];
 		[aCircle setShowLabel:_showRingLabels];
-		[aCircle setFont:_ringFont];
+		aCircle.labelFont = _ringFont;
 		[aCircle setLineWidth:_lineWeight];
 		[aCircle setStrokeColor:_strokeColor];
 		
@@ -530,7 +530,7 @@
 			[aCircle setStrokeColor:_strokeColor];
 			[aCircle setLabelAngle:_labelAngle];
 			[aCircle setShowLabel:_showRingLabels];
-			[aCircle setFont:_ringFont];
+			aCircle.labelFont = _ringFont;
             aCircle.isFixedCount = NO;
 			[_graphicalObjects addObject:aCircle];
 			
@@ -549,7 +549,7 @@
 			
 			[aCircle setLabelAngle:_labelAngle];
 			[aCircle setShowLabel:_showRingLabels];
-			[aCircle setFont:_ringFont];
+			aCircle.labelFont = _ringFont;
             aCircle.isFixedCount = NO;
 
 			[_graphicalObjects addObject:aCircle];
@@ -571,7 +571,7 @@
 			[aCircle setStrokeColor:_strokeColor];
 			[aCircle setLabelAngle:_labelAngle];
 			[aCircle setShowLabel:_showRingLabels];
-			[aCircle setFont:_ringFont];
+			aCircle.labelFont = _ringFont;
             aCircle.isFixedCount = NO;
 			[_graphicalObjects addObject:aCircle];
 		}
@@ -583,7 +583,7 @@
 			[aCircle setStrokeColor:_strokeColor];
 			[aCircle setLabelAngle:_labelAngle];
 			[aCircle setShowLabel:_showRingLabels];
-			[aCircle setFont:_ringFont];
+			aCircle.labelFont = _ringFont;
             aCircle.isFixedCount = NO;
 			[_graphicalObjects addObject:aCircle];
 		}
@@ -748,8 +748,10 @@
 	_ringFont = font;
 	while(aGraphic = [anEnum nextObject])
 	{
-		if([aGraphic isKindOfClass:[XRGraphicCircleLabel class]])
-			[(XRGraphicCircleLabel *)aGraphic setFont:_ringFont];
+        if([aGraphic isKindOfClass:[XRGraphicCircleLabel class]]) {
+            XRGraphicCircleLabel *graphic = (XRGraphicCircleLabel *)aGraphic;
+            graphic.labelFont = _ringFont;
+        }
 	}
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:XRLayerRequiresRedraw object:self];

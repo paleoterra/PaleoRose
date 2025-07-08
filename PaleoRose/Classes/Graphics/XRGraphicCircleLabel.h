@@ -31,7 +31,6 @@
 
 
 @interface XRGraphicCircleLabel : XRGraphicCircle {
-	NSFont *_labelFont;
 	NSAffineTransform *theTransform;
 	NSPoint _labelPoint;
 	NSSize _labelSize;
@@ -39,12 +38,7 @@
 
 @property (readwrite) BOOL showLabel;
 @property (readwrite) float labelAngle;
-
--(void)setFont:(NSFont *)newFont;
--(NSFont *)font;
-
--(void)setLabelAngle:(float)newAngle;
--(float)labelAngle;
+@property (nonatomic, strong, nullable) NSFont *labelFont;
 
 -(void)computeLabelText;
 -(void)computeTransform;

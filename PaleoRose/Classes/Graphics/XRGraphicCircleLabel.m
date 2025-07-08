@@ -75,6 +75,11 @@
               options:NSKeyValueObservingOptionNew |
      NSKeyValueObservingOptionOld
               context:NULL];
+    [self addObserver:self
+           forKeyPath:@"labelFont"
+              options:NSKeyValueObservingOptionNew |
+     NSKeyValueObservingOptionOld
+              context:NULL];
 }
 
 -(void)setFont:(NSFont *)newFont
@@ -208,7 +213,7 @@
                              ofObject:object
                                change:change
                               context:context];
-    if ([keyPath isEqualToString:@"labelAngle"]) {
+    if ([keyPath isEqualToString:@"labelAngle"] || ([keyPath isEqualToString:@"labelFont"])) {
         [self calculateGeometry];
     }
 }
