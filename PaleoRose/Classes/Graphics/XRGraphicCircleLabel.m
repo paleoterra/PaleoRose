@@ -32,7 +32,10 @@
 
 @interface XRGraphicCircleLabel()
 @property (nonatomic, strong, nullable) NSMutableAttributedString *label;
+@property (nonatomic, strong, nullable) NSAffineTransform *theTransform;
 @property (readwrite) BOOL isCore;
+@property (readwrite) NSPoint labelPoint;
+@property (readwrite) NSSize labelSize;
 @end
 
 @implementation XRGraphicCircleLabel
@@ -82,17 +85,6 @@
               context:NULL];
 }
 
--(void)setFont:(NSFont *)newFont
-{
-	_labelFont = newFont;
-	[self calculateGeometry];
-}
-
--(NSFont *)font
-{
-	return _labelFont;
-}
-
 -(void)computeLabelText
 {
 
@@ -118,8 +110,8 @@
 
 -(void)computeTransform
 {
-	theTransform = [NSAffineTransform transform];
-	[theTransform rotateByDegrees:360.0-_labelAngle];
+	self.theTransform = [NSAffineTransform transform];
+	[self.theTransform rotateByDegrees:360.0-_labelAngle];
 }
 
 -(void)calculateGeometry
@@ -165,7 +157,7 @@
 
         [self.strokeColor set];
 
-		[theTransform concat];
+		[self.theTransform concat];
 		[self.drawingPath stroke];
         if(self.drawsFill)
         {	

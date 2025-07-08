@@ -30,11 +30,7 @@
 #import "XRGraphicCircle.h"
 
 
-@interface XRGraphicCircleLabel : XRGraphicCircle {
-	NSAffineTransform *theTransform;
-	NSPoint _labelPoint;
-	NSSize _labelSize;
-}
+@interface XRGraphicCircleLabel : XRGraphicCircle 
 
 @property (readwrite) BOOL showLabel;
 @property (readwrite) float labelAngle;
