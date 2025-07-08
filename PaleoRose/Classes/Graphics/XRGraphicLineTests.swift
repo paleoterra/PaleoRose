@@ -113,9 +113,9 @@ struct XRGraphicLineTests {
         var expectedSettings = try defaultSettings()
         expectedSettings["_tickType"] = "\(tickType)"
 
-        line.setTickType(tickType)
+        line.tickType = tickType
         let settings = line.graphicSettings()
-        #expect(line.tickType() == tickType)
+        #expect(line.tickType == tickType)
         try CommonUtilities.compareGraphicSettings(values: settings, expected: expectedSettings)
     }
 
@@ -132,7 +132,7 @@ struct XRGraphicLineTests {
         var expectedSettings = try defaultSettings()
         expectedSettings["_showTick"] = showTick ? "YES" : "NO"
 
-        line.setShowTick(showTick)
+        line.showTick = showTick
         let settings = line.graphicSettings()
 
         try CommonUtilities.compareGraphicSettings(values: settings, expected: expectedSettings)

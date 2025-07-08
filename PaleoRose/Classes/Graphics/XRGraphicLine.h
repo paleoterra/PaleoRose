@@ -47,7 +47,6 @@
 #define XRGraphicLineNumberPoints		1
 
 @interface XRGraphicLine : XRGraphic {
-	int _tickType;
 	BOOL _showTick;
 	NSFont *_labelFont;
 	int _spokeNumberAlign;
@@ -61,15 +60,13 @@
 	
 }
 
+@property (readwrite) int tickType;
+@property (readwrite) BOOL showTick;
+
 
 -(void)setSpokeAngle:(float)angle;
 -(void)setPointsOnly:(BOOL)value;
 -(float)spokeAngle;
-
--(void)setTickType:(int)tickType;
--(int)tickType;
-
--(void)setShowTick:(BOOL)showTick;
 
 -(void)setLineLabel;
 -(void)setLabelTransform;
