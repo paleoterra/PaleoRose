@@ -28,39 +28,39 @@
 
 #import <Cocoa/Cocoa.h>
 
-#define XRGraphicKeyGraphicType @"GraphicType"
-#define XRGraphicKeyStrokeColor @"_strokeColor"
-#define XRGraphicKeyFillColor @"_fillColor"
-#define XRGraphicKeyLineWidth @"_lineWidth"
+static const NSString * _Nonnull XRGraphicKeyGraphicType = @"GraphicType";
+static const NSString * _Nonnull XRGraphicKeyStrokeColor = @"_strokeColor";
+static const NSString * _Nonnull XRGraphicKeyFillColor = @"_fillColor";
+static const NSString * _Nonnull XRGraphicKeyLineWidth = @"_lineWidth";
 
-#define XRGraphicKeyMaxRadius @"_maxRadius"
-#define XRGraphicKeyPetalIncrement @"_petalIncrement"
-#define XRGraphicKeyAngleIncrement @"_angleIncrement"
-#define XRGraphicKeyHistogramIncrement @"_histIncrement"
-#define XRGraphicKeyDotSize @"_dotSize"
-#define XRGraphicKeyPercent @"_percent"
-#define XRGraphicKeyCount @"_count"
-#define XRGraphicKeyTotalCount @"_totalCount"
-#define XRGraphicKeyRelativePercent @"_relativePercent"
-#define XRGraphicKeyAngleSetting @"_angleSetting"
-#define XRGraphicKeyTickType @"_tickType"
-#define XRGraphicKeyShowTick @"_showTick"
-#define XRGraphicKeySpokeNumberAlignment @"_spokeNumberAlign"
-#define XRGraphicKeySpokeNumberCompassPoint @"_spokeNumberCompassPoint"
-#define XRGraphicKeySpokeNumberOrder @"_spokeNumberOrder"
-#define XRGraphicKeyShowLabel @"_showLabel"
-#define XRGraphicKeyLineLabel @"_lineLabel"
-#define XRGraphicKeyCurrentFont @"_currentFont"
-#define XRGraphicKeyLabelAngle @"_labelAngle"
-#define XRGraphicKeyLabel @"Label"
-#define XRGraphicKeyLabelFont @"_labelFont"
-#define XRGraphicKeyIsCore @"_isCore"
-#define XRGraphicKeyCountSetting @"_countSetting"
-#define XRGraphicKeyPercentSetting @"_percentSetting"
-#define XRGraphicKeyGeometryPercent @"_geometryPercent"
-#define XRGraphicKeyIsGeometryPercent @"_isGeometryPercent"
-#define XRGraphicKeyIsPercent @"_isPercent"
-#define XRGraphicKeyIsFixedCount @"_isFixedCount"
+static const NSString *  _Nonnull XRGraphicKeyMaxRadius = @"_maxRadius";
+static const NSString *  _Nonnull XRGraphicKeyPetalIncrement = @"_petalIncrement";
+static const NSString *  _Nonnull XRGraphicKeyAngleIncrement = @"_angleIncrement";
+static const NSString *  _Nonnull XRGraphicKeyHistogramIncrement = @"_histIncrement";
+static const NSString *  _Nonnull XRGraphicKeyDotSize = @"_dotSize";
+static const NSString *  _Nonnull XRGraphicKeyPercent = @"_percent";
+static const NSString *  _Nonnull XRGraphicKeyCount = @"_count";
+static const NSString *  _Nonnull XRGraphicKeyTotalCount = @"_totalCount";
+static const NSString *  _Nonnull XRGraphicKeyRelativePercent = @"_relativePercent";
+static const NSString *  _Nonnull XRGraphicKeyAngleSetting = @"_angleSetting";
+static const NSString *  _Nonnull XRGraphicKeyTickType = @"_tickType";
+static const NSString *  _Nonnull XRGraphicKeyShowTick = @"_showTick";
+static const NSString *  _Nonnull XRGraphicKeySpokeNumberAlignment = @"_spokeNumberAlign";
+static const NSString *  _Nonnull XRGraphicKeySpokeNumberCompassPoint = @"_spokeNumberCompassPoint";
+static const NSString *  _Nonnull XRGraphicKeySpokeNumberOrder = @"_spokeNumberOrder";
+static const NSString *  _Nonnull XRGraphicKeyShowLabel = @"_showLabel";
+static const NSString *  _Nonnull XRGraphicKeyLineLabel = @"_lineLabel";
+static const NSString *  _Nonnull XRGraphicKeyCurrentFont = @"_currentFont";
+static const NSString *  _Nonnull XRGraphicKeyLabelAngle = @"_labelAngle";
+static const NSString *  _Nonnull XRGraphicKeyLabel = @"Label";
+static const NSString *  _Nonnull XRGraphicKeyLabelFont = @"_labelFont";
+static const NSString *  _Nonnull XRGraphicKeyIsCore = @"_isCore";
+static const NSString *  _Nonnull XRGraphicKeyCountSetting = @"_countSetting";
+static const NSString *  _Nonnull XRGraphicKeyPercentSetting = @"_percentSetting";
+static const NSString *  _Nonnull XRGraphicKeyGeometryPercent = @"_geometryPercent";
+static const NSString *  _Nonnull XRGraphicKeyIsGeometryPercent = @"_isGeometryPercent";
+static const NSString *  _Nonnull XRGraphicKeyIsPercent = @"_isPercent";
+static const NSString *  _Nonnull XRGraphicKeyIsFixedCount = @"_isFixedCount";
 // #define XRGraphicKey
 
 NS_ASSUME_NONNULL_BEGIN
