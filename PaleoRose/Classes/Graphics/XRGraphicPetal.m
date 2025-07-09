@@ -45,8 +45,6 @@
 	return self;
 }
 
-
-
 -(void)calculateGeometry
 {
 	NSPoint aPoint,targetPoint;
@@ -153,16 +151,16 @@
 
 -(NSDictionary *)graphicSettings
 {
-	NSMutableDictionary *theDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];
-	
-    [theDict setObject:@"Petal" forKey:@"GraphicType"];
+	NSMutableDictionary *parentDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];
 
-	[theDict setObject:[NSString stringWithFormat:@"%i",_petalIncrement] forKey:@"_petalIncrement"];
-	[theDict setObject:[NSString stringWithFormat:@"%f",_maxRadius] forKey:@"_maxRadius"];
-	
-	[theDict setObject:[NSString stringWithFormat:@"%f",_percent] forKey:@"_percent"];
-	[theDict setObject:[NSString stringWithFormat:@"%i",_count] forKey:@"_count"];
-		
-	return [NSDictionary dictionaryWithDictionary:theDict];
+    NSDictionary *classDict = @{
+        XRGraphicKeyGraphicType : @"Petal",
+        XRGraphicKeyPetalIncrement : [self stringFromInt: _petalIncrement],
+        XRGraphicKeyMaxRadius      : [self stringFromFloat: _maxRadius],
+        XRGraphicKeyPercent        : [self stringFromFloat: _percent],
+        XRGraphicKeyCount          : [self stringFromInt: _count]
+    };
+    [parentDict addEntriesFromDictionary:classDict];
+	return parentDict;
 }
 @end

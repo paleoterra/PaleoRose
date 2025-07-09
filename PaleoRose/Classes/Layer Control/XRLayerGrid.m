@@ -218,7 +218,6 @@
 				else
 					_showLabels = NO;
 			}
-			//NSLog(@"4");
 			if((tempstring = [spokeDict objectForKey:@"_spokeNumberAlign"]))
 				_spokeNumberAlign = [tempstring intValue];
 			if((tempstring = [spokeDict objectForKey:@"_spokeNumberCompassPoint"]))
@@ -454,11 +453,11 @@
 -(void)configureLine:(XRGraphicLine *)aLine
 {
 
-	[aLine setShowlabel:_showLabels];
-	[aLine setNumberAlignment:_spokeNumberAlign];
-	[aLine setNumberOrder:_spokeNumberOrder];
-	[aLine setNumberPoints:_spokeNumberCompassPoint];
-	[aLine setPointsOnly:_pointsOnly];
+	aLine.showLabel =_showLabels;
+    aLine.spokeNumberAlign = _spokeNumberAlign;
+    aLine.spokeNumberOrder = _spokeNumberOrder;
+    aLine.spokeNumberCompassPoint = _spokeNumberCompassPoint;
+    aLine.spokePointOnly = _pointsOnly;
 }
 
 -(void)addFixedRings
@@ -686,18 +685,12 @@
 {
 	_spokeCount = (int)(360.0/_spokeAngle);
 	[self setValue:[NSNumber numberWithInt:_spokeCount] forKey:@"_spokeCount"];
-	
-	
-
 }
 
 -(void)spokeCountDidChange
 {
-	
 	_spokeAngle = 360.0/(float)_spokeCount;
 	[self setValue:[NSNumber numberWithFloat:_spokeAngle] forKey:@"_spokeAngle"];
-	
-
 }
 
 

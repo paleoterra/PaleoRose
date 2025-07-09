@@ -73,16 +73,15 @@
 }
 
 -(void)registerForKVO {
-    [self addObserver:self
-           forKeyPath:@"labelAngle"
-              options:NSKeyValueObservingOptionNew |
-     NSKeyValueObservingOptionOld
-              context:NULL];
-    [self addObserver:self
-           forKeyPath:@"labelFont"
-              options:NSKeyValueObservingOptionNew |
-     NSKeyValueObservingOptionOld
-              context:NULL];
+    int i = 0;
+    NSArray *keys = @[@"labelAngle", @"labelFont"];
+    for(i=0;i<keys.count;i++) {
+        [self addObserver:self
+               forKeyPath:keys[i]
+                  options:NSKeyValueObservingOptionNew |
+         NSKeyValueObservingOptionOld
+                  context:NULL];
+    }
 }
 
 -(void)computeLabelText
@@ -181,23 +180,17 @@
 
 -(NSDictionary *)graphicSettings
 {
-	NSMutableDictionary *theDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];
-    [theDict setObject:@"LabelCircle" forKey:@"GraphicType"];
-	if(_showLabel)
-		[theDict setObject:@"YES" forKey:@"_showLabel"];
-	else
-		[theDict setObject:@"NO" forKey:@"_showLabel"];
-	
-	[theDict setObject:[NSString stringWithFormat:@"%f",_labelAngle] forKey:@"_labelAngle"];
-    [theDict setObject:_label.string forKey:@"Label"];
-	[theDict setObject:_labelFont forKey:@"_labelFont"];
-	
-	if(_isCore)
-		[theDict setObject:@"YES" forKey:@"_isCore"];
-	else
-		[theDict setObject:@"NO" forKey:@"_isCore"];
-
-	return [NSDictionary dictionaryWithDictionary:theDict];
+	NSMutableDictionary *parentDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];
+    NSDictionary *classDict = @{
+        XRGraphicKeyGraphicType : @"LabelCircle",
+        XRGraphicKeyShowLabel : [self stringFromBool:_showLabel],
+        XRGraphicKeyLabelAngle : [self stringFromFloat:_labelAngle],
+        XRGraphicKeyLabel : _label.string,
+        XRGraphicKeyLabelFont : _labelFont,
+        XRGraphicKeyIsCore : [self stringFromBool:_isCore],
+    };
+    [parentDict addEntriesFromDictionary:classDict];
+	return parentDict;
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {

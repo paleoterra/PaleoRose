@@ -104,8 +104,7 @@
 -(NSDictionary *)graphicSettings
 {
 	NSMutableDictionary *theDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];
-    [theDict setObject:@"Kite" forKey:@"GraphicType"];
-
+    theDict[XRGraphicKeyGraphicType] = @"Kite";
 	return [NSDictionary dictionaryWithDictionary:theDict];
 }
 

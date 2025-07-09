@@ -46,36 +46,20 @@
 #define XRGraphicLineNumberNumbersOnly  0
 #define XRGraphicLineNumberPoints		1
 
-@interface XRGraphicLine : XRGraphic {
-	BOOL _showTick;
-	NSFont *_labelFont;
-	int _spokeNumberAlign;
-	int _spokeNumberCompassPoint;
-	int _spokeNumberOrder;
-	BOOL _showLabel;
-	BOOL _spokePointOnly;
-	NSMutableAttributedString *_lineLabel;
-	NSAffineTransform *_labelTransform;
-	NSFont *_currentFont;
-	
-}
+@interface XRGraphicLine : XRGraphic
 
 @property (readwrite) int tickType;
 @property (readwrite) BOOL showTick;
+@property (readwrite) BOOL spokePointOnly;
+@property (readwrite) int spokeNumberAlign;
+@property (readwrite) BOOL showLabel;
+@property (readwrite) int spokeNumberCompassPoint;
+@property (readwrite) int spokeNumberOrder;
 
+@property (readwrite) float spokeAngle;
 
--(void)setSpokeAngle:(float)angle;
--(void)setPointsOnly:(BOOL)value;
--(float)spokeAngle;
+@property (nonatomic, strong, nullable) NSFont *font;
+@property (nonatomic, strong, nullable) NSMutableAttributedString *lineLabel;
+@property (nonatomic, strong, nullable) NSAffineTransform *labelTransform;
 
--(void)setLineLabel;
--(void)setLabelTransform;
--(void)appendParallelTransform;
--(void)appendHorizontalTransform;
--(void)setShowlabel:(BOOL)show;
--(void)setNumberAlignment:(int)alignment;
--(void)setNumberOrder:(int)order;
--(void)setNumberPoints:(int)pointRule;
--(void)setFont:(NSFont *)font;
--(NSFont *)font;
 @end

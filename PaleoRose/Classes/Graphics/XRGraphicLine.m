@@ -31,7 +31,13 @@
 
 @interface XRGraphicLine()
 @property (readwrite) float relativePercent;
-@property (readwrite) float angleSetting;
+
+
+
+-(void)setLineLabel;
+-(void)calculateLabelTransform;
+-(void)appendParallelTransform;
+-(void)appendHorizontalTransform;
 @end
 
 @implementation XRGraphicLine
@@ -46,34 +52,24 @@
 		_spokeNumberOrder = XRGraphicLineNumberingOrderQuad;
 		_showLabel = YES;
 		_spokePointOnly = NO;
-		_currentFont = [NSFont fontWithName:@"Arial-Black" size:12];
+		self.font = [NSFont fontWithName:@"Arial-Black" size:12];
         [self registerForKVO];
+        [self setLineLabel];
+        [self calculateGeometry];
 	}
 	return self;
 }
 
 -(void)registerForKVO {
-    [self addObserver:self
-           forKeyPath:@"tickType"
-              options:NSKeyValueObservingOptionNew |
-     NSKeyValueObservingOptionOld
-              context:NULL];
-    [self addObserver:self
-           forKeyPath:@"showTick"
-              options:NSKeyValueObservingOptionNew |
-     NSKeyValueObservingOptionOld
-              context:NULL];
-}
-
--(void)setSpokeAngle:(float)angle {
-	_angleSetting = angle;
-	[self setLineLabel];
-
-	[self calculateGeometry];
-}
-
--(float)spokeAngle {
-	return _angleSetting;
+    int i = 0;
+    NSArray *keys = @[@"tickType", @"showTick", @"font", @"spokeAngle", @"spokePointOnly", @"spokeNumberOrder", @"spokeNumberCompassPoint"];
+    for(i=0;i<keys.count;i++) {
+        [self addObserver:self
+               forKeyPath:keys[i]
+                  options:NSKeyValueObservingOptionNew |
+         NSKeyValueObservingOptionOld
+                  context:NULL];
+    }
 }
 
 -(void)calculateGeometry {
@@ -84,7 +80,7 @@
 	aPoint = NSMakePoint(0.0,0.0);
 	radius = [self.geometryController radiusOfRelativePercent:0.0];
 	aPoint.y = radius;
-	aPoint = [self.geometryController rotationOfPoint:aPoint byAngle:_angleSetting];
+	aPoint = [self.geometryController rotationOfPoint:aPoint byAngle:self.spokeAngle];
 	self.drawingPath = [[NSBezierPath alloc] init];
 	[self.drawingPath moveToPoint:aPoint];
 	if((self.tickType == XRGraphicLineTickTypeNone)||(!_showTick))
@@ -96,42 +92,42 @@
 	aPoint = NSMakePoint(0.0,0.0);
 	aPoint.y = radius;
 
-	aPoint = [self.geometryController rotationOfPoint:aPoint byAngle:_angleSetting];
+	aPoint = [self.geometryController rotationOfPoint:aPoint byAngle:self.spokeAngle];
 	[self.drawingPath lineToPoint:aPoint];
 
-	[self setLabelTransform];
+	[self calculateLabelTransform];
 }
 
 -(void)setLineLabel {
-	if(((double)_angleSetting == 0.0)||((double)_angleSetting == 90.0) || ((double)_angleSetting == 180.0) || ((double)_angleSetting == 270.0)||((double)_angleSetting == 360.0)) {
+	if(((double)self.spokeAngle == 0.0)||((double)self.spokeAngle == 90.0) || ((double)self.spokeAngle == 180.0) || ((double)self.spokeAngle == 270.0)||((double)self.spokeAngle == 360.0)) {
 
 		if(_spokeNumberCompassPoint == XRGraphicLineNumberPoints) {
-		if((double)_angleSetting == 0.0)
+		if((double)self.spokeAngle == 0.0)
 			_lineLabel = [[NSMutableAttributedString alloc] initWithString:@"N"];
-		else if((double)_angleSetting == 90.0)
+		else if((double)self.spokeAngle == 90.0)
 			_lineLabel = [[NSMutableAttributedString alloc] initWithString:@"E"];
-		else if((double)_angleSetting == 180.0)
+		else if((double)self.spokeAngle == 180.0)
 			_lineLabel = [[NSMutableAttributedString alloc] initWithString:@"S"];
-		else if((double)_angleSetting == 270.0)
+		else if((double)self.spokeAngle == 270.0)
 			_lineLabel = [[NSMutableAttributedString alloc] initWithString:@"W"];
 		else
 			_lineLabel = [[NSMutableAttributedString alloc] initWithString:@"N" ];
 		}
 		else if(_spokeNumberOrder == XRGraphicLineNumberingOrderQuad) {
 			double workAngle;
-			if(_angleSetting <= 90.0) {
-				workAngle = _angleSetting;
+            if(self.spokeAngle <= 90.0) {
+				workAngle = self.spokeAngle;
 			}
-			else if((_angleSetting > 90.0)&&(_angleSetting <= 180.0)) {
-				workAngle = 180.0 - _angleSetting;
+			else if((self.spokeAngle > 90.0)&&(self.spokeAngle <= 180.0)) {
+				workAngle = 180.0 - self.spokeAngle;
 			}
-			else if((_angleSetting > 180.0)&&(_angleSetting <= 270.0)) {
-				workAngle = _angleSetting - 180.0;
+			else if((self.spokeAngle > 180.0)&&(self.spokeAngle <= 270.0)) {
+				workAngle = self.spokeAngle - 180.0;
 			}
 			else {
-				workAngle = 360.0 - _angleSetting;
+				workAngle = 360.0 - self.spokeAngle;
 			}
-			if((double)_angleSetting == (double)floor(_angleSetting)) {
+			if((double)self.spokeAngle == (double)floor(self.spokeAngle)) {
 				_lineLabel = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%i",(int)workAngle]];
 			}
 			else
@@ -139,37 +135,37 @@
 			
 		}
 		else {
-			if((double)_angleSetting == (double)floor(_angleSetting)) {
-				_lineLabel = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%i",(int)_angleSetting]];
+			if((double)self.spokeAngle == (double)floor(self.spokeAngle)) {
+				_lineLabel = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%i",(int)self.spokeAngle]];
 			}
 			else
-				_lineLabel = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%3.1f",_angleSetting]];
+				_lineLabel = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%3.1f",self.spokeAngle]];
 		}
 	
 			
 	}
 	else if((_spokeNumberOrder ==XRGraphicLineNumberingOrder360)&&(!_spokePointOnly)) {
-		if((double)_angleSetting == (double)floor(_angleSetting)) {
-			_lineLabel = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%i",(int)_angleSetting]];
+		if((double)self.spokeAngle == (double)floor(self.spokeAngle)) {
+			_lineLabel = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%i",(int)self.spokeAngle]];
 		}
 		else
-			_lineLabel = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%3.1f",_angleSetting]];
+			_lineLabel = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%3.1f",self.spokeAngle]];
 	}
 	else if(!_spokePointOnly) {
 		double workAngle;
-		if(_angleSetting <= 90.0) {
-			workAngle = _angleSetting;
+		if(self.spokeAngle <= 90.0) {
+			workAngle = self.spokeAngle;
 		}
-		else if((_angleSetting > 90.0)&&(_angleSetting <= 180.0)) {
-			workAngle = 180.0 - _angleSetting;
+		else if((self.spokeAngle > 90.0)&&(self.spokeAngle <= 180.0)) {
+			workAngle = 180.0 - self.spokeAngle;
 		}
-		else if((_angleSetting > 180.0)&&(_angleSetting <= 270.0)) {
-			workAngle = _angleSetting - 180.0;
+		else if((self.spokeAngle > 180.0)&&(self.spokeAngle <= 270.0)) {
+			workAngle = self.spokeAngle - 180.0;
 		}
 		else {
-			workAngle = 360.0 - _angleSetting;
+			workAngle = 360.0 - self.spokeAngle;
 		}
-		if((double)_angleSetting == (double)floor(_angleSetting)) {
+		if((double)self.spokeAngle == (double)floor(self.spokeAngle)) {
 			_lineLabel = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%i",(int)workAngle]];
 		}
 		else
@@ -180,12 +176,12 @@
 
 		_lineLabel = [[NSMutableAttributedString alloc] initWithString:@""];
 	}
-	/*if((_spokeNumberOrder==XRGraphicLineNumberingOrderPointOnly)&&(((double)_angleSetting != 0.0)&&((double)_angleSetting != 90.0) && ((double)_angleSetting != 180.0) && ((double)_angleSetting != 270.0)&&((double)_angleSetting != 360.0)))
+	/*if((_spokeNumberOrder==XRGraphicLineNumberingOrderPointOnly)&&(((double)self.spokeAngle != 0.0)&&((double)self.spokeAngle != 90.0) && ((double)self.spokeAngle != 180.0) && ((double)self.spokeAngle != 270.0)&&((double)self.spokeAngle != 360.0)))
 	{
 		[_lineLabel release];
 		_lineLabel = [[NSMutableAttributedString alloc] initWithString:@""];
 	}*/
-	[self setLabelTransform];
+	[self calculateLabelTransform];
 }
 
 
@@ -211,11 +207,11 @@
     }
 }
 
--(void)setLabelTransform {
+-(void)calculateLabelTransform {
 	NSRange labelRange;
 	labelRange.location = 0;
 	labelRange.length = [_lineLabel length];
-	[_lineLabel setAttributes:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:_currentFont,self.strokeColor,nil]
+	[_lineLabel setAttributes:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:self.font,self.strokeColor,nil]
 														   forKeys:[NSArray arrayWithObjects:NSFontAttributeName,NSForegroundColorAttributeName,nil]] range:labelRange];
 	_labelTransform = [NSAffineTransform transform];
 	if(_spokeNumberAlign == XRGraphicLineNumberAlignHorizontal)
@@ -231,8 +227,8 @@
 	//step 1. shift to the center point
 	[_labelTransform translateXBy:(-0.5*theSize.width) yBy:(-0.5*theSize.height)];
 	//step 2. rotation in the inverse direction
-	rotationAngle = _angleSetting - 90;
-	
+	rotationAngle = self.spokeAngle - 90;
+
 	[_labelTransform rotateByDegrees:(-1*rotationAngle)];
 	
 	//step 3. shift out
@@ -248,20 +244,19 @@
 	NSSize theSize = [_lineLabel size];
 	
 	float displacement = [self.geometryController unrestrictedRadiusOfRelativePercent:(_relativePercent + 0.1)];
-	float rotationAngle = 90-_angleSetting;
+	float rotationAngle = 90-self.spokeAngle;
 	//[_labelTransform translateXBy:(-0.5*theSize.width) yBy:(-0.5*theSize.height)];
 	//transform 1.  Shift the text down by half the height.
-	if((double)_angleSetting == 0.0) 
+	if((double)self.spokeAngle == 0.0)
 	{
 		[_labelTransform translateXBy:(-0.5*theSize.width) yBy:displacement];
 	}
-	else if((double)_angleSetting == 180.0)
+	else if((double)self.spokeAngle == 180.0)
 		[_labelTransform translateXBy:(-0.5*theSize.width) yBy:(displacement+theSize.height)*-1];
 	else 
 	{
-		if(_angleSetting > 180.0)
+		if(self.spokeAngle > 180.0)
 		{
-			
 			[_labelTransform rotateByDegrees:rotationAngle-180];
 			[_labelTransform translateXBy:-1 *(displacement+theSize.width) yBy:0.0];
 			[_labelTransform translateXBy:0.0 yBy:(-0.5*theSize.height)];
@@ -276,77 +271,35 @@
 	}
 }
 
--(void)setShowlabel:(BOOL)show {
-	_showLabel = show;
-}
-
--(void)setNumberAlignment:(int)alignment {
-	_spokeNumberAlign = alignment;
-}
-
--(void)setNumberOrder:(int)order {
-	_spokeNumberOrder = order;
-	[self setLineLabel];
-}
-
--(void)setNumberPoints:(int)pointRule {
-	_spokeNumberCompassPoint = pointRule;
-	[self setLineLabel];
-}
-
--(void)setFont:(NSFont *)font {
-	_currentFont = font;
-	[self calculateGeometry];
-}
-
--(NSFont *)font {
-	return _currentFont;
-}
-
 -(NSDictionary *)graphicSettings {
-	NSMutableDictionary *theDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];
-    [theDict setObject:@"Line" forKey:@"GraphicType"];
-
-	[theDict setObject:[NSString stringWithFormat:@"%f",_relativePercent] forKey:@"_relativePercent"];
-	
-	[theDict setObject:[NSString stringWithFormat:@"%f",_angleSetting] forKey:@"_angleSetting"];
-	[theDict setObject:[NSString stringWithFormat:@"%i",_tickType] forKey:@"_tickType"];
-	
-	if(_showTick)
-		[theDict setObject:@"YES" forKey:@"_showTick"];
-	else
-		[theDict setObject:@"NO" forKey:@"_showTick"];
-	
-	
-	
-	[theDict setObject:[NSString stringWithFormat:@"%i",_spokeNumberAlign] forKey:@"_spokeNumberAlign"];
-	[theDict setObject:[NSString stringWithFormat:@"%i",_spokeNumberCompassPoint] forKey:@"_spokeNumberCompassPoint"];
-	[theDict setObject:[NSString stringWithFormat:@"%i",_spokeNumberOrder] forKey:@"_spokeNumberOrder"];
-	
-	if(_showLabel)
-		[theDict setObject:@"YES" forKey:@"_showLabel"];
-	else
-		[theDict setObject:@"NO" forKey:@"_showLabel"];
-	
-	[theDict setObject:_lineLabel forKey:@"_lineLabel"];
-	
-	[theDict setObject:_currentFont forKey:@"_currentFont"];
-	//NSLog(@"end graphic  line label");
-	return [NSDictionary dictionaryWithDictionary:theDict];
+	NSMutableDictionary *parentDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];
+    NSDictionary *classDict = @{
+        XRGraphicKeyGraphicType            : @"Line",
+        XRGraphicKeyRelativePercent        : [self stringFromFloat:  _relativePercent],
+        XRGraphicKeyAngleSetting           : [self stringFromFloat: self.spokeAngle],
+        XRGraphicKeyTickType               : [self stringFromInt: _tickType],
+        XRGraphicKeyShowTick               : [self stringFromBool:_showTick],
+        XRGraphicKeySpokeNumberAlignment   : [self stringFromInt: _spokeNumberAlign],
+        XRGraphicKeySpokeNumberCompassPoint: [self stringFromInt: _spokeNumberCompassPoint],
+        XRGraphicKeySpokeNumberOrder       : [self stringFromInt: _spokeNumberOrder],
+        XRGraphicKeyShowLabel              : [self stringFromBool:_showLabel],
+        XRGraphicKeyLineLabel              : _lineLabel ?: @"",
+        XRGraphicKeyCurrentFont            : self.font ?: [NSFont systemFontOfSize:[NSFont systemFontSize]]
+    };
+    [parentDict addEntriesFromDictionary:classDict];
+    return parentDict;
 }
 
--(void)setPointsOnly:(BOOL)value {
-	_spokePointOnly = value;
-
-	[self setLineLabel];
-}
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
     [super observeValueForKeyPath:keyPath
                              ofObject:object
                                change:change
                               context:context];
-    if ([keyPath isEqualToString:@"tickType"] || [keyPath isEqualToString:@"showTick"]) {
+    if ([keyPath isEqualToString:@"tickType"] || [keyPath isEqualToString:@"showTick"] || [keyPath isEqualToString:@"font"] ) {
+        [self calculateGeometry];
+    } else if ([keyPath isEqualToString:@"spokeAngle"] || [keyPath isEqualToString:@"spokePointOnly"] || [keyPath isEqualToString:@"spokeNumberCompassPoint"] || [keyPath isEqualToString:@"spokeNumberOrder"]) {
+        [self setLineLabel];
         [self calculateGeometry];
     }
 }

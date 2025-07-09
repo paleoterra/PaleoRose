@@ -92,14 +92,15 @@
 
 -(NSDictionary *)graphicSettings
 {
-	NSMutableDictionary *theDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];
-    [theDict setObject:@"Histogram" forKey:@"GraphicType"];
-
-	[theDict setObject:[NSString stringWithFormat:@"%i",_histIncrement] forKey:@"_histIncrement"];
-	[theDict setObject:[NSString stringWithFormat:@"%f",_percent] forKey:@"_percent"];
-	[theDict setObject:[NSString stringWithFormat:@"%i",_count] forKey:@"_count"];
-
-	return [NSDictionary dictionaryWithDictionary:theDict];
+	NSMutableDictionary *parentDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];
+    NSDictionary *classDict = @{
+        XRGraphicKeyGraphicType : @"Histogram",
+        XRGraphicKeyHistogramIncrement : [self stringFromInt: _histIncrement],
+        XRGraphicKeyPercent : [self stringFromFloat: _percent],
+        XRGraphicKeyCount : [self stringFromInt: _count]
+    };
+    [parentDict addEntriesFromDictionary: classDict];
+	return parentDict;
 }
 
 @end

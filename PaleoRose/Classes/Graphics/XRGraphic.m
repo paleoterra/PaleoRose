@@ -123,14 +123,12 @@
 }
 
 -(NSDictionary *)graphicSettings {
-    NSMutableDictionary *theDict = [[NSMutableDictionary alloc] init];
-    [theDict setObject:@"Graphic" forKey:@"GraphicType"];
-
-    [theDict setObject:self.fillColor forKey:@"_fillColor"];
-    [theDict setObject:self.strokeColor forKey:@"_strokeColor"];
-    [theDict setObject:[NSString stringWithFormat:@"%f",self.lineWidth] forKey:@"_lineWidth"];
-    //NSLog(@"end general graphic");
-    return [NSDictionary dictionaryWithDictionary:theDict];
+    return @{
+        XRGraphicKeyGraphicType : @"Graphic",
+        XRGraphicKeyFillColor : self.fillColor,
+        XRGraphicKeyStrokeColor : self.strokeColor,
+        XRGraphicKeyLineWidth : [self stringFromFloat: self.lineWidth]
+    };
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
@@ -139,5 +137,20 @@
         if(self.drawingPath)
             [self.drawingPath setLineWidth:self.lineWidth];
     }
+}
+
+
+// graphic settings helper methods
+
+-(NSString *)stringFromBool:(BOOL)boolValue {
+    return boolValue ? @"YES" : @"NO";
+}
+
+-(NSString *)stringFromInt:(int)intValue {
+    return [NSString stringWithFormat:@"%i", intValue];
+}
+
+-(NSString *)stringFromFloat:(float)floatValue {
+    return [NSString stringWithFormat:@"%f", floatValue];
 }
 @end

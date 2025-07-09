@@ -55,16 +55,15 @@
 }
 
 -(void)registerForKVO {
-    [self addObserver:self
-           forKeyPath:@"countSetting"
-              options:NSKeyValueObservingOptionNew |
-     NSKeyValueObservingOptionOld
-              context:NULL];
-    [self addObserver:self
-           forKeyPath:@"percentSetting"
-              options:NSKeyValueObservingOptionNew |
-     NSKeyValueObservingOptionOld
-              context:NULL];
+    int i = 0;
+    NSArray *keys = @[@"countSetting", @"percentSetting"];
+    for(i=0;i<keys.count;i++) {
+        [self addObserver:self
+               forKeyPath:keys[i]
+                  options:NSKeyValueObservingOptionNew |
+         NSKeyValueObservingOptionOld
+                  context:NULL];
+    }
 }
 
 -(void)setGeometryPercent:(float)percent {
@@ -85,28 +84,18 @@
 }
 
 -(NSDictionary *)graphicSettings {
-	NSMutableDictionary *theDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];
-    [theDict setObject:@"Circle" forKey:@"GraphicType"];
-
-	[theDict setObject:[NSString stringWithFormat:@"%i", self.countSetting] forKey:@"_countSetting"];
-	[theDict setObject:[NSString stringWithFormat:@"%f",_percentSetting] forKey:@"_percentSetting"];
-	[theDict setObject:[NSString stringWithFormat:@"%f",_percentSetting] forKey:@"_geometryPercent"];
-	if(self.isGeometryPercent)
-		[theDict setObject:@"YES" forKey:@"_isGeometryPercent"];
-	else
-		[theDict setObject:@"NO" forKey:@"_isGeometryPercent"];
-	if(_isPercent)
-		[theDict setObject:@"YES" forKey:@"_isPercent"];
-	else
-		[theDict setObject:@"NO" forKey:@"_isPercent"];
-	
-	if(_isFixedCount)
-		[theDict setObject:@"YES" forKey:@"_isFixedCount"];
-	else
-		[theDict setObject:@"NO" forKey:@"_isFixedCount"];
-	
-	
-	return [NSDictionary dictionaryWithDictionary:theDict];
+    NSMutableDictionary *parentDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];
+    NSDictionary *classDict = @{
+        XRGraphicKeyGraphicType : @"Circle",
+        XRGraphicKeyCountSetting : [self stringFromInt:self.countSetting],
+        XRGraphicKeyPercentSetting : [self stringFromFloat:_percentSetting],
+        XRGraphicKeyGeometryPercent : [self stringFromFloat:_percentSetting],
+        XRGraphicKeyIsGeometryPercent : [self stringFromBool:self.isGeometryPercent],
+        XRGraphicKeyIsPercent : [self stringFromBool:_isPercent],
+        XRGraphicKeyIsFixedCount : [self stringFromBool:_isFixedCount]
+    };
+    [parentDict addEntriesFromDictionary: classDict];
+	return parentDict;
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {

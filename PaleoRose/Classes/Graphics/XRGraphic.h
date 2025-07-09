@@ -28,6 +28,41 @@
 
 #import <Cocoa/Cocoa.h>
 
+#define XRGraphicKeyGraphicType @"GraphicType"
+#define XRGraphicKeyStrokeColor @"_strokeColor"
+#define XRGraphicKeyFillColor @"_fillColor"
+#define XRGraphicKeyLineWidth @"_lineWidth"
+
+#define XRGraphicKeyMaxRadius @"_maxRadius"
+#define XRGraphicKeyPetalIncrement @"_petalIncrement"
+#define XRGraphicKeyAngleIncrement @"_angleIncrement"
+#define XRGraphicKeyHistogramIncrement @"_histIncrement"
+#define XRGraphicKeyDotSize @"_dotSize"
+#define XRGraphicKeyPercent @"_percent"
+#define XRGraphicKeyCount @"_count"
+#define XRGraphicKeyTotalCount @"_totalCount"
+#define XRGraphicKeyRelativePercent @"_relativePercent"
+#define XRGraphicKeyAngleSetting @"_angleSetting"
+#define XRGraphicKeyTickType @"_tickType"
+#define XRGraphicKeyShowTick @"_showTick"
+#define XRGraphicKeySpokeNumberAlignment @"_spokeNumberAlign"
+#define XRGraphicKeySpokeNumberCompassPoint @"_spokeNumberCompassPoint"
+#define XRGraphicKeySpokeNumberOrder @"_spokeNumberOrder"
+#define XRGraphicKeyShowLabel @"_showLabel"
+#define XRGraphicKeyLineLabel @"_lineLabel"
+#define XRGraphicKeyCurrentFont @"_currentFont"
+#define XRGraphicKeyLabelAngle @"_labelAngle"
+#define XRGraphicKeyLabel @"Label"
+#define XRGraphicKeyLabelFont @"_labelFont"
+#define XRGraphicKeyIsCore @"_isCore"
+#define XRGraphicKeyCountSetting @"_countSetting"
+#define XRGraphicKeyPercentSetting @"_percentSetting"
+#define XRGraphicKeyGeometryPercent @"_geometryPercent"
+#define XRGraphicKeyIsGeometryPercent @"_isGeometryPercent"
+#define XRGraphicKeyIsPercent @"_isPercent"
+#define XRGraphicKeyIsFixedCount @"_isFixedCount"
+// #define XRGraphicKey
+
 NS_ASSUME_NONNULL_BEGIN
 
 @class XRGeometryController;
@@ -63,6 +98,10 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)setTransparency:(float)alpha;
 
 -(NSDictionary *)graphicSettings;
+
+-(NSString *)stringFromBool:(BOOL)boolValue;
+-(NSString *)stringFromInt:(int)intValue;
+-(NSString *)stringFromFloat:(float)floatValue;
 
 @end
 

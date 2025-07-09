@@ -96,15 +96,17 @@
 
 -(NSDictionary *)graphicSettings
 {
-	NSMutableDictionary *theDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];
-    [theDict setObject:@"Dot" forKey:@"GraphicType"];
+	NSMutableDictionary *parentDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];
+    NSDictionary *classDict = @{
+        XRGraphicKeyGraphicType : @"Dot",
+        XRGraphicKeyAngleIncrement : [self stringFromInt: _angleIncrement],
+        XRGraphicKeyTotalCount : [self stringFromInt: _totalCount],
+        XRGraphicKeyCount : [self stringFromInt: _count],
+        XRGraphicKeyDotSize : [self stringFromFloat: _dotSize]
+    };
 
-	[theDict setObject:[NSString stringWithFormat:@"%i",_angleIncrement] forKey:@"_angleIncrement"];
-	[theDict setObject:[NSString stringWithFormat:@"%i",_totalCount] forKey:@"_totalCount"];
-	[theDict setObject:[NSString stringWithFormat:@"%i",_count] forKey:@"_count"];
-	[theDict setObject:[NSString stringWithFormat:@"%f",_dotSize] forKey:@"_dotSize"];
 
-	
-	return [NSDictionary dictionaryWithDictionary:theDict];
+    [parentDict addEntriesFromDictionary:classDict];
+    return parentDict;
 }
 @end

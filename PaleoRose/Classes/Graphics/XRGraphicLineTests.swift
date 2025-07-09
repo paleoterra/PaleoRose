@@ -12,7 +12,7 @@ struct XRGraphicLineTests {
     }
 
     private func buildTestObject(controller: XRGeometryController) throws -> XRGraphicLine {
-        try #require(XRGraphicLine(controller: controller))
+        XRGraphicLine(controller: controller)
     }
 
     private func defaultSettings() throws -> [AnyHashable: Any] {
@@ -43,7 +43,6 @@ struct XRGraphicLineTests {
 
         // When
         let line = try buildTestObject(controller: controller)
-        line.setLineLabel() // must be called directly or indirectly
         let expectedSettings = try defaultSettings()
 
         // Then
@@ -83,13 +82,13 @@ struct XRGraphicLineTests {
         var expectedSettings = try defaultSettings()
         expectedSettings["_angleSetting"] = "180.000000"
 
-        line.setSpokeAngle(testAngle)
+        line.spokeAngle = testAngle
 
         // Then
 
         #expect(
-            line.spokeAngle().isApproximatelyEqual(to: testAngle, relativeTolerance: 0.001),
-            "Spoke angle was \(line.spokeAngle()), should be \(testAngle)"
+            line.spokeAngle.isApproximatelyEqual(to: testAngle, relativeTolerance: 0.001),
+            "Spoke angle was \(line.spokeAngle), should be \(testAngle)"
         )
 
         let settings = line.graphicSettings()
@@ -109,7 +108,6 @@ struct XRGraphicLineTests {
     func testSetTickType(tickType: Int32) throws {
         let controller = buildController()
         let line = try buildTestObject(controller: controller)
-        line.setLineLabel() // must be called directly or indirectly
         var expectedSettings = try defaultSettings()
         expectedSettings["_tickType"] = "\(tickType)"
 
@@ -128,7 +126,6 @@ struct XRGraphicLineTests {
     func testShowTick(showTick: Bool) throws {
         let controller = buildController()
         let line = try buildTestObject(controller: controller)
-        line.setLineLabel() // must be called directly or indirectly
         var expectedSettings = try defaultSettings()
         expectedSettings["_showTick"] = showTick ? "YES" : "NO"
 
@@ -147,11 +144,10 @@ struct XRGraphicLineTests {
     func testSetShowLabel(showLabel: Bool) throws {
         let controller = buildController()
         let line = try buildTestObject(controller: controller)
-        line.setLineLabel() // must be called directly or indirectly
         var expectedSettings = try defaultSettings()
         expectedSettings["_showLabel"] = showLabel ? "YES" : "NO"
 
-        line.setShowlabel(showLabel)
+        line.showLabel = showLabel
         let settings = line.graphicSettings()
 
         try CommonUtilities.compareGraphicSettings(values: settings, expected: expectedSettings)
@@ -168,13 +164,12 @@ struct XRGraphicLineTests {
     func testSetShowLabel(fontInfo: (name: String, size: CGFloat)) throws {
         let controller = buildController()
         let line = try buildTestObject(controller: controller)
-        line.setLineLabel() // must be called directly or indirectly
         let expectedSettings = try defaultSettings()
-        let font = NSFont(name: fontInfo.name, size: fontInfo.size)
+        let font = try #require(NSFont(name: fontInfo.name, size: fontInfo.size))
 
-        line.setFont(font)
-        #expect(line.font().fontName == fontInfo.name)
-        #expect(line.font().pointSize == fontInfo.size)
+        line.font = font
+        #expect(line.font?.fontName == fontInfo.name)
+        #expect(line.font?.pointSize == fontInfo.size)
 
         let settings = line.graphicSettings()
 
