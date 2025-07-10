@@ -30,6 +30,21 @@
 #import "LITMArrowHead.h"
 #import "math.h"
 
+@interface LITMArrowHead()
+@property (nonatomic, strong, nonnull) NSColor * arrowColor;
+@property (nonatomic, strong, nonnull) NSBezierPath *path;
+@property (nonatomic, strong, nonnull) NSAffineTransform *positionTransform;
+@property (nonatomic, strong, nonnull) NSAffineTransform *scaleTransform;
+
+-(void)configureScaleTransform:(float)scale;
+-(void)setType:(int)type;
+-(void)standardArrow;
+-(void)flyingArrow;
+-(void)halfArrowLeft;
+-(void)halfArrowRight;
+
+@end
+
 @implementation LITMArrowHead
 
 -(id)initWithSize:(float)size color:(NSColor *)color type:(int)type
@@ -37,94 +52,79 @@
 	if (!(self = [super init])) return nil;
 	if(self)
 	{
-		[self setColor:color]; 
-		[self setSize:size];
-		[self setType:type];
+        _arrowColor = color;
+        _path = [NSBezierPath bezierPath];
+        _scaleTransform = [NSAffineTransform transform];
+        _positionTransform = [NSAffineTransform transform];
+        [self configureScaleTransform:size];
+        [self setType:type];
 		[self positionAtLineEndpoint:NSMakePoint(0.0,0.0) withAngle:0.0];
 	}
 	return self;
 }
 
-
--(void)setColor:(NSColor *)color
-{
-	_arrowColor = color;
+-(void)configureScaleTransform:(float)scale {
+    [_scaleTransform scaleXBy:scale yBy:scale];
 }
 
--(void)setSize:(float)size
-{
-	float scale;
-	
-	//scale = sqrt(size);
-	scale = size;
-	_scaleTransform = [NSAffineTransform transform];
-	[_scaleTransform scaleXBy:scale yBy:scale];
-	//assumes that the origin is unchanged in position.
-	//[_scaleTransform translateXBy:-0.5*scale yBy:-0.5*scale];
+-(void)setType:(int)type {
+	switch(type) {
+		case 0: {
+            [self standardArrow];
+		}
+			break;
+		case 1: {
+            [self flyingArrow];
+		}
+			break;
+		case 2: {
+            [self halfArrowLeft];
+        }
+			break;
+		case 4: {
+            [self halfArrowRight];
+		}
+			break;
+    }
 }
 
--(void)setType:(int)type
-{
-	_type = type;
-	//should command to reassemble path
-	_path = [NSBezierPath bezierPath];
-	switch(_type)
-	{
-		case 0://standard arrow
-		{
-			[_path moveToPoint:NSMakePoint(0.0,0.0)];
-			
-			[_path lineToPoint:NSMakePoint(5.0,-10.0)];
-			[_path lineToPoint:NSMakePoint(-5.0,-10.0)];
-			[_path lineToPoint:NSMakePoint(0.0,0.0)];
-		}
-			break;
-		case 1://flying arrow
-		{
-			[_path moveToPoint:NSMakePoint(0.0,0.0)];
-			[_path lineToPoint:NSMakePoint(5.0,-10.0)];
-			[_path lineToPoint:NSMakePoint(0.0,-7.5)];
-			
-			[_path lineToPoint:NSMakePoint(-5.0,-10.0)];
-			[_path lineToPoint:NSMakePoint(0.0,0.0)];
-		}
-			break;
-		case 2: //half arrow left
-		{
-			[_path moveToPoint:NSMakePoint(0.0,0.0)];
-			
-			[_path lineToPoint:NSMakePoint(0.0,-7.5)];
-			[_path lineToPoint:NSMakePoint(-5.0,-10.0)];
-			[_path lineToPoint:NSMakePoint(0.0,0.0)];
-		}
-			break;
-		case 4: //half arrow right
-		{
-			[_path moveToPoint:NSMakePoint(0.0,0.0)];
-			
-			
-			[_path lineToPoint:NSMakePoint(5.0,-10.0)];
-			[_path lineToPoint:NSMakePoint(0.0,-7.5)];
-			[_path lineToPoint:NSMakePoint(0.0,0.0)];
-		}
-			break;
-		
-	}
+-(void)standardArrow {
+    [_path moveToPoint:NSMakePoint(0.0,0.0)];
+    [_path lineToPoint:NSMakePoint(5.0,-10.0)];
+    [_path lineToPoint:NSMakePoint(-5.0,-10.0)];
+    [_path lineToPoint:NSMakePoint(0.0,0.0)];
 }
--(void)positionAtLineEndpoint:(NSPoint)aPoint withAngle:(float)angle
-{
 
+-(void)flyingArrow {
+    [_path moveToPoint:NSMakePoint(0.0,0.0)];
+    [_path lineToPoint:NSMakePoint(5.0,-10.0)];
+    [_path lineToPoint:NSMakePoint(0.0,-7.5)];
+    [_path lineToPoint:NSMakePoint(-5.0,-10.0)];
+    [_path lineToPoint:NSMakePoint(0.0,0.0)];
+}
+
+-(void)halfArrowLeft {
+    [_path moveToPoint:NSMakePoint(0.0,0.0)];
+    [_path lineToPoint:NSMakePoint(0.0,-7.5)];
+    [_path lineToPoint:NSMakePoint(-5.0,-10.0)];
+    [_path lineToPoint:NSMakePoint(0.0,0.0)];
+}
+
+-(void)halfArrowRight {
+    [_path moveToPoint:NSMakePoint(0.0,0.0)];
+    [_path lineToPoint:NSMakePoint(5.0,-10.0)];
+    [_path lineToPoint:NSMakePoint(0.0,-7.5)];
+    [_path lineToPoint:NSMakePoint(0.0,0.0)];
+}
+
+
+-(void)positionAtLineEndpoint:(NSPoint)aPoint withAngle:(float)angle {
 	_positionTransform = [NSAffineTransform transform];
-
 	[_positionTransform translateXBy:aPoint.x yBy:aPoint.y];
-
 	[_positionTransform rotateByDegrees:360.0-angle];
-
-
 }
 
--(void)drawRect:(NSRect)rect
-{
+-(void)drawRect:(NSRect)rect {
 
 	NSAffineTransform *aTrans = [NSAffineTransform transform];
 	
@@ -143,7 +143,6 @@
 	[_path fill];
 
 	[NSGraphicsContext restoreGraphicsState];
-
 }
 
 @end

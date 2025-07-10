@@ -43,7 +43,6 @@
 -(id)initCoreCircleWithController:(XRGeometryController *)aController
 {
 	if (!(self = [super initCoreCircleWithController:aController])) return nil;
-	
 	if(self)
 	{
 		self.showLabel = NO;

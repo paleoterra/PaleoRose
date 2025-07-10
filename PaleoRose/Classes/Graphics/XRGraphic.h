@@ -28,6 +28,8 @@
 
 #import <Cocoa/Cocoa.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 static const NSString * _Nonnull XRGraphicKeyGraphicType = @"GraphicType";
 static const NSString * _Nonnull XRGraphicKeyStrokeColor = @"_strokeColor";
 static const NSString * _Nonnull XRGraphicKeyFillColor = @"_fillColor";
@@ -61,9 +63,6 @@ static const NSString *  _Nonnull XRGraphicKeyGeometryPercent = @"_geometryPerce
 static const NSString *  _Nonnull XRGraphicKeyIsGeometryPercent = @"_isGeometryPercent";
 static const NSString *  _Nonnull XRGraphicKeyIsPercent = @"_isPercent";
 static const NSString *  _Nonnull XRGraphicKeyIsFixedCount = @"_isFixedCount";
-// #define XRGraphicKey
-
-NS_ASSUME_NONNULL_BEGIN
 
 @class XRGeometryController;
 

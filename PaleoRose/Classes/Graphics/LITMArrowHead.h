@@ -29,22 +29,9 @@
 #import <Foundation/Foundation.h>
 
 
-@interface LITMArrowHead : NSObject {
-	NSColor *_arrowColor;
-	float _scale;
-	int _type;
-	NSBezierPath *_path;
-	NSAffineTransform *_positionTransform;
-	NSAffineTransform *_scaleTransform;
-	NSPoint _targetPoint;
-	float _angle;
-}
+@interface LITMArrowHead : NSObject
 
 -(id)initWithSize:(float)size color:(NSColor *)color type:(int)type;
--(void)setColor:(NSColor *)color;
--(void)setSize:(float)size;
--(void)setType:(int)type;
 -(void)positionAtLineEndpoint:(NSPoint)aPoint withAngle:(float)angle;
-//-(void)positionAtLineEndpoint:(NSPoint)aPoint previousPoint:(NSPoint)sourcePoint;
 -(void)drawRect:(NSRect)rect;
 @end
