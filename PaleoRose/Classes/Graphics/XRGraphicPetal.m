@@ -29,6 +29,13 @@
 #import "XRGraphicPetal.h"
 #import "XRGeometryController.h"
 
+@interface XRGraphicPetal()
+@property (readwrite, assign) int petalIncrement;
+@property (readwrite, assign) float maxRadius;
+@property (readwrite, assign) float percent;
+@property (readwrite, assign) int count;
+@end
+
 @implementation XRGraphicPetal
 
 -(id)initWithController:(XRGeometryController *)controller forIncrement:(int)increment forValue:(NSNumber *)aNumber
@@ -45,8 +52,7 @@
 	return self;
 }
 
--(void)calculateGeometry
-{
+-(void)calculateGeometry {
 	NSPoint aPoint,targetPoint;
 	float radius;
 	float angle1;
@@ -70,9 +76,8 @@
 		angle4 = angle4- 360.0;
 	self.drawingPath = [NSBezierPath bezierPath];
 
-	if([self.geometryController isPercent])
-	{
-		
+	if([self.geometryController isPercent]) {
+
 		//core point 1.
 		radius = [self.geometryController radiusOfPercentValue:0.0];
 		aPoint.x = 0.0;
@@ -105,11 +110,7 @@
 		aPoint.x = 0.0;
 		aPoint.y = 0.0;
 		[self.drawingPath appendBezierPathWithArcWithCenter:aPoint radius:radius startAngle:angle4 endAngle:angle3 clockwise:NO];
-
-		
-	}
-	else
-	{
+	} else {
 		//core point 1.
 		radius = [self.geometryController radiusOfCount:0];
 		//NSLog(@"radius 1: %f",radius);
@@ -146,11 +147,9 @@
 		aPoint.y = 0.0;
 		[self.drawingPath appendBezierPathWithArcWithCenter:aPoint radius:radius startAngle:angle4 endAngle:angle3 clockwise:YES];
 	}
-		
 }
 
--(NSDictionary *)graphicSettings
-{
+-(NSDictionary *)graphicSettings {
 	NSMutableDictionary *parentDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];
 
     NSDictionary *classDict = @{

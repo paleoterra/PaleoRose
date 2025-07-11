@@ -30,12 +30,7 @@
 
 #import "XRGraphic.h"
 @class XRGraphic;
-@interface XRGraphicPetal : XRGraphic {
-	int _petalIncrement;
-	float _maxRadius;
-	float _percent;
-	int _count;
-}
+@interface XRGraphicPetal : XRGraphic
 
 -(id)initWithController:(XRGeometryController *)controller forIncrement:(int)increment forValue:(NSNumber *)aNumber;
 @end

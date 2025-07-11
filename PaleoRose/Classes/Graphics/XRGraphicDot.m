@@ -29,6 +29,13 @@
 #import "XRGraphicDot.h"
 #import "XRGeometryController.h"
 
+@interface XRGraphicDot()
+@property (assign, nonatomic) int angleIncrement;
+@property (assign, nonatomic) int totalCount;
+@property (assign, nonatomic) int count;
+@property (assign, nonatomic) float dotSize;
+@end
+
 @implementation XRGraphicDot
 
 -(id)initWithController:(XRGeometryController *)controller forIncrement:(int)increment valueCount:(int)count totalCount:(int)total
