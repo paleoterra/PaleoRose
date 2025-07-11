@@ -30,11 +30,7 @@
 
 #import "XRGraphic.h"
 @class XRGraphic;
-@interface XRGraphicHistogram : XRGraphic {
-	int _histIncrement;
-	float _percent;
-	int _count;
-}
+@interface XRGraphicHistogram : XRGraphic 
 
 -(id)initWithController:(XRGeometryController *)controller forIncrement:(int)increment forValue:(NSNumber *)aNumber;
 @end

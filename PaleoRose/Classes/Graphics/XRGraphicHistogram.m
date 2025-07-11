@@ -28,13 +28,18 @@
 
 #import "XRGraphicHistogram.h"
 #import "XRGeometryController.h"
+@interface XRGraphicHistogram()
+
+@property (assign, readwrite) int histIncrement;
+@property (assign, readwrite) float percent;
+@property (assign, readwrite) int count;
+
+@end
 
 @implementation XRGraphicHistogram
--(id)initWithController:(XRGeometryController *)controller forIncrement:(int)increment forValue:(NSNumber *)aNumber
-{
+-(id)initWithController:(XRGeometryController *)controller forIncrement:(int)increment forValue:(NSNumber *)aNumber {
 	if (!(self = [super initWithController:controller])) return nil;
-	if(self)
-	{
+	if(self) {
 		_histIncrement = increment;
 		_percent = [aNumber floatValue];
 		_count = [aNumber intValue];
@@ -45,10 +50,7 @@
 	return self;
 }
 
--(void)calculateGeometry
-{
-	
-	
+-(void)calculateGeometry {
 	NSPoint aPoint,targetPoint;
 	float radius;
 	float angle1;
@@ -60,8 +62,7 @@
 	if(angle1>360.0)
 		angle1 = angle1 - 360.0;
 	self.drawingPath = [NSBezierPath bezierPath];
-	if([self.geometryController isPercent])
-	{
+	if([self.geometryController isPercent]) {
 		radius = [self.geometryController radiusOfPercentValue:0.0];
 		aPoint = NSMakePoint(0.0,radius);
 		targetPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle1];
@@ -72,9 +73,7 @@
 		targetPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle1];
 		[self.drawingPath lineToPoint:targetPoint];
 
-	}
-	else
-	{
+	} else {
 		radius = [self.geometryController radiusOfCount:0];
 		aPoint = NSMakePoint(0.0,radius);
 		targetPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle1];
@@ -89,9 +88,7 @@
 	[self.drawingPath setLineWidth:self.lineWidth];
 }
 
-
--(NSDictionary *)graphicSettings
-{
+-(NSDictionary *)graphicSettings {
 	NSMutableDictionary *parentDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];
     NSDictionary *classDict = @{
         XRGraphicKeyGraphicType : @"Histogram",
