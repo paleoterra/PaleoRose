@@ -47,7 +47,7 @@
 		_totalCount = total;
 		_count = count;
 		
-		_dotSize = 4.0;
+		self.dotSize = 4.0;
 		[self setDrawsFill:YES];
 		[self calculateGeometry];
 	}
@@ -63,7 +63,7 @@
 	NSRect aRect;
 	NSPoint aPoint;
 	self.drawingPath = [[NSBezierPath alloc] init];
-	aRect.size = NSMakeSize(_dotSize,_dotSize);
+	aRect.size = NSMakeSize(self.dotSize,self.dotSize);
 	if([self.geometryController isPercent])
 	{
 		for(int i=0;i<_count;i++)
@@ -71,8 +71,8 @@
 			radius = [self.geometryController radiusOfPercentValue:(float)(i+1)/(float)_totalCount];
 			aPoint = NSMakePoint(0.0,radius);
 			aPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle];
-			aRect.origin.x = aPoint.x - (_dotSize * 0.5);
-			aRect.origin.y = aPoint.y - (_dotSize * 0.5);
+            aRect.origin.x = aPoint.x - (self.dotSize * 0.5);
+			aRect.origin.y = aPoint.y - (self.dotSize * 0.5);
 			[self.drawingPath appendBezierPathWithOvalInRect:aRect];
 		}
 	}
@@ -83,8 +83,8 @@
 			radius = [self.geometryController radiusOfCount:i];
 			aPoint = NSMakePoint(0.0,radius);
 			aPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle];
-			aRect.origin.x = aPoint.x - (_dotSize * 0.5);
-			aRect.origin.y = aPoint.y - (_dotSize * 0.5);
+			aRect.origin.x = aPoint.x - (self.dotSize * 0.5);
+			aRect.origin.y = aPoint.y - (self.dotSize * 0.5);
 			[self.drawingPath appendBezierPathWithOvalInRect:aRect];
 		}
 	}
@@ -92,12 +92,12 @@
 
 -(void)setDotSize:(float)newSize
 {
-	_dotSize = newSize;
+	self.dotSize = newSize;
 	[self calculateGeometry];
 }
 
 -(float)dotSize {
-	return _dotSize;
+	return self.dotSize;
 }
 
 -(NSDictionary *)graphicSettings {
@@ -107,7 +107,7 @@
         XRGraphicKeyAngleIncrement : [self stringFromInt: _angleIncrement],
         XRGraphicKeyTotalCount : [self stringFromInt: _totalCount],
         XRGraphicKeyCount : [self stringFromInt: _count],
-        XRGraphicKeyDotSize : [self stringFromFloat: _dotSize]
+        XRGraphicKeyDotSize : [self stringFromFloat: self.dotSize]
     };
     [parentDict addEntriesFromDictionary:classDict];
     return parentDict;

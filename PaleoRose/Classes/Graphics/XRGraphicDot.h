@@ -30,12 +30,7 @@
 
 #import "XRGraphic.h"
 @class XRGraphic;
-@interface XRGraphicDot : XRGraphic {
-	int _angleIncrement;
-	int _totalCount;
-	int _count;
-	float _dotSize;
-}
+@interface XRGraphicDot : XRGraphic
 
 -(id)initWithController:(XRGeometryController *)controller forIncrement:(int)increment valueCount:(int)count totalCount:(int)total;
 -(void)setDotSize:(float)newSize;
