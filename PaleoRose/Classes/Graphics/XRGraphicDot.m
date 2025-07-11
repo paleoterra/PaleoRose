@@ -33,75 +33,75 @@
 @property (assign, nonatomic) int angleIncrement;
 @property (assign, nonatomic) int totalCount;
 @property (assign, nonatomic) int count;
-@property (assign, nonatomic) float dotSize;
+
+-(void)registerForKVO;
+
 @end
 
 @implementation XRGraphicDot
 
 -(id)initWithController:(XRGeometryController *)controller forIncrement:(int)increment valueCount:(int)count totalCount:(int)total
 {
-	if (!(self = [super initWithController:controller])) return nil;
-	if(self)
-	{
-		_angleIncrement = increment;
-		_totalCount = total;
-		_count = count;
-		
-		self.dotSize = 4.0;
-		[self setDrawsFill:YES];
-		[self calculateGeometry];
-	}
-	return self;
+    if (!(self = [super initWithController:controller])) return nil;
+    if(self)
+    {
+        _angleIncrement = increment;
+        _totalCount = total;
+        _count = count;
+
+        self.dotSize = 4.0;
+        [self setDrawsFill:YES];
+        [self calculateGeometry];
+        [self registerForKVO];
+    }
+    return self;
+}
+-(void)registerForKVO {
+    [self addObserver:self
+           forKeyPath:@"dotSize"
+              options:NSKeyValueObservingOptionNew |
+     NSKeyValueObservingOptionOld
+              context:NULL];
 }
 
 -(void)calculateGeometry
 {
-	float radius;
-	float startAngle = [self.geometryController startingAngle];
-	float step = [self.geometryController sectorSize];
-	float angle = startAngle + (step * ((float)_angleIncrement +0.5));
-	NSRect aRect;
-	NSPoint aPoint;
-	self.drawingPath = [[NSBezierPath alloc] init];
-	aRect.size = NSMakeSize(self.dotSize,self.dotSize);
-	if([self.geometryController isPercent])
-	{
-		for(int i=0;i<_count;i++)
-		{
-			radius = [self.geometryController radiusOfPercentValue:(float)(i+1)/(float)_totalCount];
-			aPoint = NSMakePoint(0.0,radius);
-			aPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle];
+    float radius;
+    float startAngle = [self.geometryController startingAngle];
+    float step = [self.geometryController sectorSize];
+    float angle = startAngle + (step * ((float)_angleIncrement +0.5));
+    NSRect aRect;
+    NSPoint aPoint;
+    self.drawingPath = [[NSBezierPath alloc] init];
+    aRect.size = NSMakeSize(self.dotSize,self.dotSize);
+    if([self.geometryController isPercent])
+    {
+        for(int i=0;i<_count;i++)
+        {
+            radius = [self.geometryController radiusOfPercentValue:(float)(i+1)/(float)_totalCount];
+            aPoint = NSMakePoint(0.0,radius);
+            aPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle];
             aRect.origin.x = aPoint.x - (self.dotSize * 0.5);
-			aRect.origin.y = aPoint.y - (self.dotSize * 0.5);
-			[self.drawingPath appendBezierPathWithOvalInRect:aRect];
-		}
-	}
-	else
-	{
-		for(int i=0;i<_count;i++)
-		{
-			radius = [self.geometryController radiusOfCount:i];
-			aPoint = NSMakePoint(0.0,radius);
-			aPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle];
-			aRect.origin.x = aPoint.x - (self.dotSize * 0.5);
-			aRect.origin.y = aPoint.y - (self.dotSize * 0.5);
-			[self.drawingPath appendBezierPathWithOvalInRect:aRect];
-		}
-	}
-}
-
--(void)setDotSize:(float)newSize
-{
-	self.dotSize = newSize;
-	[self calculateGeometry];
-}
-
--(float)dotSize {
-	return self.dotSize;
+            aRect.origin.y = aPoint.y - (self.dotSize * 0.5);
+            [self.drawingPath appendBezierPathWithOvalInRect:aRect];
+        }
+    }
+    else
+    {
+        for(int i=0;i<_count;i++)
+        {
+            radius = [self.geometryController radiusOfCount:i];
+            aPoint = NSMakePoint(0.0,radius);
+            aPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle];
+            aRect.origin.x = aPoint.x - (self.dotSize * 0.5);
+            aRect.origin.y = aPoint.y - (self.dotSize * 0.5);
+            [self.drawingPath appendBezierPathWithOvalInRect:aRect];
+        }
+    }
 }
 
 -(NSDictionary *)graphicSettings {
-	NSMutableDictionary *parentDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];
+    NSMutableDictionary *parentDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];
     NSDictionary *classDict = @{
         XRGraphicKeyGraphicType : @"Dot",
         XRGraphicKeyAngleIncrement : [self stringFromInt: _angleIncrement],
@@ -111,5 +111,15 @@
     };
     [parentDict addEntriesFromDictionary:classDict];
     return parentDict;
+}
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    [super observeValueForKeyPath:keyPath
+                             ofObject:object
+                               change:change
+                              context:context];
+    if ([keyPath isEqualToString:@"dotSize"]) {
+        [self calculateGeometry];
+    }
 }
 @end

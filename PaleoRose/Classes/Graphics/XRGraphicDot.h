@@ -31,8 +31,8 @@
 #import "XRGraphic.h"
 @class XRGraphic;
 @interface XRGraphicDot : XRGraphic
+@property (assign, nonatomic) float dotSize;
 
 -(id)initWithController:(XRGeometryController *)controller forIncrement:(int)increment valueCount:(int)count totalCount:(int)total;
--(void)setDotSize:(float)newSize;
--(float)dotSize;
+
 @end

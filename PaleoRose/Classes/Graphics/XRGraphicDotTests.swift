@@ -97,8 +97,8 @@ struct XRGraphicDotTests {
         let controller = buildController()
         let dot = try buildBasicTestObject(controller: controller)
         let newDotSize: Float = 10
-        dot.setDotSize(newDotSize)
+        dot.dotSize = newDotSize
 
-        #expect(dot.dotSize() == newDotSize)
+        #expect(dot.dotSize == newDotSize)
     }
 }
