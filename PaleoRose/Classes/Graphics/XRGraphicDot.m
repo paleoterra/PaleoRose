@@ -89,13 +89,11 @@
 	[self calculateGeometry];
 }
 
--(float)dotSize
-{
+-(float)dotSize {
 	return _dotSize;
 }
 
--(NSDictionary *)graphicSettings
-{
+-(NSDictionary *)graphicSettings {
 	NSMutableDictionary *parentDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];
     NSDictionary *classDict = @{
         XRGraphicKeyGraphicType : @"Dot",
@@ -104,8 +102,6 @@
         XRGraphicKeyCount : [self stringFromInt: _count],
         XRGraphicKeyDotSize : [self stringFromFloat: _dotSize]
     };
-
-
     [parentDict addEntriesFromDictionary:classDict];
     return parentDict;
 }

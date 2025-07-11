@@ -2,7 +2,7 @@ import Numerics
 @testable import PaleoRose
 import Testing
 
-// swiftlint:disable file_length type_body_length
+// swiftlint:disable file_length type_body_length object_literal
 @MainActor
 struct XRGraphicCircleTests {
 
@@ -57,7 +57,10 @@ struct XRGraphicCircleTests {
                 .isApproximatelyEqual(to: CGFloat(expectedAlpha)),
             sourceLocation: sourceLocation
         )
-        #expect(fillColor.alphaComponent.isApproximatelyEqual(to: CGFloat(expectedAlpha)), sourceLocation: sourceLocation)
+        #expect(
+            fillColor.alphaComponent.isApproximatelyEqual(to: CGFloat(expectedAlpha)),
+            sourceLocation: sourceLocation
+        )
 
         // Convert all colors to a common color space (sRGB) for comparison
         try CommonUtilities.verifyEqualColorsWithOutAlpha(
@@ -592,4 +595,4 @@ struct XRGraphicCircleTests {
     }
 }
 
-// swiftlint:enable file_length type_body_length
+// swiftlint:enable file_length type_body_length object_literal

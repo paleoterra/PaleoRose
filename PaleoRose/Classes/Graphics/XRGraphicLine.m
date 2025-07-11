@@ -30,14 +30,14 @@
 #import "XRGeometryController.h"
 
 @interface XRGraphicLine()
+
 @property (readwrite) float relativePercent;
-
-
 
 -(void)setLineLabel;
 -(void)calculateLabelTransform;
 -(void)appendParallelTransform;
 -(void)appendHorizontalTransform;
+
 @end
 
 @implementation XRGraphicLine

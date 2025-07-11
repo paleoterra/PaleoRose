@@ -11,8 +11,8 @@ struct XRGraphicKiteTests {
         MockGeometryController()
     }
 
-    private func buildBasicTestObject(controller: XRGeometryController) throws -> XRGraphicKite {
-        try #require(XRGraphicKite(controller: controller))
+    private func buildBasicTestObject(controller: XRGeometryController) -> XRGraphicKite {
+        XRGraphicKite(controller: controller)
     }
 
     private func buildTestObject(controller: XRGeometryController, angles: [Double] = [], values: [Double] = []) throws -> XRGraphicKite {
@@ -42,7 +42,7 @@ struct XRGraphicKiteTests {
         let controller = buildController()
 
         // When
-        let kite = try buildBasicTestObject(controller: controller)
+        let kite = buildBasicTestObject(controller: controller)
         var expectedSettings = defaultSettings()
         expectedSettings["_fillColor"] = NSColor.black
 

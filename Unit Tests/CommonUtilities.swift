@@ -128,8 +128,11 @@ enum CommonUtilities {
         ))
         let components1 = try #require(lhsCG.components)
         let components2 = try #require(rhsCG.components)
-        let colorMatches = zip(components1.prefix(componentCount), components2.prefix(componentCount)).allSatisfy {
-            $0.isApproximatelyEqual(to: $1, absoluteTolerance: 0.01)
+        let colorMatches = zip(
+            components1.prefix(componentCount),
+            components2.prefix(componentCount)
+        ).allSatisfy { lhs, rhs in
+            lhs.isApproximatelyEqual(to: rhs, absoluteTolerance: 0.01)
         }
         #expect(colorMatches, "Color doesn't match expected color: \(lhs.description), \(rhs.description)", sourceLocation: sourceLocation)
     }

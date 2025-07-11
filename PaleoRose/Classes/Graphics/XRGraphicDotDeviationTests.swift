@@ -11,8 +11,8 @@ struct XRGraphicDotDeviationTests {
         MockGeometryController()
     }
 
-    private func buildBasicTestObject(controller: XRGeometryController) throws -> XRGraphicDotDeviation {
-        try #require(XRGraphicDotDeviation(controller: controller))
+    private func buildBasicTestObject(controller: XRGeometryController) -> XRGraphicDotDeviation {
+        XRGraphicDotDeviation(controller: controller)
     }
 
     private func buildTestObject(controller: XRGeometryController, forIncrement: Int = 0, totalCount: Int = 0) throws -> XRGraphicDotDeviation {
@@ -49,7 +49,7 @@ struct XRGraphicDotDeviationTests {
         let controller = buildController()
 
         // When
-        let dotDeviation = try buildBasicTestObject(controller: controller)
+        let dotDeviation = buildBasicTestObject(controller: controller)
 
         let expectedSettings = defaultSettings()
         let settings = dotDeviation.graphicSettings()

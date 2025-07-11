@@ -89,11 +89,9 @@ struct InMemoryStoreIntegrationTest {
         let interface = SQLiteInterface()
         let store = try InMemoryStore(interface: interface)
         let dbPointer = try #require(store.store())
-        let result: [TableSchema] = try #require(
-            try interface.executeCodableQuery(
-                sqlite: dbPointer,
-                query: TableSchema.storedValues()
-            )
+        let result: [TableSchema] = try interface.executeCodableQuery(
+            sqlite: dbPointer,
+            query: TableSchema.storedValues()
         )
         let table = try #require(result.first { $0.name == execptedTable })
         let caputedSql = table.sql.replacingOccurrences(of: "IF NOT EXISTS ", with: "")
@@ -101,9 +99,7 @@ struct InMemoryStoreIntegrationTest {
     }
 
     private func assertDatabaseContentMatchesSampleFile(database: OpaquePointer) throws {
-        let tables: [TableSchema] = try #require(
-            try SQLiteInterface().executeCodableQuery(sqlite: database, query: TableSchema.storedValues())
-        )
+        let tables: [TableSchema] = try SQLiteInterface().executeCodableQuery(sqlite: database, query: TableSchema.storedValues())
         let tableNames = tables.map(\.name)
         let expectedTableNames = [
             "_windowController",
@@ -120,9 +116,7 @@ struct InMemoryStoreIntegrationTest {
         ]
         #expect(tableNames == expectedTableNames)
 
-        let colors: [Color] = try #require(
-            try SQLiteInterface().executeCodableQuery(sqlite: database, query: Color.storedValues())
-        )
+        let colors: [Color] = try SQLiteInterface().executeCodableQuery(sqlite: database, query: Color.storedValues())
         #expect(colors.count == 4)
     }
 
@@ -599,7 +593,7 @@ struct InMemoryStoreIntegrationTest {
             fillColor: rTestColorItem(atIndex: 2) // not correct
         )
 
-        let lineArrow = try #require(delegate.layers[2])
+        let lineArrow = delegate.layers[2]
 
         try CommonUtilities.assertXRLayerHasCorrectValues(
             layer: lineArrow,

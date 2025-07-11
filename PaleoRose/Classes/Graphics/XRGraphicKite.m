@@ -29,6 +29,13 @@
 #import "XRGraphicKite.h"
 #import "XRGeometryController.h"
 
+@interface XRGraphicKite()
+
+@property (nonatomic, strong, nonnull) NSArray *angles;
+@property (nonatomic, strong, nonnull) NSArray *values;
+
+@end
+
 @implementation XRGraphicKite
 
 -(id)initWithController:(XRGeometryController *)controller withAngles:(NSArray *)angles forValues:(NSArray *)values
@@ -36,8 +43,8 @@
 	if (!(self = [super initWithController:controller])) return nil;
 	if(self)
 	{
-		_angles = angles;
-		_values = values;
+        self.angles = angles;
+        self.values = values;
 		self.drawsFill = YES;
 		self.fillColor = [NSColor colorWithCalibratedWhite:1.0 alpha:1.0];
 		[self calculateGeometry];

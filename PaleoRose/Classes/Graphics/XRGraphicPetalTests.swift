@@ -11,12 +11,16 @@ struct XRGraphicPetalTests {
         MockGeometryController()
     }
 
-    private func buildBasicTestObject(controller: XRGeometryController) throws -> XRGraphicPetal {
-        try #require(XRGraphicPetal(controller: controller))
+    private func buildBasicTestObject(controller: XRGeometryController) -> XRGraphicPetal {
+        XRGraphicPetal(controller: controller)
     }
 
     private func builtTestObject(controller: XRGeometryController, forIncrement: Int32 = 0, forValue: Int32 = 0) throws -> XRGraphicPetal {
-        try #require(XRGraphicPetal(controller: controller, forIncrement: forIncrement, forValue: NSNumber(value: forValue)))
+        try #require(XRGraphicPetal(
+            controller: controller,
+            forIncrement: forIncrement,
+            forValue: forValue as NSNumber
+        ))
     }
 
     private func defaultSettings() -> [AnyHashable: Any] {
@@ -40,11 +44,11 @@ struct XRGraphicPetalTests {
         let controller = buildController()
 
         // When
-        let petal = try buildBasicTestObject(controller: controller)
+        let petal = buildBasicTestObject(controller: controller)
         let expectedSettings = defaultSettings()
 
         // Then
-        let settings = try #require(petal.graphicSettings())
+        let settings = petal.graphicSettings()
 
         try CommonUtilities.compareGraphicSettings(values: settings, expected: expectedSettings)
     }
@@ -59,7 +63,7 @@ struct XRGraphicPetalTests {
         let expectedSettings = defaultSettings()
 
         // Then
-        let settings = try #require(petal.graphicSettings())
+        let settings = petal.graphicSettings()
 
         try CommonUtilities.compareGraphicSettings(values: settings, expected: expectedSettings)
     }

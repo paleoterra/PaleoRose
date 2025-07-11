@@ -19,7 +19,7 @@ struct XRGraphicDotTests {
     }
 
     private func buildBasicTestObject(controller: XRGeometryController) throws -> XRGraphicDot {
-        try #require(XRGraphicDot(controller: controller))
+        XRGraphicDot(controller: controller)
     }
 
     private func buildTestObject(controller: XRGeometryController, forIncrement: Int32 = 0, valueCount: Int32 = 0, totalCount: Int32 = 0) throws -> XRGraphicDot {
@@ -54,7 +54,7 @@ struct XRGraphicDotTests {
         // When
         let dot = try buildBasicTestObject(controller: controller)
 
-        let settings = try #require(dot.graphicSettings())
+        let settings = dot.graphicSettings()
         let expectedSettings = defaultSettings()
 
         // Then
@@ -80,7 +80,7 @@ struct XRGraphicDotTests {
             totalCount: params.totalCount
         )
 
-        let settings = try #require(dot.graphicSettings())
+        let settings = dot.graphicSettings()
         var expectedSettings = defaultSettings()
         expectedSettings["_dotSize"] = String(format: "%.6f", params.dotSize)
         expectedSettings["_angleIncrement"] = "\(params.increment)"

@@ -461,8 +461,7 @@ class InMemoryStore: NSObject {
         storageLayerFactory.set(colors: colors)
         var xrLayers: [XRLayer] = []
         for layer in layers {
-            guard let typeLayerArray = typeLayers[layer.TYPE],
-                  let typeLayer = typeLayerArray.first(where: { $0.LAYERID == layer.LAYERID })
+            guard let typeLayerArray = typeLayers[layer.TYPE], let typeLayer = typeLayerArray.first(where: { $0.LAYERID == layer.LAYERID })
             else {
                 throw InMemoryStoreError.invalidLayersStore
             }

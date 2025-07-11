@@ -205,7 +205,9 @@ class MockGeometryController: XRGeometryController {
     // MARK: - Overridden Methods
 
     override func isEqual(_ object: Any?) -> Bool {
-        guard let other = object as? Self else { return false }
+        guard let other = object as? Self else {
+            return false
+        }
         return mockIsEqualArea == other.mockIsEqualArea &&
             mockIsPercent == other.mockIsPercent &&
             mockGeometryMaxCount == other.mockGeometryMaxCount &&

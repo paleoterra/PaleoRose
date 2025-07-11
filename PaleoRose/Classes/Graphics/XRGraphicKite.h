@@ -29,9 +29,6 @@
 #import <Foundation/Foundation.h>
 #import "XRGraphic.h"
 @class XRGraphic;
-@interface XRGraphicKite : XRGraphic {
-	NSArray *_angles;
-	NSArray *_values;
-}
+@interface XRGraphicKite : XRGraphic
 -(id)initWithController:(XRGeometryController *)controller withAngles:(NSArray *)angles forValues:(NSArray *)values;
 @end
