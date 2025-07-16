@@ -23,6 +23,7 @@
 // SOFTWARE.
 
 #import <Cocoa/Cocoa.h>
+#import "GraphicGeometrySource.h"
 
 #define XRGeometryDidChange @"XRGeometryDidChange" //generic notification for any change in geometry
 #define XRGeometryDidChangeIsPercent @"XRGeometryDidChangeIsPercent" //in this case, much has to be redrawn completely.. layers should pick this up
@@ -36,7 +37,7 @@
 #define XRGeometryDefaultKeyHollowCoreSize @"XRGeometryDefaultKeyHollowCoreSize"
 #import "sqlite3.h"
 @class LITMXMLTree;
-@interface XRGeometryController : NSObject
+@interface XRGeometryController : NSObject <GraphicGeometrySource>
 {
     IBOutlet id _roseTableController;
 	NSRect _mainRect;

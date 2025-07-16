@@ -21,3 +21,4 @@
 #import "XRGraphicDot.h"
 #import "XRGraphicKite.h"
 #import "XRGraphicPetal.h"
+#import "GraphicGeometrySource.h"
