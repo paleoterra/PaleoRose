@@ -378,7 +378,7 @@ struct XRGraphicCircleTests {
 
         // When
         let circle = try #require(
-            XRGraphicCircle(coreCircleWith: controller),
+            XRGraphicCircle(coreCircleWithController: controller),
             "Failed to initialize circle"
         )
 

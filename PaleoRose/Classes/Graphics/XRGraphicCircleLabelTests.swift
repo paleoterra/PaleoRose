@@ -83,7 +83,7 @@ struct XRGraphicCircleLabelTests {
         let controller = buildController()
 
         // When
-        let label = try #require(XRGraphicCircleLabel(coreCircleWith: controller))
+        let label = try #require(XRGraphicCircleLabel(coreCircleWithController: controller))
         label.labelFont = NSFont(name: "Arial-Black", size: 12)
         label.computeLabelText()
         var expectedSettings = defaultSettings()
