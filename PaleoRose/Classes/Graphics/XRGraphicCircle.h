@@ -37,8 +37,8 @@
 @property (readwrite) BOOL isGeometryPercent;
 @property (readwrite) BOOL isPercent;
 
--(instancetype)initWithController:(XRGeometryController *)controller;
--(instancetype)initCoreCircleWithController:(XRGeometryController *)aController;//for cores (0 values) only.  Use the standard initializer for all others
+-(instancetype)initWithController:(id<GraphicGeometrySource>)controller;
+-(instancetype)initCoreCircleWithController:(id<GraphicGeometrySource>)aController;//for cores (0 values) only.  Use the standard initializer for all others
 
 -(void)setGeometryPercent:(float)percent;
 

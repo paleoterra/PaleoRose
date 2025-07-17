@@ -27,7 +27,7 @@
 // SOFTWARE.
 
 #import <Cocoa/Cocoa.h>
-
+#import "GraphicGeometrySource.h"
 NS_ASSUME_NONNULL_BEGIN
 
 static const NSString * XRGraphicKeyGraphicType = @"GraphicType";
@@ -77,7 +77,7 @@ static const NSString * XRGraphicKeyIsFixedCount = @"_isFixedCount";
 @property (readwrite) BOOL needsDisplay;
 
 -(instancetype)init NS_UNAVAILABLE;
--(instancetype)initWithController:(XRGeometryController *)controller;
+-(instancetype)initWithController:(id<GraphicGeometrySource>)controller;
 
 -(void)geometryDidChange:(NSNotification *)aNotification;
 

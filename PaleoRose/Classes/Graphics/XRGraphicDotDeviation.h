@@ -38,7 +38,7 @@
 	float _mean;
 }
 
--(id)initWithController:(XRGeometryController *)controller forIncrement:(int)increment valueCount:(int)count totalCount:(int)total statistics:(NSDictionary *)stats;
+-(id)initWithController:(id<GraphicGeometrySource>)controller forIncrement:(int)increment valueCount:(int)count totalCount:(int)total statistics:(NSDictionary *)stats;
 -(void)setDotSize:(float)newSize;
 -(float)dotSize;
 @end

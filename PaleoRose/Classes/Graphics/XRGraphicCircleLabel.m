@@ -40,7 +40,7 @@
 
 @implementation XRGraphicCircleLabel
 
--(id)initCoreCircleWithController:(XRGeometryController *)aController
+-(id)initCoreCircleWithController:(id<GraphicGeometrySource>)aController
 {
 	if (!(self = [super initCoreCircleWithController:aController])) return nil;
 	if(self)
@@ -57,7 +57,7 @@
 	return self;
 }
 
--(id)initWithController:(XRGeometryController *)controller
+-(id)initWithController:(id<GraphicGeometrySource>)controller
 {
 	if (!(self = [super initWithController:controller])) return nil;
 	if(self)

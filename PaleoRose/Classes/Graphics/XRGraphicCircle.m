@@ -31,7 +31,7 @@
 
 @implementation XRGraphicCircle
 
--(instancetype)initWithController:(XRGeometryController *)controller {
+-(instancetype)initWithController:(id<GraphicGeometrySource>)controller {
     if(self = [super initWithController:controller]) {
         _isPercent = [controller isPercent];
         [self registerForKVO];
@@ -41,7 +41,7 @@
     return self;
 }
 
--(id)initCoreCircleWithController:(XRGeometryController *)aController {
+-(id)initCoreCircleWithController:(id<GraphicGeometrySource>)aController {
 	if(self = [super initWithController:aController])
 	{
         self.countSetting = 0;

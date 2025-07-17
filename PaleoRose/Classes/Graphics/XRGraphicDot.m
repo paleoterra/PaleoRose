@@ -40,7 +40,7 @@
 
 @implementation XRGraphicDot
 
--(id)initWithController:(XRGeometryController *)controller forIncrement:(int)increment valueCount:(int)count totalCount:(int)total
+-(id)initWithController:(id<GraphicGeometrySource>)controller forIncrement:(int)increment valueCount:(int)count totalCount:(int)total
 {
     if (!(self = [super initWithController:controller])) return nil;
     if(self)

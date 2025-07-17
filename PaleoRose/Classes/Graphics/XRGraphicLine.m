@@ -41,7 +41,7 @@
 @end
 
 @implementation XRGraphicLine
--(id)initWithController:(XRGeometryController *)aController {
+-(id)initWithController:(id<GraphicGeometrySource>)aController {
 	if (!(self = [super initWithController:aController])) return nil;
 	if(self)
 	{

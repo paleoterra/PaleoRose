@@ -38,7 +38,7 @@
 
 @implementation XRGraphicPetal
 
--(id)initWithController:(XRGeometryController *)controller forIncrement:(int)increment forValue:(NSNumber *)aNumber
+-(id)initWithController:(id<GraphicGeometrySource>)controller forIncrement:(int)increment forValue:(NSNumber *)aNumber
 {
 	if (!(self = [super initWithController:controller])) return nil;
 	if(self)

@@ -32,5 +32,5 @@
 @class XRGraphic;
 @interface XRGraphicPetal : XRGraphic
 
--(id)initWithController:(XRGeometryController *)controller forIncrement:(int)increment forValue:(NSNumber *)aNumber;
+-(id)initWithController:(id<GraphicGeometrySource>)controller forIncrement:(int)increment forValue:(NSNumber *)aNumber;
 @end

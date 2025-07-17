@@ -32,7 +32,7 @@
 
 @implementation XRGraphic
 
--(instancetype)initWithController:(XRGeometryController *)controller {
+-(instancetype)initWithController:(id<GraphicGeometrySource>)controller {
     if (!(self = [super init])) return nil;
     if(self)
     {

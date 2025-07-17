@@ -31,7 +31,7 @@
 - (NSRect)circleRectForGeometryPercent:(float)percent;
 - (NSPoint)rotationOfPoint:(NSPoint)thePoint byAngle:(double)angle;
 - (double)degreesFromRadians:(double)radians;
-- (double)radiusOfRelativePercent:(float)percent;
-- (CGFloat)unrestrictedRadiusOfRelativePercent:(CGFloat)percent;
+- (double)radiusOfRelativePercent:(double)percent;
+- (CGFloat)unrestrictedRadiusOfRelativePercent:(double)percent;
 
 @end
