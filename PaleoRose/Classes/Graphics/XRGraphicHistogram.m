@@ -37,7 +37,7 @@
 @end
 
 @implementation XRGraphicHistogram
--(id)initWithController:(id<GraphicGeometrySource>)controller forIncrement:(int)increment forValue:(NSNumber *)aNumber {
+-(instancetype)initWithController:(id<GraphicGeometrySource>)controller forIncrement:(int)increment forValue:(NSNumber *)aNumber {
 	if (!(self = [super initWithController:controller])) return nil;
 	if(self) {
 		_histIncrement = increment;

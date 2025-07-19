@@ -49,7 +49,7 @@ static NSString * const KVOKeySpokeNumberCompassPoint = @"spokeNumberCompassPoin
 @end
 
 @implementation XRGraphicLine
--(id)initWithController:(id<GraphicGeometrySource>)aController {
+-(instancetype)initWithController:(id<GraphicGeometrySource>)aController {
 	if (!(self = [super initWithController:aController])) return nil;
 	if(self)
 	{

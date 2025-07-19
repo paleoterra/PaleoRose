@@ -44,7 +44,7 @@ static NSString * const KVOKeyPercentSetting = @"percentSetting";
     return self;
 }
 
--(id)initCoreCircleWithController:(id<GraphicGeometrySource>)aController {
+-(instancetype)initCoreCircleWithController:(id<GraphicGeometrySource>)aController {
 	if(self = [super initWithController:aController])
 	{
         self.countSetting = 0;

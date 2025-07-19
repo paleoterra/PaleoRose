@@ -30,7 +30,7 @@
 #import "XRGeometryController.h"
 
 @implementation XRGraphicDotDeviation
--(id)initWithController:(id<GraphicGeometrySource>)controller forIncrement:(int)increment valueCount:(int)count totalCount:(int)total statistics:(NSDictionary *)stats
+-(instancetype)initWithController:(id<GraphicGeometrySource>)controller forIncrement:(int)increment valueCount:(int)count totalCount:(int)total statistics:(NSDictionary *)stats
 {
 #ifdef GraphicsDebug
 	NSLog(@"XRGraphicDotDeviation:initWithController");

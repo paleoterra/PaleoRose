@@ -42,7 +42,7 @@ static NSString * const KVOKeyDotSize = @"labelFont";
 
 @implementation XRGraphicDot
 
--(id)initWithController:(id<GraphicGeometrySource>)controller forIncrement:(int)increment valueCount:(int)count totalCount:(int)total
+-(instancetype)initWithController:(id<GraphicGeometrySource>)controller forIncrement:(int)increment valueCount:(int)count totalCount:(int)total
 {
     if (!(self = [super initWithController:controller])) return nil;
     if(self)

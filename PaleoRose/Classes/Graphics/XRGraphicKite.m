@@ -38,7 +38,7 @@
 
 @implementation XRGraphicKite
 
--(id)initWithController:(id<GraphicGeometrySource>)controller withAngles:(NSArray *)angles forValues:(NSArray *)values
+-(instancetype)initWithController:(id<GraphicGeometrySource>)controller withAngles:(NSArray *)angles forValues:(NSArray *)values
 {
 	if (!(self = [super initWithController:controller])) return nil;
 	if(self)

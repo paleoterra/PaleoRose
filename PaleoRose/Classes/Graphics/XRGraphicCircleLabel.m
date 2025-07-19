@@ -43,7 +43,7 @@ static NSString * const KVOKeyLabelFont = @"labelFont";
 
 @implementation XRGraphicCircleLabel
 
--(id)initCoreCircleWithController:(id<GraphicGeometrySource>)aController
+-(instancetype)initCoreCircleWithController:(id<GraphicGeometrySource>)aController
 {
 	if (!(self = [super initCoreCircleWithController:aController])) return nil;
 	if(self)
@@ -60,7 +60,7 @@ static NSString * const KVOKeyLabelFont = @"labelFont";
 	return self;
 }
 
--(id)initWithController:(id<GraphicGeometrySource>)controller
+-(instancetype)initWithController:(id<GraphicGeometrySource>)controller
 {
 	if (!(self = [super initWithController:controller])) return nil;
 	if(self)
