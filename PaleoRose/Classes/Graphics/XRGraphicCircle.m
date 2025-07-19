@@ -58,15 +58,13 @@ static NSString * const KVOKeyPercentSetting = @"percentSetting";
 }
 
 -(void)registerForKVO {
-    int i = 0;
     NSArray *keys = @[KVOKeyCountSetting, KVOKeyPercentSetting];
-    for(i=0;i<keys.count;i++) {
+    [keys enumerateObjectsUsingBlock:^(NSString * _Nonnull keyPath, NSUInteger idx, BOOL * _Nonnull stop) {
         [self addObserver:self
-               forKeyPath:keys[i]
-                  options:NSKeyValueObservingOptionNew |
-         NSKeyValueObservingOptionOld
+               forKeyPath:keyPath
+                  options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld)
                   context:NULL];
-    }
+    }];
 }
 
 -(void)setGeometryPercent:(float)percent {

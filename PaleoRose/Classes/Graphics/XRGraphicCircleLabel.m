@@ -75,15 +75,13 @@ static NSString * const KVOKeyLabelFont = @"labelFont";
 }
 
 -(void)registerForKVO {
-    int i = 0;
     NSArray *keys = @[KVOKeyLabelAngle, KVOKeyLabelFont];
-    for(i=0;i<keys.count;i++) {
+    [keys enumerateObjectsUsingBlock:^(NSString * _Nonnull keyPath, NSUInteger idx, BOOL * _Nonnull stop) {
         [self addObserver:self
-               forKeyPath:keys[i]
-                  options:NSKeyValueObservingOptionNew |
-         NSKeyValueObservingOptionOld
+               forKeyPath:keyPath
+                  options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld)
                   context:NULL];
-    }
+    }];
 }
 
 -(void)computeLabelText
