@@ -153,7 +153,7 @@
 	NSMutableDictionary *parentDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];
 
     NSDictionary *classDict = @{
-        XRGraphicKeyGraphicType : @"Petal",
+        XRGraphicKeyGraphicType : GraphicTypePetal,
         XRGraphicKeyPetalIncrement : [self stringFromInt: _petalIncrement],
         XRGraphicKeyMaxRadius      : [self stringFromFloat: _maxRadius],
         XRGraphicKeyPercent        : [self stringFromFloat: _percent],

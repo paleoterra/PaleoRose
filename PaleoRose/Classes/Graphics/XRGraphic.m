@@ -30,6 +30,8 @@
 #import "XRGeometryController.h"
 #import <math.h>
 
+static NSString * const KVOKeyLineWidth = @"lineWidth";
+
 @implementation XRGraphic
 
 -(instancetype)initWithController:(id<GraphicGeometrySource>)controller {
@@ -44,7 +46,7 @@
         _geometryController = controller;
 
         [self addObserver:self
-               forKeyPath:@"lineWidth"
+               forKeyPath: KVOKeyLineWidth
                   options:NSKeyValueObservingOptionNew |
          NSKeyValueObservingOptionOld
                   context:NULL];
@@ -124,7 +126,7 @@
 
 -(NSDictionary *)graphicSettings {
     return @{
-        XRGraphicKeyGraphicType : @"Graphic",
+        XRGraphicKeyGraphicType : GraphicTypeGraphic,
         XRGraphicKeyFillColor : self.fillColor,
         XRGraphicKeyStrokeColor : self.strokeColor,
         XRGraphicKeyLineWidth : [self stringFromFloat: self.lineWidth]
@@ -133,12 +135,11 @@
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
 
-    if ([keyPath isEqualToString:@"lineWidth"]) {
+    if ([keyPath isEqualToString: KVOKeyLineWidth]) {
         if(self.drawingPath)
             [self.drawingPath setLineWidth:self.lineWidth];
     }
 }
-
 
 // graphic settings helper methods
 

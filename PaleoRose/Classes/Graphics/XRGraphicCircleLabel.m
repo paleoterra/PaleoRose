@@ -30,6 +30,9 @@
 #import "XRGeometryController.h"
 #import "math.h"
 
+static NSString * const KVOKeyLabelAngle = @"labelAngle";
+static NSString * const KVOKeyLabelFont = @"labelFont";
+
 @interface XRGraphicCircleLabel()
 @property (nonatomic, strong, nullable) NSMutableAttributedString *label;
 @property (nonatomic, strong, nullable) NSAffineTransform *theTransform;
@@ -73,7 +76,7 @@
 
 -(void)registerForKVO {
     int i = 0;
-    NSArray *keys = @[@"labelAngle", @"labelFont"];
+    NSArray *keys = @[KVOKeyLabelAngle, KVOKeyLabelFont];
     for(i=0;i<keys.count;i++) {
         [self addObserver:self
                forKeyPath:keys[i]
@@ -181,7 +184,7 @@
 {
 	NSMutableDictionary *parentDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];
     NSDictionary *classDict = @{
-        XRGraphicKeyGraphicType : @"LabelCircle",
+        XRGraphicKeyGraphicType : GraphicTypeLabelCircle,
         XRGraphicKeyShowLabel : [self stringFromBool:_showLabel],
         XRGraphicKeyLabelAngle : [self stringFromFloat:_labelAngle],
         XRGraphicKeyLabel : _label.string,
@@ -197,7 +200,7 @@
                              ofObject:object
                                change:change
                               context:context];
-    if ([keyPath isEqualToString:@"labelAngle"] || ([keyPath isEqualToString:@"labelFont"])) {
+    if ([keyPath isEqualToString: KVOKeyLabelAngle] || ([keyPath isEqualToString: KVOKeyLabelFont])) {
         [self calculateGeometry];
     }
 }

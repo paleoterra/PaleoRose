@@ -111,7 +111,7 @@
 -(NSDictionary *)graphicSettings
 {
 	NSMutableDictionary *theDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];
-    theDict[XRGraphicKeyGraphicType] = @"Kite";
+    theDict[XRGraphicKeyGraphicType] = GraphicTypeKite;
 	return [NSDictionary dictionaryWithDictionary:theDict];
 }
 

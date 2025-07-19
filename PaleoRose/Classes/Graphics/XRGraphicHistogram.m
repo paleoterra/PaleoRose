@@ -91,7 +91,7 @@
 -(NSDictionary *)graphicSettings {
 	NSMutableDictionary *parentDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];
     NSDictionary *classDict = @{
-        XRGraphicKeyGraphicType : @"Histogram",
+        XRGraphicKeyGraphicType : GraphicTypeHistogram,
         XRGraphicKeyHistogramIncrement : [self stringFromInt: _histIncrement],
         XRGraphicKeyPercent : [self stringFromFloat: _percent],
         XRGraphicKeyCount : [self stringFromInt: _count]

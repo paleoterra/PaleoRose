@@ -30,39 +30,49 @@
 #import "GraphicGeometrySource.h"
 NS_ASSUME_NONNULL_BEGIN
 
-static const NSString * XRGraphicKeyGraphicType = @"GraphicType";
-static const NSString * XRGraphicKeyStrokeColor = @"_strokeColor";
-static const NSString * XRGraphicKeyFillColor = @"_fillColor";
-static const NSString * XRGraphicKeyLineWidth = @"_lineWidth";
+static NSString const * XRGraphicKeyGraphicType = @"GraphicType";
+static NSString const * XRGraphicKeyStrokeColor = @"_strokeColor";
+static NSString const * XRGraphicKeyFillColor = @"_fillColor";
+static NSString const * XRGraphicKeyLineWidth = @"_lineWidth";
 
-static const NSString * XRGraphicKeyMaxRadius = @"_maxRadius";
-static const NSString * XRGraphicKeyPetalIncrement = @"_petalIncrement";
-static const NSString * XRGraphicKeyAngleIncrement = @"_angleIncrement";
-static const NSString * XRGraphicKeyHistogramIncrement = @"_histIncrement";
-static const NSString * XRGraphicKeyDotSize = @"_dotSize";
-static const NSString * XRGraphicKeyPercent = @"_percent";
-static const NSString * XRGraphicKeyCount = @"_count";
-static const NSString * XRGraphicKeyTotalCount = @"_totalCount";
-static const NSString * XRGraphicKeyRelativePercent = @"_relativePercent";
-static const NSString * XRGraphicKeyAngleSetting = @"_angleSetting";
-static const NSString * XRGraphicKeyTickType = @"_tickType";
-static const NSString * XRGraphicKeyShowTick = @"_showTick";
-static const NSString * XRGraphicKeySpokeNumberAlignment = @"_spokeNumberAlign";
-static const NSString * XRGraphicKeySpokeNumberCompassPoint = @"_spokeNumberCompassPoint";
-static const NSString * XRGraphicKeySpokeNumberOrder = @"_spokeNumberOrder";
-static const NSString * XRGraphicKeyShowLabel = @"_showLabel";
-static const NSString * XRGraphicKeyLineLabel = @"_lineLabel";
-static const NSString * XRGraphicKeyCurrentFont = @"_currentFont";
-static const NSString * XRGraphicKeyLabelAngle = @"_labelAngle";
-static const NSString * XRGraphicKeyLabel = @"Label";
-static const NSString * XRGraphicKeyLabelFont = @"_labelFont";
-static const NSString * XRGraphicKeyIsCore = @"_isCore";
-static const NSString * XRGraphicKeyCountSetting = @"_countSetting";
-static const NSString * XRGraphicKeyPercentSetting = @"_percentSetting";
-static const NSString * XRGraphicKeyGeometryPercent = @"_geometryPercent";
-static const NSString * XRGraphicKeyIsGeometryPercent = @"_isGeometryPercent";
-static const NSString * XRGraphicKeyIsPercent = @"_isPercent";
-static const NSString * XRGraphicKeyIsFixedCount = @"_isFixedCount";
+static NSString const * XRGraphicKeyMaxRadius = @"_maxRadius";
+static NSString const * XRGraphicKeyPetalIncrement = @"_petalIncrement";
+static NSString const * XRGraphicKeyAngleIncrement = @"_angleIncrement";
+static NSString const * XRGraphicKeyHistogramIncrement = @"_histIncrement";
+static NSString const * XRGraphicKeyDotSize = @"_dotSize";
+static NSString const * XRGraphicKeyPercent = @"_percent";
+static NSString const * XRGraphicKeyCount = @"_count";
+static NSString const * XRGraphicKeyTotalCount = @"_totalCount";
+static NSString const * XRGraphicKeyRelativePercent = @"_relativePercent";
+static NSString const * XRGraphicKeyAngleSetting = @"_angleSetting";
+static NSString const * XRGraphicKeyTickType = @"_tickType";
+static NSString const * XRGraphicKeyShowTick = @"_showTick";
+static NSString const * XRGraphicKeySpokeNumberAlignment = @"_spokeNumberAlign";
+static NSString const * XRGraphicKeySpokeNumberCompassPoint = @"_spokeNumberCompassPoint";
+static NSString const * XRGraphicKeySpokeNumberOrder = @"_spokeNumberOrder";
+static NSString const * XRGraphicKeyShowLabel = @"_showLabel";
+static NSString const * XRGraphicKeyLineLabel = @"_lineLabel";
+static NSString const * XRGraphicKeyCurrentFont = @"_currentFont";
+static NSString const * XRGraphicKeyLabelAngle = @"_labelAngle";
+static NSString const * XRGraphicKeyLabel = @"Label";
+static NSString const * XRGraphicKeyLabelFont = @"_labelFont";
+static NSString const * XRGraphicKeyIsCore = @"_isCore";
+static NSString const * XRGraphicKeyCountSetting = @"_countSetting";
+static NSString const * XRGraphicKeyPercentSetting = @"_percentSetting";
+static NSString const * XRGraphicKeyGeometryPercent = @"_geometryPercent";
+static NSString const * XRGraphicKeyIsGeometryPercent = @"_isGeometryPercent";
+static NSString const * XRGraphicKeyIsPercent = @"_isPercent";
+static NSString const * XRGraphicKeyIsFixedCount = @"_isFixedCount";
+
+static NSString const * GraphicTypeGraphic = @"Graphic";
+static NSString const * GraphicTypeCircle = @"Circle";
+static NSString const * GraphicTypeLabelCircle = @"LabelCircle";
+static NSString const * GraphicTypeLine = @"Line";
+static NSString const * GraphicTypeKite = @"Kite";
+static NSString const * GraphicTypePetal = @"Petal";
+static NSString const * GraphicTypeDot = @"Dot";
+static NSString const * GraphicTypeHistogram = @"Histogram";
+static NSString const * GraphicTypeDotDeviation = @"DotDeviation";
 
 @class XRGeometryController;
 

@@ -29,6 +29,8 @@
 #import "XRGraphicDot.h"
 #import "XRGeometryController.h"
 
+static NSString * const KVOKeyDotSize = @"labelFont";
+
 @interface XRGraphicDot()
 @property (assign, nonatomic) int angleIncrement;
 @property (assign, nonatomic) int totalCount;
@@ -58,7 +60,7 @@
 }
 -(void)registerForKVO {
     [self addObserver:self
-           forKeyPath:@"dotSize"
+           forKeyPath:KVOKeyDotSize
               options:NSKeyValueObservingOptionNew |
      NSKeyValueObservingOptionOld
               context:NULL];
@@ -103,7 +105,7 @@
 -(NSDictionary *)graphicSettings {
     NSMutableDictionary *parentDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];
     NSDictionary *classDict = @{
-        XRGraphicKeyGraphicType : @"Dot",
+        XRGraphicKeyGraphicType : GraphicTypeDot,
         XRGraphicKeyAngleIncrement : [self stringFromInt: _angleIncrement],
         XRGraphicKeyTotalCount : [self stringFromInt: _totalCount],
         XRGraphicKeyCount : [self stringFromInt: _count],
@@ -118,7 +120,7 @@
                              ofObject:object
                                change:change
                               context:context];
-    if ([keyPath isEqualToString:@"dotSize"]) {
+    if ([keyPath isEqualToString: KVOKeyDotSize]) {
         [self calculateGeometry];
     }
 }

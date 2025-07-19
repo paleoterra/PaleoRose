@@ -6,13 +6,7 @@ import Testing
 @MainActor
 struct XRGraphicCircleTests {
 
-    private func buildController() -> MockGeometryController {
-        let controller = MockGeometryController()
-        controller.configureTestValues()
-        return controller
-    }
-
-    private func buildTestObject(controller: MockGeometryController) throws -> XRGraphicCircle {
+    private func buildTestObject(controller: GraphicGeometrySource) throws -> XRGraphicCircle {
         try #require(
             XRGraphicCircle(controller: controller),
             "Graphic circle should be initialized"
@@ -73,7 +67,7 @@ struct XRGraphicCircleTests {
     @Test("Initialize with controller should set default values")
     func initWithController() throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
 
         // When
         let circle = try buildTestObject(controller: controller)
@@ -99,7 +93,7 @@ struct XRGraphicCircleTests {
     @Test("Count should be settable and gettable")
     func count() throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
         let circle = try buildTestObject(controller: controller)
 
         let expectedCount: Int32 = 42
@@ -117,7 +111,7 @@ struct XRGraphicCircleTests {
     @Test("Percent should be settable and gettable")
     func percent() throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
         let circle = try buildTestObject(controller: controller)
         let expectedPercent: Float = 0.75
 
@@ -137,7 +131,7 @@ struct XRGraphicCircleTests {
     @Test("Geometry percent should be settable and gettable")
     func percentSetting() throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
         let circle = try buildTestObject(controller: controller)
         let testPercent: Float = 60.0
 
@@ -159,7 +153,7 @@ struct XRGraphicCircleTests {
     @Test("Fixed state should be updatable")
     func fixedState() throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
         let circle = try buildTestObject(controller: controller)
 
         // Test default value
@@ -174,112 +168,36 @@ struct XRGraphicCircleTests {
         #expect(!circle.isFixedCount, "Fixed state should be false after setting to false")
     }
 
-    //    // MARK: - Equality
+    // MARK: - Drawing
 
-    //    @Test("Equality should compare based on properties")
-    //    func equality() throws {
-    //        // Given
-    //        let controller1 = buildController()
-    //        let circle1 = try buildTestObject(controller: controller1)
-    //        let controller2 = buildController()
-    //        let circle2 = try buildTestObject(controller: controller2)
-    //
-    //        // Then
-    //        #expect(circle1 == circle2, "Circles with same properties should be equal")
-    //    }
-
-    //    @Test("Inequality should detect different properties")
-    //    func inequality() throws {
-    //        // Given
-    //        let controller1 = MockGeometryController()
-    //        controller1.configureTestValues()
-    //        let circle1 = try #require(
-    //            XRGraphicCircle(controller: controller1),
-    //            "Failed to initialize first circle"
-    //        )
-    //
-    //        let controller2 = MockGeometryController()
-    //        controller2.configureTestValues()
-    //        let circle2 = try #require(
-    //            XRGraphicCircle(controller: controller2),
-    //            "Failed to initialize second circle"
-    //        )
-    //        circle2.setCountSetting(99) // Different count
-    //
-    //        // Then
-    //        #expect(circle1 != circle2, "Circles with different properties should not be equal")
-    //    }
-    //
-    //    @Test("Equality check with nil should return false")
-    //    func isEqual_whenComparingToNil() throws {
-    //        // Given
-    //        let controller = MockGeometryController()
-    //        controller.configureTestValues()
-    //        let circle = try #require(
-    //            XRGraphicCircle(controller: controller),
-    //            "Failed to initialize circle"
-    //        )
-    //    }
-    //
-    //    // MARK: - Drawing
-
-    @Test("Drawing rect should return non-zero size when Is percent")
-    func drawingRect() throws {
+    @Test(
+        "Drawing rect should return non-zero size when Is percent",
+        arguments: [
+            (true, 100),
+            (false, 75)
+        ]
+    )
+    func drawingRect(settings: (isPercent: Bool, expectedSize: CGFloat)) throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource(isPercent: settings.isPercent)
         let circle = try buildTestObject(controller: controller)
-        controller.mockIsPercent = true
+        circle.percentSetting = 0.75
+        circle.countSetting = 100
+        controller.mockCircleRectCount = NSRect(x: 0, y: 0, width: 75, height: 75)
+        controller.mockCircleRectPercent = NSRect(x: 0, y: 0, width: 100, height: 100)
         circle.calculateGeometry()
         // When
         let drawingRect = circle.drawingRect()
         print(drawingRect)
         // Then
-        #expect(drawingRect.width > 0, "Width should be greater than 0")
-        #expect(drawingRect.height > 0, "Height should be greater than 0")
+        #expect(drawingRect.width.isApproximatelyEqual(to: settings.expectedSize), "Width should be \(settings.expectedSize)")
+        #expect(drawingRect.height.isApproximatelyEqual(to: settings.expectedSize), "Height should be \(settings.expectedSize)")
     }
-
-    @Test("Drawing rect should return non-zero size when not percent")
-    func drawingRectNotPercent() throws {
-        // Given
-        let controller = buildController()
-        let circle = try buildTestObject(controller: controller)
-        controller.mockIsPercent = false
-        circle.calculateGeometry()
-        // When
-        let drawingRect = circle.drawingRect()
-        print(drawingRect)
-        // Then
-        #expect(drawingRect.width > 0, "Width should be greater than 0")
-        #expect(drawingRect.height > 0, "Height should be greater than 0")
-    }
-
-    // MARK: - Hit Testing
-
-    //    @Test("Hit test should detect point inside circle")
-    //    func hitTest_whenPointIsInside() throws {
-    //        // Given
-    //        let controller = MockGeometryController()
-    //        controller.configureTestValues()
-    //        let circle = try #require(
-    //            XRGraphicCircle(controller: controller),
-    //            "Failed to initialize circle"
-    //        )
-    //
-    //        // Position the circle at (50,50) with radius 40
-    //        circle.setFrame(NSRect(x: 10, y: 10, width: 80, height: 80))
-    //        let insidePoint = NSPoint(x: 50, y: 50)
-    //
-    //        // When
-    //        let hitResult = circle.hitTest(insidePoint)
-    //
-    //        // Then
-    //        #expect(hitResult, "Should detect point inside circle")
-    //    }
 
     @Test("Hit test should not detect point outside circle")
     func hitTest_whenPointIsOutside() throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
         let circle = try buildTestObject(controller: controller)
         let outsidePoint = NSPoint(x: -10, y: -10)
 
@@ -293,7 +211,7 @@ struct XRGraphicCircleTests {
     @Test("Setting fill color should update the fill color")
     func setFillColor() throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
         let circle = try buildTestObject(controller: controller)
         let testColor = NSColor.red
 
@@ -310,7 +228,7 @@ struct XRGraphicCircleTests {
     @Test("Setting stroke color should update the stroke color")
     func setStrokeColor() throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
         let circle = try buildTestObject(controller: controller)
         let testColor = NSColor.blue
 
@@ -329,7 +247,7 @@ struct XRGraphicCircleTests {
     @Test("Draw rect should be callable")
     func drawRect() throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
         let circle = try buildTestObject(controller: controller)
         let testRect = NSRect(x: 0, y: 0, width: 100, height: 100)
 
@@ -343,38 +261,12 @@ struct XRGraphicCircleTests {
         circle.draw(testRect)
     }
 
-    // MARK: - Geometry Controller
-
-    //    @Test("Setting geometry controller should update internal controller")
-    //    func setGeometryController() throws {
-    //        // Given
-    //        let controller = MockGeometryController()
-    //        controller.configureTestValues()
-    //        let circle = try #require(
-    //            XRGraphicCircle(controller: controller),
-    //            "Failed to initialize circle"
-    //        )
-    //
-    //        let newController = MockGeometryController()
-    //        newController.configureTestValues()
-    //
-    //        // When
-    //        circle.setGeometryController(newController)
-    //
-    //        // Then - Verify controller was updated
-    //        // Note: Using value(forKey:) to access private property
-    //        let updatedController = try #require(
-    //            circle.value(forKey: "geometryController") as AnyObject?,
-    //            "Controller should be set"
-    //        )
-    //    }
-
     // MARK: - Core Initialization
 
     @Test("initCoreCircleWithController should initialize with default values")
     func initCoreCircleWithController() throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
 
         // When
         let circle = try #require(
@@ -393,7 +285,7 @@ struct XRGraphicCircleTests {
     @Test("percent should return correct value")
     func testPercent() throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
         let circle = try buildTestObject(controller: controller)
         let expectedPercent: Float = 75.5
 
@@ -412,7 +304,7 @@ struct XRGraphicCircleTests {
     @Test("graphicSettings should include correct default properties")
     func graphicSettingsWithDefaultValues() throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
         let circle = try buildTestObject(controller: controller)
         try CommonUtilities
             .compareGraphicSettings(
@@ -424,7 +316,7 @@ struct XRGraphicCircleTests {
     @Test("graphicSettings should include correct properties for set percent")
     func graphicSettingsWithSetPercentSettingsValues() throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
         let circle = try buildTestObject(controller: controller)
         circle.percentSetting = 75.5
         var expectedSettings = defaultGraphicSettings()
@@ -441,7 +333,7 @@ struct XRGraphicCircleTests {
     @Test("graphicSettings should include correct properties for set geometry percent")
     func graphicSettingsWithSetGeometryPercentValues() throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
         let circle = try buildTestObject(controller: controller)
         circle.setGeometryPercent(0.45)
 
@@ -458,7 +350,7 @@ struct XRGraphicCircleTests {
     @Test("graphicSettings should include correct properties for is fixed count")
     func graphicSettingsWithIsFixedValues() throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
         let circle = try buildTestObject(controller: controller)
         circle.isFixedCount = true
         var expectedSettings = defaultGraphicSettings()
@@ -482,7 +374,7 @@ struct XRGraphicCircleTests {
     )
     func testSetTransparency(values: (Float, Float)) throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
         let circle = try buildTestObject(controller: controller)
         let alpha: Float = values.0
         let expectedAlpha: Float = values.1
@@ -508,7 +400,7 @@ struct XRGraphicCircleTests {
     @Test("setTransparency should handle nil colors gracefully")
     func testSetTransparencyWithNilColors() throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
         let circle = try buildTestObject(controller: controller)
         let testAlpha: Float = 0.5
 
@@ -533,7 +425,7 @@ struct XRGraphicCircleTests {
     @Test("setDrawsFill should update fill drawing state")
     func testSetDrawsFill() throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
         let circle = try buildTestObject(controller: controller)
 
         // When - Set to true
@@ -560,7 +452,7 @@ struct XRGraphicCircleTests {
     @Test("setLineColor should update both stroke and fill colors")
     func testSetLineAndFillColor() throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
         let circle = try buildTestObject(controller: controller)
         let testStrokeColor = NSColor(red: 0.2, green: 0.4, blue: 0.6, alpha: 0.8)
         let testFillColor = NSColor(red: 0.7, green: 0.5, blue: 0.3, alpha: 0.9)
@@ -580,7 +472,7 @@ struct XRGraphicCircleTests {
     @Test("setLineColor with nil parameters should use default colors")
     func testSetLineColorWithNilParameters() throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
         let circle = try buildTestObject(controller: controller)
 
         // Set custom colors first

@@ -29,6 +29,14 @@
 #import "XRGraphicLine.h"
 #import "XRGeometryController.h"
 
+static NSString * const KVOKeyTickType = @"tickType";
+static NSString * const KVOKeyShowTick = @"showTick";
+static NSString * const KVOKeyFont = @"font";
+static NSString * const KVOKeySpokeAngle = @"spokeAngle";
+static NSString * const KVOKeySpokePointOnly = @"spokePointOnly";
+static NSString * const KVOKeySpokeNumberOrder = @"spokeNumberOrder";
+static NSString * const KVOKeySpokeNumberCompassPoint = @"spokeNumberCompassPoint";
+
 @interface XRGraphicLine()
 
 @property (readwrite) float relativePercent;
@@ -62,7 +70,8 @@
 
 -(void)registerForKVO {
     int i = 0;
-    NSArray *keys = @[@"tickType", @"showTick", @"font", @"spokeAngle", @"spokePointOnly", @"spokeNumberOrder", @"spokeNumberCompassPoint"];
+    NSArray *keys = @[KVOKeyTickType, KVOKeyShowTick, KVOKeyFont, KVOKeySpokeAngle, 
+                     KVOKeySpokePointOnly, KVOKeySpokeNumberOrder, KVOKeySpokeNumberCompassPoint];
     for(i=0;i<keys.count;i++) {
         [self addObserver:self
                forKeyPath:keys[i]
@@ -274,7 +283,7 @@
 -(NSDictionary *)graphicSettings {
 	NSMutableDictionary *parentDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];
     NSDictionary *classDict = @{
-        XRGraphicKeyGraphicType            : @"Line",
+        XRGraphicKeyGraphicType            : GraphicTypeLine,
         XRGraphicKeyRelativePercent        : [self stringFromFloat:  _relativePercent],
         XRGraphicKeyAngleSetting           : [self stringFromFloat: self.spokeAngle],
         XRGraphicKeyTickType               : [self stringFromInt: _tickType],
@@ -296,9 +305,10 @@
                              ofObject:object
                                change:change
                               context:context];
-    if ([keyPath isEqualToString:@"tickType"] || [keyPath isEqualToString:@"showTick"] || [keyPath isEqualToString:@"font"] ) {
+    if ([keyPath isEqualToString: KVOKeyTickType] || [keyPath isEqualToString: KVOKeyShowTick] || [keyPath isEqualToString: KVOKeyFont]) {
         [self calculateGeometry];
-    } else if ([keyPath isEqualToString:@"spokeAngle"] || [keyPath isEqualToString:@"spokePointOnly"] || [keyPath isEqualToString:@"spokeNumberCompassPoint"] || [keyPath isEqualToString:@"spokeNumberOrder"]) {
+    } else if ([keyPath isEqualToString: KVOKeySpokeAngle] || [keyPath isEqualToString: KVOKeySpokePointOnly] ||
+              [keyPath isEqualToString: KVOKeySpokeNumberCompassPoint] || [keyPath isEqualToString: KVOKeySpokeNumberOrder]) {
         [self setLineLabel];
         [self calculateGeometry];
     }

@@ -29,6 +29,9 @@
 #import "XRGraphicCircle.h"
 #import "XRGeometryController.h"
 
+static NSString * const KVOKeyCountSetting = @"countSetting";
+static NSString * const KVOKeyPercentSetting = @"percentSetting";
+
 @implementation XRGraphicCircle
 
 -(instancetype)initWithController:(id<GraphicGeometrySource>)controller {
@@ -56,7 +59,7 @@
 
 -(void)registerForKVO {
     int i = 0;
-    NSArray *keys = @[@"countSetting", @"percentSetting"];
+    NSArray *keys = @[KVOKeyCountSetting, KVOKeyPercentSetting];
     for(i=0;i<keys.count;i++) {
         [self addObserver:self
                forKeyPath:keys[i]
@@ -86,7 +89,7 @@
 -(NSDictionary *)graphicSettings {
     NSMutableDictionary *parentDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];
     NSDictionary *classDict = @{
-        XRGraphicKeyGraphicType : @"Circle",
+        XRGraphicKeyGraphicType : GraphicTypeCircle,
         XRGraphicKeyCountSetting : [self stringFromInt:self.countSetting],
         XRGraphicKeyPercentSetting : [self stringFromFloat:_percentSetting],
         XRGraphicKeyGeometryPercent : [self stringFromFloat:_percentSetting],
@@ -103,11 +106,11 @@
                              ofObject:object
                                change:change
                               context:context];
-    if ([keyPath isEqualToString:@"countSetting"]) {
+    if ([keyPath isEqualToString: KVOKeyCountSetting]) {
         _isPercent = NO;
         self.isGeometryPercent = NO;
         [self calculateGeometry];
-    } else if ([keyPath isEqualToString:@"percentSetting"]) {
+    } else if ([keyPath isEqualToString: KVOKeyPercentSetting]) {
         _isPercent = YES;
         self.isGeometryPercent = NO;
         [self calculateGeometry];

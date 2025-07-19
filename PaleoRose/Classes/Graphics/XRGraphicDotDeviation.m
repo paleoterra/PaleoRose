@@ -187,7 +187,7 @@
 	NSLog(@"XRGraphicDotDeviation:graphicSettings");
 #endif
 	NSMutableDictionary *theDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];
-    [theDict setObject:@"DotDeviation" forKey:@"GraphicType"];
+    [theDict setObject: GraphicTypeDotDeviation forKey:@"GraphicType"];
 
 	[theDict setObject:[NSString stringWithFormat:@"%i",_angleIncrement] forKey:@"_angleIncrement"];
 	[theDict setObject:[NSString stringWithFormat:@"%i",_totalCount] forKey:@"_totalCount"];

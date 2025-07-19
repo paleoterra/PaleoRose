@@ -22,6 +22,8 @@ class MockGraphicGeometrySource: NSObject, GraphicGeometrySource {
     var mockGeometryMaxCount: Int32 = 0
     var mockGeometryMaxPercent: Float = 0.0
     var mockHollowCoreSize: Float = 0.0
+    var mockCircleRectPercent: NSRect = .zero
+    var mockCircleRectCount: NSRect = .zero
 
     // MARK: - GraphicGeometrySource Protocol Conformance
 
@@ -74,16 +76,12 @@ class MockGraphicGeometrySource: NSObject, GraphicGeometrySource {
 
     @objc
     func circleRect(forCount count: Int32) -> NSRect {
-        let radius = radius(ofCount: count)
-        let size = radius * 2.0
-        return NSRect(x: 0, y: 0, width: size, height: size)
+        mockCircleRectCount
     }
 
     @objc
     func circleRect(forPercent percent: Float) -> NSRect {
-        let radius = radius(ofRelativePercent: Double(percent))
-        let size = radius * 2.0
-        return NSRect(x: 0, y: 0, width: size, height: size)
+        mockCircleRectPercent
     }
 
     @objc
@@ -127,8 +125,8 @@ class MockGraphicGeometrySource: NSObject, GraphicGeometrySource {
     }
 
     @objc
-    convenience init(
-        drawingBounds: NSRect = .zero,
+    init(
+        drawingBounds: NSRect = NSRect(x: 0, y: 0, width: 100, height: 100),
         isPercent: Bool = false,
         isEqualArea: Bool = false,
         startingAngle: Float = 0.0,
@@ -137,7 +135,6 @@ class MockGraphicGeometrySource: NSObject, GraphicGeometrySource {
         maxPercent: Float = 0.0,
         hollowCore: Float = 0.0
     ) {
-        self.init()
         mockDrawingBounds = drawingBounds
         mockIsPercent = isPercent
         mockIsEqualArea = isEqualArea
