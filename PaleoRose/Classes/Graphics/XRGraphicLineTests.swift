@@ -7,11 +7,7 @@ import Testing
 struct XRGraphicLineTests {
     // MARK: - Test Setup
 
-    private func buildController() -> MockGeometryController {
-        MockGeometryController()
-    }
-
-    private func buildTestObject(controller: XRGeometryController) throws -> XRGraphicLine {
+    private func buildTestObject(controller: MockGraphicGeometrySource) throws -> XRGraphicLine {
         XRGraphicLine(controller: controller)
     }
 
@@ -39,7 +35,7 @@ struct XRGraphicLineTests {
     @Test("initWithController should initialize with default values")
     func testInitWithController() throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
 
         // When
         let line = try buildTestObject(controller: controller)
@@ -59,7 +55,7 @@ struct XRGraphicLineTests {
     @Test("setLineWidth should update the line width")
     func testSetLineWidth() throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
         let line = try buildTestObject(controller: controller)
         let testWidth: Float = 2.5
 
@@ -75,7 +71,7 @@ struct XRGraphicLineTests {
 
     @Test("Spoke angle accessors")
     func spokeAngleTest() throws {
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
         let line = try buildTestObject(controller: controller)
         let testAngle: Float = 180.0
 
@@ -106,7 +102,7 @@ struct XRGraphicLineTests {
         ]
     )
     func testSetTickType(tickType: Int32) throws {
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
         let line = try buildTestObject(controller: controller)
         var expectedSettings = try defaultSettings()
         expectedSettings["_tickType"] = "\(tickType)"
@@ -124,7 +120,7 @@ struct XRGraphicLineTests {
         ]
     )
     func testShowTick(showTick: Bool) throws {
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
         let line = try buildTestObject(controller: controller)
         var expectedSettings = try defaultSettings()
         expectedSettings["_showTick"] = showTick ? "YES" : "NO"
@@ -142,7 +138,7 @@ struct XRGraphicLineTests {
         ]
     )
     func testSetShowLabel(showLabel: Bool) throws {
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
         let line = try buildTestObject(controller: controller)
         var expectedSettings = try defaultSettings()
         expectedSettings["_showLabel"] = showLabel ? "YES" : "NO"
@@ -162,7 +158,7 @@ struct XRGraphicLineTests {
         ]
     )
     func testSetShowLabel(fontInfo: (name: String, size: CGFloat)) throws {
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
         let line = try buildTestObject(controller: controller)
         let expectedSettings = try defaultSettings()
         let font = try #require(NSFont(name: fontInfo.name, size: fontInfo.size))

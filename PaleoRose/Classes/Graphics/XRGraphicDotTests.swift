@@ -14,15 +14,11 @@ struct XRGraphicDotTests {
         let totalCount: Int32
     }
 
-    private func buildController() -> MockGeometryController {
-        MockGeometryController()
-    }
-
-    private func buildBasicTestObject(controller: XRGeometryController) throws -> XRGraphicDot {
+    private func buildBasicTestObject(controller: MockGraphicGeometrySource) throws -> XRGraphicDot {
         XRGraphicDot(controller: controller)
     }
 
-    private func buildTestObject(controller: XRGeometryController, forIncrement: Int32 = 0, valueCount: Int32 = 0, totalCount: Int32 = 0) throws -> XRGraphicDot {
+    private func buildTestObject(controller: MockGraphicGeometrySource, forIncrement: Int32 = 0, valueCount: Int32 = 0, totalCount: Int32 = 0) throws -> XRGraphicDot {
         try #require(XRGraphicDot(
             controller: controller,
             forIncrement: forIncrement,
@@ -49,7 +45,7 @@ struct XRGraphicDotTests {
     @Test("initWithController basic version should initialize with default values")
     func testBasicInitWithController() throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
 
         // When
         let dot = try buildBasicTestObject(controller: controller)
@@ -70,7 +66,7 @@ struct XRGraphicDotTests {
           ])
     func testInitWithController(params: TestConfiguration) throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
 
         // When
         let dot = try buildTestObject(
@@ -94,7 +90,7 @@ struct XRGraphicDotTests {
 
     @Test("Test setting and getting dot size")
     func testDotSize() throws {
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
         let dot = try buildBasicTestObject(controller: controller)
         let newDotSize: Float = 10
         dot.dotSize = newDotSize

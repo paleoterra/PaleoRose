@@ -43,11 +43,9 @@ static NSString * const KVOKeyLabelFont = @"labelFont";
 
 @implementation XRGraphicCircleLabel
 
--(instancetype)initCoreCircleWithController:(id<GraphicGeometrySource>)aController
-{
+-(instancetype)initCoreCircleWithController:(id<GraphicGeometrySource>)aController {
 	if (!(self = [super initCoreCircleWithController:aController])) return nil;
-	if(self)
-	{
+	if(self) {
 		self.showLabel = NO;
 		_labelPoint = NSMakePoint(0.0,0.0);
 		self.isPercent = [aController isPercent];
@@ -60,11 +58,9 @@ static NSString * const KVOKeyLabelFont = @"labelFont";
 	return self;
 }
 
--(instancetype)initWithController:(id<GraphicGeometrySource>)controller
-{
+-(instancetype)initWithController:(id<GraphicGeometrySource>)controller {
 	if (!(self = [super initWithController:controller])) return nil;
-	if(self)
-	{
+	if(self) {
 		_showLabel = YES;
 		_isCore = NO;
 		_labelFont = [NSFont fontWithName:@"Arial-Black" size:12];
@@ -84,9 +80,7 @@ static NSString * const KVOKeyLabelFont = @"labelFont";
     }];
 }
 
--(void)computeLabelText
-{
-
+-(void)computeLabelText {
 	NSRange aRange;
 	aRange.location = 0;
     self.isPercent = [self.geometryController isPercent];
@@ -103,52 +97,72 @@ static NSString * const KVOKeyLabelFont = @"labelFont";
 	if(_labelFont)
 		[_label setAttributes:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:_labelFont, self.strokeColor,nil]
 														  forKeys:[NSArray arrayWithObjects:NSFontAttributeName,NSForegroundColorAttributeName,nil]] range:aRange];
-	
-	//NSLog([_label description]);
 }
 
--(void)computeTransform
-{
+-(void)computeTransform {
 	self.theTransform = [NSAffineTransform transform];
 	[self.theTransform rotateByDegrees:360.0-_labelAngle];
 }
 
+-(BOOL)drawClosedCircle {
+    return !_showLabel || _isCore;
+}
+
+-(BOOL)circleBasedOnPercent {
+    return [self.geometryController isPercent] || self.isFixedCount;
+}
+
 -(void)calculateGeometry
 {
+    NSLog(@"calculateGeometry called with showLabel: %d, isCore: %d, isFixedCount: %d, isPercent: %d", 
+          _showLabel, _isCore, self.isFixedCount, [self.geometryController isPercent]);
+          
 	[self computeLabelText];
 	[self computeTransform];
-	if((!_showLabel)||(_isCore))
-	{
-        if((([self.geometryController isPercent])||(self.isFixedCount))||((![self.geometryController isPercent])&&(self.isFixedCount)))
-		{
+    
+    BOOL drawClosed = [self drawClosedCircle];
+    NSLog(@"drawClosedCircle: %d", drawClosed);
+    
+    if(drawClosed) {
+        BOOL usePercent = [self circleBasedOnPercent];
+        NSLog(@"Using %@ method for closed circle", usePercent ? @"percent" : @"count");
+        
+        if(usePercent) {
+            NSLog(@"Calling circleRectForPercent: %f", self.percentSetting);
             self.drawingPath = [NSBezierPath bezierPathWithOvalInRect:[self.geometryController circleRectForPercent:self.percentSetting]];
 		}
-		else
-		{
+		else {
+            NSLog(@"Calling circleRectForCount: %d", self.countSetting);
             self.drawingPath = [NSBezierPath bezierPathWithOvalInRect:[self.geometryController circleRectForCount:self.countSetting]];
 		}
 	}
-	else
-	{
-		float radius,angle;
+	else {
+		float radius, angle;
+        BOOL usePercent = [self circleBasedOnPercent];
+        NSLog(@"Using %@ method for open arc", usePercent ? @"percent" : @"count");
 
-        if((([self.geometryController isPercent])||(self.isFixedCount))||((![self.geometryController isPercent])&&(self.isFixedCount)))
+        if(usePercent) {
+            NSLog(@"Calling radiusOfPercentValue: %f", self.percentSetting);
             radius = [self.geometryController radiusOfPercentValue:self.percentSetting];
-		else
+        }
+		else {
+            NSLog(@"Calling radiusOfCount: %d", self.countSetting);
             radius = [self.geometryController radiusOfCount:self.countSetting];
+        }
+        
         angle = [self.geometryController degreesFromRadians:atan((0.52*[_label size].width)/radius)];
+        NSLog(@"Calculated angle: %f", angle);
+        
 		self.drawingPath = [NSBezierPath bezierPath];
 		[self.drawingPath appendBezierPathWithArcWithCenter:NSMakePoint(0.0,0.0) radius:radius startAngle:90+angle endAngle:90-angle];
 		_labelPoint = NSMakePoint(0 - (0.5*[_label size].width),radius - (0.5*[_label size].height));
-
-
-				
+        
+        NSLog(@"Created arc with radius: %f, startAngle: %f, endAngle: %f", radius, 90+angle, 90-angle);
 	}
 	[self.drawingPath setLineWidth:self.lineWidth];
 }
 
--(void)drawRect:(NSRect)aRect
-{
+-(void)drawRect:(NSRect)aRect {
     [self computeLabelText];
     if(NSIntersectsRect(aRect,[self.drawingPath bounds]))
     {  
@@ -172,14 +186,12 @@ static NSString * const KVOKeyLabelFont = @"labelFont";
     }
 }
 
--(void)setGeometryPercent:(float)percent
-{
+-(void)setGeometryPercent:(float)percent {
     self.percentSetting = percent*[self.geometryController geometryMaxPercent];
 	[self calculateGeometry];
 }
 
--(NSDictionary *)graphicSettings
-{
+-(NSDictionary *)graphicSettings {
 	NSMutableDictionary *parentDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];
     NSDictionary *classDict = @{
         XRGraphicKeyGraphicType : GraphicTypeLabelCircle,

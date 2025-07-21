@@ -38,11 +38,9 @@
 
 @implementation XRGraphicKite
 
--(instancetype)initWithController:(id<GraphicGeometrySource>)controller withAngles:(NSArray *)angles forValues:(NSArray *)values
-{
+-(instancetype)initWithController:(id<GraphicGeometrySource>)controller withAngles:(NSArray *)angles forValues:(NSArray *)values {
 	if (!(self = [super initWithController:controller])) return nil;
-	if(self)
-	{
+	if(self) {
         self.angles = angles;
         self.values = values;
 		self.drawsFill = YES;
@@ -58,15 +56,13 @@
 	NSPoint aPoint,targetPoint;
 	float radius;
 	self.drawingPath = [NSBezierPath bezierPath];
-	if([self.geometryController isPercent])
-	{
+	if([self.geometryController isPercent]) {
 		radius = [self.geometryController radiusOfPercentValue:[[_values lastObject] doubleValue]];
 		aPoint.x = 0.0;
 		aPoint.y = radius;
 		targetPoint = [self.geometryController rotationOfPoint:aPoint byAngle:[[_angles lastObject] doubleValue]];
 		[self.drawingPath moveToPoint:targetPoint];
-		for(int i=0;i<count;i++)
-		{
+		for(int i=0;i<count;i++) {
 			//NSLog(@"value: %f angle %f", [[_values objectAtIndex:i] floatValue],[[_angles objectAtIndex:i] floatValue]);
 			radius = [self.geometryController radiusOfPercentValue:[[_values objectAtIndex:i] doubleValue]];
 			aPoint.x = 0.0;
@@ -74,18 +70,15 @@
 			targetPoint = [self.geometryController rotationOfPoint:aPoint byAngle:[[_angles objectAtIndex:i] doubleValue]];
 			[self.drawingPath lineToPoint:targetPoint];
 		}
-		
 	}
-	else
-	{
+	else {
 		radius = [self.geometryController radiusOfCount:[[_values lastObject] doubleValue]];
 		aPoint.x = 0.0;
 		aPoint.y = radius;
 		targetPoint = [self.geometryController rotationOfPoint:aPoint byAngle:[[_angles lastObject] doubleValue]];
 		[self.drawingPath moveToPoint:targetPoint];
 
-		for(int i=0;i<count;i++)
-		{
+		for(int i=0;i<count;i++) {
 			radius = [self.geometryController radiusOfCount:[[_values objectAtIndex:i] intValue]];
 			aPoint.x = 0.0;
 			aPoint.y = radius;
@@ -94,8 +87,7 @@
 			
 		}
 	}
-	if([self.geometryController hollowCoreSize]>0.0)
-	{
+	if([self.geometryController hollowCoreSize]>0.0) {
 		NSRect aRect;
 		NSPoint centroid = NSMakePoint(0.0,0.0);
 		if([self.geometryController isPercent])
@@ -108,8 +100,7 @@
 	}
 }
 
--(NSDictionary *)graphicSettings
-{
+-(NSDictionary *)graphicSettings {
 	NSMutableDictionary *theDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];
     theDict[XRGraphicKeyGraphicType] = GraphicTypeKite;
 	return [NSDictionary dictionaryWithDictionary:theDict];

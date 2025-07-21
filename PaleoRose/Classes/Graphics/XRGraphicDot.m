@@ -66,8 +66,7 @@ static NSString * const KVOKeyDotSize = @"labelFont";
               context:NULL];
 }
 
--(void)calculateGeometry
-{
+-(void)calculateGeometry {
     float radius;
     float startAngle = [self.geometryController startingAngle];
     float step = [self.geometryController sectorSize];
@@ -76,10 +75,8 @@ static NSString * const KVOKeyDotSize = @"labelFont";
     NSPoint aPoint;
     self.drawingPath = [[NSBezierPath alloc] init];
     aRect.size = NSMakeSize(self.dotSize,self.dotSize);
-    if([self.geometryController isPercent])
-    {
-        for(int i=0;i<_count;i++)
-        {
+    if([self.geometryController isPercent]) {
+        for(int i=0;i<_count;i++) {
             radius = [self.geometryController radiusOfPercentValue:(float)(i+1)/(float)_totalCount];
             aPoint = NSMakePoint(0.0,radius);
             aPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle];
@@ -88,10 +85,8 @@ static NSString * const KVOKeyDotSize = @"labelFont";
             [self.drawingPath appendBezierPathWithOvalInRect:aRect];
         }
     }
-    else
-    {
-        for(int i=0;i<_count;i++)
-        {
+    else {
+        for(int i=0;i<_count;i++) {
             radius = [self.geometryController radiusOfCount:i];
             aPoint = NSMakePoint(0.0,radius);
             aPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle];

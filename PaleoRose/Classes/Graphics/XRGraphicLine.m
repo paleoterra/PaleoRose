@@ -80,9 +80,7 @@ static NSString * const KVOKeySpokeNumberCompassPoint = @"spokeNumberCompassPoin
 
 -(void)calculateGeometry {
 	float radius;
-
 	NSPoint aPoint;
-
 	aPoint = NSMakePoint(0.0,0.0);
 	radius = [self.geometryController radiusOfRelativePercent:0.0];
 	aPoint.y = radius;

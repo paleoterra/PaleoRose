@@ -6,30 +6,26 @@
 //
 
 import AppKit
-import Numerics
 @testable import PaleoRose
 import Testing
 
-@MainActor
+// swiftlint:disable line_length file_length type_body_length
 struct XRGraphicCircleLabelTests {
     // MARK: - Test Setup
 
-    private func buildController() -> MockGeometryController {
-        let controller = MockGeometryController()
-        controller.configureTestValues()
-        return controller
-    }
-
-    private func buildTestObject(controller: MockGeometryController) throws -> XRGraphicCircleLabel {
+    private func buildTestObject(controller: GraphicGeometrySource) throws -> XRGraphicCircleLabel {
         try #require(
             XRGraphicCircleLabel(controller: controller),
             "Graphic circle label should be initialized"
         )
     }
 
-    private func buildCoreTestObject(controller: MockGeometryController) throws -> XRGraphicCircleLabel {
+    private func buildCoreTestObject(controller: GraphicGeometrySource) throws -> XRGraphicCircleLabel {
         let label = try buildTestObject(controller: controller)
+        // For core circles, we want to hide the label and mark it as a core circle
         label.showLabel = false
+        // Set the private _isCore ivar to true
+        label.setValue(true, forKey: "_isCore")
         return label
     }
 
@@ -58,7 +54,7 @@ struct XRGraphicCircleLabelTests {
     @Test("initWithController should initialize with default values")
     func testInitWithController() throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
 
         // When
         let label = try buildTestObject(controller: controller)
@@ -80,7 +76,7 @@ struct XRGraphicCircleLabelTests {
     @Test("initCoreCircleWithController should initialize core label with default values")
     func testInitCoreCircleWithController() throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
 
         // When
         let label = try #require(XRGraphicCircleLabel(coreCircleWithController: controller))
@@ -112,7 +108,7 @@ struct XRGraphicCircleLabelTests {
     @Test("setShow should update showLabel value")
     func testSetShow() throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
         let label = try buildTestObject(controller: controller)
 
         // When - Set to false
@@ -131,7 +127,7 @@ struct XRGraphicCircleLabelTests {
     @Test("setLabelAngle should update label angle and trigger geometry update")
     func testSetLabelAngle() throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
         let label = try buildTestObject(controller: controller)
         let testAngle: Float = 45.0
 
@@ -148,7 +144,7 @@ struct XRGraphicCircleLabelTests {
     @Test("setFont should update font and trigger geometry update")
     func testSetFont() throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
         let label = try buildTestObject(controller: controller)
         let newFont = NSFont.systemFont(ofSize: 14.0)
 
@@ -163,27 +159,12 @@ struct XRGraphicCircleLabelTests {
         )
     }
 
-    @Test("calculateGeometry should compute correct geometry for core label")
-    func testCalculateGeometryCore() throws {
-        // Given
-        let controller = buildController()
-        let label = try buildCoreTestObject(controller: controller)
-
-        // When
-        label.calculateGeometry()
-
-        // Then - Verify the drawing path is created
-        let drawingRect = label.drawingRect()
-        #expect(drawingRect.width > 0, "Drawing rect width should be greater than 0")
-        #expect(drawingRect.height > 0, "Drawing rect height should be greater than 0")
-    }
-
     // MARK: - Graphic Settings Tests
 
     @Test("graphicSettings should return correct settings dictionary")
     func testGraphicSettings() throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
         let label = try buildTestObject(controller: controller)
 
         // Configure some custom values
@@ -211,7 +192,7 @@ struct XRGraphicCircleLabelTests {
     @Test("computeLabelText should generate correct label for percent mode")
     func testComputeLabelTextPercentMode() throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
         controller.mockIsPercent = true
         let label = try buildTestObject(controller: controller)
         label.percentSetting = 0.5 // 50%
@@ -227,7 +208,7 @@ struct XRGraphicCircleLabelTests {
     @Test("computeLabelText should generate correct label for count mode")
     func testComputeLabelTextCountMode() throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
         controller.mockIsPercent = false
         let label = try buildTestObject(controller: controller)
         label.countSetting = 42
@@ -243,7 +224,7 @@ struct XRGraphicCircleLabelTests {
     @Test("computeLabelText should generate correct label for fixed count mode")
     func testComputeLabelTextFixCountMode() throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
         controller.mockIsPercent = false
         controller.mockGeometryMaxCount = 100
         let label = try buildTestObject(controller: controller)
@@ -263,7 +244,7 @@ struct XRGraphicCircleLabelTests {
     @Test("computeTransform should create correct transform for label angle")
     func testComputeTransform() throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
         let label = try buildTestObject(controller: controller)
         let testAngle: Float = 90.0
         label.labelAngle = testAngle
@@ -280,7 +261,8 @@ struct XRGraphicCircleLabelTests {
 
     @Test("Set geometry percent")
     func setGeometryPercent() throws {
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
+        controller.mockGeometryMaxPercent = 100.0
         let label = try buildTestObject(controller: controller)
 
         label.setGeometryPercent(0.7)
@@ -299,7 +281,7 @@ struct XRGraphicCircleLabelTests {
 
     @Test("Show label to NO")
     func testShowLabelToNo() throws {
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
         let label = try buildTestObject(controller: controller)
 
         label.showLabel = false
@@ -315,7 +297,254 @@ struct XRGraphicCircleLabelTests {
                 expected: expectedSettings
             )
     }
+
+    // MARK: - Core Circle Tests
+
+    @Test("Core circle in percent mode should use circleRect(forPercent:)")
+    func testCoreCirclePercentMode() throws {
+        // Given
+        let controller = MockGraphicGeometrySource()
+        controller.mockIsPercent = true
+        controller.mockCircleRectPercent = NSRect(x: 0, y: 0, width: 100, height: 100)
+
+        let label = try buildCoreTestObject(controller: controller)
+        label.showLabel = true
+
+        // When
+        label.calculateGeometry()
+
+        // Then
+
+        verifyCalculateGeometryCalls(
+            controller: controller,
+            circleRectPercent: true
+        )
+
+        try verifyDrawingPath(for: label, isCore: true)
+    }
+
+    @Test("Core circle in count mode should use circleRect(forCount:)")
+    func testCoreCircleCountMode() throws {
+        // Given
+        let controller = MockGraphicGeometrySource()
+        controller.mockIsPercent = false
+        controller.mockCircleRectCount = NSRect(x: 0, y: 0, width: 100, height: 100)
+
+        let label = try buildCoreTestObject(controller: controller)
+        label.showLabel = true
+
+        // When
+        label.calculateGeometry()
+
+        // Then
+        verifyCalculateGeometryCalls(
+            controller: controller,
+            circleRectForCount: true
+        )
+
+        try verifyDrawingPath(for: label, isCore: true)
+    }
+
+    // MARK: - Non-Core Circle Tests
+
+    @Test("Non-core circle with showLabel in percent mode should use radius methods")
+    func testNonCoreCircleWithLabelPercentMode() throws {
+        // Given
+        let controller = MockGraphicGeometrySource()
+        controller.mockIsPercent = true
+        controller.mockGeometryMaxPercent = 100.0
+
+        let label = try buildTestObject(controller: controller)
+        label.showLabel = true
+        label.isFixedCount = false
+        label.percentSetting = 0.7
+
+        // When
+        label.calculateGeometry()
+
+        // Then
+
+        verifyCalculateGeometryCalls(
+            controller: controller,
+            radiusPercentValue: true
+        )
+
+        try verifyDrawingPath(for: label, isCore: false)
+
+        // Verify label properties are set
+        #expect(label.value(forKey: "_label") != nil, "Label should be set when showLabel is true")
+        #expect(label.value(forKey: "_theTransform") != nil, "Transform should be set when showLabel is true")
+    }
+
+    @Test("Non-core circle with showLabel in count mode should use radius methods")
+    func testNonCoreCircleWithLabelCountMode() throws {
+        // Given
+        let controller = MockGraphicGeometrySource()
+        controller.mockIsPercent = false
+        controller.mockGeometryMaxCount = 100
+
+        let label = try buildTestObject(controller: controller)
+        label.showLabel = true
+        label.isFixedCount = false
+        label.countSetting = 25
+
+        // When
+        label.calculateGeometry()
+
+        // Then
+        verifyCalculateGeometryCalls(
+            controller: controller,
+            radiusForCount: true
+        )
+
+        try verifyDrawingPath(for: label, isCore: false)
+
+        // Verify label properties are set
+        #expect(label.value(forKey: "_label") != nil, "Label should be set when showLabel is true")
+        #expect(label.value(forKey: "_theTransform") != nil, "Transform should be set when showLabel is true")
+    }
+
+    @Test("Non-core circle without showLabel in percent mode should use circleRect")
+    func testNonCoreCircleWithoutLabelPercentMode() throws {
+        // Given
+        let controller = MockGraphicGeometrySource()
+        controller.mockIsPercent = true
+        controller.mockCircleRectPercent = NSRect(x: 0, y: 0, width: 100, height: 100)
+
+        let label = try buildTestObject(controller: controller)
+        label.showLabel = false
+
+        // When
+        label.calculateGeometry()
+
+        // Then
+
+        verifyCalculateGeometryCalls(
+            controller: controller,
+            circleRectPercent: true
+        )
+
+        try verifyDrawingPath(for: label, isCore: false)
+    }
+
+    @Test("Non-core circle without showLabel in count mode should use circleRect")
+    func testNonCoreCircleWithoutLabelCountMode() throws {
+        // Given
+        let controller = MockGraphicGeometrySource()
+        controller.mockIsPercent = false
+        controller.mockCircleRectCount = NSRect(x: 0, y: 0, width: 100, height: 100)
+
+        let label = try buildTestObject(controller: controller)
+        label.showLabel = false
+
+        // When
+        label.calculateGeometry()
+
+        // Then
+
+        verifyCalculateGeometryCalls(
+            controller: controller,
+            circleRectForCount: true
+        )
+
+        try verifyDrawingPath(for: label, isCore: false)
+    }
+
+    // MARK: - Fixed Count Tests
+
+    @Test("Non-core circle with fixedCount should use percent methods regardless of isPercent")
+    func testNonCoreCircleWithFixedCount() throws {
+        // Given
+        let controller = MockGraphicGeometrySource()
+        controller.mockIsPercent = false // This should be ignored when isFixedCount is true
+
+        let label = try buildTestObject(controller: controller)
+        label.showLabel = true
+        label.isFixedCount = true // This makes it use percent methods
+        label.percentSetting = 0.7
+        // When
+        label.calculateGeometry()
+
+        // Then
+
+        verifyCalculateGeometryCalls(
+            controller: controller,
+            radiusPercentValue: true
+        )
+
+        try verifyDrawingPath(for: label, isCore: false)
+    }
+
+    // MARK: - Helper Methods
+
+    private func verifyDrawingPath(
+        for label: XRGraphicCircleLabel,
+        isCore: Bool,
+        fileID: String = #fileID,
+        filePath: String = #filePath,
+        line: Int = #line,
+        column: Int = #column
+    ) throws {
+        let sourceLocaton = SourceLocation(
+            fileID: fileID,
+            filePath: filePath,
+            line: line,
+            column: column
+        )
+        if isCore {
+            let drawingPath = try #require(label.value(forKey: "drawingPath") as? NSBezierPath)
+            #expect(
+                !drawingPath.bounds.isEmpty,
+                "Drawing path bounds should not be empty for core circle",
+                sourceLocation: sourceLocaton
+            )
+        } else {
+            let drawingRect = label.drawingRect()
+            #expect(
+                !drawingRect.isEmpty,
+                "Drawing rect should not be empty for non-core circle", sourceLocation: sourceLocaton
+            )
+        }
+    }
+
+    private func verifyCalculateGeometryCalls(
+        controller: MockGraphicGeometrySource,
+        radiusPercentValue: Bool = false,
+        radiusForCount: Bool = false,
+        circleRectPercent: Bool = false,
+        circleRectForCount: Bool = false,
+        fileID: String = #fileID,
+        filePath: String = #filePath,
+        line: Int = #line,
+        column: Int = #column
+    ) {
+        let sourceLocaton = SourceLocation(
+            fileID: fileID,
+            filePath: filePath,
+            line: line,
+            column: column
+        )
+        #expect(
+            controller.wasMethodCalled("radius(ofPercentValue:)") == radiusPercentValue,
+            "\(radiusPercentValue ? "Should " : "Should not ")call radius(ofPercentValue:) when isFixedCount is true",
+            sourceLocation: sourceLocaton
+        )
+        #expect(
+            controller.wasMethodCalled("radius(ofCount:)") == radiusForCount,
+            "\(radiusForCount ? "Should " : "Should not ")call radius(ofCount:) when isFixedCount is true",
+            sourceLocation: sourceLocaton
+        )
+        #expect(
+            controller.wasMethodCalled("circleRect(forPercent:)") == circleRectPercent,
+            "\(circleRectPercent ? "Should " : "Should not ")call circleRect methods when showLabel is true",
+            sourceLocation: sourceLocaton
+        )
+        #expect(
+            controller.wasMethodCalled("circleRect(forCount:)") == circleRectForCount,
+            "\(circleRectForCount ? "Should " : "Should not ")call circleRect methods when showLabel is true",
+            sourceLocation: sourceLocaton
+        )
+    }
 }
 
-// swiftlint:enable type_body_length
-// swiftlint:enable file_length
+// swiftlint:enable type_body_length file_length line_length

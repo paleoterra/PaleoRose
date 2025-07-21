@@ -25,6 +25,37 @@ class MockGraphicGeometrySource: NSObject, GraphicGeometrySource {
     var mockCircleRectPercent: NSRect = .zero
     var mockCircleRectCount: NSRect = .zero
 
+    // MARK: - Method Call Tracking
+
+    private var methodCalls: [String: Int] = [:]
+
+    func wasMethodCalled(_ methodName: String) -> Bool {
+        methodCalls[methodName] != nil
+    }
+
+    func callCount(for methodName: String) -> Int {
+        methodCalls[methodName] ?? 0
+    }
+
+    private func recordMethodCall(_ methodName: String) {
+        methodCalls[methodName, default: 0] += 1
+    }
+
+    func resetMethodCalls() {
+        methodCalls.removeAll()
+    }
+
+    func printMethodCalls() {
+        if methodCalls.isEmpty {
+            print("No method calls recorded")
+            return
+        }
+        print("Method calls:")
+        for (method, count) in methodCalls.sorted(by: { $0.key < $1.key }) {
+            print("- \(method): called \(count) time\(count == 1 ? "" : "s")")
+        }
+    }
+
     // MARK: - GraphicGeometrySource Protocol Conformance
 
     @objc
@@ -70,18 +101,21 @@ class MockGraphicGeometrySource: NSObject, GraphicGeometrySource {
 
     @objc
     func radius(ofCount count: Int32) -> Double {
+        recordMethodCall(#function)
         // Simple linear scaling for testing
-        Double(count) / Double(max(1, mockGeometryMaxCount))
+        return Double(count) / Double(max(1, mockGeometryMaxCount))
     }
 
     @objc
     func circleRect(forCount count: Int32) -> NSRect {
-        mockCircleRectCount
+        recordMethodCall(#function)
+        return mockCircleRectCount
     }
 
     @objc
     func circleRect(forPercent percent: Float) -> NSRect {
-        mockCircleRectPercent
+        recordMethodCall(#function)
+        return mockCircleRectPercent
     }
 
     @objc
@@ -110,12 +144,14 @@ class MockGraphicGeometrySource: NSObject, GraphicGeometrySource {
     }
 
     @objc func radius(ofPercentValue percent: Double) -> Double {
-        Double(percent) / 100.0
+        recordMethodCall(#function)
+        return Double(percent) / 100.0
     }
 
     @objc
     func unrestrictedRadius(ofRelativePercent percent: Double) -> CGFloat {
-        CGFloat(radius(ofRelativePercent: percent))
+        recordMethodCall(#function)
+        return CGFloat(radius(ofRelativePercent: percent))
     }
 
     // MARK: - Convenience Initializer

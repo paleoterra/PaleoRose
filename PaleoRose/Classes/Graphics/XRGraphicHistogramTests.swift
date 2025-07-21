@@ -7,15 +7,11 @@ import Testing
 struct XRGraphicHistogramTests {
     // MARK: - Test Setup
 
-    private func buildController() -> MockGeometryController {
-        MockGeometryController()
-    }
-
-    private func buildBasicTestObject(controller: XRGeometryController) -> XRGraphicHistogram {
+    private func buildBasicTestObject(controller: MockGraphicGeometrySource) -> XRGraphicHistogram {
         XRGraphicHistogram(controller: controller)
     }
 
-    private func buildTestObject(controller: XRGeometryController, increment: Int32 = 0, value: Int32 = 1) throws -> XRGraphicHistogram {
+    private func buildTestObject(controller: MockGraphicGeometrySource, increment: Int32 = 0, value: Int32 = 1) throws -> XRGraphicHistogram {
         try #require(
             XRGraphicHistogram(
                 controller: controller,
@@ -42,7 +38,7 @@ struct XRGraphicHistogramTests {
     @Test("basic initWithController should initialize with default values")
     func testBasicInitWithController() throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
 
         // When
         let histogram = buildBasicTestObject(controller: controller)
@@ -61,7 +57,7 @@ struct XRGraphicHistogramTests {
     @Test("correct InitWithController initialization")
     func testInitWithController() throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
 
         // When
         let histogram = try buildTestObject(controller: controller)

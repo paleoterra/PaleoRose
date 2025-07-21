@@ -7,15 +7,11 @@ import Testing
 struct XRGraphicDotDeviationTests {
     // MARK: - Test Setup
 
-    private func buildController() -> MockGeometryController {
-        MockGeometryController()
-    }
-
-    private func buildBasicTestObject(controller: XRGeometryController) -> XRGraphicDotDeviation {
+    private func buildBasicTestObject(controller: MockGraphicGeometrySource) -> XRGraphicDotDeviation {
         XRGraphicDotDeviation(controller: controller)
     }
 
-    private func buildTestObject(controller: XRGeometryController, forIncrement: Int = 0, totalCount: Int = 0) throws -> XRGraphicDotDeviation {
+    private func buildTestObject(controller: MockGraphicGeometrySource, forIncrement: Int = 0, totalCount: Int = 0) throws -> XRGraphicDotDeviation {
         try #require(
             XRGraphicDotDeviation(
                 controller: controller,
@@ -46,7 +42,7 @@ struct XRGraphicDotDeviationTests {
     @Test("initWithController should initialize with default values")
     func testInitWithController() throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
 
         // When
         let dotDeviation = buildBasicTestObject(controller: controller)
@@ -64,7 +60,7 @@ struct XRGraphicDotDeviationTests {
     @Test("initWithController:ForIncrement:valueCount:statics should initialize with correct values")
     func testInitWithControllerfoeIncrement() throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
 
         // When
         let dotDeviation = try buildTestObject(controller: controller)
@@ -87,7 +83,7 @@ struct XRGraphicDotDeviationTests {
     @Test("setLineWidth should update line width")
     func testSetLineWidth() throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
         let dotDeviation = try buildTestObject(controller: controller)
         let testWidth: Float = 2.5
 
@@ -106,7 +102,7 @@ struct XRGraphicDotDeviationTests {
     @Test("graphicSettings should return correct settings dictionary")
     func testGraphicSettings() throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
         let dotDeviation = try buildTestObject(controller: controller)
 
         // Configure some custom values
@@ -135,7 +131,7 @@ struct XRGraphicDotDeviationTests {
         ]
     )
     func testSetDotSize(dotSize: Float) throws {
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
         let dotDeviation = try buildTestObject(controller: controller)
 
         dotDeviation.setDotSize(dotSize)

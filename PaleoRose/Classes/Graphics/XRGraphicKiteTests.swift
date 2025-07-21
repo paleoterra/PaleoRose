@@ -7,15 +7,11 @@ import Testing
 struct XRGraphicKiteTests {
     // MARK: - Test Setup
 
-    private func buildController() -> MockGeometryController {
-        MockGeometryController()
-    }
-
-    private func buildBasicTestObject(controller: XRGeometryController) -> XRGraphicKite {
+    private func buildBasicTestObject(controller: MockGraphicGeometrySource) -> XRGraphicKite {
         XRGraphicKite(controller: controller)
     }
 
-    private func buildTestObject(controller: XRGeometryController, angles: [Double] = [], values: [Double] = []) throws -> XRGraphicKite {
+    private func buildTestObject(controller: MockGraphicGeometrySource, angles: [Double] = [], values: [Double] = []) throws -> XRGraphicKite {
         try #require(
             XRGraphicKite(
                 controller: controller,
@@ -39,7 +35,7 @@ struct XRGraphicKiteTests {
     @Test("basic initWithController should initialize with default values")
     func testBasicInitWithController() throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
 
         // When
         let kite = buildBasicTestObject(controller: controller)
@@ -56,7 +52,7 @@ struct XRGraphicKiteTests {
     @Test("initWithController should initialize with default values")
     func testInitWithController() throws {
         // Given
-        let controller = buildController()
+        let controller = MockGraphicGeometrySource()
 
         // When
         let kite = try buildTestObject(controller: controller)
