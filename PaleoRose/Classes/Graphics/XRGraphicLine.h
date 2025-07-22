@@ -40,7 +40,7 @@
 
 //numbering angle
 #define XRGraphicLineNumberAlignHorizontal  0
-#define XRGraphicLineNumberAligAngle		1
+#define XRGraphicLineNumberAlignAngle		1
 
 //numbering compass point
 #define XRGraphicLineNumberNumbersOnly  0

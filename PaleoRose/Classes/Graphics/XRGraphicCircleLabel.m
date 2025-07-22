@@ -114,50 +114,32 @@ static NSString * const KVOKeyLabelFont = @"labelFont";
 
 -(void)calculateGeometry
 {
-    NSLog(@"calculateGeometry called with showLabel: %d, isCore: %d, isFixedCount: %d, isPercent: %d", 
-          _showLabel, _isCore, self.isFixedCount, [self.geometryController isPercent]);
-          
 	[self computeLabelText];
 	[self computeTransform];
     
-    BOOL drawClosed = [self drawClosedCircle];
-    NSLog(@"drawClosedCircle: %d", drawClosed);
-    
-    if(drawClosed) {
-        BOOL usePercent = [self circleBasedOnPercent];
-        NSLog(@"Using %@ method for closed circle", usePercent ? @"percent" : @"count");
-        
-        if(usePercent) {
-            NSLog(@"Calling circleRectForPercent: %f", self.percentSetting);
+    if([self drawClosedCircle]) {
+        if([self circleBasedOnPercent]) {
             self.drawingPath = [NSBezierPath bezierPathWithOvalInRect:[self.geometryController circleRectForPercent:self.percentSetting]];
 		}
 		else {
-            NSLog(@"Calling circleRectForCount: %d", self.countSetting);
             self.drawingPath = [NSBezierPath bezierPathWithOvalInRect:[self.geometryController circleRectForCount:self.countSetting]];
 		}
 	}
 	else {
 		float radius, angle;
-        BOOL usePercent = [self circleBasedOnPercent];
-        NSLog(@"Using %@ method for open arc", usePercent ? @"percent" : @"count");
-
-        if(usePercent) {
-            NSLog(@"Calling radiusOfPercentValue: %f", self.percentSetting);
+        
+        if([self circleBasedOnPercent]) {
             radius = [self.geometryController radiusOfPercentValue:self.percentSetting];
         }
 		else {
-            NSLog(@"Calling radiusOfCount: %d", self.countSetting);
             radius = [self.geometryController radiusOfCount:self.countSetting];
         }
         
         angle = [self.geometryController degreesFromRadians:atan((0.52*[_label size].width)/radius)];
-        NSLog(@"Calculated angle: %f", angle);
         
 		self.drawingPath = [NSBezierPath bezierPath];
 		[self.drawingPath appendBezierPathWithArcWithCenter:NSMakePoint(0.0,0.0) radius:radius startAngle:90+angle endAngle:90-angle];
 		_labelPoint = NSMakePoint(0 - (0.5*[_label size].width),radius - (0.5*[_label size].height));
-        
-        NSLog(@"Created arc with radius: %f, startAngle: %f, endAngle: %f", radius, 90+angle, 90-angle);
 	}
 	[self.drawingPath setLineWidth:self.lineWidth];
 }

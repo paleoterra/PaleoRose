@@ -171,4 +171,161 @@ struct XRGraphicLineTests {
 
         try CommonUtilities.compareGraphicSettings(values: settings, expected: expectedSettings)
     }
+
+    // MARK: - Line Label
+
+    @Test(
+        "Testing setLineLabel for Compass Points in Letter",
+        arguments: [
+            (0.0, "N"),
+            (90.0, "E"),
+            (180.0, "S"),
+            (270.0, "W"),
+            (360.0, "N")
+        ]
+    )
+    func testSetLineLabelForCompassPointsInDegrees(values: (degrees: Float, expected: String)) async throws {
+        let controller = MockGraphicGeometrySource()
+        let line = XRGraphicLine(controller: controller)
+
+        line.spokeNumberCompassPoint = XRGraphicLineNumberPoints
+
+        line.spokeAngle = values.degrees
+        let label = try #require(line.lineLabel)
+        #expect(label.string == values.expected)
+    }
+
+    @Test(
+        "Testing setLineLabel for Compass Points in degrees: Numeric Quad",
+        arguments: [
+            (0.0, "0"),
+            (90.0, "90"),
+            (180.0, "0"),
+            (270.0, "90"),
+            (360.0, "0")
+        ]
+    )
+    func testSetLineLabelForCompassPointsQuadNumbering(values: (degrees: Float, expected: String)) async throws {
+        let controller = MockGraphicGeometrySource()
+        let line = XRGraphicLine(controller: controller)
+
+        line.spokeNumberCompassPoint = XRGraphicLineNumberNumbersOnly
+        line.spokeNumberOrder = XRGraphicLineNumberingOrderQuad
+
+        line.spokeAngle = values.degrees
+        let label = try #require(line.lineLabel)
+        #expect(label.string == values.expected)
+    }
+
+    @Test(
+        "Testing setLineLabel for Compass Points in degrees: Numeric",
+        arguments: [
+            (0.0, "0"),
+            (90.0, "90"),
+            (180.0, "180"),
+            (270.0, "270") // ,
+//            (360.0, "0")
+        ]
+    )
+    func testSetLineLabelForCompassPointsNumericNumbering(values: (degrees: Float, expected: String)) async throws {
+        let controller = MockGraphicGeometrySource()
+        let line = XRGraphicLine(controller: controller)
+
+        line.spokeNumberCompassPoint = XRGraphicLineNumberNumbersOnly
+        line.spokeNumberOrder = XRGraphicLineNumberingOrder360
+
+        line.spokeAngle = values.degrees
+        let label = try #require(line.lineLabel)
+        #expect(label.string == values.expected)
+    }
+
+    @Test(
+        "Testing setLineLabel for Spoke angle text",
+        arguments: [
+            (90.0, "90"),
+            (180.8, "180.8"),
+            (231.3234, "231.3"),
+            (220.0, "220")
+        ]
+    )
+    func testSetLineLabelForSpokeAngle(values: (degrees: Float, expected: String)) async throws {
+        let controller = MockGraphicGeometrySource()
+        let line = XRGraphicLine(controller: controller)
+
+        line.spokeNumberCompassPoint = XRGraphicLineNumberNumbersOnly
+        line.spokeNumberOrder = XRGraphicLineNumberingOrder360
+
+        line.spokeAngle = values.degrees
+
+        let label = try #require(line.lineLabel)
+        print(label.string)
+        #expect(label.string == values.expected)
+    }
+
+    @Test(
+        "Testing setLineLabel for Spoke angle text quad",
+        arguments: [
+            (90.0, "90"),
+            (180.8, "0.8"),
+            (231.3234, "51.3")
+        ]
+    )
+    func testSetLineLabelForSpokeAngleQuad(values: (degrees: Float, expected: String)) async throws {
+        let controller = MockGraphicGeometrySource()
+        let line = XRGraphicLine(controller: controller)
+
+        line.spokeNumberCompassPoint = XRGraphicLineNumberNumbersOnly
+        line.spokeNumberOrder = XRGraphicLineNumberingOrderQuad
+
+        line.spokeAngle = values.degrees
+
+        let label = try #require(line.lineLabel)
+        print(label.string)
+        #expect(label.string == values.expected)
+    }
+
+    @Test(
+        "Testing setLineLabel for Spoke angle text not points and quad",
+        arguments: [
+            (90.0, "90"),
+            (180.8, "0.8"),
+            (231.3234, "51.3")
+        ]
+    )
+    func testSetLineLabelForSpokeAngleNotPoints(values: (degrees: Float, expected: String)) async throws {
+        let controller = MockGraphicGeometrySource()
+        let line = XRGraphicLine(controller: controller)
+
+        line.spokeNumberCompassPoint = XRGraphicLineNumberNumbersOnly
+        line.spokeNumberOrder = XRGraphicLineNumberingOrderQuad
+
+        line.spokeAngle = values.degrees
+
+        let label = try #require(line.lineLabel)
+        print(label.string)
+        #expect(label.string == values.expected)
+    }
+
+    @Test(
+        "Spoke points only and non spoke returns empty string",
+        arguments: [
+            (90.0, "90"),
+            (180.8, ""),
+            (231.3234, "")
+        ]
+    )
+    func testWhenSpokePointsOnlyReturnEmptyStringsForNonPoints(values: (degrees: Float, expected: String)) async throws {
+        let controller = MockGraphicGeometrySource()
+        let line = XRGraphicLine(controller: controller)
+
+        line.spokeNumberCompassPoint = XRGraphicLineNumberNumbersOnly
+        line.spokeNumberOrder = XRGraphicLineNumberingOrderQuad
+
+        line.spokeAngle = values.degrees
+        line.spokePointOnly = true
+
+        let label = try #require(line.lineLabel)
+        print(label.string)
+        #expect(label.string == values.expected)
+    }
 }
