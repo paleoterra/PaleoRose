@@ -24,6 +24,7 @@ class MockGraphicGeometrySource: NSObject, GraphicGeometrySource {
     var mockHollowCoreSize: Float = 0.0
     var mockCircleRectPercent: NSRect = .zero
     var mockCircleRectCount: NSRect = .zero
+    var mockUnrestrictedRadius: CGFloat = 10.0
 
     // MARK: - Method Call Tracking
 
@@ -151,7 +152,7 @@ class MockGraphicGeometrySource: NSObject, GraphicGeometrySource {
     @objc
     func unrestrictedRadius(ofRelativePercent percent: Double) -> CGFloat {
         recordMethodCall(#function)
-        return CGFloat(radius(ofRelativePercent: percent))
+        return mockUnrestrictedRadius
     }
 
     // MARK: - Convenience Initializer

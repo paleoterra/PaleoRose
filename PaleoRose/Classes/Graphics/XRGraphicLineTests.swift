@@ -3,7 +3,7 @@ import Numerics
 @testable import PaleoRose
 import Testing
 
-@MainActor
+// swiftlint:disable type_body_length file_length
 struct XRGraphicLineTests {
     // MARK: - Test Setup
 
@@ -224,7 +224,7 @@ struct XRGraphicLineTests {
             (90.0, "90"),
             (180.0, "180"),
             (270.0, "270") // ,
-//            (360.0, "0")
+//          (360.0, "0")
         ]
     )
     func testSetLineLabelForCompassPointsNumericNumbering(values: (degrees: Float, expected: String)) async throws {
@@ -328,4 +328,51 @@ struct XRGraphicLineTests {
         print(label.string)
         #expect(label.string == values.expected)
     }
+
+    @Test(
+        "Test horizontal transform",
+        arguments: [
+            (Float(10.0), AffineTransform.unitTestTranform(.horizontal10Degree)),
+            (Float(75.0), AffineTransform.unitTestTranform(.horizontal75Degree)),
+            (Float(289.0), AffineTransform.unitTestTranform(.horizontal289Degree)),
+            (Float(0.0), AffineTransform.unitTestTranform(.horizontal0Degree)),
+            (Float(180.0), AffineTransform.unitTestTranform(.horizontal180Degree))
+        ]
+    )
+    func testHorizontalTransform(params: (angle: Float, transform: AffineTransform)) async throws {
+        let controller = MockGraphicGeometrySource()
+        let line = XRGraphicLine(controller: controller)
+        line.spokeNumberAlign = XRGraphicLineNumberAlignHorizontal
+        line.spokeAngle = params.angle
+        let transform = try #require(line.labelTransform)
+        params.transform.assertEqual(to: transform)
+    }
+
+    @Test(
+        "Test parallel transform",
+        arguments: [
+            (Float(10.0), AffineTransform.unitTestTranform(.parallel10Degree)),
+            (Float(75.0), AffineTransform.unitTestTranform(.parallel75Degree)),
+            (Float(289.0), AffineTransform.unitTestTranform(.parallel289Degree)),
+            (Float(0), AffineTransform.unitTestTranform(.parallel0Degree)),
+            (Float(180), AffineTransform.unitTestTranform(.parallel180Degree))
+        ]
+    )
+    func testParallelTransform(
+        params: (
+            angle: Float,
+            transform: AffineTransform
+        )
+    ) async throws {
+        let controller = MockGraphicGeometrySource()
+        let line = XRGraphicLine(controller: controller)
+        line.spokeNumberAlign = 1
+        line.spokeAngle = params.angle
+
+        let transform = try #require(line.labelTransform)
+//        print("***\n\(angle)\n\(String(describing: transform))\n***\n")
+        params.transform.assertEqual(to: transform)
+    }
 }
+
+// swiftlint:enable type_body_length file_length

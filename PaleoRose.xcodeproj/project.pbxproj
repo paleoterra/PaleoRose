@@ -11,6 +11,7 @@
 		8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */; };
 		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
 		8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
+		B40AE9092E30804800330530 /* AffineTransform+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40AE9082E30803F00330530 /* AffineTransform+extensions.swift */; };
 		B40C43C5060545BD00353928 /* XRLayerLineArrow.h in Headers */ = {isa = PBXBuildFile; fileRef = B40C43C3060545BD00353928 /* XRLayerLineArrow.h */; };
 		B40C43C6060545BD00353928 /* XRLayerLineArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = B40C43C4060545BD00353928 /* XRLayerLineArrow.m */; };
 		B411E50705C35F5500C22F3E /* XRGraphic.h in Headers */ = {isa = PBXBuildFile; fileRef = B411E50505C35F5500C22F3E /* XRGraphic.h */; };
@@ -287,6 +288,7 @@
 		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32DBCF750370BD2300C91783 /* PaleoRose_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaleoRose_Prefix.pch; sourceTree = "<group>"; };
 		8D15AC370486D014006FF6A4 /* PaleoRose.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaleoRose.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B40AE9082E30803F00330530 /* AffineTransform+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AffineTransform+extensions.swift"; sourceTree = "<group>"; };
 		B40C43C3060545BD00353928 /* XRLayerLineArrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRLayerLineArrow.h; sourceTree = "<group>"; };
 		B40C43C4060545BD00353928 /* XRLayerLineArrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRLayerLineArrow.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B411E50505C35F5500C22F3E /* XRGraphic.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRGraphic.h; sourceTree = "<group>"; };
@@ -1182,6 +1184,7 @@
 				B41C18102CC1A9E4002D19C2 /* rtest1.XRose */,
 				B4B0BB691E7E41C900F392DA /* Info.plist */,
 				B41C87432DE4DC070053C9C9 /* CommonUtilities.swift */,
+				B40AE9082E30803F00330530 /* AffineTransform+extensions.swift */,
 				B41C174D2CB0E45C002D19C2 /* Tag.swift */,
 				B4A23FC72E28936900EDE135 /* MockGraphicGeometrySource.swift */,
 			);
@@ -1636,6 +1639,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4A23FCA2E2C44FC00EDE135 /* XRGraphicCircleLabelTestCases.swift in Sources */,
+				B40AE9092E30804800330530 /* AffineTransform+extensions.swift in Sources */,
 				B4AE41D32D17DD2800E05D96 /* LayerData+Testing.swift in Sources */,
 				B48430862E1193E500E126C0 /* XRGraphicCircleLabelTests.swift in Sources */,
 				B4AE41C42D14E86700E05D96 /* Layer+Testing.swift in Sources */,
