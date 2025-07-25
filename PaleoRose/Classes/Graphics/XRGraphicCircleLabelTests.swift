@@ -536,7 +536,7 @@ struct XRGraphicCircleLabelTests {
         )
         #expect(
             controller.wasMethodCalled("circleRect(forPercent:)") == circleRectPercent,
-            "\(circleRectPercent ? "Should " : "Should not ")call circleRect methods when showLabel is true",
+            "\(circleRectPercent ? "Should " : "Should not ")call circleRect methods when showLabel isx true",
             sourceLocation: sourceLocaton
         )
         #expect(

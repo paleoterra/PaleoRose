@@ -63,7 +63,6 @@
 		targetPoint = [self.geometryController rotationOfPoint:aPoint byAngle:[[_angles lastObject] doubleValue]];
 		[self.drawingPath moveToPoint:targetPoint];
 		for(int i=0;i<count;i++) {
-			//NSLog(@"value: %f angle %f", [[_values objectAtIndex:i] floatValue],[[_angles objectAtIndex:i] floatValue]);
 			radius = [self.geometryController radiusOfPercentValue:[[_values objectAtIndex:i] doubleValue]];
 			aPoint.x = 0.0;
 			aPoint.y = radius;

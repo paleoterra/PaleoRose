@@ -187,6 +187,7 @@
 		B4E5F90E05FC679E0011788E /* XRFileParser1.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E5F90C05FC679E0011788E /* XRFileParser1.m */; };
 		B4E69E3D062AE989006B21D6 /* vectorLayer.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B4E69E3C062AE989006B21D6 /* vectorLayer.tiff */; };
 		B4E69E51062AE9B0006B21D6 /* gridLayer.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B4E69E50062AE9B0006B21D6 /* gridLayer.tiff */; };
+		B4E9C7812E3300DE005BA22F /* BezierPath+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E9C7802E3300D1005BA22F /* BezierPath+extensions.swift */; };
 		B4EE8F7805C5E0A9001BACD3 /* XRGraphicLine.h in Headers */ = {isa = PBXBuildFile; fileRef = B4EE8F7605C5E0A9001BACD3 /* XRGraphicLine.h */; };
 		B4EE8F7905C5E0A9001BACD3 /* XRGraphicLine.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EE8F7705C5E0A9001BACD3 /* XRGraphicLine.m */; };
 		B4F08861060914150000CF7A /* XRVStatCreatePanelController.h in Headers */ = {isa = PBXBuildFile; fileRef = B4F0885F060914150000CF7A /* XRVStatCreatePanelController.h */; };
@@ -508,6 +509,7 @@
 		B4E5F90C05FC679E0011788E /* XRFileParser1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRFileParser1.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B4E69E3C062AE989006B21D6 /* vectorLayer.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = vectorLayer.tiff; sourceTree = "<group>"; };
 		B4E69E50062AE9B0006B21D6 /* gridLayer.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = gridLayer.tiff; sourceTree = "<group>"; };
+		B4E9C7802E3300D1005BA22F /* BezierPath+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BezierPath+extensions.swift"; sourceTree = "<group>"; };
 		B4EE8F7605C5E0A9001BACD3 /* XRGraphicLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRGraphicLine.h; sourceTree = "<group>"; };
 		B4EE8F7705C5E0A9001BACD3 /* XRGraphicLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRGraphicLine.m; sourceTree = "<group>"; };
 		B4F0885F060914150000CF7A /* XRVStatCreatePanelController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRVStatCreatePanelController.h; sourceTree = "<group>"; };
@@ -1185,6 +1187,7 @@
 				B4B0BB691E7E41C900F392DA /* Info.plist */,
 				B41C87432DE4DC070053C9C9 /* CommonUtilities.swift */,
 				B40AE9082E30803F00330530 /* AffineTransform+extensions.swift */,
+				B4E9C7802E3300D1005BA22F /* BezierPath+extensions.swift */,
 				B41C174D2CB0E45C002D19C2 /* Tag.swift */,
 				B4A23FC72E28936900EDE135 /* MockGraphicGeometrySource.swift */,
 			);
@@ -1657,6 +1660,7 @@
 				B427CFF21E81EB9E0047F659 /* XRStatisticTests.m in Sources */,
 				B41C87402DE4D8070053C9C9 /* DefaultsStorageTests.swift in Sources */,
 				B41C87412DE4D8070053C9C9 /* UserDefaultsKeyTests.swift in Sources */,
+				B4E9C7812E3300DE005BA22F /* BezierPath+extensions.swift in Sources */,
 				B484308A2E1487C900E126C0 /* XRGraphicDotDeviationTests.swift in Sources */,
 				B41C87422DE4D8070053C9C9 /* UserDefaultsExtensionsTests.swift in Sources */,
 				B41C17522CB1C278002D19C2 /* InMemoryStoreIntegrationTest.swift in Sources */,
