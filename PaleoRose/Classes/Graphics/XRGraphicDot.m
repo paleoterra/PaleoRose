@@ -58,6 +58,7 @@ static NSString * const KVOKeyDotSize = @"labelFont";
     }
     return self;
 }
+
 -(void)registerForKVO {
     [self addObserver:self
            forKeyPath:KVOKeyDotSize
@@ -66,24 +67,61 @@ static NSString * const KVOKeyDotSize = @"labelFont";
               context:NULL];
 }
 
--(void)calculateGeometry {
-    float radius;
-    float startAngle = [self.geometryController startingAngle];
-    float step = [self.geometryController sectorSize];
-    bool isPercent = [self.geometryController isPercent];
-    float angle = startAngle + (step * ((float)_angleIncrement +0.5));
-    NSRect aRect;
-    NSPoint aPoint;
-    self.drawingPath = [[NSBezierPath alloc] init];
-    aRect.size = NSMakeSize(self.dotSize,self.dotSize);
+#pragma mark - Geometry Calculation
 
-    for(int i=0;i<_count;i++) {
-        radius = isPercent ? [self.geometryController radiusOfPercentValue:(float)(i+1)/(float)_totalCount] : [self.geometryController radiusOfCount:i];
-        aPoint = NSMakePoint(0.0,radius);
-        aPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle];
-        aRect.origin.x = aPoint.x - (self.dotSize * 0.5);
-        aRect.origin.y = aPoint.y - (self.dotSize * 0.5);
-        [self.drawingPath appendBezierPathWithOvalInRect:aRect];
+/**
+ * Calculates the center angle for the dots based on the sector configuration.
+ */
+- (CGFloat)centerAngleForSector {
+    const CGFloat startAngle = [self.geometryController startingAngle];
+    const CGFloat sectorSize = [self.geometryController sectorSize];
+    return startAngle + (sectorSize * ((CGFloat)self.angleIncrement + 0.5));
+}
+
+/**
+ * Calculates the radius for a dot at the given index.
+ */
+- (CGFloat)radiusForDotAtIndex:(NSInteger)index isPercentMode:(BOOL)isPercent {
+    if (isPercent) {
+        const CGFloat percentValue = (CGFloat)(index + 1) / (CGFloat)self.totalCount;
+        return [self.geometryController radiusOfPercentValue:percentValue];
+    } else {
+        return [self.geometryController radiusOfCount:(int)index];
+    }
+}
+
+/**
+ * Creates a dot at the specified radius and angle.
+ */
+- (void)addDotAtRadius:(CGFloat)radius angle:(CGFloat)angle {
+    // Create a point at the specified radius on the Y-axis
+    NSPoint centerPoint = NSMakePoint(0.0, radius);
+    
+    // Rotate the point to the correct angle
+    centerPoint = [self.geometryController rotationOfPoint:centerPoint byAngle:angle];
+    
+    // Create a rect for the dot centered at the calculated point
+    const CGFloat halfDotSize = self.dotSize * 0.5;
+    NSRect dotRect = {
+        .origin = NSMakePoint(centerPoint.x - halfDotSize, centerPoint.y - halfDotSize),
+        .size = NSMakeSize(self.dotSize, self.dotSize)
+    };
+    
+    [self.drawingPath appendBezierPathWithOvalInRect:dotRect];
+}
+
+- (void)calculateGeometry {
+    // Initialize the drawing path
+    self.drawingPath = [[NSBezierPath alloc] init];
+    
+    // Get configuration
+    const BOOL isPercentMode = [self.geometryController isPercent];
+    const CGFloat centerAngle = [self centerAngleForSector];
+    
+    // Create dots for each value
+    for (NSInteger i = 0; i < self.count; i++) {
+        const CGFloat radius = [self radiusForDotAtIndex:i isPercentMode:isPercentMode];
+        [self addDotAtRadius:radius angle:centerAngle];
     }
 }
 
