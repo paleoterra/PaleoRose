@@ -97,4 +97,95 @@ struct XRGraphicDotTests {
 
         #expect(dot.dotSize == newDotSize)
     }
+
+    @Test(
+        "calculate geometry standard",
+        arguments: [
+            (Int32(10), NSRect(x: -2.0, y: -2.0, width: 4.0, height: 13.0)),
+            (Int32(30), NSRect(x: -2.0, y: -2.0, width: 4.0, height: 33.0)),
+            (Int32(70), NSRect(x: -2.0, y: -2.0, width: 4.0, height: 73.0))
+        ]
+    )
+    func calculateGeometryStandard(params: (count: Int32, expectedRect: NSRect)) throws {
+        let controller = MockGraphicGeometrySource()
+        let dot = try buildTestObject(
+            controller: controller,
+            forIncrement: 3,
+            valueCount: params.count,
+            totalCount: 100
+        )
+
+        let path = try #require(dot.drawingPath)
+        let bounds = path.bounds
+        #expect(
+            bounds.origin.x.isApproximatelyEqual(
+                to: params.expectedRect.origin.x,
+                absoluteTolerance: 0.01
+            )
+        )
+        #expect(
+            bounds.origin.y.isApproximatelyEqual(
+                to: params.expectedRect.origin.y,
+                absoluteTolerance: 0.01
+            )
+        )
+        #expect(
+            bounds.size.width.isApproximatelyEqual(
+                to: params.expectedRect.size.width,
+                absoluteTolerance: 0.01
+            )
+        )
+        #expect(
+            bounds.size.height.isApproximatelyEqual(
+                to: params.expectedRect.size.height,
+                absoluteTolerance: 0.01
+            )
+        )
+    }
+
+    @Test(
+        "calculate geometry standard Percent",
+        arguments: [
+            (Int32(10), NSRect(x: -2.0, y: -2.0, width: 4.0, height: 4.0)),
+            (Int32(30), NSRect(x: -2.0, y: -2.0, width: 4.0, height: 4.0)),
+            (Int32(70), NSRect(x: -2.0, y: -2.0, width: 4.0, height: 4.0))
+        ]
+    )
+    func calculateGeometryStandardPercent(params: (count: Int32, expectedRect: NSRect)) throws {
+        let controller = MockGraphicGeometrySource()
+        controller.mockIsPercent = true
+        let dot = try buildTestObject(
+            controller: controller,
+            forIncrement: 3,
+            valueCount: params.count,
+            totalCount: 100
+        )
+
+        let path = try #require(dot.drawingPath)
+        let bounds = path.bounds
+        #expect(
+            bounds.origin.x.isApproximatelyEqual(
+                to: params.expectedRect.origin.x,
+                absoluteTolerance: 0.01
+            )
+        )
+        #expect(
+            bounds.origin.y.isApproximatelyEqual(
+                to: params.expectedRect.origin.y,
+                absoluteTolerance: 0.01
+            )
+        )
+        #expect(
+            bounds.size.width.isApproximatelyEqual(
+                to: params.expectedRect.size.width,
+                absoluteTolerance: 0.01
+            )
+        )
+        #expect(
+            bounds.size.height.isApproximatelyEqual(
+                to: params.expectedRect.size.height,
+                absoluteTolerance: 0.01
+            )
+        )
+    }
 }
