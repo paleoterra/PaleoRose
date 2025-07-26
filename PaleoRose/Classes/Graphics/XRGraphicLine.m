@@ -125,9 +125,6 @@ static NSString * const KVOKeySpokeNumberCompassPoint = @"spokeNumberCompassPoin
 #pragma mark - Label Handling
 
 - (void)setLineLabel {
-    // Reset showLabel flag
-    _showLabel = YES;
-    
     // Handle spoke point only mode
     if (_spokePointOnly) {
         // In point-only mode, show N/S/E/W for cardinal directions when in compass point mode
