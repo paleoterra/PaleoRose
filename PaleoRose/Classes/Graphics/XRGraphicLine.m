@@ -78,113 +78,149 @@ static NSString * const KVOKeySpokeNumberCompassPoint = @"spokeNumberCompassPoin
     }];
 }
 
--(void)calculateGeometry {
-    float radius;
-    NSPoint aPoint;
-    aPoint = NSMakePoint(0.0,0.0);
-    radius = [self.geometryController radiusOfRelativePercent:0.0];
-    aPoint.y = radius;
-    aPoint = [self.geometryController rotationOfPoint:aPoint byAngle:self.spokeAngle];
+#pragma mark - Geometry Calculation
+
+- (void)calculateGeometry {
     self.drawingPath = [[NSBezierPath alloc] init];
-    [self.drawingPath moveToPoint:aPoint];
-    if((self.tickType == XRGraphicLineTickTypeNone)||(!_showTick))
-        radius = [self.geometryController radiusOfRelativePercent:_relativePercent];
-    else if(self.tickType == XRGraphicLineTickTypeMinor)
-        radius = [self.geometryController unrestrictedRadiusOfRelativePercent:(_relativePercent+ 0.05)];
-    else
-        radius = [self.geometryController unrestrictedRadiusOfRelativePercent:(_relativePercent+ 0.1)];
-    aPoint = NSMakePoint(0.0,0.0);
-    aPoint.y = radius;
-
-    aPoint = [self.geometryController rotationOfPoint:aPoint byAngle:self.spokeAngle];
-    [self.drawingPath lineToPoint:aPoint];
-
+    
+    // Draw the inner point of the line
+    [self drawLineFromCenterToRadius:[self radiusForInnerPoint]];
+    
+    // Draw the outer point of the line with appropriate tick adjustment
+    [self drawLineToOuterPoint];
+    
     [self calculateLabelTransform];
 }
 
--(void)setLineLabel {
-    if(((double)self.spokeAngle == 0.0)||((double)self.spokeAngle == 90.0) || ((double)self.spokeAngle == 180.0) || ((double)self.spokeAngle == 270.0)||((double)self.spokeAngle == 360.0)) {
+- (void)drawLineFromCenterToRadius:(CGFloat)radius {
+    NSPoint startPoint = [self pointAtRadius:radius angle:self.spokeAngle];
+    [self.drawingPath moveToPoint:startPoint];
+}
 
-        if(_spokeNumberCompassPoint == XRGraphicLineNumberPoints) {
-            if((double)self.spokeAngle == 0.0)
-                _lineLabel = [[NSMutableAttributedString alloc] initWithString:@"N"];
-            else if((double)self.spokeAngle == 90.0)
-                _lineLabel = [[NSMutableAttributedString alloc] initWithString:@"E"];
-            else if((double)self.spokeAngle == 180.0)
-                _lineLabel = [[NSMutableAttributedString alloc] initWithString:@"S"];
-            else if((double)self.spokeAngle == 270.0)
-                _lineLabel = [[NSMutableAttributedString alloc] initWithString:@"W"];
-            else
-                _lineLabel = [[NSMutableAttributedString alloc] initWithString:@"N" ];
-        }
-        else if(_spokeNumberOrder == XRGraphicLineNumberingOrderQuad) {
-            double workAngle;
-            if(self.spokeAngle <= 90.0) {
-                workAngle = self.spokeAngle;
-            }
-            else if((self.spokeAngle > 90.0)&&(self.spokeAngle <= 180.0)) {
-                workAngle = 180.0 - self.spokeAngle;
-            }
-            else if((self.spokeAngle > 180.0)&&(self.spokeAngle <= 270.0)) {
-                workAngle = self.spokeAngle - 180.0;
-            }
-            else {
-                workAngle = 360.0 - self.spokeAngle;
-            }
+- (void)drawLineToOuterPoint {
+    CGFloat radius = [self calculateOuterRadius];
+    NSPoint endPoint = [self pointAtRadius:radius angle:self.spokeAngle];
+    [self.drawingPath lineToPoint:endPoint];
+}
 
-            if((double)self.spokeAngle == (double)floor(self.spokeAngle)) {
-                _lineLabel = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%i",(int)workAngle]];
-            }
-            else // inaccessible?
-                _lineLabel = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%3.1f",workAngle]];
-
-        }
-        else {
-            if((double)self.spokeAngle == (double)floor(self.spokeAngle)) {
-                _lineLabel = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%i",(int)self.spokeAngle]];
-            }
-            else // inaccessible?
-                _lineLabel = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%3.1f",self.spokeAngle]];
-        }
+- (CGFloat)calculateOuterRadius {
+    if (self.tickType == XRGraphicLineTickTypeNone || !_showTick) {
+        return [self.geometryController radiusOfRelativePercent:_relativePercent];
+    } else if (self.tickType == XRGraphicLineTickTypeMinor) {
+        return [self.geometryController unrestrictedRadiusOfRelativePercent:(_relativePercent + 0.05)];
+    } else {
+        return [self.geometryController unrestrictedRadiusOfRelativePercent:(_relativePercent + 0.1)];
     }
-    else if((_spokeNumberOrder == XRGraphicLineNumberingOrder360)&&(!_spokePointOnly)) {
-        if((double)self.spokeAngle == (double)floor(self.spokeAngle)) {
-            _lineLabel = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%i",(int)self.spokeAngle]];
+}
+
+- (CGFloat)radiusForInnerPoint {
+    return [self.geometryController radiusOfRelativePercent:0.0];
+}
+
+- (NSPoint)pointAtRadius:(CGFloat)radius angle:(CGFloat)angle {
+    NSPoint point = NSMakePoint(0.0, radius);
+    return [self.geometryController rotationOfPoint:point byAngle:angle];
+}
+
+#pragma mark - Label Handling
+
+- (void)setLineLabel {
+    // Reset showLabel flag
+    _showLabel = YES;
+    
+    // Handle spoke point only mode
+    if (_spokePointOnly) {
+        // In point-only mode, show N/S/E/W for cardinal directions when in compass point mode
+        if (_spokeNumberCompassPoint == XRGraphicLineNumberPoints) {
+            // For compass point mode, only show N/S/E/W for exact cardinal directions
+            if (self.spokeAngle == 0.0 || self.spokeAngle == 90.0 || 
+                self.spokeAngle == 180.0 || self.spokeAngle == 270.0 || 
+                self.spokeAngle == 360.0) {
+                [self setCompassPointLabel];
+                [self calculateLabelTransform];
+                return;
+            }
+        } 
+        // For non-compass point mode, show the angle value for cardinal directions
+        else if (self.spokeAngle == 0.0 || self.spokeAngle == 90.0 || 
+                self.spokeAngle == 180.0 || self.spokeAngle == 270.0 || 
+                self.spokeAngle == 360.0) {
+            [self setLabelForAngle:self.spokeAngle];
+            [self calculateLabelTransform];
+            return;
         }
-        else
-            _lineLabel = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%3.1f",self.spokeAngle]];
+        
+        // For all other cases in point-only mode, show empty string
+        _showLabel = NO;
+        _lineLabel = [[NSMutableAttributedString alloc] initWithString:@""];
+        [self calculateLabelTransform];
+        return;
     }
-    else if(!_spokePointOnly) {
-        double workAngle;
-        if(self.spokeAngle <= 90.0) {
-            workAngle = self.spokeAngle;
-        }
-        else if((self.spokeAngle > 90.0)&&(self.spokeAngle <= 180.0)) {
-            workAngle = 180.0 - self.spokeAngle;
-        }
-        else if((self.spokeAngle > 180.0)&&(self.spokeAngle <= 270.0)) {
-            workAngle = self.spokeAngle - 180.0;
-        }
-        else {
-            workAngle = 360.0 - self.spokeAngle;
-        }
-        if((double)self.spokeAngle == (double)floor(self.spokeAngle)) {
-            _lineLabel = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%i",(int)workAngle]];
-        }
-        else
-            _lineLabel = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%3.1f",workAngle]];
+    // Handle compass points (N/S/E/W) when in compass point mode
+    else if (_spokeNumberCompassPoint == XRGraphicLineNumberPoints && 
+             (self.spokeAngle == 0.0 || self.spokeAngle == 90.0 || 
+              self.spokeAngle == 180.0 || self.spokeAngle == 270.0 || 
+              self.spokeAngle == 360.0)) {
+        [self setCompassPointLabel];
+    }
+    // Handle quadrant-based numbering
+    else if (_spokeNumberOrder == XRGraphicLineNumberingOrderQuad) {
+        [self setQuadrantBasedLabel];
+    }
+    // Handle 360-degree numbering
+    else if (_spokeNumberOrder == XRGraphicLineNumberingOrder360) {
+        [self setLabelForAngle:self.spokeAngle];
+    }
+    // Default case - show the angle as is
+    else {
+        [self setLabelForAngle:self.spokeAngle];
+    }
+    
+    [self calculateLabelTransform];
+}
+
+- (void)setCompassPointLabel {
+    NSString *compassPoint = @"N"; // Default
+    
+    if (self.spokeAngle == 0.0 || self.spokeAngle == 360.0) {
+        compassPoint = @"N";
+    } else if (self.spokeAngle == 90.0) {
+        compassPoint = @"E";
+    } else if (self.spokeAngle == 180.0) {
+        compassPoint = @"S";
+    } else if (self.spokeAngle == 270.0) {
+        compassPoint = @"W";
+    }
+    
+    _lineLabel = [[NSMutableAttributedString alloc] initWithString:compassPoint];
+}
+
+- (void)setQuadrantBasedLabel {
+    double workAngle;
+    
+    if (self.spokeAngle <= 90.0) {
+        workAngle = self.spokeAngle;
+    }
+    else if (self.spokeAngle <= 180.0) {
+        workAngle = 180.0 - self.spokeAngle;
+    }
+    else if (self.spokeAngle <= 270.0) {
+        workAngle = self.spokeAngle - 180.0;
     }
     else {
-        _showLabel = NO;
-
-        _lineLabel = [[NSMutableAttributedString alloc] initWithString:@""];
+        workAngle = 360.0 - self.spokeAngle;
     }
-    /*if((_spokeNumberOrder==XRGraphicLineNumberingOrderPointOnly)&&(((double)self.spokeAngle != 0.0)&&((double)self.spokeAngle != 90.0) && ((double)self.spokeAngle != 180.0) && ((double)self.spokeAngle != 270.0)&&((double)self.spokeAngle != 360.0)))
-     {
-     [_lineLabel release];
-     _lineLabel = [[NSMutableAttributedString alloc] initWithString:@""];
-     }*/
-    [self calculateLabelTransform];
+    
+    [self setLabelForAngle:workAngle];
+}
+
+- (void)setLabelForAngle:(double)angle {
+    // Match the original behavior for integer vs. floating point display
+    if (angle == floor(angle)) {
+        _lineLabel = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d", (int)angle]];
+    } else {
+        _lineLabel = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%3.1f", angle]];
+    }
 }
 
 
