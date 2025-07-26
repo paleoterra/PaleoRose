@@ -51,40 +51,24 @@
 }
 
 -(void)calculateGeometry {
-	NSPoint aPoint,targetPoint;
-	float radius;
 	float angle1;
 	float size = [self.geometryController sectorSize];
 	float start = [self.geometryController startingAngle];
-	//step 1. find the angles
+    bool isPercent = [self.geometryController isPercent];
+
 	angle1 = (_histIncrement * size)+(0.5 * size) + start;
+    angle1 = [self restrictAngleToACircle:angle1];
 
-	if(angle1>360.0)
-		angle1 = angle1 - 360.0;
 	self.drawingPath = [NSBezierPath bezierPath];
-	if([self.geometryController isPercent]) {
-		radius = [self.geometryController radiusOfPercentValue:0.0];
-		aPoint = NSMakePoint(0.0,radius);
-		targetPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle1];
-		[self.drawingPath moveToPoint:targetPoint];
 
-		radius = [self.geometryController radiusOfPercentValue:_percent];
-		aPoint = NSMakePoint(0.0,radius);
-		targetPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle1];
-		[self.drawingPath lineToPoint:targetPoint];
-
-	} else {
-		radius = [self.geometryController radiusOfCount:0];
-		aPoint = NSMakePoint(0.0,radius);
-		targetPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle1];
-		[self.drawingPath moveToPoint:targetPoint];
-
-		radius = [self.geometryController radiusOfCount:_count];
-		aPoint = NSMakePoint(0.0,radius);
-		targetPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle1];
-		[self.drawingPath lineToPoint:targetPoint];
-
-	}
+    float radius = isPercent ? [self.geometryController radiusOfPercentValue:0.0] :  [self.geometryController radiusOfCount:0];
+    NSPoint aPoint = NSMakePoint(0.0,radius);
+    NSPoint targetPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle1];
+    [self.drawingPath moveToPoint:targetPoint];
+    radius = isPercent ? [self.geometryController radiusOfPercentValue:_percent] : [self.geometryController radiusOfCount:_count];
+    aPoint = NSMakePoint(0.0,radius);
+    targetPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle1];
+    [self.drawingPath lineToPoint:targetPoint];
 	[self.drawingPath setLineWidth:self.lineWidth];
 }
 

@@ -111,6 +111,7 @@ static NSString const * GraphicTypeDotDeviation = @"DotDeviation";
 -(NSString *)stringFromBool:(BOOL)boolValue;
 -(NSString *)stringFromInt:(int)intValue;
 -(NSString *)stringFromFloat:(float)floatValue;
+-(float)restrictAngleToACircle:(float)angle;
 
 @end
 

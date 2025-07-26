@@ -154,4 +154,13 @@ static NSString * const KVOKeyLineWidth = @"lineWidth";
 -(NSString *)stringFromFloat:(float)floatValue {
     return [NSString stringWithFormat:@"%f", floatValue];
 }
+
+-(float)restrictAngleToACircle:(float)angle {
+    float maxAngle = 360.0;
+    float newAngle = angle;
+    while (newAngle >= maxAngle) {
+        newAngle = newAngle - maxAngle;
+    }
+    return newAngle;
+}
 @end
