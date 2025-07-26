@@ -53,100 +53,34 @@
 }
 
 -(void)calculateGeometry {
-	NSPoint aPoint,targetPoint;
-	float radius;
+	float radius1, radius2;
 	float angle1;
 	float angle2;
 	float angle3;
 	float angle4;
+    NSPoint pivotPoint = NSMakePoint(0, 0);
 	float size = [self.geometryController sectorSize];
 	float start = [self.geometryController startingAngle];
+    bool isPercent = [self.geometryController isPercent];
 	//step 1. find the angles
-	angle1 = (_petalIncrement * size) + start;
-	angle2 = angle1 + size;
-	if(angle1>360.0)
-		angle1 = angle1 - 360.0;
-	if(angle2>360.0)
-		angle2 = angle2 - 360.0;
-	angle3 =  360.0 - angle1 + 90.0;
-	angle4 =  360.0 - angle2 + 90.0;
-	if(angle3>360)
-		angle3 = angle3 - 360.0;
-	if(angle4>360)
-		angle4 = angle4- 360.0;
+    angle1 = [self restrictAngleToACircle:(_petalIncrement * size) + start];
+    angle2 = [self restrictAngleToACircle:angle1 + size];
+
+    angle3 =  [self restrictAngleToACircle:360.0 - angle1 + 90.0];
+    angle4 =  [self restrictAngleToACircle:360.0 - angle2 + 90.0];
+
 	self.drawingPath = [NSBezierPath bezierPath];
 
-	if([self.geometryController isPercent]) {
+    radius1 = isPercent ? [self.geometryController radiusOfPercentValue:0.0] : [self.geometryController radiusOfCount:0];
+    radius2 = isPercent ?  [self.geometryController radiusOfPercentValue:_percent] : [self.geometryController radiusOfCount:_count];
+    NSPoint startPoint = NSMakePoint(0.0, radius1);
+    NSPoint outerPoint = NSMakePoint(0.0, radius2);
 
-		//core point 1.
-		radius = [self.geometryController radiusOfPercentValue:0.0];
-		aPoint.x = 0.0;
-		aPoint.y = radius;
-		targetPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle1];
-
-		[self.drawingPath moveToPoint:targetPoint];
-
-		
-		//move out to point 2.
-		radius = [self.geometryController radiusOfPercentValue:_percent];
-		aPoint.x = 0.0;
-		aPoint.y = radius;
-		targetPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle1];
-		[self.drawingPath lineToPoint:targetPoint];
-
-		//arc to point 3.
-		aPoint.x = 0.0;
-		aPoint.y = 0.0;
-		[self.drawingPath appendBezierPathWithArcWithCenter:aPoint radius:radius startAngle:angle3 endAngle:angle4 clockwise:YES];
-
-		//line to point 4.
-		radius = [self.geometryController radiusOfPercentValue:0.0];
-		aPoint.x = 0.0;
-		aPoint.y = radius;
-		targetPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle2];
-		[self.drawingPath lineToPoint:targetPoint];
-
-		//arc to point 1
-		aPoint.x = 0.0;
-		aPoint.y = 0.0;
-		[self.drawingPath appendBezierPathWithArcWithCenter:aPoint radius:radius startAngle:angle4 endAngle:angle3 clockwise:NO];
-	} else {
-		//core point 1.
-		radius = [self.geometryController radiusOfCount:0];
-		//NSLog(@"radius 1: %f",radius);
-		aPoint.x = 0.0;
-		aPoint.y = radius;
-		targetPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle1];
-		
-		[self.drawingPath moveToPoint:targetPoint];
-
-		
-		//move out to point 2.
-		radius = [self.geometryController radiusOfCount:_count];
-		//NSLog(@"radius 2: %f %i",radius,_count);
-		aPoint.x = 0.0;
-		aPoint.y = radius;
-		targetPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle1];
-		[self.drawingPath lineToPoint:targetPoint];
-
-		//arc to point 3.
-		aPoint.x = 0.0;
-		aPoint.y = 0.0;
-		[self.drawingPath appendBezierPathWithArcWithCenter:aPoint radius:radius startAngle:angle3 endAngle:angle4 clockwise:YES];
-
-		//line to point 4.
-		radius = [self.geometryController radiusOfCount:0];
-		//NSLog(@"radius 4: %f",radius);
-		aPoint.x = 0.0;
-		aPoint.y = radius;
-		targetPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle2];
-		[self.drawingPath lineToPoint:targetPoint];
-
-		//arc to point 1
-		aPoint.x = 0.0;
-		aPoint.y = 0.0;
-		[self.drawingPath appendBezierPathWithArcWithCenter:aPoint radius:radius startAngle:angle4 endAngle:angle3 clockwise:YES];
-	}
+    [self.drawingPath moveToPoint:[self.geometryController rotationOfPoint:startPoint byAngle:angle1]];
+    [self.drawingPath lineToPoint:[self.geometryController rotationOfPoint:outerPoint byAngle:angle1]];
+    [self.drawingPath appendBezierPathWithArcWithCenter:pivotPoint radius:radius2 startAngle:angle3 endAngle:angle4 clockwise:YES];
+    [self.drawingPath lineToPoint:[self.geometryController rotationOfPoint:startPoint byAngle:angle2]];
+    [self.drawingPath appendBezierPathWithArcWithCenter:pivotPoint radius:radius1 startAngle:angle4 endAngle:angle3 clockwise:NO];
 }
 
 -(NSDictionary *)graphicSettings {
