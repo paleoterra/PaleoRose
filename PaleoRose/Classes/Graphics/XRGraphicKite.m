@@ -50,53 +50,58 @@
 	return self;
 }
 
--(void)calculateGeometry
-{
-	NSUInteger count = [_angles count];
-	NSPoint aPoint,targetPoint;
-	float radius;
-	self.drawingPath = [NSBezierPath bezierPath];
-	if([self.geometryController isPercent]) {
-		radius = [self.geometryController radiusOfPercentValue:[[_values lastObject] doubleValue]];
-		aPoint.x = 0.0;
-		aPoint.y = radius;
-		targetPoint = [self.geometryController rotationOfPoint:aPoint byAngle:[[_angles lastObject] doubleValue]];
-		[self.drawingPath moveToPoint:targetPoint];
-		for(int i=0;i<count;i++) {
-			radius = [self.geometryController radiusOfPercentValue:[[_values objectAtIndex:i] doubleValue]];
-			aPoint.x = 0.0;
-			aPoint.y = radius;
-			targetPoint = [self.geometryController rotationOfPoint:aPoint byAngle:[[_angles objectAtIndex:i] doubleValue]];
-			[self.drawingPath lineToPoint:targetPoint];
-		}
-	}
-	else {
-		radius = [self.geometryController radiusOfCount:[[_values lastObject] doubleValue]];
-		aPoint.x = 0.0;
-		aPoint.y = radius;
-		targetPoint = [self.geometryController rotationOfPoint:aPoint byAngle:[[_angles lastObject] doubleValue]];
-		[self.drawingPath moveToPoint:targetPoint];
+#pragma mark - Geometry Calculation
 
-		for(int i=0;i<count;i++) {
-			radius = [self.geometryController radiusOfCount:[[_values objectAtIndex:i] intValue]];
-			aPoint.x = 0.0;
-			aPoint.y = radius;
-			targetPoint = [self.geometryController rotationOfPoint:aPoint byAngle:[[_angles objectAtIndex:i] doubleValue]];
-			[self.drawingPath lineToPoint:targetPoint];
-			
-		}
-	}
-	if([self.geometryController hollowCoreSize]>0.0) {
-		NSRect aRect;
-		NSPoint centroid = NSMakePoint(0.0,0.0);
-		if([self.geometryController isPercent])
-			radius = [self.geometryController radiusOfPercentValue:0.0];
-		else
-			radius = [self.geometryController radiusOfCount:0];
-		aRect = NSMakeRect(centroid.x - radius,centroid.y - radius,2* radius,2* radius);
-		[self.drawingPath appendBezierPathWithOvalInRect:aRect];
-		//[self.drawingPath moveToPoint:targetPoint];
-	}
+- (void)calculateGeometry {
+    NSParameterAssert(_angles.count == _values.count);
+    
+    self.drawingPath = [NSBezierPath bezierPath];
+    [self drawKiteOutline];
+    [self drawHollowCoreIfNeeded];
+}
+
+- (void)drawKiteOutline {
+    // Start with the last point to close the shape
+    double lastValue = [_values.lastObject doubleValue];
+    double radius = [self radiusForValue:lastValue];
+    double lastAngle = [_angles.lastObject doubleValue];
+    
+    NSPoint startPoint = [self pointWithRadius:radius atAngle:lastAngle];
+    [self.drawingPath moveToPoint:startPoint];
+    
+    // Draw the rest of the kite
+    for (NSUInteger i = 0; i < _angles.count; i++) {
+        radius = [self radiusForValue:[_values[i] doubleValue]];
+        NSPoint point = [self pointWithRadius:radius atAngle:[_angles[i] doubleValue]];
+        [self.drawingPath lineToPoint:point];
+    }
+}
+
+- (void)drawHollowCoreIfNeeded {
+    if ([self.geometryController hollowCoreSize] <= 0.0) {
+        return;
+    }
+    
+    double radius = [self radiusForValue:0.0];
+    NSPoint centroid = NSZeroPoint;
+    NSRect coreRect = NSMakeRect(centroid.x - radius,
+                                centroid.y - radius,
+                                radius * 2.0,
+                                radius * 2.0);
+    [self.drawingPath appendBezierPathWithOvalInRect:coreRect];
+}
+
+- (NSPoint)pointWithRadius:(double)radius atAngle:(double)angle {
+    NSPoint point = NSMakePoint(0.0, radius);
+    return [self.geometryController rotationOfPoint:point byAngle:angle];
+}
+
+- (double)radiusForValue:(double)value {
+    if ([self.geometryController isPercent]) {
+        return [self.geometryController radiusOfPercentValue:value];
+    } else {
+        return [self.geometryController radiusOfCount:value];
+    }
 }
 
 -(NSDictionary *)graphicSettings {
