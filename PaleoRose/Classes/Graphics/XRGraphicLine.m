@@ -90,6 +90,7 @@ static NSString * const KVOKeySpokeNumberCompassPoint = @"spokeNumberCompassPoin
     [self drawLineToOuterPoint];
     
     [self calculateLabelTransform];
+    [self.drawingPath setLineWidth:self.lineWidth];
 }
 
 - (void)drawLineFromCenterToRadius:(CGFloat)radius {

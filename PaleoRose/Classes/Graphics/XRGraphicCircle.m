@@ -82,6 +82,7 @@ static NSString * const KVOKeyPercentSetting = @"percentSetting";
 	{
 		self.drawingPath = [NSBezierPath bezierPathWithOvalInRect:[self.geometryController circleRectForCount:_countSetting]];
 	}
+    [self.drawingPath setLineWidth:self.lineWidth];
 }
 
 -(NSDictionary *)graphicSettings {
