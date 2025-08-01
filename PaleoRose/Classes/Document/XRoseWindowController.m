@@ -368,8 +368,14 @@ NSRect initialRect;
 
 -(void)importerCompleted:(NSNotification *)aNotification
 {
-	[[self document] discoverTables];
-	[self updateTable];
+    [self.documentModel readFromStoreWithCompletion:^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[self document] discoverTables];
+            [self updateTable];
+        });
+    }];
+
+
 }
 
 -(void)updateTable
