@@ -168,7 +168,7 @@ static NSString * const KVOKeyDotSize = @"dotSize";
 					aPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle];
 					aRect.origin.x = aPoint.x - (_dotSize * 0.5);
 					aRect.origin.y = aPoint.y - (_dotSize * 0.5);
-					//[self.drawingPath appendBezierPathWithOvalInRect:aRect];
+					[self.drawingPath appendBezierPathWithOvalInRect:aRect];
 				}
 			
 			}
