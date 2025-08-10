@@ -75,68 +75,74 @@ static NSString * const KVOKeyDotSize = @"dotSize";
     }
 }
 
+-(void)addToDrawingPath:(NSBezierPath *)path dotSize:(float)dotSize  radius:(float)radius angle:(float)angle geometryController:(XRGeometryController *)controller {
+    NSPoint aPoint = NSMakePoint(0.0,radius);
+    aPoint = [controller rotationOfPoint:aPoint byAngle:angle];
+    NSRect aRect = NSMakeRect(
+                              aPoint.x - (dotSize * 0.5),
+                              aPoint.y - (dotSize * 0.5),
+                              dotSize,
+                              dotSize
+                              );
+
+
+    [path appendBezierPathWithOvalInRect:aRect];
+}
+
 -(void)calculateGeometry
 {
 	float radius;
-	int excess;
-	int shortfall;
 	float startAngle = [self.geometryController startingAngle];
 	float step = [self.geometryController sectorSize];
 	float angle = startAngle + (step * ((float)_angleIncrement +0.5));
 	
 	NSRect aRect;
-	NSPoint aPoint;
 
 	self.drawingPath = [[NSBezierPath alloc] init];
 	aRect.size = NSMakeSize(_dotSize,_dotSize);
-	
+    int excess = (int)(ceil((float)_count -_mean));
+    int shortfall = (int)(ceil(_mean -(float)_count));
+
 	if([self.geometryController isPercent])
 	{
 
 		if(_count>_mean)
 		{
-
-			excess = (int)(ceil((float)_count -_mean));
-			
 			for(int i=0;i<excess;i++)
 			{
 
 				radius = [self.geometryController radiusOfPercentValue:(float)(i+1+(int)floor(_mean))/(float)_totalCount];
-				aPoint = NSMakePoint(0.0,radius);
-				aPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle];
-
-				aRect.origin.x = aPoint.x - (_dotSize * 0.5);
-				aRect.origin.y = aPoint.y - (_dotSize * 0.5);
-
-				[self.drawingPath appendBezierPathWithOvalInRect:aRect];
+                [self addToDrawingPath:self.drawingPath
+                               dotSize:_dotSize
+                                radius:radius
+                                 angle:angle
+                    geometryController:self.geometryController];
 
 			}
 		}
 		else
 		{
-			shortfall = (int)(ceil(_mean -(float)_count));
-
 			if(shortfall >0)
 			{
 			for(int i=0;i<shortfall;i++)
 			{
 				
 				radius = [self.geometryController radiusOfPercentValue:(float)((int)ceil(_mean) - (i + 1))/(float)_totalCount];
-				aPoint = NSMakePoint(0.0,radius);
-				aPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle];
-				aRect.origin.x = aPoint.x - (_dotSize * 0.5);
-				aRect.origin.y = aPoint.y - (_dotSize * 0.5);
-				[self.drawingPath appendBezierPathWithOvalInRect:aRect];
+                [self addToDrawingPath:self.drawingPath
+                               dotSize:_dotSize
+                                radius:radius
+                                 angle:angle
+                    geometryController:self.geometryController];
 			}
 			}
 			else
 			{
 				radius = [self.geometryController radiusOfPercentValue:(float)((int)ceil(_mean))/(float)_totalCount];
-				aPoint = NSMakePoint(0.0,radius);
-				aPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle];
-				aRect.origin.x = aPoint.x - (_dotSize * 0.5);
-				aRect.origin.y = aPoint.y - (_dotSize * 0.5);
-				[self.drawingPath appendBezierPathWithOvalInRect:aRect];
+                [self addToDrawingPath:self.drawingPath
+                               dotSize:_dotSize
+                                radius:radius
+                                 angle:angle
+                    geometryController:self.geometryController];
 			}
 		}
 			
@@ -145,41 +151,39 @@ static NSString * const KVOKeyDotSize = @"dotSize";
 	{
 		if(_count>_mean)
 		{
-			excess = (int)(ceil((float)_count -_mean));
 			for(int i=0;i<excess;i++)
 			{
 				radius = [self.geometryController radiusOfCount:(float)(i+1+(int)floor(_mean))];
-				aPoint = NSMakePoint(0.0,radius);
-				aPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle];
-				aRect.origin.x = aPoint.x - (_dotSize * 0.5);
-				aRect.origin.y = aPoint.y - (_dotSize * 0.5);
-				[self.drawingPath appendBezierPathWithOvalInRect:aRect];
+                [self addToDrawingPath:self.drawingPath
+                               dotSize:_dotSize
+                                radius:radius
+                                 angle:angle
+                    geometryController:self.geometryController];
 			}
 		}
 		else
 		{
-			shortfall = (int)(ceil(_mean -(float)_count));
 			if(shortfall >0)
 			{
 				for(int i=0;i<shortfall;i++)
 				{
 					radius = [self.geometryController radiusOfCount:((int)ceil(_mean) - (i + 1))];
-					aPoint = NSMakePoint(0.0,radius);
-					aPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle];
-					aRect.origin.x = aPoint.x - (_dotSize * 0.5);
-					aRect.origin.y = aPoint.y - (_dotSize * 0.5);
-					[self.drawingPath appendBezierPathWithOvalInRect:aRect];
+                    [self addToDrawingPath:self.drawingPath
+                                   dotSize:_dotSize
+                                    radius:radius
+                                     angle:angle
+                        geometryController:self.geometryController];
 				}
 			
 			}
 			else
 			{
 				radius = [self.geometryController radiusOfPercentValue:(float)((int)ceil(_mean))/(float)_totalCount];
-				aPoint = NSMakePoint(0.0,radius);
-				aPoint = [self.geometryController rotationOfPoint:aPoint byAngle:angle];
-				aRect.origin.x = aPoint.x - (_dotSize * 0.5);
-				aRect.origin.y = aPoint.y - (_dotSize * 0.5);
-				[self.drawingPath appendBezierPathWithOvalInRect:aRect];
+                [self addToDrawingPath:self.drawingPath
+                               dotSize:_dotSize
+                                radius:radius
+                                 angle:angle
+                    geometryController:self.geometryController];
 			}
 		}
 	}
