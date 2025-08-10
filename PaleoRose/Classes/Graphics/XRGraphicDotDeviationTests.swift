@@ -58,7 +58,7 @@ struct XRGraphicDotDeviationTests {
     }
 
     @Test("initWithController:ForIncrement:valueCount:statics should initialize with correct values")
-    func testInitWithControllerfoeIncrement() throws {
+    func testInitWithControllerforIncrement() throws {
         // Given
         let controller = MockGraphicGeometrySource()
 

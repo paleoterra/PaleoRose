@@ -30,15 +30,10 @@
 
 #import "XRGraphic.h"
 @class XRGraphic;
-@interface XRGraphicDotDeviation : XRGraphic {
-	int _angleIncrement;
-	int _totalCount;
-	int _count;
-	float _dotSize;
-	float _mean;
-}
+@interface XRGraphicDotDeviation : XRGraphic
+
+@property (assign, nonatomic) float dotSize;
 
 -(instancetype)initWithController:(id<GraphicGeometrySource>)controller forIncrement:(int)increment valueCount:(int)count totalCount:(int)total statistics:(NSDictionary *)stats;
--(void)setDotSize:(float)newSize;
--(float)dotSize;
+
 @end

@@ -29,12 +29,18 @@
 #import "XRGraphicDotDeviation.h"
 #import "XRGeometryController.h"
 
+static NSString * const KVOKeyDotSize = @"DotSize";
+
+@interface XRGraphicDotDeviation()
+@property (assign, nonatomic) int angleIncrement;
+@property (assign, nonatomic) int totalCount;
+@property (assign, nonatomic) int count;
+@property (assign, nonatomic) float mean;
+@end
+
 @implementation XRGraphicDotDeviation
 -(instancetype)initWithController:(id<GraphicGeometrySource>)controller forIncrement:(int)increment valueCount:(int)count totalCount:(int)total statistics:(NSDictionary *)stats
 {
-#ifdef GraphicsDebug
-	NSLog(@"XRGraphicDotDeviation:initWithController");
-#endif
 	if (!(self = [super initWithController:controller])) return nil;
 	if(self)
 	{
@@ -46,16 +52,31 @@
 		_dotSize = 4.0;
 		[self setDrawsFill:YES];
 		[self calculateGeometry];
+        [self registerForKVO];
 	}
 	return self;
 }
 
+-(void)registerForKVO {
+    [self addObserver:self
+           forKeyPath:KVOKeyDotSize
+              options:NSKeyValueObservingOptionNew |
+     NSKeyValueObservingOptionOld
+              context:NULL];
+}
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    [super observeValueForKeyPath:keyPath
+                             ofObject:object
+                               change:change
+                              context:context];
+    if ([keyPath isEqualToString: KVOKeyDotSize]) {
+        [self calculateGeometry];
+    }
+}
+
 -(void)calculateGeometry
 {
-#ifdef GraphicsDebug
-	NSLog(@"XRGraphicDotDeviation:calculateGeometry");
-#endif
-
 	float radius;
 	int excess;
 	int shortfall;
@@ -164,28 +185,8 @@
 	}
 }
 
--(void)setDotSize:(float)newSize
-{
-#ifdef GraphicsDebug
-	NSLog(@"XRGraphicDotDeviation:setDotSize");
-#endif
-	_dotSize = newSize;
-	[self calculateGeometry];
-}
-
--(float)dotSize
-{
-#ifdef GraphicsDebug
-	NSLog(@"XRGraphicDotDeviation:dotSize");
-#endif
-	return _dotSize;
-}
-
 -(NSDictionary *)graphicSettings
 {
-#ifdef GraphicsDebug
-	NSLog(@"XRGraphicDotDeviation:graphicSettings");
-#endif
 	NSMutableDictionary *theDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];
     [theDict setObject: GraphicTypeDotDeviation forKey:@"GraphicType"];
 
