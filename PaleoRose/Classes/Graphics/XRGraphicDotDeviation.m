@@ -29,7 +29,7 @@
 #import "XRGraphicDotDeviation.h"
 #import "XRGeometryController.h"
 
-static NSString * const KVOKeyDotSize = @"DotSize";
+static NSString * const KVOKeyDotSize = @"dotSize";
 
 @interface XRGraphicDotDeviation()
 @property (assign, nonatomic) int angleIncrement;
@@ -187,18 +187,17 @@ static NSString * const KVOKeyDotSize = @"DotSize";
 
 -(NSDictionary *)graphicSettings
 {
-	NSMutableDictionary *theDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];
-    [theDict setObject: GraphicTypeDotDeviation forKey:@"GraphicType"];
-
-	[theDict setObject:[NSString stringWithFormat:@"%i",_angleIncrement] forKey:@"_angleIncrement"];
-	[theDict setObject:[NSString stringWithFormat:@"%i",_totalCount] forKey:@"_totalCount"];
-	[theDict setObject:[NSString stringWithFormat:@"%i",_count] forKey:@"_count"];
-	[theDict setObject:[NSString stringWithFormat:@"%f",_dotSize] forKey:@"_dotSize"];
-	
-	[theDict setObject:[NSString stringWithFormat:@"%f",_mean] forKey:@"_mean"];
-
-	
-	return [NSDictionary dictionaryWithDictionary:theDict];
+	NSMutableDictionary *parentDict = [NSMutableDictionary dictionaryWithDictionary:[super graphicSettings]];
+    NSDictionary *classDict = @{
+        XRGraphicKeyGraphicType: GraphicTypeDotDeviation,
+        XRGraphicKeyAngleIncrement: [self stringFromInt:_angleIncrement],
+        XRGraphicKeyTotalCount: [self stringFromInt:_totalCount],
+        XRGraphicKeyCount: [self stringFromInt:_count],
+        XRGraphicKeyDotSize: [self stringFromFloat:_dotSize],
+        XRGraphicKeyMean: [self stringFromFloat:_mean]
+    };
+    [parentDict addEntriesFromDictionary:classDict];
+	return parentDict;
 }
 
 @end

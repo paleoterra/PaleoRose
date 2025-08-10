@@ -134,8 +134,8 @@ struct XRGraphicDotDeviationTests {
         let controller = MockGraphicGeometrySource()
         let dotDeviation = try buildTestObject(controller: controller)
 
-        dotDeviation.setDotSize(dotSize)
+        dotDeviation.dotSize = dotSize
 
-        #expect(dotDeviation.dotSize().isApproximatelyEqual(to: dotSize, relativeTolerance: 0.001))
+        #expect(dotDeviation.dotSize.isApproximatelyEqual(to: dotSize, relativeTolerance: 0.001))
     }
 }

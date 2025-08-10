@@ -29,7 +29,7 @@
 #import "XRGraphicDot.h"
 #import "XRGeometryController.h"
 
-static NSString * const KVOKeyDotSize = @"DotSize";
+static NSString * const KVOKeyDotSize = @"dotSize";
 
 @interface XRGraphicDot()
 @property (assign, nonatomic) int angleIncrement;

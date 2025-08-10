@@ -63,6 +63,7 @@ static NSString const * XRGraphicKeyGeometryPercent = @"_geometryPercent";
 static NSString const * XRGraphicKeyIsGeometryPercent = @"_isGeometryPercent";
 static NSString const * XRGraphicKeyIsPercent = @"_isPercent";
 static NSString const * XRGraphicKeyIsFixedCount = @"_isFixedCount";
+static NSString const * XRGraphicKeyMean = @"_mean";
 
 static NSString const * GraphicTypeGraphic = @"Graphic";
 static NSString const * GraphicTypeCircle = @"Circle";

@@ -91,7 +91,7 @@ struct XRGraphicDotTests {
     @Test("Test setting and getting dot size")
     func testDotSize() throws {
         let controller = MockGraphicGeometrySource()
-        let dot = try buildBasicTestObject(controller: controller)
+        let dot = try buildTestObject(controller: controller)
         let newDotSize: Float = 10
         dot.dotSize = newDotSize
 
