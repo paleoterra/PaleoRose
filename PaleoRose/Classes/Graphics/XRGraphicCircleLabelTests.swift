@@ -9,7 +9,7 @@ import AppKit
 @testable import PaleoRose
 import Testing
 
-// swiftlint:disable line_length file_length type_body_length
+// swiftlint:disable line_length type_body_length
 struct XRGraphicCircleLabelTests {
     // MARK: - Test Setup
 
@@ -262,14 +262,14 @@ struct XRGraphicCircleLabelTests {
     @Test("Set geometry percent")
     func setGeometryPercent() throws {
         let controller = MockGraphicGeometrySource()
-        controller.mockGeometryMaxPercent = 100.0
+        controller.mockGeometryMaxPercent = 1.0
         let label = try buildTestObject(controller: controller)
 
         label.setGeometryPercent(0.7)
         var expectedSettings = defaultSettings()
         expectedSettings["_labelAngle"] = "0.000000"
-        expectedSettings["_geometryPercent"] = "70.000000"
-        expectedSettings["_percentSetting"] = "70.000000"
+        expectedSettings["_geometryPercent"] = "0.7000000"
+        expectedSettings["_percentSetting"] = "0.7000000"
 
         let settings = label.graphicSettings()
         try CommonUtilities
@@ -352,7 +352,7 @@ struct XRGraphicCircleLabelTests {
         // Given
         let controller = MockGraphicGeometrySource()
         controller.mockIsPercent = true
-        controller.mockGeometryMaxPercent = 100.0
+        controller.mockGeometryMaxPercent = 1.0
 
         let label = try buildTestObject(controller: controller)
         label.showLabel = true

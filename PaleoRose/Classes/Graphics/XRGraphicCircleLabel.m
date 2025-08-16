@@ -80,17 +80,30 @@ static NSString * const KVOKeyLabelFont = @"labelFont";
     }];
 }
 
+-(NSString *)labelStringForPercent:(float)percent {
+    return [NSString stringWithFormat:@"%3.1f %c",percent * 100.0,'%'];
+}
+
+-(NSString *)labelStringForFixedCount:(float)percent geometryMaxCount:(int)maxCount {
+    return [NSString stringWithFormat:@"%3.1f", (percent * (float)maxCount)];
+}
+
+-(NSString *)labelStringForCount:(int)count {
+    return [NSString stringWithFormat:@"%i", count];
+}
+
+
 -(void)computeLabelText {
 	NSRange aRange;
 	aRange.location = 0;
     self.isPercent = [self.geometryController isPercent];
 
 	if(self.isPercent)
-		_label = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%3.1f %c",(self.percentSetting * 100.0),'%']];
+        _label = [[NSMutableAttributedString alloc] initWithString: [self labelStringForPercent:self.percentSetting]];
 	else if(self.isFixedCount)
-        _label = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%3.1f",(self.percentSetting * (float)[self.geometryController geometryMaxCount])]];
+        _label = [[NSMutableAttributedString alloc] initWithString:[self labelStringForFixedCount: self.percentSetting geometryMaxCount: [self.geometryController geometryMaxCount]]];
 	else
-		_label = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%i",self.countSetting]];
+        _label = [[NSMutableAttributedString alloc] initWithString:[self labelStringForCount: self.countSetting]];
 
 	aRange.length = [_label length];
 	
@@ -118,12 +131,14 @@ static NSString * const KVOKeyLabelFont = @"labelFont";
 	[self computeTransform];
     
     if([self drawClosedCircle]) {
+        NSRect drawRect = NSMakeRect(0, 0, 0, 0);
         if([self circleBasedOnPercent]) {
-            self.drawingPath = [NSBezierPath bezierPathWithOvalInRect:[self.geometryController circleRectForPercent:self.percentSetting]];
+            drawRect = [self.geometryController circleRectForPercent:self.percentSetting];
 		}
 		else {
-            self.drawingPath = [NSBezierPath bezierPathWithOvalInRect:[self.geometryController circleRectForCount:self.countSetting]];
+            drawRect = [self.geometryController circleRectForCount:self.countSetting];
 		}
+        self.drawingPath = [NSBezierPath bezierPathWithOvalInRect: drawRect];
 	}
 	else {
 		float radius, angle;
