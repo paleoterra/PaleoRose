@@ -30,5 +30,6 @@
 #import "XRGraphic.h"
 @class XRGraphic;
 @interface XRGraphicKite : XRGraphic
+-(id)initWithController:(id<GraphicGeometrySource>)controller NS_UNAVAILABLE;
 -(id)initWithController:(id<GraphicGeometrySource>)controller withAngles:(NSArray *)angles forValues:(NSArray *)values;
 @end

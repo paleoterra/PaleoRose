@@ -7,10 +7,6 @@ import Testing
 struct XRGraphicDotDeviationTests {
     // MARK: - Test Setup
 
-    private func buildBasicTestObject(controller: MockGraphicGeometrySource) -> XRGraphicDotDeviation {
-        XRGraphicDotDeviation(controller: controller)
-    }
-
     private func buildTestObject(controller: MockGraphicGeometrySource, forIncrement: Int32 = 3, totalCount: Int32 = 32, valueCount: Int32 = 0, mean: Float = 0.0) throws -> XRGraphicDotDeviation {
         try #require(
             XRGraphicDotDeviation(
@@ -38,24 +34,6 @@ struct XRGraphicDotDeviationTests {
     }
 
     // MARK: - Initialization Tests
-
-    @Test("initWithController should initialize with default values")
-    func testInitWithController() throws {
-        // Given
-        let controller = MockGraphicGeometrySource()
-
-        // When
-        let dotDeviation = buildBasicTestObject(controller: controller)
-
-        let expectedSettings = defaultSettings()
-        let settings = dotDeviation.graphicSettings()
-
-        // Then
-        #expect(dotDeviation.lineWidth == 1.0, "Default lineWidth should be 1.0")
-        #expect(dotDeviation.strokeColor == .black, "Default strokeColor should be black")
-
-        try CommonUtilities.compareGraphicSettings(values: settings, expected: expectedSettings)
-    }
 
     @Test("initWithController:ForIncrement:valueCount:statics should initialize with correct values")
     func testInitWithControllerforIncrement() throws {

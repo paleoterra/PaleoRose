@@ -31,6 +31,6 @@
 #import "XRGraphic.h"
 @class XRGraphic;
 @interface XRGraphicPetal : XRGraphic
-
+-(id)initWithController:(id<GraphicGeometrySource>)controller NS_UNAVAILABLE;
 -(instancetype)initWithController:(id<GraphicGeometrySource>)controller forIncrement:(int)increment forValue:(NSNumber *)aNumber;
 @end

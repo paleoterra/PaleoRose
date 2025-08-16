@@ -30,7 +30,8 @@
 
 #import "XRGraphic.h"
 @class XRGraphic;
-@interface XRGraphicHistogram : XRGraphic 
+@interface XRGraphicHistogram : XRGraphic
 
+-(id)initWithController:(id<GraphicGeometrySource>)controller NS_UNAVAILABLE;
 -(instancetype)initWithController:(id<GraphicGeometrySource>)controller forIncrement:(int)increment forValue:(NSNumber *)aNumber;
 @end

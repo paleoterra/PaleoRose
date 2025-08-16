@@ -3,7 +3,7 @@ import Numerics
 @testable import PaleoRose
 import Testing
 
-// swiftlint:disable type_body_length file_length
+// swiftlint:disable type_body_length
 struct XRGraphicLineTests {
     // MARK: - Test Setup
 
@@ -370,9 +370,8 @@ struct XRGraphicLineTests {
         line.spokeAngle = params.angle
 
         let transform = try #require(line.labelTransform)
-//        print("***\n\(angle)\n\(String(describing: transform))\n***\n")
         params.transform.assertEqual(to: transform)
     }
 }
 
-// swiftlint:enable type_body_length file_length
+// swiftlint:enable type_body_length

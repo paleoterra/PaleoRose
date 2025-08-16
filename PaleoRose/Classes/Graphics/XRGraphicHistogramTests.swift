@@ -7,10 +7,6 @@ import Testing
 struct XRGraphicHistogramTests {
     // MARK: - Test Setup
 
-    private func buildBasicTestObject(controller: MockGraphicGeometrySource) -> XRGraphicHistogram {
-        XRGraphicHistogram(controller: controller)
-    }
-
     private func buildTestObject(controller: MockGraphicGeometrySource, increment: Int32 = 0, value: Int32 = 1) throws -> XRGraphicHistogram {
         try #require(
             XRGraphicHistogram(
@@ -34,25 +30,6 @@ struct XRGraphicHistogramTests {
     }
 
     // MARK: - Initialization Tests
-
-    @Test("basic initWithController should initialize with default values")
-    func testBasicInitWithController() throws {
-        // Given
-        let controller = MockGraphicGeometrySource()
-
-        // When
-        let histogram = buildBasicTestObject(controller: controller)
-
-        let expectedSettings = defaultSettings()
-        let settings = histogram.graphicSettings()
-
-        // Then
-        try CommonUtilities
-            .compareGraphicSettings(
-                values: settings,
-                expected: expectedSettings
-            )
-    }
 
     @Test("correct InitWithController initialization")
     func testInitWithController() throws {

@@ -36,10 +36,13 @@ extension NSBezierPath {
             switch type {
             case .moveTo, .lineTo:
                 points.append(pointsBuffer[0])
+
             case .curveTo:
                 points.append(contentsOf: pointsBuffer.prefix(3))
+
             case .closePath, .cubicCurveTo, .quadraticCurveTo:
                 break
+
             @unknown default:
                 break
             }

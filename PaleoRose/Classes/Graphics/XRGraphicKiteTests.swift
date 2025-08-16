@@ -7,10 +7,6 @@ import Testing
 struct XRGraphicKiteTests {
     // MARK: - Test Setup
 
-    private func buildBasicTestObject(controller: MockGraphicGeometrySource) -> XRGraphicKite {
-        XRGraphicKite(controller: controller)
-    }
-
     private func buildTestObject(controller: MockGraphicGeometrySource, angles: [Double] = [], values: [Double] = []) throws -> XRGraphicKite {
         try #require(
             XRGraphicKite(
@@ -31,23 +27,6 @@ struct XRGraphicKiteTests {
     }
 
     // MARK: - Initialization Tests
-
-    @Test("basic initWithController should initialize with default values")
-    func testBasicInitWithController() throws {
-        // Given
-        let controller = MockGraphicGeometrySource()
-
-        // When
-        let kite = buildBasicTestObject(controller: controller)
-        var expectedSettings = defaultSettings()
-        expectedSettings["_fillColor"] = NSColor.black
-
-        let settings = kite.graphicSettings()
-        // Then
-        #expect(kite.lineWidth == 1.0, "Default lineWidth should be 1.0")
-
-        try CommonUtilities.compareGraphicSettings(values: settings, expected: expectedSettings)
-    }
 
     @Test("initWithController should initialize with default values")
     func testInitWithController() throws {

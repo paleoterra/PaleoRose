@@ -14,10 +14,6 @@ struct XRGraphicDotTests {
         let totalCount: Int32
     }
 
-    private func buildBasicTestObject(controller: MockGraphicGeometrySource) throws -> XRGraphicDot {
-        XRGraphicDot(controller: controller)
-    }
-
     private func buildTestObject(controller: MockGraphicGeometrySource, forIncrement: Int32 = 0, valueCount: Int32 = 0, totalCount: Int32 = 0) throws -> XRGraphicDot {
         try #require(XRGraphicDot(
             controller: controller,
@@ -41,22 +37,6 @@ struct XRGraphicDotTests {
     }
 
     // MARK: - Initialization Tests
-
-    @Test("initWithController basic version should initialize with default values")
-    func testBasicInitWithController() throws {
-        // Given
-        let controller = MockGraphicGeometrySource()
-
-        // When
-        let dot = try buildBasicTestObject(controller: controller)
-
-        let settings = dot.graphicSettings()
-        let expectedSettings = defaultSettings()
-
-        // Then
-
-        try CommonUtilities.compareGraphicSettings(values: settings, expected: expectedSettings)
-    }
 
     @Test("initWithController should initialize with default values",
           arguments: [

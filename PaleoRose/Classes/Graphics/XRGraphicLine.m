@@ -126,11 +126,8 @@ static NSString * const KVOKeySpokeNumberCompassPoint = @"spokeNumberCompassPoin
 #pragma mark - Label Handling
 
 - (void)setLineLabel {
-    // Handle spoke point only mode
     if (_spokePointOnly) {
-        // In point-only mode, show N/S/E/W for cardinal directions when in compass point mode
         if (_spokeNumberCompassPoint == XRGraphicLineNumberPoints) {
-            // For compass point mode, only show N/S/E/W for exact cardinal directions
             if (self.spokeAngle == 0.0 || self.spokeAngle == 90.0 || 
                 self.spokeAngle == 180.0 || self.spokeAngle == 270.0 || 
                 self.spokeAngle == 360.0) {
@@ -138,8 +135,7 @@ static NSString * const KVOKeySpokeNumberCompassPoint = @"spokeNumberCompassPoin
                 [self calculateLabelTransform];
                 return;
             }
-        } 
-        // For non-compass point mode, show the angle value for cardinal directions
+        }
         else if (self.spokeAngle == 0.0 || self.spokeAngle == 90.0 || 
                 self.spokeAngle == 180.0 || self.spokeAngle == 270.0 || 
                 self.spokeAngle == 360.0) {
@@ -147,29 +143,24 @@ static NSString * const KVOKeySpokeNumberCompassPoint = @"spokeNumberCompassPoin
             [self calculateLabelTransform];
             return;
         }
-        
-        // For all other cases in point-only mode, show empty string
+
         _showLabel = NO;
         _lineLabel = [[NSMutableAttributedString alloc] initWithString:@""];
         [self calculateLabelTransform];
         return;
     }
-    // Handle compass points (N/S/E/W) when in compass point mode
     else if (_spokeNumberCompassPoint == XRGraphicLineNumberPoints && 
              (self.spokeAngle == 0.0 || self.spokeAngle == 90.0 || 
               self.spokeAngle == 180.0 || self.spokeAngle == 270.0 || 
               self.spokeAngle == 360.0)) {
         [self setCompassPointLabel];
     }
-    // Handle quadrant-based numbering
     else if (_spokeNumberOrder == XRGraphicLineNumberingOrderQuad) {
         [self setQuadrantBasedLabel];
     }
-    // Handle 360-degree numbering
     else if (_spokeNumberOrder == XRGraphicLineNumberingOrder360) {
         [self setLabelForAngle:self.spokeAngle];
     }
-    // Default case - show the angle as is
     else {
         [self setLabelForAngle:self.spokeAngle];
     }
@@ -213,7 +204,6 @@ static NSString * const KVOKeySpokeNumberCompassPoint = @"spokeNumberCompassPoin
 }
 
 - (void)setLabelForAngle:(double)angle {
-    // Match the original behavior for integer vs. floating point display
     if (angle == floor(angle)) {
         _lineLabel = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d", (int)angle]];
     } else {
@@ -272,7 +262,6 @@ static NSString * const KVOKeySpokeNumberCompassPoint = @"spokeNumberCompassPoin
     [_labelTransform translateXBy:displacement yBy:0.0];
 
     //step 4. final rotation
-
     [_labelTransform rotateByDegrees:rotationAngle];
 }
 
@@ -282,8 +271,7 @@ static NSString * const KVOKeySpokeNumberCompassPoint = @"spokeNumberCompassPoin
 
     float displacement = [self.geometryController unrestrictedRadiusOfRelativePercent:(_relativePercent + 0.1)];
     float rotationAngle = 90-self.spokeAngle;
-    //[_labelTransform translateXBy:(-0.5*theSize.width) yBy:(-0.5*theSize.height)];
-    //transform 1.  Shift the text down by half the height.
+
     if((double)self.spokeAngle == 0.0)
     {
         [_labelTransform translateXBy:(-0.5*theSize.width) yBy:displacement];

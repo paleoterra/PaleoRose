@@ -99,7 +99,10 @@ struct InMemoryStoreIntegrationTest {
     }
 
     private func assertDatabaseContentMatchesSampleFile(database: OpaquePointer) throws {
-        let tables: [TableSchema] = try SQLiteInterface().executeCodableQuery(sqlite: database, query: TableSchema.storedValues())
+        let tables: [TableSchema] = try SQLiteInterface().executeCodableQuery(
+            sqlite: database,
+            query: TableSchema.storedValues()
+        )
         let tableNames = tables.map(\.name)
         let expectedTableNames = [
             "_windowController",

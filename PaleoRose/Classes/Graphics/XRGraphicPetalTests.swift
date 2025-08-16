@@ -7,10 +7,6 @@ import Testing
 struct XRGraphicPetalTests {
     // MARK: - Test Setup
 
-    private func buildBasicTestObject(controller: MockGraphicGeometrySource) -> XRGraphicPetal {
-        XRGraphicPetal(controller: controller)
-    }
-
     private func builtTestObject(controller: MockGraphicGeometrySource, forIncrement: Int32 = 0, forValue: Int32 = 0) throws -> XRGraphicPetal {
         try #require(XRGraphicPetal(
             controller: controller,
@@ -33,21 +29,6 @@ struct XRGraphicPetalTests {
     }
 
     // MARK: - Initialization Tests
-
-    @Test("basic initWithController should initialize with default values")
-    func testBasicInitWithController() throws {
-        // Given
-        let controller = MockGraphicGeometrySource()
-
-        // When
-        let petal = buildBasicTestObject(controller: controller)
-        let expectedSettings = defaultSettings()
-
-        // Then
-        let settings = petal.graphicSettings()
-
-        try CommonUtilities.compareGraphicSettings(values: settings, expected: expectedSettings)
-    }
 
     @Test("initWithController should initialize with default values and configure")
     func testInitWithController() throws {

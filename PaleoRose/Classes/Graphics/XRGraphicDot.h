@@ -32,7 +32,7 @@
 @class XRGraphic;
 @interface XRGraphicDot : XRGraphic
 @property (assign, nonatomic) float dotSize;
-
+-(id)initWithController:(id<GraphicGeometrySource>)controller NS_UNAVAILABLE;
 -(instancetype)initWithController:(id<GraphicGeometrySource>)controller forIncrement:(int)increment valueCount:(int)count totalCount:(int)total;
 
 @end

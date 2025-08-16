@@ -43,6 +43,7 @@ extension AffineTransform {
         case parallel180Degree
     }
 
+    // swiftlint:disable:next function_body_length
     static func unitTestTranform(_ transform: TestTransform) -> AffineTransform {
         switch transform {
         case .horizontal10Degree:
