@@ -133,7 +133,7 @@ struct XRGraphicCircleTests {
         // Given
         let controller = MockGraphicGeometrySource()
         let circle = try buildTestObject(controller: controller)
-        let testPercent: Float = 60.0
+        let testPercent: Float = 0.60
 
         // When
         circle.percentSetting = testPercent
@@ -287,7 +287,7 @@ struct XRGraphicCircleTests {
         // Given
         let controller = MockGraphicGeometrySource()
         let circle = try buildTestObject(controller: controller)
-        let expectedPercent: Float = 75.5
+        let expectedPercent: Float = 0.75
 
         // When
         circle.percentSetting = expectedPercent
@@ -318,11 +318,11 @@ struct XRGraphicCircleTests {
         // Given
         let controller = MockGraphicGeometrySource()
         let circle = try buildTestObject(controller: controller)
-        circle.percentSetting = 75.5
+        circle.percentSetting = 0.755
         var expectedSettings = defaultGraphicSettings()
         expectedSettings["_isPercent"] = "YES"
-        expectedSettings["_percentSetting"] = "75.500000"
-        expectedSettings["_geometryPercent"] = "75.500000"
+        expectedSettings["_percentSetting"] = "0.755000"
+        expectedSettings["_geometryPercent"] = "0.755000"
         try CommonUtilities
             .compareGraphicSettings(
                 values: circle.graphicSettings(),

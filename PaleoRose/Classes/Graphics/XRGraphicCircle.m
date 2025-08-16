@@ -73,15 +73,13 @@ static NSString * const KVOKeyPercentSetting = @"percentSetting";
 }
 
 -(void)calculateGeometry {
-	
-	if([self.geometryController isPercent])
-	{
-		self.drawingPath = [NSBezierPath bezierPathWithOvalInRect:[self.geometryController circleRectForPercent:_percentSetting]];
+    NSRect circleRect = NSMakeRect(0, 0, 0, 0);
+	if([self.geometryController isPercent]) {
+        circleRect = [self.geometryController circleRectForPercent:_percentSetting];
+	} else {
+        circleRect = [self.geometryController circleRectForCount:_countSetting];
 	}
-	else
-	{
-		self.drawingPath = [NSBezierPath bezierPathWithOvalInRect:[self.geometryController circleRectForCount:_countSetting]];
-	}
+    self.drawingPath = [NSBezierPath bezierPathWithOvalInRect:circleRect];
     [self.drawingPath setLineWidth:self.lineWidth];
 }
 

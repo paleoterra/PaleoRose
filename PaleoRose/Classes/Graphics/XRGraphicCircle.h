@@ -41,6 +41,4 @@
 -(instancetype)initCoreCircleWithController:(id<GraphicGeometrySource>)aController;//for cores (0 values) only.  Use the standard initializer for all others
 
 -(void)setGeometryPercent:(float)percent;
-
-
 @end
