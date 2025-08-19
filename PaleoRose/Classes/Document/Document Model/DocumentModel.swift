@@ -122,7 +122,7 @@ class DocumentModel: NSObject, InMemoryStoreDelegate {
     // MARK: - Read From Store
 
     @objc func readFromStore(completion: @escaping () -> Void) {
-        try inMemoryStore.readFromStore { _ in
+        inMemoryStore.readFromStore { _ in
             completion()
         }
     }
