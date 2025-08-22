@@ -13,7 +13,6 @@
 #import "XRGraphic.h"
 #import "XRGraphicCircle.h"
 #import "XRGraphicCircleLabel.h"
-#import "XRGraphicDotDeviation.h"
 #import "XRGraphicHistogram.h"
 #import "XRGraphicLine.h"
 #import "LITMArrowHead.h"

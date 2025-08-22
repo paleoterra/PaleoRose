@@ -32,7 +32,6 @@
 #import "XRGraphicKite.h"
 #import "XRGraphicDot.h"
 #import "XRGraphicHistogram.h"
-#import "XRGraphicDotDeviation.h"
 #import "XRStatistic.h"
 #import "XRGraphic.h"
 #import "XRGraphicCircle.h"
