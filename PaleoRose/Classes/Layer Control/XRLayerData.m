@@ -30,7 +30,6 @@
 #import "XRDataSet.h"
 #import "XRGeometryController.h"
 #import "XRGraphicKite.h"
-#import "XRGraphicPetal.h"
 #import "XRGraphicDot.h"
 #import "XRGraphicHistogram.h"
 #import "XRGraphicDotDeviation.h"
@@ -39,6 +38,7 @@
 #import "XRGraphicCircle.h"
 #import "sqlite3.h"
 #import "LITMXMLTree.h"
+#import <PaleoRose-Swift.h>
 
 @implementation XRLayerData
 +(void)initialize

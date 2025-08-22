@@ -1,12 +1,10 @@
 //
-//  XRGraphicPetal.h
-//  XRose
-//
-//  Created by Tom Moore on Mon Jan 26 2004.
+// CGFloat+Extensions.swift
+// PaleoRose
 //
 // MIT License
 //
-// Copyright (c) 2004 to present Thomas L. Moore.
+// Copyright (c) 2025 to present Thomas L. Moore.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,11 +24,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#import <Cocoa/Cocoa.h>
+extension CGFloat {
+    func cgAngleFromPolar() -> CGFloat {
+        90 - self
+    }
 
-#import "XRGraphic.h"
-@class XRGraphic;
-@interface XRGraphicPetal : XRGraphic
--(id)initWithController:(id<GraphicGeometrySource>)controller NS_UNAVAILABLE;
--(instancetype)initWithController:(id<GraphicGeometrySource>)controller forIncrement:(int)increment forValue:(NSNumber *)aNumber;
-@end
+    func normalizePositiveAngle() -> CGFloat {
+        var angle = self
+        while angle < 0 {
+            angle += 360.0
+        }
+        while angle > 360 {
+            angle -= 360
+        }
+        return angle
+    }
+}
