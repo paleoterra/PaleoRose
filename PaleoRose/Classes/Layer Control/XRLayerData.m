@@ -29,7 +29,6 @@
 #import "XRLayerData.h"
 #import "XRDataSet.h"
 #import "XRGeometryController.h"
-#import "XRGraphicKite.h"
 #import "XRGraphicHistogram.h"
 #import "XRStatistic.h"
 #import "XRGraphic.h"

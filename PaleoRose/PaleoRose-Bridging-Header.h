@@ -16,5 +16,4 @@
 #import "XRGraphicHistogram.h"
 #import "XRGraphicLine.h"
 #import "LITMArrowHead.h"
-#import "XRGraphicKite.h"
 #import "GraphicGeometrySource.h"

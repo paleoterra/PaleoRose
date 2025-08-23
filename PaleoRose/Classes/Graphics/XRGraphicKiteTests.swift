@@ -11,8 +11,8 @@ struct XRGraphicKiteTests {
         try #require(
             XRGraphicKite(
                 controller: controller,
-                withAngles: angles,
-                forValues: values
+                angles: angles,
+                values: values
             )
         )
     }
