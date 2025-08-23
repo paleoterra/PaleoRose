@@ -30,7 +30,6 @@
 #import "XRDataSet.h"
 #import "XRGeometryController.h"
 #import "XRGraphicKite.h"
-#import "XRGraphicDot.h"
 #import "XRGraphicHistogram.h"
 #import "XRStatistic.h"
 #import "XRGraphic.h"

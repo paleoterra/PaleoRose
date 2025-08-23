@@ -63,6 +63,7 @@
 		B43D613A06345207001B863E /* FStatisticController.h in Headers */ = {isa = PBXBuildFile; fileRef = B43D613806345207001B863E /* FStatisticController.h */; };
 		B440D5582E580FF3000D98A0 /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B440D5572E580FE9000D98A0 /* CGFloat+Extensions.swift */; };
 		B440D55A2E589B69000D98A0 /* XRGraphicDotDeviation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B440D5592E589B69000D98A0 /* XRGraphicDotDeviation.swift */; };
+		B440D55C2E594369000D98A0 /* XRGraphicDot.swift in Sources */ = {isa = PBXBuildFile; fileRef = B440D55B2E594369000D98A0 /* XRGraphicDot.swift */; };
 		B447A960062B002B00154420 /* logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B447A95F062B002B00154420 /* logo.jpg */; };
 		B44B08A705CFE9D200C6E8D3 /* xroseapp.icns in Resources */ = {isa = PBXBuildFile; fileRef = B44B08A505CFE9D200C6E8D3 /* xroseapp.icns */; };
 		B44B08A805CFE9D200C6E8D3 /* xroseDocIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = B44B08A605CFE9D200C6E8D3 /* xroseDocIcon.icns */; };
@@ -193,8 +194,6 @@
 		B4EE8F7905C5E0A9001BACD3 /* XRGraphicLine.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EE8F7705C5E0A9001BACD3 /* XRGraphicLine.m */; };
 		B4F08861060914150000CF7A /* XRVStatCreatePanelController.h in Headers */ = {isa = PBXBuildFile; fileRef = B4F0885F060914150000CF7A /* XRVStatCreatePanelController.h */; };
 		B4F08862060914150000CF7A /* XRVStatCreatePanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F08860060914150000CF7A /* XRVStatCreatePanelController.m */; };
-		B4F257AD05C58578008591BE /* XRGraphicDot.h in Headers */ = {isa = PBXBuildFile; fileRef = B4F257AB05C58578008591BE /* XRGraphicDot.h */; };
-		B4F257AE05C58578008591BE /* XRGraphicDot.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F257AC05C58578008591BE /* XRGraphicDot.m */; };
 		B4F2595105C58F28008591BE /* XRGraphicHistogram.h in Headers */ = {isa = PBXBuildFile; fileRef = B4F2594F05C58F28008591BE /* XRGraphicHistogram.h */; };
 		B4F2595205C58F28008591BE /* XRGraphicHistogram.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F2595005C58F28008591BE /* XRGraphicHistogram.m */; };
 		B4F2B1892C97CB300017E717 /* LayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F2B1872C97CB300017E717 /* LayerData.swift */; };
@@ -355,6 +354,7 @@
 		B43D613806345207001B863E /* FStatisticController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = FStatisticController.h; sourceTree = "<group>"; };
 		B440D5572E580FE9000D98A0 /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
 		B440D5592E589B69000D98A0 /* XRGraphicDotDeviation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicDotDeviation.swift; sourceTree = "<group>"; };
+		B440D55B2E594369000D98A0 /* XRGraphicDot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicDot.swift; sourceTree = "<group>"; };
 		B441FEFB05CB725300F9A0F9 /* XRStatistic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRStatistic.h; sourceTree = "<group>"; };
 		B441FEFC05CB725300F9A0F9 /* XRStatistic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRStatistic.m; sourceTree = "<group>"; };
 		B442674F2B3F881300749923 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -514,8 +514,6 @@
 		B4EE8F7705C5E0A9001BACD3 /* XRGraphicLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRGraphicLine.m; sourceTree = "<group>"; };
 		B4F0885F060914150000CF7A /* XRVStatCreatePanelController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRVStatCreatePanelController.h; sourceTree = "<group>"; };
 		B4F08860060914150000CF7A /* XRVStatCreatePanelController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XRVStatCreatePanelController.m; sourceTree = "<group>"; };
-		B4F257AB05C58578008591BE /* XRGraphicDot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRGraphicDot.h; sourceTree = "<group>"; };
-		B4F257AC05C58578008591BE /* XRGraphicDot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRGraphicDot.m; sourceTree = "<group>"; };
 		B4F2594F05C58F28008591BE /* XRGraphicHistogram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRGraphicHistogram.h; sourceTree = "<group>"; };
 		B4F2595005C58F28008591BE /* XRGraphicHistogram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRGraphicHistogram.m; sourceTree = "<group>"; };
 		B4F2B17E2C97CB300017E717 /* WindowControllerSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowControllerSize.swift; sourceTree = "<group>"; };
@@ -788,8 +786,7 @@
 				B4A23EFA2E196D1800EDE135 /* XRGraphicKiteTests.swift */,
 				B46002892E54135600DD41C8 /* XRGraphicPetal.swift */,
 				B4A23EFE2E19C49E00EDE135 /* XRGraphicPetalTests.swift */,
-				B4F257AB05C58578008591BE /* XRGraphicDot.h */,
-				B4F257AC05C58578008591BE /* XRGraphicDot.m */,
+				B440D55B2E594369000D98A0 /* XRGraphicDot.swift */,
 				B4A23EF62E18951700EDE135 /* XRGraphicDotTests.swift */,
 				B4F2594F05C58F28008591BE /* XRGraphicHistogram.h */,
 				B4F2595005C58F28008591BE /* XRGraphicHistogram.m */,
@@ -1242,7 +1239,6 @@
 				B411E84C05C397D000C22F3E /* XREncodingAccessoryView.h in Headers */,
 				B4815B7005C44C0200403360 /* XRLayerData.h in Headers */,
 				B461B87105C4E1DA00738D23 /* XRGraphicKite.h in Headers */,
-				B4F257AD05C58578008591BE /* XRGraphicDot.h in Headers */,
 				B4F2595105C58F28008591BE /* XRGraphicHistogram.h in Headers */,
 				B4A82F962A07F87A00790052 /* LITMXMLNodeProtocol.h in Headers */,
 				B4E2DE8905C5BD6500714F6F /* XRLayerGrid.h in Headers */,
@@ -1556,9 +1552,9 @@
 				B440D5582E580FF3000D98A0 /* CGFloat+Extensions.swift in Sources */,
 				B461B87205C4E1DA00738D23 /* XRGraphicKite.m in Sources */,
 				B4A82F9C2A07F8A400790052 /* LITMXMLBinaryEncoding.m in Sources */,
-				B4F257AE05C58578008591BE /* XRGraphicDot.m in Sources */,
 				B41C86B62DE4BEE20053C9C9 /* DefaultsStorage.swift in Sources */,
 				B4A82FAD2A07FB8800790052 /* LITMArrowHead.m in Sources */,
+				B440D55C2E594369000D98A0 /* XRGraphicDot.swift in Sources */,
 				B4F2595205C58F28008591BE /* XRGraphicHistogram.m in Sources */,
 				B4866BF42CAE02C900319712 /* StoreProtocol.swift in Sources */,
 				B4DB28E32D22450300FC6A49 /* Encoding.swift in Sources */,
