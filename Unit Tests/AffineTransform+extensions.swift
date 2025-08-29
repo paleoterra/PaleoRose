@@ -193,4 +193,35 @@ extension AffineTransform {
             sourceLocation: sourceLocation
         )
     }
+
+    func assertEqual(
+        to other: NSAffineTransform?,
+        fileID: String = #fileID,
+        filePath: String = #filePath,
+        line: Int = #line,
+        column: Int = #column
+    ) {
+        guard let other else {
+            #expect(Bool(false), "NSAffineTransform is nil", sourceLocation: SourceLocation(
+                fileID: fileID,
+                filePath: filePath,
+                line: line,
+                column: column
+            ))
+            return
+        }
+
+        // Convert NSAffineTransform to AffineTransform
+        let transform = other.transformStruct
+        let otherAffine = AffineTransform(
+            m11: transform.m11,
+            m12: transform.m12,
+            m21: transform.m21,
+            m22: transform.m22,
+            tX: transform.tX,
+            tY: transform.tY
+        )
+
+        assertEqual(to: otherAffine, fileID: fileID, filePath: filePath, line: line, column: column)
+    }
 }

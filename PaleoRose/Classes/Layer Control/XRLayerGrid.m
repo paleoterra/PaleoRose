@@ -30,7 +30,7 @@
 #import "XRGraphicCircle.h"
 #import "XRGraphicCircleLabel.h"
 #import "XRGeometryController.h"
-#import "XRGraphicLine.h"
+#import "PaleoRose-Swift.h"
 #import "XRGraphic.h"
 #import "sqlite3.h"
 #import "LITMXMLTree.h"
@@ -115,7 +115,7 @@
 		_showTicks = NO;
 		_minorTicks = NO;
 		_spokeNumberAlign = XRGraphicLineNumberAlignHorizontal;
-		_spokeNumberCompassPoint = XRGraphicLineNumberPoints;
+		_spokeNumberCompassPoint = XRGraphicLineNumberCompassPointPoints;
 		_spokeNumberOrder = XRGraphicLineNumberingOrderQuad;
 		_showLabels = NO;
 		_showRingLabels = NO;

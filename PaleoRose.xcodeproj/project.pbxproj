@@ -64,6 +64,7 @@
 		B440D5582E580FF3000D98A0 /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B440D5572E580FE9000D98A0 /* CGFloat+Extensions.swift */; };
 		B440D55A2E589B69000D98A0 /* XRGraphicDotDeviation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B440D5592E589B69000D98A0 /* XRGraphicDotDeviation.swift */; };
 		B440D55C2E594369000D98A0 /* XRGraphicDot.swift in Sources */ = {isa = PBXBuildFile; fileRef = B440D55B2E594369000D98A0 /* XRGraphicDot.swift */; };
+		25B505F6A6A844FBA2747DF6 /* XRGraphicLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6339D5B71C2480BB4DC0F6C /* XRGraphicLine.swift */; };
 		B440D55E2E59444C000D98A0 /* XRGraphicKite.swift in Sources */ = {isa = PBXBuildFile; fileRef = B440D55D2E59444C000D98A0 /* XRGraphicKite.swift */; };
 		B447A960062B002B00154420 /* logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B447A95F062B002B00154420 /* logo.jpg */; };
 		B44B08A705CFE9D200C6E8D3 /* xroseapp.icns in Resources */ = {isa = PBXBuildFile; fileRef = B44B08A505CFE9D200C6E8D3 /* xroseapp.icns */; };
@@ -354,6 +355,7 @@
 		B440D5572E580FE9000D98A0 /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
 		B440D5592E589B69000D98A0 /* XRGraphicDotDeviation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicDotDeviation.swift; sourceTree = "<group>"; };
 		B440D55B2E594369000D98A0 /* XRGraphicDot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicDot.swift; sourceTree = "<group>"; };
+		F6339D5B71C2480BB4DC0F6C /* XRGraphicLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicLine.swift; sourceTree = "<group>"; };
 		B440D55D2E59444C000D98A0 /* XRGraphicKite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicKite.swift; sourceTree = "<group>"; };
 		B441FEFB05CB725300F9A0F9 /* XRStatistic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRStatistic.h; sourceTree = "<group>"; };
 		B441FEFC05CB725300F9A0F9 /* XRStatistic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRStatistic.m; sourceTree = "<group>"; };
@@ -776,8 +778,7 @@
 				B4950EFF05DD286A00C711DC /* XRGraphicCircleLabel.m */,
 				B4A23FC92E2C44FC00EDE135 /* XRGraphicCircleLabelTestCases.swift */,
 				B48430852E1193E500E126C0 /* XRGraphicCircleLabelTests.swift */,
-				B4EE8F7605C5E0A9001BACD3 /* XRGraphicLine.h */,
-				B4EE8F7705C5E0A9001BACD3 /* XRGraphicLine.m */,
+				F6339D5B71C2480BB4DC0F6C /* XRGraphicLine.swift */,
 				B4A23EFC2E19960100EDE135 /* XRGraphicLineTests.swift */,
 				B440D55D2E59444C000D98A0 /* XRGraphicKite.swift */,
 				B4A23EFA2E196D1800EDE135 /* XRGraphicKiteTests.swift */,
@@ -1239,7 +1240,6 @@
 				B4A82F962A07F87A00790052 /* LITMXMLNodeProtocol.h in Headers */,
 				B4E2DE8905C5BD6500714F6F /* XRLayerGrid.h in Headers */,
 				B4A82FAC2A07FB8800790052 /* LITMArrowHead.h in Headers */,
-				B4EE8F7805C5E0A9001BACD3 /* XRGraphicLine.h in Headers */,
 				B47CA2F105C6C5470060A30C /* XRPropertyInspector.h in Headers */,
 				B47CA37A05C6CB150060A30C /* XREmptyInspectorController.h in Headers */,
 				B4A23FC62E28389D00EDE135 /* GraphicGeometrySource.h in Headers */,
@@ -1555,7 +1555,7 @@
 				B4DB28E32D22450300FC6A49 /* Encoding.swift in Sources */,
 				B4E2DE8A05C5BD6500714F6F /* XRLayerGrid.m in Sources */,
 				B423AB6D2D472DB1002474C7 /* MockInMemoryStoreDelegate.swift in Sources */,
-				B4EE8F7905C5E0A9001BACD3 /* XRGraphicLine.m in Sources */,
+				25B505F6A6A844FBA2747DF6 /* XRGraphicLine.swift in Sources */,
 				B47CA2F205C6C5470060A30C /* XRPropertyInspector.m in Sources */,
 				B47CA37905C6CB150060A30C /* XREmptyInspectorController.m in Sources */,
 				B47CA41405C6D56D0060A30C /* XRGeometryInspector.m in Sources */,

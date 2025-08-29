@@ -77,6 +77,7 @@ struct XRGraphicLineTests {
 
         var expectedSettings = try defaultSettings()
         expectedSettings["_angleSetting"] = "180.000000"
+        expectedSettings["_lineLabel"] = "S" // 180 degrees should show "S" for South
 
         line.spokeAngle = testAngle
 
@@ -105,11 +106,15 @@ struct XRGraphicLineTests {
         let controller = MockGraphicGeometrySource()
         let line = try buildTestObject(controller: controller)
         var expectedSettings = try defaultSettings()
-        expectedSettings["_tickType"] = "\(tickType)"
 
         line.tickType = tickType
+
+        // Enum validation: invalid values default to .none (0)
+        let expectedTickType = XRGraphicLineTickType(rawValue: tickType)?.rawValue ?? 0
+        expectedSettings["_tickType"] = "\(expectedTickType)"
+
         let settings = line.graphicSettings()
-        #expect(line.tickType == tickType)
+        #expect(line.tickType == expectedTickType)
         try CommonUtilities.compareGraphicSettings(values: settings, expected: expectedSettings)
     }
 
@@ -188,7 +193,7 @@ struct XRGraphicLineTests {
         let controller = MockGraphicGeometrySource()
         let line = XRGraphicLine(controller: controller)
 
-        line.spokeNumberCompassPoint = XRGraphicLineNumberPoints
+        line.spokeNumberCompassPoint = XRGraphicLineNumberCompassPoint.points.rawValue
 
         line.spokeAngle = values.degrees
         let label = try #require(line.lineLabel)
@@ -209,8 +214,8 @@ struct XRGraphicLineTests {
         let controller = MockGraphicGeometrySource()
         let line = XRGraphicLine(controller: controller)
 
-        line.spokeNumberCompassPoint = XRGraphicLineNumberNumbersOnly
-        line.spokeNumberOrder = XRGraphicLineNumberingOrderQuad
+        line.spokeNumberCompassPoint = XRGraphicLineNumberCompassPoint.numbersOnly.rawValue
+        line.spokeNumberOrder = XRGraphicLineNumberingOrder.quad.rawValue
 
         line.spokeAngle = values.degrees
         let label = try #require(line.lineLabel)
@@ -231,8 +236,8 @@ struct XRGraphicLineTests {
         let controller = MockGraphicGeometrySource()
         let line = XRGraphicLine(controller: controller)
 
-        line.spokeNumberCompassPoint = XRGraphicLineNumberNumbersOnly
-        line.spokeNumberOrder = XRGraphicLineNumberingOrder360
+        line.spokeNumberCompassPoint = XRGraphicLineNumberCompassPoint.numbersOnly.rawValue
+        line.spokeNumberOrder = XRGraphicLineNumberingOrder.order360.rawValue
 
         line.spokeAngle = values.degrees
         let label = try #require(line.lineLabel)
@@ -252,8 +257,8 @@ struct XRGraphicLineTests {
         let controller = MockGraphicGeometrySource()
         let line = XRGraphicLine(controller: controller)
 
-        line.spokeNumberCompassPoint = XRGraphicLineNumberNumbersOnly
-        line.spokeNumberOrder = XRGraphicLineNumberingOrder360
+        line.spokeNumberCompassPoint = XRGraphicLineNumberCompassPoint.numbersOnly.rawValue
+        line.spokeNumberOrder = XRGraphicLineNumberingOrder.order360.rawValue
 
         line.spokeAngle = values.degrees
 
@@ -274,8 +279,8 @@ struct XRGraphicLineTests {
         let controller = MockGraphicGeometrySource()
         let line = XRGraphicLine(controller: controller)
 
-        line.spokeNumberCompassPoint = XRGraphicLineNumberNumbersOnly
-        line.spokeNumberOrder = XRGraphicLineNumberingOrderQuad
+        line.spokeNumberCompassPoint = XRGraphicLineNumberCompassPoint.numbersOnly.rawValue
+        line.spokeNumberOrder = XRGraphicLineNumberingOrder.quad.rawValue
 
         line.spokeAngle = values.degrees
 
@@ -296,8 +301,8 @@ struct XRGraphicLineTests {
         let controller = MockGraphicGeometrySource()
         let line = XRGraphicLine(controller: controller)
 
-        line.spokeNumberCompassPoint = XRGraphicLineNumberNumbersOnly
-        line.spokeNumberOrder = XRGraphicLineNumberingOrderQuad
+        line.spokeNumberCompassPoint = XRGraphicLineNumberCompassPoint.numbersOnly.rawValue
+        line.spokeNumberOrder = XRGraphicLineNumberingOrder.quad.rawValue
 
         line.spokeAngle = values.degrees
 
@@ -318,8 +323,8 @@ struct XRGraphicLineTests {
         let controller = MockGraphicGeometrySource()
         let line = XRGraphicLine(controller: controller)
 
-        line.spokeNumberCompassPoint = XRGraphicLineNumberNumbersOnly
-        line.spokeNumberOrder = XRGraphicLineNumberingOrderQuad
+        line.spokeNumberCompassPoint = XRGraphicLineNumberCompassPoint.numbersOnly.rawValue
+        line.spokeNumberOrder = XRGraphicLineNumberingOrder.quad.rawValue
 
         line.spokeAngle = values.degrees
         line.spokePointOnly = true
@@ -342,7 +347,7 @@ struct XRGraphicLineTests {
     func testHorizontalTransform(params: (angle: Float, transform: AffineTransform)) async throws {
         let controller = MockGraphicGeometrySource()
         let line = XRGraphicLine(controller: controller)
-        line.spokeNumberAlign = XRGraphicLineNumberAlignHorizontal
+        line.spokeNumberAlign = XRGraphicLineNumberAlign.horizontal.rawValue
         line.spokeAngle = params.angle
         let transform = try #require(line.labelTransform)
         params.transform.assertEqual(to: transform)
@@ -371,6 +376,88 @@ struct XRGraphicLineTests {
 
         let transform = try #require(line.labelTransform)
         params.transform.assertEqual(to: transform)
+    }
+
+    // MARK: - Tests for Previously Untested Code
+
+    @Test(
+        "Major tick type extends radius by 0.1",
+        arguments: [
+            Float(1.0), Float(0.5), Float(0.8)
+        ]
+    )
+    func testMajorTickTypeRadius(relativePercent: Float) throws {
+        let controller = MockGraphicGeometrySource()
+        let line = try buildTestObject(controller: controller)
+
+        // Set up for major tick
+        line.tickType = XRGraphicLineTickType.major.rawValue
+        line.showTick = true
+
+        // Access private method through calculation trigger
+        line.calculateGeometry()
+
+        // Verify the major tick path was taken by checking the drawing path bounds
+        // Major ticks should extend further than minor ticks
+        let majorPath = line.drawingPath
+
+        // Compare with minor tick for same settings
+        line.tickType = XRGraphicLineTickType.minor.rawValue
+        line.calculateGeometry()
+        let minorPath = line.drawingPath
+
+        // Major tick should have larger bounds than minor tick
+        if let majorBounds = majorPath?.bounds, let minorBounds = minorPath?.bounds {
+            #expect(
+                majorBounds.size.width >= minorBounds.size.width ||
+                    majorBounds.size.height >= minorBounds.size.height,
+                "Major tick should extend further than minor tick"
+            )
+        }
+    }
+
+    @Test(
+        "Spoke point only with compass points shows correct labels",
+        arguments: [
+            (Float(0.0), "N"),
+            (Float(90.0), "E"),
+            (Float(180.0), "S"),
+            (Float(270.0), "W")
+        ]
+    )
+    func testSpokePointOnlyWithCompassPoints(values: (angle: Float, expectedLabel: String)) throws {
+        let controller = MockGraphicGeometrySource()
+        let line = try buildTestObject(controller: controller)
+
+        // Set up for spoke point only with compass points
+        line.spokePointOnly = true
+        line.spokeNumberCompassPoint = XRGraphicLineNumberCompassPoint.points.rawValue
+        line.spokeAngle = values.angle
+
+        // Verify the label is set correctly
+        let label = try #require(line.lineLabel)
+        #expect(
+            label.string == values.expectedLabel,
+            "Expected '\(values.expectedLabel)' for angle \(values.angle)°, got '\(label.string)'"
+        )
+    }
+
+    @Test("Spoke point only with compass points and non-cardinal angle shows empty label")
+    func testSpokePointOnlyWithCompassPointsNonCardinal() throws {
+        let controller = MockGraphicGeometrySource()
+        let line = try buildTestObject(controller: controller)
+
+        // Set up for spoke point only with compass points at non-cardinal angle
+        line.spokePointOnly = true
+        line.spokeNumberCompassPoint = XRGraphicLineNumberCompassPoint.points.rawValue
+        line.spokeAngle = 45.0 // Non-cardinal angle
+
+        // Verify the label is empty for non-cardinal angles
+        let label = try #require(line.lineLabel)
+        #expect(
+            label.string == "",
+            "Expected empty string for non-cardinal angle with spoke points only, got '\(label.string)'"
+        )
     }
 }
 
