@@ -27,8 +27,6 @@
 // SOFTWARE.
 
 #import "XRLayerGrid.h"
-#import "XRGraphicCircle.h"
-#import "XRGraphicCircleLabel.h"
 #import "XRGeometryController.h"
 #import "PaleoRose-Swift.h"
 #import "XRGraphic.h"

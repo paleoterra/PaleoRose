@@ -11,7 +11,5 @@
 #import "XRLayerData.h"
 #import "XRLayerGrid.h"
 #import "XRGraphic.h"
-#import "XRGraphicCircle.h"
-#import "XRGraphicCircleLabel.h"
 #import "LITMArrowHead.h"
 #import "GraphicGeometrySource.h"

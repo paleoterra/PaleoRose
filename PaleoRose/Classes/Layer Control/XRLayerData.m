@@ -31,7 +31,6 @@
 #import "XRGeometryController.h"
 #import "XRStatistic.h"
 #import "XRGraphic.h"
-#import "XRGraphicCircle.h"
 #import "sqlite3.h"
 #import "LITMXMLTree.h"
 #import <PaleoRose-Swift.h>

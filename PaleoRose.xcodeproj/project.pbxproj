@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		25B505F6A6A844FBA2747DF6 /* XRGraphicLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6339D5B71C2480BB4DC0F6C /* XRGraphicLine.swift */; };
+		44379A9A8F5640DA8A491A38 /* XRGraphicHistogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = E257B1C714BB4BADBD314888 /* XRGraphicHistogram.swift */; };
 		8D15AC290486D014006FF6A4 /* PaleoRose_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32DBCF750370BD2300C91783 /* PaleoRose_Prefix.pch */; };
 		8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */; };
 		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
@@ -16,8 +18,6 @@
 		B40C43C6060545BD00353928 /* XRLayerLineArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = B40C43C4060545BD00353928 /* XRLayerLineArrow.m */; };
 		B411E50705C35F5500C22F3E /* XRGraphic.h in Headers */ = {isa = PBXBuildFile; fileRef = B411E50505C35F5500C22F3E /* XRGraphic.h */; };
 		B411E50805C35F5500C22F3E /* XRGraphic.m in Sources */ = {isa = PBXBuildFile; fileRef = B411E50605C35F5500C22F3E /* XRGraphic.m */; };
-		B411E5DE05C3651400C22F3E /* XRGraphicCircle.h in Headers */ = {isa = PBXBuildFile; fileRef = B411E5DC05C3651400C22F3E /* XRGraphicCircle.h */; };
-		B411E5DF05C3651400C22F3E /* XRGraphicCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = B411E5DD05C3651400C22F3E /* XRGraphicCircle.m */; };
 		B411E6EC05C3855000C22F3E /* XRLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = B411E6EA05C3855000C22F3E /* XRLayer.h */; };
 		B411E6ED05C3855000C22F3E /* XRLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B411E6EB05C3855000C22F3E /* XRLayer.m */; };
 		B411E75005C386DA00C22F3E /* XRDataSet.h in Headers */ = {isa = PBXBuildFile; fileRef = B411E74E05C386DA00C22F3E /* XRDataSet.h */; };
@@ -64,9 +64,7 @@
 		B440D5582E580FF3000D98A0 /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B440D5572E580FE9000D98A0 /* CGFloat+Extensions.swift */; };
 		B440D55A2E589B69000D98A0 /* XRGraphicDotDeviation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B440D5592E589B69000D98A0 /* XRGraphicDotDeviation.swift */; };
 		B440D55C2E594369000D98A0 /* XRGraphicDot.swift in Sources */ = {isa = PBXBuildFile; fileRef = B440D55B2E594369000D98A0 /* XRGraphicDot.swift */; };
-		25B505F6A6A844FBA2747DF6 /* XRGraphicLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6339D5B71C2480BB4DC0F6C /* XRGraphicLine.swift */; };
 		B440D55E2E59444C000D98A0 /* XRGraphicKite.swift in Sources */ = {isa = PBXBuildFile; fileRef = B440D55D2E59444C000D98A0 /* XRGraphicKite.swift */; };
-		44379A9A8F5640DA8A491A38 /* XRGraphicHistogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = E257B1C714BB4BADBD314888 /* XRGraphicHistogram.swift */; };
 		B447A960062B002B00154420 /* logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B447A95F062B002B00154420 /* logo.jpg */; };
 		B44B08A705CFE9D200C6E8D3 /* xroseapp.icns in Resources */ = {isa = PBXBuildFile; fileRef = B44B08A505CFE9D200C6E8D3 /* xroseapp.icns */; };
 		B44B08A805CFE9D200C6E8D3 /* xroseDocIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = B44B08A605CFE9D200C6E8D3 /* xroseDocIcon.icns */; };
@@ -134,8 +132,7 @@
 		B48B89FC05C794C500248F96 /* XRDataInspector.m in Sources */ = {isa = PBXBuildFile; fileRef = B48B89FA05C794C500248F96 /* XRDataInspector.m */; };
 		B48BBEC12CAA1BFA0050852E /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48BBEC02CAA1BF40050852E /* Logger.swift */; };
 		B48BBEC82CAA20DC0050852E /* InMemoryStoreTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48BBEC62CAA20C70050852E /* InMemoryStoreTest.swift */; };
-		B4950F0005DD286A00C711DC /* XRGraphicCircleLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = B4950EFE05DD286A00C711DC /* XRGraphicCircleLabel.h */; };
-		B4950F0105DD286A00C711DC /* XRGraphicCircleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4950EFF05DD286A00C711DC /* XRGraphicCircleLabel.m */; };
+		B4950F0305DD286A00C711DE /* XRGraphicCircleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4950F0205DD286A00C711DD /* XRGraphicCircleLabel.swift */; };
 		B4A23EF72E18951700EDE135 /* XRGraphicDotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A23EF62E18951700EDE135 /* XRGraphicDotTests.swift */; };
 		B4A23EF92E19668900EDE135 /* XRGraphicHistogramTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A23EF82E19668900EDE135 /* XRGraphicHistogramTests.swift */; };
 		B4A23EFB2E196D1800EDE135 /* XRGraphicKiteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A23EFA2E196D1800EDE135 /* XRGraphicKiteTests.swift */; };
@@ -191,8 +188,6 @@
 		B4E69E3D062AE989006B21D6 /* vectorLayer.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B4E69E3C062AE989006B21D6 /* vectorLayer.tiff */; };
 		B4E69E51062AE9B0006B21D6 /* gridLayer.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B4E69E50062AE9B0006B21D6 /* gridLayer.tiff */; };
 		B4E9C7812E3300DE005BA22F /* BezierPath+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E9C7802E3300D1005BA22F /* BezierPath+extensions.swift */; };
-		B4EE8F7805C5E0A9001BACD3 /* XRGraphicLine.h in Headers */ = {isa = PBXBuildFile; fileRef = B4EE8F7605C5E0A9001BACD3 /* XRGraphicLine.h */; };
-		B4EE8F7905C5E0A9001BACD3 /* XRGraphicLine.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EE8F7705C5E0A9001BACD3 /* XRGraphicLine.m */; };
 		B4F08861060914150000CF7A /* XRVStatCreatePanelController.h in Headers */ = {isa = PBXBuildFile; fileRef = B4F0885F060914150000CF7A /* XRVStatCreatePanelController.h */; };
 		B4F08862060914150000CF7A /* XRVStatCreatePanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F08860060914150000CF7A /* XRVStatCreatePanelController.m */; };
 		B4F2B1892C97CB300017E717 /* LayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F2B1872C97CB300017E717 /* LayerData.swift */; };
@@ -208,6 +203,7 @@
 		B4F2B1932C97CB300017E717 /* DataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F2B1822C97CB300017E717 /* DataSet.swift */; };
 		B4F929FD05D35D3A00EAAED0 /* XRLayerCore.h in Headers */ = {isa = PBXBuildFile; fileRef = B4F929FB05D35D3A00EAAED0 /* XRLayerCore.h */; };
 		B4F929FE05D35D3A00EAAED0 /* XRLayerCore.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F929FC05D35D3A00EAAED0 /* XRLayerCore.m */; };
+		BLJPCHG3GJY5JEQ0DHOENH4A /* XRGraphicCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BLHFDTXYH56D3KXO45XKMYX9 /* XRGraphicCircle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -291,8 +287,6 @@
 		B40C43C4060545BD00353928 /* XRLayerLineArrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRLayerLineArrow.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B411E50505C35F5500C22F3E /* XRGraphic.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRGraphic.h; sourceTree = "<group>"; };
 		B411E50605C35F5500C22F3E /* XRGraphic.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRGraphic.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		B411E5DC05C3651400C22F3E /* XRGraphicCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRGraphicCircle.h; sourceTree = "<group>"; };
-		B411E5DD05C3651400C22F3E /* XRGraphicCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRGraphicCircle.m; sourceTree = "<group>"; };
 		B411E6EA05C3855000C22F3E /* XRLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRLayer.h; sourceTree = "<group>"; };
 		B411E6EB05C3855000C22F3E /* XRLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRLayer.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B411E74E05C386DA00C22F3E /* XRDataSet.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRDataSet.h; sourceTree = "<group>"; };
@@ -354,9 +348,7 @@
 		B440D5572E580FE9000D98A0 /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
 		B440D5592E589B69000D98A0 /* XRGraphicDotDeviation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicDotDeviation.swift; sourceTree = "<group>"; };
 		B440D55B2E594369000D98A0 /* XRGraphicDot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicDot.swift; sourceTree = "<group>"; };
-		F6339D5B71C2480BB4DC0F6C /* XRGraphicLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicLine.swift; sourceTree = "<group>"; };
 		B440D55D2E59444C000D98A0 /* XRGraphicKite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicKite.swift; sourceTree = "<group>"; };
-		E257B1C714BB4BADBD314888 /* XRGraphicHistogram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicHistogram.swift; sourceTree = "<group>"; };
 		B441FEFB05CB725300F9A0F9 /* XRStatistic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRStatistic.h; sourceTree = "<group>"; };
 		B441FEFC05CB725300F9A0F9 /* XRStatistic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRStatistic.m; sourceTree = "<group>"; };
 		B442674F2B3F881300749923 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -416,8 +408,7 @@
 		B48B89FA05C794C500248F96 /* XRDataInspector.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRDataInspector.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B48BBEC02CAA1BF40050852E /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		B48BBEC62CAA20C70050852E /* InMemoryStoreTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryStoreTest.swift; sourceTree = "<group>"; };
-		B4950EFE05DD286A00C711DC /* XRGraphicCircleLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRGraphicCircleLabel.h; sourceTree = "<group>"; };
-		B4950EFF05DD286A00C711DC /* XRGraphicCircleLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRGraphicCircleLabel.m; sourceTree = "<group>"; };
+		B4950F0205DD286A00C711DD /* XRGraphicCircleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicCircleLabel.swift; sourceTree = "<group>"; };
 		B49D7EB32DDEC80C0046A8B8 /* XRDataSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRDataSet.swift; sourceTree = "<group>"; };
 		B49D7EB42DDEC81D0046A8B8 /* XRMakeDatasetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRMakeDatasetController.swift; sourceTree = "<group>"; };
 		B49D7EB52DDEC8400046A8B8 /* XRStatistic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRStatistic.swift; sourceTree = "<group>"; };
@@ -510,8 +501,6 @@
 		B4E69E3C062AE989006B21D6 /* vectorLayer.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = vectorLayer.tiff; sourceTree = "<group>"; };
 		B4E69E50062AE9B0006B21D6 /* gridLayer.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = gridLayer.tiff; sourceTree = "<group>"; };
 		B4E9C7802E3300D1005BA22F /* BezierPath+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BezierPath+extensions.swift"; sourceTree = "<group>"; };
-		B4EE8F7605C5E0A9001BACD3 /* XRGraphicLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRGraphicLine.h; sourceTree = "<group>"; };
-		B4EE8F7705C5E0A9001BACD3 /* XRGraphicLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRGraphicLine.m; sourceTree = "<group>"; };
 		B4F0885F060914150000CF7A /* XRVStatCreatePanelController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRVStatCreatePanelController.h; sourceTree = "<group>"; };
 		B4F08860060914150000CF7A /* XRVStatCreatePanelController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XRVStatCreatePanelController.m; sourceTree = "<group>"; };
 		B4F2B17E2C97CB300017E717 /* WindowControllerSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowControllerSize.swift; sourceTree = "<group>"; };
@@ -527,6 +516,9 @@
 		B4F2B1882C97CB300017E717 /* Count.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Count.swift; sourceTree = "<group>"; };
 		B4F929FB05D35D3A00EAAED0 /* XRLayerCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRLayerCore.h; sourceTree = "<group>"; };
 		B4F929FC05D35D3A00EAAED0 /* XRLayerCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRLayerCore.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		BLHFDTXYH56D3KXO45XKMYX9 /* XRGraphicCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicCircle.swift; sourceTree = "<group>"; };
+		E257B1C714BB4BADBD314888 /* XRGraphicHistogram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicHistogram.swift; sourceTree = "<group>"; };
+		F6339D5B71C2480BB4DC0F6C /* XRGraphicLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicLine.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -769,11 +761,9 @@
 				B48430872E1486D100E126C0 /* LITMArrowHeadTests.swift */,
 				B411E50505C35F5500C22F3E /* XRGraphic.h */,
 				B411E50605C35F5500C22F3E /* XRGraphic.m */,
-				B411E5DC05C3651400C22F3E /* XRGraphicCircle.h */,
-				B411E5DD05C3651400C22F3E /* XRGraphicCircle.m */,
+				BLHFDTXYH56D3KXO45XKMYX9 /* XRGraphicCircle.swift */,
 				B4CC53472E10593000067436 /* XRGraphicCircleTests.swift */,
-				B4950EFE05DD286A00C711DC /* XRGraphicCircleLabel.h */,
-				B4950EFF05DD286A00C711DC /* XRGraphicCircleLabel.m */,
+				B4950F0205DD286A00C711DD /* XRGraphicCircleLabel.swift */,
 				B4A23FC92E2C44FC00EDE135 /* XRGraphicCircleLabelTestCases.swift */,
 				B48430852E1193E500E126C0 /* XRGraphicCircleLabelTests.swift */,
 				F6339D5B71C2480BB4DC0F6C /* XRGraphicLine.swift */,
@@ -1227,7 +1217,6 @@
 				B4A82F972A07F87A00790052 /* LITMXMLTree.h in Headers */,
 				B4852A8405C2E223002212E3 /* XRGeometryController.h in Headers */,
 				B411E50705C35F5500C22F3E /* XRGraphic.h in Headers */,
-				B411E5DE05C3651400C22F3E /* XRGraphicCircle.h in Headers */,
 				B411E6EC05C3855000C22F3E /* XRLayer.h in Headers */,
 				B411E75005C386DA00C22F3E /* XRDataSet.h in Headers */,
 				B411E7F405C396A400C22F3E /* XRAppendDialogController.h in Headers */,
@@ -1244,7 +1233,6 @@
 				B4BF9C1505CD6B110047E8CF /* XRGridInspector.h in Headers */,
 				B4F929FD05D35D3A00EAAED0 /* XRLayerCore.h in Headers */,
 				B452504D05D427F1008338E8 /* XRCoreInspector.h in Headers */,
-				B4950F0005DD286A00C711DC /* XRGraphicCircleLabel.h in Headers */,
 				B4E5F8C005FC63A00011788E /* XRFileParser.h in Headers */,
 				B4E5F90D05FC679E0011788E /* XRFileParser1.h in Headers */,
 				B40C43C5060545BD00353928 /* XRLayerLineArrow.h in Headers */,
@@ -1535,7 +1523,8 @@
 				B4852A8505C2E223002212E3 /* XRGeometryController.m in Sources */,
 				B4E22DA82DFF701200A9AFE0 /* FormatterFactory.swift in Sources */,
 				B411E50805C35F5500C22F3E /* XRGraphic.m in Sources */,
-				B411E5DF05C3651400C22F3E /* XRGraphicCircle.m in Sources */,
+				BLJPCHG3GJY5JEQ0DHOENH4A /* XRGraphicCircle.swift in Sources */,
+				B4950F0305DD286A00C711DE /* XRGraphicCircleLabel.swift in Sources */,
 				B411E6ED05C3855000C22F3E /* XRLayer.m in Sources */,
 				B411E75105C386DA00C22F3E /* XRDataSet.m in Sources */,
 				B411E7F505C396A400C22F3E /* XRAppendDialogController.m in Sources */,
@@ -1562,7 +1551,6 @@
 				B4BF9C1605CD6B110047E8CF /* XRGridInspector.m in Sources */,
 				B4F929FE05D35D3A00EAAED0 /* XRLayerCore.m in Sources */,
 				B452504E05D427F1008338E8 /* XRCoreInspector.m in Sources */,
-				B4950F0105DD286A00C711DC /* XRGraphicCircleLabel.m in Sources */,
 				B414A00D2B24CD24008AE5F4 /* XRStatistic.m in Sources */,
 				B41C85B32DE4A2550053C9C9 /* SettingsView.swift in Sources */,
 				B4E5F8C105FC63A00011788E /* XRFileParser.m in Sources */,
