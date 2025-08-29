@@ -13,6 +13,5 @@
 #import "XRGraphic.h"
 #import "XRGraphicCircle.h"
 #import "XRGraphicCircleLabel.h"
-#import "XRGraphicHistogram.h"
 #import "LITMArrowHead.h"
 #import "GraphicGeometrySource.h"

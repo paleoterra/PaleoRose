@@ -66,6 +66,7 @@
 		B440D55C2E594369000D98A0 /* XRGraphicDot.swift in Sources */ = {isa = PBXBuildFile; fileRef = B440D55B2E594369000D98A0 /* XRGraphicDot.swift */; };
 		25B505F6A6A844FBA2747DF6 /* XRGraphicLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6339D5B71C2480BB4DC0F6C /* XRGraphicLine.swift */; };
 		B440D55E2E59444C000D98A0 /* XRGraphicKite.swift in Sources */ = {isa = PBXBuildFile; fileRef = B440D55D2E59444C000D98A0 /* XRGraphicKite.swift */; };
+		44379A9A8F5640DA8A491A38 /* XRGraphicHistogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = E257B1C714BB4BADBD314888 /* XRGraphicHistogram.swift */; };
 		B447A960062B002B00154420 /* logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B447A95F062B002B00154420 /* logo.jpg */; };
 		B44B08A705CFE9D200C6E8D3 /* xroseapp.icns in Resources */ = {isa = PBXBuildFile; fileRef = B44B08A505CFE9D200C6E8D3 /* xroseapp.icns */; };
 		B44B08A805CFE9D200C6E8D3 /* xroseDocIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = B44B08A605CFE9D200C6E8D3 /* xroseDocIcon.icns */; };
@@ -194,8 +195,6 @@
 		B4EE8F7905C5E0A9001BACD3 /* XRGraphicLine.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EE8F7705C5E0A9001BACD3 /* XRGraphicLine.m */; };
 		B4F08861060914150000CF7A /* XRVStatCreatePanelController.h in Headers */ = {isa = PBXBuildFile; fileRef = B4F0885F060914150000CF7A /* XRVStatCreatePanelController.h */; };
 		B4F08862060914150000CF7A /* XRVStatCreatePanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F08860060914150000CF7A /* XRVStatCreatePanelController.m */; };
-		B4F2595105C58F28008591BE /* XRGraphicHistogram.h in Headers */ = {isa = PBXBuildFile; fileRef = B4F2594F05C58F28008591BE /* XRGraphicHistogram.h */; };
-		B4F2595205C58F28008591BE /* XRGraphicHistogram.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F2595005C58F28008591BE /* XRGraphicHistogram.m */; };
 		B4F2B1892C97CB300017E717 /* LayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F2B1872C97CB300017E717 /* LayerData.swift */; };
 		B4F2B18A2C97CB300017E717 /* WindowControllerSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F2B17E2C97CB300017E717 /* WindowControllerSize.swift */; };
 		B4F2B18B2C97CB300017E717 /* Layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F2B1802C97CB300017E717 /* Layer.swift */; };
@@ -357,6 +356,7 @@
 		B440D55B2E594369000D98A0 /* XRGraphicDot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicDot.swift; sourceTree = "<group>"; };
 		F6339D5B71C2480BB4DC0F6C /* XRGraphicLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicLine.swift; sourceTree = "<group>"; };
 		B440D55D2E59444C000D98A0 /* XRGraphicKite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicKite.swift; sourceTree = "<group>"; };
+		E257B1C714BB4BADBD314888 /* XRGraphicHistogram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicHistogram.swift; sourceTree = "<group>"; };
 		B441FEFB05CB725300F9A0F9 /* XRStatistic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRStatistic.h; sourceTree = "<group>"; };
 		B441FEFC05CB725300F9A0F9 /* XRStatistic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRStatistic.m; sourceTree = "<group>"; };
 		B442674F2B3F881300749923 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -514,8 +514,6 @@
 		B4EE8F7705C5E0A9001BACD3 /* XRGraphicLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRGraphicLine.m; sourceTree = "<group>"; };
 		B4F0885F060914150000CF7A /* XRVStatCreatePanelController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRVStatCreatePanelController.h; sourceTree = "<group>"; };
 		B4F08860060914150000CF7A /* XRVStatCreatePanelController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XRVStatCreatePanelController.m; sourceTree = "<group>"; };
-		B4F2594F05C58F28008591BE /* XRGraphicHistogram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRGraphicHistogram.h; sourceTree = "<group>"; };
-		B4F2595005C58F28008591BE /* XRGraphicHistogram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRGraphicHistogram.m; sourceTree = "<group>"; };
 		B4F2B17E2C97CB300017E717 /* WindowControllerSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowControllerSize.swift; sourceTree = "<group>"; };
 		B4F2B17F2C97CB300017E717 /* Geometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geometry.swift; sourceTree = "<group>"; };
 		B4F2B1802C97CB300017E717 /* Layer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layer.swift; sourceTree = "<group>"; };
@@ -786,8 +784,7 @@
 				B4A23EFE2E19C49E00EDE135 /* XRGraphicPetalTests.swift */,
 				B440D55B2E594369000D98A0 /* XRGraphicDot.swift */,
 				B4A23EF62E18951700EDE135 /* XRGraphicDotTests.swift */,
-				B4F2594F05C58F28008591BE /* XRGraphicHistogram.h */,
-				B4F2595005C58F28008591BE /* XRGraphicHistogram.m */,
+				E257B1C714BB4BADBD314888 /* XRGraphicHistogram.swift */,
 				B4A23EF82E19668900EDE135 /* XRGraphicHistogramTests.swift */,
 				B440D5592E589B69000D98A0 /* XRGraphicDotDeviation.swift */,
 				B48430892E1487C900E126C0 /* XRGraphicDotDeviationTests.swift */,
@@ -1236,7 +1233,6 @@
 				B411E7F405C396A400C22F3E /* XRAppendDialogController.h in Headers */,
 				B411E84C05C397D000C22F3E /* XREncodingAccessoryView.h in Headers */,
 				B4815B7005C44C0200403360 /* XRLayerData.h in Headers */,
-				B4F2595105C58F28008591BE /* XRGraphicHistogram.h in Headers */,
 				B4A82F962A07F87A00790052 /* LITMXMLNodeProtocol.h in Headers */,
 				B4E2DE8905C5BD6500714F6F /* XRLayerGrid.h in Headers */,
 				B4A82FAC2A07FB8800790052 /* LITMArrowHead.h in Headers */,
@@ -1550,7 +1546,6 @@
 				B41C86B62DE4BEE20053C9C9 /* DefaultsStorage.swift in Sources */,
 				B4A82FAD2A07FB8800790052 /* LITMArrowHead.m in Sources */,
 				B440D55C2E594369000D98A0 /* XRGraphicDot.swift in Sources */,
-				B4F2595205C58F28008591BE /* XRGraphicHistogram.m in Sources */,
 				B4866BF42CAE02C900319712 /* StoreProtocol.swift in Sources */,
 				B4DB28E32D22450300FC6A49 /* Encoding.swift in Sources */,
 				B4E2DE8A05C5BD6500714F6F /* XRLayerGrid.m in Sources */,
@@ -1561,6 +1556,7 @@
 				B47CA41405C6D56D0060A30C /* XRGeometryInspector.m in Sources */,
 				B48B89FC05C794C500248F96 /* XRDataInspector.m in Sources */,
 				B440D55E2E59444C000D98A0 /* XRGraphicKite.swift in Sources */,
+				44379A9A8F5640DA8A491A38 /* XRGraphicHistogram.swift in Sources */,
 				B440D55A2E589B69000D98A0 /* XRGraphicDotDeviation.swift in Sources */,
 				B439AB392C83D01700252574 /* InMemoryStore.swift in Sources */,
 				B4BF9C1605CD6B110047E8CF /* XRGridInspector.m in Sources */,
