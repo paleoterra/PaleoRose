@@ -30,6 +30,10 @@
 
 
 @interface LITMArrowHead : NSObject
+@property (nonatomic, strong, nonnull) NSColor * arrowColor;
+@property (nonatomic, strong, nonnull) NSBezierPath *path;
+@property (nonatomic, strong, nonnull) NSAffineTransform *positionTransform;
+@property (nonatomic, strong, nonnull) NSAffineTransform *scaleTransform;
 
 -(id)initWithSize:(float)size color:(NSColor *)color type:(int)type;
 -(void)positionAtLineEndpoint:(NSPoint)aPoint withAngle:(float)angle;

@@ -31,10 +31,6 @@
 #import "math.h"
 
 @interface LITMArrowHead()
-@property (nonatomic, strong, nonnull) NSColor * arrowColor;
-@property (nonatomic, strong, nonnull) NSBezierPath *path;
-@property (nonatomic, strong, nonnull) NSAffineTransform *positionTransform;
-@property (nonatomic, strong, nonnull) NSAffineTransform *scaleTransform;
 
 -(void)configureScaleTransform:(float)scale;
 -(void)setType:(int)type;
