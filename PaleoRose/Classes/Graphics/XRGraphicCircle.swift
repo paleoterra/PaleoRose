@@ -52,17 +52,11 @@ import AppKit
     @objc dynamic var isGeometryPercent: Bool = false
     @objc dynamic var isPercent: Bool = false
 
-    // MARK: - KVO Keys
-
-    private static let kvoKeyCountSetting = "countSetting"
-    private static let kvoKeyPercentSetting = "percentSetting"
-
     // MARK: - Initialization
 
     @objc override init(controller: GraphicGeometrySource) {
         super.init(controller: controller)
         isPercent = controller.isPercent()
-        registerForKVO()
 
         // Prevent calculating geometry twice for circle labels
         if type(of: self) == XRGraphicCircle.self {
@@ -75,25 +69,10 @@ import AppKit
         countSetting = 0
         percentSetting = 0.0
         isPercent = controller.isPercent()
-        registerForKVO()
 
         // Prevent calculating geometry twice for circle labels
         if type(of: self) == XRGraphicCircle.self {
             calculateGeometry()
-        }
-    }
-
-    private func registerForKVO() {
-        let keyPaths = [XRGraphicCircle.kvoKeyCountSetting, XRGraphicCircle.kvoKeyPercentSetting]
-        for keyPath in keyPaths {
-            addObserver(self, forKeyPath: keyPath, options: [.new, .old], context: nil)
-        }
-    }
-
-    deinit {
-        let keyPaths = [XRGraphicCircle.kvoKeyCountSetting, XRGraphicCircle.kvoKeyPercentSetting]
-        for keyPath in keyPaths {
-            removeObserver(self, forKeyPath: keyPath)
         }
     }
 
@@ -134,25 +113,5 @@ import AppKit
         settings["_isFixedCount"] = string(from: isFixedCount)
 
         return settings
-    }
-
-    // MARK: - KVO
-
-    @objc override func observeValue(forKeyPath keyPath: String?, of object: Any?,
-                                     change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?)
-    {
-        super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
-
-        guard let keyPath else { return }
-
-        if keyPath == XRGraphicCircle.kvoKeyCountSetting {
-            isPercent = false
-            isGeometryPercent = false
-            calculateGeometry()
-        } else if keyPath == XRGraphicCircle.kvoKeyPercentSetting {
-            isPercent = true
-            isGeometryPercent = false
-            calculateGeometry()
-        }
     }
 }

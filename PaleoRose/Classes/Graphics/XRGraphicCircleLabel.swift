@@ -41,8 +41,17 @@ import AppKit
 
     // XRGraphicCircleLabel specific properties
     @objc dynamic var showLabel: Bool = false
-    @objc dynamic var labelAngle: Float = 0.0
-    @objc dynamic var labelFont: NSFont?
+    @objc dynamic var labelAngle: Float = 0.0 {
+        didSet {
+            calculateGeometry()
+        }
+    }
+
+    @objc dynamic var labelFont: NSFont? {
+        didSet {
+            calculateGeometry()
+        }
+    }
 
     // Private properties (some exposed for testing)
     @objc dynamic var label: NSMutableAttributedString?
@@ -50,11 +59,6 @@ import AppKit
     @objc dynamic var isCore: Bool = false
     private var labelPoint: NSPoint = .zero
     private var labelSize: NSSize = .zero
-
-    // MARK: - KVO Keys
-
-    private static let kvoKeyLabelAngle = "labelAngle"
-    private static let kvoKeyLabelFont = "labelFont"
 
     // MARK: - Initialization
 
@@ -69,7 +73,6 @@ import AppKit
         countSetting = 0
 
         calculateGeometry()
-        registerForKVO()
     }
 
     @objc override init(controller: GraphicGeometrySource) {
@@ -79,22 +82,6 @@ import AppKit
         isCore = false
         labelFont = NSFont(name: "Arial-Black", size: 12)
         labelPoint = NSPoint.zero
-
-        registerForKVO()
-    }
-
-    private func registerForKVO() {
-        let keyPaths = [XRGraphicCircleLabel.kvoKeyLabelAngle, XRGraphicCircleLabel.kvoKeyLabelFont]
-        for keyPath in keyPaths {
-            addObserver(self, forKeyPath: keyPath, options: [.new, .old], context: nil)
-        }
-    }
-
-    deinit {
-        let keyPaths = [XRGraphicCircleLabel.kvoKeyLabelAngle, XRGraphicCircleLabel.kvoKeyLabelFont]
-        for keyPath in keyPaths {
-            removeObserver(self, forKeyPath: keyPath)
-        }
     }
 
     // MARK: - Label String Methods
@@ -245,19 +232,5 @@ import AppKit
         settings["_isFixedCount"] = string(from: isFixedCount)
 
         return settings
-    }
-
-    // MARK: - KVO
-
-    @objc override func observeValue(forKeyPath keyPath: String?, of object: Any?,
-                                     change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?)
-    {
-        super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
-
-        guard let keyPath else { return }
-
-        if keyPath == XRGraphicCircleLabel.kvoKeyLabelAngle || keyPath == XRGraphicCircleLabel.kvoKeyLabelFont {
-            calculateGeometry()
-        }
     }
 }

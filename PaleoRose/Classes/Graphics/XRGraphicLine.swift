@@ -141,7 +141,6 @@ import AppKit
     @objc override init(controller: GraphicGeometrySource) {
         super.init(controller: controller)
         setupInitialValues()
-        registerForKVO()
         setLineLabel()
         calculateGeometry()
     }
@@ -157,22 +156,6 @@ import AppKit
         spokeAngle = 0.0
         font = NSFont(name: "Arial-Black", size: 12)
         relativePercent = 1.0
-    }
-
-    private func registerForKVO() {
-        let keyPaths = ["tickType", "showTick", "font", "spokeAngle",
-                        "spokePointOnly", "spokeNumberOrder", "spokeNumberCompassPoint", "showLabel"]
-        for keyPath in keyPaths {
-            addObserver(self, forKeyPath: keyPath, options: [.new, .old], context: nil)
-        }
-    }
-
-    deinit {
-        let keyPaths = ["tickType", "showTick", "font", "spokeAngle",
-                        "spokePointOnly", "spokeNumberOrder", "spokeNumberCompassPoint", "showLabel"]
-        for keyPath in keyPaths {
-            removeObserver(self, forKeyPath: keyPath)
-        }
     }
 
     // MARK: - Geometry Calculation
@@ -403,22 +386,5 @@ import AppKit
         settings["_currentFont"] = font ?? NSFont(name: "Arial-Black", size: 12)!
 
         return settings
-    }
-
-    // MARK: - KVO
-
-    @objc override func observeValue(forKeyPath keyPath: String?, of object: Any?,
-                                     change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?)
-    {
-        super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
-
-        guard let keyPath else { return }
-
-        if ["tickType", "showTick", "font"].contains(keyPath) {
-            calculateGeometry()
-        } else if ["spokeAngle", "spokePointOnly", "spokeNumberCompassPoint", "spokeNumberOrder", "showLabel"].contains(keyPath) {
-            setLineLabel()
-            calculateGeometry()
-        }
     }
 }
