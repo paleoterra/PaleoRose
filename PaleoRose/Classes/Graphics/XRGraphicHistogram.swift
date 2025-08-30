@@ -93,10 +93,10 @@ import AppKit
     @objc override func graphicSettings() -> [AnyHashable: Any] {
         var settings = super.graphicSettings()
 
-        settings["GraphicType"] = "Histogram"
-        settings["_histIncrement"] = string(from: histIncrement)
-        settings["_percent"] = string(from: percent)
-        settings["_count"] = string(from: count)
+        settings[XRGraphicKeyGraphicType] = "Histogram"
+        settings[XRGraphicKeyHistogramIncrement] = string(from: histIncrement)
+        settings[XRGraphicKeyPercent] = string(from: percent)
+        settings[XRGraphicKeyCount] = string(from: count)
 
         return settings
     }

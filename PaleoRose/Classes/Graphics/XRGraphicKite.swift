@@ -28,7 +28,6 @@
 
 import AppKit
 
-@MainActor
 @objc class XRGraphicKite: XRGraphic {
 
     private var angles: [Double] = []
@@ -106,7 +105,7 @@ import AppKit
 
     @objc override func graphicSettings() -> [AnyHashable: Any] {
         var parent = super.graphicSettings()
-        parent["GraphicType"] = "Kite"
+        parent[XRGraphicKeyGraphicType] = "Kite"
         return parent
     }
 }

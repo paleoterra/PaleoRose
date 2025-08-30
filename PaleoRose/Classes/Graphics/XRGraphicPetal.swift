@@ -29,7 +29,6 @@
 import AppKit
 
 /// A petal graphic drawn using the provided geometry controller.
-@MainActor
 @objc class XRGraphicPetal: XRGraphic {
 
     /// Keep the NSBezierPath's line width synced when the lineWidth changes.
@@ -130,11 +129,11 @@ import AppKit
         var parent = super.graphicSettings()
         // Keys match those used throughout the ObjC code and tests.
         let classDict: [AnyHashable: Any] = [
-            "GraphicType": "Petal",
-            "_petalIncrement": string(from: Int32(petalIncrement)),
-            "_maxRadius": string(from: maxRadius),
-            "_percent": string(from: percent),
-            "_count": string(from: Int32(count))
+            XRGraphicKeyGraphicType: "Petal",
+            XRGraphicKeyPetalIncrement: string(from: Int32(petalIncrement)),
+            XRGraphicKeyMaxRadius: string(from: maxRadius),
+            XRGraphicKeyPercent: string(from: percent),
+            XRGraphicKeyCount: string(from: Int32(count))
         ]
         parent.merge(classDict) { _, new in new }
         return parent

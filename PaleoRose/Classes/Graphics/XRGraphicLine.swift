@@ -370,20 +370,20 @@ import AppKit
     @objc override func graphicSettings() -> [AnyHashable: Any] {
         var settings = super.graphicSettings()
 
-        settings["GraphicType"] = "Line"
-        settings["_tickType"] = string(from: tickType)
-        settings["_spokeNumberCompassPoint"] = string(from: spokeNumberCompassPoint)
-        settings["_showLabel"] = string(from: showLabel)
-        settings["_lineWidth"] = string(from: lineWidth)
-        settings["_relativePercent"] = string(from: relativePercent)
-        settings["_showTick"] = string(from: showTick)
-        settings["_spokeNumberOrder"] = string(from: spokeNumberOrder)
-        settings["_lineLabel"] = lineLabel?.string ?? "N"
-        settings["_fillColor"] = fillColor ?? NSColor.black
-        settings["_angleSetting"] = string(from: spokeAngle)
-        settings["_spokeNumberAlign"] = string(from: spokeNumberAlign)
-        settings["_strokeColor"] = strokeColor ?? NSColor.black
-        settings["_currentFont"] = font ?? NSFont(name: "Arial-Black", size: 12)!
+        settings[XRGraphicKeyGraphicType] = "Line"
+        settings[XRGraphicKeyTickType] = string(from: tickType)
+        settings[XRGraphicKeySpokeNumberCompassPoint] = string(from: spokeNumberCompassPoint)
+        settings[XRGraphicKeyShowLabel] = string(from: showLabel)
+        settings[XRGraphicKeyLineWidth] = string(from: lineWidth)
+        settings[XRGraphicKeyRelativePercent] = string(from: relativePercent)
+        settings[XRGraphicKeyShowTick] = string(from: showTick)
+        settings[XRGraphicKeySpokeNumberOrder] = string(from: spokeNumberOrder)
+        settings[XRGraphicKeyLineLabel] = lineLabel?.string ?? "N"
+        settings[XRGraphicKeyFillColor] = fillColor ?? NSColor.black
+        settings[XRGraphicKeyAngleSetting] = string(from: spokeAngle)
+        settings[XRGraphicKeySpokeNumberAlignment] = string(from: spokeNumberAlign)
+        settings[XRGraphicKeyStrokeColor] = strokeColor ?? NSColor.black
+        settings[XRGraphicKeyCurrentFont] = font ?? NSFont(name: "Arial-Black", size: 12)!
 
         return settings
     }

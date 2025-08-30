@@ -268,8 +268,8 @@ struct XRGraphicCircleLabelTests {
         label.setGeometryPercent(0.7)
         var expectedSettings = defaultSettings()
         expectedSettings["_labelAngle"] = "0.000000"
-        expectedSettings["_geometryPercent"] = "0.700000"
-        expectedSettings["_percentSetting"] = "0.700000"
+        expectedSettings[XRGraphicKeyGeometryPercent] = "0.700000"
+        expectedSettings[XRGraphicKeyPercentSetting] = "0.700000"
 
         let settings = label.graphicSettings()
         try CommonUtilities

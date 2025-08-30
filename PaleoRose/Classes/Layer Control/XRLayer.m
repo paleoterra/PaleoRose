@@ -27,7 +27,6 @@
 // SOFTWARE.
 
 #import "XRLayer.h"
-#import "XRGraphic.h"
 #import "XRGeometryController.h"
 #import "XRLayerCore.h"
 #import "XRLayerGrid.h"
@@ -36,6 +35,7 @@
 #import "XRLayerLineArrow.h"
 #import "sqlite3.h"
 #import "LITMXMLTree.h"
+#import <PaleoRose-Swift.h>
 
 @implementation XRLayer
 

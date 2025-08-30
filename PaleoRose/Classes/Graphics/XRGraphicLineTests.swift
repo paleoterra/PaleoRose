@@ -154,7 +154,6 @@ struct XRGraphicLineTests {
         try CommonUtilities.compareGraphicSettings(values: settings, expected: expectedSettings)
     }
 
-    @MainActor
     @Test(
         "SetFont",
         arguments: [

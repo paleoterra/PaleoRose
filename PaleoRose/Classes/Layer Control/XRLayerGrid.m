@@ -29,7 +29,6 @@
 #import "XRLayerGrid.h"
 #import "XRGeometryController.h"
 #import "PaleoRose-Swift.h"
-#import "XRGraphic.h"
 #import "sqlite3.h"
 #import "LITMXMLTree.h"
 @implementation XRLayerGrid

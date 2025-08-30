@@ -85,7 +85,7 @@ import AppKit
         drawingPath = NSBezierPath(ovalIn: circleRect)
     }
 
-    @objc override func calculateGeometry() {
+    override func calculateGeometry() {
         guard let controller = geometryController else { return }
 
         var circleRect = NSRect.zero
@@ -104,13 +104,13 @@ import AppKit
     @objc override func graphicSettings() -> [AnyHashable: Any] {
         var settings = super.graphicSettings()
 
-        settings["GraphicType"] = "Circle"
-        settings["_countSetting"] = string(from: countSetting)
-        settings["_percentSetting"] = string(from: percentSetting)
-        settings["_geometryPercent"] = string(from: percentSetting)
-        settings["_isGeometryPercent"] = string(from: isGeometryPercent)
-        settings["_isPercent"] = string(from: isPercent)
-        settings["_isFixedCount"] = string(from: isFixedCount)
+        settings[XRGraphicKeyGraphicType] = "Circle"
+        settings[XRGraphicKeyCountSetting] = string(from: countSetting)
+        settings[XRGraphicKeyPercentSetting] = string(from: percentSetting)
+        settings[XRGraphicKeyGeometryPercent] = string(from: percentSetting)
+        settings[XRGraphicKeyIsGeometryPercent] = string(from: isGeometryPercent)
+        settings[XRGraphicKeyIsPercent] = string(from: isPercent)
+        settings[XRGraphicKeyIsFixedCount] = string(from: isFixedCount)
 
         return settings
     }

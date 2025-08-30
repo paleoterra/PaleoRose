@@ -10,6 +10,5 @@
 #import "XRLayerCore.h"
 #import "XRLayerData.h"
 #import "XRLayerGrid.h"
-#import "XRGraphic.h"
 #import "LITMArrowHead.h"
 #import "GraphicGeometrySource.h"

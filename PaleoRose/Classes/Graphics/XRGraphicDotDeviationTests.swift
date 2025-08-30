@@ -3,7 +3,6 @@ import Numerics
 @testable import PaleoRose
 import Testing
 
-@MainActor
 struct XRGraphicDotDeviationTests {
     // MARK: - Test Setup
 

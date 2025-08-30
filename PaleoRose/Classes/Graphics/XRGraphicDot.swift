@@ -28,7 +28,6 @@
 
 import AppKit
 
-@MainActor
 @objc class XRGraphicDot: XRGraphic {
 
     // MARK: - Public API
@@ -105,11 +104,11 @@ import AppKit
     @objc override func graphicSettings() -> [AnyHashable: Any] {
         var parent = super.graphicSettings()
         let classDict: [AnyHashable: Any] = [
-            "GraphicType": "Dot",
-            "_angleIncrement": string(from: Int32(angleIncrement)),
-            "_totalCount": string(from: Int32(totalCount)),
-            "_count": string(from: Int32(count)),
-            "_dotSize": string(from: dotSize)
+            XRGraphicKeyGraphicType: "Dot",
+            XRGraphicKeyAngleIncrement: string(from: Int32(angleIncrement)),
+            XRGraphicKeyTotalCount: string(from: Int32(totalCount)),
+            XRGraphicKeyCount: string(from: Int32(count)),
+            XRGraphicKeyDotSize: string(from: dotSize)
         ]
         parent.merge(classDict) { _, new in new }
         return parent

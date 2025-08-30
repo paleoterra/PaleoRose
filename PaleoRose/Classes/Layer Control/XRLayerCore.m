@@ -28,11 +28,10 @@
 
 #import "XRLayer.h"
 #import "XRLayerCore.h"
-#import "XRGraphic.h"
 #import "XRGeometryController.h"
 #import "sqlite3.h"
 #import "LITMXMLTree.h"
-#import "PaleoRose-Swift.h"
+#import <PaleoRose-Swift.h>
 
 @implementation XRLayerCore
 //+(void)initialize

@@ -28,7 +28,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-#import "XRGraphic.h"
 @class XRGraphic;
 @interface XRGraphicHistogram : XRGraphic
 
