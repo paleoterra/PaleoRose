@@ -147,8 +147,8 @@
 		B4A82F9C2A07F8A400790052 /* LITMXMLBinaryEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A82F9A2A07F8A400790052 /* LITMXMLBinaryEncoding.m */; };
 		B4A82FA42A07FA8900790052 /* LITMXMLParser.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A82FA22A07FA8900790052 /* LITMXMLParser.h */; };
 		B4A82FA52A07FA8900790052 /* LITMXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A82FA32A07FA8900790052 /* LITMXMLParser.m */; };
-		B4A82FAC2A07FB8800790052 /* LITMArrowHead.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A82FAA2A07FB8700790052 /* LITMArrowHead.h */; };
-		B4A82FAD2A07FB8800790052 /* LITMArrowHead.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A82FAB2A07FB8800790052 /* LITMArrowHead.m */; };
+		
+		B4A82FAD2A07FB8800790052 /* LITMArrowHead.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A82FAB2A07FB8800790052 /* LITMArrowHead.swift */; };
 		B4AE41B52D0BBAF600E05D96 /* XRLayerText+Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AE41B32D0BBAF600E05D96 /* XRLayerText+Stub.swift */; };
 		B4AE41B82D0BCEBF00E05D96 /* XRLayerLineArrow+Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AE41B62D0BCE6100E05D96 /* XRLayerLineArrow+Stub.swift */; };
 		B4AE41BF2D0BD08400E05D96 /* XRLayerGrid+Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AE41BD2D0BD07000E05D96 /* XRLayerGrid+Stub.swift */; };
@@ -459,8 +459,8 @@
 		B4A82F9A2A07F8A400790052 /* LITMXMLBinaryEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LITMXMLBinaryEncoding.m; sourceTree = "<group>"; };
 		B4A82FA22A07FA8900790052 /* LITMXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LITMXMLParser.h; sourceTree = "<group>"; };
 		B4A82FA32A07FA8900790052 /* LITMXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LITMXMLParser.m; sourceTree = "<group>"; };
-		B4A82FAA2A07FB8700790052 /* LITMArrowHead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LITMArrowHead.h; sourceTree = "<group>"; };
-		B4A82FAB2A07FB8800790052 /* LITMArrowHead.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LITMArrowHead.m; sourceTree = "<group>"; };
+		
+		B4A82FAB2A07FB8800790052 /* LITMArrowHead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LITMArrowHead.swift; sourceTree = "<group>"; };
 		B4AE41B32D0BBAF600E05D96 /* XRLayerText+Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XRLayerText+Stub.swift"; sourceTree = "<group>"; };
 		B4AE41B62D0BCE6100E05D96 /* XRLayerLineArrow+Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XRLayerLineArrow+Stub.swift"; sourceTree = "<group>"; };
 		B4AE41B92D0BD03A00E05D96 /* XRLayerCore+Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XRLayerCore+Stub.swift"; sourceTree = "<group>"; };
@@ -754,8 +754,7 @@
 		B4149FEC2B24C455008AE5F4 /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
-				B4A82FAA2A07FB8700790052 /* LITMArrowHead.h */,
-				B4A82FAB2A07FB8800790052 /* LITMArrowHead.m */,
+				B4A82FAB2A07FB8800790052 /* LITMArrowHead.swift */,
 				B48430872E1486D100E126C0 /* LITMArrowHeadTests.swift */,
 				B444B5722E62AC8C007E7E36 /* XRGraphic.swift */,
 				BLHFDTXYH56D3KXO45XKMYX9 /* XRGraphicCircle.swift */,
@@ -1220,7 +1219,7 @@
 				B4815B7005C44C0200403360 /* XRLayerData.h in Headers */,
 				B4A82F962A07F87A00790052 /* LITMXMLNodeProtocol.h in Headers */,
 				B4E2DE8905C5BD6500714F6F /* XRLayerGrid.h in Headers */,
-				B4A82FAC2A07FB8800790052 /* LITMArrowHead.h in Headers */,
+
 				B47CA2F105C6C5470060A30C /* XRPropertyInspector.h in Headers */,
 				B47CA37A05C6CB150060A30C /* XREmptyInspectorController.h in Headers */,
 				B4A23FC62E28389D00EDE135 /* GraphicGeometrySource.h in Headers */,
@@ -1528,7 +1527,7 @@
 				B440D5582E580FF3000D98A0 /* CGFloat+Extensions.swift in Sources */,
 				B4A82F9C2A07F8A400790052 /* LITMXMLBinaryEncoding.m in Sources */,
 				B41C86B62DE4BEE20053C9C9 /* DefaultsStorage.swift in Sources */,
-				B4A82FAD2A07FB8800790052 /* LITMArrowHead.m in Sources */,
+				B4A82FAD2A07FB8800790052 /* LITMArrowHead.swift in Sources */,
 				B440D55C2E594369000D98A0 /* XRGraphicDot.swift in Sources */,
 				B4866BF42CAE02C900319712 /* StoreProtocol.swift in Sources */,
 				B4DB28E32D22450300FC6A49 /* Encoding.swift in Sources */,
