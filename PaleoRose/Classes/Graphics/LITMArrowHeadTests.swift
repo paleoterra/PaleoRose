@@ -43,7 +43,8 @@ struct LITMArrowHeadTests {
 
     @Test(
         "Initialization with different colors",
-        arguments: [NSColor.red, NSColor.blue, NSColor.green, NSColor.black, NSColor.white])
+        arguments: [NSColor.red, NSColor.blue, NSColor.green, NSColor.black, NSColor.white]
+    )
     func testInitializationWithDifferentColors(color: NSColor) throws {
         let size: Float = 1.0
         let type = 0
