@@ -336,14 +336,14 @@ struct GraphicLineTests {
     @Test(
         "Test horizontal transform",
         arguments: [
-            (Float(10.0), AffineTransform.unitTestTranform(.horizontal10Degree)),
-            (Float(75.0), AffineTransform.unitTestTranform(.horizontal75Degree)),
-            (Float(289.0), AffineTransform.unitTestTranform(.horizontal289Degree)),
-            (Float(0.0), AffineTransform.unitTestTranform(.horizontal0Degree)),
-            (Float(180.0), AffineTransform.unitTestTranform(.horizontal180Degree))
+            (Float(10.0), CGAffineTransform.unitTestTranform(.horizontal10Degree)),
+            (Float(75.0), CGAffineTransform.unitTestTranform(.horizontal75Degree)),
+            (Float(289.0), CGAffineTransform.unitTestTranform(.horizontal289Degree)),
+            (Float(0.0), CGAffineTransform.unitTestTranform(.horizontal0Degree)),
+            (Float(180.0), CGAffineTransform.unitTestTranform(.horizontal180Degree))
         ]
     )
-    func testHorizontalTransform(params: (angle: Float, transform: AffineTransform)) async throws {
+    func testHorizontalTransform(params: (angle: Float, transform: CGAffineTransform)) async throws {
         let controller = MockGraphicGeometrySource()
         let line = GraphicLine(controller: controller)
         line.spokeNumberAlign = GraphicLineNumberAlign.horizontal.rawValue
@@ -355,17 +355,17 @@ struct GraphicLineTests {
     @Test(
         "Test parallel transform",
         arguments: [
-            (Float(10.0), AffineTransform.unitTestTranform(.parallel10Degree)),
-            (Float(75.0), AffineTransform.unitTestTranform(.parallel75Degree)),
-            (Float(289.0), AffineTransform.unitTestTranform(.parallel289Degree)),
-            (Float(0), AffineTransform.unitTestTranform(.parallel0Degree)),
-            (Float(180), AffineTransform.unitTestTranform(.parallel180Degree))
+            (Float(10.0), CGAffineTransform.unitTestTranform(.parallel10Degree)),
+            (Float(75.0), CGAffineTransform.unitTestTranform(.parallel75Degree)),
+            (Float(289.0), CGAffineTransform.unitTestTranform(.parallel289Degree)),
+            (Float(0), CGAffineTransform.unitTestTranform(.parallel0Degree)),
+            (Float(180), CGAffineTransform.unitTestTranform(.parallel180Degree))
         ]
     )
     func testParallelTransform(
         params: (
             angle: Float,
-            transform: AffineTransform
+            transform: CGAffineTransform
         )
     ) async throws {
         let controller = MockGraphicGeometrySource()

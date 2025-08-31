@@ -28,7 +28,7 @@ import AppKit
 import Numerics
 import Testing
 
-extension AffineTransform {
+extension CGAffineTransform {
     enum TestTransform {
         case horizontal10Degree
         case horizontal75Degree
@@ -44,112 +44,112 @@ extension AffineTransform {
     }
 
     // swiftlint:disable:next function_body_length
-    static func unitTestTranform(_ transform: TestTransform) -> AffineTransform {
+    static func unitTestTranform(_ transform: TestTransform) -> CGAffineTransform {
         switch transform {
         case .horizontal10Degree:
-            .init(
-                m11: 0.9999999999999999,
-                m12: 1.2380714832134292e-17,
-                m21: 1.2380714832134292e-17,
-                m22: 1.0,
-                tX: -6.267424473330696,
-                tY: 1.3480775301220795
+            CGAffineTransform(
+                a: 0.9999999999999999,
+                b: 1.2380714832134292e-17,
+                c: 1.2380714832134292e-17,
+                d: 1.0,
+                tx: -6.267424473330696,
+                ty: 1.3480775301220795
             )
 
         case .horizontal75Degree:
-            .init(
-                m11: 1.0,
-                m12: 1.2253002782949126e-17,
-                m21: 1.2253002782949126e-17,
-                m22: 1.0,
-                tX: 1.655352012890683,
-                tY: -5.911809548974793
+            CGAffineTransform(
+                a: 1.0,
+                b: 1.2253002782949126e-17,
+                c: 1.2253002782949126e-17,
+                d: 1.0,
+                tx: 1.655352012890683,
+                ty: -5.911809548974793
             )
 
         case .horizontal289Degree:
-            .init(
-                m11: 0.9999999999999999,
-                m12: 4.062288780148174e-18,
-                m21: 4.062288780148174e-18,
-                m22: 0.9999999999999999,
-                tX: -17.459092005993167,
-                tY: -5.244318455428433
+            CGAffineTransform(
+                a: 0.9999999999999999,
+                b: 4.062288780148174e-18,
+                c: 4.062288780148174e-18,
+                d: 0.9999999999999999,
+                tx: -17.459092005993167,
+                ty: -5.244318455428433
             )
 
         case .horizontal0Degree:
-            .init(
-                m11: 1.0,
-                m12: 0.0,
-                m21: 0.0,
-                m22: 1.0,
-                tX: -4.998046874999999,
-                tY: 1.5
+            CGAffineTransform(
+                a: 1.0,
+                b: 0.0,
+                c: 0.0,
+                d: 1.0,
+                tx: -4.998046874999999,
+                ty: 1.5
             )
 
         case .horizontal180Degree:
-            .init(
-                m11: 1.0,
-                m12: 0.0,
-                m21: 0.0,
-                m22: 1.0,
-                tX: -4.333007812499999,
-                tY: -18.5
+            CGAffineTransform(
+                a: 1.0,
+                b: 0.0,
+                c: 0.0,
+                d: 1.0,
+                tx: -4.333007812499999,
+                ty: -18.5
             )
 
         case .parallel10Degree:
-            .init(
-                m11: 0.17364817766693041,
-                m12: 0.984807753012208,
-                m21: -0.984807753012208,
-                m22: 0.17364817766693041,
-                tX: 10.107347677273072,
-                tY: 8.37206801995317
+            CGAffineTransform(
+                a: 0.17364817766693041,
+                b: 0.984807753012208,
+                c: -0.984807753012208,
+                d: 0.17364817766693041,
+                tx: 10.107347677273072,
+                ty: 8.37206801995317
             )
 
         case .parallel75Degree:
-            .init(
-                m11: 0.9659258262890683,
-                m12: 0.25881904510252074,
-                m21: -0.25881904510252074,
-                m22: 0.9659258262890683,
-                tX: 11.859220146262109,
-                tY: -5.622179072431873
+            CGAffineTransform(
+                a: 0.9659258262890683,
+                b: 0.25881904510252074,
+                c: -0.25881904510252074,
+                d: 0.9659258262890683,
+                tx: 11.859220146262109,
+                ty: -5.622179072431873
             )
 
         case .parallel289Degree:
-            .init(
-                m11: 0.945518575599317,
-                m12: -0.32556815445715626,
-                m21: 0.32556815445715626,
-                m22: 0.945518575599317,
-                tX: -27.358199142339938,
-                tY: 0.4304076244985655
+            CGAffineTransform(
+                a: 0.945518575599317,
+                b: -0.32556815445715626,
+                c: 0.32556815445715626,
+                d: 0.945518575599317,
+                tx: -27.358199142339938,
+                ty: 0.4304076244985655
             )
 
         case .parallel0Degree:
-            .init(
-                m11: 1.0,
-                m12: 0.0,
-                m21: 0.0,
-                m22: 1.0,
-                tX: -4.998046875,
-                tY: 10.0
+            CGAffineTransform(
+                a: 1.0,
+                b: 0.0,
+                c: 0.0,
+                d: 1.0,
+                tx: -4.998046875,
+                ty: 10.0
             )
 
         case .parallel180Degree:
-            .init(
-                m11: 1.0,
-                m12: 0.0,
-                m21: 0.0,
-                m22: 1.0,
-                tX: -4.3330078125,
-                tY: -27.0
+            CGAffineTransform(
+                a: 1.0,
+                b: 0.0,
+                c: 0.0,
+                d: 1.0,
+                tx: -4.3330078125,
+                ty: -27.0
             )
         }
     }
 
     func assertEqual(
-        to other: AffineTransform,
+        to other: CGAffineTransform,
         fileID: String = #fileID,
         filePath: String = #filePath,
         line: Int = #line,
@@ -163,46 +163,46 @@ extension AffineTransform {
             column: column
         )
         #expect(
-            m11.isApproximatelyEqual(to: other.m11, absoluteTolerance: defaultTolerance),
-            "m11 mismatch: expected: \(m11), actual \(other.m11)",
+            a.isApproximatelyEqual(to: other.a, absoluteTolerance: defaultTolerance),
+            "a mismatch: expected: \(a), actual \(other.a)",
             sourceLocation: sourceLocation
         )
         #expect(
-            m12.isApproximatelyEqual(to: other.m12, absoluteTolerance: defaultTolerance),
-            "m12 mismatch: expected: \(m12), actual \(other.m12)",
+            b.isApproximatelyEqual(to: other.b, absoluteTolerance: defaultTolerance),
+            "b mismatch: expected: \(b), actual \(other.b)",
             sourceLocation: sourceLocation
         )
         #expect(
-            m21.isApproximatelyEqual(to: other.m21, absoluteTolerance: defaultTolerance),
-            "m21 mismatch: expected: \(m21), actual \(other.m21)",
+            c.isApproximatelyEqual(to: other.c, absoluteTolerance: defaultTolerance),
+            "c mismatch: expected: \(c), actual \(other.c)",
             sourceLocation: sourceLocation
         )
         #expect(
-            m22.isApproximatelyEqual(to: other.m22, absoluteTolerance: defaultTolerance),
-            "m22 mismatch: expected: \(m22), actual \(other.m22)",
+            d.isApproximatelyEqual(to: other.d, absoluteTolerance: defaultTolerance),
+            "d mismatch: expected: \(d), actual \(other.d)",
             sourceLocation: sourceLocation
         )
         #expect(
-            tX.isApproximatelyEqual(to: other.tX, absoluteTolerance: defaultTolerance),
-            "tX mismatch: expected: \(tX), actual \(other.tX)",
+            tx.isApproximatelyEqual(to: other.tx, absoluteTolerance: defaultTolerance),
+            "tx mismatch: expected: \(tx), actual \(other.tx)",
             sourceLocation: sourceLocation
         )
         #expect(
-            tY.isApproximatelyEqual(to: other.tY, absoluteTolerance: defaultTolerance),
-            "tY mismatch: expected: \(tY), actual \(other.tY)",
+            ty.isApproximatelyEqual(to: other.ty, absoluteTolerance: defaultTolerance),
+            "ty mismatch: expected: \(ty), actual \(other.ty)",
             sourceLocation: sourceLocation
         )
     }
 
     func assertEqual(
-        to other: NSAffineTransform?,
+        to other: CGAffineTransform?,
         fileID: String = #fileID,
         filePath: String = #filePath,
         line: Int = #line,
         column: Int = #column
     ) {
         guard let other else {
-            #expect(Bool(false), "NSAffineTransform is nil", sourceLocation: SourceLocation(
+            #expect(Bool(false), "CGAffineTransform is nil", sourceLocation: SourceLocation(
                 fileID: fileID,
                 filePath: filePath,
                 line: line,
@@ -211,17 +211,6 @@ extension AffineTransform {
             return
         }
 
-        // Convert NSAffineTransform to AffineTransform
-        let transform = other.transformStruct
-        let otherAffine = AffineTransform(
-            m11: transform.m11,
-            m12: transform.m12,
-            m21: transform.m21,
-            m22: transform.m22,
-            tX: transform.tX,
-            tY: transform.tY
-        )
-
-        assertEqual(to: otherAffine, fileID: fileID, filePath: filePath, line: line, column: column)
+        assertEqual(to: other, fileID: fileID, filePath: filePath, line: line, column: column)
     }
 }

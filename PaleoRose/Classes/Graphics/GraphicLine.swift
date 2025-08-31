@@ -133,8 +133,8 @@ import AppKit
     }
 
     private var relativePercent: Float = 1.0
-    @objc public var lineLabel: NSMutableAttributedString?
-    @objc public var labelTransform: NSAffineTransform?
+    @objc var lineLabel: NSMutableAttributedString?
+    var labelTransform: CGAffineTransform?
 
     // MARK: - Initialization
 
@@ -289,7 +289,7 @@ import AppKit
             .foregroundColor: strokeColor ?? NSColor.black
         ], range: range)
 
-        labelTransform = NSAffineTransform()
+        labelTransform = CGAffineTransform.identity
 
         if spokeNumberAlignEnum == .horizontal {
             calculateHorizontalTransform()
@@ -307,10 +307,10 @@ import AppKit
         let displacement = CGFloat(controller.unrestrictedRadius(ofRelativePercent: Double(relativePercent + 0.2)))
         let rotationAngle = CGFloat(spokeAngle - 90.0)
 
-        transform.translateX(by: -0.5 * labelSize.width, yBy: -0.5 * labelSize.height)
-        transform.rotate(byDegrees: -rotationAngle)
-        transform.translateX(by: displacement, yBy: 0.0)
-        transform.rotate(byDegrees: rotationAngle)
+        labelTransform = transform.translatedBy(x: -0.5 * labelSize.width, y: -0.5 * labelSize.height)
+        labelTransform = labelTransform?.rotated(by: -rotationAngle * .pi / 180.0)
+        labelTransform = labelTransform?.translatedBy(x: displacement, y: 0.0)
+        labelTransform = labelTransform?.rotated(by: rotationAngle * .pi / 180.0)
     }
 
     private func calculateParallelTransform() {
@@ -323,18 +323,18 @@ import AppKit
         let rotationAngle = CGFloat(90.0 - spokeAngle)
 
         if spokeAngle == 0.0 {
-            transform.translateX(by: -0.5 * labelSize.width, yBy: displacement)
+            labelTransform = transform.translatedBy(x: -0.5 * labelSize.width, y: displacement)
         } else if spokeAngle == 180.0 {
-            transform.translateX(by: -0.5 * labelSize.width, yBy: -(displacement + labelSize.height))
+            labelTransform = transform.translatedBy(x: -0.5 * labelSize.width, y: -(displacement + labelSize.height))
         } else {
             if spokeAngle > 180.0 {
-                transform.rotate(byDegrees: rotationAngle - 180.0)
-                transform.translateX(by: -(displacement + labelSize.width), yBy: 0.0)
-                transform.translateX(by: 0.0, yBy: -0.5 * labelSize.height)
+                labelTransform = transform.rotated(by: (rotationAngle - 180.0) * .pi / 180.0)
+                labelTransform = labelTransform?.translatedBy(x: -(displacement + labelSize.width), y: 0.0)
+                labelTransform = labelTransform?.translatedBy(x: 0.0, y: -0.5 * labelSize.height)
             } else {
-                transform.rotate(byDegrees: rotationAngle)
-                transform.translateX(by: displacement, yBy: 0.0)
-                transform.translateX(by: 0.0, yBy: -0.5 * labelSize.height)
+                labelTransform = transform.rotated(by: rotationAngle * .pi / 180.0)
+                labelTransform = labelTransform?.translatedBy(x: displacement, y: 0.0)
+                labelTransform = labelTransform?.translatedBy(x: 0.0, y: -0.5 * labelSize.height)
             }
         }
     }
@@ -356,8 +356,10 @@ import AppKit
             }
 
             if showLabel, let transform = labelTransform, let label = lineLabel {
-                transform.concat()
-                label.draw(at: NSZeroPoint)
+                if let context = NSGraphicsContext.current?.cgContext {
+                    context.concatenate(transform)
+                }
+                label.draw(at: CGPoint.zero)
             }
 
             NSGraphicsContext.restoreGraphicsState()

@@ -14,10 +14,7 @@ struct GraphicCircleLabelTests {
     // MARK: - Test Setup
 
     private func buildTestObject(controller: GraphicGeometrySource) throws -> GraphicCircleLabel {
-        try #require(
-            GraphicCircleLabel(controller: controller),
-            "Graphic circle label should be initialized"
-        )
+        GraphicCircleLabel(controller: controller)
     }
 
     private func buildCoreTestObject(controller: GraphicGeometrySource) throws -> GraphicCircleLabel {
@@ -201,7 +198,7 @@ struct GraphicCircleLabelTests {
         label.computeLabelText()
 
         // Then - Verify the label text is formatted correctly
-        let labelText = try #require(label.value(forKey: "label") as? NSAttributedString)
+        let labelText = try #require(label.label)
         #expect(labelText.string.contains("50.0 %"), "Label should contain '50.0%' in percent mode")
     }
 
@@ -217,8 +214,8 @@ struct GraphicCircleLabelTests {
         label.computeLabelText()
 
         // Then - Verify the label text is formatted correctly
-        let labelText = label.value(forKey: "label") as? NSAttributedString
-        #expect(labelText?.string == "42", "Label should be '42' in count mode")
+        let labelText = try #require(label.label)
+        #expect(labelText.string == "42", "Label should be '42' in count mode")
     }
 
     @Test("computeLabelText should generate correct label for fixed count mode")
@@ -235,8 +232,8 @@ struct GraphicCircleLabelTests {
         label.computeLabelText()
 
         // Then - Verify the label text is formatted correctly
-        let labelText = label.value(forKey: "label") as? NSAttributedString
-        #expect(labelText?.string == "30.0", "Label should be '30.0' in fixed count mode")
+        let labelText = try #require(label.label)
+        #expect(labelText.string == "30.0", "Label should be '30.0' in fixed count mode")
     }
 
     // MARK: - Transform Computation Tests
@@ -255,7 +252,7 @@ struct GraphicCircleLabelTests {
         // Then - Verify the transform is created
         // Note: We can't directly test the transform values, but we can verify the method runs without errors
         // and that the transform is applied during drawing
-        let transform = label.value(forKey: "theTransform") as? AffineTransform
+        let transform = label.theTransform
         #expect(transform != nil, "Transform should be created")
     }
 
@@ -372,8 +369,14 @@ struct GraphicCircleLabelTests {
         try verifyDrawingPath(for: label, isCore: false)
 
         // Verify label properties are set
-        #expect(label.value(forKey: "label") != nil, "Label should be set when showLabel is true")
-        #expect(label.value(forKey: "theTransform") != nil, "Transform should be set when showLabel is true")
+        #expect(
+            label.label != nil,
+            "Label should be set when showLabel is true"
+        )
+        #expect(
+            label.theTransform != nil,
+            "Transform should be set when showLabel is true"
+        )
     }
 
     @Test("Non-core circle with showLabel in count mode should use radius methods")
@@ -400,8 +403,8 @@ struct GraphicCircleLabelTests {
         try verifyDrawingPath(for: label, isCore: false)
 
         // Verify label properties are set
-        #expect(label.value(forKey: "label") != nil, "Label should be set when showLabel is true")
-        #expect(label.value(forKey: "theTransform") != nil, "Transform should be set when showLabel is true")
+        #expect(label.label != nil, "Label should be set when showLabel is true")
+        #expect(label.theTransform != nil, "Transform should be set when showLabel is true")
     }
 
     @Test("Non-core circle without showLabel in percent mode should use circleRect")

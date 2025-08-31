@@ -83,7 +83,7 @@ struct ArrowHeadTests {
     func testPositionAtLineEndpointWithPoints() {
         let arrowHead = ArrowHead(size: 1.0, color: NSColor.red, type: 0)
         let points = [
-            CGPoint(x: 0.0, y: 0.0),
+            CGPoint.zero,
             CGPoint(x: -10.0, y: -10.0),
             CGPoint(x: 100.0, y: 50.0),
             CGPoint(x: -50.0, y: 75.0)

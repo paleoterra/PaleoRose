@@ -55,7 +55,7 @@ import AppKit
 
     // Private properties (some exposed for testing)
     @objc dynamic var label: NSMutableAttributedString?
-    @objc dynamic var theTransform: NSAffineTransform?
+    var theTransform: CGAffineTransform?
     @objc dynamic var isCore: Bool = false
     private var labelPoint: CGPoint = .zero
     private var labelSize: CGSize = .zero
@@ -126,8 +126,8 @@ import AppKit
     }
 
     @objc func computeTransform() {
-        theTransform = NSAffineTransform()
-        theTransform?.rotate(byDegrees: 360.0 - CGFloat(labelAngle))
+        theTransform = CGAffineTransform.identity
+        theTransform = theTransform?.rotated(by: CGFloat(360.0 - labelAngle) * .pi / 180.0)
     }
 
     // MARK: - Helper Methods
@@ -192,12 +192,13 @@ import AppKit
     @objc override func draw(_ rect: CGRect) {
         computeLabelText()
 
-        guard let path = drawingPath, NSIntersectsRect(rect, path.bounds) else { return }
+        guard let path = drawingPath, rect.intersects(path.bounds) else { return }
 
         NSGraphicsContext.saveGraphicsState()
 
         strokeColor?.set()
-        theTransform?.concat()
+        if let transform = theTransform, let context = NSGraphicsContext.current?.cgContext { context.concatenate(transform)
+        }
         path.stroke()
 
         if drawsFill {
