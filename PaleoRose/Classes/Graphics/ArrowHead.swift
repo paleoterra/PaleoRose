@@ -35,39 +35,41 @@ import Foundation
 
     @objc var arrowColor: NSColor
     @objc var path: NSBezierPath
-    @objc var positionTransform: NSAffineTransform
-    @objc var scaleTransform: NSAffineTransform
+    @objc var positionTransform: CGAffineTransform
+    @objc var scaleTransform: CGAffineTransform
 
     // MARK: - Initialization
 
     @objc init(size: Float, color: NSColor, type: Int32) {
         arrowColor = color
         path = NSBezierPath()
-        scaleTransform = NSAffineTransform()
-        positionTransform = NSAffineTransform()
+        scaleTransform = CGAffineTransform.identity
+        positionTransform = CGAffineTransform.identity
 
         super.init()
 
         configureScaleTransform(size)
         setType(Int(type))
-        position(atLineEndpoint: NSPoint(x: 0.0, y: 0.0), withAngle: 0.0)
+        position(atLineEndpoint: CGPoint.zero, withAngle: 0.0)
     }
 
     // MARK: - Public Methods
 
     @objc(positionAtLineEndpoint:withAngle:)
-    func position(atLineEndpoint point: NSPoint, withAngle angle: Float) {
-        positionTransform = NSAffineTransform()
-        positionTransform.translateX(by: point.x, yBy: point.y)
-        positionTransform.rotate(byDegrees: 360.0 - CGFloat(angle))
+    func position(atLineEndpoint point: CGPoint, withAngle angle: Float) {
+        positionTransform = CGAffineTransform.identity
+        positionTransform = positionTransform.translatedBy(x: point.x, y: point.y)
+        positionTransform = positionTransform.rotated(by: CGFloat(360.0 - angle) * .pi / 180.0)
     }
 
     @objc(drawRect:)
     func draw(_: NSRect) {
         NSGraphicsContext.saveGraphicsState()
 
-        scaleTransform.concat()
-        positionTransform.concat()
+        if let context = NSGraphicsContext.current?.cgContext {
+            context.concatenate(scaleTransform)
+            context.concatenate(positionTransform)
+        }
 
         arrowColor.set()
 
@@ -80,7 +82,7 @@ import Foundation
     // MARK: - Private Methods
 
     private func configureScaleTransform(_ scale: Float) {
-        scaleTransform.scale(by: CGFloat(scale))
+        scaleTransform = CGAffineTransform(scaleX: CGFloat(scale), y: CGFloat(scale))
     }
 
     private func setType(_ type: Int) {
@@ -104,31 +106,31 @@ import Foundation
     }
 
     private func standardArrow() {
-        path.move(to: NSPoint(x: 0.0, y: 0.0))
-        path.line(to: NSPoint(x: 5.0, y: -10.0))
-        path.line(to: NSPoint(x: -5.0, y: -10.0))
-        path.line(to: NSPoint(x: 0.0, y: 0.0))
+        path.move(to: CGPoint.zero)
+        path.line(to: CGPoint(x: 5.0, y: -10.0))
+        path.line(to: CGPoint(x: -5.0, y: -10.0))
+        path.line(to: CGPoint.zero)
     }
 
     private func flyingArrow() {
-        path.move(to: NSPoint(x: 0.0, y: 0.0))
-        path.line(to: NSPoint(x: 5.0, y: -10.0))
-        path.line(to: NSPoint(x: 0.0, y: -7.5))
-        path.line(to: NSPoint(x: -5.0, y: -10.0))
-        path.line(to: NSPoint(x: 0.0, y: 0.0))
+        path.move(to: CGPoint.zero)
+        path.line(to: CGPoint(x: 5.0, y: -10.0))
+        path.line(to: CGPoint(x: 0.0, y: -7.5))
+        path.line(to: CGPoint(x: -5.0, y: -10.0))
+        path.line(to: CGPoint.zero)
     }
 
     private func halfArrowLeft() {
-        path.move(to: NSPoint(x: 0.0, y: 0.0))
-        path.line(to: NSPoint(x: 0.0, y: -7.5))
-        path.line(to: NSPoint(x: -5.0, y: -10.0))
-        path.line(to: NSPoint(x: 0.0, y: 0.0))
+        path.move(to: CGPoint.zero)
+        path.line(to: CGPoint(x: 0.0, y: -7.5))
+        path.line(to: CGPoint(x: -5.0, y: -10.0))
+        path.line(to: CGPoint.zero)
     }
 
     private func halfArrowRight() {
-        path.move(to: NSPoint(x: 0.0, y: 0.0))
-        path.line(to: NSPoint(x: 5.0, y: -10.0))
-        path.line(to: NSPoint(x: 0.0, y: -7.5))
-        path.line(to: NSPoint(x: 0.0, y: 0.0))
+        path.move(to: CGPoint.zero)
+        path.line(to: CGPoint(x: 5.0, y: -10.0))
+        path.line(to: CGPoint(x: 0.0, y: -7.5))
+        path.line(to: CGPoint.zero)
     }
 }
