@@ -191,7 +191,7 @@ import AppKit
         }
     }
 
-    private func pointAtRadius(_ radius: CGFloat, angle: CGFloat) -> NSPoint {
+    private func pointAtRadius(_ radius: CGFloat, angle: CGFloat) -> CGPoint {
         guard let controller = geometryController else { return NSZeroPoint }
         let point = NSMakePoint(0.0, radius)
         return controller.rotation(of: point, byAngle: Double(angle))
@@ -341,7 +341,7 @@ import AppKit
 
     // MARK: - Drawing
 
-    @objc override func draw(_ rect: NSRect) {
+    @objc override func draw(_ rect: CGRect) {
         guard let path = drawingPath else { return }
 
         if rect.intersects(path.bounds) {

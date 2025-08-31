@@ -49,11 +49,11 @@ struct GraphicKiteTests {
         controller.mockGeometryMaxCount = 10
 
         let expectedPoints = [
-            NSPoint(x: 9.797174393178826e-16, y: 4.0),
-            NSPoint(x: 0.0, y: 1.0),
-            NSPoint(x: -1.7320508075688774, y: -0.9999999999999997),
-            NSPoint(x: 2.598076211353315, y: -1.5000000000000013),
-            NSPoint(x: 9.797174393178826e-16, y: 4.0)
+            CGPoint(x: 9.797174393178826e-16, y: 4.0),
+            CGPoint(x: 0.0, y: 1.0),
+            CGPoint(x: -1.7320508075688774, y: -0.9999999999999997),
+            CGPoint(x: 2.598076211353315, y: -1.5000000000000013),
+            CGPoint(x: 9.797174393178826e-16, y: 4.0)
         ]
 
         let kite = try
@@ -82,25 +82,25 @@ struct GraphicKiteTests {
         controller.mockGeometryMaxCount = 10
         controller.mockHollowCoreSize = 0.5
 
-        let expectedPoints: [NSPoint] = [
-            NSPoint(x: 9.797174393178826e-16, y: 4.0),
-            NSPoint(x: 0.0, y: 1.0),
-            NSPoint(x: -1.7320508075688774, y: -0.9999999999999997),
-            NSPoint(x: 2.598076211353315, y: -1.5000000000000013),
-            NSPoint(x: 9.797174393178826e-16, y: 4.0),
-            NSPoint(x: 0.0, y: 0.0),
-            NSPoint(x: 0.0, y: 0.0),
-            NSPoint(x: 0.0, y: 0.0),
-            NSPoint(x: 0.0, y: 0.0),
-            NSPoint(x: 0.0, y: 0.0),
-            NSPoint(x: 0.0, y: 0.0),
-            NSPoint(x: 0.0, y: 0.0),
-            NSPoint(x: 0.0, y: 0.0),
-            NSPoint(x: 0.0, y: 0.0),
-            NSPoint(x: 0.0, y: 0.0),
-            NSPoint(x: 0.0, y: 0.0),
-            NSPoint(x: 0.0, y: 0.0),
-            NSPoint(x: 0.0, y: 0.0)
+        let expectedPoints: [CGPoint] = [
+            CGPoint(x: 9.797174393178826e-16, y: 4.0),
+            CGPoint(x: 0.0, y: 1.0),
+            CGPoint(x: -1.7320508075688774, y: -0.9999999999999997),
+            CGPoint(x: 2.598076211353315, y: -1.5000000000000013),
+            CGPoint(x: 9.797174393178826e-16, y: 4.0),
+            CGPoint(x: 0.0, y: 0.0),
+            CGPoint(x: 0.0, y: 0.0),
+            CGPoint(x: 0.0, y: 0.0),
+            CGPoint(x: 0.0, y: 0.0),
+            CGPoint(x: 0.0, y: 0.0),
+            CGPoint(x: 0.0, y: 0.0),
+            CGPoint(x: 0.0, y: 0.0),
+            CGPoint(x: 0.0, y: 0.0),
+            CGPoint(x: 0.0, y: 0.0),
+            CGPoint(x: 0.0, y: 0.0),
+            CGPoint(x: 0.0, y: 0.0),
+            CGPoint(x: 0.0, y: 0.0),
+            CGPoint(x: 0.0, y: 0.0)
         ]
 
         let kite = try
@@ -131,11 +131,11 @@ struct GraphicKiteTests {
         controller.mockGeometryMaxPercent = 100.0
 
         let expectedPoints = [
-            NSPoint(x: 9.7971745391681e-17, y: 0.4000000059604645),
-            NSPoint(x: 0.0, y: 0.10000000149011612),
-            NSPoint(x: -0.17320508333784457, y: -0.10000000149011609),
-            NSPoint(x: 0.2598076314591588, y: -0.15000000596046462),
-            NSPoint(x: 9.7971745391681e-17, y: 0.4000000059604645)
+            CGPoint(x: 9.7971745391681e-17, y: 0.4000000059604645),
+            CGPoint(x: 0.0, y: 0.10000000149011612),
+            CGPoint(x: -0.17320508333784457, y: -0.10000000149011609),
+            CGPoint(x: 0.2598076314591588, y: -0.15000000596046462),
+            CGPoint(x: 9.7971745391681e-17, y: 0.4000000059604645)
         ]
 
         let kite = try
@@ -166,24 +166,24 @@ struct GraphicKiteTests {
         controller.mockHollowCoreSize = 0.5
 
         let expectedPoints = [
-            NSPoint(x: 9.7971745391681e-17, y: 0.4000000059604645),
-            NSPoint(x: 0.0, y: 0.10000000149011612),
-            NSPoint(x: -0.17320508333784457, y: -0.10000000149011609),
-            NSPoint(x: 0.2598076314591588, y: -0.15000000596046462),
-            NSPoint(x: 9.7971745391681e-17, y: 0.4000000059604645),
-            NSPoint(x: 0.0, y: 0.0),
-            NSPoint(x: 0.0, y: 0.0),
-            NSPoint(x: 0.0, y: 0.0),
-            NSPoint(x: 0.0, y: 0.0),
-            NSPoint(x: 0.0, y: 0.0),
-            NSPoint(x: 0.0, y: 0.0),
-            NSPoint(x: 0.0, y: 0.0),
-            NSPoint(x: 0.0, y: 0.0),
-            NSPoint(x: 0.0, y: 0.0),
-            NSPoint(x: 0.0, y: 0.0),
-            NSPoint(x: 0.0, y: 0.0),
-            NSPoint(x: 0.0, y: 0.0),
-            NSPoint(x: 0.0, y: 0.0)
+            CGPoint(x: 9.7971745391681e-17, y: 0.4000000059604645),
+            CGPoint(x: 0.0, y: 0.10000000149011612),
+            CGPoint(x: -0.17320508333784457, y: -0.10000000149011609),
+            CGPoint(x: 0.2598076314591588, y: -0.15000000596046462),
+            CGPoint(x: 9.7971745391681e-17, y: 0.4000000059604645),
+            CGPoint(x: 0.0, y: 0.0),
+            CGPoint(x: 0.0, y: 0.0),
+            CGPoint(x: 0.0, y: 0.0),
+            CGPoint(x: 0.0, y: 0.0),
+            CGPoint(x: 0.0, y: 0.0),
+            CGPoint(x: 0.0, y: 0.0),
+            CGPoint(x: 0.0, y: 0.0),
+            CGPoint(x: 0.0, y: 0.0),
+            CGPoint(x: 0.0, y: 0.0),
+            CGPoint(x: 0.0, y: 0.0),
+            CGPoint(x: 0.0, y: 0.0),
+            CGPoint(x: 0.0, y: 0.0),
+            CGPoint(x: 0.0, y: 0.0)
         ]
 
         let kite = try

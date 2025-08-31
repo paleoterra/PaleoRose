@@ -57,8 +57,8 @@ import AppKit
     @objc dynamic var label: NSMutableAttributedString?
     @objc dynamic var theTransform: NSAffineTransform?
     @objc dynamic var isCore: Bool = false
-    private var labelPoint: NSPoint = .zero
-    private var labelSize: NSSize = .zero
+    private var labelPoint: CGPoint = .zero
+    private var labelSize: CGSize = .zero
 
     // MARK: - Initialization
 
@@ -66,7 +66,7 @@ import AppKit
         super.init(controller: controller)
 
         showLabel = false
-        labelPoint = NSPoint.zero
+        labelPoint = CGPoint.zero
         isPercent = controller.isPercent()
         isCore = true
         percentSetting = 0.0
@@ -81,7 +81,7 @@ import AppKit
         showLabel = true
         isCore = false
         labelFont = NSFont(name: "Arial-Black", size: 12)
-        labelPoint = NSPoint.zero
+        labelPoint = CGPoint.zero
     }
 
     // MARK: - Label String Methods
@@ -150,7 +150,7 @@ import AppKit
         computeTransform()
 
         if drawClosedCircle() {
-            var drawRect = NSRect.zero
+            var drawRect = CGRect.zero
             if circleBasedOnPercent() {
                 drawRect = controller.circleRect(forPercent: percentSetting)
             } else {
@@ -168,13 +168,13 @@ import AppKit
             let angle = controller.degrees(fromRadians: atan((0.52 * labelWidth) / CGFloat(radius)))
 
             drawingPath = NSBezierPath()
-            drawingPath?.appendArc(withCenter: NSPoint.zero,
+            drawingPath?.appendArc(withCenter: CGPoint.zero,
                                    radius: CGFloat(radius),
                                    startAngle: 90 + angle,
                                    endAngle: 90 - angle)
 
             let labelHeight = label?.size().height ?? 0.0
-            labelPoint = NSPoint(x: -(labelWidth * 0.5),
+            labelPoint = CGPoint(x: -(labelWidth * 0.5),
                                  y: CGFloat(radius) - (labelHeight * 0.5))
         }
 
@@ -189,7 +189,7 @@ import AppKit
 
     // MARK: - Drawing
 
-    @objc override func draw(_ rect: NSRect) {
+    @objc override func draw(_ rect: CGRect) {
         computeLabelText()
 
         guard let path = drawingPath, NSIntersectsRect(rect, path.bounds) else { return }

@@ -56,7 +56,7 @@ struct ArrowHeadTests {
     func testPositionTransformChanges() {
         let arrowHead = ArrowHead(size: 1.0, color: NSColor.red, type: 0)
         let initialTransform = arrowHead.positionTransform
-        let point = NSPoint(x: 10.0, y: 20.0)
+        let point = CGPoint(x: 10.0, y: 20.0)
         let angle: Float = 45.0
 
         arrowHead.position(atLineEndpoint: point, withAngle: angle)
@@ -67,8 +67,8 @@ struct ArrowHeadTests {
     @Test("Multiple positioning calls update transform", arguments: [0.0, 45.0, 90.0, 180.0, 270.0, 360.0])
     func testMultiplePositioningUpdatesTransform(angle: Float) {
         let arrowHead = ArrowHead(size: 1.0, color: NSColor.red, type: 0)
-        let point1 = NSPoint(x: 15.0, y: 25.0)
-        let point2 = NSPoint(x: 30.0, y: 40.0)
+        let point1 = CGPoint(x: 15.0, y: 25.0)
+        let point2 = CGPoint(x: 30.0, y: 40.0)
 
         arrowHead.position(atLineEndpoint: point1, withAngle: angle)
         let firstTransform = arrowHead.positionTransform
@@ -83,10 +83,10 @@ struct ArrowHeadTests {
     func testPositionAtLineEndpointWithPoints() {
         let arrowHead = ArrowHead(size: 1.0, color: NSColor.red, type: 0)
         let points = [
-            NSPoint(x: 0.0, y: 0.0),
-            NSPoint(x: -10.0, y: -10.0),
-            NSPoint(x: 100.0, y: 50.0),
-            NSPoint(x: -50.0, y: 75.0)
+            CGPoint(x: 0.0, y: 0.0),
+            CGPoint(x: -10.0, y: -10.0),
+            CGPoint(x: 100.0, y: 50.0),
+            CGPoint(x: -50.0, y: 75.0)
         ]
         let angle: Float = 45.0
 
@@ -98,7 +98,7 @@ struct ArrowHeadTests {
     @Test("Draw rect functionality")
     func testDrawRect() {
         let arrowHead = ArrowHead(size: 1.0, color: NSColor.red, type: 0)
-        let rect = NSRect(x: 0, y: 0, width: 100, height: 100)
+        let rect = CGRect(x: 0, y: 0, width: 100, height: 100)
 
         arrowHead.draw(rect)
     }
@@ -144,7 +144,7 @@ struct ArrowHeadTests {
         let arrowHead = ArrowHead(size: 1.0, color: NSColor.red, type: 0)
         let initialTransform = arrowHead.positionTransform
 
-        arrowHead.position(atLineEndpoint: NSPoint(x: 50.0, y: 100.0), withAngle: 90.0)
+        arrowHead.position(atLineEndpoint: CGPoint(x: 50.0, y: 100.0), withAngle: 90.0)
 
         #expect(arrowHead.positionTransform != initialTransform)
     }
@@ -154,12 +154,12 @@ struct ArrowHeadTests {
         let arrowHead = ArrowHead(size: 1.0, color: NSColor.red, type: 0)
 
         arrowHead
-            .position(atLineEndpoint: NSPoint(x: 10.0, y: 10.0), withAngle: 0.0)
+            .position(atLineEndpoint: CGPoint(x: 10.0, y: 10.0), withAngle: 0.0)
         let firstTransform = arrowHead.positionTransform
 
         arrowHead
             .position(
-                atLineEndpoint: NSPoint(x: 20.0, y: 20.0),
+                atLineEndpoint: CGPoint(x: 20.0, y: 20.0),
                 withAngle: 45.0
             )
         let secondTransform = arrowHead.positionTransform

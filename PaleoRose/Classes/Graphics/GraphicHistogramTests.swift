@@ -56,12 +56,12 @@ struct GraphicHistogramTests {
     @Test(
         "Calculate Geometry",
         arguments: [
-            (Int32(5), NSRect(x: -2.86788, y: 0.0, width: 2.8678, height: 4.09576)),
-            (Int32(20), NSRect(x: -11.471528, y: 0.0, width: 11.47152, height: 16.38304)),
-            (Int32(30), NSRect(x: -17.20729, y: 0.0, width: 17.20729, height: 24.57456))
+            (Int32(5), CGRect(x: -2.86788, y: 0.0, width: 2.8678, height: 4.09576)),
+            (Int32(20), CGRect(x: -11.471528, y: 0.0, width: 11.47152, height: 16.38304)),
+            (Int32(30), CGRect(x: -17.20729, y: 0.0, width: 17.20729, height: 24.57456))
         ]
     )
-    func testCalculateGeometry(params: (value: Int32, expectedRect: NSRect)) throws {
+    func testCalculateGeometry(params: (value: Int32, expectedRect: CGRect)) throws {
         let controller = MockGraphicGeometrySource()
         controller.mockSectorSize = 10.0
         let histogram = try buildTestObject(
@@ -101,12 +101,12 @@ struct GraphicHistogramTests {
     @Test(
         "Calculate Geometry Percent",
         arguments: [
-            (Int32(5), NSRect(x: -0.02867, y: 0.0, width: 0.0286, height: 0.05)),
-            (Int32(20), NSRect(x: -0.11471, y: 0.0, width: 0.11471, height: 0.1638)),
-            (Int32(30), NSRect(x: -0.1720, y: 0.0, width: 0.1720, height: 0.2457))
+            (Int32(5), CGRect(x: -0.02867, y: 0.0, width: 0.0286, height: 0.05)),
+            (Int32(20), CGRect(x: -0.11471, y: 0.0, width: 0.11471, height: 0.1638)),
+            (Int32(30), CGRect(x: -0.1720, y: 0.0, width: 0.1720, height: 0.2457))
         ]
     )
-    func testCalculateGeometryPercent(params: (value: Int32, expectedRect: NSRect)) throws {
+    func testCalculateGeometryPercent(params: (value: Int32, expectedRect: CGRect)) throws {
         let controller = MockGraphicGeometrySource()
         controller.mockIsPercent = true
         controller.mockSectorSize = 10.0
@@ -154,7 +154,7 @@ struct GraphicHistogramTests {
             value: 10
         )
 
-        let expectedRect = NSRect(x: -4.226, y: 0.0, width: 4.226, height: 9.063)
+        let expectedRect = CGRect(x: -4.226, y: 0.0, width: 4.226, height: 9.063)
 
         let path = try #require(histogram.drawingPath)
         let bounds = path.bounds

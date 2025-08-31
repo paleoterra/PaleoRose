@@ -305,7 +305,7 @@ struct GraphicCircleLabelTests {
         // Given
         let controller = MockGraphicGeometrySource()
         controller.mockIsPercent = true
-        controller.mockCircleRectPercent = NSRect(x: 0, y: 0, width: 100, height: 100)
+        controller.mockCircleRectPercent = CGRect(x: 0, y: 0, width: 100, height: 100)
 
         let label = try buildCoreTestObject(controller: controller)
         label.showLabel = true
@@ -328,7 +328,7 @@ struct GraphicCircleLabelTests {
         // Given
         let controller = MockGraphicGeometrySource()
         controller.mockIsPercent = false
-        controller.mockCircleRectCount = NSRect(x: 0, y: 0, width: 100, height: 100)
+        controller.mockCircleRectCount = CGRect(x: 0, y: 0, width: 100, height: 100)
 
         let label = try buildCoreTestObject(controller: controller)
         label.showLabel = true
@@ -409,7 +409,7 @@ struct GraphicCircleLabelTests {
         // Given
         let controller = MockGraphicGeometrySource()
         controller.mockIsPercent = true
-        controller.mockCircleRectPercent = NSRect(x: 0, y: 0, width: 100, height: 100)
+        controller.mockCircleRectPercent = CGRect(x: 0, y: 0, width: 100, height: 100)
 
         let label = try buildTestObject(controller: controller)
         label.showLabel = false
@@ -432,7 +432,7 @@ struct GraphicCircleLabelTests {
         // Given
         let controller = MockGraphicGeometrySource()
         controller.mockIsPercent = false
-        controller.mockCircleRectCount = NSRect(x: 0, y: 0, width: 100, height: 100)
+        controller.mockCircleRectCount = CGRect(x: 0, y: 0, width: 100, height: 100)
 
         let label = try buildTestObject(controller: controller)
         label.showLabel = false

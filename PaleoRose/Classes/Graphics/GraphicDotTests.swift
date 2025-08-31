@@ -80,12 +80,12 @@ struct GraphicDotTests {
     @Test(
         "calculate geometry standard",
         arguments: [
-            (Int32(10), NSRect(x: -2.0, y: -2.0, width: 4.0, height: 13.0)),
-            (Int32(30), NSRect(x: -2.0, y: -2.0, width: 4.0, height: 33.0)),
-            (Int32(70), NSRect(x: -2.0, y: -2.0, width: 4.0, height: 73.0))
+            (Int32(10), CGRect(x: -2.0, y: -2.0, width: 4.0, height: 13.0)),
+            (Int32(30), CGRect(x: -2.0, y: -2.0, width: 4.0, height: 33.0)),
+            (Int32(70), CGRect(x: -2.0, y: -2.0, width: 4.0, height: 73.0))
         ]
     )
-    func calculateGeometryStandard(params: (count: Int32, expectedRect: NSRect)) throws {
+    func calculateGeometryStandard(params: (count: Int32, expectedRect: CGRect)) throws {
         let controller = MockGraphicGeometrySource()
         let dot = try buildTestObject(
             controller: controller,
@@ -125,12 +125,12 @@ struct GraphicDotTests {
     @Test(
         "calculate geometry standard Percent",
         arguments: [
-            (Int32(10), NSRect(x: -2.0, y: -2.0, width: 4.0, height: 4.0)),
-            (Int32(30), NSRect(x: -2.0, y: -2.0, width: 4.0, height: 4.0)),
-            (Int32(70), NSRect(x: -2.0, y: -2.0, width: 4.0, height: 4.0))
+            (Int32(10), CGRect(x: -2.0, y: -2.0, width: 4.0, height: 4.0)),
+            (Int32(30), CGRect(x: -2.0, y: -2.0, width: 4.0, height: 4.0)),
+            (Int32(70), CGRect(x: -2.0, y: -2.0, width: 4.0, height: 4.0))
         ]
     )
-    func calculateGeometryStandardPercent(params: (count: Int32, expectedRect: NSRect)) throws {
+    func calculateGeometryStandardPercent(params: (count: Int32, expectedRect: CGRect)) throws {
         let controller = MockGraphicGeometrySource()
         controller.mockIsPercent = true
         let dot = try buildTestObject(
