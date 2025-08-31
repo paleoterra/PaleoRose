@@ -119,11 +119,11 @@ let GraphicTypeDotDeviation = "DotDeviation"
         // Subclasses must override this method to set up the geometry of the graphic object
     }
 
-    func drawingRect() -> NSRect {
-        drawingPath?.bounds ?? NSRect.zero
+    func drawingRect() -> CGRect {
+        drawingPath?.bounds ?? CGRect.zero
     }
 
-    @objc(drawRect:) func draw(_ rect: NSRect) {
+    @objc(drawRect:) func draw(_ rect: CGRect) {
         guard let path = drawingPath else { return }
 
         if rect.intersects(path.bounds) {
@@ -144,7 +144,7 @@ let GraphicTypeDotDeviation = "DotDeviation"
 
     // MARK: - Hit Testing
 
-    func hitTest(_: NSPoint) -> Bool {
+    func hitTest(_: CGPoint) -> Bool {
         false
     }
 

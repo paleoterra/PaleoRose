@@ -199,7 +199,7 @@ struct GraphicCircleTests {
         // Given
         let controller = MockGraphicGeometrySource()
         let circle = try buildTestObject(controller: controller)
-        let outsidePoint = NSPoint(x: -10, y: -10)
+        let outsidePoint = CGPoint(x: -10, y: -10)
 
         // When
         let hitResult = circle.hitTest(outsidePoint)
@@ -249,7 +249,7 @@ struct GraphicCircleTests {
         // Given
         let controller = MockGraphicGeometrySource()
         let circle = try buildTestObject(controller: controller)
-        let testRect = NSRect(x: 0, y: 0, width: 100, height: 100)
+        let testRect = CGRect(x: 0, y: 0, width: 100, height: 100)
 
         // Verify the method exists
         try #require(
@@ -269,10 +269,7 @@ struct GraphicCircleTests {
         let controller = MockGraphicGeometrySource()
 
         // When
-        let circle = try #require(
-            GraphicCircle(coreCircleWithController: controller),
-            "Failed to initialize circle"
-        )
+        let circle = GraphicCircle(coreCircleWithController: controller)
 
         // Then
         #expect(circle.countSetting == 0, "Default count should be 0")

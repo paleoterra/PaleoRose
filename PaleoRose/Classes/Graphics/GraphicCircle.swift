@@ -80,15 +80,19 @@ import AppKit
 
     @objc func setGeometryPercent(_ percent: Float) {
         isGeometryPercent = true
-        guard let controller = geometryController else { return }
+        guard let controller = geometryController else {
+            return
+        }
         let circleRect = controller.circleRect(forGeometryPercent: percent)
         drawingPath = NSBezierPath(ovalIn: circleRect)
     }
 
     override func calculateGeometry() {
-        guard let controller = geometryController else { return }
+        guard let controller = geometryController else {
+            return
+        }
 
-        var circleRect = NSRect.zero
+        var circleRect = CGRect.zero
         if controller.isPercent() {
             circleRect = controller.circleRect(forPercent: percentSetting)
         } else {
