@@ -4,11 +4,11 @@ import Testing
 
 // swiftlint:disable file_length type_body_length object_literal
 
-struct XRGraphicCircleTests {
+struct GraphicCircleTests {
 
-    private func buildTestObject(controller: GraphicGeometrySource) throws -> XRGraphicCircle {
+    private func buildTestObject(controller: GraphicGeometrySource) throws -> GraphicCircle {
         try #require(
-            XRGraphicCircle(controller: controller),
+            GraphicCircle(controller: controller),
             "Graphic circle should be initialized"
         )
     }
@@ -253,7 +253,7 @@ struct XRGraphicCircleTests {
 
         // Verify the method exists
         try #require(
-            circle.responds(to: #selector(XRGraphicCircle.draw)),
+            circle.responds(to: #selector(GraphicCircle.draw)),
             "Draw rect method should be available"
         )
 
@@ -270,7 +270,7 @@ struct XRGraphicCircleTests {
 
         // When
         let circle = try #require(
-            XRGraphicCircle(coreCircleWithController: controller),
+            GraphicCircle(coreCircleWithController: controller),
             "Failed to initialize circle"
         )
 
@@ -320,9 +320,9 @@ struct XRGraphicCircleTests {
         let circle = try buildTestObject(controller: controller)
         circle.percentSetting = 0.755
         var expectedSettings = defaultGraphicSettings()
-        expectedSettings[XRGraphicKeyIsPercent] = "YES"
-        expectedSettings[XRGraphicKeyPercentSetting] = "0.755000"
-        expectedSettings[XRGraphicKeyGeometryPercent] = "0.755000"
+        expectedSettings[GraphicKeyIsPercent] = "YES"
+        expectedSettings[GraphicKeyPercentSetting] = "0.755000"
+        expectedSettings[GraphicKeyGeometryPercent] = "0.755000"
         try CommonUtilities
             .compareGraphicSettings(
                 values: circle.graphicSettings(),
@@ -338,8 +338,8 @@ struct XRGraphicCircleTests {
         circle.setGeometryPercent(0.45)
 
         var expectedSettings = defaultGraphicSettings()
-        expectedSettings[XRGraphicKeyIsPercent] = "NO"
-        expectedSettings[XRGraphicKeyIsGeometryPercent] = "YES"
+        expectedSettings[GraphicKeyIsPercent] = "NO"
+        expectedSettings[GraphicKeyIsGeometryPercent] = "YES"
         try CommonUtilities
             .compareGraphicSettings(
                 values: circle.graphicSettings(),
@@ -354,7 +354,7 @@ struct XRGraphicCircleTests {
         let circle = try buildTestObject(controller: controller)
         circle.isFixedCount = true
         var expectedSettings = defaultGraphicSettings()
-        expectedSettings[XRGraphicKeyIsFixedCount] = "YES"
+        expectedSettings[GraphicKeyIsFixedCount] = "YES"
         try CommonUtilities
             .compareGraphicSettings(
                 values: circle.graphicSettings(),

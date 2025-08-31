@@ -1,5 +1,5 @@
 //
-//  XRGraphicPetal.swift
+//  GraphicPetal.swift
 //  PaleoRose
 //
 //  Created by Cascade on 2025-08-18.
@@ -29,7 +29,7 @@
 import AppKit
 
 /// A petal graphic drawn using the provided geometry controller.
-@objc class XRGraphicPetal: XRGraphic {
+@objc class GraphicPetal: Graphic {
 
     /// Keep the NSBezierPath's line width synced when the lineWidth changes.
     override var lineWidth: Float {
@@ -129,11 +129,11 @@ import AppKit
         var parent = super.graphicSettings()
         // Keys match those used throughout the ObjC code and tests.
         let classDict: [AnyHashable: Any] = [
-            XRGraphicKeyGraphicType: "Petal",
-            XRGraphicKeyPetalIncrement: string(from: Int32(petalIncrement)),
-            XRGraphicKeyMaxRadius: string(from: maxRadius),
-            XRGraphicKeyPercent: string(from: percent),
-            XRGraphicKeyCount: string(from: Int32(count))
+            GraphicKeyGraphicType: "Petal",
+            GraphicKeyPetalIncrement: string(from: Int32(petalIncrement)),
+            GraphicKeyMaxRadius: string(from: maxRadius),
+            GraphicKeyPercent: string(from: percent),
+            GraphicKeyCount: string(from: Int32(count))
         ]
         parent.merge(classDict) { _, new in new }
         return parent

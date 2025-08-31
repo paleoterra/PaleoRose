@@ -1,5 +1,5 @@
 //
-//  XRGraphicDotDeviation.swift
+//  GraphicDotDeviation.swift
 //  PaleoRose
 //
 //  Created by Cascade on 2025-08-22.
@@ -29,7 +29,7 @@
 import AppKit
 
 /// Draws one or more dots at a specific angle to visualize deviation from the mean.
-@objc class XRGraphicDotDeviation: XRGraphic {
+@objc class GraphicDotDeviation: Graphic {
 
     // MARK: - Public API
 
@@ -58,7 +58,7 @@ import AppKit
         angleIncrement = Int(increment)
         totalCount = Int(total)
         self.count = Int(count)
-        if let m = (stats["mean"] as? NSNumber)?.floatValue { mean = m } else { mean = 0 }
+        if let mean1 = (stats["mean"] as? NSNumber)?.floatValue { mean = mean1 } else { mean = 0 }
         drawsFill = true
         calculateGeometry()
     }
@@ -84,51 +84,51 @@ import AppKit
         let path = NSBezierPath()
         path.lineWidth = CGFloat(lineWidth)
 
-        let m = mean
+        let mean1 = mean
         let count = Float(count)
-        let excess = Int(ceil(count - m))
-        let shortfall = Int(ceil(m - count))
+        let excess = Int(ceil(count - mean1))
+        let shortfall = Int(ceil(mean1 - count))
 
         if controller.isPercent() {
-            if count > m {
+            if count > mean1 {
                 if excess > 0 {
-                    for i in 0 ..< excess {
-                        let value = Double(Float(i + 1) + floor(m)) / Double(totalCount)
+                    for index in 0 ..< excess {
+                        let value = Double(Float(index + 1) + floor(mean1)) / Double(totalCount)
                         let radius = CGFloat(controller.radius(ofPercentValue: value))
                         addDot(to: path, dotSize: CGFloat(dotSize), radius: radius, angle: angle, controller: controller)
                     }
                 }
             } else {
                 if shortfall > 0 {
-                    for i in 0 ..< shortfall {
-                        let value = Double(Float(Int(ceil(m)) - (i + 1))) / Double(totalCount)
+                    for index in 0 ..< shortfall {
+                        let value = Double(Float(Int(ceil(mean1)) - (index + 1))) / Double(totalCount)
                         let radius = CGFloat(controller.radius(ofPercentValue: value))
                         addDot(to: path, dotSize: CGFloat(dotSize), radius: radius, angle: angle, controller: controller)
                     }
                 } else {
-                    let value = Double(Int(ceil(m))) / Double(totalCount)
+                    let value = Double(Int(ceil(mean1))) / Double(totalCount)
                     let radius = CGFloat(controller.radius(ofPercentValue: value))
                     addDot(to: path, dotSize: CGFloat(dotSize), radius: radius, angle: angle, controller: controller)
                 }
             }
         } else {
-            if count > m {
+            if count > mean1 {
                 if excess > 0 {
-                    for i in 0 ..< excess {
-                        let radius = CGFloat(controller.radius(ofCount: Int32(Float(i + 1) + floor(m))))
+                    for index in 0 ..< excess {
+                        let radius = CGFloat(controller.radius(ofCount: Int32(Float(index + 1) + floor(mean1))))
                         addDot(to: path, dotSize: CGFloat(dotSize), radius: radius, angle: angle, controller: controller)
                     }
                 }
             } else {
                 if shortfall > 0 {
-                    for i in 0 ..< shortfall {
-                        let value = Int32(Int(ceil(m)) - (i + 1))
+                    for index in 0 ..< shortfall {
+                        let value = Int32(Int(ceil(mean1)) - (index + 1))
                         let radius = CGFloat(controller.radius(ofCount: value))
                         addDot(to: path, dotSize: CGFloat(dotSize), radius: radius, angle: angle, controller: controller)
                     }
                 } else {
                     // NOTE: Preserving Objective-C behavior that used percent radius call here.
-                    let value = Double(Int(ceil(m))) / Double(totalCount)
+                    let value = Double(Int(ceil(mean1))) / Double(totalCount)
                     let radius = CGFloat(controller.radius(ofPercentValue: value))
                     addDot(to: path, dotSize: CGFloat(dotSize), radius: radius, angle: angle, controller: controller)
                 }
@@ -144,12 +144,12 @@ import AppKit
     @objc override func graphicSettings() -> [AnyHashable: Any] {
         var parent = super.graphicSettings()
         let classDict: [AnyHashable: Any] = [
-            XRGraphicKeyGraphicType: "DotDeviation",
-            XRGraphicKeyAngleIncrement: string(from: Int32(angleIncrement)),
-            XRGraphicKeyTotalCount: string(from: Int32(totalCount)),
-            XRGraphicKeyCount: string(from: Int32(count)),
-            XRGraphicKeyDotSize: string(from: dotSize),
-            XRGraphicKeyMean: string(from: mean)
+            GraphicKeyGraphicType: "DotDeviation",
+            GraphicKeyAngleIncrement: string(from: Int32(angleIncrement)),
+            GraphicKeyTotalCount: string(from: Int32(totalCount)),
+            GraphicKeyCount: string(from: Int32(count)),
+            GraphicKeyDotSize: string(from: dotSize),
+            GraphicKeyMean: string(from: mean)
         ]
         parent.merge(classDict) { _, new in new }
         return parent

@@ -3,11 +3,11 @@ import Numerics
 @testable import PaleoRose
 import Testing
 
-struct XRGraphicPetalTests {
+struct GraphicPetalTests {
     // MARK: - Test Setup
 
-    private func builtTestObject(controller: MockGraphicGeometrySource, forIncrement: Int32 = 0, forValue: Int32 = 0) throws -> XRGraphicPetal {
-        try #require(XRGraphicPetal(
+    private func builtTestObject(controller: MockGraphicGeometrySource, forIncrement: Int32 = 0, forValue: Int32 = 0) throws -> GraphicPetal {
+        try #require(GraphicPetal(
             controller: controller,
             forIncrement: forIncrement,
             forValue: forValue as NSNumber

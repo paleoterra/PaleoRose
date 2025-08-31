@@ -3,7 +3,7 @@ import Numerics
 @testable import PaleoRose
 import Testing
 
-struct XRGraphicDotTests {
+struct GraphicDotTests {
     // MARK: - Test Setup
 
     struct TestConfiguration {
@@ -13,8 +13,8 @@ struct XRGraphicDotTests {
         let totalCount: Int32
     }
 
-    private func buildTestObject(controller: MockGraphicGeometrySource, forIncrement: Int32 = 0, valueCount: Int32 = 0, totalCount: Int32 = 0) throws -> XRGraphicDot {
-        try #require(XRGraphicDot(
+    private func buildTestObject(controller: MockGraphicGeometrySource, forIncrement: Int32 = 0, valueCount: Int32 = 0, totalCount: Int32 = 0) throws -> GraphicDot {
+        try #require(GraphicDot(
             controller: controller,
             forIncrement: forIncrement,
             valueCount: valueCount,

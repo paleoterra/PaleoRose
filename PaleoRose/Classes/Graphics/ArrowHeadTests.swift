@@ -3,8 +3,8 @@ import Numerics
 @testable import PaleoRose
 import Testing
 
-@Suite("LITMArrowHead Tests")
-struct LITMArrowHeadTests {
+@Suite("ArrowHead Tests")
+struct ArrowHeadTests {
 
     @Test("Initialization with valid parameters")
     func testInitialization() {
@@ -12,7 +12,7 @@ struct LITMArrowHeadTests {
         let size: Float = 1.0
         let type = 0
 
-        let arrowHead = LITMArrowHead(
+        let arrowHead = ArrowHead(
             size: size,
             color: color,
             type: Int32(type)
@@ -26,7 +26,7 @@ struct LITMArrowHeadTests {
         let color = NSColor.blue
         let size: Float = 2.0
 
-        let arrowHead = LITMArrowHead(size: size, color: color, type: Int32(type))
+        let arrowHead = ArrowHead(size: size, color: color, type: Int32(type))
         #expect(arrowHead.arrowColor == color)
     }
 
@@ -35,7 +35,7 @@ struct LITMArrowHeadTests {
         let color = NSColor.green
         let type = 0
 
-        let arrowHead = LITMArrowHead(size: size, color: color, type: Int32(type))
+        let arrowHead = ArrowHead(size: size, color: color, type: Int32(type))
 
         #expect(arrowHead.arrowColor == color)
     }
@@ -48,13 +48,13 @@ struct LITMArrowHeadTests {
         let size: Float = 1.0
         let type = 0
 
-        let arrowHead = LITMArrowHead(size: size, color: color, type: Int32(type))
+        let arrowHead = ArrowHead(size: size, color: color, type: Int32(type))
         #expect(arrowHead.arrowColor == color)
     }
 
     @Test("Position transform changes after positioning")
     func testPositionTransformChanges() {
-        let arrowHead = LITMArrowHead(size: 1.0, color: NSColor.red, type: 0)
+        let arrowHead = ArrowHead(size: 1.0, color: NSColor.red, type: 0)
         let initialTransform = arrowHead.positionTransform
         let point = NSPoint(x: 10.0, y: 20.0)
         let angle: Float = 45.0
@@ -66,7 +66,7 @@ struct LITMArrowHeadTests {
 
     @Test("Multiple positioning calls update transform", arguments: [0.0, 45.0, 90.0, 180.0, 270.0, 360.0])
     func testMultiplePositioningUpdatesTransform(angle: Float) {
-        let arrowHead = LITMArrowHead(size: 1.0, color: NSColor.red, type: 0)
+        let arrowHead = ArrowHead(size: 1.0, color: NSColor.red, type: 0)
         let point1 = NSPoint(x: 15.0, y: 25.0)
         let point2 = NSPoint(x: 30.0, y: 40.0)
 
@@ -81,7 +81,7 @@ struct LITMArrowHeadTests {
 
     @Test("Position at line endpoint with various points")
     func testPositionAtLineEndpointWithPoints() {
-        let arrowHead = LITMArrowHead(size: 1.0, color: NSColor.red, type: 0)
+        let arrowHead = ArrowHead(size: 1.0, color: NSColor.red, type: 0)
         let points = [
             NSPoint(x: 0.0, y: 0.0),
             NSPoint(x: -10.0, y: -10.0),
@@ -97,7 +97,7 @@ struct LITMArrowHeadTests {
 
     @Test("Draw rect functionality")
     func testDrawRect() {
-        let arrowHead = LITMArrowHead(size: 1.0, color: NSColor.red, type: 0)
+        let arrowHead = ArrowHead(size: 1.0, color: NSColor.red, type: 0)
         let rect = NSRect(x: 0, y: 0, width: 100, height: 100)
 
         arrowHead.draw(rect)
@@ -105,43 +105,43 @@ struct LITMArrowHeadTests {
 
     @Test("Standard arrow type path creation")
     func testStandardArrowType() {
-        let arrowHead = LITMArrowHead(size: 1.0, color: NSColor.red, type: 0)
+        let arrowHead = ArrowHead(size: 1.0, color: NSColor.red, type: 0)
 
         #expect(arrowHead.path.elementCount > 0)
     }
 
     @Test("Flying arrow type path creation")
     func testFlyingArrowType() {
-        let arrowHead = LITMArrowHead(size: 1.0, color: NSColor.red, type: 1)
+        let arrowHead = ArrowHead(size: 1.0, color: NSColor.red, type: 1)
 
         #expect(arrowHead.path.elementCount > 0)
     }
 
     @Test("Half arrow left type path creation")
     func testHalfArrowLeftType() {
-        let arrowHead = LITMArrowHead(size: 1.0, color: NSColor.red, type: 2)
+        let arrowHead = ArrowHead(size: 1.0, color: NSColor.red, type: 2)
 
         #expect(arrowHead.path.elementCount > 0)
     }
 
     @Test("Half arrow right type path creation")
     func testHalfArrowRightType() {
-        let arrowHead = LITMArrowHead(size: 1.0, color: NSColor.red, type: 4)
+        let arrowHead = ArrowHead(size: 1.0, color: NSColor.red, type: 4)
 
         #expect(arrowHead.path.elementCount > 0)
     }
 
     @Test("Scale transform configuration")
     func testScaleTransformConfiguration() {
-        let smallArrow = LITMArrowHead(size: 0.5, color: NSColor.red, type: 0)
-        let largeArrow = LITMArrowHead(size: 2.0, color: NSColor.red, type: 0)
+        let smallArrow = ArrowHead(size: 0.5, color: NSColor.red, type: 0)
+        let largeArrow = ArrowHead(size: 2.0, color: NSColor.red, type: 0)
 
         #expect(smallArrow.scaleTransform != largeArrow.scaleTransform)
     }
 
     @Test("Position transform after positioning")
     func testPositionTransformAfterPositioning() {
-        let arrowHead = LITMArrowHead(size: 1.0, color: NSColor.red, type: 0)
+        let arrowHead = ArrowHead(size: 1.0, color: NSColor.red, type: 0)
         let initialTransform = arrowHead.positionTransform
 
         arrowHead.position(atLineEndpoint: NSPoint(x: 50.0, y: 100.0), withAngle: 90.0)
@@ -151,7 +151,7 @@ struct LITMArrowHeadTests {
 
     @Test("Multiple repositioning updates transform")
     func testMultipleRepositioning() {
-        let arrowHead = LITMArrowHead(size: 1.0, color: NSColor.red, type: 0)
+        let arrowHead = ArrowHead(size: 1.0, color: NSColor.red, type: 0)
 
         arrowHead
             .position(atLineEndpoint: NSPoint(x: 10.0, y: 10.0), withAngle: 0.0)
@@ -169,7 +169,7 @@ struct LITMArrowHeadTests {
 
     @Test("Invalid arrow type defaults gracefully")
     func testInvalidArrowType() {
-        let arrowHead = LITMArrowHead(size: 1.0, color: NSColor.red, type: 999)
+        let arrowHead = ArrowHead(size: 1.0, color: NSColor.red, type: 999)
 
         #expect(arrowHead.path.elementCount == 0)
     }

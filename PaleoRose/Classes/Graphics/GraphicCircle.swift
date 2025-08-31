@@ -1,5 +1,5 @@
 //
-//  XRGraphicCircle.swift
+//  GraphicCircle.swift
 //  PaleoRose
 //
 //  Created by Migration Assistant on 2025-08-29.
@@ -28,7 +28,7 @@
 
 import AppKit
 
-@objc class XRGraphicCircle: XRGraphic {
+@objc class GraphicCircle: Graphic {
 
     // MARK: - Properties
 
@@ -59,7 +59,7 @@ import AppKit
         isPercent = controller.isPercent()
 
         // Prevent calculating geometry twice for circle labels
-        if type(of: self) == XRGraphicCircle.self {
+        if type(of: self) == GraphicCircle.self {
             calculateGeometry()
         }
     }
@@ -71,7 +71,7 @@ import AppKit
         isPercent = controller.isPercent()
 
         // Prevent calculating geometry twice for circle labels
-        if type(of: self) == XRGraphicCircle.self {
+        if type(of: self) == GraphicCircle.self {
             calculateGeometry()
         }
     }
@@ -104,13 +104,13 @@ import AppKit
     @objc override func graphicSettings() -> [AnyHashable: Any] {
         var settings = super.graphicSettings()
 
-        settings[XRGraphicKeyGraphicType] = "Circle"
-        settings[XRGraphicKeyCountSetting] = string(from: countSetting)
-        settings[XRGraphicKeyPercentSetting] = string(from: percentSetting)
-        settings[XRGraphicKeyGeometryPercent] = string(from: percentSetting)
-        settings[XRGraphicKeyIsGeometryPercent] = string(from: isGeometryPercent)
-        settings[XRGraphicKeyIsPercent] = string(from: isPercent)
-        settings[XRGraphicKeyIsFixedCount] = string(from: isFixedCount)
+        settings[GraphicKeyGraphicType] = "Circle"
+        settings[GraphicKeyCountSetting] = string(from: countSetting)
+        settings[GraphicKeyPercentSetting] = string(from: percentSetting)
+        settings[GraphicKeyGeometryPercent] = string(from: percentSetting)
+        settings[GraphicKeyIsGeometryPercent] = string(from: isGeometryPercent)
+        settings[GraphicKeyIsPercent] = string(from: isPercent)
+        settings[GraphicKeyIsFixedCount] = string(from: isFixedCount)
 
         return settings
     }

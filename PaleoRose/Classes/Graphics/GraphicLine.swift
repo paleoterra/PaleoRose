@@ -1,5 +1,5 @@
 //
-//  XRGraphicLine.swift
+//  GraphicLine.swift
 //  PaleoRose
 //
 //  Created by Migration Assistant on 2025-08-28.
@@ -30,44 +30,44 @@ import AppKit
 
 // MARK: - Swift Enums with Objective-C compatibility
 
-@objc public enum XRGraphicLineTickType: Int32 {
+@objc public enum GraphicLineTickType: Int32 {
     case none = 0
     case minor = 1
     case major = 2
 }
 
-@objc public enum XRGraphicLineNumberAlign: Int32 {
+@objc public enum GraphicLineNumberAlign: Int32 {
     case horizontal = 0
     case angle = 1
 }
 
-@objc public enum XRGraphicLineNumberCompassPoint: Int32 {
+@objc public enum GraphicLineNumberCompassPoint: Int32 {
     case numbersOnly = 0
     case points = 1
 }
 
-@objc public enum XRGraphicLineNumberingOrder: Int32 {
+@objc public enum GraphicLineNumberingOrder: Int32 {
     case order360 = 0
     case quad = 1
 }
 
 // MARK: - Main Class
 
-@objc class XRGraphicLine: XRGraphic {
+@objc class GraphicLine: Graphic {
 
     // MARK: - Properties (Swift enum-based)
 
     // Private enum storage
-    private var tickTypeEnum: XRGraphicLineTickType = .none
-    private var spokeNumberAlignEnum: XRGraphicLineNumberAlign = .horizontal
-    private var spokeNumberCompassPointEnum: XRGraphicLineNumberCompassPoint = .points
-    private var spokeNumberOrderEnum: XRGraphicLineNumberingOrder = .quad
+    private var tickTypeEnum: GraphicLineTickType = .none
+    private var spokeNumberAlignEnum: GraphicLineNumberAlign = .horizontal
+    private var spokeNumberCompassPointEnum: GraphicLineNumberCompassPoint = .points
+    private var spokeNumberOrderEnum: GraphicLineNumberingOrder = .quad
 
     // Objective-C compatible Int32 computed properties
     @objc dynamic var tickType: Int32 {
         get { tickTypeEnum.rawValue }
         set {
-            tickTypeEnum = XRGraphicLineTickType(rawValue: newValue) ?? .none
+            tickTypeEnum = GraphicLineTickType(rawValue: newValue) ?? .none
             calculateGeometry()
         }
     }
@@ -75,7 +75,7 @@ import AppKit
     @objc dynamic var spokeNumberAlign: Int32 {
         get { spokeNumberAlignEnum.rawValue }
         set {
-            spokeNumberAlignEnum = XRGraphicLineNumberAlign(rawValue: newValue) ?? .horizontal
+            spokeNumberAlignEnum = GraphicLineNumberAlign(rawValue: newValue) ?? .horizontal
             setLineLabel()
             calculateGeometry()
         }
@@ -84,7 +84,7 @@ import AppKit
     @objc dynamic var spokeNumberCompassPoint: Int32 {
         get { spokeNumberCompassPointEnum.rawValue }
         set {
-            spokeNumberCompassPointEnum = XRGraphicLineNumberCompassPoint(rawValue: newValue) ?? .points
+            spokeNumberCompassPointEnum = GraphicLineNumberCompassPoint(rawValue: newValue) ?? .points
             setLineLabel()
             calculateGeometry()
         }
@@ -93,7 +93,7 @@ import AppKit
     @objc dynamic var spokeNumberOrder: Int32 {
         get { spokeNumberOrderEnum.rawValue }
         set {
-            spokeNumberOrderEnum = XRGraphicLineNumberingOrder(rawValue: newValue) ?? .quad
+            spokeNumberOrderEnum = GraphicLineNumberingOrder(rawValue: newValue) ?? .quad
             setLineLabel()
             calculateGeometry()
         }
@@ -370,20 +370,20 @@ import AppKit
     @objc override func graphicSettings() -> [AnyHashable: Any] {
         var settings = super.graphicSettings()
 
-        settings[XRGraphicKeyGraphicType] = "Line"
-        settings[XRGraphicKeyTickType] = string(from: tickType)
-        settings[XRGraphicKeySpokeNumberCompassPoint] = string(from: spokeNumberCompassPoint)
-        settings[XRGraphicKeyShowLabel] = string(from: showLabel)
-        settings[XRGraphicKeyLineWidth] = string(from: lineWidth)
-        settings[XRGraphicKeyRelativePercent] = string(from: relativePercent)
-        settings[XRGraphicKeyShowTick] = string(from: showTick)
-        settings[XRGraphicKeySpokeNumberOrder] = string(from: spokeNumberOrder)
-        settings[XRGraphicKeyLineLabel] = lineLabel?.string ?? "N"
-        settings[XRGraphicKeyFillColor] = fillColor ?? NSColor.black
-        settings[XRGraphicKeyAngleSetting] = string(from: spokeAngle)
-        settings[XRGraphicKeySpokeNumberAlignment] = string(from: spokeNumberAlign)
-        settings[XRGraphicKeyStrokeColor] = strokeColor ?? NSColor.black
-        settings[XRGraphicKeyCurrentFont] = font ?? NSFont(name: "Arial-Black", size: 12)!
+        settings[GraphicKeyGraphicType] = "Line"
+        settings[GraphicKeyTickType] = string(from: tickType)
+        settings[GraphicKeySpokeNumberCompassPoint] = string(from: spokeNumberCompassPoint)
+        settings[GraphicKeyShowLabel] = string(from: showLabel)
+        settings[GraphicKeyLineWidth] = string(from: lineWidth)
+        settings[GraphicKeyRelativePercent] = string(from: relativePercent)
+        settings[GraphicKeyShowTick] = string(from: showTick)
+        settings[GraphicKeySpokeNumberOrder] = string(from: spokeNumberOrder)
+        settings[GraphicKeyLineLabel] = lineLabel?.string ?? "N"
+        settings[GraphicKeyFillColor] = fillColor ?? NSColor.black
+        settings[GraphicKeyAngleSetting] = string(from: spokeAngle)
+        settings[GraphicKeySpokeNumberAlignment] = string(from: spokeNumberAlign)
+        settings[GraphicKeyStrokeColor] = strokeColor ?? NSColor.black
+        settings[GraphicKeyCurrentFont] = font ?? NSFont(name: "Arial-Black", size: 12)!
 
         return settings
     }

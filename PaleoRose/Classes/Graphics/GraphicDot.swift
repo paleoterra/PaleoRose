@@ -1,5 +1,5 @@
 //
-//  XRGraphicDot.swift
+//  GraphicDot.swift
 //  PaleoRose
 //
 //  Created by Cascade on 2025-08-22.
@@ -28,7 +28,7 @@
 
 import AppKit
 
-@objc class XRGraphicDot: XRGraphic {
+@objc class GraphicDot: Graphic {
 
     // MARK: - Public API
 
@@ -88,8 +88,8 @@ import AppKit
         let path = NSBezierPath()
         let isPercentMode = controller.isPercent()
         let centerAngle = centerAngleForSector()
-        for i in 0 ..< count {
-            let radius = radiusForDot(index: i, isPercentMode: isPercentMode)
+        for index in 0 ..< count {
+            let radius = radiusForDot(index: index, isPercentMode: isPercentMode)
             var point = CGPoint(x: 0.0, y: radius)
             point = controller.rotation(of: point, byAngle: Double(centerAngle))
             let half = CGFloat(dotSize) * 0.5
@@ -104,11 +104,11 @@ import AppKit
     @objc override func graphicSettings() -> [AnyHashable: Any] {
         var parent = super.graphicSettings()
         let classDict: [AnyHashable: Any] = [
-            XRGraphicKeyGraphicType: "Dot",
-            XRGraphicKeyAngleIncrement: string(from: Int32(angleIncrement)),
-            XRGraphicKeyTotalCount: string(from: Int32(totalCount)),
-            XRGraphicKeyCount: string(from: Int32(count)),
-            XRGraphicKeyDotSize: string(from: dotSize)
+            GraphicKeyGraphicType: "Dot",
+            GraphicKeyAngleIncrement: string(from: Int32(angleIncrement)),
+            GraphicKeyTotalCount: string(from: Int32(totalCount)),
+            GraphicKeyCount: string(from: Int32(count)),
+            GraphicKeyDotSize: string(from: dotSize)
         ]
         parent.merge(classDict) { _, new in new }
         return parent

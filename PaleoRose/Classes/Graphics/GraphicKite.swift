@@ -1,5 +1,5 @@
 //
-//  XRGraphicKite.swift
+//  GraphicKite.swift
 //  PaleoRose
 //
 //  Created by Cascade on 2025-08-22.
@@ -28,7 +28,7 @@
 
 import AppKit
 
-@objc class XRGraphicKite: XRGraphic {
+@objc class GraphicKite: Graphic {
 
     private var angles: [Double] = []
     private var values: [Double] = []
@@ -69,10 +69,10 @@ import AppKit
         var lastAngle = angles.last!
         let startPoint = point(radius: radius, atAngle: lastAngle)
         drawingPath?.move(to: startPoint)
-        for i in 0 ..< angles.count {
-            radius = radiusForValue(values[i])
-            let p = point(radius: radius, atAngle: angles[i])
-            drawingPath?.line(to: p)
+        for index in 0 ..< angles.count {
+            radius = radiusForValue(values[index])
+            let point = point(radius: radius, atAngle: angles[index])
+            drawingPath?.line(to: point)
         }
     }
 
@@ -87,9 +87,9 @@ import AppKit
 
     private func point(radius: Double, atAngle angle: Double) -> CGPoint {
         guard let controller = geometryController else { return .zero }
-        var p = CGPoint(x: 0.0, y: radius)
-        p = controller.rotation(of: p, byAngle: angle)
-        return p
+        var point = CGPoint(x: 0.0, y: radius)
+        point = controller.rotation(of: point, byAngle: angle)
+        return point
     }
 
     private func radiusForValue(_ value: Double) -> CGFloat {
@@ -105,7 +105,7 @@ import AppKit
 
     @objc override func graphicSettings() -> [AnyHashable: Any] {
         var parent = super.graphicSettings()
-        parent[XRGraphicKeyGraphicType] = "Kite"
+        parent[GraphicKeyGraphicType] = "Kite"
         return parent
     }
 }

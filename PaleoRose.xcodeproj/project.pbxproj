@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		25B505F6A6A844FBA2747DF6 /* XRGraphicLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6339D5B71C2480BB4DC0F6C /* XRGraphicLine.swift */; };
-		44379A9A8F5640DA8A491A38 /* XRGraphicHistogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = E257B1C714BB4BADBD314888 /* XRGraphicHistogram.swift */; };
+		25B505F6A6A844FBA2747DF6 /* GraphicLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6339D5B71C2480BB4DC0F6C /* GraphicLine.swift */; };
+		44379A9A8F5640DA8A491A38 /* GraphicHistogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = E257B1C714BB4BADBD314888 /* GraphicHistogram.swift */; };
 		8D15AC290486D014006FF6A4 /* PaleoRose_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32DBCF750370BD2300C91783 /* PaleoRose_Prefix.pch */; };
 		8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */; };
 		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
@@ -60,10 +60,10 @@
 		B43D613906345207001B863E /* FStatisticController.m in Sources */ = {isa = PBXBuildFile; fileRef = B43D613706345207001B863E /* FStatisticController.m */; };
 		B43D613A06345207001B863E /* FStatisticController.h in Headers */ = {isa = PBXBuildFile; fileRef = B43D613806345207001B863E /* FStatisticController.h */; };
 		B440D5582E580FF3000D98A0 /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B440D5572E580FE9000D98A0 /* CGFloat+Extensions.swift */; };
-		B440D55A2E589B69000D98A0 /* XRGraphicDotDeviation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B440D5592E589B69000D98A0 /* XRGraphicDotDeviation.swift */; };
-		B440D55C2E594369000D98A0 /* XRGraphicDot.swift in Sources */ = {isa = PBXBuildFile; fileRef = B440D55B2E594369000D98A0 /* XRGraphicDot.swift */; };
-		B440D55E2E59444C000D98A0 /* XRGraphicKite.swift in Sources */ = {isa = PBXBuildFile; fileRef = B440D55D2E59444C000D98A0 /* XRGraphicKite.swift */; };
-		B444B5732E62AC8C007E7E36 /* XRGraphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B444B5722E62AC8C007E7E36 /* XRGraphic.swift */; };
+		B440D55A2E589B69000D98A0 /* GraphicDotDeviation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B440D5592E589B69000D98A0 /* GraphicDotDeviation.swift */; };
+		B440D55C2E594369000D98A0 /* GraphicDot.swift in Sources */ = {isa = PBXBuildFile; fileRef = B440D55B2E594369000D98A0 /* GraphicDot.swift */; };
+		B440D55E2E59444C000D98A0 /* GraphicKite.swift in Sources */ = {isa = PBXBuildFile; fileRef = B440D55D2E59444C000D98A0 /* GraphicKite.swift */; };
+		B444B5732E62AC8C007E7E36 /* Graphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B444B5722E62AC8C007E7E36 /* Graphic.swift */; };
 		B447A960062B002B00154420 /* logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B447A95F062B002B00154420 /* logo.jpg */; };
 		B44B08A705CFE9D200C6E8D3 /* xroseapp.icns in Resources */ = {isa = PBXBuildFile; fileRef = B44B08A505CFE9D200C6E8D3 /* xroseapp.icns */; };
 		B44B08A805CFE9D200C6E8D3 /* xroseDocIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = B44B08A605CFE9D200C6E8D3 /* xroseDocIcon.icns */; };
@@ -74,7 +74,7 @@
 		B4564ABB096A04A1005E0015 /* XRTableAddColumnController.h in Headers */ = {isa = PBXBuildFile; fileRef = B4564AB9096A04A1005E0015 /* XRTableAddColumnController.h */; };
 		B4564ABC096A04A1005E0015 /* XRTableAddColumnController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4564ABA096A04A1005E0015 /* XRTableAddColumnController.m */; };
 		B45DD0E2062849BD00B06A95 /* textLayer.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B45DD0E1062849BD00B06A95 /* textLayer.tiff */; };
-		B460028A2E54135600DD41C8 /* XRGraphicPetal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46002892E54135600DD41C8 /* XRGraphicPetal.swift */; };
+		B460028A2E54135600DD41C8 /* GraphicPetal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46002892E54135600DD41C8 /* GraphicPetal.swift */; };
 		B461BA3D05C4F84C00738D23 /* LayerDrawerImageAddLayer.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B461BA3C05C4F84C00738D23 /* LayerDrawerImageAddLayer.tiff */; };
 		B463B60A2DE2AD51006B6C7C /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B463B6062DE2AD51006B6C7C /* AboutView.swift */; };
 		B463B60B2DE2AD51006B6C7C /* AboutWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B463B6072DE2AD51006B6C7C /* AboutWindowController.swift */; };
@@ -102,9 +102,9 @@
 		B48345D705C23B3D00E3F6B7 /* XRoseTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = B48345D505C23B3D00E3F6B7 /* XRoseTableController.m */; };
 		B48345F005C23CA100E3F6B7 /* XRoseView.h in Headers */ = {isa = PBXBuildFile; fileRef = B48345EE05C23CA100E3F6B7 /* XRoseView.h */; };
 		B48345F105C23CA100E3F6B7 /* XRoseView.m in Sources */ = {isa = PBXBuildFile; fileRef = B48345EF05C23CA100E3F6B7 /* XRoseView.m */; };
-		B48430862E1193E500E126C0 /* XRGraphicCircleLabelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48430852E1193E500E126C0 /* XRGraphicCircleLabelTests.swift */; };
-		B48430882E1486D100E126C0 /* LITMArrowHeadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48430872E1486D100E126C0 /* LITMArrowHeadTests.swift */; };
-		B484308A2E1487C900E126C0 /* XRGraphicDotDeviationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48430892E1487C900E126C0 /* XRGraphicDotDeviationTests.swift */; };
+		B48430862E1193E500E126C0 /* GraphicCircleLabelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48430852E1193E500E126C0 /* GraphicCircleLabelTests.swift */; };
+		B48430882E1486D100E126C0 /* ArrowHeadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48430872E1486D100E126C0 /* ArrowHeadTests.swift */; };
+		B484308A2E1487C900E126C0 /* GraphicDotDeviationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48430892E1487C900E126C0 /* GraphicDotDeviationTests.swift */; };
 		B4852A8405C2E223002212E3 /* XRGeometryController.h in Headers */ = {isa = PBXBuildFile; fileRef = B4852A8205C2E223002212E3 /* XRGeometryController.h */; };
 		B4852A8505C2E223002212E3 /* XRGeometryController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4852A8305C2E223002212E3 /* XRGeometryController.m */; };
 		B4866BF42CAE02C900319712 /* StoreProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4866BF32CAE02C300319712 /* StoreProtocol.swift */; };
@@ -131,15 +131,15 @@
 		B48B89FC05C794C500248F96 /* XRDataInspector.m in Sources */ = {isa = PBXBuildFile; fileRef = B48B89FA05C794C500248F96 /* XRDataInspector.m */; };
 		B48BBEC12CAA1BFA0050852E /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48BBEC02CAA1BF40050852E /* Logger.swift */; };
 		B48BBEC82CAA20DC0050852E /* InMemoryStoreTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48BBEC62CAA20C70050852E /* InMemoryStoreTest.swift */; };
-		B4950F0305DD286A00C711DE /* XRGraphicCircleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4950F0205DD286A00C711DD /* XRGraphicCircleLabel.swift */; };
-		B4A23EF72E18951700EDE135 /* XRGraphicDotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A23EF62E18951700EDE135 /* XRGraphicDotTests.swift */; };
-		B4A23EF92E19668900EDE135 /* XRGraphicHistogramTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A23EF82E19668900EDE135 /* XRGraphicHistogramTests.swift */; };
-		B4A23EFB2E196D1800EDE135 /* XRGraphicKiteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A23EFA2E196D1800EDE135 /* XRGraphicKiteTests.swift */; };
-		B4A23EFD2E19960100EDE135 /* XRGraphicLineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A23EFC2E19960100EDE135 /* XRGraphicLineTests.swift */; };
-		B4A23EFF2E19C49E00EDE135 /* XRGraphicPetalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A23EFE2E19C49E00EDE135 /* XRGraphicPetalTests.swift */; };
+		B4950F0305DD286A00C711DE /* GraphicCircleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4950F0205DD286A00C711DD /* GraphicCircleLabel.swift */; };
+		B4A23EF72E18951700EDE135 /* GraphicDotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A23EF62E18951700EDE135 /* GraphicDotTests.swift */; };
+		B4A23EF92E19668900EDE135 /* GraphicHistogramTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A23EF82E19668900EDE135 /* GraphicHistogramTests.swift */; };
+		B4A23EFB2E196D1800EDE135 /* GraphicKiteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A23EFA2E196D1800EDE135 /* GraphicKiteTests.swift */; };
+		B4A23EFD2E19960100EDE135 /* GraphicLineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A23EFC2E19960100EDE135 /* GraphicLineTests.swift */; };
+		B4A23EFF2E19C49E00EDE135 /* GraphicPetalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A23EFE2E19C49E00EDE135 /* GraphicPetalTests.swift */; };
 		B4A23FC62E28389D00EDE135 /* GraphicGeometrySource.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A23FC52E28389D00EDE135 /* GraphicGeometrySource.h */; };
 		B4A23FC82E28936900EDE135 /* MockGraphicGeometrySource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A23FC72E28936900EDE135 /* MockGraphicGeometrySource.swift */; };
-		B4A23FCA2E2C44FC00EDE135 /* XRGraphicCircleLabelTestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A23FC92E2C44FC00EDE135 /* XRGraphicCircleLabelTestCases.swift */; };
+		B4A23FCA2E2C44FC00EDE135 /* GraphicCircleLabelTestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A23FC92E2C44FC00EDE135 /* GraphicCircleLabelTestCases.swift */; };
 		B4A82F962A07F87A00790052 /* LITMXMLNodeProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A82F932A07F87900790052 /* LITMXMLNodeProtocol.h */; };
 		B4A82F972A07F87A00790052 /* LITMXMLTree.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A82F942A07F87900790052 /* LITMXMLTree.h */; };
 		B4A82F982A07F87A00790052 /* LITMXMLTree.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A82F952A07F87A00790052 /* LITMXMLTree.m */; };
@@ -147,8 +147,7 @@
 		B4A82F9C2A07F8A400790052 /* LITMXMLBinaryEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A82F9A2A07F8A400790052 /* LITMXMLBinaryEncoding.m */; };
 		B4A82FA42A07FA8900790052 /* LITMXMLParser.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A82FA22A07FA8900790052 /* LITMXMLParser.h */; };
 		B4A82FA52A07FA8900790052 /* LITMXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A82FA32A07FA8900790052 /* LITMXMLParser.m */; };
-		
-		B4A82FAD2A07FB8800790052 /* LITMArrowHead.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A82FAB2A07FB8800790052 /* LITMArrowHead.swift */; };
+		B4A82FAD2A07FB8800790052 /* ArrowHead.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A82FAB2A07FB8800790052 /* ArrowHead.swift */; };
 		B4AE41B52D0BBAF600E05D96 /* XRLayerText+Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AE41B32D0BBAF600E05D96 /* XRLayerText+Stub.swift */; };
 		B4AE41B82D0BCEBF00E05D96 /* XRLayerLineArrow+Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AE41B62D0BCE6100E05D96 /* XRLayerLineArrow+Stub.swift */; };
 		B4AE41BF2D0BD08400E05D96 /* XRLayerGrid+Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AE41BD2D0BD07000E05D96 /* XRLayerGrid+Stub.swift */; };
@@ -174,7 +173,7 @@
 		B4C08803063069F2001A91F4 /* XRExportGraphicAccessory.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C08801063069F2001A91F4 /* XRExportGraphicAccessory.m */; };
 		B4C7CF7405D7FA190071FD29 /* removeLayer.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B4C7CF7305D7FA180071FD29 /* removeLayer.tiff */; };
 		B4CC53462E1043A200067436 /* Numerics in Frameworks */ = {isa = PBXBuildFile; productRef = B4CC53452E1043A200067436 /* Numerics */; };
-		B4CC53482E10593000067436 /* XRGraphicCircleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4CC53472E10593000067436 /* XRGraphicCircleTests.swift */; };
+		B4CC53482E10593000067436 /* GraphicCircleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4CC53472E10593000067436 /* GraphicCircleTests.swift */; };
 		B4DB28E32D22450300FC6A49 /* Encoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DB28E22D2244FC00FC6A49 /* Encoding.swift */; };
 		B4E0138D05EC4AC500C50D5D /* version.plist in Resources */ = {isa = PBXBuildFile; fileRef = B4E0138C05EC4AC500C50D5D /* version.plist */; };
 		B4E22DA82DFF701200A9AFE0 /* FormatterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E22DA72DFF700D00A9AFE0 /* FormatterFactory.swift */; };
@@ -202,7 +201,7 @@
 		B4F2B1932C97CB300017E717 /* DataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F2B1822C97CB300017E717 /* DataSet.swift */; };
 		B4F929FD05D35D3A00EAAED0 /* XRLayerCore.h in Headers */ = {isa = PBXBuildFile; fileRef = B4F929FB05D35D3A00EAAED0 /* XRLayerCore.h */; };
 		B4F929FE05D35D3A00EAAED0 /* XRLayerCore.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F929FC05D35D3A00EAAED0 /* XRLayerCore.m */; };
-		BLJPCHG3GJY5JEQ0DHOENH4A /* XRGraphicCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BLHFDTXYH56D3KXO45XKMYX9 /* XRGraphicCircle.swift */; };
+		BLJPCHG3GJY5JEQ0DHOENH4A /* GraphicCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BLHFDTXYH56D3KXO45XKMYX9 /* GraphicCircle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -343,14 +342,14 @@
 		B43D613706345207001B863E /* FStatisticController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = FStatisticController.m; sourceTree = "<group>"; };
 		B43D613806345207001B863E /* FStatisticController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = FStatisticController.h; sourceTree = "<group>"; };
 		B440D5572E580FE9000D98A0 /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
-		B440D5592E589B69000D98A0 /* XRGraphicDotDeviation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicDotDeviation.swift; sourceTree = "<group>"; };
-		B440D55B2E594369000D98A0 /* XRGraphicDot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicDot.swift; sourceTree = "<group>"; };
-		B440D55D2E59444C000D98A0 /* XRGraphicKite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicKite.swift; sourceTree = "<group>"; };
+		B440D5592E589B69000D98A0 /* GraphicDotDeviation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicDotDeviation.swift; sourceTree = "<group>"; };
+		B440D55B2E594369000D98A0 /* GraphicDot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicDot.swift; sourceTree = "<group>"; };
+		B440D55D2E59444C000D98A0 /* GraphicKite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicKite.swift; sourceTree = "<group>"; };
 		B441FEFB05CB725300F9A0F9 /* XRStatistic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRStatistic.h; sourceTree = "<group>"; };
 		B441FEFC05CB725300F9A0F9 /* XRStatistic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRStatistic.m; sourceTree = "<group>"; };
 		B442674F2B3F881300749923 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B442E69D2A48E9F300466763 /* PaleoRose-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PaleoRose-Bridging-Header.h"; sourceTree = "<group>"; };
-		B444B5722E62AC8C007E7E36 /* XRGraphic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphic.swift; sourceTree = "<group>"; };
+		B444B5722E62AC8C007E7E36 /* Graphic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graphic.swift; sourceTree = "<group>"; };
 		B447A95F062B002B00154420 /* logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = logo.jpg; sourceTree = "<group>"; };
 		B44B08A505CFE9D200C6E8D3 /* xroseapp.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = xroseapp.icns; sourceTree = "<group>"; };
 		B44B08A605CFE9D200C6E8D3 /* xroseDocIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = xroseDocIcon.icns; sourceTree = "<group>"; };
@@ -361,7 +360,7 @@
 		B4564AB9096A04A1005E0015 /* XRTableAddColumnController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRTableAddColumnController.h; sourceTree = "<group>"; };
 		B4564ABA096A04A1005E0015 /* XRTableAddColumnController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XRTableAddColumnController.m; sourceTree = "<group>"; };
 		B45DD0E1062849BD00B06A95 /* textLayer.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = textLayer.tiff; sourceTree = "<group>"; };
-		B46002892E54135600DD41C8 /* XRGraphicPetal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicPetal.swift; sourceTree = "<group>"; };
+		B46002892E54135600DD41C8 /* GraphicPetal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicPetal.swift; sourceTree = "<group>"; };
 		B461BA3C05C4F84C00738D23 /* LayerDrawerImageAddLayer.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = LayerDrawerImageAddLayer.tiff; sourceTree = "<group>"; };
 		B463B6062DE2AD51006B6C7C /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		B463B6072DE2AD51006B6C7C /* AboutWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutWindowController.swift; sourceTree = "<group>"; };
@@ -389,9 +388,9 @@
 		B48345D505C23B3D00E3F6B7 /* XRoseTableController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRoseTableController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B48345EE05C23CA100E3F6B7 /* XRoseView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRoseView.h; sourceTree = "<group>"; };
 		B48345EF05C23CA100E3F6B7 /* XRoseView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XRoseView.m; sourceTree = "<group>"; };
-		B48430852E1193E500E126C0 /* XRGraphicCircleLabelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicCircleLabelTests.swift; sourceTree = "<group>"; };
-		B48430872E1486D100E126C0 /* LITMArrowHeadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LITMArrowHeadTests.swift; sourceTree = "<group>"; };
-		B48430892E1487C900E126C0 /* XRGraphicDotDeviationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicDotDeviationTests.swift; sourceTree = "<group>"; };
+		B48430852E1193E500E126C0 /* GraphicCircleLabelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicCircleLabelTests.swift; sourceTree = "<group>"; };
+		B48430872E1486D100E126C0 /* ArrowHeadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowHeadTests.swift; sourceTree = "<group>"; };
+		B48430892E1487C900E126C0 /* GraphicDotDeviationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicDotDeviationTests.swift; sourceTree = "<group>"; };
 		B4852A8205C2E223002212E3 /* XRGeometryController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRGeometryController.h; sourceTree = "<group>"; };
 		B4852A8305C2E223002212E3 /* XRGeometryController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XRGeometryController.m; sourceTree = "<group>"; };
 		B4866BF32CAE02C300319712 /* StoreProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreProtocol.swift; sourceTree = "<group>"; };
@@ -406,7 +405,7 @@
 		B48B89FA05C794C500248F96 /* XRDataInspector.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRDataInspector.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B48BBEC02CAA1BF40050852E /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		B48BBEC62CAA20C70050852E /* InMemoryStoreTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryStoreTest.swift; sourceTree = "<group>"; };
-		B4950F0205DD286A00C711DD /* XRGraphicCircleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicCircleLabel.swift; sourceTree = "<group>"; };
+		B4950F0205DD286A00C711DD /* GraphicCircleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicCircleLabel.swift; sourceTree = "<group>"; };
 		B49D7EB32DDEC80C0046A8B8 /* XRDataSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRDataSet.swift; sourceTree = "<group>"; };
 		B49D7EB42DDEC81D0046A8B8 /* XRMakeDatasetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRMakeDatasetController.swift; sourceTree = "<group>"; };
 		B49D7EB52DDEC8400046A8B8 /* XRStatistic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRStatistic.swift; sourceTree = "<group>"; };
@@ -418,12 +417,6 @@
 		B49D7EBC2DDEC9350046A8B8 /* XRoseWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRoseWindowController.swift; sourceTree = "<group>"; };
 		B49D7ED12DDECA9B0046A8B8 /* XRAppendDialogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRAppendDialogController.swift; sourceTree = "<group>"; };
 		B49D7ED22DDECAB40046A8B8 /* FStatisticController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FStatisticController.swift; sourceTree = "<group>"; };
-		B49D7ED42DDECB2B0046A8B8 /* XRLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRLayer.swift; sourceTree = "<group>"; };
-		B49D7ED52DDECB2B0046A8B8 /* XRLayerCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRLayerCore.swift; sourceTree = "<group>"; };
-		B49D7ED62DDECB2B0046A8B8 /* XRLayerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRLayerData.swift; sourceTree = "<group>"; };
-		B49D7ED72DDECB2B0046A8B8 /* XRLayerGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRLayerGrid.swift; sourceTree = "<group>"; };
-		B49D7ED82DDECB2B0046A8B8 /* XRLayerLineArrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRLayerLineArrow.swift; sourceTree = "<group>"; };
-		B49D7ED92DDECB2B0046A8B8 /* XRLayerText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRLayerText.swift; sourceTree = "<group>"; };
 		B49D7EDC2DDECB8F0046A8B8 /* XRTableImporterDelimiterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRTableImporterDelimiterController.swift; sourceTree = "<group>"; };
 		B49D7EDD2DDECB9C0046A8B8 /* PTFMXMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTFMXMLParser.swift; sourceTree = "<group>"; };
 		B49D7EDE2DDECBB80046A8B8 /* XRTableImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRTableImporter.swift; sourceTree = "<group>"; };
@@ -444,14 +437,14 @@
 		B49D7EED2DDED1A40046A8B8 /* XRTableImporterXRose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRTableImporterXRose.swift; sourceTree = "<group>"; };
 		B49D7EEE2DDED1DE0046A8B8 /* XRExportGraphicAccessory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRExportGraphicAccessory.swift; sourceTree = "<group>"; };
 		B49D7EEF2DDED1E90046A8B8 /* XREncodingAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XREncodingAccessoryView.swift; sourceTree = "<group>"; };
-		B4A23EF62E18951700EDE135 /* XRGraphicDotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicDotTests.swift; sourceTree = "<group>"; };
-		B4A23EF82E19668900EDE135 /* XRGraphicHistogramTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicHistogramTests.swift; sourceTree = "<group>"; };
-		B4A23EFA2E196D1800EDE135 /* XRGraphicKiteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicKiteTests.swift; sourceTree = "<group>"; };
-		B4A23EFC2E19960100EDE135 /* XRGraphicLineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicLineTests.swift; sourceTree = "<group>"; };
-		B4A23EFE2E19C49E00EDE135 /* XRGraphicPetalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicPetalTests.swift; sourceTree = "<group>"; };
+		B4A23EF62E18951700EDE135 /* GraphicDotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicDotTests.swift; sourceTree = "<group>"; };
+		B4A23EF82E19668900EDE135 /* GraphicHistogramTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicHistogramTests.swift; sourceTree = "<group>"; };
+		B4A23EFA2E196D1800EDE135 /* GraphicKiteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicKiteTests.swift; sourceTree = "<group>"; };
+		B4A23EFC2E19960100EDE135 /* GraphicLineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicLineTests.swift; sourceTree = "<group>"; };
+		B4A23EFE2E19C49E00EDE135 /* GraphicPetalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicPetalTests.swift; sourceTree = "<group>"; };
 		B4A23FC52E28389D00EDE135 /* GraphicGeometrySource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GraphicGeometrySource.h; sourceTree = "<group>"; };
 		B4A23FC72E28936900EDE135 /* MockGraphicGeometrySource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGraphicGeometrySource.swift; sourceTree = "<group>"; };
-		B4A23FC92E2C44FC00EDE135 /* XRGraphicCircleLabelTestCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicCircleLabelTestCases.swift; sourceTree = "<group>"; };
+		B4A23FC92E2C44FC00EDE135 /* GraphicCircleLabelTestCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicCircleLabelTestCases.swift; sourceTree = "<group>"; };
 		B4A82F932A07F87900790052 /* LITMXMLNodeProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LITMXMLNodeProtocol.h; sourceTree = "<group>"; };
 		B4A82F942A07F87900790052 /* LITMXMLTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LITMXMLTree.h; sourceTree = "<group>"; };
 		B4A82F952A07F87A00790052 /* LITMXMLTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LITMXMLTree.m; sourceTree = "<group>"; };
@@ -459,8 +452,7 @@
 		B4A82F9A2A07F8A400790052 /* LITMXMLBinaryEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LITMXMLBinaryEncoding.m; sourceTree = "<group>"; };
 		B4A82FA22A07FA8900790052 /* LITMXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LITMXMLParser.h; sourceTree = "<group>"; };
 		B4A82FA32A07FA8900790052 /* LITMXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LITMXMLParser.m; sourceTree = "<group>"; };
-		
-		B4A82FAB2A07FB8800790052 /* LITMArrowHead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LITMArrowHead.swift; sourceTree = "<group>"; };
+		B4A82FAB2A07FB8800790052 /* ArrowHead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowHead.swift; sourceTree = "<group>"; };
 		B4AE41B32D0BBAF600E05D96 /* XRLayerText+Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XRLayerText+Stub.swift"; sourceTree = "<group>"; };
 		B4AE41B62D0BCE6100E05D96 /* XRLayerLineArrow+Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XRLayerLineArrow+Stub.swift"; sourceTree = "<group>"; };
 		B4AE41B92D0BD03A00E05D96 /* XRLayerCore+Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XRLayerCore+Stub.swift"; sourceTree = "<group>"; };
@@ -486,7 +478,7 @@
 		B4C08800063069F2001A91F4 /* XRExportGraphicAccessory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRExportGraphicAccessory.h; sourceTree = "<group>"; };
 		B4C08801063069F2001A91F4 /* XRExportGraphicAccessory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRExportGraphicAccessory.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B4C7CF7305D7FA180071FD29 /* removeLayer.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = removeLayer.tiff; sourceTree = "<group>"; };
-		B4CC53472E10593000067436 /* XRGraphicCircleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicCircleTests.swift; sourceTree = "<group>"; };
+		B4CC53472E10593000067436 /* GraphicCircleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicCircleTests.swift; sourceTree = "<group>"; };
 		B4DB28E22D2244FC00FC6A49 /* Encoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encoding.swift; sourceTree = "<group>"; };
 		B4E0138C05EC4AC500C50D5D /* version.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; path = version.plist; sourceTree = "<group>"; };
 		B4E22DA72DFF700D00A9AFE0 /* FormatterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatterFactory.swift; sourceTree = "<group>"; };
@@ -514,9 +506,9 @@
 		B4F2B1882C97CB300017E717 /* Count.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Count.swift; sourceTree = "<group>"; };
 		B4F929FB05D35D3A00EAAED0 /* XRLayerCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRLayerCore.h; sourceTree = "<group>"; };
 		B4F929FC05D35D3A00EAAED0 /* XRLayerCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRLayerCore.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		BLHFDTXYH56D3KXO45XKMYX9 /* XRGraphicCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicCircle.swift; sourceTree = "<group>"; };
-		E257B1C714BB4BADBD314888 /* XRGraphicHistogram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicHistogram.swift; sourceTree = "<group>"; };
-		F6339D5B71C2480BB4DC0F6C /* XRGraphicLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGraphicLine.swift; sourceTree = "<group>"; };
+		BLHFDTXYH56D3KXO45XKMYX9 /* GraphicCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicCircle.swift; sourceTree = "<group>"; };
+		E257B1C714BB4BADBD314888 /* GraphicHistogram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicHistogram.swift; sourceTree = "<group>"; };
+		F6339D5B71C2480BB4DC0F6C /* GraphicLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicLine.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -741,12 +733,6 @@
 				B4E2DE8705C5BD6500714F6F /* XRLayerGrid.h */,
 				B4E2DE8805C5BD6500714F6F /* XRLayerGrid.m */,
 				B4AE41BD2D0BD07000E05D96 /* XRLayerGrid+Stub.swift */,
-				B49D7ED42DDECB2B0046A8B8 /* XRLayer.swift */,
-				B49D7ED52DDECB2B0046A8B8 /* XRLayerCore.swift */,
-				B49D7ED62DDECB2B0046A8B8 /* XRLayerData.swift */,
-				B49D7ED72DDECB2B0046A8B8 /* XRLayerGrid.swift */,
-				B49D7ED82DDECB2B0046A8B8 /* XRLayerLineArrow.swift */,
-				B49D7ED92DDECB2B0046A8B8 /* XRLayerText.swift */,
 			);
 			path = "Layer Control";
 			sourceTree = "<group>";
@@ -754,26 +740,26 @@
 		B4149FEC2B24C455008AE5F4 /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
-				B4A82FAB2A07FB8800790052 /* LITMArrowHead.swift */,
-				B48430872E1486D100E126C0 /* LITMArrowHeadTests.swift */,
-				B444B5722E62AC8C007E7E36 /* XRGraphic.swift */,
-				BLHFDTXYH56D3KXO45XKMYX9 /* XRGraphicCircle.swift */,
-				B4CC53472E10593000067436 /* XRGraphicCircleTests.swift */,
-				B4950F0205DD286A00C711DD /* XRGraphicCircleLabel.swift */,
-				B4A23FC92E2C44FC00EDE135 /* XRGraphicCircleLabelTestCases.swift */,
-				B48430852E1193E500E126C0 /* XRGraphicCircleLabelTests.swift */,
-				F6339D5B71C2480BB4DC0F6C /* XRGraphicLine.swift */,
-				B4A23EFC2E19960100EDE135 /* XRGraphicLineTests.swift */,
-				B440D55D2E59444C000D98A0 /* XRGraphicKite.swift */,
-				B4A23EFA2E196D1800EDE135 /* XRGraphicKiteTests.swift */,
-				B46002892E54135600DD41C8 /* XRGraphicPetal.swift */,
-				B4A23EFE2E19C49E00EDE135 /* XRGraphicPetalTests.swift */,
-				B440D55B2E594369000D98A0 /* XRGraphicDot.swift */,
-				B4A23EF62E18951700EDE135 /* XRGraphicDotTests.swift */,
-				E257B1C714BB4BADBD314888 /* XRGraphicHistogram.swift */,
-				B4A23EF82E19668900EDE135 /* XRGraphicHistogramTests.swift */,
-				B440D5592E589B69000D98A0 /* XRGraphicDotDeviation.swift */,
-				B48430892E1487C900E126C0 /* XRGraphicDotDeviationTests.swift */,
+				B4A82FAB2A07FB8800790052 /* ArrowHead.swift */,
+				B48430872E1486D100E126C0 /* ArrowHeadTests.swift */,
+				B444B5722E62AC8C007E7E36 /* Graphic.swift */,
+				BLHFDTXYH56D3KXO45XKMYX9 /* GraphicCircle.swift */,
+				B4CC53472E10593000067436 /* GraphicCircleTests.swift */,
+				B4950F0205DD286A00C711DD /* GraphicCircleLabel.swift */,
+				B4A23FC92E2C44FC00EDE135 /* GraphicCircleLabelTestCases.swift */,
+				B48430852E1193E500E126C0 /* GraphicCircleLabelTests.swift */,
+				F6339D5B71C2480BB4DC0F6C /* GraphicLine.swift */,
+				B4A23EFC2E19960100EDE135 /* GraphicLineTests.swift */,
+				B440D55D2E59444C000D98A0 /* GraphicKite.swift */,
+				B4A23EFA2E196D1800EDE135 /* GraphicKiteTests.swift */,
+				B46002892E54135600DD41C8 /* GraphicPetal.swift */,
+				B4A23EFE2E19C49E00EDE135 /* GraphicPetalTests.swift */,
+				B440D55B2E594369000D98A0 /* GraphicDot.swift */,
+				B4A23EF62E18951700EDE135 /* GraphicDotTests.swift */,
+				E257B1C714BB4BADBD314888 /* GraphicHistogram.swift */,
+				B4A23EF82E19668900EDE135 /* GraphicHistogramTests.swift */,
+				B440D5592E589B69000D98A0 /* GraphicDotDeviation.swift */,
+				B48430892E1487C900E126C0 /* GraphicDotDeviationTests.swift */,
 				B4A23FC52E28389D00EDE135 /* GraphicGeometrySource.h */,
 			);
 			path = Graphics;
@@ -1219,7 +1205,6 @@
 				B4815B7005C44C0200403360 /* XRLayerData.h in Headers */,
 				B4A82F962A07F87A00790052 /* LITMXMLNodeProtocol.h in Headers */,
 				B4E2DE8905C5BD6500714F6F /* XRLayerGrid.h in Headers */,
-
 				B47CA2F105C6C5470060A30C /* XRPropertyInspector.h in Headers */,
 				B47CA37A05C6CB150060A30C /* XREmptyInspectorController.h in Headers */,
 				B4A23FC62E28389D00EDE135 /* GraphicGeometrySource.h in Headers */,
@@ -1517,8 +1502,8 @@
 				B48345F105C23CA100E3F6B7 /* XRoseView.m in Sources */,
 				B4852A8505C2E223002212E3 /* XRGeometryController.m in Sources */,
 				B4E22DA82DFF701200A9AFE0 /* FormatterFactory.swift in Sources */,
-				BLJPCHG3GJY5JEQ0DHOENH4A /* XRGraphicCircle.swift in Sources */,
-				B4950F0305DD286A00C711DE /* XRGraphicCircleLabel.swift in Sources */,
+				BLJPCHG3GJY5JEQ0DHOENH4A /* GraphicCircle.swift in Sources */,
+				B4950F0305DD286A00C711DE /* GraphicCircleLabel.swift in Sources */,
 				B411E6ED05C3855000C22F3E /* XRLayer.m in Sources */,
 				B411E75105C386DA00C22F3E /* XRDataSet.m in Sources */,
 				B411E7F505C396A400C22F3E /* XRAppendDialogController.m in Sources */,
@@ -1527,20 +1512,20 @@
 				B440D5582E580FF3000D98A0 /* CGFloat+Extensions.swift in Sources */,
 				B4A82F9C2A07F8A400790052 /* LITMXMLBinaryEncoding.m in Sources */,
 				B41C86B62DE4BEE20053C9C9 /* DefaultsStorage.swift in Sources */,
-				B4A82FAD2A07FB8800790052 /* LITMArrowHead.swift in Sources */,
-				B440D55C2E594369000D98A0 /* XRGraphicDot.swift in Sources */,
+				B4A82FAD2A07FB8800790052 /* ArrowHead.swift in Sources */,
+				B440D55C2E594369000D98A0 /* GraphicDot.swift in Sources */,
 				B4866BF42CAE02C900319712 /* StoreProtocol.swift in Sources */,
 				B4DB28E32D22450300FC6A49 /* Encoding.swift in Sources */,
 				B4E2DE8A05C5BD6500714F6F /* XRLayerGrid.m in Sources */,
 				B423AB6D2D472DB1002474C7 /* MockInMemoryStoreDelegate.swift in Sources */,
-				25B505F6A6A844FBA2747DF6 /* XRGraphicLine.swift in Sources */,
+				25B505F6A6A844FBA2747DF6 /* GraphicLine.swift in Sources */,
 				B47CA2F205C6C5470060A30C /* XRPropertyInspector.m in Sources */,
 				B47CA37905C6CB150060A30C /* XREmptyInspectorController.m in Sources */,
 				B47CA41405C6D56D0060A30C /* XRGeometryInspector.m in Sources */,
 				B48B89FC05C794C500248F96 /* XRDataInspector.m in Sources */,
-				B440D55E2E59444C000D98A0 /* XRGraphicKite.swift in Sources */,
-				44379A9A8F5640DA8A491A38 /* XRGraphicHistogram.swift in Sources */,
-				B440D55A2E589B69000D98A0 /* XRGraphicDotDeviation.swift in Sources */,
+				B440D55E2E59444C000D98A0 /* GraphicKite.swift in Sources */,
+				44379A9A8F5640DA8A491A38 /* GraphicHistogram.swift in Sources */,
+				B440D55A2E589B69000D98A0 /* GraphicDotDeviation.swift in Sources */,
 				B439AB392C83D01700252574 /* InMemoryStore.swift in Sources */,
 				B4BF9C1605CD6B110047E8CF /* XRGridInspector.m in Sources */,
 				B4F929FE05D35D3A00EAAED0 /* XRLayerCore.m in Sources */,
@@ -1567,7 +1552,7 @@
 				B4F2B1922C97CB300017E717 /* Color.swift in Sources */,
 				B4F2B1932C97CB300017E717 /* DataSet.swift in Sources */,
 				B4F08862060914150000CF7A /* XRVStatCreatePanelController.m in Sources */,
-				B460028A2E54135600DD41C8 /* XRGraphicPetal.swift in Sources */,
+				B460028A2E54135600DD41C8 /* GraphicPetal.swift in Sources */,
 				B464E643060956DE009C1C89 /* XRGeometryPropertyInspector.m in Sources */,
 				B4324D0B06187FFF0083AE8A /* XRLayerText.m in Sources */,
 				B48BBEC12CAA1BFA0050852E /* Logger.swift in Sources */,
@@ -1583,7 +1568,7 @@
 				B47DDF510964CDE700C7EF02 /* XRTableImporterXRose.m in Sources */,
 				B41C86B22DE4B9C20053C9C9 /* UserDefaults+Extensions.swift in Sources */,
 				B4564ABC096A04A1005E0015 /* XRTableAddColumnController.m in Sources */,
-				B444B5732E62AC8C007E7E36 /* XRGraphic.swift in Sources */,
+				B444B5732E62AC8C007E7E36 /* Graphic.swift in Sources */,
 				B463B60A2DE2AD51006B6C7C /* AboutView.swift in Sources */,
 				B463B60B2DE2AD51006B6C7C /* AboutWindowController.swift in Sources */,
 				B42FE3AC096AEB99007E9DC5 /* XRCalculateAzimuthController.m in Sources */,
@@ -1608,17 +1593,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B4A23FCA2E2C44FC00EDE135 /* XRGraphicCircleLabelTestCases.swift in Sources */,
+				B4A23FCA2E2C44FC00EDE135 /* GraphicCircleLabelTestCases.swift in Sources */,
 				B40AE9092E30804800330530 /* AffineTransform+extensions.swift in Sources */,
 				B4AE41D32D17DD2800E05D96 /* LayerData+Testing.swift in Sources */,
-				B48430862E1193E500E126C0 /* XRGraphicCircleLabelTests.swift in Sources */,
+				B48430862E1193E500E126C0 /* GraphicCircleLabelTests.swift in Sources */,
 				B4AE41C42D14E86700E05D96 /* Layer+Testing.swift in Sources */,
 				B4AE41D02D17DA3700E05D96 /* LayerCore+Testing.swift in Sources */,
 				B41C17532CB1C2AF002D19C2 /* Tag.swift in Sources */,
-				B48430882E1486D100E126C0 /* LITMArrowHeadTests.swift in Sources */,
+				B48430882E1486D100E126C0 /* ArrowHeadTests.swift in Sources */,
 				B48BBEC82CAA20DC0050852E /* InMemoryStoreTest.swift in Sources */,
-				B4A23EFB2E196D1800EDE135 /* XRGraphicKiteTests.swift in Sources */,
-				B4A23EF72E18951700EDE135 /* XRGraphicDotTests.swift in Sources */,
+				B4A23EFB2E196D1800EDE135 /* GraphicKiteTests.swift in Sources */,
+				B4A23EF72E18951700EDE135 /* GraphicDotTests.swift in Sources */,
 				B4237C9C2D013BE900E2B510 /* StorageModelFactoryTest.swift in Sources */,
 				B4866BF72CAE039200319712 /* MockSqliteInterface.swift in Sources */,
 				B4AE41B82D0BCEBF00E05D96 /* XRLayerLineArrow+Stub.swift in Sources */,
@@ -1628,22 +1613,22 @@
 				B41C87402DE4D8070053C9C9 /* DefaultsStorageTests.swift in Sources */,
 				B41C87412DE4D8070053C9C9 /* UserDefaultsKeyTests.swift in Sources */,
 				B4E9C7812E3300DE005BA22F /* BezierPath+extensions.swift in Sources */,
-				B484308A2E1487C900E126C0 /* XRGraphicDotDeviationTests.swift in Sources */,
+				B484308A2E1487C900E126C0 /* GraphicDotDeviationTests.swift in Sources */,
 				B41C87422DE4D8070053C9C9 /* UserDefaultsExtensionsTests.swift in Sources */,
 				B41C17522CB1C278002D19C2 /* InMemoryStoreIntegrationTest.swift in Sources */,
 				B4A23FC82E28936900EDE135 /* MockGraphicGeometrySource.swift in Sources */,
 				B4AE41B52D0BBAF600E05D96 /* XRLayerText+Stub.swift in Sources */,
-				B4A23EFF2E19C49E00EDE135 /* XRGraphicPetalTests.swift in Sources */,
-				B4A23EFD2E19960100EDE135 /* XRGraphicLineTests.swift in Sources */,
+				B4A23EFF2E19C49E00EDE135 /* GraphicPetalTests.swift in Sources */,
+				B4A23EFD2E19960100EDE135 /* GraphicLineTests.swift in Sources */,
 				B4AE41CA2D17D76000E05D96 /* LayerLineArrow+Testing.swift in Sources */,
 				B4AE41C72D14EA5900E05D96 /* LayerText+Testing.swift in Sources */,
-				B4CC53482E10593000067436 /* XRGraphicCircleTests.swift in Sources */,
+				B4CC53482E10593000067436 /* GraphicCircleTests.swift in Sources */,
 				B41C87442DE4DC070053C9C9 /* CommonUtilities.swift in Sources */,
 				B4AE41D62D1E5DC300E05D96 /* XRGeometryController+Testing.swift in Sources */,
 				B4B0BB881E7E45CB00F392DA /* XRLayerDataTests.m in Sources */,
 				B4AE41CD2D17D77C00E05D96 /* LayerGrid+Testing.swift in Sources */,
 				B4AE41C02D0BD08C00E05D96 /* XRLayerData+Stub.swift in Sources */,
-				B4A23EF92E19668900EDE135 /* XRGraphicHistogramTests.swift in Sources */,
+				B4A23EF92E19668900EDE135 /* GraphicHistogramTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

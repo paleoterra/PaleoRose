@@ -1,5 +1,5 @@
 //
-//  XRGraphicCircleLabelTests.swift
+//  GraphicCircleLabelTests.swift
 //  PaleoRose
 //
 //  Created by Thomas Moore on 6/29/25.
@@ -10,17 +10,17 @@ import AppKit
 import Testing
 
 // swiftlint:disable file_length type_body_length
-struct XRGraphicCircleLabelTests {
+struct GraphicCircleLabelTests {
     // MARK: - Test Setup
 
-    private func buildTestObject(controller: GraphicGeometrySource) throws -> XRGraphicCircleLabel {
+    private func buildTestObject(controller: GraphicGeometrySource) throws -> GraphicCircleLabel {
         try #require(
-            XRGraphicCircleLabel(controller: controller),
+            GraphicCircleLabel(controller: controller),
             "Graphic circle label should be initialized"
         )
     }
 
-    private func buildCoreTestObject(controller: GraphicGeometrySource) throws -> XRGraphicCircleLabel {
+    private func buildCoreTestObject(controller: GraphicGeometrySource) throws -> GraphicCircleLabel {
         let label = try buildTestObject(controller: controller)
         // For core circles, we want to hide the label and mark it as a core circle
         label.showLabel = false
@@ -79,7 +79,7 @@ struct XRGraphicCircleLabelTests {
         let controller = MockGraphicGeometrySource()
 
         // When
-        let label = try #require(XRGraphicCircleLabel(coreCircleWithController: controller))
+        let label = try #require(GraphicCircleLabel(coreCircleWithController: controller))
         label.labelFont = NSFont(name: "Arial-Black", size: 12)
         label.computeLabelText()
         var expectedSettings = defaultSettings()
@@ -268,8 +268,8 @@ struct XRGraphicCircleLabelTests {
         label.setGeometryPercent(0.7)
         var expectedSettings = defaultSettings()
         expectedSettings["_labelAngle"] = "0.000000"
-        expectedSettings[XRGraphicKeyGeometryPercent] = "0.700000"
-        expectedSettings[XRGraphicKeyPercentSetting] = "0.700000"
+        expectedSettings[GraphicKeyGeometryPercent] = "0.700000"
+        expectedSettings[GraphicKeyPercentSetting] = "0.700000"
 
         let settings = label.graphicSettings()
         try CommonUtilities
@@ -478,7 +478,7 @@ struct XRGraphicCircleLabelTests {
     // MARK: - Helper Methods
 
     private func verifyDrawingPath(
-        for label: XRGraphicCircleLabel,
+        for label: GraphicCircleLabel,
         isCore: Bool,
         fileID: String = #fileID,
         filePath: String = #filePath,

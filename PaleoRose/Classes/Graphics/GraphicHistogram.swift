@@ -1,5 +1,5 @@
 //
-//  XRGraphicHistogram.swift
+//  GraphicHistogram.swift
 //  PaleoRose
 //
 //  Created by Migration Assistant on 2025-08-29.
@@ -28,7 +28,7 @@
 
 import AppKit
 
-@objc class XRGraphicHistogram: XRGraphic {
+@objc class GraphicHistogram: Graphic {
 
     // MARK: - Properties
 
@@ -93,10 +93,10 @@ import AppKit
     @objc override func graphicSettings() -> [AnyHashable: Any] {
         var settings = super.graphicSettings()
 
-        settings[XRGraphicKeyGraphicType] = "Histogram"
-        settings[XRGraphicKeyHistogramIncrement] = string(from: histIncrement)
-        settings[XRGraphicKeyPercent] = string(from: percent)
-        settings[XRGraphicKeyCount] = string(from: count)
+        settings[GraphicKeyGraphicType] = "Histogram"
+        settings[GraphicKeyHistogramIncrement] = string(from: histIncrement)
+        settings[GraphicKeyPercent] = string(from: percent)
+        settings[GraphicKeyCount] = string(from: count)
 
         return settings
     }

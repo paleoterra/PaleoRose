@@ -3,12 +3,12 @@ import Numerics
 @testable import PaleoRose
 import Testing
 
-struct XRGraphicDotDeviationTests {
+struct GraphicDotDeviationTests {
     // MARK: - Test Setup
 
-    private func buildTestObject(controller: MockGraphicGeometrySource, forIncrement: Int32 = 3, totalCount: Int32 = 32, valueCount: Int32 = 0, mean: Float = 0.0) throws -> XRGraphicDotDeviation {
+    private func buildTestObject(controller: MockGraphicGeometrySource, forIncrement: Int32 = 3, totalCount: Int32 = 32, valueCount: Int32 = 0, mean: Float = 0.0) throws -> GraphicDotDeviation {
         try #require(
-            XRGraphicDotDeviation(
+            GraphicDotDeviation(
                 controller: controller,
                 forIncrement: forIncrement,
                 valueCount: valueCount,
@@ -182,7 +182,7 @@ struct XRGraphicDotDeviationTests {
         let controller = MockGraphicGeometrySource()
         controller.mockIsPercent = params.mockIsPercent
         let dotDeviation = try #require(
-            XRGraphicDotDeviation(
+            GraphicDotDeviation(
                 controller: controller,
                 forIncrement: params.forIncrement,
                 valueCount: params.valueCount,

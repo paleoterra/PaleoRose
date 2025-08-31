@@ -38,7 +38,7 @@
 #define XRLayerGridDefaultSectorLock @"XRLayerGridDefaultSectorLock"
 #define XRLayerGridDefaultRingFixed @"XRLayerGridDefaultRingFixed"
 #define XRLayerGridDefaultLineWidth @"XRLayerGridDefaultLineWidth"
-@class XRLayer,XRGraphicLine;
+@class XRLayer,GraphicLine;
 
 @interface XRLayerGrid : XRLayer {
 	int _spokeCount;
@@ -115,7 +115,7 @@ ringPercentIncrement:(float)ringPercentIncrement
 -(BOOL)spokeSectorsEditable;
 -(void)addFixedSpokes;
 -(void)addVariableSpokes;
--(void)configureLine:(XRGraphicLine *)aLine;
+-(void)configureLine:(GraphicLine *)aLine;
 -(void)addVariableRings;
 -(void)addFixedRings;
 

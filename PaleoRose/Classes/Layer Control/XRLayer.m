@@ -174,7 +174,7 @@
 -(void)setStrokeColor:(NSColor *)color
 {
 	NSEnumerator *anEnum = [_graphicalObjects objectEnumerator];
-	XRGraphic *aGraphic;
+	Graphic *aGraphic;
 	_strokeColor = color;
 	[self resetColorImage];
 	//possibly post notification.
@@ -195,7 +195,7 @@
 -(void)setFillColor:(NSColor *)color
 {
 	NSEnumerator *anEnum = [_graphicalObjects objectEnumerator];
-	XRGraphic *aGraphic;
+	Graphic *aGraphic;
 	_fillColor = color;
 	[self resetColorImage];
 	//possibly post notification.

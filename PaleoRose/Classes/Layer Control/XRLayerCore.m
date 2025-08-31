@@ -154,7 +154,7 @@
 	[_graphicalObjects removeAllObjects];
 	if(!_coreType)
 	{
-		XRGraphicCircle * aCircle = [[XRGraphicCircle alloc] initWithController:geometryController];
+		GraphicCircle * aCircle = [[GraphicCircle alloc] initWithController:geometryController];
 		[aCircle setGeometryPercent:_percentRadius];
 		[aCircle setDrawsFill:_canFill];
 		[aCircle setStrokeColor:_strokeColor];
@@ -164,7 +164,7 @@
 	else
 	{
 		
-		XRGraphicCircle * aCircle = [[XRGraphicCircle alloc] initCoreCircleWithController:geometryController];
+		GraphicCircle * aCircle = [[GraphicCircle alloc] initCoreCircleWithController:geometryController];
 		NSImage *anImage = [[NSImage alloc] initWithSize:[_corePattern size]];
 		NSColor *newColor;
 		[anImage lockFocus];
@@ -186,7 +186,7 @@
 -(void)drawRect:(NSRect)rect
 {
 	NSEnumerator *anEnum = [_graphicalObjects objectEnumerator];
-	XRGraphic *aGraphic;
+	Graphic *aGraphic;
 	if(_isVisible)
 	{
 		while(aGraphic = [anEnum nextObject])
@@ -207,7 +207,7 @@
 	NSMutableDictionary *theDict = [NSMutableDictionary dictionaryWithDictionary:[super layerSettings]];
 	NSMutableArray *theGraphics  = [[NSMutableArray alloc] init];
 	NSEnumerator *anEnum = [_graphicalObjects objectEnumerator];
-	XRGraphic *aGraphic;
+	Graphic *aGraphic;
 	if(_coreType)
 		[theDict setObject:@"YES" forKey:XRLayerCoreXMLCoreType];
 	else

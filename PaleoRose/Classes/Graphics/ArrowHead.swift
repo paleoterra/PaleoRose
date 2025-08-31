@@ -1,5 +1,5 @@
 //
-//  LITMArrowHead.swift
+//  ArrowHead.swift
 //  PaleoRose
 //
 //  Created by Migration Assistant on 2025-08-30.
@@ -29,7 +29,7 @@
 import AppKit
 import Foundation
 
-@objc class LITMArrowHead: NSObject {
+@objc class ArrowHead: NSObject {
 
     // MARK: - Properties
 
@@ -87,12 +87,16 @@ import Foundation
         switch type {
         case 0:
             standardArrow()
+
         case 1:
             flyingArrow()
+
         case 2:
             halfArrowLeft()
+
         case 4:
             halfArrowRight()
+            
         default:
             // Invalid type - leave path empty
             break

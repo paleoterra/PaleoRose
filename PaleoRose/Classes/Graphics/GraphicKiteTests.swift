@@ -3,12 +3,12 @@ import Numerics
 @testable import PaleoRose
 import Testing
 
-struct XRGraphicKiteTests {
+struct GraphicKiteTests {
     // MARK: - Test Setup
 
-    private func buildTestObject(controller: MockGraphicGeometrySource, angles: [Double] = [], values: [Double] = []) throws -> XRGraphicKite {
+    private func buildTestObject(controller: MockGraphicGeometrySource, angles: [Double] = [], values: [Double] = []) throws -> GraphicKite {
         try #require(
-            XRGraphicKite(
+            GraphicKite(
                 controller: controller,
                 angles: angles,
                 values: values

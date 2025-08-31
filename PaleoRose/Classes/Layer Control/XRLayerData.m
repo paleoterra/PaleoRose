@@ -193,18 +193,18 @@
 	{
 		case XRLayerDataPlotTypePetal:
 		{
-			XRGraphicPetal *petal;
+			GraphicPetal *petal;
 			if([geometryController isPercent])
 			{
 				for(int i=0;i<[_sectorValues count];i++)
 				{
 					if([[_sectorValues objectAtIndex:i]doubleValue] != 0.0)
 					{
-						petal = [[XRGraphicPetal alloc] initWithController:geometryController forIncrement:i forValue:[_sectorValues objectAtIndex:i]];
+						petal = [[GraphicPetal alloc] initWithController:geometryController forIncrement:i forValue:[_sectorValues objectAtIndex:i]];
 						[_graphicalObjects addObject:petal];
 						//NSLog([[_graphicalObjects lastObject] description]);
 						
-						[(XRGraphic *)[_graphicalObjects lastObject] setLineWidth:_lineWeight];
+						[(Graphic *)[_graphicalObjects lastObject] setLineWidth:_lineWeight];
 						[[_graphicalObjects lastObject] setStrokeColor:_strokeColor];
 						[[_graphicalObjects lastObject] setFillColor:_fillColor];
 					}
@@ -214,11 +214,11 @@
 				{
 					if([[_sectorValues objectAtIndex:i]doubleValue] != 0.0)
 					{
-						petal = [[XRGraphicPetal alloc] initWithController:geometryController forIncrement:i forValue:[_sectorValuesCount objectAtIndex:i]];
+						petal = [[GraphicPetal alloc] initWithController:geometryController forIncrement:i forValue:[_sectorValuesCount objectAtIndex:i]];
 						[_graphicalObjects addObject:petal];
-						[(XRGraphic *)[_graphicalObjects lastObject] setLineWidth:_lineWeight];
-						[(XRGraphic *)[_graphicalObjects lastObject] setStrokeColor:_strokeColor];
-						[(XRGraphic *)[_graphicalObjects lastObject] setFillColor:_fillColor];
+						[(Graphic *)[_graphicalObjects lastObject] setLineWidth:_lineWeight];
+						[(Graphic *)[_graphicalObjects lastObject] setStrokeColor:_strokeColor];
+						[(Graphic *)[_graphicalObjects lastObject] setFillColor:_fillColor];
 					}
 				}
 			}
@@ -229,7 +229,7 @@
 		case XRLayerDataPlotTypeKite:
 		{
 			NSMutableArray *theAngles = [[NSMutableArray alloc] init];
-			XRGraphicKite *aKite;
+			GraphicKite *aKite;
 			int count;
 			float angle;
 			count = (int)[_sectorValues count];
@@ -241,11 +241,11 @@
 				[theAngles addObject:[NSNumber numberWithFloat:angle]];
 			}
 			if([geometryController isPercent])
-				aKite = [[XRGraphicKite alloc] initWithController:geometryController withAngles:[NSArray arrayWithArray:theAngles] forValues:_sectorValues];
+				aKite = [[GraphicKite alloc] initWithController:geometryController withAngles:[NSArray arrayWithArray:theAngles] forValues:_sectorValues];
 			else
-				aKite = [[XRGraphicKite alloc] initWithController:geometryController withAngles:[NSArray arrayWithArray:theAngles] forValues:_sectorValuesCount];
+				aKite = [[GraphicKite alloc] initWithController:geometryController withAngles:[NSArray arrayWithArray:theAngles] forValues:_sectorValuesCount];
 			[_graphicalObjects addObject:aKite];
-			[(XRGraphic *)[_graphicalObjects lastObject] setLineWidth:_lineWeight];
+			[(Graphic *)[_graphicalObjects lastObject] setLineWidth:_lineWeight];
 			[[_graphicalObjects lastObject] setStrokeColor:_strokeColor];
 			[[_graphicalObjects lastObject] setFillColor:_fillColor];
 		}
@@ -257,8 +257,8 @@
 			{
 				if([[_sectorValuesCount objectAtIndex:i] intValue]>0)
 				{
-					[_graphicalObjects addObject:[[XRGraphicDot alloc] initWithController:geometryController forIncrement:i valueCount:[[_sectorValuesCount objectAtIndex:i] intValue] totalCount:_totalCount]];
-					[(XRGraphic *)[_graphicalObjects lastObject] setLineWidth:_lineWeight];
+					[_graphicalObjects addObject:[[GraphicDot alloc] initWithController:geometryController forIncrement:i valueCount:[[_sectorValuesCount objectAtIndex:i] intValue] totalCount:_totalCount]];
+					[(Graphic *)[_graphicalObjects lastObject] setLineWidth:_lineWeight];
 					[[_graphicalObjects lastObject] setDotSize:_dotRadius];
 					[[_graphicalObjects lastObject] setStrokeColor:_strokeColor];
 					[[_graphicalObjects lastObject] setFillColor:_fillColor];
@@ -269,15 +269,15 @@
 			break;
 		case XRLayerDataPlotTypeHistogram:
 		{
-			XRGraphicHistogram *hist;
+			GraphicHistogram *hist;
 			
 			for(int i=0;i<[_sectorValues count];i++)
 			{
 				if([[_sectorValues objectAtIndex:i]doubleValue] != 0.0)
 				{
-					hist = [[XRGraphicHistogram alloc] initWithController:geometryController forIncrement:i forValue:[_sectorValues objectAtIndex:i]];
+					hist = [[GraphicHistogram alloc] initWithController:geometryController forIncrement:i forValue:[_sectorValues objectAtIndex:i]];
 					[_graphicalObjects addObject:hist];
-					[(XRGraphic *)[_graphicalObjects lastObject] setLineWidth:_lineWeight];
+					[(Graphic *)[_graphicalObjects lastObject] setLineWidth:_lineWeight];
 					[[_graphicalObjects lastObject] setStrokeColor:_strokeColor];
 					[[_graphicalObjects lastObject] setFillColor:_fillColor];
 				}
@@ -288,13 +288,13 @@
 		case XRLayerDataPlotTypeDotDeviation:
 		{
 			NSDictionary *aDict = [_theSet meanCountWithIncrement:size startingAngle:start isBiDirectional:_isBiDir];
-			XRGraphicDotDeviation *aGraphic;
-			XRGraphicCircle *aCircle;
+			GraphicDotDeviation *aGraphic;
+			GraphicCircle *aCircle;
 			int count = (int)[_sectorValuesCount count];
 
 			for(int i=0;i<count;i++)
 			{
-				aGraphic = [[XRGraphicDotDeviation alloc] initWithController:geometryController forIncrement:i valueCount:[[_sectorValuesCount objectAtIndex:i] intValue] totalCount:_totalCount statistics:aDict];
+				aGraphic = [[GraphicDotDeviation alloc] initWithController:geometryController forIncrement:i valueCount:[[_sectorValuesCount objectAtIndex:i] intValue] totalCount:_totalCount statistics:aDict];
 				if(aGraphic)
 				{
 				[aGraphic setLineWidth:_lineWeight];
@@ -307,7 +307,7 @@
 			}
 			//display mean circle
 			float _mean = [[aDict objectForKey:@"mean"] floatValue];
-			aCircle = [[XRGraphicCircle alloc] initWithController:geometryController];
+			aCircle = [[GraphicCircle alloc] initWithController:geometryController];
 			if([geometryController isPercent])
 			{
 				[aCircle setPercentSetting:(_mean/(float)_totalCount)];
@@ -389,7 +389,7 @@
 -(void)didChangeValueForKey:(NSString *)key
 {
 	NSEnumerator *anEnum = [_graphicalObjects objectEnumerator];
-	XRGraphic *aGraphic;
+	Graphic *aGraphic;
 		
 	if([key isEqualToString:@"_isBiDir"])
 	{
@@ -448,10 +448,10 @@
 
 		while(aGraphic = [anEnum nextObject])
 		{
-			if([aGraphic isKindOfClass:[XRGraphicDot class]])
-				[(XRGraphicDot *)aGraphic setDotSize:_dotRadius];
-			else if([aGraphic isKindOfClass:[XRGraphicDotDeviation class]])
-				[(XRGraphicDotDeviation *)aGraphic setDotSize:_dotRadius];
+			if([aGraphic isKindOfClass:[GraphicDot class]])
+				[(GraphicDot *)aGraphic setDotSize:_dotRadius];
+			else if([aGraphic isKindOfClass:[GraphicDotDeviation class]])
+				[(GraphicDotDeviation *)aGraphic setDotSize:_dotRadius];
 
 			
 		}
@@ -487,7 +487,7 @@
 	NSMutableDictionary *theDict = [NSMutableDictionary dictionaryWithDictionary:[super layerSettings]];
 	NSMutableArray *theGraphics  = [[NSMutableArray alloc] init];
 	NSEnumerator *anEnum = [_graphicalObjects objectEnumerator];
-	XRGraphic *aGraphic;
+	Graphic *aGraphic;
 	
 	[theDict setObject:[_theSet dataSetDictionary] forKey:@"Data_Set"];
 

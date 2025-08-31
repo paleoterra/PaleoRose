@@ -1,5 +1,5 @@
 //
-//  XRGraphic.swift
+//  Graphic.swift
 //  PaleoRose
 //
 //  Created by Migration Assistant on 2025-08-30.
@@ -30,40 +30,41 @@ import AppKit
 
 // MARK: - String Constants
 
-let XRGraphicKeyGraphicType = "GraphicType"
-let XRGraphicKeyStrokeColor = "_strokeColor"
-let XRGraphicKeyFillColor = "_fillColor"
-let XRGraphicKeyLineWidth = "_lineWidth"
+// swiftlint:disable identifier_name
+let GraphicKeyGraphicType = "GraphicType"
+let GraphicKeyStrokeColor = "_strokeColor"
+let GraphicKeyFillColor = "_fillColor"
+let GraphicKeyLineWidth = "_lineWidth"
 
-let XRGraphicKeyMaxRadius = "_maxRadius"
-let XRGraphicKeyPetalIncrement = "_petalIncrement"
-let XRGraphicKeyAngleIncrement = "_angleIncrement"
-let XRGraphicKeyHistogramIncrement = "_histIncrement"
-let XRGraphicKeyDotSize = "_dotSize"
-let XRGraphicKeyPercent = "_percent"
-let XRGraphicKeyCount = "_count"
-let XRGraphicKeyTotalCount = "_totalCount"
-let XRGraphicKeyRelativePercent = "_relativePercent"
-let XRGraphicKeyAngleSetting = "_angleSetting"
-let XRGraphicKeyTickType = "_tickType"
-let XRGraphicKeyShowTick = "_showTick"
-let XRGraphicKeySpokeNumberAlignment = "_spokeNumberAlign"
-let XRGraphicKeySpokeNumberCompassPoint = "_spokeNumberCompassPoint"
-let XRGraphicKeySpokeNumberOrder = "_spokeNumberOrder"
-let XRGraphicKeyShowLabel = "_showLabel"
-let XRGraphicKeyLineLabel = "_lineLabel"
-let XRGraphicKeyCurrentFont = "_currentFont"
-let XRGraphicKeyLabelAngle = "_labelAngle"
-let XRGraphicKeyLabel = "Label"
-let XRGraphicKeyLabelFont = "_labelFont"
-let XRGraphicKeyIsCore = "_isCore"
-let XRGraphicKeyCountSetting = "_countSetting"
-let XRGraphicKeyPercentSetting = "_percentSetting"
-let XRGraphicKeyGeometryPercent = "_geometryPercent"
-let XRGraphicKeyIsGeometryPercent = "_isGeometryPercent"
-let XRGraphicKeyIsPercent = "_isPercent"
-let XRGraphicKeyIsFixedCount = "_isFixedCount"
-let XRGraphicKeyMean = "_mean"
+let GraphicKeyMaxRadius = "_maxRadius"
+let GraphicKeyPetalIncrement = "_petalIncrement"
+let GraphicKeyAngleIncrement = "_angleIncrement"
+let GraphicKeyHistogramIncrement = "_histIncrement"
+let GraphicKeyDotSize = "_dotSize"
+let GraphicKeyPercent = "_percent"
+let GraphicKeyCount = "_count"
+let GraphicKeyTotalCount = "_totalCount"
+let GraphicKeyRelativePercent = "_relativePercent"
+let GraphicKeyAngleSetting = "_angleSetting"
+let GraphicKeyTickType = "_tickType"
+let GraphicKeyShowTick = "_showTick"
+let GraphicKeySpokeNumberAlignment = "_spokeNumberAlign"
+let GraphicKeySpokeNumberCompassPoint = "_spokeNumberCompassPoint"
+let GraphicKeySpokeNumberOrder = "_spokeNumberOrder"
+let GraphicKeyShowLabel = "_showLabel"
+let GraphicKeyLineLabel = "_lineLabel"
+let GraphicKeyCurrentFont = "_currentFont"
+let GraphicKeyLabelAngle = "_labelAngle"
+let GraphicKeyLabel = "Label"
+let GraphicKeyLabelFont = "_labelFont"
+let GraphicKeyIsCore = "_isCore"
+let GraphicKeyCountSetting = "_countSetting"
+let GraphicKeyPercentSetting = "_percentSetting"
+let GraphicKeyGeometryPercent = "_geometryPercent"
+let GraphicKeyIsGeometryPercent = "_isGeometryPercent"
+let GraphicKeyIsPercent = "_isPercent"
+let GraphicKeyIsFixedCount = "_isFixedCount"
+let GraphicKeyMean = "_mean"
 
 let GraphicTypeGraphic = "Graphic"
 let GraphicTypeCircle = "Circle"
@@ -74,10 +75,11 @@ let GraphicTypePetal = "Petal"
 let GraphicTypeDot = "Dot"
 let GraphicTypeHistogram = "Histogram"
 let GraphicTypeDotDeviation = "DotDeviation"
+// swiftlint:enable identifier_name
 
 // MARK: - Main Class
 
-@objc class XRGraphic: NSObject {
+@objc class Graphic: NSObject {
 
     // MARK: - Properties
 
@@ -183,10 +185,10 @@ let GraphicTypeDotDeviation = "DotDeviation"
 
     @objc func graphicSettings() -> [AnyHashable: Any] {
         [
-            XRGraphicKeyGraphicType: GraphicTypeGraphic,
-            XRGraphicKeyFillColor: fillColor as Any,
-            XRGraphicKeyStrokeColor: strokeColor as Any,
-            XRGraphicKeyLineWidth: string(from: lineWidth)
+            GraphicKeyGraphicType: GraphicTypeGraphic,
+            GraphicKeyFillColor: fillColor as Any,
+            GraphicKeyStrokeColor: strokeColor as Any,
+            GraphicKeyLineWidth: string(from: lineWidth)
         ]
     }
 
@@ -208,7 +210,7 @@ let GraphicTypeDotDeviation = "DotDeviation"
         let maxAngle: Float = 360.0
         var newAngle = angle
         while newAngle >= maxAngle {
-            newAngle = newAngle - maxAngle
+            newAngle -= maxAngle
         }
         return newAngle
     }

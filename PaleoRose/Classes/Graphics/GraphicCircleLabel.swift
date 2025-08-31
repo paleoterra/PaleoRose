@@ -1,5 +1,5 @@
 //
-//  XRGraphicCircleLabel.swift
+//  GraphicCircleLabel.swift
 //  PaleoRose
 //
 //  Created by Migration Assistant on 2025-08-29.
@@ -28,18 +28,18 @@
 
 import AppKit
 
-@objc class XRGraphicCircleLabel: XRGraphic {
+@objc class GraphicCircleLabel: Graphic {
 
     // MARK: - Properties
 
-    // Properties that were inherited from XRGraphicCircle
+    // Properties that were inherited from GraphicCircle
     @objc dynamic var isFixedCount: Bool = false
     @objc dynamic var countSetting: Int32 = 0
     @objc dynamic var percentSetting: Float = 0.0
     @objc dynamic var isGeometryPercent: Bool = false
     @objc dynamic var isPercent: Bool = false
 
-    // XRGraphicCircleLabel specific properties
+    // GraphicCircleLabel specific properties
     @objc dynamic var showLabel: Bool = false
     @objc dynamic var labelAngle: Float = 0.0 {
         didSet {
@@ -218,18 +218,18 @@ import AppKit
     @objc override func graphicSettings() -> [AnyHashable: Any] {
         var settings = super.graphicSettings()
 
-        settings[XRGraphicKeyGraphicType] = "LabelCircle"
-        settings[XRGraphicKeyShowLabel] = string(from: showLabel)
-        settings[XRGraphicKeyLabelAngle] = string(from: labelAngle)
-        settings[XRGraphicKeyLabel] = label?.string ?? ""
-        settings[XRGraphicKeyLabelFont] = labelFont
-        settings[XRGraphicKeyIsCore] = string(from: isCore)
-        settings[XRGraphicKeyCountSetting] = string(from: countSetting)
-        settings[XRGraphicKeyPercentSetting] = string(from: percentSetting)
-        settings[XRGraphicKeyGeometryPercent] = string(from: percentSetting)
-        settings[XRGraphicKeyIsGeometryPercent] = string(from: isGeometryPercent)
-        settings[XRGraphicKeyIsPercent] = string(from: isPercent)
-        settings[XRGraphicKeyIsFixedCount] = string(from: isFixedCount)
+        settings[GraphicKeyGraphicType] = "LabelCircle"
+        settings[GraphicKeyShowLabel] = string(from: showLabel)
+        settings[GraphicKeyLabelAngle] = string(from: labelAngle)
+        settings[GraphicKeyLabel] = label?.string ?? ""
+        settings[GraphicKeyLabelFont] = labelFont
+        settings[GraphicKeyIsCore] = string(from: isCore)
+        settings[GraphicKeyCountSetting] = string(from: countSetting)
+        settings[GraphicKeyPercentSetting] = string(from: percentSetting)
+        settings[GraphicKeyGeometryPercent] = string(from: percentSetting)
+        settings[GraphicKeyIsGeometryPercent] = string(from: isGeometryPercent)
+        settings[GraphicKeyIsPercent] = string(from: isPercent)
+        settings[GraphicKeyIsFixedCount] = string(from: isFixedCount)
 
         return settings
     }
