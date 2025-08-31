@@ -43,8 +43,7 @@ import AppKit
 
     // MARK: - Init
 
-    @objc
-    init?(controller: GraphicGeometrySource, forIncrement increment: Int32, valueCount count: Int32, totalCount total: Int32) {
+    @objc init?(controller: GraphicGeometrySource, forIncrement increment: Int32, valueCount count: Int32, totalCount total: Int32) {
         super.init(controller: controller)
         angleIncrement = Int(increment)
         totalCount = Int(total)

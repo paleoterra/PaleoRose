@@ -32,7 +32,7 @@ import AppKit
 
     // MARK: - Properties
 
-    @objc dynamic var isFixedCount: Bool = false
+    var isFixedCount: Bool = false
     @objc dynamic var countSetting: Int32 = 0 {
         didSet {
             isPercent = false
@@ -49,8 +49,8 @@ import AppKit
         }
     }
 
-    @objc dynamic var isGeometryPercent: Bool = false
-    @objc dynamic var isPercent: Bool = false
+    var isGeometryPercent: Bool = false
+    var isPercent: Bool = false
 
     // MARK: - Initialization
 

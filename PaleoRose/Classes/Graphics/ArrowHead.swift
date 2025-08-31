@@ -29,14 +29,14 @@
 import AppKit
 import Foundation
 
-@objc class ArrowHead: NSObject {
+class ArrowHead: NSObject {
 
     // MARK: - Properties
 
-    @objc var arrowColor: NSColor
-    @objc var path: NSBezierPath
-    @objc var positionTransform: CGAffineTransform
-    @objc var scaleTransform: CGAffineTransform
+    var arrowColor: NSColor
+    var path: NSBezierPath
+    var positionTransform: CGAffineTransform
+    var scaleTransform: CGAffineTransform
 
     // MARK: - Initialization
 

@@ -33,8 +33,7 @@ import AppKit
     private var angles: [Double] = []
     private var values: [Double] = []
 
-    @objc
-    init?(controller: GraphicGeometrySource, angles: [Double], values: [Double]) {
+    @objc init?(controller: GraphicGeometrySource, angles: [Double], values: [Double]) {
         super.init(controller: controller)
         self.angles = angles
         self.values = values
@@ -64,9 +63,10 @@ import AppKit
     }
 
     private func drawKiteOutline() {
-        guard !angles.isEmpty, !values.isEmpty else { return }
-        var radius = radiusForValue(values.last!)
-        var lastAngle = angles.last!
+        guard let lastValue = values.last, let lastAngle = angles.last else {
+            return
+        }
+        var radius = radiusForValue(lastValue)
         let startPoint = point(radius: radius, atAngle: lastAngle)
         drawingPath?.move(to: startPoint)
         for index in 0 ..< angles.count {
@@ -77,8 +77,9 @@ import AppKit
     }
 
     private func drawHollowCoreIfNeeded() {
-        guard let controller = geometryController else { return }
-        if controller.hollowCoreSize() <= 0.0 { return }
+        guard let controller = geometryController, controller.hollowCoreSize() > 0.0 else {
+            return
+        }
         let radius = radiusForValue(0.0)
         let centroid = CGPoint.zero
         let coreRect = CGRect(x: centroid.x - radius, y: centroid.y - radius, width: radius * 2.0, height: radius * 2.0)
@@ -86,19 +87,22 @@ import AppKit
     }
 
     private func point(radius: Double, atAngle angle: Double) -> CGPoint {
-        guard let controller = geometryController else { return .zero }
+        guard let controller = geometryController else {
+            return .zero
+        }
         var point = CGPoint(x: 0.0, y: radius)
         point = controller.rotation(of: point, byAngle: angle)
         return point
     }
 
     private func radiusForValue(_ value: Double) -> CGFloat {
-        guard let controller = geometryController else { return 0 }
+        guard let controller = geometryController else {
+            return 0
+        }
         if controller.isPercent() {
             return CGFloat(controller.radius(ofPercentValue: value))
-        } else {
-            return CGFloat(controller.radius(ofCount: Int32(value)))
         }
+        return CGFloat(controller.radius(ofCount: Int32(value)))
     }
 
     // MARK: - Settings

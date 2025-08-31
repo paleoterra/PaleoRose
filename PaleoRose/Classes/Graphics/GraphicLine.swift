@@ -30,15 +30,16 @@ import AppKit
 
 // MARK: - Swift Enums with Objective-C compatibility
 
+// swiftlint:disable type_body_length file_length
 @objc public enum GraphicLineTickType: Int32 {
-    case none = 0
-    case minor = 1
     case major = 2
+    case minor = 1
+    case noTick = 0
 }
 
 @objc public enum GraphicLineNumberAlign: Int32 {
-    case horizontal = 0
     case angle = 1
+    case horizontal = 0
 }
 
 @objc public enum GraphicLineNumberCompassPoint: Int32 {
@@ -58,7 +59,7 @@ import AppKit
     // MARK: - Properties (Swift enum-based)
 
     // Private enum storage
-    private var tickTypeEnum: GraphicLineTickType = .none
+    private var tickTypeEnum: GraphicLineTickType = .noTick
     private var spokeNumberAlignEnum: GraphicLineNumberAlign = .horizontal
     private var spokeNumberCompassPointEnum: GraphicLineNumberCompassPoint = .points
     private var spokeNumberOrderEnum: GraphicLineNumberingOrder = .quad
@@ -67,7 +68,7 @@ import AppKit
     @objc dynamic var tickType: Int32 {
         get { tickTypeEnum.rawValue }
         set {
-            tickTypeEnum = GraphicLineTickType(rawValue: newValue) ?? .none
+            tickTypeEnum = GraphicLineTickType(rawValue: newValue) ?? .noTick
             calculateGeometry()
         }
     }
@@ -146,7 +147,7 @@ import AppKit
     }
 
     private func setupInitialValues() {
-        tickTypeEnum = .none
+        tickTypeEnum = .noTick
         showTick = false
         spokePointOnly = false
         spokeNumberAlignEnum = .horizontal
@@ -161,7 +162,9 @@ import AppKit
     // MARK: - Geometry Calculation
 
     @objc override func calculateGeometry() {
-        guard let controller = geometryController else { return }
+        guard let controller = geometryController else {
+            return
+        }
 
         drawingPath = NSBezierPath()
 
@@ -180,20 +183,29 @@ import AppKit
     }
 
     private func calculateOuterRadius() -> CGFloat {
-        guard let controller = geometryController else { return 0 }
-
-        if tickTypeEnum == .none || !showTick {
+        guard let controller = geometryController else {
+            return 0
+        }
+        if !showTick {
             return CGFloat(controller.radius(ofRelativePercent: Double(relativePercent)))
-        } else if tickTypeEnum == .minor {
-            return CGFloat(controller.unrestrictedRadius(ofRelativePercent: Double(relativePercent + 0.05)))
-        } else { // major
+        }
+        switch tickTypeEnum {
+        case .noTick:
+            return CGFloat(controller.radius(ofRelativePercent: Double(relativePercent)))
+
+        case .minor:
+            return CGFloat(controller.radius(ofRelativePercent: Double(relativePercent + 0.05)))
+
+        case .major:
             return CGFloat(controller.unrestrictedRadius(ofRelativePercent: Double(relativePercent + 0.1)))
         }
     }
 
     private func pointAtRadius(_ radius: CGFloat, angle: CGFloat) -> CGPoint {
-        guard let controller = geometryController else { return NSZeroPoint }
-        let point = NSMakePoint(0.0, radius)
+        guard let controller = geometryController else {
+            return CGPoint.zero
+        }
+        let point = CGPoint(x: 0.0, y: radius)
         return controller.rotation(of: point, byAngle: Double(angle))
     }
 
@@ -237,12 +249,16 @@ import AppKit
         let compassPoint = switch spokeAngle {
         case 0.0, 360.0:
             "N"
+
         case 90.0:
             "E"
+
         case 180.0:
             "S"
+
         case 270.0:
             "W"
+
         default:
             "N"
         }
@@ -280,7 +296,9 @@ import AppKit
     // MARK: - Label Transform
 
     private func calculateLabelTransform() {
-        guard let label = lineLabel, let font else { return }
+        guard let label = lineLabel, let font else {
+            return
+        }
 
         // Apply font and color attributes
         let range = NSRange(location: 0, length: label.length)
@@ -301,7 +319,10 @@ import AppKit
     private func calculateHorizontalTransform() {
         guard let controller = geometryController,
               let label = lineLabel,
-              let transform = labelTransform else { return }
+              let transform = labelTransform
+        else {
+            return
+        }
 
         let labelSize = label.size()
         let displacement = CGFloat(controller.unrestrictedRadius(ofRelativePercent: Double(relativePercent + 0.2)))
@@ -316,7 +337,10 @@ import AppKit
     private func calculateParallelTransform() {
         guard let controller = geometryController,
               let label = lineLabel,
-              let transform = labelTransform else { return }
+              let transform = labelTransform
+        else {
+            return
+        }
 
         let labelSize = label.size()
         let displacement = CGFloat(controller.unrestrictedRadius(ofRelativePercent: Double(relativePercent + 0.1)))
@@ -342,7 +366,9 @@ import AppKit
     // MARK: - Drawing
 
     @objc override func draw(_ rect: CGRect) {
-        guard let path = drawingPath else { return }
+        guard let path = drawingPath else {
+            return
+        }
 
         if rect.intersects(path.bounds) {
             NSGraphicsContext.saveGraphicsState()
@@ -390,3 +416,5 @@ import AppKit
         return settings
     }
 }
+
+// swiftlint:enable type_body_length file_length

@@ -83,12 +83,12 @@ let GraphicTypeDotDeviation = "DotDeviation"
 
     // MARK: - Properties
 
-    @objc weak var geometryController: GraphicGeometrySource?
-    @objc var drawingPath: NSBezierPath?
+    weak var geometryController: GraphicGeometrySource?
+    var drawingPath: NSBezierPath?
     @objc var fillColor: NSColor?
     @objc var strokeColor: NSColor?
     @objc var drawsFill: Bool = false
-    @objc var needsDisplay: Bool = true
+    var needsDisplay: Bool = true
 
     @objc var lineWidth: Float = 1.0 {
         didSet {
@@ -124,7 +124,9 @@ let GraphicTypeDotDeviation = "DotDeviation"
     }
 
     @objc(drawRect:) func draw(_ rect: CGRect) {
-        guard let path = drawingPath else { return }
+        guard let path = drawingPath else {
+            return
+        }
 
         if rect.intersects(path.bounds) {
             NSGraphicsContext.saveGraphicsState()

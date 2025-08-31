@@ -495,7 +495,7 @@ struct GraphicCircleLabelTests {
             column: column
         )
         if isCore {
-            let drawingPath = try #require(label.value(forKey: "drawingPath") as? NSBezierPath)
+            let drawingPath = try #require(label.drawingPath)
             #expect(
                 !drawingPath.bounds.isEmpty,
                 "Drawing path bounds should not be empty for core circle",

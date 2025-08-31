@@ -57,8 +57,7 @@ import AppKit
     ///   - controller: The geometry controller used to compute drawing geometry.
     ///   - forIncrement: The petal increment index.
     ///   - forValue: The value for this petal (interpreted as count or percent by the controller).
-    @objc
-    init?(controller: GraphicGeometrySource, forIncrement increment: Int32, forValue aNumber: NSNumber) {
+    @objc init?(controller: GraphicGeometrySource, forIncrement increment: Int32, forValue aNumber: NSNumber) {
         super.init(controller: controller)
         petalIncrement = Int(increment)
         percent = aNumber.floatValue
@@ -73,13 +72,15 @@ import AppKit
                 restrictAngle(
                     toACircle: Float(CGFloat(petalIncrement) * size + start)
                 )
-            ),
+            )
         ]
     }
 
     /// Recalculate geometry when external changes require it.
     @objc override func calculateGeometry() {
-        guard let controller = geometryController else { return }
+        guard let controller = geometryController else {
+            return
+        }
 
         // step 1. find the angles
         let size = CGFloat(controller.sectorSize())
@@ -100,7 +101,7 @@ import AppKit
             controller.radius(ofCount: count)
         )
 
-        let pivotPoint = CGPoint(x: 0, y: 0)
+        let pivotPoint = CGPoint.zero
         let startPoint = CGPoint(x: 0.0, y: radius1)
         let outerPoint = CGPoint(x: 0.0, y: radius2)
 
@@ -114,12 +115,24 @@ import AppKit
             .line(
                 to: controller.rotation(of: outerPoint, byAngle: Double(angle1Polar))
             )
-        path.appendArc(withCenter: pivotPoint, radius: radius2, startAngle: angle1Canvas, endAngle: angle2Canvas, clockwise: true)
+        path.appendArc(
+            withCenter: pivotPoint,
+            radius: radius2,
+            startAngle: angle1Canvas,
+            endAngle: angle2Canvas,
+            clockwise: true
+        )
         path
             .line(
                 to: controller.rotation(of: startPoint, byAngle: Double(angle2Polar))
             )
-        path.appendArc(withCenter: pivotPoint, radius: radius1, startAngle: angle2Canvas, endAngle: angle1Canvas, clockwise: false)
+        path.appendArc(
+            withCenter: pivotPoint,
+            radius: radius1,
+            startAngle: angle2Canvas,
+            endAngle: angle1Canvas,
+            clockwise: false
+        )
 
         drawingPath = path
     }

@@ -139,7 +139,6 @@
 		B4A23EFF2E19C49E00EDE135 /* GraphicPetalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A23EFE2E19C49E00EDE135 /* GraphicPetalTests.swift */; };
 		B4A23FC62E28389D00EDE135 /* GraphicGeometrySource.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A23FC52E28389D00EDE135 /* GraphicGeometrySource.h */; };
 		B4A23FC82E28936900EDE135 /* MockGraphicGeometrySource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A23FC72E28936900EDE135 /* MockGraphicGeometrySource.swift */; };
-		B4A23FCA2E2C44FC00EDE135 /* GraphicCircleLabelTestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A23FC92E2C44FC00EDE135 /* GraphicCircleLabelTestCases.swift */; };
 		B4A82F962A07F87A00790052 /* LITMXMLNodeProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A82F932A07F87900790052 /* LITMXMLNodeProtocol.h */; };
 		B4A82F972A07F87A00790052 /* LITMXMLTree.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A82F942A07F87900790052 /* LITMXMLTree.h */; };
 		B4A82F982A07F87A00790052 /* LITMXMLTree.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A82F952A07F87A00790052 /* LITMXMLTree.m */; };
@@ -444,7 +443,6 @@
 		B4A23EFE2E19C49E00EDE135 /* GraphicPetalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicPetalTests.swift; sourceTree = "<group>"; };
 		B4A23FC52E28389D00EDE135 /* GraphicGeometrySource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GraphicGeometrySource.h; sourceTree = "<group>"; };
 		B4A23FC72E28936900EDE135 /* MockGraphicGeometrySource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGraphicGeometrySource.swift; sourceTree = "<group>"; };
-		B4A23FC92E2C44FC00EDE135 /* GraphicCircleLabelTestCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicCircleLabelTestCases.swift; sourceTree = "<group>"; };
 		B4A82F932A07F87900790052 /* LITMXMLNodeProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LITMXMLNodeProtocol.h; sourceTree = "<group>"; };
 		B4A82F942A07F87900790052 /* LITMXMLTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LITMXMLTree.h; sourceTree = "<group>"; };
 		B4A82F952A07F87A00790052 /* LITMXMLTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LITMXMLTree.m; sourceTree = "<group>"; };
@@ -746,7 +744,6 @@
 				BLHFDTXYH56D3KXO45XKMYX9 /* GraphicCircle.swift */,
 				B4CC53472E10593000067436 /* GraphicCircleTests.swift */,
 				B4950F0205DD286A00C711DD /* GraphicCircleLabel.swift */,
-				B4A23FC92E2C44FC00EDE135 /* GraphicCircleLabelTestCases.swift */,
 				B48430852E1193E500E126C0 /* GraphicCircleLabelTests.swift */,
 				F6339D5B71C2480BB4DC0F6C /* GraphicLine.swift */,
 				B4A23EFC2E19960100EDE135 /* GraphicLineTests.swift */,
@@ -1593,7 +1590,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B4A23FCA2E2C44FC00EDE135 /* GraphicCircleLabelTestCases.swift in Sources */,
 				B40AE9092E30804800330530 /* AffineTransform+extensions.swift in Sources */,
 				B4AE41D32D17DD2800E05D96 /* LayerData+Testing.swift in Sources */,
 				B48430862E1193E500E126C0 /* GraphicCircleLabelTests.swift in Sources */,

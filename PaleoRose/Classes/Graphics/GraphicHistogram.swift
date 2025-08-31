@@ -58,7 +58,9 @@ import AppKit
     // MARK: - Geometry Calculation
 
     @objc override func calculateGeometry() {
-        guard let controller = geometryController else { return }
+        guard let controller = geometryController else {
+            return
+        }
 
         let size = Float(controller.sectorSize())
         let start = Float(controller.startingAngle())
@@ -73,7 +75,7 @@ import AppKit
         let startRadius = isPercent ?
             CGFloat(controller.radius(ofPercentValue: 0.0)) :
             CGFloat(controller.radius(ofCount: 0))
-        let startPoint = NSMakePoint(0.0, startRadius)
+        let startPoint = CGPoint(x: 0.0, y: startRadius)
         let startTargetPoint = controller.rotation(of: startPoint, byAngle: Double(angle1))
         drawingPath?.move(to: startTargetPoint)
 
@@ -81,7 +83,7 @@ import AppKit
         let endRadius = isPercent ?
             CGFloat(controller.radius(ofPercentValue: Double(percent))) :
             CGFloat(controller.radius(ofCount: Int32(count)))
-        let endPoint = NSMakePoint(0.0, endRadius)
+        let endPoint = CGPoint(x: 0.0, y: endRadius)
         let endTargetPoint = controller.rotation(of: endPoint, byAngle: Double(angle1))
         drawingPath?.line(to: endTargetPoint)
 

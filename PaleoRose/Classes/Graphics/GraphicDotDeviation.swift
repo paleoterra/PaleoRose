@@ -52,8 +52,7 @@ import AppKit
     ///   - count: Observed value count for this spoke.
     ///   - total: Total count for percent calculations.
     ///   - stats: Dictionary containing at least key "mean" as NSNumber/Float.
-    @objc
-    init?(controller: GraphicGeometrySource, forIncrement increment: Int32, valueCount count: Int32, totalCount total: Int32, statistics stats: [AnyHashable: Any]) {
+    @objc init?(controller: GraphicGeometrySource, forIncrement increment: Int32, valueCount count: Int32, totalCount total: Int32, statistics stats: [AnyHashable: Any]) {
         super.init(controller: controller)
         angleIncrement = Int(increment)
         totalCount = Int(total)

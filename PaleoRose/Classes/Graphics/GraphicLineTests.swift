@@ -454,7 +454,7 @@ struct GraphicLineTests {
         // Verify the label is empty for non-cardinal angles
         let label = try #require(line.lineLabel)
         #expect(
-            label.string == "",
+            label.string.isEmpty,
             "Expected empty string for non-cardinal angle with spoke points only, got '\(label.string)'"
         )
     }

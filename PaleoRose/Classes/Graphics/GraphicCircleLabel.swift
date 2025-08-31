@@ -101,7 +101,9 @@ import AppKit
     // MARK: - Label and Transform Computation
 
     @objc func computeLabelText() {
-        guard let controller = geometryController else { return }
+        guard let controller = geometryController else {
+            return
+        }
 
         isPercent = controller.isPercent()
 
@@ -137,14 +139,18 @@ import AppKit
     }
 
     private func circleBasedOnPercent() -> Bool {
-        guard let controller = geometryController else { return false }
+        guard let controller = geometryController else {
+            return false
+        }
         return controller.isPercent() || isFixedCount
     }
 
     // MARK: - Geometry
 
     @objc override func calculateGeometry() {
-        guard let controller = geometryController else { return }
+        guard let controller = geometryController else {
+            return
+        }
 
         computeLabelText()
         computeTransform()
@@ -168,21 +174,27 @@ import AppKit
             let angle = controller.degrees(fromRadians: atan((0.52 * labelWidth) / CGFloat(radius)))
 
             drawingPath = NSBezierPath()
-            drawingPath?.appendArc(withCenter: CGPoint.zero,
-                                   radius: CGFloat(radius),
-                                   startAngle: 90 + angle,
-                                   endAngle: 90 - angle)
+            drawingPath?.appendArc(
+                withCenter: CGPoint.zero,
+                radius: CGFloat(radius),
+                startAngle: 90 + angle,
+                endAngle: 90 - angle
+            )
 
             let labelHeight = label?.size().height ?? 0.0
-            labelPoint = CGPoint(x: -(labelWidth * 0.5),
-                                 y: CGFloat(radius) - (labelHeight * 0.5))
+            labelPoint = CGPoint(
+                x: -(labelWidth * 0.5),
+                y: CGFloat(radius) - (labelHeight * 0.5)
+            )
         }
 
         drawingPath?.lineWidth = CGFloat(lineWidth)
     }
 
     @objc func setGeometryPercent(_ percent: Float) {
-        guard let controller = geometryController else { return }
+        guard let controller = geometryController else {
+            return
+        }
         percentSetting = percent * controller.geometryMaxPercent()
         calculateGeometry()
     }
@@ -192,7 +204,9 @@ import AppKit
     @objc override func draw(_ rect: CGRect) {
         computeLabelText()
 
-        guard let path = drawingPath, rect.intersects(path.bounds) else { return }
+        guard let path = drawingPath, rect.intersects(path.bounds) else {
+            return
+        }
 
         NSGraphicsContext.saveGraphicsState()
 
