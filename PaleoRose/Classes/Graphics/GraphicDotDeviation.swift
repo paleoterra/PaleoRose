@@ -75,67 +75,127 @@ import AppKit
 
     /// Recalculate all dot positions based on current state.
     @objc override func calculateGeometry() {
-        guard let controller = geometryController else { return }
-
-        let startAngle = CGFloat(controller.startingAngle())
-        let step = CGFloat(controller.sectorSize())
-        let angle = startAngle + step * (CGFloat(angleIncrement) + 0.5)
+        guard let controller = geometryController else {
+            return
+        }
 
         let path = NSBezierPath()
         path.lineWidth = CGFloat(lineWidth)
 
-        let mean1 = mean
-        let count = Float(count)
-        let excess = Int(ceil(count - mean1))
-        let shortfall = Int(ceil(mean1 - count))
+        let angle = calculateDotAngle(controller: controller)
+        let deviationData = calculateDeviationData()
 
-        if controller.isPercent() {
-            if count > mean1 {
-                if excess > 0 {
-                    for index in 0 ..< excess {
-                        let value = Double(Float(index + 1) + floor(mean1)) / Double(totalCount)
-                        let radius = CGFloat(controller.radius(ofPercentValue: value))
-                        addDot(to: path, dotSize: CGFloat(dotSize), radius: radius, angle: angle, controller: controller)
-                    }
-                }
-            } else {
-                if shortfall > 0 {
-                    for index in 0 ..< shortfall {
-                        let value = Double(Float(Int(ceil(mean1)) - (index + 1))) / Double(totalCount)
-                        let radius = CGFloat(controller.radius(ofPercentValue: value))
-                        addDot(to: path, dotSize: CGFloat(dotSize), radius: radius, angle: angle, controller: controller)
-                    }
-                } else {
-                    let value = Double(Int(ceil(mean1))) / Double(totalCount)
-                    let radius = CGFloat(controller.radius(ofPercentValue: value))
-                    addDot(to: path, dotSize: CGFloat(dotSize), radius: radius, angle: angle, controller: controller)
-                }
-            }
-        } else {
-            if count > mean1 {
-                if excess > 0 {
-                    for index in 0 ..< excess {
-                        let radius = CGFloat(controller.radius(ofCount: Int32(Float(index + 1) + floor(mean1))))
-                        addDot(to: path, dotSize: CGFloat(dotSize), radius: radius, angle: angle, controller: controller)
-                    }
-                }
-            } else {
-                if shortfall > 0 {
-                    for index in 0 ..< shortfall {
-                        let value = Int32(Int(ceil(mean1)) - (index + 1))
-                        let radius = CGFloat(controller.radius(ofCount: value))
-                        addDot(to: path, dotSize: CGFloat(dotSize), radius: radius, angle: angle, controller: controller)
-                    }
-                } else {
-                    // NOTE: Preserving Objective-C behavior that used percent radius call here.
-                    let value = Double(Int(ceil(mean1))) / Double(totalCount)
-                    let radius = CGFloat(controller.radius(ofPercentValue: value))
-                    addDot(to: path, dotSize: CGFloat(dotSize), radius: radius, angle: angle, controller: controller)
-                }
-            }
-        }
+        addDeviationDots(to: path, angle: angle, deviationData: deviationData, controller: controller)
 
         drawingPath = path
+    }
+
+    // MARK: - Private Helper Methods
+
+    private func calculateDotAngle(controller: GraphicGeometrySource) -> CGFloat {
+        let startAngle = CGFloat(controller.startingAngle())
+        let step = CGFloat(controller.sectorSize())
+        return startAngle + step * (CGFloat(angleIncrement) + 0.5)
+    }
+
+    private struct DeviationData {
+        let excess: Int
+        let shortfall: Int
+        let isAboveMean: Bool
+        let hasDeviation: Bool
+    }
+
+    private func calculateDeviationData() -> DeviationData {
+        let currentCount = Float(count)
+        let excess = Int(ceil(currentCount - mean))
+        let shortfall = Int(ceil(mean - currentCount))
+        let isAboveMean = currentCount > mean
+        let hasDeviation = excess > 0 || shortfall > 0
+
+        return DeviationData(
+            excess: excess,
+            shortfall: shortfall,
+            isAboveMean: isAboveMean,
+            hasDeviation: hasDeviation
+        )
+    }
+
+    private func addDeviationDots(to path: NSBezierPath, angle: CGFloat, deviationData: DeviationData, controller: GraphicGeometrySource) {
+        if controller.isPercent() {
+            addPercentDeviationDots(to: path, angle: angle, deviationData: deviationData, controller: controller)
+        } else {
+            addCountDeviationDots(to: path, angle: angle, deviationData: deviationData, controller: controller)
+        }
+    }
+
+    private func addPercentDeviationDots(to path: NSBezierPath, angle: CGFloat, deviationData: DeviationData, controller: GraphicGeometrySource) {
+        if deviationData.isAboveMean {
+            addExcessPercentDots(to: path, angle: angle, excess: deviationData.excess, controller: controller)
+        } else {
+            addShortfallPercentDots(to: path, angle: angle, shortfall: deviationData.shortfall, controller: controller)
+        }
+    }
+
+    private func addCountDeviationDots(to path: NSBezierPath, angle: CGFloat, deviationData: DeviationData, controller: GraphicGeometrySource) {
+        if deviationData.isAboveMean {
+            addExcessCountDots(to: path, angle: angle, excess: deviationData.excess, controller: controller)
+        } else {
+            addShortfallCountDots(to: path, angle: angle, shortfall: deviationData.shortfall, controller: controller)
+        }
+    }
+
+    private func addExcessPercentDots(to path: NSBezierPath, angle: CGFloat, excess: Int, controller: GraphicGeometrySource) {
+        guard excess > 0 else {
+            return
+        }
+
+        for index in 0 ..< excess {
+            let value = Double(Float(index + 1) + floor(mean)) / Double(totalCount)
+            let radius = CGFloat(controller.radius(ofPercentValue: value))
+            addDot(to: path, dotSize: CGFloat(dotSize), radius: radius, angle: angle, controller: controller)
+        }
+    }
+
+    private func addShortfallPercentDots(to path: NSBezierPath, angle: CGFloat, shortfall: Int, controller: GraphicGeometrySource) {
+        if shortfall > 0 {
+            for index in 0 ..< shortfall {
+                let value = Double(Float(Int(ceil(mean)) - (index + 1))) / Double(totalCount)
+                let radius = CGFloat(controller.radius(ofPercentValue: value))
+                addDot(to: path, dotSize: CGFloat(dotSize), radius: radius, angle: angle, controller: controller)
+            }
+        } else {
+            addSinglePercentDot(to: path, angle: angle, controller: controller)
+        }
+    }
+
+    private func addExcessCountDots(to path: NSBezierPath, angle: CGFloat, excess: Int, controller: GraphicGeometrySource) {
+        guard excess > 0 else {
+            return
+        }
+
+        for index in 0 ..< excess {
+            let radius = CGFloat(controller.radius(ofCount: Int32(Float(index + 1) + floor(mean))))
+            addDot(to: path, dotSize: CGFloat(dotSize), radius: radius, angle: angle, controller: controller)
+        }
+    }
+
+    private func addShortfallCountDots(to path: NSBezierPath, angle: CGFloat, shortfall: Int, controller: GraphicGeometrySource) {
+        if shortfall > 0 {
+            for index in 0 ..< shortfall {
+                let value = Int32(Int(ceil(mean)) - (index + 1))
+                let radius = CGFloat(controller.radius(ofCount: value))
+                addDot(to: path, dotSize: CGFloat(dotSize), radius: radius, angle: angle, controller: controller)
+            }
+        } else {
+            // NOTE: Preserving Objective-C behavior that used percent radius call here.
+            addSinglePercentDot(to: path, angle: angle, controller: controller)
+        }
+    }
+
+    private func addSinglePercentDot(to path: NSBezierPath, angle: CGFloat, controller: GraphicGeometrySource) {
+        let value = Double(Int(ceil(mean))) / Double(totalCount)
+        let radius = CGFloat(controller.radius(ofPercentValue: value))
+        addDot(to: path, dotSize: CGFloat(dotSize), radius: radius, angle: angle, controller: controller)
     }
 
     // MARK: - Settings

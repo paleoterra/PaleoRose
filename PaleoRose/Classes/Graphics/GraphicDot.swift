@@ -56,35 +56,31 @@ import AppKit
     // MARK: - Geometry Helpers
 
     private func centerAngleForSector() -> CGFloat {
-        guard let controller = geometryController else { return 0 }
+        guard let controller = geometryController else {
+            return 0
+        }
         let startAngle = CGFloat(controller.startingAngle())
         let sectorSize = CGFloat(controller.sectorSize())
         return startAngle + sectorSize * (CGFloat(angleIncrement) + 0.5)
     }
 
     private func radiusForDot(index: Int, isPercentMode: Bool) -> CGFloat {
-        guard let controller = geometryController else { return 0 }
+        guard let controller = geometryController else {
+            return 0
+        }
         if isPercentMode {
             let percentValue = CGFloat(index + 1) / CGFloat(totalCount)
             return CGFloat(controller.radius(ofPercentValue: Double(percentValue)))
-        } else {
-            return CGFloat(controller.radius(ofCount: Int32(index)))
         }
-    }
-
-    private func addDot(atRadius radius: CGFloat, angle: CGFloat) {
-        guard let controller = geometryController else { return }
-        var centerPoint = CGPoint(x: 0.0, y: radius)
-        centerPoint = controller.rotation(of: centerPoint, byAngle: Double(angle))
-        let half = CGFloat(dotSize) * 0.5
-        let rect = CGRect(x: centerPoint.x - half, y: centerPoint.y - half, width: CGFloat(dotSize), height: CGFloat(dotSize))
-        drawingPath?.appendOval(in: rect)
+        return CGFloat(controller.radius(ofCount: Int32(index)))
     }
 
     // MARK: - Geometry
 
     @objc override func calculateGeometry() {
-        guard let controller = geometryController else { return }
+        guard let controller = geometryController else {
+            return
+        }
         let path = NSBezierPath()
         let isPercentMode = controller.isPercent()
         let centerAngle = centerAngleForSector()

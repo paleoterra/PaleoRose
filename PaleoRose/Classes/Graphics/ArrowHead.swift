@@ -96,7 +96,7 @@ import Foundation
 
         case 4:
             halfArrowRight()
-            
+
         default:
             // Invalid type - leave path empty
             break
