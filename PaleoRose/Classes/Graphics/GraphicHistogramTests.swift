@@ -7,12 +7,10 @@ struct GraphicHistogramTests {
     // MARK: - Test Setup
 
     private func buildTestObject(controller: MockGraphicGeometrySource, increment: Int32 = 0, value: Int32 = 1) throws -> GraphicHistogram {
-        try #require(
-            GraphicHistogram(
-                controller: controller,
-                forIncrement: increment,
-                forValue: value as NSNumber
-            )
+        GraphicHistogram(
+            controller: controller,
+            forIncrement: increment,
+            forValue: value as NSNumber
         )
     }
 

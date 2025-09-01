@@ -35,11 +35,12 @@ import Testing
 )
 struct InMemoryStoreIntegrationTest {
     private func sampleFilePath() throws -> String {
-        guard let bundle = Bundle(identifier: "PaleoTerra.Unit-Tests"),
-              let path = bundle.path(
-                  forResource: "rtest1",
-                  ofType: "XRose"
-              )
+        guard
+            let bundle = Bundle(identifier: "PaleoTerra.Unit-Tests"),
+            let path = bundle.path(
+                forResource: "rtest1",
+                ofType: "XRose"
+            )
         else {
             Issue.record("Could not find test file")
             throw SQLiteError.failedToOpen

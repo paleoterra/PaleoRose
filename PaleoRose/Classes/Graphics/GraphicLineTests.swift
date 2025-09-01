@@ -3,7 +3,7 @@ import Numerics
 @testable import PaleoRose
 import Testing
 
-// swiftlint:disable type_body_length
+// swiftlint:disable type_body_length file_length
 struct GraphicLineTests {
     // MARK: - Test Setup
 
@@ -460,4 +460,4 @@ struct GraphicLineTests {
     }
 }
 
-// swiftlint:enable type_body_length
+// swiftlint:enable type_body_length file_length

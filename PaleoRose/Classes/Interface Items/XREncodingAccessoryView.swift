@@ -17,8 +17,9 @@ final class XREncodingAccessoryView: NSView {
 
     var selectedEncoding: String.Encoding {
         get {
-            guard let identifier = encodingPopup.selectedItem?.representedObject as? UInt,
-                  let encoding = String.Encoding(rawValue: identifier)
+            guard
+                let identifier = encodingPopup.selectedItem?.representedObject as? UInt,
+                let encoding = String.Encoding(rawValue: identifier)
             else {
                 return .utf8
             }

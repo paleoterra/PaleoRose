@@ -317,9 +317,10 @@ import AppKit
     }
 
     private func calculateHorizontalTransform() {
-        guard let controller = geometryController,
-              let label = lineLabel,
-              let transform = labelTransform
+        guard
+            let controller = geometryController,
+            let label = lineLabel,
+            let transform = labelTransform
         else {
             return
         }
@@ -335,9 +336,10 @@ import AppKit
     }
 
     private func calculateParallelTransform() {
-        guard let controller = geometryController,
-              let label = lineLabel,
-              let transform = labelTransform
+        guard
+            let controller = geometryController,
+            let label = lineLabel,
+            let transform = labelTransform
         else {
             return
         }

@@ -173,16 +173,17 @@ private enum XRGeometryDefaultKey: String {
     // MARK: - Configuration
 
     // swiftlint:disable:next function_parameter_count
-    func configure(isEqualArea: Bool,
-                   isPercent: Bool,
-                   maxCount: Int,
-                   maxPercent: CGFloat,
-                   hollowCore: CGFloat,
-                   sectorSize: CGFloat,
-                   startingAngle: CGFloat,
-                   sectorCount: Int,
-                   relativeSize: CGFloat)
-    {
+    func configure(
+        isEqualArea: Bool,
+        isPercent: Bool,
+        maxCount: Int,
+        maxPercent: CGFloat,
+        hollowCore: CGFloat,
+        sectorSize: CGFloat,
+        startingAngle: CGFloat,
+        sectorCount: Int,
+        relativeSize: CGFloat
+    ) {
         self.isPercent = isPercent
         self.isEqualArea = isEqualArea
         geometryMaxCount = maxCount

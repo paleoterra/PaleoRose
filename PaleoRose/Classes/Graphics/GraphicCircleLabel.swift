@@ -211,7 +211,9 @@ import AppKit
         NSGraphicsContext.saveGraphicsState()
 
         strokeColor?.set()
-        if let transform = theTransform, let context = NSGraphicsContext.current?.cgContext { context.concatenate(transform)
+        if
+            let transform = theTransform,
+            let context = NSGraphicsContext.current?.cgContext { context.concatenate(transform)
         }
         path.stroke()
 

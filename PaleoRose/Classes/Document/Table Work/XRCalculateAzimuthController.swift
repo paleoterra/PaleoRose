@@ -72,8 +72,9 @@ import Cocoa
     }
 
     @IBAction func populateSelectedColumns(_: Any) {
-        guard let document,
-              let selectedTable = tableNamePop.titleOfSelectedItem else { return }
+        guard
+            let document,
+            let selectedTable = tableNamePop.titleOfSelectedItem else { return }
 
         let populateItems = document.retrieveNonTextColumnNames(fromTable: selectedTable)
 

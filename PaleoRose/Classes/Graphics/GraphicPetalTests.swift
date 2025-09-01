@@ -4,6 +4,14 @@ import Numerics
 import Testing
 
 struct GraphicPetalTests {
+    // MARK: - Test Data Structures
+
+    struct PetalGeometryTestParams {
+        let increment: Int32
+        let value: Int32
+        let expected: [CGPoint]
+    }
+
     // MARK: - Test Setup
 
     private func builtTestObject(controller: MockGraphicGeometrySource, forIncrement: Int32 = 0, forValue: Int32 = 0) throws -> GraphicPetal {
@@ -47,7 +55,7 @@ struct GraphicPetalTests {
     @Test(
         "calculategeometry given start angle and angle",
         arguments: [
-            (0, 10, [
+            PetalGeometryTestParams(increment: 0, value: 10, expected: [
                 CGPoint.zero,
                 CGPoint(x: 0.0, y: 10.0),
                 CGPoint(x: 6.123233995736766e-16, y: 10.0),
@@ -69,7 +77,7 @@ struct GraphicPetalTests {
                 CGPoint.zero,
                 CGPoint.zero
             ]),
-            (10, 10, [
+            PetalGeometryTestParams(increment: 10, value: 10, expected: [
                 CGPoint(x: -0.0, y: 0.0),
                 CGPoint(x: -9.84807753012208, y: -1.736481776669303),
                 CGPoint(x: 9.84807753012208, y: -1.7364817766693128),
@@ -91,7 +99,7 @@ struct GraphicPetalTests {
                 CGPoint.zero,
                 CGPoint.zero
             ]),
-            (60, 10, [
+            PetalGeometryTestParams(increment: 60, value: 10, expected: [
                 CGPoint(x: 0.0, y: -0.0),
                 CGPoint(x: 8.660254037844384, y: -5.000000000000004),
                 CGPoint(x: -8.660254037844386, y: -5.000000000000001),
@@ -115,7 +123,7 @@ struct GraphicPetalTests {
             ])
         ]
     )
-    func testCalculateGeometryCountController(params: (increment: Int32, value: Int32, expected: [CGPoint])) throws {
+    func testCalculateGeometryCountController(params: PetalGeometryTestParams) throws {
         // Given
         let controller = MockGraphicGeometrySource()
         controller.mockSectorSize = 10
@@ -135,7 +143,7 @@ struct GraphicPetalTests {
     @Test(
         "calculategeometry given start angle and angle percent",
         arguments: [
-            (0, 10, [
+            PetalGeometryTestParams(increment: 0, value: 10, expected: [
                 CGPoint.zero,
                 CGPoint(x: 0.0, y: 10.0),
                 CGPoint(x: 6.123233995736766e-16, y: 10.0),
@@ -157,7 +165,7 @@ struct GraphicPetalTests {
                 CGPoint.zero,
                 CGPoint.zero
             ]),
-            (10, 10, [
+            PetalGeometryTestParams(increment: 10, value: 10, expected: [
                 CGPoint(x: -0.0, y: 0.0),
                 CGPoint(x: -9.84807753012208, y: -1.736481776669303),
                 CGPoint(x: 9.84807753012208, y: -1.7364817766693128),
@@ -179,7 +187,7 @@ struct GraphicPetalTests {
                 CGPoint.zero,
                 CGPoint.zero
             ]),
-            (60, 10, [
+            PetalGeometryTestParams(increment: 60, value: 10, expected: [
                 CGPoint(x: 0.0, y: -0.0),
                 CGPoint(x: 8.660254037844384, y: -5.000000000000004),
                 CGPoint(x: -8.660254037844386, y: -5.000000000000001),
@@ -203,7 +211,7 @@ struct GraphicPetalTests {
             ])
         ]
     )
-    func testCalculateGeometryCountControllerPercent(params: (increment: Int32, value: Int32, expected: [CGPoint])) throws {
+    func testCalculateGeometryCountControllerPercent(params: PetalGeometryTestParams) throws {
         // Given
         let controller = MockGraphicGeometrySource()
         controller.mockSectorSize = 10

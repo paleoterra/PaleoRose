@@ -37,12 +37,14 @@ struct GraphicDotTests {
 
     // MARK: - Initialization Tests
 
-    @Test("initWithController should initialize with default values",
-          arguments: [
-              TestConfiguration(dotSize: 4, increment: 0, valueCount: 0, totalCount: 0),
-              TestConfiguration(dotSize: 4, increment: 0, valueCount: 1, totalCount: 1),
-              TestConfiguration(dotSize: 4, increment: 0, valueCount: 10, totalCount: 10)
-          ])
+    @Test(
+        "initWithController should initialize with default values",
+        arguments: [
+            TestConfiguration(dotSize: 4, increment: 0, valueCount: 0, totalCount: 0),
+            TestConfiguration(dotSize: 4, increment: 0, valueCount: 1, totalCount: 1),
+            TestConfiguration(dotSize: 4, increment: 0, valueCount: 10, totalCount: 10)
+        ]
+    )
     func testInitWithController(params: TestConfiguration) throws {
         // Given
         let controller = MockGraphicGeometrySource()

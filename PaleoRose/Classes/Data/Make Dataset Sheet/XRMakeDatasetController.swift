@@ -91,8 +91,9 @@ import SQLite3
     }
 
     @IBAction func selectColumns(_: Any) {
-        guard let inMemoryStore,
-              let selectedTable = tablesPop.titleOfSelectedItem else { return }
+        guard
+            let inMemoryStore,
+            let selectedTable = tablesPop.titleOfSelectedItem else { return }
 
         let sqlQuery = "SELECT * FROM \"\(selectedTable)\" LIMIT 1"
         var sqlStatement: OpaquePointer?
@@ -157,10 +158,11 @@ import SQLite3
     }
 
     @IBAction func validatePredicate(_: Any) {
-        guard let inMemoryStore,
-              let selectedTable = tablesPop.titleOfSelectedItem,
-              let selectedColumn = columnsPop.titleOfSelectedItem,
-              let predicateString = predicateSource.string else { return }
+        guard
+            let inMemoryStore,
+            let selectedTable = tablesPop.titleOfSelectedItem,
+            let selectedColumn = columnsPop.titleOfSelectedItem,
+            let predicateString = predicateSource.string else { return }
 
         let sql = """
             SELECT count(*) FROM "\(selectedTable)" 

@@ -76,10 +76,10 @@ final class XRGridInspector: NSViewController {
     @IBAction private func handleFontChange(_ sender: Any) {
         guard let grid = currentGrid else { return }
 
-        if sender as AnyObject? === spokeFontSize ||
+        if
+            sender as AnyObject? === spokeFontSize ||
             sender as AnyObject? === spokeFontSizeStepper ||
-            sender as AnyObject? === spokeFont
-        {
+            sender as AnyObject? === spokeFont {
 
             let fontSize = CGFloat(spokeFontSize.doubleValue)
             let fontName = spokeFont.stringValue

@@ -38,8 +38,8 @@ import AppKit
 
     // MARK: - Initialization
 
+    @available(*, unavailable, message: "Use init(controller:forIncrement:forValue:) instead")
     @objc override init(controller: GraphicGeometrySource) {
-        // This initializer is not available - use custom initializer
         fatalError("Use init(controller:forIncrement:forValue:) instead")
     }
 

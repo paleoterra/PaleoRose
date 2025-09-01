@@ -16,8 +16,9 @@ final class XRExportGraphicAccessory: NSView {
     // MARK: - Public Properties
 
     var selectedFormat: ExportFormat {
-        guard let title = popupButton.titleOfSelectedItem,
-              let format = ExportFormat(rawValue: title.lowercased())
+        guard
+            let title = popupButton.titleOfSelectedItem,
+            let format = ExportFormat(rawValue: title.lowercased())
         else {
             return .pdf
         }

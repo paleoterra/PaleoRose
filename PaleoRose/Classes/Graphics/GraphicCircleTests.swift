@@ -6,13 +6,6 @@ import Testing
 
 struct GraphicCircleTests {
 
-    private func buildTestObject(controller: GraphicGeometrySource) throws -> GraphicCircle {
-        try #require(
-            GraphicCircle(controller: controller),
-            "Graphic circle should be initialized"
-        )
-    }
-
     private func defaultGraphicSettings() -> [AnyHashable: Any] {
         [
             "GraphicType": "Circle",
@@ -70,7 +63,7 @@ struct GraphicCircleTests {
         let controller = MockGraphicGeometrySource()
 
         // When
-        let circle = try buildTestObject(controller: controller)
+        let circle = GraphicCircle(controller: controller)
 
         // Then
         // Verify super values
@@ -94,7 +87,7 @@ struct GraphicCircleTests {
     func count() throws {
         // Given
         let controller = MockGraphicGeometrySource()
-        let circle = try buildTestObject(controller: controller)
+        let circle = GraphicCircle(controller: controller)
 
         let expectedCount: Int32 = 42
 
@@ -112,7 +105,7 @@ struct GraphicCircleTests {
     func percent() throws {
         // Given
         let controller = MockGraphicGeometrySource()
-        let circle = try buildTestObject(controller: controller)
+        let circle = GraphicCircle(controller: controller)
         let expectedPercent: Float = 0.75
 
         // When
@@ -132,7 +125,7 @@ struct GraphicCircleTests {
     func percentSetting() throws {
         // Given
         let controller = MockGraphicGeometrySource()
-        let circle = try buildTestObject(controller: controller)
+        let circle = GraphicCircle(controller: controller)
         let testPercent: Float = 0.60
 
         // When
@@ -154,7 +147,7 @@ struct GraphicCircleTests {
     func fixedState() throws {
         // Given
         let controller = MockGraphicGeometrySource()
-        let circle = try buildTestObject(controller: controller)
+        let circle = GraphicCircle(controller: controller)
 
         // Test default value
         #expect(!circle.isFixedCount, "Default fixed state should be false")
@@ -180,7 +173,7 @@ struct GraphicCircleTests {
     func drawingRect(settings: (isPercent: Bool, expectedSize: CGFloat)) throws {
         // Given
         let controller = MockGraphicGeometrySource(isPercent: settings.isPercent)
-        let circle = try buildTestObject(controller: controller)
+        let circle = GraphicCircle(controller: controller)
         circle.percentSetting = 0.75
         circle.countSetting = 100
         controller.mockCircleRectCount = NSRect(x: 0, y: 0, width: 75, height: 75)
@@ -198,7 +191,7 @@ struct GraphicCircleTests {
     func hitTest_whenPointIsOutside() throws {
         // Given
         let controller = MockGraphicGeometrySource()
-        let circle = try buildTestObject(controller: controller)
+        let circle = GraphicCircle(controller: controller)
         let outsidePoint = CGPoint(x: -10, y: -10)
 
         // When
@@ -212,7 +205,7 @@ struct GraphicCircleTests {
     func setFillColor() throws {
         // Given
         let controller = MockGraphicGeometrySource()
-        let circle = try buildTestObject(controller: controller)
+        let circle = GraphicCircle(controller: controller)
         let testColor = NSColor.red
 
         // When
@@ -229,7 +222,7 @@ struct GraphicCircleTests {
     func setStrokeColor() throws {
         // Given
         let controller = MockGraphicGeometrySource()
-        let circle = try buildTestObject(controller: controller)
+        let circle = GraphicCircle(controller: controller)
         let testColor = NSColor.blue
 
         // When
@@ -248,7 +241,7 @@ struct GraphicCircleTests {
     func drawRect() throws {
         // Given
         let controller = MockGraphicGeometrySource()
-        let circle = try buildTestObject(controller: controller)
+        let circle = GraphicCircle(controller: controller)
         let testRect = CGRect(x: 0, y: 0, width: 100, height: 100)
 
         // Verify the method exists
@@ -283,7 +276,7 @@ struct GraphicCircleTests {
     func testPercent() throws {
         // Given
         let controller = MockGraphicGeometrySource()
-        let circle = try buildTestObject(controller: controller)
+        let circle = GraphicCircle(controller: controller)
         let expectedPercent: Float = 0.75
 
         // When
@@ -302,7 +295,7 @@ struct GraphicCircleTests {
     func graphicSettingsWithDefaultValues() throws {
         // Given
         let controller = MockGraphicGeometrySource()
-        let circle = try buildTestObject(controller: controller)
+        let circle = GraphicCircle(controller: controller)
         try CommonUtilities
             .compareGraphicSettings(
                 values: circle.graphicSettings(),
@@ -314,7 +307,7 @@ struct GraphicCircleTests {
     func graphicSettingsWithSetPercentSettingsValues() throws {
         // Given
         let controller = MockGraphicGeometrySource()
-        let circle = try buildTestObject(controller: controller)
+        let circle = GraphicCircle(controller: controller)
         circle.percentSetting = 0.755
         var expectedSettings = defaultGraphicSettings()
         expectedSettings[GraphicKeyIsPercent] = "YES"
@@ -331,7 +324,7 @@ struct GraphicCircleTests {
     func graphicSettingsWithSetGeometryPercentValues() throws {
         // Given
         let controller = MockGraphicGeometrySource()
-        let circle = try buildTestObject(controller: controller)
+        let circle = GraphicCircle(controller: controller)
         circle.setGeometryPercent(0.45)
 
         var expectedSettings = defaultGraphicSettings()
@@ -348,7 +341,7 @@ struct GraphicCircleTests {
     func graphicSettingsWithIsFixedValues() throws {
         // Given
         let controller = MockGraphicGeometrySource()
-        let circle = try buildTestObject(controller: controller)
+        let circle = GraphicCircle(controller: controller)
         circle.isFixedCount = true
         var expectedSettings = defaultGraphicSettings()
         expectedSettings[GraphicKeyIsFixedCount] = "YES"
@@ -372,7 +365,7 @@ struct GraphicCircleTests {
     func testSetTransparency(values: (Float, Float)) throws {
         // Given
         let controller = MockGraphicGeometrySource()
-        let circle = try buildTestObject(controller: controller)
+        let circle = GraphicCircle(controller: controller)
         let alpha: Float = values.0
         let expectedAlpha: Float = values.1
 
@@ -398,7 +391,7 @@ struct GraphicCircleTests {
     func testSetTransparencyWithNilColors() throws {
         // Given
         let controller = MockGraphicGeometrySource()
-        let circle = try buildTestObject(controller: controller)
+        let circle = GraphicCircle(controller: controller)
         let testAlpha: Float = 0.5
 
         // Set colors to nil (simulate cleared colors)
@@ -423,7 +416,7 @@ struct GraphicCircleTests {
     func testSetDrawsFill() throws {
         // Given
         let controller = MockGraphicGeometrySource()
-        let circle = try buildTestObject(controller: controller)
+        let circle = GraphicCircle(controller: controller)
 
         // When - Set to true
         circle.drawsFill = true
@@ -450,7 +443,7 @@ struct GraphicCircleTests {
     func testSetLineAndFillColor() throws {
         // Given
         let controller = MockGraphicGeometrySource()
-        let circle = try buildTestObject(controller: controller)
+        let circle = GraphicCircle(controller: controller)
         let testStrokeColor = NSColor(red: 0.2, green: 0.4, blue: 0.6, alpha: 0.8)
         let testFillColor = NSColor(red: 0.7, green: 0.5, blue: 0.3, alpha: 0.9)
 
@@ -470,7 +463,7 @@ struct GraphicCircleTests {
     func testSetLineColorWithNilParameters() throws {
         // Given
         let controller = MockGraphicGeometrySource()
-        let circle = try buildTestObject(controller: controller)
+        let circle = GraphicCircle(controller: controller)
 
         // Set custom colors first
         circle.setLineColor(NSColor.red, fill: NSColor.blue)

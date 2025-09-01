@@ -27,7 +27,7 @@
 import Foundation
 import SQLite3
 
-// swiftlint:disable opening_brace indentation_width
+// swiftlint:disable indentation_width
 
 struct SQLiteColumnProcessor {
     let sqliteBool: Int32 = 1000
@@ -47,9 +47,9 @@ struct SQLiteColumnProcessor {
         }
         let columnType = getColumnType(statement: statement, index: index)
 
-        if let columnProcessor = columnProcessors[columnType],
-           let returnValue = columnProcessor.value(stmt: statement, index: index)
-        {
+        if
+            let columnProcessor = columnProcessors[columnType],
+            let returnValue = columnProcessor.value(stmt: statement, index: index) {
             return (columnName, returnValue)
         }
         return nil
@@ -67,3 +67,5 @@ struct SQLiteColumnProcessor {
         return columnType
     }
 }
+
+// swiftlint:enable indentation_width

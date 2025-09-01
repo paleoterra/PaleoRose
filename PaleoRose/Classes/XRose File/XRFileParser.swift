@@ -46,9 +46,10 @@ import Foundation
     }
 
     @objc static func file(fromXMLData data: Data) -> [String: Any]? {
-        guard let parser = LITMXMLParser.xmlParser(for: data).treeArray().first,
-              let version = parser.attributesDictionary()["VERSION"] as? String,
-              version == "1.0"
+        guard
+            let parser = LITMXMLParser.xmlParser(for: data).treeArray().first,
+            let version = parser.attributesDictionary()["VERSION"] as? String,
+            version == "1.0"
         else {
             return nil
         }

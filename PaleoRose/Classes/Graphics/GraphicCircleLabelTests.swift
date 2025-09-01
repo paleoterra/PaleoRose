@@ -76,7 +76,7 @@ struct GraphicCircleLabelTests {
         let controller = MockGraphicGeometrySource()
 
         // When
-        let label = try #require(GraphicCircleLabel(coreCircleWithController: controller))
+        let label = GraphicCircleLabel(coreCircleWithController: controller)
         label.labelFont = NSFont(name: "Arial-Black", size: 12)
         label.computeLabelText()
         var expectedSettings = defaultSettings()

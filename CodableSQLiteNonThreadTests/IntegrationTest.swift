@@ -98,8 +98,9 @@ struct IntegrationTest {
     }
 
     private func openTestFile() throws -> OpaquePointer {
-        guard let bundle = Bundle(identifier: "paleoterra.CodableSQLiteNonThreadTests"),
-              let path = bundle.path(forResource: "testfile", ofType: "sqlite")
+        guard
+            let bundle = Bundle(identifier: "paleoterra.CodableSQLiteNonThreadTests"),
+            let path = bundle.path(forResource: "testfile", ofType: "sqlite")
         else {
             Issue.record("Could not find test file")
             throw SQLiteError.failedToOpen

@@ -95,11 +95,12 @@ class XRoseView: NSView {
     override func mouseDown(with event: NSEvent) {
         if event.type == .leftMouseDown, event.clickCount > 1 {
             roseTableController.handleMouseEvent(event)
-        } else if let layer = roseTableController.activeLayer(withPoint: convert(event.locationInWindow, from: nil)),
-                  event.type == .leftMouseDown
-        {
-            guard let textLayer = layer as? XRLayerText,
-                  let dragImage = textLayer.dragImage else { return }
+        } else if
+            let layer = roseTableController.activeLayer(withPoint: convert(event.locationInWindow, from: nil)),
+            event.type == .leftMouseDown {
+            guard
+                let textLayer = layer as? XRLayerText,
+                let dragImage = textLayer.dragImage else { return }
 
             NSPasteboard(name: .drag).setData(dragImage.tiffRepresentation, forType: .tiff)
             draggedObject = layer
@@ -141,8 +142,9 @@ class XRoseView: NSView {
     }
 
     func calculatePrintHeight() -> CGFloat {
-        guard let printOperation = NSPrintOperation.current,
-              let printInfo = printOperation.printInfo else { return 0 }
+        guard
+            let printOperation = NSPrintOperation.current,
+            let printInfo = printOperation.printInfo else { return 0 }
 
         let paperSize = printInfo.paperSize
         let pageHeight = paperSize.height - printInfo.topMargin - printInfo.bottomMargin
@@ -156,9 +158,9 @@ class XRoseView: NSView {
     // MARK: - Dragging
 
     func draggingSession(_ session: NSDraggingSession, sourceOperationMaskFor context: NSDraggingContext) -> NSDragOperation {
-        if let draggedObject = draggedObject as? XRLayerText,
-           let dragImage = draggedObject.dragImage
-        {
+        if
+            let draggedObject = draggedObject as? XRLayerText,
+            let dragImage = draggedObject.dragImage {
             NSPasteboard(name: .drag).declareTypes([.tiff], owner: self)
             NSPasteboard(name: .drag).setData(dragImage.tiffRepresentation, forType: .tiff)
             return .move
@@ -222,8 +224,9 @@ class XRoseView: NSView {
             draw(bounds)
             image.unlockFocus()
 
-            guard let tiffData = image.tiffRepresentation(using: .none, factor: 1.0),
-                  let bitmap = NSBitmapImageRep(data: tiffData) else { return nil }
+            guard
+                let tiffData = image.tiffRepresentation(using: .none, factor: 1.0),
+                let bitmap = NSBitmapImageRep(data: tiffData) else { return nil }
 
             return bitmap.representation(using: .jpeg,
                                          properties: [.compressionFactor: NSNumber(value: 1.0)])

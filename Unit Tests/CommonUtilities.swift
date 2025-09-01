@@ -93,9 +93,7 @@ enum CommonUtilities {
         filePath: String = #filePath,
         line: Int = #line,
         column: Int = #column
-    )
-        throws
-    {
+    ) throws {
         let sourceLocation = SourceLocation(fileID: fileID, filePath: filePath, line: line, column: column)
         try verifyEqualColors(lhs: lhs, rhs: rhs, componentCount: 4, sourceLocation: sourceLocation)
     }
@@ -107,9 +105,7 @@ enum CommonUtilities {
         filePath: String = #filePath,
         line: Int = #line,
         column: Int = #column
-    )
-        throws
-    {
+    ) throws {
         let sourceLocation = SourceLocation(fileID: fileID, filePath: filePath, line: line, column: column)
         try verifyEqualColors(lhs: lhs, rhs: rhs, componentCount: 3, sourceLocation: sourceLocation)
     }
