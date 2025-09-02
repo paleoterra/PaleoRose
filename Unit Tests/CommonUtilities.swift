@@ -35,7 +35,7 @@ enum CommonUtilities {
 
     static func assertEqualColors(
         lhs: NSColor,
-        rhs: NSColor,
+        rhs: NSColor
     ) throws -> Bool {
         guard let lhsComponents = lhs.cgColor.components, let rhsComponents = rhs.cgColor.components else {
             throw CommonUtilityError.invalidColor
