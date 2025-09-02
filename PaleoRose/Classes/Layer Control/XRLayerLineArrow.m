@@ -30,8 +30,8 @@
 #import "XRDataSet.h"
 #import "XRStatistic.h"
 #import "XRGeometryController.h"
-#import "LITMArrowHead.h"
 #import "LITMXMLTree.h"
+#import "PaleoRose-Swift.h"
 #import "sqlite3.h"
 #import <Cocoa/Cocoa.h>
 @implementation XRLayerLineArrow
@@ -110,7 +110,7 @@
     float radiusCore = 0.0;
     float vectorStrength = 0.0;
     float errorAngle = 0.0;
-    LITMArrowHead *anArrow;
+    ArrowHead *anArrow;
     NSBezierPath *aPath;
     NSEnumerator *anEnum = [[_theSet currentStatistics] objectEnumerator];
     XRStatistic *theStat;
@@ -158,7 +158,7 @@
     [theDictionary setObject:aPath forKey:@"vector"];
 
     //NSLog(@"5 %f %i",_arrowSize,_headType);
-    anArrow = [[LITMArrowHead alloc] initWithSize:_arrowSize color:_strokeColor type:_headType];
+    anArrow = [[ArrowHead alloc] initWithSize:_arrowSize color:_strokeColor type:_headType];
 
     //NSLog(@"5.5 %f %f",radiusCore, radius);
     [anArrow positionAtLineEndpoint:[geometryController rotationOfPoint:NSMakePoint(0.0,radius) byAngle:vector] withAngle:vector];

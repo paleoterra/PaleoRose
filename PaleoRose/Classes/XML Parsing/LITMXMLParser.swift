@@ -71,9 +71,10 @@ import Foundation
     }
 
     func parser(_ parser: XMLParser, foundCharacters string: String) {
-        guard let lastTree = rootArray.last,
-              !lastTree.isClosed,
-              lastTree.childCount == 0 else { return }
+        guard
+            let lastTree = rootArray.last,
+            !lastTree.isClosed,
+            lastTree.childCount == 0 else { return }
 
         lastTree.appendContentsString(string)
     }

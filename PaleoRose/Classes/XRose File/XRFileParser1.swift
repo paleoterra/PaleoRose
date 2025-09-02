@@ -86,15 +86,16 @@ import Cocoa
     }
 
     @objc func color(fromTree tree: LITMXMLTree) -> NSColor? {
-        guard let attributes = tree.attributesDictionary() as? [String: String],
-              let redStr = attributes["red"],
-              let greenStr = attributes["green"],
-              let blueStr = attributes["blue"],
-              let alphaStr = attributes["alpha"],
-              let red = Double(redStr),
-              let green = Double(greenStr),
-              let blue = Double(blueStr),
-              let alpha = Double(alphaStr)
+        guard
+            let attributes = tree.attributesDictionary() as? [String: String],
+            let redStr = attributes["red"],
+            let greenStr = attributes["green"],
+            let blueStr = attributes["blue"],
+            let alphaStr = attributes["alpha"],
+            let red = Double(redStr),
+            let green = Double(greenStr),
+            let blue = Double(blueStr),
+            let alpha = Double(alphaStr)
         else {
             return nil
         }
@@ -118,10 +119,11 @@ import Cocoa
     }
 
     @objc func font(fromTree tree: LITMXMLTree) -> NSFont? {
-        guard let attributes = tree.attributesDictionary() as? [String: String],
-              let name = attributes["name"],
-              let sizeStr = attributes["size"],
-              let size = Double(sizeStr)
+        guard
+            let attributes = tree.attributesDictionary() as? [String: String],
+            let name = attributes["name"],
+            let sizeStr = attributes["size"],
+            let size = Double(sizeStr)
         else {
             return nil
         }

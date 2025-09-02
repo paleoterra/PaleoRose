@@ -51,6 +51,7 @@
 --operatorfunc spaced
 --organizetypes actor,class,enum,struct
 --patternlet hoist
+--guardelse auto
 --ranges spaced
 --redundanttype infer-locals-only
 --self remove
@@ -73,13 +74,13 @@
 --voidtype void
 --wraparguments preserve
 --wrapcollections preserve
---wrapconditions preserve
+--wrapconditions before-first
 --wrapeffects preserve
 --wrapenumcases always
---wrapparameters default
+--wrapparameters before-first
 --wrapreturntype preserve
 --wrapternary default
 --wraptypealiases preserve
 --xcodeindentation disabled
 --yodaswap always
---disable blankLinesAtStartOfScope,trailingCommas
+--disable blankLinesAtStartOfScope,trailingCommas,wrapMultilineStatementBraces

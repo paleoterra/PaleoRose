@@ -66,8 +66,9 @@ import SQLite3
     private func importTextFromFile() {
         delimiterController = XRTableImporterDelimiterController(path: sourcePath)
 
-        guard let window = targetDocument?.windowControllers.first?.window,
-              let sheet = delimiterController?.window else { return }
+        guard
+            let window = targetDocument?.windowControllers.first?.window,
+            let sheet = delimiterController?.window else { return }
 
         window.beginSheet(sheet) { [weak self] response in
             guard let self else { return }
@@ -80,9 +81,10 @@ import SQLite3
     }
 
     private func processTextImport() {
-        guard let results = delimiterController?.results,
-              let tableName = results["tableName"] as? String,
-              let sourceString = try? String(contentsOfFile: sourcePath, encoding: .utf8) else { return }
+        guard
+            let results = delimiterController?.results,
+            let tableName = results["tableName"] as? String,
+            let sourceString = try? String(contentsOfFile: sourcePath, encoding: .utf8) else { return }
 
         var lines = sourceString.components(separatedBy: .newlines)
         if lines.count == 1 {
@@ -90,8 +92,9 @@ import SQLite3
         }
 
         let contents = lines.map { $0.components(separatedBy: "\t") }
-        guard let columnCount = contents.first?.count,
-              contents.allSatisfy({ $0.count == columnCount })
+        guard
+            let columnCount = contents.first?.count,
+            contents.allSatisfy({ $0.count == columnCount })
         else {
             presentError("Text table has improper shape.")
             return
@@ -192,14 +195,16 @@ import SQLite3
         importerController = XRTableImporterXRose()
         importerController?.setTableNames(tableNames)
 
-        guard let window = targetDocument?.windowControllers.first?.window,
-              let sheet = importerController?.window else { return }
+        guard
+            let window = targetDocument?.windowControllers.first?.window,
+            let sheet = importerController?.window else { return }
 
         window.beginSheet(sheet) { [weak self] response in
-            guard let self,
-                  response == .OK,
-                  let selectedTables = importerController?.selectedTableNames,
-                  !selectedTables.isEmpty else { return }
+            guard
+                let self,
+                response == .OK,
+                let selectedTables = importerController?.selectedTableNames,
+                !selectedTables.isEmpty else { return }
 
             importSelectedTables(selectedTables, from: db)
             importerController = nil
@@ -224,8 +229,9 @@ import SQLite3
         }
 
         var error: NSError?
-        guard let db = (targetDocument as? XRoseDocument)?.documentInMemoryStore,
-              parser.writeToSQLITE(db, withError: &error)
+        guard
+            let db = (targetDocument as? XRoseDocument)?.documentInMemoryStore,
+            parser.writeToSQLITE(db, withError: &error)
         else {
             if let error {
                 presentError(error.localizedDescription)
@@ -294,8 +300,9 @@ import SQLite3
         guard sqlite3_prepare_v2(sourceDB, schemaQuery, -1, &statement, nil) == SQLITE_OK else { return }
         sqlite3_bind_text(statement, 1, table, -1, nil)
 
-        guard sqlite3_step(statement) == SQLITE_ROW,
-              let schemaBytes = sqlite3_column_text(statement, 0)
+        guard
+            sqlite3_step(statement) == SQLITE_ROW,
+            let schemaBytes = sqlite3_column_text(statement, 0)
         else {
             sqlite3_finalize(statement)
             return

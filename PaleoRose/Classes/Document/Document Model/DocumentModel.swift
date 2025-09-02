@@ -36,10 +36,10 @@ class DocumentModel: NSObject, InMemoryStoreDelegate {
     // MARK: - Properties
 
     private var inMemoryStore: InMemoryStore
-    var tableNames: [String] = []
+    @objc var tableNames: [String] = []
     @objc var windowSize: CGSize = .zero
     @objc var dataSets: [XRDataSet] = []
-    var layers: [XRLayer] = []
+    @objc var layers: [XRLayer] = []
     @objc weak var document: NSDocument?
     @objc var geometryController: XRGeometryController?
 
@@ -121,8 +121,10 @@ class DocumentModel: NSObject, InMemoryStoreDelegate {
 
     // MARK: - Read From Store
 
-    private func loadFromFile(_ file: URL) throws {
-        try inMemoryStore.load(from: file.path)
+    @objc func readFromStore(completion: @escaping () -> Void) {
+        inMemoryStore.readFromStore { _ in
+            completion()
+        }
     }
 
     // MARK: - Geometry

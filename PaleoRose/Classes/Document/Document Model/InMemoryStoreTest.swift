@@ -96,7 +96,7 @@ struct InMemoryStoreTest {
     func configureStoreWithoutError() throws {
         let pointer = try createPointer()
         sqliteInterface.pointer = pointer
-        _ = try #require(try InMemoryStore(interface: sqliteInterface))
+        _ = try InMemoryStore(interface: sqliteInterface)
 
         #expect(sqliteInterface.createInMemoryStoreCalled)
         #expect(sqliteInterface.executeQueryCalled)
@@ -128,7 +128,7 @@ struct InMemoryStoreTest {
                 Issue.record("Failed to close pointer: \(error)")
             }
         }
-        _ = try #require(try InMemoryStore(interface: sqliteInterface))
+        _ = try InMemoryStore(interface: sqliteInterface)
 
         let allQueries = sqliteInterface.queryAccumulator.map(\.sql).joined(separator: "\n")
         #expect(allQueries.contains(tableName))
@@ -144,8 +144,8 @@ struct InMemoryStoreTest {
                 Issue.record("Failed to close pointer: \(error)")
             }
         }
-        let store = try #require(try InMemoryStore(interface: sqliteInterface))
-        let pointer = try #require(try store.sqlitePointer())
+        let store = try InMemoryStore(interface: sqliteInterface)
+        let pointer = try store.sqlitePointer()
         let expectedPointerInt = Int(bitPattern: expectedPointer)
         let pointerInt = Int(bitPattern: pointer)
         #expect(pointerInt == expectedPointerInt)
@@ -164,7 +164,7 @@ struct InMemoryStoreTest {
             }
         }
         let layer = XRLayerText.stub()
-        let store = try #require(try InMemoryStore(interface: sqliteInterface))
+        let store = try InMemoryStore(interface: sqliteInterface)
         sqliteInterface.resetMock()
         try store.store(layers: [layer])
         #expect(sqliteInterface.queryAccumulator.count >= 6)
@@ -187,7 +187,7 @@ struct InMemoryStoreTest {
             }
         }
         let layer = XRLayerText.stub()
-        let store = try #require(try InMemoryStore(interface: sqliteInterface))
+        let store = try InMemoryStore(interface: sqliteInterface)
         sqliteInterface.resetMock()
         try store.store(layers: [layer])
         #expect(sqliteInterface.queryAccumulator.count >= 8)
@@ -209,7 +209,7 @@ struct InMemoryStoreTest {
             }
         }
         let layer = XRLayerLineArrow.stub()
-        let store = try #require(try InMemoryStore(interface: sqliteInterface))
+        let store = try InMemoryStore(interface: sqliteInterface)
         sqliteInterface.resetMock()
         try store.store(layers: [layer])
         #expect(sqliteInterface.queryAccumulator.count >= 8)
@@ -231,7 +231,7 @@ struct InMemoryStoreTest {
             }
         }
         let layer = XRLayerCore.stub()
-        let store = try #require(try InMemoryStore(interface: sqliteInterface))
+        let store = try InMemoryStore(interface: sqliteInterface)
         sqliteInterface.resetMock()
         try store.store(layers: [layer])
         #expect(sqliteInterface.queryAccumulator.count >= 8)
@@ -252,7 +252,7 @@ struct InMemoryStoreTest {
             }
         }
         let layer = XRLayerGrid.stub()
-        let store = try #require(try InMemoryStore(interface: sqliteInterface))
+        let store = try InMemoryStore(interface: sqliteInterface)
         sqliteInterface.resetMock()
         try store.store(layers: [layer])
         #expect(sqliteInterface.queryAccumulator.count >= 8)

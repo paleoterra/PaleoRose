@@ -33,7 +33,10 @@ enum CommonUtilities {
         case invalidColor
     }
 
-    static func assertEqualColors(lhs: NSColor, rhs: NSColor) throws -> Bool {
+    static func assertEqualColors(
+        lhs: NSColor,
+        rhs: NSColor
+    ) throws -> Bool {
         guard let lhsComponents = lhs.cgColor.components, let rhsComponents = rhs.cgColor.components else {
             throw CommonUtilityError.invalidColor
         }
@@ -81,5 +84,97 @@ enum CommonUtilities {
         #expect(layer.maxPercent() == maxPercent)
         #expect(try assertEqualColors(lhs: layer.strokeColor(), rhs: strokeColor))
         #expect(try assertEqualColors(lhs: layer.fillColor(), rhs: fillColor))
+    }
+
+    static func verifyEqualColorsWithAlpha(
+        lhs: NSColor,
+        rhs: NSColor,
+        fileID: String = #fileID,
+        filePath: String = #filePath,
+        line: Int = #line,
+        column: Int = #column
+    ) throws {
+        let sourceLocation = SourceLocation(fileID: fileID, filePath: filePath, line: line, column: column)
+        try verifyEqualColors(lhs: lhs, rhs: rhs, componentCount: 4, sourceLocation: sourceLocation)
+    }
+
+    static func verifyEqualColorsWithOutAlpha(
+        lhs: NSColor,
+        rhs: NSColor,
+        fileID: String = #fileID,
+        filePath: String = #filePath,
+        line: Int = #line,
+        column: Int = #column
+    ) throws {
+        let sourceLocation = SourceLocation(fileID: fileID, filePath: filePath, line: line, column: column)
+        try verifyEqualColors(lhs: lhs, rhs: rhs, componentCount: 3, sourceLocation: sourceLocation)
+    }
+
+    private static func verifyEqualColors(lhs: NSColor, rhs: NSColor, componentCount: Int, sourceLocation: SourceLocation) throws {
+        let colorSpace = try #require(CGColorSpace(name: CGColorSpace.sRGB))
+        let lhsCG = try #require(lhs.cgColor.converted(
+            to: colorSpace,
+            intent: .defaultIntent,
+            options: nil
+        ))
+        let rhsCG = try #require(rhs.cgColor.converted(
+            to: colorSpace,
+            intent: .defaultIntent,
+            options: nil
+        ))
+        let components1 = try #require(lhsCG.components)
+        let components2 = try #require(rhsCG.components)
+        let colorMatches = zip(
+            components1.prefix(componentCount),
+            components2.prefix(componentCount)
+        ).allSatisfy { lhs, rhs in
+            lhs.isApproximatelyEqual(to: rhs, absoluteTolerance: 0.01)
+        }
+        #expect(colorMatches, "Color doesn't match expected color: \(lhs.description), \(rhs.description)", sourceLocation: sourceLocation)
+    }
+
+    static func compareGraphicSettings(
+        values: [AnyHashable: Any],
+        expected: [AnyHashable: Any],
+        fileID: String = #fileID,
+        filePath: String = #filePath,
+        line: Int = #line,
+        column: Int = #column
+    ) throws {
+        let sourceLocation = SourceLocation(fileID: fileID, filePath: filePath, line: line, column: column)
+        let sortedValueKeys = values.keys.compactMap { $0 as? String }.sorted()
+        let sortedExpectationKeys = expected.keys.compactMap { $0 as? String }.sorted()
+        #expect(
+            sortedValueKeys == sortedExpectationKeys,
+            "Settings should have the same keys",
+            sourceLocation: sourceLocation
+        )
+
+        let valuesStrings = values.filter { $0.value is String } as? [String: String] ?? [:]
+        let valuesColors = values.filter { $0.value is NSColor } as? [String: NSColor] ?? [:]
+
+        let expectedStrings = expected.filter { $0.value is String } as? [String: String] ?? [:]
+        let expectedColors = expected.filter { $0.value is NSColor } as? [String: NSColor] ?? [:]
+
+        for key in valuesStrings.keys {
+            #expect(
+                valuesStrings[key] == expectedStrings[key],
+                "String values for key \(key) do not match \(String(describing: valuesStrings[key])) \(String(describing: expectedStrings[key]))",
+                sourceLocation: sourceLocation
+            )
+        }
+
+        for key in valuesColors.keys {
+            let valueColor = try #require(valuesColors[key])
+            let expectedColor = try #require(expectedColors[key])
+            try Self.verifyEqualColorsWithAlpha(
+                lhs: valueColor,
+                rhs: expectedColor,
+                fileID: fileID,
+                filePath: filePath,
+                line: line,
+                column: column
+            )
+        }
     }
 }

@@ -44,7 +44,7 @@
 #import <Security/AuthSession.h>
 #import "XRTableImporter.h"
 #import <os/activity.h>
-#import <PaleoRose-Swift.h>
+
 
 @interface XRoseDocument()
 
@@ -73,10 +73,34 @@
 		_tables = [[NSMutableArray alloc] init];
         _tableImporter = [[XRTableImporter alloc] init];
         _documentModel = [[DocumentModel alloc] initInMemoryStore:[[InMemoryStore alloc] init] document:self];
+        [self subscribeToDocumentModel];
         [self createDB];
         _didLoad = NO;
 	}
     return self;
+}
+
+-(void)subscribeToDocumentModel {
+    NSArray *keys = @[@"tableNames",@"dataSets", @"layers"];
+    for(int i = 0; i<[keys count]; i++) {
+        [self.documentModel addObserver:self
+                             forKeyPath:keys[i]
+                                options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld | NSKeyValueObservingOptionInitial)
+                                context:nil];
+    }
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                     ofObject:(id)object
+                       change:(NSDictionary<NSKeyValueChangeKey,id> *)change
+                      context:(void *)context {
+    NSLog(@"Change Description");
+    NSLog(@"%@", keyPath);
+    NSLog(@"%@", [change description]);
+
+    if([keyPath isEqualToString:@"tableNames"]) {
+        [self discoverTables];
+    }
 }
 
 #pragma mark - Reading the Document's Content

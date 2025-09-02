@@ -47,10 +47,11 @@ enum Encoding {
 //    }
 
     static func decodeTextStorage(from input: Data) -> NSTextStorage? {
-        guard let base64EncodedString = String(
-            data: input,
-            encoding: .utf8
-        ), let rtfData = Data(base64Encoded: base64EncodedString) else {
+        guard
+            let base64EncodedString = String(
+                data: input,
+                encoding: .utf8
+            ), let rtfData = Data(base64Encoded: base64EncodedString) else {
             return nil
         }
         return NSTextStorage(rtf: rtfData, documentAttributes: nil)

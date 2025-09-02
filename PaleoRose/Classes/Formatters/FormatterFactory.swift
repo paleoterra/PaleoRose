@@ -1,5 +1,5 @@
 //
-// FormatterFactor.swift
+// FormatterFactory.swift
 // PaleoRose
 //
 // MIT License

@@ -26,7 +26,7 @@
 
 import Foundation
 
-// swiftlint:disable indentation_width opening_brace
+// swiftlint:disable indentation_width
 
 /// A type must conform to this protocol in order to work with Codable decoding from Sqlite
 public protocol TableRepresentable: Codable {
@@ -103,10 +103,10 @@ public extension TableRepresentable {
         if let value = value as? Data {
             return value
         }
-        if let value = value as? String,
-           let data = value.data(using: .utf8),
-           let decoded = Data(base64Encoded: data)
-        {
+        if
+            let value = value as? String,
+            let data = value.data(using: .utf8),
+            let decoded = Data(base64Encoded: data) {
             return decoded
         }
         return nil
@@ -121,3 +121,5 @@ public extension TableRepresentable {
         return false
     }
 }
+
+// swiftlint:enable indentation_width

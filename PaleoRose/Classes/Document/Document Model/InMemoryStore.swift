@@ -453,7 +453,6 @@ class InMemoryStore: NSObject {
         let layerCores = try readLayerCoreTable(sqliteStore: sqliteStore)
         typeLayers["XRLayerCore"] = layerCores
         let layerGrids = try readLayerGridTable(sqliteStore: sqliteStore)
-        print("radials is percent \(layerGrids[0].RADIALS_ISPERCENT)")
         typeLayers["XRLayerGrid"] = layerGrids
         let layerDatas = try readLayerDataTable(sqliteStore: sqliteStore)
         typeLayers["XRLayerData"] = layerDatas
@@ -461,8 +460,9 @@ class InMemoryStore: NSObject {
         storageLayerFactory.set(colors: colors)
         var xrLayers: [XRLayer] = []
         for layer in layers {
-            guard let typeLayerArray = typeLayers[layer.TYPE],
-                  let typeLayer = typeLayerArray.first(where: { $0.LAYERID == layer.LAYERID })
+            guard
+                let typeLayerArray = typeLayers[layer.TYPE],
+                let typeLayer = typeLayerArray.first(where: { $0.LAYERID == layer.LAYERID })
             else {
                 throw InMemoryStoreError.invalidLayersStore
             }

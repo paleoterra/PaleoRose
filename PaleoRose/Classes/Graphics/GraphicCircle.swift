@@ -1,0 +1,121 @@
+//
+//  GraphicCircle.swift
+//  PaleoRose
+//
+//  Created by Migration Assistant on 2025-08-29.
+//
+// MIT License
+//
+// Copyright (c) 2004 to present Thomas L. Moore.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+import AppKit
+
+@objc class GraphicCircle: Graphic {
+
+    // MARK: - Properties
+
+    var isFixedCount: Bool = false
+    @objc dynamic var countSetting: Int32 = 0 {
+        didSet {
+            isPercent = false
+            isGeometryPercent = false
+            calculateGeometry()
+        }
+    }
+
+    @objc dynamic var percentSetting: Float = 0.0 {
+        didSet {
+            isPercent = true
+            isGeometryPercent = false
+            calculateGeometry()
+        }
+    }
+
+    var isGeometryPercent: Bool = false
+    var isPercent: Bool = false
+
+    // MARK: - Initialization
+
+    @objc override init(controller: GraphicGeometrySource) {
+        super.init(controller: controller)
+        isPercent = controller.isPercent()
+
+        // Prevent calculating geometry twice for circle labels
+        if type(of: self) == GraphicCircle.self {
+            calculateGeometry()
+        }
+    }
+
+    @objc(initCoreCircleWithController:) init(coreCircleWithController controller: GraphicGeometrySource) {
+        super.init(controller: controller)
+        countSetting = 0
+        percentSetting = 0.0
+        isPercent = controller.isPercent()
+
+        // Prevent calculating geometry twice for circle labels
+        if type(of: self) == GraphicCircle.self {
+            calculateGeometry()
+        }
+    }
+
+    // MARK: - Geometry
+
+    @objc func setGeometryPercent(_ percent: Float) {
+        isGeometryPercent = true
+        guard let controller = geometryController else {
+            return
+        }
+        let circleRect = controller.circleRect(forGeometryPercent: percent)
+        drawingPath = NSBezierPath(ovalIn: circleRect)
+    }
+
+    override func calculateGeometry() {
+        guard let controller = geometryController else {
+            return
+        }
+
+        var circleRect = CGRect.zero
+        if controller.isPercent() {
+            circleRect = controller.circleRect(forPercent: percentSetting)
+        } else {
+            circleRect = controller.circleRect(forCount: countSetting)
+        }
+
+        drawingPath = NSBezierPath(ovalIn: circleRect)
+        drawingPath?.lineWidth = CGFloat(lineWidth)
+    }
+
+    // MARK: - Settings Export
+
+    @objc override func graphicSettings() -> [AnyHashable: Any] {
+        var settings = super.graphicSettings()
+
+        settings[GraphicKeyGraphicType] = "Circle"
+        settings[GraphicKeyCountSetting] = string(from: countSetting)
+        settings[GraphicKeyPercentSetting] = string(from: percentSetting)
+        settings[GraphicKeyGeometryPercent] = string(from: percentSetting)
+        settings[GraphicKeyIsGeometryPercent] = string(from: isGeometryPercent)
+        settings[GraphicKeyIsPercent] = string(from: isPercent)
+        settings[GraphicKeyIsFixedCount] = string(from: isFixedCount)
+
+        return settings
+    }
+}

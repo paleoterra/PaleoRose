@@ -86,13 +86,17 @@ enum XRGeometryCalculator {
     // MARK: - Geometry Calculations
 
     static func radiusOfCount(_ count: Int, maxCount: Int, parameters: CircleParameters) -> CGFloat {
-        guard maxCount > 0 else { return 0 }
+        guard maxCount > 0 else {
+            return 0
+        }
         let percent = CGFloat(count) / CGFloat(maxCount)
         return radiusOfRelativePercent(percent, parameters: parameters)
     }
 
     static func radiusOfPercentValue(_ percent: CGFloat, maxPercent: CGFloat, parameters: CircleParameters) -> CGFloat {
-        guard maxPercent > 0 else { return 0 }
+        guard maxPercent > 0 else {
+            return 0
+        }
         let relativePercent = percent / maxPercent
         return radiusOfRelativePercent(relativePercent, parameters: parameters)
     }
@@ -108,10 +112,12 @@ enum XRGeometryCalculator {
     }
 
     static func circleRect(forRadius radius: CGFloat, center: NSPoint) -> NSRect {
-        NSRect(x: center.x - radius,
-               y: center.y - radius,
-               width: radius * 2,
-               height: radius * 2)
+        NSRect(
+            x: center.x - radius,
+            y: center.y - radius,
+            width: radius * 2,
+            height: radius * 2
+        )
     }
 
     // MARK: - Angle Calculations
@@ -129,8 +135,10 @@ enum XRGeometryCalculator {
         let cosAngle = cos(radians)
         let sinAngle = sin(radians)
 
-        return NSPoint(x: point.x * cosAngle - point.y * sinAngle,
-                       y: point.x * sinAngle + point.y * cosAngle)
+        return NSPoint(
+            x: point.x * cosAngle - point.y * sinAngle,
+            y: point.x * sinAngle + point.y * cosAngle
+        )
     }
 
     static func angleIsValid(forSpoke angle: CGFloat, startingAngle: CGFloat, sectorSize: CGFloat) -> Bool {
@@ -139,10 +147,10 @@ enum XRGeometryCalculator {
     }
 
     static func calculateRelativePosition(forPoint point: NSPoint, center: NSPoint) -> (radius: CGFloat, angle: CGFloat) {
-        let dx = point.x - center.x
-        let dy = point.y - center.y
-        let radius = sqrt(dx * dx + dy * dy)
-        let angle = degrees(from: atan2(dy, dx))
+        let deltax = point.x - center.x
+        let deltay = point.y - center.y
+        let radius = sqrt(deltax * deltax + deltay * deltay)
+        let angle = degrees(from: atan2(deltay, deltax))
         return (radius, angle)
     }
 }

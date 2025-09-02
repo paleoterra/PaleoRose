@@ -10,3 +10,4 @@
 #import "XRLayerCore.h"
 #import "XRLayerData.h"
 #import "XRLayerGrid.h"
+#import "GraphicGeometrySource.h"

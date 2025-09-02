@@ -27,7 +27,6 @@
 // SOFTWARE.
 
 #import "XRLayer.h"
-#import "XRGraphic.h"
 #import "XRGeometryController.h"
 #import "XRLayerCore.h"
 #import "XRLayerGrid.h"
@@ -36,6 +35,7 @@
 #import "XRLayerLineArrow.h"
 #import "sqlite3.h"
 #import "LITMXMLTree.h"
+#import <PaleoRose-Swift.h>
 
 @implementation XRLayer
 
@@ -174,7 +174,7 @@
 -(void)setStrokeColor:(NSColor *)color
 {
 	NSEnumerator *anEnum = [_graphicalObjects objectEnumerator];
-	XRGraphic *aGraphic;
+	Graphic *aGraphic;
 	_strokeColor = color;
 	[self resetColorImage];
 	//possibly post notification.
@@ -195,7 +195,7 @@
 -(void)setFillColor:(NSColor *)color
 {
 	NSEnumerator *anEnum = [_graphicalObjects objectEnumerator];
-	XRGraphic *aGraphic;
+	Graphic *aGraphic;
 	_fillColor = color;
 	[self resetColorImage];
 	//possibly post notification.

@@ -401,9 +401,10 @@ class XRoseTableController: NSObject, NSTableViewDataSource, NSTableViewDelegate
             return XRLayerGrid(geometryController: rosePlotController, dictionary: settings)
 
         case "Data_Layer":
-            guard let data = settings["values"] as? Data,
-                  let name = settings["Layer_Name"] as? String,
-                  let document = windowController.document as? XRoseDocument
+            guard
+                let data = settings["values"] as? Data,
+                let name = settings["Layer_Name"] as? String,
+                let document = windowController.document as? XRoseDocument
             else {
                 return nil
             }
@@ -448,10 +449,10 @@ class XRoseTableController: NSObject, NSTableViewDataSource, NSTableViewDelegate
 
         vStatController = XRVStatCreatePanelController(array: names)
         windowController.window?.beginSheet(vStatController!.window!) { response in
-            if response == .OK,
-               let selectedName = self.vStatController?.selectedName,
-               let targetLayer = self.dataLayer(withName: selectedName) as? XRLayerData
-            {
+            if
+                response == .OK,
+                let selectedName = self.vStatController?.selectedName,
+                let targetLayer = self.dataLayer(withName: selectedName) as? XRLayerData {
                 let arrowLayer = XRLayerLineArrow(geometryController: self.rosePlotController,
                                                   set: targetLayer.dataSet)
                 self.theLayers.append(arrowLayer)
@@ -479,11 +480,12 @@ class XRoseTableController: NSObject, NSTableViewDataSource, NSTableViewDelegate
         theLayers.removeAll()
 
         for index in 0 ..< tree.childCount {
-            guard let childTree = tree.child(at: index),
-                  let layer = XRLayer.layer(withGeometryController: rosePlotController,
-                                            xmlTree: childTree,
-                                            version: version,
-                                            parentView: roseTableView) else { continue }
+            guard
+                let childTree = tree.child(at: index),
+                let layer = XRLayer.layer(withGeometryController: rosePlotController,
+                                          xmlTree: childTree,
+                                          version: version,
+                                          parentView: roseTableView) else { continue }
 
             if configureDataLayer(layer, withXMLTree: childTree, dataSets: dataSets) {
                 registerNotifications(for: layer)
@@ -497,8 +499,9 @@ class XRoseTableController: NSObject, NSTableViewDataSource, NSTableViewDelegate
         guard layer is XRLayerData || layer is XRLayerLineArrow else { return true }
 
         // For data layers, we need to find and set the dataset
-        guard let name = tree.findXMLTreeElement("PARENTDATA")?.contentsString,
-              let dataSet = dataSets.first(where: { $0.name == name }) else { return false }
+        guard
+            let name = tree.findXMLTreeElement("PARENTDATA")?.contentsString,
+            let dataSet = dataSets.first(where: { $0.name == name }) else { return false }
 
         layer.dataSet = dataSet
         return true
@@ -511,8 +514,9 @@ class XRoseTableController: NSObject, NSTableViewDataSource, NSTableViewDelegate
     }
 
     func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-        guard row < theLayers.count,
-              let columnId = ColumnIdentifier(rawValue: tableColumn?.identifier.rawValue ?? "") else { return nil }
+        guard
+            row < theLayers.count,
+            let columnId = ColumnIdentifier(rawValue: tableColumn?.identifier.rawValue ?? "") else { return nil }
 
         let layer = theLayers[row]
         switch columnId {
@@ -523,8 +527,9 @@ class XRoseTableController: NSObject, NSTableViewDataSource, NSTableViewDelegate
     }
 
     func tableView(_ tableView: NSTableView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, row: Int) {
-        guard row < theLayers.count,
-              let columnId = ColumnIdentifier(rawValue: tableColumn?.identifier.rawValue ?? "") else { return }
+        guard
+            row < theLayers.count,
+            let columnId = ColumnIdentifier(rawValue: tableColumn?.identifier.rawValue ?? "") else { return }
 
         let layer = theLayers[row]
         switch columnId {
@@ -557,8 +562,9 @@ class XRoseTableController: NSObject, NSTableViewDataSource, NSTableViewDelegate
     }
 
     func tableView(_ tableView: NSTableView, toolTipFor cell: NSCell, rect: NSRectPointer, tableColumn: NSTableColumn?, row: Int, mouseLocation: NSPoint) -> String {
-        guard row < theLayers.count,
-              let columnId = ColumnIdentifier(rawValue: tableColumn?.identifier.rawValue ?? "") else { return "" }
+        guard
+            row < theLayers.count,
+            let columnId = ColumnIdentifier(rawValue: tableColumn?.identifier.rawValue ?? "") else { return "" }
 
         let layer = theLayers[row]
         return "\(columnId.tooltip)\n\(layer.layerName)"
@@ -642,8 +648,9 @@ class XRoseTableController: NSObject, NSTableViewDataSource, NSTableViewDelegate
     @available(*, deprecated, message: "Use modern persistence methods instead")
     func deleteLayersForTableName(_ tableName: String) {
         theLayers.removeAll { layer in
-            guard let dataLayer = layer as? XRLayerData,
-                  dataLayer.dataSet.name == tableName else { return false }
+            guard
+                let dataLayer = layer as? XRLayerData,
+                dataLayer.dataSet.name == tableName else { return false }
 
             unregisterNotifications(for: layer)
             return true

@@ -30,7 +30,6 @@
 #import "sqlite3.h"
 @class XRDataSet,LITMXMLTree,XRTableImporter;
 @interface XRoseDocument : NSDocument
-
 -(void)addDataLayer:(id)sender;
 
 

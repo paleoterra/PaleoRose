@@ -128,7 +128,7 @@ only_rules:
 - file_length
 - file_name
 - file_name_no_space
-- file_types_order
+# - file_types_order
 - first_where
 - flatmap_over_map_reduce
 - for_where
@@ -190,7 +190,7 @@ only_rules:
 - nslocalizedstring_require_bundle
 - nsobject_prefer_isequal
 # - number_separator
-- object_literal
+# - object_literal
 - opening_brace
 - operator_usage_whitespace
 - operator_whitespace
@@ -259,7 +259,7 @@ only_rules:
 - trailing_semicolon
 - trailing_whitespace
 - type_body_length
-- type_contents_order
+# - type_contents_order
 - type_name
 - unavailable_condition
 - unavailable_function

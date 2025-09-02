@@ -129,7 +129,6 @@ extension DefaultsStorage {
         notifier.objectWillChange.send()
     }
 
-    /// Helper for testing - directly reads from UserDefaults
     // swiftlint:disable:next identifier_name
     var _testValue: Value { wrappedValue }
 }

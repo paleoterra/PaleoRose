@@ -36,7 +36,7 @@ struct DefaultsStorageTests {
         let key = DefaultsKey.vectorCalculationMethod
         let initialValue = 42
         let newValue = 100
-        var storage = DefaultsStorage(wrappedValue: initialValue, key, defaults: defaults)
+        let storage = DefaultsStorage(wrappedValue: initialValue, key, defaults: defaults)
 
         // When
         storage.wrappedValue = newValue
@@ -82,7 +82,7 @@ struct DefaultsStorageTests {
         let key = DefaultsKey.vectorCalculationMethod
         let initialValue = 42
         let newValue = 100
-        var storage = DefaultsStorage(wrappedValue: initialValue, key, defaults: defaults)
+        let storage = DefaultsStorage(wrappedValue: initialValue, key, defaults: defaults)
 
         // When
         storage.projectedValue.wrappedValue = newValue
@@ -106,21 +106,21 @@ struct DefaultsStorageTests {
         let key = DefaultsKey.vectorCalculationMethod
 
         // Test String
-        var stringStorage = DefaultsStorage<String>(wrappedValue: "default", key, defaults: defaults)
+        let stringStorage = DefaultsStorage<String>(wrappedValue: "default", key, defaults: defaults)
         stringStorage.wrappedValue = "test"
         defaults.synchronize()
         #expect(defaults.string(forKey: key.rawValue) == "test", "String not stored in UserDefaults")
         #expect(stringStorage.wrappedValue == "test", "String storage failed")
 
         // Test Bool
-        var boolStorage = DefaultsStorage<Bool>(wrappedValue: false, key, defaults: defaults)
+        let boolStorage = DefaultsStorage<Bool>(wrappedValue: false, key, defaults: defaults)
         boolStorage.wrappedValue = true
         defaults.synchronize()
         #expect(defaults.bool(forKey: key.rawValue) == true, "Bool not stored in UserDefaults")
         #expect(boolStorage.wrappedValue == true, "Bool storage failed")
 
         // Test Double
-        var doubleStorage = DefaultsStorage<Double>(wrappedValue: 0.0, key, defaults: defaults)
+        let doubleStorage = DefaultsStorage<Double>(wrappedValue: 0.0, key, defaults: defaults)
         doubleStorage.wrappedValue = 3.14
         defaults.synchronize()
         #expect(abs(defaults.double(forKey: key.rawValue) - 3.14) < 0.001, "Double not stored in UserDefaults")

@@ -27,11 +27,8 @@
 // SOFTWARE.
 
 #import "XRLayerGrid.h"
-#import "XRGraphicCircle.h"
-#import "XRGraphicCircleLabel.h"
 #import "XRGeometryController.h"
-#import "XRGraphicLine.h"
-#import "XRGraphic.h"
+#import "PaleoRose-Swift.h"
 #import "sqlite3.h"
 #import "LITMXMLTree.h"
 @implementation XRLayerGrid
@@ -114,9 +111,9 @@
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(geometryDidChangeSectors:) name:XRGeometryDidChangeSectors object:aController];
 		_showTicks = NO;
 		_minorTicks = NO;
-		_spokeNumberAlign = XRGraphicLineNumberAlignHorizontal;
-		_spokeNumberCompassPoint = XRGraphicLineNumberPoints;
-		_spokeNumberOrder = XRGraphicLineNumberingOrderQuad;
+		_spokeNumberAlign = GraphicLineNumberAlignHorizontal;
+		_spokeNumberCompassPoint = GraphicLineNumberCompassPointPoints;
+		_spokeNumberOrder = GraphicLineNumberingOrderQuad;
 		_showLabels = NO;
 		_showRingLabels = NO;
 		_pointsOnly = NO;
@@ -218,7 +215,6 @@
 				else
 					_showLabels = NO;
 			}
-			//NSLog(@"4");
 			if((tempstring = [spokeDict objectForKey:@"_spokeNumberAlign"]))
 				_spokeNumberAlign = [tempstring intValue];
 			if((tempstring = [spokeDict objectForKey:@"_spokeNumberCompassPoint"]))
@@ -377,7 +373,7 @@
 {
 	NS_DURING
 	float angle;
-	XRGraphicLine *aLine;
+	GraphicLine *aLine;
 	_spokeAngle = 360.0/(float)_spokeCount;
 	[self setValue:[NSNumber numberWithInt:_spokeCount] forKey:@"_spokeCount"];
 	[self setValue:[NSNumber numberWithFloat:_spokeAngle] forKey:@"_spokeAngle"];
@@ -385,7 +381,7 @@
 	for(int i=0;i<_spokeCount;i++)
 	{
 		angle = i * _spokeAngle;
-		aLine = [[XRGraphicLine alloc] initWithController:geometryController];
+		aLine = [[GraphicLine alloc] initWithController:geometryController];
 		[aLine setSpokeAngle:angle];
 		if(_showTicks)
 		{
@@ -394,10 +390,10 @@
 			if(((double)angle == 90.0)||((double)angle == 180.0)||((double)angle == 270.0)||((double)angle == 360.0)||((double)angle == 90.0))
 			{
 				//NSLog(@"angle %f",angle);
-				[aLine setTickType:XRGraphicLineTickTypeMajor];
+				[aLine setTickType:GraphicLineTickTypeMajor];
 			}
 			else if(_minorTicks)
-				[aLine setTickType:XRGraphicLineTickTypeMinor];
+				[aLine setTickType:GraphicLineTickTypeMinor];
 		}
 		[aLine setFont:_spokeFont];
 		[aLine setLineWidth:_lineWeight];
@@ -416,7 +412,7 @@
 {
 	NS_DURING
 	float angle;
-	XRGraphicLine *aLine;
+	GraphicLine *aLine;
 	_spokeCount = [geometryController sectorCount];
 	[self setValue:[NSNumber numberWithInt:_spokeCount] forKey:@"_spokeCount"];
 	_spokeAngle = 360.0/(float)_spokeCount;
@@ -425,7 +421,7 @@
 	for(int i=0;i<_spokeCount;i++)
 	{
 		angle = i * _spokeAngle;
-		aLine = [[XRGraphicLine alloc] initWithController:geometryController];
+		aLine = [[GraphicLine alloc] initWithController:geometryController];
 		[aLine setSpokeAngle:angle];
 		if(_showTicks)
 		{
@@ -434,10 +430,10 @@
 			if(((double)angle == 90.0)||((double)angle == 180.0)||((double)angle == 270.0)||((double)angle == 360.0)||((double)angle == 0.0))
 			{
 				//NSLog(@"dangle %f",angle);
-				[aLine setTickType:XRGraphicLineTickTypeMajor];
+				[aLine setTickType:GraphicLineTickTypeMajor];
 			}
 			else if(_minorTicks)
-				[aLine setTickType:XRGraphicLineTickTypeMinor];
+				[aLine setTickType:GraphicLineTickTypeMinor];
 		}
 		[aLine setFont:_spokeFont];
 		[aLine setLineWidth:_lineWeight];
@@ -451,35 +447,35 @@
 	NS_ENDHANDLER
 }
 
--(void)configureLine:(XRGraphicLine *)aLine
+-(void)configureLine:(GraphicLine *)aLine
 {
 
-	[aLine setShowlabel:_showLabels];
-	[aLine setNumberAlignment:_spokeNumberAlign];
-	[aLine setNumberOrder:_spokeNumberOrder];
-	[aLine setNumberPoints:_spokeNumberCompassPoint];
-	[aLine setPointsOnly:_pointsOnly];
+	aLine.showLabel =_showLabels;
+    aLine.spokeNumberAlign = _spokeNumberAlign;
+    aLine.spokeNumberOrder = _spokeNumberOrder;
+    aLine.spokeNumberCompassPoint = _spokeNumberCompassPoint;
+    aLine.spokePointOnly = _pointsOnly;
 }
 
 -(void)addFixedRings
 {
 	NS_DURING
-	XRGraphicCircleLabel *aCircle;
+	GraphicCircleLabel *aCircle;
 	float percent;
 	[self setValue:[NSNumber numberWithBool:[geometryController isPercent]] forKey:@"_isPercent"];
 	//NSLog(@"fixed rings");
 	for(int i=0;i<_fixedRingCount;i++)
 	{
 		percent = (float)(i+1)/(float)_fixedRingCount;
-		aCircle = [[XRGraphicCircleLabel alloc] initWithController:geometryController];
-		[aCircle setIsFixed:YES];
+		aCircle = [[GraphicCircleLabel alloc] initWithController:geometryController];
+        aCircle.isFixedCount = YES;
 		[aCircle setGeometryPercent:percent];
 		[aCircle setLineWidth:_lineWeight];
 		
 		[aCircle setLabelAngle:_labelAngle];
 		[aCircle setShowLabel:_showRingLabels];
 
-		[aCircle setFont:_ringFont];
+		aCircle.labelFont = _ringFont;
 		[aCircle setStrokeColor:_strokeColor];
 		[_graphicalObjects addObject:aCircle];
 		
@@ -489,11 +485,11 @@
 	if([geometryController hollowCoreSize]>0.0)//core boundary
 	{
 		aCircle = nil;
-		aCircle = [[XRGraphicCircleLabel alloc] initCoreCircleWithController:geometryController];
+		aCircle = [[GraphicCircleLabel alloc] initCoreCircleWithController:geometryController];
 		
 		[aCircle setLabelAngle:_labelAngle];
 		[aCircle setShowLabel:_showRingLabels];
-		[aCircle setFont:_ringFont];
+		aCircle.labelFont = _ringFont;
 		[aCircle setLineWidth:_lineWeight];
 		[aCircle setStrokeColor:_strokeColor];
 		
@@ -510,7 +506,7 @@
 -(void)addVariableRings
 {
 	NS_DURING
-	XRGraphicCircleLabel *aCircle;
+	GraphicCircleLabel *aCircle;
 	[self setValue:[NSNumber numberWithBool:[geometryController isPercent]] forKey:@"_isPercent"];
 	if([geometryController isPercent])
 	{
@@ -524,14 +520,14 @@
 		{
 			percent = (float)(i+1)* _ringPercentIncrement;
 			//NSLog(@"percent %f",percent);
-			aCircle = [[XRGraphicCircleLabel alloc] initWithController:geometryController];
+			aCircle = [[GraphicCircleLabel alloc] initWithController:geometryController];
 			[aCircle setPercentSetting:percent];
 			[aCircle setLineWidth:_lineWeight];
 			[aCircle setStrokeColor:_strokeColor];
 			[aCircle setLabelAngle:_labelAngle];
 			[aCircle setShowLabel:_showRingLabels];
-			[aCircle setFont:_ringFont];
-			[aCircle setIsFixed:NO];
+			aCircle.labelFont = _ringFont;
+            aCircle.isFixedCount = NO;
 			[_graphicalObjects addObject:aCircle];
 			
 		}
@@ -540,7 +536,7 @@
 		{
 			
 			aCircle = nil;
-			aCircle = [[XRGraphicCircleLabel alloc] initCoreCircleWithController:geometryController];
+			aCircle = [[GraphicCircleLabel alloc] initCoreCircleWithController:geometryController];
 			
 			[aCircle setPercentSetting:0.0];
 			[aCircle setLineWidth:_lineWeight];
@@ -549,8 +545,8 @@
 			
 			[aCircle setLabelAngle:_labelAngle];
 			[aCircle setShowLabel:_showRingLabels];
-			[aCircle setFont:_ringFont];
-			[aCircle setIsFixed:NO];
+			aCircle.labelFont = _ringFont;
+            aCircle.isFixedCount = NO;
 
 			[_graphicalObjects addObject:aCircle];
 
@@ -565,26 +561,26 @@
 		{
 			ringCount = ((i+1)*_ringCountIncrement);
 			//NSLog(@"ring percent %i, i %i, %i max %i",ringCount,i,_ringCountIncrement,[geometryController geometryMaxCount]);
-			aCircle = [[XRGraphicCircleLabel alloc] initWithController:geometryController];
+			aCircle = [[GraphicCircleLabel alloc] initWithController:geometryController];
 			[aCircle setCountSetting:ringCount];
 			[aCircle setLineWidth:_lineWeight];
 			[aCircle setStrokeColor:_strokeColor];
 			[aCircle setLabelAngle:_labelAngle];
 			[aCircle setShowLabel:_showRingLabels];
-			[aCircle setFont:_ringFont];
-			[aCircle setIsFixed:NO];
+			aCircle.labelFont = _ringFont;
+            aCircle.isFixedCount = NO;
 			[_graphicalObjects addObject:aCircle];
 		}
 		if([geometryController hollowCoreSize]>0.0)//core boundary
 		{
-			aCircle = [[XRGraphicCircleLabel alloc] initCoreCircleWithController:geometryController];
+			aCircle = [[GraphicCircleLabel alloc] initCoreCircleWithController:geometryController];
 			[aCircle setPercentSetting:0.0];
 			[aCircle setLineWidth:_lineWeight];
 			[aCircle setStrokeColor:_strokeColor];
 			[aCircle setLabelAngle:_labelAngle];
 			[aCircle setShowLabel:_showRingLabels];
-			[aCircle setFont:_ringFont];
-			[aCircle setIsFixed:NO];
+			aCircle.labelFont = _ringFont;
+            aCircle.isFixedCount = NO;
 			[_graphicalObjects addObject:aCircle];
 		}
 	}
@@ -603,16 +599,16 @@
 		return;
 	//NSLog(@"drawing grid");
 	NSEnumerator *anEnum = [_graphicalObjects objectEnumerator];
-	XRGraphic *aGraphic;
+	Graphic *aGraphic;
 	
 	while(aGraphic = [anEnum nextObject])
 	{
-		if(([aGraphic isKindOfClass:[XRGraphicCircleLabel class]])&&(_ringsVisible))
+		if(([aGraphic isKindOfClass:[GraphicCircleLabel class]])&&(_ringsVisible))
 		{
 			
 			[aGraphic drawRect:rect];
 		}
-		else if(([aGraphic isKindOfClass:[XRGraphicLine class]])&&(_spokesVisible))
+		else if(([aGraphic isKindOfClass:[GraphicLine class]])&&(_spokesVisible))
 		{
 			
 			[aGraphic drawRect:rect];
@@ -686,18 +682,12 @@
 {
 	_spokeCount = (int)(360.0/_spokeAngle);
 	[self setValue:[NSNumber numberWithInt:_spokeCount] forKey:@"_spokeCount"];
-	
-	
-
 }
 
 -(void)spokeCountDidChange
 {
-	
 	_spokeAngle = 360.0/(float)_spokeCount;
 	[self setValue:[NSNumber numberWithFloat:_spokeAngle] forKey:@"_spokeAngle"];
-	
-
 }
 
 
@@ -725,12 +715,12 @@
 -(void)setSpokeFont:(NSFont *)font
 {
 	NSEnumerator *anEnum = [_graphicalObjects objectEnumerator];
-	XRGraphic *aGraphic;
+	Graphic *aGraphic;
 	_spokeFont = font;
 	while(aGraphic = [anEnum nextObject])
 	{
-		if([aGraphic isKindOfClass:[XRGraphicLine class]])
-			[(XRGraphicLine *)aGraphic setFont:_spokeFont];
+		if([aGraphic isKindOfClass:[GraphicLine class]])
+			[(GraphicLine *)aGraphic setFont:_spokeFont];
 	}
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:XRLayerRequiresRedraw object:self];
@@ -744,12 +734,14 @@
 -(void)setRingFont:(NSFont *)font
 {
 	NSEnumerator *anEnum = [_graphicalObjects objectEnumerator];
-	XRGraphic *aGraphic;
+	Graphic *aGraphic;
 	_ringFont = font;
 	while(aGraphic = [anEnum nextObject])
 	{
-		if([aGraphic isKindOfClass:[XRGraphicCircleLabel class]])
-			[(XRGraphicCircleLabel *)aGraphic setFont:_ringFont];
+        if([aGraphic isKindOfClass:[GraphicCircleLabel class]]) {
+            GraphicCircleLabel *graphic = (GraphicCircleLabel *)aGraphic;
+            graphic.labelFont = _ringFont;
+        }
 	}
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:XRLayerRequiresRedraw object:self];
@@ -851,7 +843,7 @@
 	NSMutableDictionary *spokeSettings = [[NSMutableDictionary alloc] init];
 	NSMutableArray *theGraphics  = [[NSMutableArray alloc] init];
 	NSEnumerator *anEnum = [_graphicalObjects objectEnumerator];
-	XRGraphic *aGraphic;
+	Graphic *aGraphic;
 	//(@"layerSettings 1");
 	//ring settings
 	if(_fixedCount)
