@@ -28,7 +28,6 @@
 #import "XRGeometryPropertyInspector.h"
 #import "FStatisticController.h"
 #import "XRGeometryController.h"
-#import "LITMXMLTree.h"
 #import "XRTableAddColumnController.h"
 #import "XRCalculateAzimuthController.h"
 #import "math.h"
@@ -284,28 +283,6 @@ NSRect initialRect;
 -(void)toggleGeometryInspector:(id)sender
 {
 	[[XRGeometryPropertyInspector defaultGeometryInspector] toggleInspector:sender]; 
-}
-
--(LITMXMLTree *)windowControllerXMLSettings
-{
-	LITMXMLTree *rootObject = [LITMXMLTree xmlTreeWithElementTag:@"WINDOW"];
-	NSSize theSize = [[self window]frame].size;
-	[rootObject addChild:[LITMXMLTree xmlTreeWithElementTag:@"WIDTH" attributes:nil attributeOrder:nil contents:[NSString stringWithFormat:@"%f",theSize.width]]];
-	[rootObject addChild:[LITMXMLTree xmlTreeWithElementTag:@"HEIGHT" attributes:nil attributeOrder:nil contents:[NSString stringWithFormat:@"%f",theSize.height]]];
-	return rootObject;
-}
-
--(void)setWindowSettingsWithXMLTree:(LITMXMLTree *)tree
-{
-	NSRect frame = [[self window] frame];
-	NSString *theContents;
-	
-	theContents = [[tree findXMLTreeElement:@"WIDTH"] contentsString];
-	frame.size.width = [theContents floatValue];
-	theContents = [[tree findXMLTreeElement:@"HEIGHT"] contentsString];
-	frame.size.height = [theContents floatValue];
-	
-	[[self window] setFrame:frame display:YES];
 }
 
 -(IBAction)generateFTestReport:(id)sender

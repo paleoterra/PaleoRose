@@ -27,7 +27,6 @@
 //NOTIFICATIONS
 #define XRRoseViewDrawingRectDidChange @"XRRoseViewDrawingRectDidChange"
 
-@class LITMXMLTree;
 @interface XRoseView : NSView
 {
     __weak IBOutlet id _rosePlotController;
@@ -45,6 +44,5 @@
 - (BOOL)knowsPageRange:(NSRangePointer)range;
 - (NSRect)rectForPage:(int)page;
 - (float)calculatePrintHeight;
--(LITMXMLTree *)xmlTreeForPreview;
 -(NSData *)imageDataForType:(NSString *)type;
 @end

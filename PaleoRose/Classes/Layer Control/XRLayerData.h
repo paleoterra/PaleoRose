@@ -77,5 +77,4 @@
 -(NSMutableArray *)statisticsArray;
 -(XRDataSet *)dataSet;
 
--(LITMXMLTree *)xmlTreeForVersion1_0;
 @end

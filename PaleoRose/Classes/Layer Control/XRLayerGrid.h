@@ -147,15 +147,4 @@ ringPercentIncrement:(float)ringPercentIncrement
 -(BOOL)radianMinorTicks;
 -(BOOL)radianLabels;
 
--(LITMXMLTree *)xmlTreeForVersion1_0Rings;
--(LITMXMLTree *)xmlTreeForVersion1_0Radials;
-
--(id)initWithGeometryController:(XRGeometryController *)aController xmlTree:(LITMXMLTree *)configureTree forVersion:(NSString *)version;
--(void)configureWithXMLTree:(LITMXMLTree *)configureTree version:(NSString *)version;
--(void)configureWithXMLTree1_0:(LITMXMLTree *)configureTree;
--(void)configureRingsWithXMLTree:(LITMXMLTree *)configureTree version:(NSString *)version;
--(void)configureRingsWithXMLTree1_0:(LITMXMLTree *)configureTree;
--(void)configureRadialsWithXMLTree:(LITMXMLTree *)configureTree version:(NSString *)version;
--(void)configureRadialsWithXMLTree1_0:(LITMXMLTree *)configureTree;
-
 @end

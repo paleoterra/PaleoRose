@@ -37,8 +37,6 @@
 #import "XRVStatCreatePanelController.h"
 #import "XRLayerText.h"
 #import "sqlite3.h"
-#import "LITMXMLTree.h"
-
 
 @interface XRoseTableController()
 
@@ -665,19 +663,6 @@
 	}
 }
 
--(LITMXMLTree *)xmlTreeForVersion:(NSString *)version
-{
-	NSEnumerator *anEnum = [_theLayers objectEnumerator];
-	XRLayer *layer;
-	LITMXMLTree *rootObject = [LITMXMLTree xmlTreeWithElementTag:@"LAYERS"];
-	while(layer = [anEnum nextObject])
-	{
-
-		[rootObject addChild:[layer xmlTreeForVersion:version]];
-	}
-	return rootObject;
-}
-
 -(void)saveToSQLDB:(sqlite3 *)db
 {
 	int _id;
@@ -767,52 +752,6 @@
 			[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(layerRequestsReload:) name:XRLayerTableRequiresReload object:aLayer];
 			[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(layerRequestsRedraw:) name:XRLayerRequiresRedraw object:aLayer];
 			
-		}
-	}
-	[_roseTableView reloadData];
-	[_roseView display];
-}
-
--(void)configureControllerWithXMLTree:(LITMXMLTree *)configureTree version:(NSString *)version withDataSets:(NSArray *)datasets
-{
-	int k;
-	XRLayer *aLayer;
-	
-	[_theLayers removeAllObjects];
-	[_roseTableView reloadData];
-	for(int i=0;i <[configureTree childCount];i++)
-	{
-		aLayer = [XRLayer layerWithGeometryController:_rosePlotController xmlTree:[configureTree childAtIndex:i] forVersion:version withParentView:_roseTableView];
-		if(([aLayer isKindOfClass:[XRLayerData class]])||([aLayer isKindOfClass:[XRLayerLineArrow class]]))
-		{
-			k = -1;
-			NSString *name = [[[configureTree childAtIndex:i] findXMLTreeElement:@"PARENTDATA"] contentsString];
-			
-			for(int j= 0;j<[datasets count];j++)
-			{
-				if([name isEqualToString:[[datasets objectAtIndex:j] name]])
-				{
-					k = j;
-					[aLayer setDataSet:[datasets objectAtIndex:j]];
-
-					j = (int)[datasets count];
-				}
-				if(k>-1)
-				{
-					[_theLayers addObject:aLayer];
-					[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(layerRequestsReload:) name:XRLayerTableRequiresReload object:aLayer];
-					[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(layerRequestsRedraw:) name:XRLayerRequiresRedraw object:aLayer];
-				}
-				
-			}
-			
-		}
-		else
-		{
-			[_theLayers addObject:aLayer];
-			[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(layerRequestsReload:) name:XRLayerTableRequiresReload object:aLayer];
-			[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(layerRequestsRedraw:) name:XRLayerRequiresRedraw object:aLayer];
-
 		}
 	}
 	[_roseTableView reloadData];

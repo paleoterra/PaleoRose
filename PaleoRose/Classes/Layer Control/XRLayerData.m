@@ -31,7 +31,6 @@
 #import "XRGeometryController.h"
 #import "XRStatistic.h"
 #import "sqlite3.h"
-#import "LITMXMLTree.h"
 #import <PaleoRose-Swift.h>
 
 @implementation XRLayerData
@@ -511,96 +510,6 @@
 +(NSString *)classTag
 {
 	return @"DATA";
-}
-
--(LITMXMLTree *)xmlTreeForVersion:(NSString *)version
-{
-	NSString *currentVersion = @"1.0";
-	if((version == nil)||([currentVersion isEqualToString:version]))
-		return [self xmlTreeForVersion1_0];
-	return nil;
-}
-
--(LITMXMLTree *)xmlTreeForVersion1_0
-{
-	LITMXMLTree *rootTree = [self baseXMLTreeForVersion:@"1.0"];
-	
-	[rootTree addChild:[LITMXMLTree xmlTreeWithElementTag:@"PARENTDATA" attributes:nil attributeOrder:nil contents:[_theSet name]]];
-	[rootTree addChild:[LITMXMLTree xmlTreeWithElementTag:@"PLOTTYPE" attributes:nil attributeOrder:nil contents:[NSString stringWithFormat:@"%i",_plotType]]];
-	[rootTree addChild:[LITMXMLTree xmlTreeWithElementTag:@"TOTALCOUNT" attributes:nil attributeOrder:nil contents:[NSString stringWithFormat:@"%i",_totalCount]]];
-	[rootTree addChild:[LITMXMLTree xmlTreeWithElementTag:@"DOTRADIUS" attributes:nil attributeOrder:nil contents:[NSString stringWithFormat:@"%f",_dotRadius]]];
-	
-	return rootTree;
-}
-
--(id)initWithGeometryController:(XRGeometryController *)aController xmlTree:(LITMXMLTree *)configureTree forVersion:(NSString *)version
-{
-	if (!(self = [self initWithGeometryController:aController withSet:nil])) return nil;
-	if(self)
-	{
-		
-		[self configureBaseWithXMLTree:configureTree version:version];
-		[self configureWithXMLTree:configureTree version:version];
-		[self generateGraphics];
-		return self;
-	}
-	return nil;
-}
-
--(id)initWithIsVisible:(BOOL)visible
-                active:(BOOL)active
-                 biDir:(BOOL)isBiDir
-                  name:(NSString *)layerName
-            lineWeight:(float)lineWeight
-              maxCount:(int)maxCount
-            maxPercent:(float)maxPercent
-           strokeColor:(NSColor *)strokeColor
-             fillColor:(NSColor *)fillColor
-              plotType:(int)plotType
-            totalCount:(int)totalCount
-             dotRadius:(float)dotRadius {
-    self = [super init];
-    if (self) {
-        _isVisible = visible;
-        _isActive = active;
-        _isBiDir = isBiDir;
-        _layerName = layerName;
-        _lineWeight = lineWeight;
-        _maxCount = maxCount;
-        _maxPercent = maxPercent;
-        _maxPercent = maxPercent;
-        _strokeColor = strokeColor;
-        _fillColor = fillColor;
-        _plotType = plotType;
-        _totalCount = totalCount;
-        _dotRadius = dotRadius;
-    }
-    return self;
-}
-
--(void)configureWithXMLTree:(LITMXMLTree *)configureTree version:(NSString *)version
-{
-	NSString *currentVersion = @"1.0";
-	if((version == nil)||([currentVersion isEqualToString:version]))
-	{
-		[self configureBaseWithXMLTree1_0:configureTree];
-		[self configureWithXMLTree1_0:configureTree];
-		
-	}
-	return;
-}
-
--(void)configureWithXMLTree1_0:(LITMXMLTree *)configureTree
-{
-
-	NSString *content;
-	if((content = [[configureTree findXMLTreeElement:@"PLOTTYPE"] contentsString]))
-		_plotType = [content intValue];
-	if((content = [[configureTree findXMLTreeElement:@"TOTALCOUNT"] contentsString]))
-		_totalCount = [content intValue];
-	if((content = [[configureTree findXMLTreeElement:@"DOTRADIUS"] contentsString]))
-		_dotRadius = [content floatValue];
-
 }
 
 -(void)setDataSet:(XRDataSet *)aSet

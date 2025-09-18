@@ -30,7 +30,6 @@
 #import "XRDataSet.h"
 #import "XRStatistic.h"
 #import "XRGeometryController.h"
-#import "LITMXMLTree.h"
 #import "PaleoRose-Swift.h"
 #import "sqlite3.h"
 #import <Cocoa/Cocoa.h>
@@ -281,77 +280,6 @@
 +(NSString *)classTag
 {
     return @"VECTOR";
-}
-
--(id)initWithGeometryController:(XRGeometryController *)aController xmlTree:(LITMXMLTree *)configureTree forVersion:(NSString *)version
-{
-    if (!(self = [self initWithGeometryController:aController])) return nil;
-    [self configureWithXMLTree:configureTree version:version];
-    return self;
-}
-
--(LITMXMLTree *)xmlTreeForVersion:(NSString *)version
-{
-    NSString *currentVersion = @"1.0";
-    if((version == nil)||([currentVersion isEqualToString:version]))
-        return [self xmlTreeForVersion1_0];
-    return nil;
-}
-
--(LITMXMLTree *)xmlTreeForVersion1_0
-{
-    LITMXMLTree *rootTree = [self baseXMLTreeForVersion:@"1.0"];
-    [rootTree addChild:[LITMXMLTree xmlTreeWithElementTag:@"PARENTDATA" attributes:nil attributeOrder:nil contents:[_theSet name]]];
-    [rootTree addChild:[LITMXMLTree xmlTreeWithElementTag:@"ARROWSIZE" attributes:nil attributeOrder:nil contents:[NSString stringWithFormat:@"%f",_arrowSize]]];
-    [rootTree addChild:[LITMXMLTree xmlTreeWithElementTag:@"VECTORTYPE" attributes:nil attributeOrder:nil contents:[NSString stringWithFormat:@"%i",_type]]];
-    [rootTree addChild:[LITMXMLTree xmlTreeWithElementTag:@"ARROWTYPE" attributes:nil attributeOrder:nil contents:[NSString stringWithFormat:@"%i",_headType]]];
-
-    if(_showVector)
-        [rootTree addChild:[LITMXMLTree xmlTreeWithElementTag:@"SHOWVECTOR" attributes:nil attributeOrder:nil contents:@"YES"]];
-    else
-        [rootTree addChild:[LITMXMLTree xmlTreeWithElementTag:@"SHOWVECTOR" attributes:nil attributeOrder:nil contents:@"NO"]];
-    if(_showError)
-        [rootTree addChild:[LITMXMLTree xmlTreeWithElementTag:@"SHOWERROR" attributes:nil attributeOrder:nil contents:@"YES"]];
-    else
-        [rootTree addChild:[LITMXMLTree xmlTreeWithElementTag:@"SHOWERROR" attributes:nil attributeOrder:nil contents:@"NO"]];
-    return rootTree;
-}
-
--(void)configureWithXMLTree:(LITMXMLTree *)configureTree version:(NSString *)version
-{
-    NSString *currentVersion = @"1.0";
-    if((version == nil)||([currentVersion isEqualToString:version]))
-    {
-        [self configureBaseWithXMLTree1_0:configureTree];
-        [self configureWithXMLTree1_0:configureTree];
-    }
-    return;
-}
-
--(void)configureWithXMLTree1_0:(LITMXMLTree *)configureTree
-{
-    NSString *content;
-    if((content = [[configureTree findXMLTreeElement:@"ARROWSIZE"] contentsString]))
-        _arrowSize = [content floatValue];
-    if((content = [[configureTree findXMLTreeElement:@"VECTORTYPE"] contentsString]))
-        _type = [content intValue];
-    if((content = [[configureTree findXMLTreeElement:@"ARROWTYPE"] contentsString]))
-        _headType = [content intValue];
-
-    if((content = [[configureTree findXMLTreeElement:@"SHOWVECTOR"] contentsString]))
-    {
-        if([content isEqualToString:@"YES"])
-            _showVector = YES;
-        else
-            _showVector = NO;
-    }
-    if((content = [[configureTree findXMLTreeElement:@"SHOWERROR"] contentsString]))
-    {
-        if([content isEqualToString:@"YES"])
-            _showError = YES;
-        else
-            _showError = NO;
-    }
 }
 
 -(void)setDataSet:(XRDataSet *)aSet

@@ -28,11 +28,9 @@
 
 #import "XRDataSet.h"
 #import <math.h>
-
 #import "XRStatistic.h"
 #import "sqlite3.h"
 #import "LITMXMLBinaryEncoding.h"
-#import "LITMXMLTree.h"
 
 @implementation XRDataSet
 
@@ -102,15 +100,6 @@
         [_theValues appendData:data];
     }
     return self;
-}
-
--(id)initWithXMLTree:(LITMXMLTree *)aTree forVersion:(NSString *)version
-{
-    if(version == nil)
-        return [self initWithVersion1_0XMLTree:aTree];
-    else if([version isEqualToString:@"1.0"])
-        return [self initWithVersion1_0XMLTree:aTree];
-    return nil;
 }
 
 #pragma mark Accessors
@@ -781,34 +770,6 @@
 		NSLog(@"error: %s",errorMsg);
 }
 
-#pragma Init with XML versions
-
--(id)initWithVersion1_0XMLTree:(LITMXMLTree *)aTree
-{
-	if (!(self = [super init])) return nil;
-	float aValue;
-	if(self)
-	{
-		NSEnumerator *children = [[aTree children] objectEnumerator];
-		LITMXMLTree *aChild;
-		_theValues = [[NSMutableData alloc] init];
-		[self setName:[[aTree attributesDictionary] objectForKey:@"name"]];
-		while(aChild = [children nextObject])
-		{
-			if([[aChild elementName] isEqualToString:@"COMMENTS"])
-			{
-				_comments = [[NSMutableAttributedString alloc] initWithRTF:[aChild decodedBase64Contents] documentAttributes:nil];
-			}
-			else if([[aChild elementName] isEqualToString:@"VALUE"])
-			{
-				aValue = [[aChild contentsString] floatValue];
-				[_theValues appendBytes:&aValue length:sizeof(float)];
-			}
-		}
-	}
-	return self;
-}
-
 -(id)initFromSQL:(sqlite3 *)db forIndex:(int)index
 {
 	//NSLog(@"index: %i",index);
@@ -884,78 +845,5 @@
 	}
 	
 }
-
-#pragma mark XML
-
--(LITMXMLTree *)treeForVersion:(NSString *)version
-{
-	if(version == nil)
-		return [self dataXMLDataVersion1_0];
-	else if ([version isEqualToString:@"1.0"])
-		return [self dataXMLDataVersion1_0];
-	return nil;
-}
-
--(LITMXMLTree *)dataXMLDataVersion1_0
-{
-	LITMXMLTree *aChild;
-	NSRange range;
-	float aFloat;
-	NSRange aRange;
-	aRange.length = sizeof(float);
-	int valueCount = (int)[_theValues length]/sizeof(float);
-	LITMXMLTree *rootForSetInfo = [LITMXMLTree xmlTreeWithElementTag:@"DATASET"
-														  attributes:[NSDictionary dictionaryWithObject:_name forKey:@"name"]
-													  attributeOrder:[NSArray arrayWithObject:@"name"]
-															contents:nil];
-	if(_comments)
-	{
-		if([_comments length]>0)
-		{
-			aChild = [LITMXMLTree xmlTreeWithElementTag:@"COMMENTS"];
-			range.location = 0;
-			range.length = [_comments length];
-            [aChild setBase64Contents:[_comments RTFFromRange:range documentAttributes:@{}]];
-			[rootForSetInfo addChild:aChild];
-		}
-	}
-	
-	for(int i=0;i<valueCount;i++)
-	{
-		aChild = [LITMXMLTree xmlTreeWithElementTag:@"VALUE"];
-		aRange.location = sizeof(float) * i;
-		[_theValues getBytes:&aFloat range:aRange];
-		[aChild setContentsString:[NSString stringWithFormat:@"%f",aFloat]];
-		[rootForSetInfo addChild:aChild];
-	}
-	return rootForSetInfo;
-}
-
-// unused methods
-
-//-(id)initWithContentsOfASCIIFile:(NSString *)filePath encoding:(NSStringEncoding)encoding
-//{
-//    if (!(self = [super init])) return nil;
-//    if(self)
-//    {
-//        NSString *theContents = [[NSString alloc] initWithData:[NSData dataWithContentsOfFile:filePath] encoding:encoding];
-//        NSScanner *theScanner = [NSScanner scannerWithString:theContents];
-//        float aValue;
-//
-//        _name = [filePath lastPathComponent];
-//        _theValues = [[NSMutableData alloc] init];
-//        while(![theScanner isAtEnd])
-//        {
-//            if([theScanner scanFloat:&aValue])
-//            {
-//                if((aValue<=360.0)&&(aValue>=0))
-//                    [_theValues appendBytes:&aValue length:sizeof(float)];
-//            }
-//            else
-//                break;
-//        }
-//    }
-//    return self;
-//}
 
 @end

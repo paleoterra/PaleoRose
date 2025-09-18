@@ -25,7 +25,6 @@
 #import "XRoseTableController.h"
 #import <math.h>
 #import <sqlite3.h>
-#import "LITMXMLTree.h"
 
 @implementation XRGeometryController
 
@@ -511,101 +510,6 @@
 	[theDict setObject:[NSString stringWithFormat:@"%i",_sectorCount] forKey:@"_sectorCount"];
 
 	return [NSDictionary dictionaryWithDictionary:theDict];
-}
-
--(void)configureController:(LITMXMLTree *)settings forVersion:(NSString *)version
-{
-	NSString *currentVersion = @"1.0";
-	if((version == nil)||([currentVersion isEqualToString:version]))
-		 [self configureControllerForVersion1_0:settings];
-	return ;	
-}
-
--(void)configureControllerForVersion1_0:(LITMXMLTree *)settings
-{
-	//do attributes
-	NSString *contents;
-	LITMXMLTree *child;
-	if((contents = [[settings attributesDictionary] objectForKey:@"EQUAL"]))
-	{
-		if([contents isEqualToString:@"YES"])
-			[self setEqualArea:YES];
-		else
-			[self setEqualArea:NO];
-	}
-	if((contents = [[settings attributesDictionary] objectForKey:@"ISPERCENT"]))
-	{
-		if([contents isEqualToString:@"YES"])
-			[self setPercent:YES];
-		else
-			[self setPercent:NO];
-	}
-	if((child = [settings findXMLTreeElement:@"MAXCOUNT"]))
-	{
-		_geometryMaxCount = [[child contentsString] intValue];
-	}
-	if((child = [settings findXMLTreeElement:@"MAXPERCENT"]))
-	{
-		_geometryMaxPercent = [[child contentsString] floatValue];
-	}
-	if((child = [settings findXMLTreeElement:@"HOLLOWCORE"]))
-	{
-		_hollowCoreSize = [[child contentsString] floatValue];
-	}
-	if((child = [settings findXMLTreeElement:@"SECTORSIZE"]))
-	{
-		_sectorSize = [[child contentsString] floatValue];
-	}
-	if((child = [settings findXMLTreeElement:@"STARTINGANGLE"]))
-	{
-		_startingAngle = [[child contentsString] floatValue];
-	}
-	if((child = [settings findXMLTreeElement:@"SECTORCOUNT"]))
-	{
-		_sectorCount = [[child contentsString] intValue];
-	}
-	if((child = [settings findXMLTreeElement:@"RELATIVESIZE"]))
-	{
-		[self setRelativeSizeOfCircleRect:[[child contentsString] floatValue]];
-	}
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName:XRGeometryDidChange object:self];
-}
-
--(LITMXMLTree *)xmlTreeForVersion:(NSString *)version
-{
-	NSString *currentVersion = @"1.0";
-	if((version == nil)||([currentVersion isEqualToString:version]))
-		return [self xmlTreeForVersion1_0];
-	return nil;
-}
-
--(LITMXMLTree *)xmlTreeForVersion1_0
-{
-	NSArray *keys = [NSArray arrayWithObjects:@"EQUAL",@"ISPERCENT",nil];
-	NSMutableDictionary *atts = [[NSMutableDictionary alloc] init];
-	LITMXMLTree *rootObject;
-	
-	if(_isEqualArea)
-		[atts setObject:@"YES" forKey:@"EQUAL"];
-	else
-		[atts setObject:@"NO" forKey:@"EQUAL"];
-	
-	if(_isPercent)
-		[atts setObject:@"YES" forKey:@"ISPERCENT"];
-	else
-		[atts setObject:@"NO" forKey:@"ISPERCENT"];
-	
-	rootObject = [LITMXMLTree xmlTreeWithElementTag:@"GEOMETRY" attributes:atts attributeOrder:keys contents:nil];
-	[rootObject addChild:[LITMXMLTree xmlTreeWithElementTag:@"MAXCOUNT" attributes:nil attributeOrder:nil contents:[NSString stringWithFormat:@"%i",_geometryMaxCount]]];
-	[rootObject addChild:[LITMXMLTree xmlTreeWithElementTag:@"MAXPERCENT" attributes:nil attributeOrder:nil contents:[NSString stringWithFormat:@"%f",_geometryMaxPercent]]];
-	[rootObject addChild:[LITMXMLTree xmlTreeWithElementTag:@"HOLLOWCORE" attributes:nil attributeOrder:nil contents:[NSString stringWithFormat:@"%f",_hollowCoreSize]]];
-	[rootObject addChild:[LITMXMLTree xmlTreeWithElementTag:@"SECTORSIZE" attributes:nil attributeOrder:nil contents:[NSString stringWithFormat:@"%f",_sectorSize]]];
-	[rootObject addChild:[LITMXMLTree xmlTreeWithElementTag:@"STARTINGANGLE" attributes:nil attributeOrder:nil contents:[NSString stringWithFormat:@"%f",_startingAngle]]];
-	[rootObject addChild:[LITMXMLTree xmlTreeWithElementTag:@"SECTORCOUNT" attributes:nil attributeOrder:nil contents:[NSString stringWithFormat:@"%i",_sectorCount]]];
-	[rootObject addChild:[LITMXMLTree xmlTreeWithElementTag:@"RELATIVESIZE" attributes:nil attributeOrder:nil contents:[NSString stringWithFormat:@"%f",_relativeSizeOfCircleRect]]];
-
-	return rootObject;
 }
 
 -(void)calculateRelativePositionWithPoint:(NSPoint)target intoRadius:(float *)estimatedRadius intoAngle:(float *)estimatedAngle

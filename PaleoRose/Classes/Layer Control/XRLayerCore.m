@@ -30,7 +30,6 @@
 #import "XRLayerCore.h"
 #import "XRGeometryController.h"
 #import "sqlite3.h"
-#import "LITMXMLTree.h"
 #import <PaleoRose-Swift.h>
 
 @implementation XRLayerCore
@@ -225,70 +224,6 @@
 +(NSString *)classTag
 {
 	return @"CORE";
-}
-
-
--(LITMXMLTree *)xmlTreeForVersion:(NSString *)version
-{
-	NSString *currentVersion = @"1.0";
-	if((version == nil)||([currentVersion isEqualToString:version]))
-		return [self xmlTreeForVersion1_0];
-	return nil;
-}
-
--(LITMXMLTree *)xmlTreeForVersion1_0
-{
-	LITMXMLTree *rootTree = [self baseXMLTreeForVersion:@"1.0"];
-	
-	if(_coreType)
-		[rootTree addChild:[LITMXMLTree xmlTreeWithElementTag:XRLayerCoreXMLCoreType attributes:nil attributeOrder:nil contents:@"YES"]];
-	else
-		[rootTree addChild:[LITMXMLTree xmlTreeWithElementTag:XRLayerCoreXMLCoreType attributes:nil attributeOrder:nil contents:@"NO"]];
-	
-	[rootTree addChild:[LITMXMLTree xmlTreeWithElementTag:XRLayerCoreXMLCoreRadius attributes:nil attributeOrder:nil contents:[NSString stringWithFormat:@"%f",_percentRadius]]];
-
-	return rootTree;
-}
-
--(id)initWithGeometryController:(XRGeometryController *)aController xmlTree:(LITMXMLTree *)configureTree forVersion:(NSString *)version
-{
-	if (!(self = [super initWithGeometryController:aController])) return nil;
-	if(self)
-	{
-		
-		[self configureBaseWithXMLTree:configureTree version:version];
-		[self configureWithXMLTree:configureTree version:version];
-		[self generateGraphics];
-		return self;
-	}
-	return nil;
-}
-
--(void)configureWithXMLTree:(LITMXMLTree *)configureTree version:(NSString *)version
-{
-	NSString *currentVersion = @"1.0";
-	if((version == nil)||([currentVersion isEqualToString:version]))
-	{
-		[self configureBaseWithXMLTree1_0:configureTree];
-		[self configureWithXMLTree1_0:configureTree];
-	}
-	return;
-}
-
--(void)configureWithXMLTree1_0:(LITMXMLTree *)configureTree
-{
-	NSString *content;
-	if((content = [[configureTree findXMLTreeElement:XRLayerCoreXMLCoreType] contentsString]))
-	{
-		if([content isEqualToString:@"YES"])
-			_coreType = YES;
-		else
-			_coreType = NO;
-
-	}
-	if((content = [[configureTree findXMLTreeElement:XRLayerCoreXMLCoreRadius] contentsString]))
-		_percentRadius = [content intValue];
-
 }
 
 -(NSString *)type

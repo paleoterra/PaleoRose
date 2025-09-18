@@ -25,7 +25,6 @@
 #import "XRGeometryController.h"
 #import "XRoseTableController.h"
 #import "XRLayerText.h"
-#import "LITMXMLTree.h"
 
 @implementation XRoseView
 
@@ -236,13 +235,6 @@
     NSPoint draggedImageLocation = [self convertPoint:[sender draggedImageLocation] fromView:nil];
 	[(XRLayerText *)draggedObject moveToPoint:draggedImageLocation];
 	draggedObject = nil;
-}
-
--(LITMXMLTree *)xmlTreeForPreview
-{
-	LITMXMLTree *preview = [LITMXMLTree xmlTreeWithElementTag:@"PREVIEW"];
-	[preview setBase64Contents:[self dataWithPDFInsideRect:[self bounds]]];
-	return preview;
 }
 
 -(NSData *)imageDataForType:(NSString *)type

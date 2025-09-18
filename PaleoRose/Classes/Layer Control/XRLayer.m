@@ -34,7 +34,6 @@
 #import "XRLayerText.h"
 #import "XRLayerLineArrow.h"
 #import "sqlite3.h"
-#import "LITMXMLTree.h"
 #import <PaleoRose-Swift.h>
 
 @implementation XRLayer
@@ -383,126 +382,6 @@
 	return @"GENERIC";
 }
 
--(LITMXMLTree *)baseXMLTreeForVersion:(NSString *)version
-{
-	if(version == nil)
-		return [self baseXMLTree1_0];
-	else if([version isEqualToString:@"1.0"])
-		return [self baseXMLTree1_0];
-	return nil;
-}
-
--(LITMXMLTree *)baseXMLTree1_0
-{
-	NSMutableDictionary *aDict = [[NSMutableDictionary alloc] init];
-	NSArray *attOrder = [NSArray arrayWithObjects:@"TYPE",@"VISIBLE",@"ACTIVE",@"BIDIR",nil];
-	LITMXMLTree *baseTree;
-	[aDict setObject:[[self class] classTag] forKey:@"TYPE"];
-	if(_isVisible)
-		[aDict setObject:@"YES" forKey:@"VISIBLE"];
-	else
-		[aDict setObject:@"NO" forKey:@"VISIBLE"];
-	
-	if(_isActive)
-		[aDict setObject:@"YES" forKey:@"ACTIVE"];
-	else
-		[aDict setObject:@"NO" forKey:@"ACTIVE"];
-	if(_isBiDir)
-		[aDict setObject:@"YES" forKey:@"BIDIR"];
-	else
-		[aDict setObject:@"NO" forKey:@"BIDIR"];
-	
-	baseTree = [LITMXMLTree xmlTreeWithElementTag:@"LAYER" attributes:aDict attributeOrder:attOrder contents:nil];
-	[baseTree addChild:[LITMXMLTree xmlTreeWithElementTag:@"LAYER_NAME" attributes:nil attributeOrder:nil contents:[self layerName]]];
-	[baseTree addChild:[LITMXMLTree treeFromNSColor:_strokeColor withName:@"STROKE"]];
-	[baseTree addChild:[LITMXMLTree treeFromNSColor:_fillColor withName:@"FILL"]];
-	[baseTree addChild:[LITMXMLTree xmlTreeWithElementTag:@"LINEWEIGHT" attributes:nil attributeOrder:nil contents:[NSString stringWithFormat:@"%f",_lineWeight]]];
-	[baseTree addChild:[LITMXMLTree xmlTreeWithElementTag:@"MAXCOUNT" attributes:nil attributeOrder:nil contents:[NSString stringWithFormat:@"%i",_maxCount]]];
-	[baseTree addChild:[LITMXMLTree xmlTreeWithElementTag:@"MAXPERCENT" attributes:nil attributeOrder:nil contents:[NSString stringWithFormat:@"%f",_maxPercent]]];
-	return baseTree;
-}
-
--(void)configureBaseWithXMLTree:(LITMXMLTree *)configureTree version:(NSString *)version
-{
-	if(version == nil)
-		[self configureBaseWithXMLTree1_0:configureTree];
-	else if([version isEqualToString:@"1.0"])
-		[self configureBaseWithXMLTree1_0:configureTree];
-	
-}
-
--(void)configureBaseWithXMLTree1_0:(LITMXMLTree *)configureTree
-{
-	NS_DURING
-	NSDictionary *dict = [configureTree attributesDictionary];
-	NSString *aString;
-	LITMXMLTree *aChild;
-	if((aString = [dict objectForKey:@"VISIBLE"]))
-	{
-		if([aString isEqualToString:@"YES"])
-			[self setIsVisible:YES];
-		else
-			[self setIsVisible:NO];
-	}
-	if((aString = [dict objectForKey:@"ACTIVE"]))
-	{
-		if([aString isEqualToString:@"YES"])
-			[self setIsActive:YES];
-		else
-			[self setIsActive:NO];
-	}
-	if((aString = [dict objectForKey:@"BIDIR"]))
-	{
-		if([aString isEqualToString:@"YES"])
-			[self setBiDirectional:YES];
-		else
-			[self setBiDirectional:NO];
-	}
-	if((aChild = [configureTree findXMLTreeElement:@"LAYER_NAME"]))
-		[self setLayerName:[aChild contentsString]];
-	
-	if((aChild = [configureTree findXMLTreeElement:@"LINEWEIGHT"]))
-		[self setLineWeight:[[aChild contentsString] floatValue]];
-	if((aChild = [configureTree findXMLTreeElement:@"MAXCOUNT"]))
-		_maxCount = [[aChild contentsString] intValue];
-	if((aChild = [configureTree findXMLTreeElement:@"MAXPERCENT"]))
-		_maxPercent = [[aChild contentsString] floatValue];
-	
-	for(int i=0;i<[configureTree childCount];i++)
-	{
-		NSString *type;
-		if((type = [[[configureTree childAtIndex:i] attributesDictionary] objectForKey:@"TYPE"]))
-		{
-			if([type isEqualToString:@"FILL"])
-				[self setFillColor:[[configureTree childAtIndex:i] colorFromTree]];
-			else if([type isEqualToString:@"STROKE"])
-				[self setStrokeColor:[[configureTree childAtIndex:i] colorFromTree]];
-		}
-	}
-	NS_HANDLER
-		//NSLog(@"configureBaseWithXMLTree1_0 error");
-		//NSLog(@"[XRlayer configureBaseWithXMLTree1_0] %@",[localException name]);
-		[localException raise];
-	NS_ENDHANDLER
-	
-}
-
--(void)configureWithXMLTree:(LITMXMLTree *)configureTree version:(NSString *)version
-{
-	NSString *currentVersion = @"1.0";
-	if((version == nil)||([currentVersion isEqualToString:version]))
-		[self configureBaseWithXMLTree1_0:configureTree];
-	return;
-}
--(void)configureWithXMLTree1_0:(LITMXMLTree *)configureTree
-{
-}
-
--(id)initWithGeometryController:(XRGeometryController *)aController xmlTree:(LITMXMLTree *)configureTree forVersion:(NSString *)version
-{
-	return nil;
-}
-
 -(id)initWithGeometryController:(XRGeometryController *)aController sqlDB:(sqlite3 *)db   layerID:(int)layerID 
 {
 	return nil;
@@ -512,28 +391,6 @@
 -(id)initWithGeometryController:(XRGeometryController *)aController sqlDB:(sqlite3 *)db layerID:(int)layerID withParentView:(NSView *)parentView
 {
 	return nil;
-}
-
-+(id)layerWithGeometryController:(XRGeometryController *)aController xmlTree:(LITMXMLTree *)configureTree forVersion:(NSString *)version withParentView:(NSView *)parentView
-{
-	NSDictionary *atts = [configureTree attributesDictionary];
-	NSString *class = [atts objectForKey:@"TYPE"];
-	//NSLog(@"class %@",class);
-	//NSLog(@"element name %@",[configureTree elementName]);
-	if([class isEqualToString:[XRLayerLineArrow classTag]])
-		return [[XRLayerLineArrow alloc] initWithGeometryController:aController xmlTree:configureTree forVersion:version];
-	else if([class isEqualToString:[XRLayerCore classTag]])
-		return [[XRLayerCore alloc] initWithGeometryController:aController xmlTree:configureTree forVersion:version];
-	else if([class isEqualToString:[XRLayerData classTag]])
-		return [[XRLayerData alloc] initWithGeometryController:aController xmlTree:configureTree forVersion:version];
-	else if([class isEqualToString:[XRLayerGrid classTag]])
-		return [[XRLayerGrid alloc] initWithGeometryController:aController xmlTree:configureTree forVersion:version];
-	else if([class isEqualToString:[XRLayerText classTag]])
-		return [[XRLayerText alloc] initWithGeometryController:aController xmlTree:configureTree forVersion:version withParentView:parentView];
-	else
-		return nil;
-	
-	
 }
 
 +(id)layerWithGeometryController:(XRGeometryController *)aController sqlDB:(sqlite3 *)db layerID:(int)layerid withParentView:(NSView *)parentView
@@ -563,16 +420,6 @@
 	else
 		return nil;
 	
-	return nil;
-}
-
--(LITMXMLTree *)xmlTreeForVersion:(NSString *)version
-{
-	return nil;
-}
-
--(LITMXMLTree *)xmlTreeForVersion1_0
-{
 	return nil;
 }
 

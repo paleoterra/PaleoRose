@@ -25,7 +25,7 @@
 #import <Cocoa/Cocoa.h>
 #define XRLayerDragType @"XRLayerDragType"
 #import "sqlite3.h"
-@class XRDataSet,LITMXMLTree,XRLayer;
+@class XRDataSet, XRLayer;
 @interface XRoseTableController : NSObject
 {
 	__weak IBOutlet id _rosePlotController;
@@ -63,10 +63,6 @@
 
 -(NSArray *)dataLayerNames;
 -(void)displaySheetForVStatLayer:(id)sender;
-
--(LITMXMLTree *)xmlTreeForVersion:(NSString *)version;
-
--(void)configureControllerWithXMLTree:(LITMXMLTree *)configureTree version:(NSString *)version withDataSets:(NSArray *)datasets;
 
 -(void)deleteLayer:(XRLayer *)aLayer;
 -(XRLayer *)lastLayer;

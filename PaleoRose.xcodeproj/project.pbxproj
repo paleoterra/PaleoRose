@@ -140,8 +140,6 @@
 		B4A23FC62E28389D00EDE135 /* GraphicGeometrySource.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A23FC52E28389D00EDE135 /* GraphicGeometrySource.h */; };
 		B4A23FC82E28936900EDE135 /* MockGraphicGeometrySource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A23FC72E28936900EDE135 /* MockGraphicGeometrySource.swift */; };
 		B4A82F962A07F87A00790052 /* LITMXMLNodeProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A82F932A07F87900790052 /* LITMXMLNodeProtocol.h */; };
-		B4A82F972A07F87A00790052 /* LITMXMLTree.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A82F942A07F87900790052 /* LITMXMLTree.h */; };
-		B4A82F982A07F87A00790052 /* LITMXMLTree.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A82F952A07F87A00790052 /* LITMXMLTree.m */; };
 		B4A82F9B2A07F8A400790052 /* LITMXMLBinaryEncoding.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A82F992A07F8A400790052 /* LITMXMLBinaryEncoding.h */; };
 		B4A82F9C2A07F8A400790052 /* LITMXMLBinaryEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A82F9A2A07F8A400790052 /* LITMXMLBinaryEncoding.m */; };
 		B4A82FA42A07FA8900790052 /* LITMXMLParser.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A82FA22A07FA8900790052 /* LITMXMLParser.h */; };
@@ -418,8 +416,6 @@
 		B4A23FC52E28389D00EDE135 /* GraphicGeometrySource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GraphicGeometrySource.h; sourceTree = "<group>"; };
 		B4A23FC72E28936900EDE135 /* MockGraphicGeometrySource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGraphicGeometrySource.swift; sourceTree = "<group>"; };
 		B4A82F932A07F87900790052 /* LITMXMLNodeProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LITMXMLNodeProtocol.h; sourceTree = "<group>"; };
-		B4A82F942A07F87900790052 /* LITMXMLTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LITMXMLTree.h; sourceTree = "<group>"; };
-		B4A82F952A07F87A00790052 /* LITMXMLTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LITMXMLTree.m; sourceTree = "<group>"; };
 		B4A82F992A07F8A400790052 /* LITMXMLBinaryEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LITMXMLBinaryEncoding.h; sourceTree = "<group>"; };
 		B4A82F9A2A07F8A400790052 /* LITMXMLBinaryEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LITMXMLBinaryEncoding.m; sourceTree = "<group>"; };
 		B4A82FA22A07FA8900790052 /* LITMXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LITMXMLParser.h; sourceTree = "<group>"; };
@@ -627,8 +623,6 @@
 				B4A82F992A07F8A400790052 /* LITMXMLBinaryEncoding.h */,
 				B4A82F9A2A07F8A400790052 /* LITMXMLBinaryEncoding.m */,
 				B4A82F932A07F87900790052 /* LITMXMLNodeProtocol.h */,
-				B4A82F942A07F87900790052 /* LITMXMLTree.h */,
-				B4A82F952A07F87A00790052 /* LITMXMLTree.m */,
 			);
 			path = "XML Parsing";
 			sourceTree = "<group>";
@@ -1141,7 +1135,6 @@
 				B48345D605C23B3D00E3F6B7 /* XRoseTableController.h in Headers */,
 				B4A82F9B2A07F8A400790052 /* LITMXMLBinaryEncoding.h in Headers */,
 				B48345F005C23CA100E3F6B7 /* XRoseView.h in Headers */,
-				B4A82F972A07F87A00790052 /* LITMXMLTree.h in Headers */,
 				B4852A8405C2E223002212E3 /* XRGeometryController.h in Headers */,
 				B411E6EC05C3855000C22F3E /* XRLayer.h in Headers */,
 				B411E75005C386DA00C22F3E /* XRDataSet.h in Headers */,
@@ -1501,7 +1494,6 @@
 				B464E643060956DE009C1C89 /* XRGeometryPropertyInspector.m in Sources */,
 				B4324D0B06187FFF0083AE8A /* XRLayerText.m in Sources */,
 				B48BBEC12CAA1BFA0050852E /* Logger.swift in Sources */,
-				B4A82F982A07F87A00790052 /* LITMXMLTree.m in Sources */,
 				B4C08803063069F2001A91F4 /* XRExportGraphicAccessory.m in Sources */,
 				B43D613906345207001B863E /* FStatisticController.m in Sources */,
 				B41D283D094FC7CA008DF384 /* XRTableImporter.m in Sources */,
