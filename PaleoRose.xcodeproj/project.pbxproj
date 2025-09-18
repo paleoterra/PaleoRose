@@ -142,8 +142,6 @@
 		B4A82F962A07F87A00790052 /* LITMXMLNodeProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A82F932A07F87900790052 /* LITMXMLNodeProtocol.h */; };
 		B4A82F9B2A07F8A400790052 /* LITMXMLBinaryEncoding.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A82F992A07F8A400790052 /* LITMXMLBinaryEncoding.h */; };
 		B4A82F9C2A07F8A400790052 /* LITMXMLBinaryEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A82F9A2A07F8A400790052 /* LITMXMLBinaryEncoding.m */; };
-		B4A82FA42A07FA8900790052 /* LITMXMLParser.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A82FA22A07FA8900790052 /* LITMXMLParser.h */; };
-		B4A82FA52A07FA8900790052 /* LITMXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A82FA32A07FA8900790052 /* LITMXMLParser.m */; };
 		B4A82FAD2A07FB8800790052 /* ArrowHead.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A82FAB2A07FB8800790052 /* ArrowHead.swift */; };
 		B4AE41B52D0BBAF600E05D96 /* XRLayerText+Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AE41B32D0BBAF600E05D96 /* XRLayerText+Stub.swift */; };
 		B4AE41B82D0BCEBF00E05D96 /* XRLayerLineArrow+Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AE41B62D0BCE6100E05D96 /* XRLayerLineArrow+Stub.swift */; };
@@ -176,10 +174,6 @@
 		B4E22DA82DFF701200A9AFE0 /* FormatterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E22DA72DFF700D00A9AFE0 /* FormatterFactory.swift */; };
 		B4E2DE8905C5BD6500714F6F /* XRLayerGrid.h in Headers */ = {isa = PBXBuildFile; fileRef = B4E2DE8705C5BD6500714F6F /* XRLayerGrid.h */; };
 		B4E2DE8A05C5BD6500714F6F /* XRLayerGrid.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E2DE8805C5BD6500714F6F /* XRLayerGrid.m */; };
-		B4E5F8C005FC63A00011788E /* XRFileParser.h in Headers */ = {isa = PBXBuildFile; fileRef = B4E5F8BE05FC63A00011788E /* XRFileParser.h */; };
-		B4E5F8C105FC63A00011788E /* XRFileParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E5F8BF05FC63A00011788E /* XRFileParser.m */; };
-		B4E5F90D05FC679E0011788E /* XRFileParser1.h in Headers */ = {isa = PBXBuildFile; fileRef = B4E5F90B05FC679E0011788E /* XRFileParser1.h */; };
-		B4E5F90E05FC679E0011788E /* XRFileParser1.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E5F90C05FC679E0011788E /* XRFileParser1.m */; };
 		B4E69E3D062AE989006B21D6 /* vectorLayer.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B4E69E3C062AE989006B21D6 /* vectorLayer.tiff */; };
 		B4E69E51062AE9B0006B21D6 /* gridLayer.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B4E69E50062AE9B0006B21D6 /* gridLayer.tiff */; };
 		B4E9C7812E3300DE005BA22F /* BezierPath+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E9C7802E3300D1005BA22F /* BezierPath+extensions.swift */; };
@@ -418,8 +412,6 @@
 		B4A82F932A07F87900790052 /* LITMXMLNodeProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LITMXMLNodeProtocol.h; sourceTree = "<group>"; };
 		B4A82F992A07F8A400790052 /* LITMXMLBinaryEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LITMXMLBinaryEncoding.h; sourceTree = "<group>"; };
 		B4A82F9A2A07F8A400790052 /* LITMXMLBinaryEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LITMXMLBinaryEncoding.m; sourceTree = "<group>"; };
-		B4A82FA22A07FA8900790052 /* LITMXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LITMXMLParser.h; sourceTree = "<group>"; };
-		B4A82FA32A07FA8900790052 /* LITMXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LITMXMLParser.m; sourceTree = "<group>"; };
 		B4A82FAB2A07FB8800790052 /* ArrowHead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowHead.swift; sourceTree = "<group>"; };
 		B4AE41B32D0BBAF600E05D96 /* XRLayerText+Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XRLayerText+Stub.swift"; sourceTree = "<group>"; };
 		B4AE41B62D0BCE6100E05D96 /* XRLayerLineArrow+Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XRLayerLineArrow+Stub.swift"; sourceTree = "<group>"; };
@@ -452,10 +444,6 @@
 		B4E22DA72DFF700D00A9AFE0 /* FormatterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatterFactory.swift; sourceTree = "<group>"; };
 		B4E2DE8705C5BD6500714F6F /* XRLayerGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRLayerGrid.h; sourceTree = "<group>"; };
 		B4E2DE8805C5BD6500714F6F /* XRLayerGrid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRLayerGrid.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		B4E5F8BE05FC63A00011788E /* XRFileParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRFileParser.h; sourceTree = "<group>"; };
-		B4E5F8BF05FC63A00011788E /* XRFileParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRFileParser.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		B4E5F90B05FC679E0011788E /* XRFileParser1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRFileParser1.h; sourceTree = "<group>"; };
-		B4E5F90C05FC679E0011788E /* XRFileParser1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRFileParser1.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B4E69E3C062AE989006B21D6 /* vectorLayer.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = vectorLayer.tiff; sourceTree = "<group>"; };
 		B4E69E50062AE9B0006B21D6 /* gridLayer.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = gridLayer.tiff; sourceTree = "<group>"; };
 		B4E9C7802E3300D1005BA22F /* BezierPath+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BezierPath+extensions.swift"; sourceTree = "<group>"; };
@@ -618,8 +606,6 @@
 		B4149FE62B24C3B6008AE5F4 /* XML Parsing */ = {
 			isa = PBXGroup;
 			children = (
-				B4A82FA22A07FA8900790052 /* LITMXMLParser.h */,
-				B4A82FA32A07FA8900790052 /* LITMXMLParser.m */,
 				B4A82F992A07F8A400790052 /* LITMXMLBinaryEncoding.h */,
 				B4A82F9A2A07F8A400790052 /* LITMXMLBinaryEncoding.m */,
 				B4A82F932A07F87900790052 /* LITMXMLNodeProtocol.h */,
@@ -773,10 +759,6 @@
 		B4149FF12B24C4CB008AE5F4 /* XRose File */ = {
 			isa = PBXGroup;
 			children = (
-				B4E5F8BE05FC63A00011788E /* XRFileParser.h */,
-				B4E5F8BF05FC63A00011788E /* XRFileParser.m */,
-				B4E5F90B05FC679E0011788E /* XRFileParser1.h */,
-				B4E5F90C05FC679E0011788E /* XRFileParser1.m */,
 			);
 			path = "XRose File";
 			sourceTree = "<group>";
@@ -1151,8 +1133,6 @@
 				B4BF9C1505CD6B110047E8CF /* XRGridInspector.h in Headers */,
 				B4F929FD05D35D3A00EAAED0 /* XRLayerCore.h in Headers */,
 				B452504D05D427F1008338E8 /* XRCoreInspector.h in Headers */,
-				B4E5F8C005FC63A00011788E /* XRFileParser.h in Headers */,
-				B4E5F90D05FC679E0011788E /* XRFileParser1.h in Headers */,
 				B40C43C5060545BD00353928 /* XRLayerLineArrow.h in Headers */,
 				B46C6D290607F2A2000620E7 /* XRVectorInspector.h in Headers */,
 				B4F08861060914150000CF7A /* XRVStatCreatePanelController.h in Headers */,
@@ -1166,7 +1146,6 @@
 				B42083B109637969007A74A8 /* PTFMXMLParser.h in Headers */,
 				B47DDF500964CDE700C7EF02 /* XRTableImporterXRose.h in Headers */,
 				B4564ABB096A04A1005E0015 /* XRTableAddColumnController.h in Headers */,
-				B4A82FA42A07FA8900790052 /* LITMXMLParser.h in Headers */,
 				B42FE3AD096AEB99007E9DC5 /* XRCalculateAzimuthController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1470,12 +1449,9 @@
 				B452504E05D427F1008338E8 /* XRCoreInspector.m in Sources */,
 				B414A00D2B24CD24008AE5F4 /* XRStatistic.m in Sources */,
 				B41C85B32DE4A2550053C9C9 /* SettingsView.swift in Sources */,
-				B4E5F8C105FC63A00011788E /* XRFileParser.m in Sources */,
 				B41266712B6EDF4C00E1C385 /* AppDelegate.swift in Sources */,
-				B4E5F90E05FC679E0011788E /* XRFileParser1.m in Sources */,
 				B40C43C6060545BD00353928 /* XRLayerLineArrow.m in Sources */,
 				B46C6D2A0607F2A2000620E7 /* XRVectorInspector.m in Sources */,
-				B4A82FA52A07FA8900790052 /* LITMXMLParser.m in Sources */,
 				B4F2B1892C97CB300017E717 /* LayerData.swift in Sources */,
 				B4F2B18A2C97CB300017E717 /* WindowControllerSize.swift in Sources */,
 				B4F2B18B2C97CB300017E717 /* Layer.swift in Sources */,

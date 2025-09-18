@@ -34,7 +34,6 @@
 #import "XREncodingAccessoryView.h"
 #import "XRoseTableController.h"
 #import "XRoseView.h"
-#import "XRFileParser.h"
 #import "XRoseTableController.h"
 
 #import "XRStatistic.h"

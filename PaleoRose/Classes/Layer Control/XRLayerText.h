@@ -39,7 +39,6 @@
 }
 
 -(id)initWithGeometryController:(XRGeometryController *)aController parentView:(NSView *)view;
--(id)initWithGeometryController:(XRGeometryController *)aController xmlTree:(LITMXMLTree *)configureTree forVersion:(NSString *)version withParentView:(NSView *)aParent;
 
 -(id)initWithIsVisible:(BOOL)visible
                 active:(BOOL)active

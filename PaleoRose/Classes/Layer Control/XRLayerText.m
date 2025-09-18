@@ -346,13 +346,6 @@ static NSLayoutManager *sharedDrawingLayoutManager(void) {
     return @"TEXT";
 }
 
--(id)initWithGeometryController:(XRGeometryController *)aController xmlTree:(LITMXMLTree *)configureTree forVersion:(NSString *)version withParentView:(NSView *)aParent
-{
-    if (!(self = [self initWithGeometryController:aController parentView:aParent])) return nil;
-    [self configureWithXMLTree:configureTree version:version];
-    return self;
-}
-
 -(NSString *)type
 {
     return @"XRLayerText";
