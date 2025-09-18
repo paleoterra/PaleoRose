@@ -1,5 +1,4 @@
 import SwiftUI
-import SwiftUICore
 
 /// A view that displays application settings.
 /// Currently supports configuring the vector calculation method.

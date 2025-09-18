@@ -25,7 +25,6 @@
 // SOFTWARE.
 
 import Foundation
-import SwiftUICore
 
 /// A type-safe enumeration of keys used to access values in UserDefaults.
 ///
