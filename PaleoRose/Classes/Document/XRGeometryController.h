@@ -36,7 +36,7 @@
 #define XRGeometryDefaultKeyStartingAngle @"XRGeometryDefaultKeyStartingAngle"
 #define XRGeometryDefaultKeyHollowCoreSize @"XRGeometryDefaultKeyHollowCoreSize"
 #import "sqlite3.h"
-@class LITMXMLTree;
+
 @interface XRGeometryController : NSObject <GraphicGeometrySource>
 {
     IBOutlet id _roseTableController;
@@ -114,12 +114,6 @@
 -(BOOL)angleIsValidForSpoke:(float)angle;
 
 -(NSDictionary *)geometrySettings;
-//-(void)configureController:(NSDictionary *)settings;
--(void)configureController:(LITMXMLTree *)settings forVersion:(NSString *)version; 
--(void)configureControllerForVersion1_0:(LITMXMLTree *)settings;
-
--(LITMXMLTree *)xmlTreeForVersion:(NSString *)version;
--(LITMXMLTree *)xmlTreeForVersion1_0;
 
 -(void)calculateRelativePositionWithPoint:(NSPoint)target intoRadius:(float *)estimatedRadius intoAngle:(float *)estimatedAngle;
 

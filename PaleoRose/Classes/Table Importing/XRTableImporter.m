@@ -30,7 +30,6 @@
 #import "XRTableImporterDelimiterController.h"
 #import "XRoseDocument.h"
 #import "sqlite3.h"
-#import "PTFMXMLParser.h"
 #import "XRTableImporterXRose.h"
 
 @interface XRTableImporter()
@@ -56,11 +55,6 @@
 	{
 		[self importFromXRoseDB];
 	}
-	else if(([[sourcePath pathExtension] isEqualToString:@"xml"]) || ([[sourcePath pathExtension] isEqualToString:@"XML"]))
-	{
-		[self importFromFMXML];
-	}
-	
 }
 
 -(void)clear
@@ -248,19 +242,6 @@
 		
 		sqlite3_exec(db,"ROLLBACK",NULL,NULL,&errorMsg);
 		return;
-	}
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"XRTableListChanged" object:nil];
-}
-
--(void)importFromFMXML
-{
-	NSError *anError;
-	
-	PTFMXMLParser *theParser = [[PTFMXMLParser alloc] initWithXMLAtPath:sourcePath];
-	if(([theParser isValid])&&([theParser isCorrectType]))
-	{
-		if(![theParser writeToSQLITE:[(XRoseDocument *)targetDocument documentInMemoryStore] withError:&anError])
-			[targetDocument presentError:anError];
 	}
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"XRTableListChanged" object:nil];
 }

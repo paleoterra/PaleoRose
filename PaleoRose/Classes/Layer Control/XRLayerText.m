@@ -32,7 +32,6 @@
 #import "XRoseView.h"
 #import "sqlite3.h"
 #import "XRoseWindowController.h"
-#import "LITMXMLTree.h"
 #import "LITMXMLBinaryEncoding.h"
 
 static NSLayoutManager *sharedDrawingLayoutManager(void);
@@ -342,73 +341,9 @@ static NSLayoutManager *sharedDrawingLayoutManager(void) {
     [[NSNotificationCenter defaultCenter] postNotificationName:XRLayerRequiresRedraw object:self];
 }
 
--(LITMXMLTree *)xmlTreeForVersion:(NSString *)version
-{
-    NSString *currentVersion = @"1.0";
-    if((version == nil)||([currentVersion isEqualToString:version]))
-        return [self xmlTreeForVersion1_0];
-    return nil;
-}
-
--(LITMXMLTree *)xmlTreeForVersion1_0
-{
-    LITMXMLTree *rootTree = [self baseXMLTreeForVersion:@"1.0"];
-    LITMXMLTree *aChild;
-    NSAttributedString *tempString = [[NSAttributedString alloc] initWithAttributedString:_contents];
-    //NSLog(@"xmlTreeForVersion1_0");
-    NSRange aRange;
-    aRange.location = 0;
-    aRange.length = [tempString length];
-    [rootTree addChild:[LITMXMLTree treeFromNSRect:textBounds]];
-    aChild = [LITMXMLTree xmlTreeWithElementTag:@"CONTENTS"];
-
-    [aChild setBase64Contents:[tempString RTFFromRange:aRange documentAttributes:@{}]];
-    [rootTree addChild:aChild];
-    return rootTree;
-}
-
--(void)configureWithXMLTree:(LITMXMLTree *)configureTree version:(NSString *)version
-{
-    NSString *currentVersion = @"1.0";
-    if((version == nil)||([currentVersion isEqualToString:version]))
-    {
-        [self configureBaseWithXMLTree1_0:configureTree];
-        [self configureWithXMLTree1_0:configureTree];
-    }
-    return;
-}
-
--(void)configureWithXMLTree1_0:(LITMXMLTree *)configureTree
-{
-
-    LITMXMLTree *aChild;
-    //NSLog(@"configuring text");
-    if((aChild = [configureTree findXMLTreeElement:@"RECT"]))
-    {
-        textBounds = [aChild rectFromTree];
-        //NSLog(NSStringFromRect(textBounds));
-    }
-    if((aChild = [configureTree findXMLTreeElement:@"CONTENTS"]))
-    {
-        //NSLog(@"here");
-        //NSLog([[aChild decodedBase64Contents] description]);
-        NSAttributedString *aString = [[NSAttributedString alloc] initWithRTF:[aChild decodedBase64Contents] documentAttributes:NULL];
-        [self setContents:aString];
-        //NSLog([aString string]);
-        //NSLog([[aChild decodedBase64Contents] description]);
-    }
-}
-
 +(NSString *)classTag
 {
     return @"TEXT";
-}
-
--(id)initWithGeometryController:(XRGeometryController *)aController xmlTree:(LITMXMLTree *)configureTree forVersion:(NSString *)version withParentView:(NSView *)aParent
-{
-    if (!(self = [self initWithGeometryController:aController parentView:aParent])) return nil;
-    [self configureWithXMLTree:configureTree version:version];
-    return self;
 }
 
 -(NSString *)type

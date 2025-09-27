@@ -25,7 +25,7 @@
 #import <Cocoa/Cocoa.h>
 #import "sqlite3.h"
 #import <PaleoRose-Swift.h>
-@class XRRoseTableController,XRGeometryController,LITMXMLTree;
+@class XRRoseTableController, XRGeometryController;
 @interface XRoseWindowController : NSWindowController <NSToolbarDelegate>
 {
     __weak IBOutlet id _rosePlotController;
@@ -47,9 +47,6 @@
 -(void)copyPDFToPasteboard;
 -(void)copyTIFFToPasteboard;
 -(NSView *)mainView;
--(LITMXMLTree *)windowControllerXMLSettings;
--(void)setWindowSettingsWithXMLTree:(LITMXMLTree *)tree;
-
 
 -(void)setTableList:(NSMutableArray *)aList;
 - (IBAction)addLayerAction:(id)sender;

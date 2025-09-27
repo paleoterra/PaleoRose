@@ -28,7 +28,7 @@
 
 #import <AppKit/AppKit.h>
 #import "sqlite3.h"
-@class XRDataSet,LITMXMLTree,XRTableImporter;
+@class XRDataSet, XRTableImporter;
 @interface XRoseDocument : NSDocument
 -(void)addDataLayer:(id)sender;
 

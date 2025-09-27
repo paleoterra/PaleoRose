@@ -42,8 +42,6 @@
 		B41C87442DE4DC070053C9C9 /* CommonUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41C87432DE4DC070053C9C9 /* CommonUtilities.swift */; };
 		B41D283C094FC7CA008DF384 /* XRTableImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = B41D283A094FC7CA008DF384 /* XRTableImporter.h */; };
 		B41D283D094FC7CA008DF384 /* XRTableImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = B41D283B094FC7CA008DF384 /* XRTableImporter.m */; };
-		B42083B109637969007A74A8 /* PTFMXMLParser.h in Headers */ = {isa = PBXBuildFile; fileRef = B42083AF09637969007A74A8 /* PTFMXMLParser.h */; };
-		B42083B209637969007A74A8 /* PTFMXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B42083B009637969007A74A8 /* PTFMXMLParser.m */; };
 		B4237C992CFE959700E2B510 /* StorageModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4237C982CFE959100E2B510 /* StorageModelFactory.swift */; };
 		B4237C9C2D013BE900E2B510 /* StorageModelFactoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4237C9A2D013BE900E2B510 /* StorageModelFactoryTest.swift */; };
 		B423AB6D2D472DB1002474C7 /* MockInMemoryStoreDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B423AB6C2D472DA6002474C7 /* MockInMemoryStoreDelegate.swift */; };
@@ -139,13 +137,8 @@
 		B4A23EFF2E19C49E00EDE135 /* GraphicPetalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A23EFE2E19C49E00EDE135 /* GraphicPetalTests.swift */; };
 		B4A23FC62E28389D00EDE135 /* GraphicGeometrySource.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A23FC52E28389D00EDE135 /* GraphicGeometrySource.h */; };
 		B4A23FC82E28936900EDE135 /* MockGraphicGeometrySource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A23FC72E28936900EDE135 /* MockGraphicGeometrySource.swift */; };
-		B4A82F962A07F87A00790052 /* LITMXMLNodeProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A82F932A07F87900790052 /* LITMXMLNodeProtocol.h */; };
-		B4A82F972A07F87A00790052 /* LITMXMLTree.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A82F942A07F87900790052 /* LITMXMLTree.h */; };
-		B4A82F982A07F87A00790052 /* LITMXMLTree.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A82F952A07F87A00790052 /* LITMXMLTree.m */; };
 		B4A82F9B2A07F8A400790052 /* LITMXMLBinaryEncoding.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A82F992A07F8A400790052 /* LITMXMLBinaryEncoding.h */; };
 		B4A82F9C2A07F8A400790052 /* LITMXMLBinaryEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A82F9A2A07F8A400790052 /* LITMXMLBinaryEncoding.m */; };
-		B4A82FA42A07FA8900790052 /* LITMXMLParser.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A82FA22A07FA8900790052 /* LITMXMLParser.h */; };
-		B4A82FA52A07FA8900790052 /* LITMXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A82FA32A07FA8900790052 /* LITMXMLParser.m */; };
 		B4A82FAD2A07FB8800790052 /* ArrowHead.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A82FAB2A07FB8800790052 /* ArrowHead.swift */; };
 		B4AE41B52D0BBAF600E05D96 /* XRLayerText+Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AE41B32D0BBAF600E05D96 /* XRLayerText+Stub.swift */; };
 		B4AE41B82D0BCEBF00E05D96 /* XRLayerLineArrow+Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AE41B62D0BCE6100E05D96 /* XRLayerLineArrow+Stub.swift */; };
@@ -178,10 +171,6 @@
 		B4E22DA82DFF701200A9AFE0 /* FormatterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E22DA72DFF700D00A9AFE0 /* FormatterFactory.swift */; };
 		B4E2DE8905C5BD6500714F6F /* XRLayerGrid.h in Headers */ = {isa = PBXBuildFile; fileRef = B4E2DE8705C5BD6500714F6F /* XRLayerGrid.h */; };
 		B4E2DE8A05C5BD6500714F6F /* XRLayerGrid.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E2DE8805C5BD6500714F6F /* XRLayerGrid.m */; };
-		B4E5F8C005FC63A00011788E /* XRFileParser.h in Headers */ = {isa = PBXBuildFile; fileRef = B4E5F8BE05FC63A00011788E /* XRFileParser.h */; };
-		B4E5F8C105FC63A00011788E /* XRFileParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E5F8BF05FC63A00011788E /* XRFileParser.m */; };
-		B4E5F90D05FC679E0011788E /* XRFileParser1.h in Headers */ = {isa = PBXBuildFile; fileRef = B4E5F90B05FC679E0011788E /* XRFileParser1.h */; };
-		B4E5F90E05FC679E0011788E /* XRFileParser1.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E5F90C05FC679E0011788E /* XRFileParser1.m */; };
 		B4E69E3D062AE989006B21D6 /* vectorLayer.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B4E69E3C062AE989006B21D6 /* vectorLayer.tiff */; };
 		B4E69E51062AE9B0006B21D6 /* gridLayer.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B4E69E50062AE9B0006B21D6 /* gridLayer.tiff */; };
 		B4E9C7812E3300DE005BA22F /* BezierPath+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E9C7802E3300D1005BA22F /* BezierPath+extensions.swift */; };
@@ -309,8 +298,6 @@
 		B41C87432DE4DC070053C9C9 /* CommonUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonUtilities.swift; sourceTree = "<group>"; };
 		B41D283A094FC7CA008DF384 /* XRTableImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRTableImporter.h; sourceTree = "<group>"; };
 		B41D283B094FC7CA008DF384 /* XRTableImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRTableImporter.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		B42083AF09637969007A74A8 /* PTFMXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTFMXMLParser.h; sourceTree = "<group>"; };
-		B42083B009637969007A74A8 /* PTFMXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTFMXMLParser.m; sourceTree = "<group>"; };
 		B4237C982CFE959100E2B510 /* StorageModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageModelFactory.swift; sourceTree = "<group>"; };
 		B4237C9A2D013BE900E2B510 /* StorageModelFactoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageModelFactoryTest.swift; sourceTree = "<group>"; };
 		B423AB6C2D472DA6002474C7 /* MockInMemoryStoreDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockInMemoryStoreDelegate.swift; sourceTree = "<group>"; };
@@ -410,32 +397,6 @@
 		B49D7EB52DDEC8400046A8B8 /* XRStatistic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRStatistic.swift; sourceTree = "<group>"; };
 		B49D7EB62DDEC8720046A8B8 /* XRCalculateAzimuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRCalculateAzimuthController.swift; sourceTree = "<group>"; };
 		B49D7EB72DDEC87E0046A8B8 /* XRTableAddColumnController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRTableAddColumnController.swift; sourceTree = "<group>"; };
-		B49D7EB82DDEC8F10046A8B8 /* XRoseDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRoseDocument.swift; sourceTree = "<group>"; };
-		B49D7EB92DDEC91A0046A8B8 /* XRoseTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRoseTableController.swift; sourceTree = "<group>"; };
-		B49D7EBA2DDEC9240046A8B8 /* XRoseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRoseView.swift; sourceTree = "<group>"; };
-		B49D7EBC2DDEC9350046A8B8 /* XRoseWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRoseWindowController.swift; sourceTree = "<group>"; };
-		B49D7ED12DDECA9B0046A8B8 /* XRAppendDialogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRAppendDialogController.swift; sourceTree = "<group>"; };
-		B49D7ED22DDECAB40046A8B8 /* FStatisticController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FStatisticController.swift; sourceTree = "<group>"; };
-		B49D7EDC2DDECB8F0046A8B8 /* XRTableImporterDelimiterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRTableImporterDelimiterController.swift; sourceTree = "<group>"; };
-		B49D7EDD2DDECB9C0046A8B8 /* PTFMXMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTFMXMLParser.swift; sourceTree = "<group>"; };
-		B49D7EDE2DDECBB80046A8B8 /* XRTableImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRTableImporter.swift; sourceTree = "<group>"; };
-		B49D7EDF2DDECBDA0046A8B8 /* LITMXMLBinaryEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LITMXMLBinaryEncoding.swift; sourceTree = "<group>"; };
-		B49D7EE02DDECBDA0046A8B8 /* LITMXMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LITMXMLParser.swift; sourceTree = "<group>"; };
-		B49D7EE12DDECBDA0046A8B8 /* LITMXMLTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LITMXMLTree.swift; sourceTree = "<group>"; };
-		B49D7EE22DDECC050046A8B8 /* XRFileParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRFileParser.swift; sourceTree = "<group>"; };
-		B49D7EE32DDECC050046A8B8 /* XRFileParser1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRFileParser1.swift; sourceTree = "<group>"; };
-		B49D7EE42DDECE4C0046A8B8 /* XRVStatCreatePanelController 2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XRVStatCreatePanelController 2.swift"; sourceTree = "<group>"; };
-		B49D7EE52DDECEB50046A8B8 /* XRCoreInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRCoreInspector.swift; sourceTree = "<group>"; };
-		B49D7EE62DDECEC60046A8B8 /* XRDataInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRDataInspector.swift; sourceTree = "<group>"; };
-		B49D7EE72DDECFBA0046A8B8 /* XRGeometryPropertyInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGeometryPropertyInspector.swift; sourceTree = "<group>"; };
-		B49D7EE82DDECFBA0046A8B8 /* XRPropertyInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRPropertyInspector.swift; sourceTree = "<group>"; };
-		B49D7EE92DDECFD60046A8B8 /* XRGridInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGridInspector.swift; sourceTree = "<group>"; };
-		B49D7EEA2DDED06C0046A8B8 /* XRGeometryInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRGeometryInspector.swift; sourceTree = "<group>"; };
-		B49D7EEB2DDED0810046A8B8 /* XREmptyInspectorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XREmptyInspectorController.swift; sourceTree = "<group>"; };
-		B49D7EEC2DDED0930046A8B8 /* XRVectorInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRVectorInspector.swift; sourceTree = "<group>"; };
-		B49D7EED2DDED1A40046A8B8 /* XRTableImporterXRose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRTableImporterXRose.swift; sourceTree = "<group>"; };
-		B49D7EEE2DDED1DE0046A8B8 /* XRExportGraphicAccessory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRExportGraphicAccessory.swift; sourceTree = "<group>"; };
-		B49D7EEF2DDED1E90046A8B8 /* XREncodingAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XREncodingAccessoryView.swift; sourceTree = "<group>"; };
 		B4A23EF62E18951700EDE135 /* GraphicDotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicDotTests.swift; sourceTree = "<group>"; };
 		B4A23EF82E19668900EDE135 /* GraphicHistogramTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicHistogramTests.swift; sourceTree = "<group>"; };
 		B4A23EFA2E196D1800EDE135 /* GraphicKiteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicKiteTests.swift; sourceTree = "<group>"; };
@@ -443,13 +404,8 @@
 		B4A23EFE2E19C49E00EDE135 /* GraphicPetalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicPetalTests.swift; sourceTree = "<group>"; };
 		B4A23FC52E28389D00EDE135 /* GraphicGeometrySource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GraphicGeometrySource.h; sourceTree = "<group>"; };
 		B4A23FC72E28936900EDE135 /* MockGraphicGeometrySource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGraphicGeometrySource.swift; sourceTree = "<group>"; };
-		B4A82F932A07F87900790052 /* LITMXMLNodeProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LITMXMLNodeProtocol.h; sourceTree = "<group>"; };
-		B4A82F942A07F87900790052 /* LITMXMLTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LITMXMLTree.h; sourceTree = "<group>"; };
-		B4A82F952A07F87A00790052 /* LITMXMLTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LITMXMLTree.m; sourceTree = "<group>"; };
 		B4A82F992A07F8A400790052 /* LITMXMLBinaryEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LITMXMLBinaryEncoding.h; sourceTree = "<group>"; };
 		B4A82F9A2A07F8A400790052 /* LITMXMLBinaryEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LITMXMLBinaryEncoding.m; sourceTree = "<group>"; };
-		B4A82FA22A07FA8900790052 /* LITMXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LITMXMLParser.h; sourceTree = "<group>"; };
-		B4A82FA32A07FA8900790052 /* LITMXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LITMXMLParser.m; sourceTree = "<group>"; };
 		B4A82FAB2A07FB8800790052 /* ArrowHead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowHead.swift; sourceTree = "<group>"; };
 		B4AE41B32D0BBAF600E05D96 /* XRLayerText+Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XRLayerText+Stub.swift"; sourceTree = "<group>"; };
 		B4AE41B62D0BCE6100E05D96 /* XRLayerLineArrow+Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XRLayerLineArrow+Stub.swift"; sourceTree = "<group>"; };
@@ -482,10 +438,6 @@
 		B4E22DA72DFF700D00A9AFE0 /* FormatterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatterFactory.swift; sourceTree = "<group>"; };
 		B4E2DE8705C5BD6500714F6F /* XRLayerGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRLayerGrid.h; sourceTree = "<group>"; };
 		B4E2DE8805C5BD6500714F6F /* XRLayerGrid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRLayerGrid.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		B4E5F8BE05FC63A00011788E /* XRFileParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRFileParser.h; sourceTree = "<group>"; };
-		B4E5F8BF05FC63A00011788E /* XRFileParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRFileParser.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		B4E5F90B05FC679E0011788E /* XRFileParser1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRFileParser1.h; sourceTree = "<group>"; };
-		B4E5F90C05FC679E0011788E /* XRFileParser1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRFileParser1.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B4E69E3C062AE989006B21D6 /* vectorLayer.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = vectorLayer.tiff; sourceTree = "<group>"; };
 		B4E69E50062AE9B0006B21D6 /* gridLayer.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = gridLayer.tiff; sourceTree = "<group>"; };
 		B4E9C7802E3300D1005BA22F /* BezierPath+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BezierPath+extensions.swift"; sourceTree = "<group>"; };
@@ -620,8 +572,6 @@
 			children = (
 				B41D283A094FC7CA008DF384 /* XRTableImporter.h */,
 				B41D283B094FC7CA008DF384 /* XRTableImporter.m */,
-				B49D7EDE2DDECBB80046A8B8 /* XRTableImporter.swift */,
-				B4149FFB2B24C976008AE5F4 /* XML Parser */,
 				B4149FFA2B24C952008AE5F4 /* XRose Importer Sheet */,
 				B4149FF92B24C92C008AE5F4 /* Delimiter Controller */,
 			);
@@ -649,16 +599,8 @@
 		B4149FE62B24C3B6008AE5F4 /* XML Parsing */ = {
 			isa = PBXGroup;
 			children = (
-				B4A82FA22A07FA8900790052 /* LITMXMLParser.h */,
-				B4A82FA32A07FA8900790052 /* LITMXMLParser.m */,
 				B4A82F992A07F8A400790052 /* LITMXMLBinaryEncoding.h */,
 				B4A82F9A2A07F8A400790052 /* LITMXMLBinaryEncoding.m */,
-				B4A82F932A07F87900790052 /* LITMXMLNodeProtocol.h */,
-				B4A82F942A07F87900790052 /* LITMXMLTree.h */,
-				B4A82F952A07F87A00790052 /* LITMXMLTree.m */,
-				B49D7EDF2DDECBDA0046A8B8 /* LITMXMLBinaryEncoding.swift */,
-				B49D7EE02DDECBDA0046A8B8 /* LITMXMLParser.swift */,
-				B49D7EE12DDECBDA0046A8B8 /* LITMXMLTree.swift */,
 			);
 			path = "XML Parsing";
 			sourceTree = "<group>";
@@ -680,13 +622,10 @@
 				B414A0042B24CB37008AE5F4 /* XRose Document */,
 				B48345D005C23B3000E3F6B7 /* XRoseWindowController.h */,
 				B48345D105C23B3000E3F6B7 /* XRoseWindowController.m */,
-				B49D7EBC2DDEC9350046A8B8 /* XRoseWindowController.swift */,
 				B48345D405C23B3D00E3F6B7 /* XRoseTableController.h */,
 				B48345D505C23B3D00E3F6B7 /* XRoseTableController.m */,
-				B49D7EB92DDEC91A0046A8B8 /* XRoseTableController.swift */,
 				B48345EE05C23CA100E3F6B7 /* XRoseView.h */,
 				B48345EF05C23CA100E3F6B7 /* XRoseView.m */,
-				B49D7EBA2DDEC9240046A8B8 /* XRoseView.swift */,
 				B4852A8205C2E223002212E3 /* XRGeometryController.h */,
 				B4852A8305C2E223002212E3 /* XRGeometryController.m */,
 				B4AE41D42D1E5DA300E05D96 /* XRGeometryController+Testing.swift */,
@@ -769,10 +708,8 @@
 				B4149FEE2B24C47E008AE5F4 /* Property Inspector */,
 				B4C08800063069F2001A91F4 /* XRExportGraphicAccessory.h */,
 				B4C08801063069F2001A91F4 /* XRExportGraphicAccessory.m */,
-				B49D7EEE2DDED1DE0046A8B8 /* XRExportGraphicAccessory.swift */,
 				B411E84A05C397D000C22F3E /* XREncodingAccessoryView.h */,
 				B411E84B05C397D000C22F3E /* XREncodingAccessoryView.m */,
-				B49D7EEF2DDED1E90046A8B8 /* XREncodingAccessoryView.swift */,
 				B414A0022B24CAE2008AE5F4 /* Append Dialog Controller */,
 				B414A0032B24CB15008AE5F4 /* F Statistic Sheet */,
 			);
@@ -807,7 +744,6 @@
 				B4F0885F060914150000CF7A /* XRVStatCreatePanelController.h */,
 				B4F08860060914150000CF7A /* XRVStatCreatePanelController.m */,
 				B486E2811E7B770A00F1ADAA /* XRVStatPanel.xib */,
-				B49D7EE42DDECE4C0046A8B8 /* XRVStatCreatePanelController 2.swift */,
 			);
 			path = "Panels and Sheets";
 			sourceTree = "<group>";
@@ -815,12 +751,6 @@
 		B4149FF12B24C4CB008AE5F4 /* XRose File */ = {
 			isa = PBXGroup;
 			children = (
-				B4E5F8BE05FC63A00011788E /* XRFileParser.h */,
-				B4E5F8BF05FC63A00011788E /* XRFileParser.m */,
-				B4E5F90B05FC679E0011788E /* XRFileParser1.h */,
-				B4E5F90C05FC679E0011788E /* XRFileParser1.m */,
-				B49D7EE22DDECC050046A8B8 /* XRFileParser.swift */,
-				B49D7EE32DDECC050046A8B8 /* XRFileParser1.swift */,
 			);
 			path = "XRose File";
 			sourceTree = "<group>";
@@ -895,7 +825,6 @@
 				B427BD050950B3050063849E /* XRTableImporterDelimiterController.h */,
 				B427BD060950B3050063849E /* XRTableImporterDelimiterController.m */,
 				B486E2741E7B765400F1ADAA /* XRTableInitialTextController.xib */,
-				B49D7EDC2DDECB8F0046A8B8 /* XRTableImporterDelimiterController.swift */,
 			);
 			path = "Delimiter Controller";
 			sourceTree = "<group>";
@@ -906,19 +835,8 @@
 				B47DDF4E0964CDE700C7EF02 /* XRTableImporterXRose.h */,
 				B47DDF4F0964CDE700C7EF02 /* XRTableImporterXRose.m */,
 				B486E2721E7B761B00F1ADAA /* XRTableImporterXRoseSheet.xib */,
-				B49D7EED2DDED1A40046A8B8 /* XRTableImporterXRose.swift */,
 			);
 			path = "XRose Importer Sheet";
-			sourceTree = "<group>";
-		};
-		B4149FFB2B24C976008AE5F4 /* XML Parser */ = {
-			isa = PBXGroup;
-			children = (
-				B42083AF09637969007A74A8 /* PTFMXMLParser.h */,
-				B42083B009637969007A74A8 /* PTFMXMLParser.m */,
-				B49D7EDD2DDECB9C0046A8B8 /* PTFMXMLParser.swift */,
-			);
-			path = "XML Parser";
 			sourceTree = "<group>";
 		};
 		B4149FFC2B24C9A9008AE5F4 /* Formatters */ = {
@@ -975,7 +893,6 @@
 				B411E7F105C396A400C22F3E /* XRAppendDialogController.h */,
 				B411E7F205C396A400C22F3E /* XRAppendDialogController.m */,
 				B486E29C1E7B850300F1ADAA /* AppendDialog.xib */,
-				B49D7ED12DDECA9B0046A8B8 /* XRAppendDialogController.swift */,
 			);
 			path = "Append Dialog Controller";
 			sourceTree = "<group>";
@@ -986,7 +903,6 @@
 				B43D613706345207001B863E /* FStatisticController.m */,
 				B43D613806345207001B863E /* FStatisticController.h */,
 				B486E2841E7B770F00F1ADAA /* FStatisticSheet.xib */,
-				B49D7ED22DDECAB40046A8B8 /* FStatisticController.swift */,
 			);
 			path = "F Statistic Sheet";
 			sourceTree = "<group>";
@@ -997,7 +913,6 @@
 				B48345CC05C238B500E3F6B7 /* XRoseDocument.h */,
 				B48345CD05C238B500E3F6B7 /* XRoseDocument.m */,
 				B486E27B1E7B76EB00F1ADAA /* XRoseDocument.xib */,
-				B49D7EB82DDEC8F10046A8B8 /* XRoseDocument.swift */,
 			);
 			path = "XRose Document";
 			sourceTree = "<group>";
@@ -1008,7 +923,6 @@
 				B452504B05D427F1008338E8 /* XRCoreInspector.h */,
 				B452504C05D427F1008338E8 /* XRCoreInspector.m */,
 				B486E2871E7B772E00F1ADAA /* XRLayerCore.xib */,
-				B49D7EE52DDECEB50046A8B8 /* XRCoreInspector.swift */,
 			);
 			path = "Core Inspector";
 			sourceTree = "<group>";
@@ -1019,7 +933,6 @@
 				B4BF9C1305CD6B110047E8CF /* XRGridInspector.h */,
 				B4BF9C1405CD6B110047E8CF /* XRGridInspector.m */,
 				B486E28A1E7B773300F1ADAA /* XRGridInspector.xib */,
-				B49D7EE92DDECFD60046A8B8 /* XRGridInspector.swift */,
 			);
 			path = "Grid Inspector";
 			sourceTree = "<group>";
@@ -1030,7 +943,6 @@
 				B47CA41105C6D56D0060A30C /* XRGeometryInspector.h */,
 				B47CA41205C6D56D0060A30C /* XRGeometryInspector.m */,
 				B486E2901E7B774000F1ADAA /* XRGeometryInspector.xib */,
-				B49D7EEA2DDED06C0046A8B8 /* XRGeometryInspector.swift */,
 			);
 			path = "Geometry Inspector";
 			sourceTree = "<group>";
@@ -1041,7 +953,6 @@
 				B47CA37805C6CB150060A30C /* XREmptyInspectorController.h */,
 				B47CA37705C6CB150060A30C /* XREmptyInspectorController.m */,
 				B486E2931E7B774600F1ADAA /* XREmptyInspector.xib */,
-				B49D7EEB2DDED0810046A8B8 /* XREmptyInspectorController.swift */,
 			);
 			path = "Empty Inspector";
 			sourceTree = "<group>";
@@ -1052,7 +963,6 @@
 				B48B89F905C794C500248F96 /* XRDataInspector.h */,
 				B48B89FA05C794C500248F96 /* XRDataInspector.m */,
 				B486E28D1E7B773900F1ADAA /* XRDataInspector.xib */,
-				B49D7EE62DDECEC60046A8B8 /* XRDataInspector.swift */,
 			);
 			path = "Data Inspector";
 			sourceTree = "<group>";
@@ -1063,7 +973,6 @@
 				B46C6D270607F2A2000620E7 /* XRVectorInspector.h */,
 				B46C6D280607F2A2000620E7 /* XRVectorInspector.m */,
 				B486E2991E7B775600F1ADAA /* XRVectorInspector.xib */,
-				B49D7EEC2DDED0930046A8B8 /* XRVectorInspector.swift */,
 			);
 			path = "Vector Inspector";
 			sourceTree = "<group>";
@@ -1076,8 +985,6 @@
 				B47CA2EF05C6C5470060A30C /* XRPropertyInspector.h */,
 				B47CA2F005C6C5470060A30C /* XRPropertyInspector.m */,
 				B486E2961E7B774E00F1ADAA /* XRPropertyInspector.xib */,
-				B49D7EE72DDECFBA0046A8B8 /* XRGeometryPropertyInspector.swift */,
-				B49D7EE82DDECFBA0046A8B8 /* XRPropertyInspector.swift */,
 			);
 			path = "Property Inspector";
 			sourceTree = "<group>";
@@ -1193,14 +1100,12 @@
 				B48345D605C23B3D00E3F6B7 /* XRoseTableController.h in Headers */,
 				B4A82F9B2A07F8A400790052 /* LITMXMLBinaryEncoding.h in Headers */,
 				B48345F005C23CA100E3F6B7 /* XRoseView.h in Headers */,
-				B4A82F972A07F87A00790052 /* LITMXMLTree.h in Headers */,
 				B4852A8405C2E223002212E3 /* XRGeometryController.h in Headers */,
 				B411E6EC05C3855000C22F3E /* XRLayer.h in Headers */,
 				B411E75005C386DA00C22F3E /* XRDataSet.h in Headers */,
 				B411E7F405C396A400C22F3E /* XRAppendDialogController.h in Headers */,
 				B411E84C05C397D000C22F3E /* XREncodingAccessoryView.h in Headers */,
 				B4815B7005C44C0200403360 /* XRLayerData.h in Headers */,
-				B4A82F962A07F87A00790052 /* LITMXMLNodeProtocol.h in Headers */,
 				B4E2DE8905C5BD6500714F6F /* XRLayerGrid.h in Headers */,
 				B47CA2F105C6C5470060A30C /* XRPropertyInspector.h in Headers */,
 				B47CA37A05C6CB150060A30C /* XREmptyInspectorController.h in Headers */,
@@ -1210,8 +1115,6 @@
 				B4BF9C1505CD6B110047E8CF /* XRGridInspector.h in Headers */,
 				B4F929FD05D35D3A00EAAED0 /* XRLayerCore.h in Headers */,
 				B452504D05D427F1008338E8 /* XRCoreInspector.h in Headers */,
-				B4E5F8C005FC63A00011788E /* XRFileParser.h in Headers */,
-				B4E5F90D05FC679E0011788E /* XRFileParser1.h in Headers */,
 				B40C43C5060545BD00353928 /* XRLayerLineArrow.h in Headers */,
 				B46C6D290607F2A2000620E7 /* XRVectorInspector.h in Headers */,
 				B4F08861060914150000CF7A /* XRVStatCreatePanelController.h in Headers */,
@@ -1222,10 +1125,8 @@
 				B41D283C094FC7CA008DF384 /* XRTableImporter.h in Headers */,
 				B427BD070950B3050063849E /* XRTableImporterDelimiterController.h in Headers */,
 				B4B10C3909529F7F00E6A350 /* XRMakeDatasetController.h in Headers */,
-				B42083B109637969007A74A8 /* PTFMXMLParser.h in Headers */,
 				B47DDF500964CDE700C7EF02 /* XRTableImporterXRose.h in Headers */,
 				B4564ABB096A04A1005E0015 /* XRTableAddColumnController.h in Headers */,
-				B4A82FA42A07FA8900790052 /* LITMXMLParser.h in Headers */,
 				B42FE3AD096AEB99007E9DC5 /* XRCalculateAzimuthController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1529,12 +1430,9 @@
 				B452504E05D427F1008338E8 /* XRCoreInspector.m in Sources */,
 				B414A00D2B24CD24008AE5F4 /* XRStatistic.m in Sources */,
 				B41C85B32DE4A2550053C9C9 /* SettingsView.swift in Sources */,
-				B4E5F8C105FC63A00011788E /* XRFileParser.m in Sources */,
 				B41266712B6EDF4C00E1C385 /* AppDelegate.swift in Sources */,
-				B4E5F90E05FC679E0011788E /* XRFileParser1.m in Sources */,
 				B40C43C6060545BD00353928 /* XRLayerLineArrow.m in Sources */,
 				B46C6D2A0607F2A2000620E7 /* XRVectorInspector.m in Sources */,
-				B4A82FA52A07FA8900790052 /* LITMXMLParser.m in Sources */,
 				B4F2B1892C97CB300017E717 /* LayerData.swift in Sources */,
 				B4F2B18A2C97CB300017E717 /* WindowControllerSize.swift in Sources */,
 				B4F2B18B2C97CB300017E717 /* Layer.swift in Sources */,
@@ -1553,14 +1451,12 @@
 				B464E643060956DE009C1C89 /* XRGeometryPropertyInspector.m in Sources */,
 				B4324D0B06187FFF0083AE8A /* XRLayerText.m in Sources */,
 				B48BBEC12CAA1BFA0050852E /* Logger.swift in Sources */,
-				B4A82F982A07F87A00790052 /* LITMXMLTree.m in Sources */,
 				B4C08803063069F2001A91F4 /* XRExportGraphicAccessory.m in Sources */,
 				B43D613906345207001B863E /* FStatisticController.m in Sources */,
 				B41D283D094FC7CA008DF384 /* XRTableImporter.m in Sources */,
 				B41C85B12DE4A24A0053C9C9 /* SettingsWindowController.swift in Sources */,
 				B427BD080950B3050063849E /* XRTableImporterDelimiterController.m in Sources */,
 				B4B10C3809529F7F00E6A350 /* XRMakeDatasetController.m in Sources */,
-				B42083B209637969007A74A8 /* PTFMXMLParser.m in Sources */,
 				B4237C992CFE959700E2B510 /* StorageModelFactory.swift in Sources */,
 				B47DDF510964CDE700C7EF02 /* XRTableImporterXRose.m in Sources */,
 				B41C86B22DE4B9C20053C9C9 /* UserDefaults+Extensions.swift in Sources */,

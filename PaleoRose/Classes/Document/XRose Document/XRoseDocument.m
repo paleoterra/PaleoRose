@@ -34,12 +34,10 @@
 #import "XREncodingAccessoryView.h"
 #import "XRoseTableController.h"
 #import "XRoseView.h"
-#import "XRFileParser.h"
 #import "XRoseTableController.h"
 
 #import "XRStatistic.h"
 #import "XRMakeDatasetController.h"
-#import "LITMXMLTree.h"
 #import <Security/Security.h>
 #import <Security/AuthSession.h>
 #import "XRTableImporter.h"
@@ -480,7 +478,7 @@
     //NSLog(@"in importTable");
     NSOpenPanel *op = [NSOpenPanel openPanel];
     [op setAllowsMultipleSelection:NO]; //this should change as the code matures
-    [op setAllowedFileTypes:[NSArray arrayWithObjects:@"txt",@"xml",@"XML",nil]];
+    [op setAllowedFileTypes:[NSArray arrayWithObjects:@"txt", nil]];
     [op beginSheetModalForWindow:[self.mainWindowController window] completionHandler:^(NSInteger result) {
         if(result == NSModalResponseOK)
         {

@@ -34,7 +34,7 @@
 
 #define XRLayerXMLType @"Layer_Type"
 #define XRLayerGraphicObjectArray @"Graphics"
-@class XRGeometryController,XRDataSet,LITMXMLTree;
+@class XRGeometryController, XRDataSet;
 @interface XRLayer : NSObject {
 	NSMutableArray *_graphicalObjects;
 	BOOL _isVisible;
@@ -85,23 +85,7 @@
 -(float)lineWeight;
 -(void)setDataSet:(XRDataSet *)aSet;
 -(XRDataSet *)dataSet;
--(NSDictionary *)layerSettings; 
-
-//xml
--(LITMXMLTree *)baseXMLTreeForVersion:(NSString *)version;
--(LITMXMLTree *)baseXMLTree1_0;
--(id)initWithGeometryController:(XRGeometryController *)aController xmlTree:(LITMXMLTree *)configureTree forVersion:(NSString *)version;
-+(id)layerWithGeometryController:(XRGeometryController *)aController xmlTree:(LITMXMLTree *)configureTree forVersion:(NSString *)version withParentView:(NSView *)parentView;
-
--(void)configureBaseWithXMLTree:(LITMXMLTree *)configureTree version:(NSString *)version;
--(void)configureBaseWithXMLTree1_0:(LITMXMLTree *)configureTree;
--(void)configureWithXMLTree:(LITMXMLTree *)configureTree version:(NSString *)version;
--(void)configureWithXMLTree1_0:(LITMXMLTree *)configureTree;
-
--(LITMXMLTree *)xmlTreeForVersion:(NSString *)version;
-
-
--(LITMXMLTree *)xmlTreeForVersion1_0;
+-(NSDictionary *)layerSettings;
 -(BOOL)handleMouseEvent:(NSEvent *)anEvent;
 -(BOOL)hitDetection:(NSPoint)testPoint;
 -(NSString *)type;

@@ -31,7 +31,7 @@
 #import "sqlite3.h"
 #define XRDataSetChangedStatisticsNotification @"XRDataSetChangedStatisticsNotification"
 
-@class LITMXMLTree,XRStatistic;
+@class XRStatistic;
 @interface XRDataSet : NSObject {
 	NSMutableData *_theValues;
 	NSString *_name;
@@ -126,23 +126,5 @@
 #pragma mark Mutability
 -(void)appendData:(NSData *)data;
 -(void)appendDataFromFile:(NSString *)path encoding:(NSStringEncoding)encoding;
-
-#pragma mark XML
-// create tree with current version (nil) or specified version
--(LITMXMLTree *)treeForVersion:(NSString *)version;
-//verison 1.0/current version
--(LITMXMLTree *)dataXMLDataVersion1_0;
-//load from xml
--(id)initWithXMLTree:(LITMXMLTree *)aTree forVersion:(NSString *)version;
-//version 1.0/current version
--(id)initWithVersion1_0XMLTree:(LITMXMLTree *)aTree;
-
-// unused methods
-//-(id)initWithContentsOfASCIIFile:(NSString *)filePath encoding:(NSStringEncoding)encoding;
-          //-(id)initWithXMLTree:(LITMXMLTree *)aTree;
-
-
-
-
 
 @end

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23094" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="24127" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23094"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24127"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -24,7 +24,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="69" y="422" width="731" height="467"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1728" height="1079"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1049"/>
             <value key="minSize" type="size" width="213" height="107"/>
             <view key="contentView" id="5">
                 <rect key="frame" x="0.0" y="0.0" width="731" height="467"/>
@@ -50,7 +50,7 @@
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <clipView key="contentView" id="gor-Cz-Ckl">
                                                         <rect key="frame" x="1" y="1" width="165" height="317"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" autosaveColumns="NO" headerView="82" id="7">
                                                                 <rect key="frame" x="0.0" y="0.0" width="165" height="294"/>
@@ -92,7 +92,6 @@
                                                                     </tableColumn>
                                                                 </tableColumns>
                                                                 <connections>
-                                                                    <outlet property="cornerView" destination="27" id="30"/>
                                                                     <outlet property="dataSource" destination="13" id="21"/>
                                                                     <outlet property="delegate" destination="13" id="22"/>
                                                                 </connections>
@@ -100,11 +99,11 @@
                                                         </subviews>
                                                     </clipView>
                                                     <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="81">
-                                                        <rect key="frame" x="1" y="302" width="165" height="16"/>
+                                                        <rect key="frame" x="1" y="301" width="165" height="17"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                     </scroller>
                                                     <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="83">
-                                                        <rect key="frame" x="150" y="24" width="16" height="294"/>
+                                                        <rect key="frame" x="149" y="24" width="17" height="294"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                     </scroller>
                                                     <tableHeaderView key="headerView" wantsLayer="YES" id="82">
@@ -149,7 +148,7 @@
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <clipView key="contentView" id="W4s-bN-Ynt">
                                                         <rect key="frame" x="1" y="1" width="165" height="51"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" alternatingRowBackgroundColors="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="79" id="40">
                                                                 <rect key="frame" x="0.0" y="0.0" width="165" height="28"/>
@@ -179,11 +178,11 @@
                                                         </subviews>
                                                     </clipView>
                                                     <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" controlSize="small" horizontal="YES" id="78">
-                                                        <rect key="frame" x="1" y="10" width="147" height="14"/>
+                                                        <rect key="frame" x="1" y="15" width="155" height="15"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                     </scroller>
                                                     <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" controlSize="small" horizontal="NO" id="80">
-                                                        <rect key="frame" x="152" y="24" width="14" height="28"/>
+                                                        <rect key="frame" x="151" y="24" width="15" height="28"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                     </scroller>
                                                     <tableHeaderView key="headerView" wantsLayer="YES" id="79">
@@ -257,15 +256,6 @@
                 <outlet property="_windowController" destination="-2" id="18"/>
             </connections>
         </customObject>
-        <customView id="27" userLabel="View" customClass="LITMDraggingCornerControl">
-            <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
-            <autoresizingMask key="autoresizingMask"/>
-            <connections>
-                <outlet property="_theFileView" destination="10" id="32"/>
-                <outlet property="_thePreview" destination="11" id="28"/>
-            </connections>
-            <point key="canvasLocation" x="4" y="466"/>
-        </customView>
         <customObject id="33" userLabel="XRGeometryController" customClass="XRGeometryController">
             <connections>
                 <outlet property="_roseTableController" destination="13" id="37"/>

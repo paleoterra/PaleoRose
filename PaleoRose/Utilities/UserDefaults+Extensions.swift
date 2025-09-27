@@ -26,7 +26,6 @@
 
 import Foundation
 import SwiftUI
-import SwiftUICore
 
 /// Extends UserDefaults with type-safe convenience methods for working with `UserDefaultsKey`.
 ///
