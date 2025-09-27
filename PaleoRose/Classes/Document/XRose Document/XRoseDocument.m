@@ -478,7 +478,7 @@
     //NSLog(@"in importTable");
     NSOpenPanel *op = [NSOpenPanel openPanel];
     [op setAllowsMultipleSelection:NO]; //this should change as the code matures
-    [op setAllowedFileTypes:[NSArray arrayWithObjects:@"txt",@"xml",@"XML",nil]];
+    [op setAllowedFileTypes:[NSArray arrayWithObjects:@"txt", nil]];
     [op beginSheetModalForWindow:[self.mainWindowController window] completionHandler:^(NSInteger result) {
         if(result == NSModalResponseOK)
         {

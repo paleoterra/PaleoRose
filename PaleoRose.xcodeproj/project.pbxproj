@@ -42,8 +42,6 @@
 		B41C87442DE4DC070053C9C9 /* CommonUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41C87432DE4DC070053C9C9 /* CommonUtilities.swift */; };
 		B41D283C094FC7CA008DF384 /* XRTableImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = B41D283A094FC7CA008DF384 /* XRTableImporter.h */; };
 		B41D283D094FC7CA008DF384 /* XRTableImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = B41D283B094FC7CA008DF384 /* XRTableImporter.m */; };
-		B42083B109637969007A74A8 /* PTFMXMLParser.h in Headers */ = {isa = PBXBuildFile; fileRef = B42083AF09637969007A74A8 /* PTFMXMLParser.h */; };
-		B42083B209637969007A74A8 /* PTFMXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B42083B009637969007A74A8 /* PTFMXMLParser.m */; };
 		B4237C992CFE959700E2B510 /* StorageModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4237C982CFE959100E2B510 /* StorageModelFactory.swift */; };
 		B4237C9C2D013BE900E2B510 /* StorageModelFactoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4237C9A2D013BE900E2B510 /* StorageModelFactoryTest.swift */; };
 		B423AB6D2D472DB1002474C7 /* MockInMemoryStoreDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B423AB6C2D472DA6002474C7 /* MockInMemoryStoreDelegate.swift */; };
@@ -139,7 +137,6 @@
 		B4A23EFF2E19C49E00EDE135 /* GraphicPetalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A23EFE2E19C49E00EDE135 /* GraphicPetalTests.swift */; };
 		B4A23FC62E28389D00EDE135 /* GraphicGeometrySource.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A23FC52E28389D00EDE135 /* GraphicGeometrySource.h */; };
 		B4A23FC82E28936900EDE135 /* MockGraphicGeometrySource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A23FC72E28936900EDE135 /* MockGraphicGeometrySource.swift */; };
-		B4A82F962A07F87A00790052 /* LITMXMLNodeProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A82F932A07F87900790052 /* LITMXMLNodeProtocol.h */; };
 		B4A82F9B2A07F8A400790052 /* LITMXMLBinaryEncoding.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A82F992A07F8A400790052 /* LITMXMLBinaryEncoding.h */; };
 		B4A82F9C2A07F8A400790052 /* LITMXMLBinaryEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A82F9A2A07F8A400790052 /* LITMXMLBinaryEncoding.m */; };
 		B4A82FAD2A07FB8800790052 /* ArrowHead.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A82FAB2A07FB8800790052 /* ArrowHead.swift */; };
@@ -301,8 +298,6 @@
 		B41C87432DE4DC070053C9C9 /* CommonUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonUtilities.swift; sourceTree = "<group>"; };
 		B41D283A094FC7CA008DF384 /* XRTableImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRTableImporter.h; sourceTree = "<group>"; };
 		B41D283B094FC7CA008DF384 /* XRTableImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRTableImporter.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		B42083AF09637969007A74A8 /* PTFMXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTFMXMLParser.h; sourceTree = "<group>"; };
-		B42083B009637969007A74A8 /* PTFMXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTFMXMLParser.m; sourceTree = "<group>"; };
 		B4237C982CFE959100E2B510 /* StorageModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageModelFactory.swift; sourceTree = "<group>"; };
 		B4237C9A2D013BE900E2B510 /* StorageModelFactoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageModelFactoryTest.swift; sourceTree = "<group>"; };
 		B423AB6C2D472DA6002474C7 /* MockInMemoryStoreDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockInMemoryStoreDelegate.swift; sourceTree = "<group>"; };
@@ -409,7 +404,6 @@
 		B4A23EFE2E19C49E00EDE135 /* GraphicPetalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicPetalTests.swift; sourceTree = "<group>"; };
 		B4A23FC52E28389D00EDE135 /* GraphicGeometrySource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GraphicGeometrySource.h; sourceTree = "<group>"; };
 		B4A23FC72E28936900EDE135 /* MockGraphicGeometrySource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGraphicGeometrySource.swift; sourceTree = "<group>"; };
-		B4A82F932A07F87900790052 /* LITMXMLNodeProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LITMXMLNodeProtocol.h; sourceTree = "<group>"; };
 		B4A82F992A07F8A400790052 /* LITMXMLBinaryEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LITMXMLBinaryEncoding.h; sourceTree = "<group>"; };
 		B4A82F9A2A07F8A400790052 /* LITMXMLBinaryEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LITMXMLBinaryEncoding.m; sourceTree = "<group>"; };
 		B4A82FAB2A07FB8800790052 /* ArrowHead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowHead.swift; sourceTree = "<group>"; };
@@ -578,7 +572,6 @@
 			children = (
 				B41D283A094FC7CA008DF384 /* XRTableImporter.h */,
 				B41D283B094FC7CA008DF384 /* XRTableImporter.m */,
-				B4149FFB2B24C976008AE5F4 /* XML Parser */,
 				B4149FFA2B24C952008AE5F4 /* XRose Importer Sheet */,
 				B4149FF92B24C92C008AE5F4 /* Delimiter Controller */,
 			);
@@ -608,7 +601,6 @@
 			children = (
 				B4A82F992A07F8A400790052 /* LITMXMLBinaryEncoding.h */,
 				B4A82F9A2A07F8A400790052 /* LITMXMLBinaryEncoding.m */,
-				B4A82F932A07F87900790052 /* LITMXMLNodeProtocol.h */,
 			);
 			path = "XML Parsing";
 			sourceTree = "<group>";
@@ -845,15 +837,6 @@
 				B486E2721E7B761B00F1ADAA /* XRTableImporterXRoseSheet.xib */,
 			);
 			path = "XRose Importer Sheet";
-			sourceTree = "<group>";
-		};
-		B4149FFB2B24C976008AE5F4 /* XML Parser */ = {
-			isa = PBXGroup;
-			children = (
-				B42083AF09637969007A74A8 /* PTFMXMLParser.h */,
-				B42083B009637969007A74A8 /* PTFMXMLParser.m */,
-			);
-			path = "XML Parser";
 			sourceTree = "<group>";
 		};
 		B4149FFC2B24C9A9008AE5F4 /* Formatters */ = {
@@ -1123,7 +1106,6 @@
 				B411E7F405C396A400C22F3E /* XRAppendDialogController.h in Headers */,
 				B411E84C05C397D000C22F3E /* XREncodingAccessoryView.h in Headers */,
 				B4815B7005C44C0200403360 /* XRLayerData.h in Headers */,
-				B4A82F962A07F87A00790052 /* LITMXMLNodeProtocol.h in Headers */,
 				B4E2DE8905C5BD6500714F6F /* XRLayerGrid.h in Headers */,
 				B47CA2F105C6C5470060A30C /* XRPropertyInspector.h in Headers */,
 				B47CA37A05C6CB150060A30C /* XREmptyInspectorController.h in Headers */,
@@ -1143,7 +1125,6 @@
 				B41D283C094FC7CA008DF384 /* XRTableImporter.h in Headers */,
 				B427BD070950B3050063849E /* XRTableImporterDelimiterController.h in Headers */,
 				B4B10C3909529F7F00E6A350 /* XRMakeDatasetController.h in Headers */,
-				B42083B109637969007A74A8 /* PTFMXMLParser.h in Headers */,
 				B47DDF500964CDE700C7EF02 /* XRTableImporterXRose.h in Headers */,
 				B4564ABB096A04A1005E0015 /* XRTableAddColumnController.h in Headers */,
 				B42FE3AD096AEB99007E9DC5 /* XRCalculateAzimuthController.h in Headers */,
@@ -1476,7 +1457,6 @@
 				B41C85B12DE4A24A0053C9C9 /* SettingsWindowController.swift in Sources */,
 				B427BD080950B3050063849E /* XRTableImporterDelimiterController.m in Sources */,
 				B4B10C3809529F7F00E6A350 /* XRMakeDatasetController.m in Sources */,
-				B42083B209637969007A74A8 /* PTFMXMLParser.m in Sources */,
 				B4237C992CFE959700E2B510 /* StorageModelFactory.swift in Sources */,
 				B47DDF510964CDE700C7EF02 /* XRTableImporterXRose.m in Sources */,
 				B41C86B22DE4B9C20053C9C9 /* UserDefaults+Extensions.swift in Sources */,

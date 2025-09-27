@@ -31,7 +31,7 @@
 #import "sqlite3.h"
 #define XRDataSetChangedStatisticsNotification @"XRDataSetChangedStatisticsNotification"
 
-@class LITMXMLTree,XRStatistic;
+@class XRStatistic;
 @interface XRDataSet : NSObject {
 	NSMutableData *_theValues;
 	NSString *_name;

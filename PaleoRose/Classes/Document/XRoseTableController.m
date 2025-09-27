@@ -107,17 +107,14 @@
 
 -(void)trigggerDrawing:(NSTimer *)timer
 {
-	//NSLog(@"******redraw");
 	_timer = nil;
 	[_roseView display];
 }
 
 -(void)drawRect:(NSRect)rect
 {
-	//NSLog(@"TableController:layerRequestsRedraw");
 	NSEnumerator *anEnum = [_theLayers reverseObjectEnumerator];
 	XRLayer *aLayer;
-	//NSLog(@"drawing layers");
 	
 	
 #ifdef PTBETALOGO
