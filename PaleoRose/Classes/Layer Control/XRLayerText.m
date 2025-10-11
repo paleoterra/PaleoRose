@@ -351,27 +351,6 @@ static NSLayoutManager *sharedDrawingLayoutManager(void) {
     return @"XRLayerText";
 }
 
--(void)saveToSQLDB:(sqlite3 *)db layerID:(int)layerID
-{
-    NSMutableString *command= [[NSMutableString alloc] init];
-    int error;
-    char *errorMsg;
-    //NSAttributedString *tempString = [[NSAttributedString alloc] initWithAttributedString:_contents];
-    NSRange aRange;
-    aRange.location = 0;
-    aRange.length = [_contents length];
-    [super saveToSQLDB:db layerID:layerID];
-
-    [command appendString:@"INSERT INTO _layerText (LAYERID,CONTENTS,RECT_POINT_X,RECT_POINT_Y,RECT_SIZE_HEIGHT,RECT_SIZE_WIDTH) "];
-    [command appendFormat:@"VALUES (%i,\"%@\",%f,%f,%f,%f) ",layerID,encodeBase64([_contents RTFFromRange:aRange documentAttributes:@{}]),textBounds.origin.x,textBounds.origin.y,textBounds.size.height,textBounds.size.width];
-    error = sqlite3_exec(db,[command UTF8String],nil,nil,&errorMsg);
-    if(error!=SQLITE_OK)
-        NSLog(@"error: %s",errorMsg);
-
-
-
-}
-
 -(id)initWithGeometryController:(XRGeometryController *)aController sqlDB:(sqlite3 *)db   layerID:(int)layerID withParentView:(NSView *)parentView
 {
     if (!(self = [self initWithGeometryController:aController parentView:parentView])) return nil;

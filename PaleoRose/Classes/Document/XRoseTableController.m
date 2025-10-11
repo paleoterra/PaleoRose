@@ -453,14 +453,6 @@
     }
 }
 
--(void)saveToSQLDB:(sqlite3 *)db {
-    int _id;
-    for(_id=0;_id<[_theLayers count];_id++) {
-        
-        [[_theLayers objectAtIndex:_id] saveToSQLDB:db layerID:_id];
-    }
-}
-
 -(void)configureControllerWithSQL:(sqlite3 *)db withDataSets:(NSArray *)datasets {
     NSMutableArray *anArray = [[NSMutableArray alloc] init];
     int k;

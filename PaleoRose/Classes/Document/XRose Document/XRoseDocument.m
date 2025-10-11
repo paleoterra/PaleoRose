@@ -132,7 +132,7 @@
         *outError = error;
         return NO;
     }
-    [(XRoseTableController *)[self.mainWindowController tableController] saveToSQLDB:[self.documentModel memoryStore]];
+
     [self.documentModel writeToFile:url error:&error];
     if (error) {
         NSLog(@"%@", error.localizedDescription);
