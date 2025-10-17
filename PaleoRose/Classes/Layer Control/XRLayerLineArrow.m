@@ -295,37 +295,6 @@
     return @"XRLayerLineArrow";
 }
 
--(void)saveToSQLDB:(sqlite3 *)db layerID:(int)layerID
-{
-    NSString *showvector,*showerror;
-    long long int datasetID;
-    NSMutableString *command= [[NSMutableString alloc] init];
-    int error;
-    char *errorMsg;
-    [super saveToSQLDB:db layerID:layerID];
-    datasetID = [_theSet setId];
-
-    if(_showVector)
-        showvector = @"TRUE";
-    else
-        showvector = @"FALSE";
-    if(_showError)
-        showerror = @"TRUE";
-    else
-        showerror = @"FALSE";
-
-    [command appendString:@"INSERT INTO _layerLineArrow (LAYERID,DATASET,ARROWSIZE,VECTORTYPE,ARROWTYPE,SHOWVECTOR,SHOWERROR) "];
-    [command appendFormat:@"VALUES (%i,%i,%f,%i,%i,\"%@\",\"%@\") ",layerID,(int)datasetID,_arrowSize,_type,_headType,showvector,showerror];
-    error = sqlite3_exec(db,[command UTF8String],nil,nil,&errorMsg);
-    if(error!=SQLITE_OK)
-        NSLog(@"error: %s",errorMsg);
-
-    if(_theSet) {
-        [_theSet saveToSQLDB:db];
-    }
-
-}
-
 -(int)datasetId {
     return _theSet.setId;
 }

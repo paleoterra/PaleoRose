@@ -231,27 +231,6 @@
 	return @"XRLayerCore";
 }
 
--(void)saveToSQLDB:(sqlite3 *)db layerID:(int)layerID
-{
-	NSString *coretype;
-	NSMutableString *command= [[NSMutableString alloc] init];
-	int error;
-	char *errorMsg;
-	[super saveToSQLDB:db layerID:layerID];
-
-	
-	if(_coreType)
-		coretype = @"TRUE";
-	else
-		coretype = @"FALSE";
-		
-	[command appendString:@"INSERT INTO _layerCore (LAYERID,RADIUS,TYPE) "];
-	[command appendFormat:@"VALUES (%i,%f,\"%@\") ",layerID,_percentRadius,coretype];
-	error = sqlite3_exec(db,[command UTF8String],nil,nil,&errorMsg);
-	if(error!=SQLITE_OK)
-		NSLog(@"error: %s",errorMsg);
-}
-
 -(id)initWithGeometryController:(XRGeometryController *)aController sqlDB:(sqlite3 *)db   layerID:(int)layerID 
 {
 	if (!(self = [self initWithGeometryController:aController])) return nil;

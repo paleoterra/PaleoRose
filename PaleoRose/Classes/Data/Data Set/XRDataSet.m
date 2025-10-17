@@ -741,35 +741,6 @@
 	return YES;
 }
 
--(void)saveToSQLDB:(sqlite3 *)db
-{
-	int error;
-	char *errorMsg;
-	NSMutableString *command = [[NSMutableString alloc] init];
-	NSMutableString *command2 = [[NSMutableString alloc] init];
-	[command appendString:@"INSERT INTO _datasets (NAME, TABLENAME,COLUMNNAME"];
-	[command2 appendFormat:@"VALUES ('%@','%@', '%@'",_name,tableName,columnName];
-	
-	if(predicate)
-	{
-		[command appendString:@",PREDICATE"];
-		[command2 appendFormat:@",'%@'",predicate];
-	}
-	if(_comments)
-	{
-		NSRange range;
-		range.location = 0;
-		range.length = [_comments length];
-		[command appendString:@",COMMENTS "];
-        [command appendFormat:@",'%@'",encodeBase64([_comments RTFFromRange:range documentAttributes:@{}])];
-	}
-	
-	[command appendFormat:@") %@)",command2];
-	error = sqlite3_exec(db,[command UTF8String],nil,nil,&errorMsg);
-	if(error!=SQLITE_OK)
-		NSLog(@"error: %s",errorMsg);
-}
-
 -(id)initFromSQL:(sqlite3 *)db forIndex:(int)index
 {
 	//NSLog(@"index: %i",index);
