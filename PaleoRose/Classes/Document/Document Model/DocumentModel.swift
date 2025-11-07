@@ -27,7 +27,7 @@
 import CodableSQLiteNonThread
 import Foundation
 
-class DocumentModel: NSObject, InMemoryStoreDelegate {
+class DocumentModel: NSObject {
 
     enum DocumentModelError: Error {
         case unknownLayerType
@@ -126,8 +126,25 @@ class DocumentModel: NSObject, InMemoryStoreDelegate {
             completion()
         }
     }
+}
 
-    // MARK: - Geometry
+extension DocumentModel: InMemoryStoreDelegate {
+
+    func update(tableNames: [String]) {
+        self.tableNames = tableNames
+    }
+
+    func update(windowSize: CGSize) {
+        self.windowSize = windowSize
+    }
+
+    func update(dataSets: [XRDataSet]) {
+        self.dataSets = dataSets
+    }
+
+    func update(layers: [XRLayer]) {
+        self.layers = layers
+    }
 
     func update(geometry: Geometry) {
         guard let controller = geometryController else {

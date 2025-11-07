@@ -29,11 +29,10 @@ import Foundation
 import OSLog
 
 protocol InMemoryStoreDelegate: AnyObject {
-    var tableNames: [String] { get set }
-    var windowSize: CGSize { get set }
-    var dataSets: [XRDataSet] { get set }
-    var layers: [XRLayer] { get set }
-
+    func update(tableNames: [String])
+    func update(windowSize: CGSize)
+    func update(dataSets: [XRDataSet])
+    func update(layers: [XRLayer])
     func update(geometry: Geometry)
 }
 
@@ -130,13 +129,14 @@ class InMemoryStore: NSObject {
                 let tableNames = try tableNames(sqliteStore: sqliteStore)
                 group.enter()
                 DispatchQueue.main.async { [weak self] in
-                    self?.delegate?.tableNames = tableNames
+                    self?.delegate?.update(tableNames: tableNames)
                     group.leave()
                 }
                 do {
                     let windowSize = try windowSize(sqliteStore: sqliteStore)
+                    group.enter()
                     DispatchQueue.main.async { [weak self] in
-                        self?.delegate?.windowSize = windowSize
+                        self?.delegate?.update(windowSize: windowSize)
                         group.leave()
                     }
                 } catch InMemoryStoreError.unexpectedEmptyResult {
@@ -161,13 +161,13 @@ class InMemoryStore: NSObject {
 
                 group.enter()
                 DispatchQueue.main.async { [weak self] in
-                    self?.delegate?.dataSets = dataSets
+                    self?.delegate?.update(dataSets: dataSets)
                     group.leave()
                 }
                 let layers = try readLayers(sqliteStore: sqliteStore)
                 group.enter()
                 DispatchQueue.main.async { [weak self] in
-                    self?.delegate?.layers = layers
+                    self?.delegate?.update(layers: layers)
                     group.leave()
                 }
                 completion(.success(true))

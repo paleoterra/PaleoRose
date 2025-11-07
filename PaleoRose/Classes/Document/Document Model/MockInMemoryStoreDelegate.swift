@@ -25,15 +25,27 @@
 // SOFTWARE.
 
 class MockInMemoryStoreDelegate: InMemoryStoreDelegate {
-    var tableNames: [String] = []
+    private(set) var tableNames: [String] = []
+    private(set) var windowSize: CGSize = .zero
+    private(set) var dataSets: [XRDataSet] = []
+    private(set) var layers: [XRLayer] = []
+    private(set) var capturedGeometry: Geometry?
 
-    var windowSize: CGSize = .zero
+    func update(tableNames: [String]) {
+        self.tableNames = tableNames
+    }
 
-    var dataSets: [XRDataSet] = []
+    func update(windowSize: CGSize) {
+        self.windowSize = windowSize
+    }
 
-    var layers: [XRLayer] = []
+    func update(dataSets: [XRDataSet]) {
+        self.dataSets = dataSets
+    }
 
-    var capturedGeometry: Geometry?
+    func update(layers: [XRLayer]) {
+        self.layers = layers
+    }
 
     func update(geometry: Geometry) {
         capturedGeometry = geometry
