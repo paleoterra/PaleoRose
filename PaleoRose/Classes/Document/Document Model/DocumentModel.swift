@@ -66,6 +66,7 @@ class DocumentModel: NSObject {
 
     @objc func openFile(_ file: URL) throws {
         try inMemoryStore.load(from: file.path)
+        readFromStore {}
     }
 
     @objc func fileURL() -> URL? {
