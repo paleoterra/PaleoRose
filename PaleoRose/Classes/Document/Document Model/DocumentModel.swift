@@ -25,6 +25,7 @@
 // SOFTWARE.
 
 import CodableSQLiteNonThread
+import Combine
 import Foundation
 
 class DocumentModel: NSObject {
@@ -36,12 +37,13 @@ class DocumentModel: NSObject {
     // MARK: - Properties
 
     private var inMemoryStore: InMemoryStore
-    @objc var tableNames: [String] = []
     @objc var windowSize: CGSize = .zero
     @objc var dataSets: [XRDataSet] = []
     @objc var layers: [XRLayer] = []
     @objc weak var document: NSDocument?
     @objc var geometryController: XRGeometryController?
+
+    private let tableNamesSubject = CurrentValueSubject<[String], Never>([])
 
     // MARK: - Deprecated Methods
 
@@ -79,7 +81,7 @@ class DocumentModel: NSObject {
     // MARK: - General
 
     @objc func dataTableNames() -> [String] {
-        tableNames
+        tableNamesSubject.value
     }
 
     @objc func possibleColumnNames(table: String) throws -> [String] {
@@ -132,7 +134,7 @@ class DocumentModel: NSObject {
 extension DocumentModel: InMemoryStoreDelegate {
 
     func update(tableNames: [String]) {
-        self.tableNames = tableNames
+        tableNamesSubject.send(tableNames)
     }
 
     func update(windowSize: CGSize) {
