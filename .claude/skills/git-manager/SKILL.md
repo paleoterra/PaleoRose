@@ -35,11 +35,14 @@ Create a commit message in this format:
 {Optional long description explaining the "why" behind changes}
 ```
 
-Requirements:
+**CRITICAL Requirements:**
+- **MUST** include card number from branch name at the start
 - Short description should be concise (5-10 words max)
 - Focus on WHAT changed, not implementation details
 - Long description (optional) should explain WHY, context, or important notes
-- Always end with " - tm" (user's initials)
+- **MUST** end the first line with " - tm" (user's initials)
+- **NEVER** add co-author lines or "Generated with Claude Code" messages
+- **DO NOT** add any emoji or special characters
 
 Examples:
 - `43 - Added datasets table view controller - tm`
@@ -53,9 +56,20 @@ Examples:
 - Ask: "Would you like me to proceed with this commit?"
 
 #### Step 5: Execute Commit (Only After Approval)
+Use a HEREDOC to ensure proper formatting:
 ```bash
-git commit -m "{card-number} - {short description} - tm" -m "{long description if provided}"
+git commit -m "$(cat <<'EOF'
+{card-number} - {short description} - tm
+
+{long description if provided}
+EOF
+)"
 ```
+
+**IMPORTANT**:
+- Use HEREDOC format as shown above for multi-line messages
+- For simple commits without long description, use: `git commit -m "{card-number} - {short description} - tm"`
+- Never add co-author or generated messages
 
 ### 2. Git Worktree Management
 
