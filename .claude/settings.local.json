@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(then echo \"✓ $dir\")",
+      "Bash(else echo \"✗ $dir\")",
+      "Bash(then echo \"✓ $dir%/\")",
+      "WebFetch(domain:code.claude.com)",
+      "Bash(then mv \"$dir/skill.md\" \"$dir/SKILL.md\")",
+      "Bash(echo:*)",
+      "Bash(do if [ -f \"$dir/SKILL.md\" ])",
+      "Bash(then if head -1 \"$dir/SKILL.md\")",
+      "Bash(then echo \"✓ $dir%/ has YAML frontmatter\")",
+      "Bash(else echo \"✗ $dir%/ missing YAML frontmatter\")",
+      "Bash(do if [ -f \"$dirSKILL.md\" ])",
+      "Bash(then if head -1 \"$dirSKILL.md\")",
+      "Bash(else echo \"✗ $dir%/\")",
+      "Bash(do head -1 $dirSKILL.md)",
+      "Bash(find . -name \"SKILL.md\" -exec sh -c 'echo \"\"=== {} ===\"\" && head -3 \"\"{}\"\"' ;)",
+      "Bash(git worktree:*)",
+      "Bash(mkdir:*)",
+      "Bash(mv:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
