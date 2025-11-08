@@ -187,6 +187,7 @@
 		B4F2B1912C97CB300017E717 /* Count.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F2B1882C97CB300017E717 /* Count.swift */; };
 		B4F2B1922C97CB300017E717 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F2B1812C97CB300017E717 /* Color.swift */; };
 		B4F2B1932C97CB300017E717 /* DataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F2B1822C97CB300017E717 /* DataSet.swift */; };
+		B4F85C7D2EBEE17A00016FA7 /* TableListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F85C7C2EBEE16E00016FA7 /* TableListController.swift */; };
 		B4F929FD05D35D3A00EAAED0 /* XRLayerCore.h in Headers */ = {isa = PBXBuildFile; fileRef = B4F929FB05D35D3A00EAAED0 /* XRLayerCore.h */; };
 		B4F929FE05D35D3A00EAAED0 /* XRLayerCore.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F929FC05D35D3A00EAAED0 /* XRLayerCore.m */; };
 		BLJPCHG3GJY5JEQ0DHOENH4A /* GraphicCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BLHFDTXYH56D3KXO45XKMYX9 /* GraphicCircle.swift */; };
@@ -454,6 +455,7 @@
 		B4F2B1862C97CB300017E717 /* LayerGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerGrid.swift; sourceTree = "<group>"; };
 		B4F2B1872C97CB300017E717 /* LayerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerData.swift; sourceTree = "<group>"; };
 		B4F2B1882C97CB300017E717 /* Count.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Count.swift; sourceTree = "<group>"; };
+		B4F85C7C2EBEE16E00016FA7 /* TableListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableListController.swift; sourceTree = "<group>"; };
 		B4F929FB05D35D3A00EAAED0 /* XRLayerCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRLayerCore.h; sourceTree = "<group>"; };
 		B4F929FC05D35D3A00EAAED0 /* XRLayerCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRLayerCore.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		BLHFDTXYH56D3KXO45XKMYX9 /* GraphicCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicCircle.swift; sourceTree = "<group>"; };
@@ -624,6 +626,7 @@
 				B48345D105C23B3000E3F6B7 /* XRoseWindowController.m */,
 				B48345D405C23B3D00E3F6B7 /* XRoseTableController.h */,
 				B48345D505C23B3D00E3F6B7 /* XRoseTableController.m */,
+				B4F85C7C2EBEE16E00016FA7 /* TableListController.swift */,
 				B48345EE05C23CA100E3F6B7 /* XRoseView.h */,
 				B48345EF05C23CA100E3F6B7 /* XRoseView.m */,
 				B4852A8205C2E223002212E3 /* XRGeometryController.h */,
@@ -1444,6 +1447,7 @@
 				B4F2B1902C97CB300017E717 /* Geometry.swift in Sources */,
 				B4F2B1912C97CB300017E717 /* Count.swift in Sources */,
 				B41C86B42DE4BE930053C9C9 /* UserDefaultsKey.swift in Sources */,
+				B4F85C7D2EBEE17A00016FA7 /* TableListController.swift in Sources */,
 				B4F2B1922C97CB300017E717 /* Color.swift in Sources */,
 				B4F2B1932C97CB300017E717 /* DataSet.swift in Sources */,
 				B4F08862060914150000CF7A /* XRVStatCreatePanelController.m in Sources */,
