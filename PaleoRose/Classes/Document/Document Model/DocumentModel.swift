@@ -92,6 +92,7 @@ class DocumentModel: NSObject {
         try inMemoryStore.store(windowSize: size)
     }
 
+    @available(*, deprecated, message: "Use TableListControllerDataSource.renameTable(oldName:to:) instead")
     @objc func rename(table: String, toName: String) throws {
         try inMemoryStore.renameTable(from: table, toName: toName)
     }
@@ -164,5 +165,25 @@ extension DocumentModel: InMemoryStoreDelegate {
             sectorCount: Int32(geometry.SECTORCOUNT),
             relativeSize: geometry.RELATIVESIZE
         )
+    }
+}
+
+extension DocumentModel: TableListControllerDataSource {
+
+    var dataSetRecordsPublisher: AnyPublisher<[String], Never> {
+        tableNamesSubject.eraseToAnyPublisher()
+    }
+
+    func renameTable(oldName: String, to newName: String) {
+        do {
+            try inMemoryStore.renameTable(from: oldName, toName: newName)
+
+            // Update all datasets that reference the renamed table
+            for dataSet in dataSets where dataSet.tableName() == oldName {
+                dataSet.setTableName(newName)
+            }
+        } catch {
+            print("Failed to rename table from '\(oldName)' to '\(newName)': \(error)")
+        }
     }
 }

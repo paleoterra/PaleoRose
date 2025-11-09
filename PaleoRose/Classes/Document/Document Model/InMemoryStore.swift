@@ -478,6 +478,12 @@ class InMemoryStore: NSObject {
         let sqliteStore = try validateStore()
         let query = Query(sql: "ALTER TABLE \(from) RENAME TO \(toName)")
         _ = try interface.executeQuery(sqlite: sqliteStore, query: query)
+
+        // Notify delegate of updated table names
+        let updatedTableNames = try tableNames(sqliteStore: sqliteStore)
+        DispatchQueue.main.async { [weak self] in
+            self?.delegate?.update(tableNames: updatedTableNames)
+        }
     }
 
     @objc func addColumn(to table: String, columnDefinition: String) throws {

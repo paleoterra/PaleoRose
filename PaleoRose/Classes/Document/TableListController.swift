@@ -1,5 +1,5 @@
 //
-// DataTableController.swift
+// TableListController.swift
 // PaleoRose
 //
 // MIT License
@@ -51,6 +51,7 @@ protocol TableListControllerDataSource: AnyObject {
             tableView?.reloadData()
         }
     }
+
     weak var dataSource: TableListControllerDataSource? {
         didSet {
             setupDataSourceSubscription()
@@ -61,8 +62,8 @@ protocol TableListControllerDataSource: AnyObject {
 
     @objc init(dataSource: DocumentModel) {
         super.init()
-//        self.dataSource = dataSource
-//        setupDataSourceSubscription()
+        self.dataSource = dataSource
+        setupDataSourceSubscription()
     }
 
     // MARK: - Private Methods
@@ -112,10 +113,11 @@ extension TableListController: NSTableViewDataSource {
         for tableColumn: NSTableColumn?,
         row: Int
     ) {
-        guard let newName = object as? String,
-              !newName.isEmpty,
-              let dataSource,
-              tableNames.indices.contains(row) else {
+        guard
+            let newName = object as? String,
+            !newName.isEmpty,
+            let dataSource,
+            tableNames.indices.contains(row) else {
             return
         }
 

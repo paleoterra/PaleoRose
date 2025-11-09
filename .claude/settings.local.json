@@ -18,7 +18,14 @@
       "Bash(find . -name \"SKILL.md\" -exec sh -c 'echo \"\"=== {} ===\"\" && head -3 \"\"{}\"\"' ;)",
       "Bash(git worktree:*)",
       "Bash(mkdir:*)",
-      "Bash(mv:*)"
+      "Bash(mv:*)",
+      "Bash(git add:*)",
+      "Bash(xcodebuild test:*)",
+      "Bash(xcodebuild -list:*)",
+      "Bash(swift test:*)",
+      "Bash(xcodebuild build:*)",
+      "Bash(swiftlint lint:*)",
+      "Bash(xcodebuild clean build:*)"
     ],
     "deny": [],
     "ask": []
