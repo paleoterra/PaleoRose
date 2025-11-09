@@ -39,6 +39,7 @@
 @property (nonatomic) FStatisticController *theSheetController;
 @property (nonatomic) XRTableAddColumnController *addColumnController;
 @property (nonatomic) XRCalculateAzimuthController *azimuthController;
+@property (nonatomic) TableListController *tableListController;
 @end
 @implementation XRoseWindowController
 NSRect initialRect;
@@ -59,7 +60,8 @@ NSRect initialRect;
 
 -(void)awakeFromNib
 {
-	//NSLog(@"windowcontrol awake");
+    self.tableListController = [[TableListController alloc] initWithDataSource:self.documentModel];
+    self.tableListController.tableView = self->_tableNameTable;
 
 	NSToolbar *roseToolbar = [[NSToolbar alloc] initWithIdentifier:@"RoseToolbar"];
 	[roseToolbar setDelegate:self];
@@ -363,31 +365,6 @@ NSRect initialRect;
 
 }
 
-- (int)numberOfRowsInTableView:(NSTableView *)aTableView
-{
-	//NSLog(@"count %i",[tableList count]);
-	return (int)[tableList count];
-}
-
-- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex
-{
-	return [tableList objectAtIndex:rowIndex];
-}
-//alter table "table name" RENAME TO "newname"[[self document] discoverTables];
-
-- (void)tableView:(NSTableView *)aTableView setObjectValue:(id)anObject forTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex
-{
-    NSError *error;
-	NSString *oldTableName = [tableList objectAtIndex:rowIndex];
-	[tableList replaceObjectAtIndex:rowIndex withObject:anObject]; // move
-
-    [self.documentModel renameWithTable:oldTableName toName:anObject error:&error];
-    if(error != nil) {
-        NSLog(@"%@",error.localizedDescription);
-    }
-	//now table has been written, we must update the datasets
-	[[self document] datasetsRenameTable:oldTableName toName:anObject]; // move
-}
 -(IBAction)tableAddColumn:(id)sender
 {
 	//this method should work on selected table items.  otherwise, does nothing.

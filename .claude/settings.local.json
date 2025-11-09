@@ -25,7 +25,11 @@
       "Bash(swift test:*)",
       "Bash(xcodebuild build:*)",
       "Bash(swiftlint lint:*)",
-      "Bash(xcodebuild clean build:*)"
+      "Bash(xcodebuild clean build:*)",
+      "Bash(find:*)",
+      "Skill(xrose-database-reader)",
+      "Bash(chmod:*)",
+      "Bash(python3:*)"
     ],
     "deny": [],
     "ask": []

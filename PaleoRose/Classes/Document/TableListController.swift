@@ -48,6 +48,8 @@ protocol TableListControllerDataSource: AnyObject {
 
     @objc weak var tableView: NSTableView? {
         didSet {
+            tableView?.dataSource = self
+            tableView?.delegate = self
             tableView?.reloadData()
         }
     }
