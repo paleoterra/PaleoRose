@@ -79,7 +79,7 @@
 }
 
 -(void)subscribeToDocumentModel {
-    NSArray *keys = @[@"tableNames",@"dataSets", @"layers"];
+    NSArray *keys = @[@"dataSets", @"layers"];
     for(int i = 0; i<[keys count]; i++) {
         [self.documentModel addObserver:self
                              forKeyPath:keys[i]

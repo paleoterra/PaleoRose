@@ -25,9 +25,10 @@
 // SOFTWARE.
 
 import CodableSQLiteNonThread
+import Combine
 import Foundation
 
-class DocumentModel: NSObject, InMemoryStoreDelegate {
+class DocumentModel: NSObject {
 
     enum DocumentModelError: Error {
         case unknownLayerType
@@ -36,12 +37,13 @@ class DocumentModel: NSObject, InMemoryStoreDelegate {
     // MARK: - Properties
 
     private var inMemoryStore: InMemoryStore
-    @objc var tableNames: [String] = []
     @objc var windowSize: CGSize = .zero
     @objc var dataSets: [XRDataSet] = []
     @objc var layers: [XRLayer] = []
     @objc weak var document: NSDocument?
     @objc var geometryController: XRGeometryController?
+
+    private let tableNamesSubject = CurrentValueSubject<[String], Never>([])
 
     // MARK: - Deprecated Methods
 
@@ -66,6 +68,7 @@ class DocumentModel: NSObject, InMemoryStoreDelegate {
 
     @objc func openFile(_ file: URL) throws {
         try inMemoryStore.load(from: file.path)
+        readFromStore {}
     }
 
     @objc func fileURL() -> URL? {
@@ -78,7 +81,7 @@ class DocumentModel: NSObject, InMemoryStoreDelegate {
     // MARK: - General
 
     @objc func dataTableNames() -> [String] {
-        tableNames
+        tableNamesSubject.value
     }
 
     @objc func possibleColumnNames(table: String) throws -> [String] {
@@ -89,6 +92,7 @@ class DocumentModel: NSObject, InMemoryStoreDelegate {
         try inMemoryStore.store(windowSize: size)
     }
 
+    @available(*, deprecated, message: "Use TableListControllerDataSource.renameTable(oldName:to:) instead")
     @objc func rename(table: String, toName: String) throws {
         try inMemoryStore.renameTable(from: table, toName: toName)
     }
@@ -126,8 +130,25 @@ class DocumentModel: NSObject, InMemoryStoreDelegate {
             completion()
         }
     }
+}
 
-    // MARK: - Geometry
+extension DocumentModel: InMemoryStoreDelegate {
+
+    func update(tableNames: [String]) {
+        tableNamesSubject.send(tableNames)
+    }
+
+    func update(windowSize: CGSize) {
+        self.windowSize = windowSize
+    }
+
+    func update(dataSets: [XRDataSet]) {
+        self.dataSets = dataSets
+    }
+
+    func update(layers: [XRLayer]) {
+        self.layers = layers
+    }
 
     func update(geometry: Geometry) {
         guard let controller = geometryController else {
@@ -144,5 +165,25 @@ class DocumentModel: NSObject, InMemoryStoreDelegate {
             sectorCount: Int32(geometry.SECTORCOUNT),
             relativeSize: geometry.RELATIVESIZE
         )
+    }
+}
+
+extension DocumentModel: TableListControllerDataSource {
+
+    var dataSetRecordsPublisher: AnyPublisher<[String], Never> {
+        tableNamesSubject.eraseToAnyPublisher()
+    }
+
+    func renameTable(oldName: String, to newName: String) {
+        do {
+            try inMemoryStore.renameTable(from: oldName, toName: newName)
+
+            // Update all datasets that reference the renamed table
+            for dataSet in dataSets where dataSet.tableName() == oldName {
+                dataSet.setTableName(newName)
+            }
+        } catch {
+            print("Failed to rename table from '\(oldName)' to '\(newName)': \(error)")
+        }
     }
 }
