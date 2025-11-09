@@ -553,28 +553,6 @@
 	return @"XRLayerData";
 }
 
--(void)saveToSQLDB:(sqlite3 *)db layerID:(int)layerID
-{
-	NSMutableString *command = [[NSMutableString alloc] init];
-	long long datasetID;
-	int error;
-	char *errorMsg;
-	[super saveToSQLDB:db layerID:layerID];
-    datasetID = [_theSet setId];
-	//NSLog(@"dataset2: %i %@ %i",(int)datasetID,[_theSet name],(int)[self findDatasetIDByName:[_theSet name] inSQLDB:db]);
-	
-	[command appendString:@"INSERT INTO _layerData (LAYERID,DATASET,PLOTTYPE,TOTALCOUNT,DOTRADIUS) "];
-	[command appendFormat:@"VALUES (%i,%i,%i,%i,%f) ",layerID,(int)datasetID,_plotType,_totalCount,_dotRadius];
-	error = sqlite3_exec(db,[command UTF8String],nil,nil,&errorMsg);
-	if(error!=SQLITE_OK)
-		NSLog(@"error: %s",errorMsg);
-	
-    if(_theSet) {
-        [_theSet saveToSQLDB:db];
-    }
-	
-}
-
 -(id)initWithGeometryController:(XRGeometryController *)aController sqlDB:(sqlite3 *)db   layerID:(int)layerID 
 {
 	if (!(self = [self initWithGeometryController:aController])) return nil;

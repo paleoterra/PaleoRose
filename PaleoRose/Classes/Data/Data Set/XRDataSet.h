@@ -120,7 +120,6 @@
 
 -(NSString *)buildSQL DEPRECATED_ATTRIBUTE;
 -(BOOL)readSQL:(sqlite3 *)db DEPRECATED_ATTRIBUTE;
--(void)saveToSQLDB:(sqlite3 *)db DEPRECATED_ATTRIBUTE;
 -(id)initFromSQL:(sqlite3 *)db forIndex:(int)index DEPRECATED_ATTRIBUTE;
 
 #pragma mark Mutability

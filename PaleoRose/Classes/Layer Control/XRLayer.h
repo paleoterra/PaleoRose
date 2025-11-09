@@ -89,8 +89,6 @@
 -(BOOL)handleMouseEvent:(NSEvent *)anEvent;
 -(BOOL)hitDetection:(NSPoint)testPoint;
 -(NSString *)type;
--(void)saveToSQLDB:(sqlite3 *)db layerID:(int)layerID DEPRECATED_ATTRIBUTE;
--(long long int)saveColor:(NSColor *)aColor toSQLDB:(sqlite3 *)db DEPRECATED_ATTRIBUTE;
 -(long long int)findColorIDForColor:(NSColor *)aColor inDB:(sqlite3 *)db DEPRECATED_ATTRIBUTE;
 -(long long int)findDatasetIDByName:(NSString *)aName inSQLDB:(sqlite3 *)db DEPRECATED_ATTRIBUTE;
 +(id)layerWithGeometryController:(XRGeometryController *)aController sqlDB:(sqlite3 *)db layerID:(int)layerid withParentView:(NSView *)parentView DEPRECATED_ATTRIBUTE;
