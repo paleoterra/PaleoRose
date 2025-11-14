@@ -325,6 +325,50 @@ private let layerDragType = NSPasteboard.PasteboardType("LayerDragType")
     @objc func lastLayer() -> XRLayer? {
         layers.last
     }
+
+    // MARK: - Mouse & Interaction Handling
+
+    @objc func handleMouseEvent(_ event: NSEvent) {
+        guard let tableView else { return }
+
+        // Forward mouse event to selected layers
+        for row in 0..<layers.count where tableView.isRowSelected(row) {
+            let layer = layers[row]
+            if layer.handleMouseEvent(event) {
+                break
+            }
+        }
+    }
+
+    @objc func activeLayer(with point: NSPoint) -> XRLayer? {
+        guard let tableView else { return nil }
+
+        // Find layer at point from selected rows
+        for row in 0..<layers.count where tableView.isRowSelected(row) {
+            let layer = layers[row]
+            if layer.hitDetection(point) {
+                return layer
+            }
+        }
+
+        return nil
+    }
+
+    // MARK: - Statistics & Reporting
+
+    @objc func generateStatisticsString() -> String {
+        var result = ""
+
+        for layer in layers {
+            if let dataLayer = layer as? XRLayerData {
+                result += "\nData Set: \(layer.layerName())\n"
+                result += dataLayer.dataSet().statisticsDescription()
+                result += "\n\n"
+            }
+        }
+
+        return result
+    }
 }
 
 // MARK: - NSTableViewDelegate
