@@ -27,6 +27,10 @@
 import AppKit
 import Combine
 
+// MARK: - Constants
+
+private let layerDragType = NSPasteboard.PasteboardType("LayerDragType")
+
 /// Controller for managing the layers table view
 /// Displays layers from DocumentModel and delegates all data operations back to DocumentModel
 @objc class LayersTableController: NSObject {
@@ -42,6 +46,7 @@ import Combine
         didSet {
             tableView?.dataSource = self
             tableView?.delegate = self
+            tableView?.registerForDraggedTypes([layerDragType])
             tableView?.reloadData()
         }
     }
@@ -386,5 +391,66 @@ extension LayersTableController: NSTableViewDataSource {
         default:
             break
         }
+    }
+
+    // MARK: - Drag & Drop
+
+    func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
+        let pasteboardItem = NSPasteboardItem()
+        pasteboardItem.setString(String(row), forType: layerDragType)
+        return pasteboardItem
+    }
+
+    func tableView(
+        _ tableView: NSTableView,
+        validateDrop info: NSDraggingInfo,
+        proposedRow row: Int,
+        proposedDropOperation dropOperation: NSTableView.DropOperation
+    ) -> NSDragOperation {
+        // Only accept drops from this table view
+        guard info.draggingSource as? NSTableView === tableView else {
+            return []
+        }
+
+        // Only accept drops above rows
+        guard dropOperation == .above else {
+            return []
+        }
+
+        return .move
+    }
+
+    func tableView(
+        _ tableView: NSTableView,
+        acceptDrop info: NSDraggingInfo,
+        row: Int,
+        dropOperation: NSTableView.DropOperation
+    ) -> Bool {
+        // Only accept drops from this table view
+        guard info.draggingSource as? NSTableView === tableView,
+              let dataSource else {
+            return false
+        }
+
+        // Extract dragged row indices from pasteboard
+        var draggedRows: [Int] = []
+        info.draggingPasteboard.pasteboardItems?.forEach { item in
+            if let rowString = item.string(forType: layerDragType),
+               let rowIndex = Int(rowString) {
+                draggedRows.append(rowIndex)
+            }
+        }
+
+        guard !draggedRows.isEmpty else {
+            return false
+        }
+
+        // Sort in descending order to maintain correct indices
+        draggedRows.sort(by: >)
+
+        // Delegate to DocumentModel
+        dataSource.moveLayers(from: draggedRows, to: row)
+
+        return true
     }
 }
