@@ -182,6 +182,144 @@ import Combine
 
         return maxPercent
     }
+
+    // MARK: - Layer Creation (Pass-Through to DocumentModel)
+
+    @objc func addDataLayer(for set: XRDataSet) {
+        guard let dataSource, let rosePlotController else { return }
+
+        // Extract dataset name
+        let dataSetName = set.tableName()
+
+        // Get next color
+        let color = nextColor()
+
+        // Generate unique name if needed
+        let baseName = set.name() ?? dataSetName
+        let uniqueName = layerExists(withName: baseName) ? newLayerName(forBaseName: baseName) : baseName
+
+        // Delegate to DocumentModel
+        dataSource.createDataLayer(
+            dataSetName: dataSetName,
+            color: color,
+            name: uniqueName,
+            geometryController: rosePlotController
+        )
+    }
+
+    @objc func addCoreLayer(_ sender: Any?) {
+        guard let dataSource, let rosePlotController else { return }
+
+        let uniqueName = newLayerName(forBaseName: "Core")
+        dataSource.createCoreLayer(name: uniqueName, geometryController: rosePlotController)
+    }
+
+    @objc func addGridLayer(_ sender: Any?) {
+        guard let dataSource, let rosePlotController else { return }
+
+        let uniqueName = newLayerName(forBaseName: "Grid")
+        dataSource.createGridLayer(name: uniqueName, geometryController: rosePlotController)
+    }
+
+    @objc func addTextLayer(_ sender: Any?) {
+        guard let dataSource, let rosePlotController, let roseView else { return }
+
+        let uniqueName = newLayerName(forBaseName: "Text")
+        dataSource.createTextLayer(name: uniqueName, parentView: roseView, geometryController: rosePlotController)
+    }
+
+    @objc func displaySheetForVStatLayer(_ sender: Any?) {
+        guard let dataSource, let rosePlotController, let windowController else { return }
+
+        let layerNames = dataLayerNames()
+        guard !layerNames.isEmpty else { return }
+
+        // Create the panel controller
+        let panelController = XRVStatCreatePanelController(array: layerNames)
+
+        // Show the sheet
+        windowController.window?.beginSheet(panelController.window) { [weak self, weak dataSource, weak panelController] response in
+            guard let self, let dataSource, let panelController else { return }
+
+            if response == .OK {
+                let selectedName = panelController.selectedName()
+
+                // Find the dataset name from the selected layer
+                if let selectedLayer = self.dataLayer(withName: selectedName) as? XRLayerData {
+                    let dataSetName = selectedLayer.dataSet().tableName()
+                    dataSource.createLineArrowLayer(
+                        dataSetName: dataSetName,
+                        name: nil,
+                        geometryController: rosePlotController
+                    )
+                }
+            }
+        }
+    }
+
+    // MARK: - Layer Deletion (Pass-Through to DocumentModel)
+
+    @objc func deleteLayers(_ sender: Any?) {
+        guard let tableView, let dataSource else { return }
+
+        let selectedIndices = tableView.selectedRowIndexes
+        guard !selectedIndices.isEmpty else { return }
+
+        // Convert IndexSet to Array
+        let indicesArray = Array(selectedIndices)
+
+        // Delegate to DocumentModel
+        dataSource.deleteLayers(at: indicesArray)
+    }
+
+    @objc func deleteLayer(_ layer: XRLayer) {
+        guard let dataSource else { return }
+        dataSource.deleteLayer(layer)
+    }
+
+    @objc func deleteLayersForTableName(_ tableName: String) {
+        guard let dataSource else { return }
+        dataSource.deleteLayersForDataset(named: tableName)
+    }
+
+    // MARK: - Layer Utilities (Controller-Local Operations)
+
+    @objc func layerExists(withName name: String) -> Bool {
+        layers.contains { $0.layerName() == name }
+    }
+
+    @objc func newLayerName(forBaseName name: String) -> String {
+        var index = 1
+        var newName: String
+
+        repeat {
+            newName = "\(name)-\(index)"
+            index += 1
+        } while layerExists(withName: newName)
+
+        return newName
+    }
+
+    @objc func layerSettings() -> [String: Any] {
+        let layerSettingsArray = layers.map { $0.layerSettings() }
+        return ["layers": layerSettingsArray]
+    }
+
+    @objc func dataLayerNames() -> [String] {
+        layers.compactMap { layer in
+            layer.isKind(of: XRLayerData.self) ? layer.layerName() : nil
+        }
+    }
+
+    @objc func dataLayer(withName name: String) -> XRLayer? {
+        layers.first { layer in
+            layer.isKind(of: XRLayerData.self) && layer.layerName() == name
+        }
+    }
+
+    @objc func lastLayer() -> XRLayer? {
+        layers.last
+    }
 }
 
 // MARK: - NSTableViewDelegate
