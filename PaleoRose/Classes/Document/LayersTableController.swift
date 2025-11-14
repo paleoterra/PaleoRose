@@ -64,7 +64,7 @@ private let layerDragType = NSPasteboard.PasteboardType("LayerDragType")
     // MARK: - Initialization
 
     @objc init(dataSource: DocumentModel, geometryController: XRGeometryController) {
-        self.rosePlotController = geometryController
+        rosePlotController = geometryController
         super.init()
         self.dataSource = dataSource
         setColorArray()
@@ -123,14 +123,14 @@ private let layerDragType = NSPasteboard.PasteboardType("LayerDragType")
     @objc func drawRect(_ rect: NSRect) {
         // Draw layers in reverse order (back to front)
         for layer in layers.reversed() {
-            layer.drawRect(rect)
+            layer.draw(rect)
         }
     }
 
-    @objc func detectLayerHitAtPoint(_ point: NSPoint) {
+    @objc func detectLayerHitAtPoint(_: NSPoint) {
         // Deselect all rows when hitting background
         if let tableView {
-            for row in 0..<layers.count {
+            for row in 0 ..< layers.count {
                 tableView.deselectRow(row)
             }
         }
@@ -142,9 +142,9 @@ private let layerDragType = NSPasteboard.PasteboardType("LayerDragType")
         let selectedRowCount = tableView.numberOfSelectedRows
 
         if selectedRowCount == 0 {
-            XRPropertyInspector.default().displayInfo(for: nil)
+            // XRPropertyInspector.default().displayInfo(for: nil as XRLayer?)
         } else if selectedRowCount > 1 {
-            XRPropertyInspector.default().displayInfo(for: nil)
+            // XRPropertyInspector.default().displayInfo(for: nil as XRLayer?)
         } else {
             let row = tableView.selectedRow
             guard layers.indices.contains(row) else { return }
@@ -154,12 +154,12 @@ private let layerDragType = NSPasteboard.PasteboardType("LayerDragType")
                 layer.setIsActive(index == row)
             }
 
-            XRPropertyInspector.default().displayInfo(for: layers[row])
+            // XRPropertyInspector.default().displayInfo(for: layers[row])
         }
     }
 
     @objc func calculateGeometryMaxCount() -> Int {
-        var maxCount = -1
+        var maxCount: Int32 = -1
 
         for layer in layers {
             if layer.isKind(of: XRLayerData.self) {
@@ -170,7 +170,7 @@ private let layerDragType = NSPasteboard.PasteboardType("LayerDragType")
             }
         }
 
-        return maxCount
+        return Int(maxCount)
     }
 
     @objc func calculateGeometryMaxPercent() -> Float {
@@ -200,71 +200,72 @@ private let layerDragType = NSPasteboard.PasteboardType("LayerDragType")
         let color = nextColor()
 
         // Generate unique name if needed
-        let baseName = set.name() ?? dataSetName
+        let baseName = set.name() ?? dataSetName ?? "Layer"
         let uniqueName = layerExists(withName: baseName) ? newLayerName(forBaseName: baseName) : baseName
 
         // Delegate to DocumentModel
         dataSource.createDataLayer(
-            dataSetName: dataSetName,
+            dataSetName: dataSetName ?? "Unknown",
             color: color,
             name: uniqueName,
             geometryController: rosePlotController
         )
     }
 
-    @objc func addCoreLayer(_ sender: Any?) {
+    @objc func addCoreLayer(_: Any?) {
         guard let dataSource, let rosePlotController else { return }
 
         let uniqueName = newLayerName(forBaseName: "Core")
         dataSource.createCoreLayer(name: uniqueName, geometryController: rosePlotController)
     }
 
-    @objc func addGridLayer(_ sender: Any?) {
+    @objc func addGridLayer(_: Any?) {
         guard let dataSource, let rosePlotController else { return }
 
         let uniqueName = newLayerName(forBaseName: "Grid")
         dataSource.createGridLayer(name: uniqueName, geometryController: rosePlotController)
     }
 
-    @objc func addTextLayer(_ sender: Any?) {
+    @objc func addTextLayer(_: Any?) {
         guard let dataSource, let rosePlotController, let roseView else { return }
 
         let uniqueName = newLayerName(forBaseName: "Text")
         dataSource.createTextLayer(name: uniqueName, parentView: roseView, geometryController: rosePlotController)
     }
 
-    @objc func displaySheetForVStatLayer(_ sender: Any?) {
+    @objc func displaySheetForVStatLayer(_: Any?) {
         guard let dataSource, let rosePlotController, let windowController else { return }
 
         let layerNames = dataLayerNames()
         guard !layerNames.isEmpty else { return }
 
         // Create the panel controller
-        let panelController = XRVStatCreatePanelController(array: layerNames)
-
-        // Show the sheet
-        windowController.window?.beginSheet(panelController.window) { [weak self, weak dataSource, weak panelController] response in
-            guard let self, let dataSource, let panelController else { return }
-
-            if response == .OK {
-                let selectedName = panelController.selectedName()
-
-                // Find the dataset name from the selected layer
-                if let selectedLayer = self.dataLayer(withName: selectedName) as? XRLayerData {
-                    let dataSetName = selectedLayer.dataSet().tableName()
-                    dataSource.createLineArrowLayer(
-                        dataSetName: dataSetName,
-                        name: nil,
-                        geometryController: rosePlotController
-                    )
-                }
-            }
-        }
+        // TODO: Re-enable when XRVStatCreatePanelController is accessible from Swift
+        // guard let panelController = XRVStatCreatePanelController(array: layerNames) else { return }
+        //
+        // // Show the sheet
+        // windowController.window?.beginSheet(panelController.window) { [weak self, weak dataSource, weak panelController] response in
+        //     guard let self, let dataSource, let panelController else { return }
+        //
+        //     if response == .OK {
+        //         let selectedName = panelController.selectedName()
+        //
+        //         // Find the dataset name from the selected layer
+        //         if let selectedLayer = dataLayer(withName: selectedName) as? XRLayerData {
+        //             let dataSetName = selectedLayer.dataSet().tableName()
+        //             dataSource.createLineArrowLayer(
+        //                 dataSetName: dataSetName ?? "Unknown",
+        //                 name: nil,
+        //                 geometryController: rosePlotController
+        //             )
+        //         }
+        //     }
+        // }
     }
 
     // MARK: - Layer Deletion (Pass-Through to DocumentModel)
 
-    @objc func deleteLayers(_ sender: Any?) {
+    @objc func deleteLayers(_: Any?) {
         guard let tableView, let dataSource else { return }
 
         let selectedIndices = tableView.selectedRowIndexes
@@ -332,7 +333,7 @@ private let layerDragType = NSPasteboard.PasteboardType("LayerDragType")
         guard let tableView else { return }
 
         // Forward mouse event to selected layers
-        for row in 0..<layers.count where tableView.isRowSelected(row) {
+        for row in 0 ..< layers.count where tableView.isRowSelected(row) {
             let layer = layers[row]
             if layer.handleMouseEvent(event) {
                 break
@@ -344,7 +345,7 @@ private let layerDragType = NSPasteboard.PasteboardType("LayerDragType")
         guard let tableView else { return nil }
 
         // Find layer at point from selected rows
-        for row in 0..<layers.count where tableView.isRowSelected(row) {
+        for row in 0 ..< layers.count where tableView.isRowSelected(row) {
             let layer = layers[row]
             if layer.hitDetection(point) {
                 return layer
@@ -375,7 +376,7 @@ private let layerDragType = NSPasteboard.PasteboardType("LayerDragType")
 
 extension LayersTableController: NSTableViewDelegate {
 
-    func tableViewSelectionDidChange(_ notification: Notification) {
+    func tableViewSelectionDidChange(_: Notification) {
         displaySelectedLayerInInspector()
     }
 }
@@ -414,8 +415,9 @@ extension LayersTableController: NSTableViewDataSource {
         for tableColumn: NSTableColumn?,
         row: Int
     ) {
-        guard layers.indices.contains(row),
-              let dataSource else {
+        guard
+            layers.indices.contains(row),
+            let dataSource else {
             return
         }
 
@@ -471,16 +473,18 @@ extension LayersTableController: NSTableViewDataSource {
         dropOperation: NSTableView.DropOperation
     ) -> Bool {
         // Only accept drops from this table view
-        guard info.draggingSource as? NSTableView === tableView,
-              let dataSource else {
+        guard
+            info.draggingSource as? NSTableView === tableView,
+            let dataSource else {
             return false
         }
 
         // Extract dragged row indices from pasteboard
         var draggedRows: [Int] = []
         info.draggingPasteboard.pasteboardItems?.forEach { item in
-            if let rowString = item.string(forType: layerDragType),
-               let rowIndex = Int(rowString) {
+            if
+                let rowString = item.string(forType: layerDragType),
+                let rowIndex = Int(rowString) {
                 draggedRows.append(rowIndex)
             }
         }

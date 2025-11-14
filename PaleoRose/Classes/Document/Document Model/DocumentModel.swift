@@ -351,11 +351,13 @@ extension DocumentModel: LayerTableControllerDataSource {
 
         // Find all layers associated with this dataset
         for layer in layers {
-            if let dataLayer = layer as? XRLayerData,
-               dataLayer.dataSet().tableName() == tableName {
+            if
+                let dataLayer = layer as? XRLayerData,
+                dataLayer.dataSet().tableName() == tableName {
                 layersToDelete.append(layer)
-            } else if let arrowLayer = layer as? XRLayerLineArrow,
-                      arrowLayer.dataSet().tableName() == tableName {
+            } else if
+                let arrowLayer = layer as? XRLayerLineArrow,
+                arrowLayer.dataSet().tableName() == tableName {
                 layersToDelete.append(layer)
             }
         }
