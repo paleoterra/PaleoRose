@@ -125,7 +125,7 @@ private let layerDragType = NSPasteboard.PasteboardType("LayerDragType")
         print("LayersTableController: Received XRLayerRequiresRedraw notification from layer: \(layerName)")
         // Ensure we're on the main thread for UI updates
         DispatchQueue.main.async { [weak self] in
-            guard let self = self, let roseView = self.roseView else {
+            guard let self, let roseView else {
                 print("LayersTableController: WARNING - self or roseView is nil!")
                 return
             }

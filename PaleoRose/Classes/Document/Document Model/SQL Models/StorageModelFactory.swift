@@ -91,18 +91,19 @@ class StorageModelFactory {
         // Try to find an existing color with the same components
         // Use a small epsilon for floating point comparison
         let epsilon: Float = 0.001
-        if let existingColor = colors.first(where: { color in
-            abs(color.RED - red) < epsilon &&
-            abs(color.GREEN - green) < epsilon &&
-            abs(color.BLUE - blue) < epsilon &&
-            abs(color.ALPHA - alpha) < epsilon
-        }) {
+        if
+            let existingColor = colors.first(where: { color in
+                abs(color.RED - red) < epsilon &&
+                    abs(color.GREEN - green) < epsilon &&
+                    abs(color.BLUE - blue) < epsilon &&
+                    abs(color.ALPHA - alpha) < epsilon
+            }) {
             return existingColor.COLORID
         }
 
         // Color not found - create a new one
         // Find the next available color ID
-        let nextID = (colors.map { $0.COLORID }.max() ?? 0) + 1
+        let nextID = (colors.map(\.COLORID).max() ?? 0) + 1
 
         let newColor = Color(
             COLORID: nextID,

@@ -453,7 +453,7 @@ struct InMemoryStoreIntegrationTest {
         #expect(layer.maxPercent() == 0.087302)
         // stroke id
         // fill id
-        #expect(layer.datasetId() == 0)
+        #expect(layer.datasetId() == 1)
         #expect(layer.plotType() == 4)
         #expect(layer.totalCount() == 126)
         #expect(layer.dotRadius() == 8.5)
@@ -481,7 +481,7 @@ struct InMemoryStoreIntegrationTest {
         #expect(layer.maxPercent() == 0)
         // stroke id
         // fill id
-        #expect(layer.datasetId() == 0)
+        #expect(layer.datasetId() == 1)
         #expect(layer.arrowSize() == 2.546645)
         #expect(layer.vectorType() == 0)
         #expect(layer.arrowType() == 1)

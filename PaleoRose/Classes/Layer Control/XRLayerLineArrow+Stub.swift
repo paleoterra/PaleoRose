@@ -42,7 +42,8 @@ extension XRLayerLineArrow {
         vectorType: Int = 0,
         arrowType: Int = 0,
         showVector: Bool = false,
-        showError: Bool = false
+        showError: Bool = false,
+        datasetId: Int32 = 1
     ) -> XRLayerLineArrow {
         XRLayerLineArrow(
             isVisible: isVisible,
@@ -58,7 +59,8 @@ extension XRLayerLineArrow {
             vectorType: Int32(vectorType),
             arrowType: Int32(arrowType),
             showVector: showVector,
-            showError: showError
+            showError: showError,
+            datasetId: datasetId
         )
     }
 
