@@ -171,6 +171,37 @@ extension DocumentModel: InMemoryStoreDelegate {
     }
 
     func update(layers: [XRLayer]) {
+        // Set datasets and geometry controller on all loaded layers
+        // IMPORTANT: For data-dependent layers, set dataset BEFORE geometry controller
+        // because setDataSet calls generateGraphics which needs the geometry controller
+        for layer in layers {
+            // First, set the dataset for data and line arrow layers
+            if let dataLayer = layer as? XRLayerData {
+                let datasetId = dataLayer.datasetId()
+                if let dataset = dataSets.first(where: { $0.setId() == datasetId }) {
+                    // Set geometry controller first (without generating graphics)
+                    layer.setGeometryController(geometryController)
+                    // Then set dataset (which will call generateGraphics with everything ready)
+                    dataLayer.setDataSet(dataset)
+                } else {
+                    layer.setGeometryController(geometryController)
+                }
+            } else if let arrowLayer = layer as? XRLayerLineArrow {
+                let datasetId = arrowLayer.datasetId()
+                if let dataset = dataSets.first(where: { $0.setId() == datasetId }) {
+                    // Set geometry controller first (without generating graphics)
+                    layer.setGeometryController(geometryController)
+                    // Then set dataset (which will call generateGraphics with everything ready)
+                    arrowLayer.setDataSet(dataset)
+                } else {
+                    layer.setGeometryController(geometryController)
+                }
+            } else {
+                // For non-data layers (grid, core, text), just set geometry controller
+                layer.setGeometryController(geometryController)
+            }
+        }
+
         self.layers = layers
         layersSubject.send(layers)
     }

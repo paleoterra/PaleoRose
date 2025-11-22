@@ -33,7 +33,8 @@
       "Bash(xcodebuild:*)",
       "Bash(open:*)",
       "Bash(cat:*)",
-      "Bash(1)"
+      "Bash(1)",
+      "Bash(sqlite3:*)"
     ],
     "deny": [],
     "ask": []

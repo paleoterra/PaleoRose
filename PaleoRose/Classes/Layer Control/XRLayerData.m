@@ -110,9 +110,14 @@
              fillColor:(NSColor *)fillColor
               plotType:(int)plotType
             totalCount:(int)totalCount
-             dotRadius:(float)dotRadius {
+             dotRadius:(float)dotRadius
+             datasetId:(int)datasetId {
     self = [super init];
     if (self) {
+        _graphicalObjects = [[NSMutableArray alloc] init];
+        _sectorValues = [[NSMutableArray alloc] init];
+        _sectorValuesCount = [[NSMutableArray alloc] init];
+        _statistics = [[NSMutableArray alloc] init];
         _isVisible = visible;
         _isActive = active;
         _isBiDir = isBiDir;
@@ -126,6 +131,11 @@
         _plotType = plotType;
         _totalCount = totalCount;
         _dotRadius = dotRadius;
+        _datasetId = datasetId;
+        _canFill = YES;
+        _canStroke = YES;
+        // Generate the color preview image for the table view
+        [self resetColorImage];
     }
     return self;
 }
@@ -401,7 +411,12 @@
 }
 
 -(int)datasetId {
-    return _theSet.setId;
+    // Return the stored dataset ID if we don't have a dataset reference yet
+    // Otherwise return the actual dataset's ID
+    if (_theSet) {
+        return _theSet.setId;
+    }
+    return _datasetId;
 }
 
 

@@ -77,6 +77,7 @@ static NSLayoutManager *sharedDrawingLayoutManager(void);
                             );
     self = [super init];
     if (self) {
+        _graphicalObjects = [[NSMutableArray alloc] init];
         _contents = [[NSTextStorage  alloc] init];
         gutter = 4.0;
         [self setLayerName:@"Default Text"];
@@ -93,6 +94,10 @@ static NSLayoutManager *sharedDrawingLayoutManager(void);
         _fillColor = fillColor;
         [self setContents:contents];
         textBounds = NSMakeRect((CGFloat)rectOriginX, (CGFloat)rectOriginY, (CGFloat)rectWidth, (CGFloat)rectHeight);
+        _canFill = YES;
+        _canStroke = YES;
+        // Generate the color preview image for the table view
+        [self resetColorImage];
 //        [self setContents:[[NSAttributedString alloc] initWithData:decodeBase64([[NSString alloc] initWithData:contents encoding:NSUTF8StringEncoding]) options:@{} documentAttributes:nil error:nil ]];
     }
     return self;

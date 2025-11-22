@@ -397,9 +397,6 @@
 		B48BBEC02CAA1BF40050852E /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		B48BBEC62CAA20C70050852E /* InMemoryStoreTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryStoreTest.swift; sourceTree = "<group>"; };
 		B4950F0205DD286A00C711DD /* GraphicCircleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicCircleLabel.swift; sourceTree = "<group>"; };
-		B49D7EB32DDEC80C0046A8B8 /* XRDataSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRDataSet.swift; sourceTree = "<group>"; };
-		B49D7EB42DDEC81D0046A8B8 /* XRMakeDatasetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRMakeDatasetController.swift; sourceTree = "<group>"; };
-		B49D7EB52DDEC8400046A8B8 /* XRStatistic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRStatistic.swift; sourceTree = "<group>"; };
 		B49D7EB62DDEC8720046A8B8 /* XRCalculateAzimuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRCalculateAzimuthController.swift; sourceTree = "<group>"; };
 		B49D7EB72DDEC87E0046A8B8 /* XRTableAddColumnController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRTableAddColumnController.swift; sourceTree = "<group>"; };
 		B4A23EF62E18951700EDE135 /* GraphicDotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicDotTests.swift; sourceTree = "<group>"; };
@@ -870,7 +867,6 @@
 				B441FEFB05CB725300F9A0F9 /* XRStatistic.h */,
 				B441FEFC05CB725300F9A0F9 /* XRStatistic.m */,
 				B427CFF11E81EB9E0047F659 /* XRStatisticTests.m */,
-				B49D7EB52DDEC8400046A8B8 /* XRStatistic.swift */,
 			);
 			path = Statistic;
 			sourceTree = "<group>";
@@ -880,7 +876,6 @@
 			children = (
 				B411E74E05C386DA00C22F3E /* XRDataSet.h */,
 				B411E74F05C386DA00C22F3E /* XRDataSet.m */,
-				B49D7EB32DDEC80C0046A8B8 /* XRDataSet.swift */,
 			);
 			path = "Data Set";
 			sourceTree = "<group>";
@@ -891,7 +886,6 @@
 				B4B10C3709529F7F00E6A350 /* XRMakeDatasetController.h */,
 				B4B10C3609529F7F00E6A350 /* XRMakeDatasetController.m */,
 				B486E29E1E7B9C2300F1ADAA /* XRCreateDatasetSheet.xib */,
-				B49D7EB42DDEC81D0046A8B8 /* XRMakeDatasetController.swift */,
 			);
 			path = "Make Dataset Sheet";
 			sourceTree = "<group>";

@@ -125,11 +125,10 @@
 
 -(void)resetGeometryWithBoundsRect:(NSRect)newBounds
 {
-	
+
 	_mainRect = newBounds;
 	_circleRect = NSInsetRect(_mainRect,_mainRect.size.width * (1.0 - _relativeSizeOfCircleRect),_mainRect.size.height * (1.0 - _relativeSizeOfCircleRect));
-	//NSLog(@"circle rect");
-	//NSLog(NSStringFromRect(_circleRect));
+	NSLog(@"XRGeometryController: resetGeometryWithBoundsRect - mainRect=%@, circleRect=%@, posting XRGeometryDidChange", NSStringFromRect(_mainRect), NSStringFromRect(_circleRect));
 	[[NSNotificationCenter defaultCenter] postNotificationName:XRGeometryDidChange object:self];
 }
 

@@ -34,8 +34,8 @@
 	id draggedObject;
 }
 
-@property (nonatomic, readonly) id roseTableController;
-@property (nonatomic, readonly) id rosePlotController;
+@property (nonatomic, weak) id roseTableController;
+@property (nonatomic, weak) id rosePlotController;
 
 -(void)resetDrawingFrames;
 -(void)computeDrawingFrames;

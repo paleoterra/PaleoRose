@@ -122,6 +122,7 @@
                   type:(BOOL)coreType{
     self = [super init];
     if (self) {
+        _graphicalObjects = [[NSMutableArray alloc] init];
         _isVisible = visible;
         _isActive = active;
         _isBiDir = isBiDir;
@@ -134,6 +135,10 @@
         _fillColor = fillColor;
         _percentRadius = percentRadius;
         _coreType = coreType;
+        _canFill = YES;
+        _canStroke = YES;
+        // Generate the color preview image for the table view
+        [self resetColorImage];
     }
     return self;
 }

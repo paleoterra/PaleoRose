@@ -40,10 +40,11 @@
 @class XRDataSet;
 @interface XRLayerData : XRLayer {
 	XRDataSet *_theSet;
+	int _datasetId;  // Stored separately so we can find the dataset before _theSet is set
 	int _plotType;
 	int _totalCount;
 	float _dotRadius;
-	
+
 	NSMutableArray *_sectorValues;
 	NSMutableArray *_sectorValuesCount;
 	NSMutableArray *_statistics;
@@ -62,7 +63,8 @@
              fillColor:(NSColor *)fillColor
               plotType:(int)plotType
             totalCount:(int)totalCount
-             dotRadius:(float)dotRadius;
+             dotRadius:(float)dotRadius
+             datasetId:(int)datasetId;
 
 -(void)setPlotType:(int)newType;
 -(int)plotType;

@@ -266,6 +266,7 @@
           radialLabels:(BOOL)radialLabels {
     self = [super init];
     if (self) {
+        _graphicalObjects = [[NSMutableArray alloc] init];
         _isVisible = visible;
         _isActive = active;
         _isBiDir = isBiDir;
@@ -296,6 +297,10 @@
         _showTicks = radialTicks;
         _minorTicks = radialMinorTicks;
         _showLabels = radialLabels;
+        _canFill = YES;
+        _canStroke = YES;
+        // Generate the color preview image for the table view
+        [self resetColorImage];
     }
     return self;
 }

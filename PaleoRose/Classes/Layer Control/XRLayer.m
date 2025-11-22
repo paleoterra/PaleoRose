@@ -290,7 +290,7 @@
 
 -(void)geometryDidChange:(NSNotification *)notification
 {
-	
+	NSLog(@"XRLayer: geometryDidChange received for layer %@ (class %@)", _layerName, NSStringFromClass([self class]));
 	[self generateGraphics];
 
 	[[NSNotificationCenter defaultCenter] postNotificationName:XRLayerRequiresRedraw object:self];
@@ -390,6 +390,41 @@
 -(BOOL)hitDetection:(NSPoint)testPoint
 {
 	return NO;
+}
+
+-(void)setGeometryController:(XRGeometryController *)controller
+{
+	if (geometryController == controller) {
+		return;
+	}
+
+	// Remove old observers if we had a previous controller
+	if (geometryController) {
+		[[NSNotificationCenter defaultCenter] removeObserver:self name:XRGeometryDidChange object:geometryController];
+		[[NSNotificationCenter defaultCenter] removeObserver:self name:XRGeometryDidChangeIsPercent object:geometryController];
+		[[NSNotificationCenter defaultCenter] removeObserver:self name:XRGeometryDidChangeSectors object:geometryController];
+	}
+
+	geometryController = controller;
+
+	// Add new observers
+	if (geometryController) {
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(geometryDidChange:) name:XRGeometryDidChange object:geometryController];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(geometryDidChangePercent:) name:XRGeometryDidChangeIsPercent object:geometryController];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(geometryDidChangeSectors:) name:XRGeometryDidChangeSectors object:geometryController];
+
+		// Generate graphics now that we have a geometry controller
+		// BUT: XRLayerData and XRLayerLineArrow need their dataset set first,
+		// so they should NOT generate graphics here. Their setDataSet method will do it.
+		if (![self isKindOfClass:[XRLayerData class]] && ![self isKindOfClass:[XRLayerLineArrow class]]) {
+			[self generateGraphics];
+		}
+	}
+}
+
+-(XRGeometryController *)geometryController
+{
+	return geometryController;
 }
 
 @end

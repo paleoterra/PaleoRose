@@ -29,32 +29,7 @@
 
 @implementation XRoseView
 
-- (id)roseTableController {
-    NSWindow *window = [self window];
-    if (!window) {
-        return nil;
-    }
-    XRoseWindowController *windowController = (XRoseWindowController *)[window windowController];
-    if (!windowController) {
-        return nil;
-    }
-    return [windowController tableController];
-}
-
-- (id)rosePlotController {
-    NSWindow *window = [self window];
-    if (!window) {
-        return nil;
-    }
-    XRoseWindowController *windowController = (XRoseWindowController *)[window windowController];
-    if (!windowController) {
-        return nil;
-    }
-    return [windowController geometryController];
-}
-
-- (id)initWithFrame:(NSRect)frameRect
-{
+- (id)initWithFrame:(NSRect)frameRect {
 	if ((self = [super initWithFrame:frameRect]) != nil) {
 		// Add initialization code here
 		[self setPostsFrameChangedNotifications:YES];
@@ -63,52 +38,41 @@
 	return self;
 }
 
--(void)setFrame:(NSRect)frame
-{
-
+-(void)setFrame:(NSRect)frame {
 	[super setFrame:frame];
 	[self resetDrawingFrames];
 }
--(void)awakeFromNib
-{
+
+-(void)awakeFromNib {
 	[self computeDrawingFrames];
 }
 
-- (void)drawRect:(NSRect)rect
-{
-
+- (void)drawRect:(NSRect)rect {
 	[self.roseTableController drawRect:rect];
 }
 
--(void)resetDrawingFrames
-{
-
+-(void)resetDrawingFrames {
 	if(NSEqualRects([self frame],_lastFrame))
 		return;
-	else
-	{
-
+	else {
 		[self computeDrawingFrames];
 	}
 }
 
--(void)computeDrawingFrames
-{
+-(void)computeDrawingFrames {
 	NSRect newBounds;
 
 	//set last frame
 	_lastFrame = [self frame];
+	NSLog(@"XRoseView: computeDrawingFrames called, frame = %@", NSStringFromRect(_lastFrame));
 
 	//do work here
 	//estimate internal rect
 	_drawingRect = _lastFrame;
-	if(_lastFrame.size.width>_lastFrame.size.height)
-	{
+	if(_lastFrame.size.width>_lastFrame.size.height) {
 	//sets the width to be smaller
 	_drawingRect.size.width = _lastFrame.size.height;
-	}
-	else
-	{
+	} else {
 	//sets the width to be smaller
 	_drawingRect.size.height = _lastFrame.size.width;
 	}
@@ -122,20 +86,24 @@
 	_drawingRect.origin.x = -1 * (_drawingRect.size.width / 2.0);
 	_drawingRect.origin.y = -1 * (_drawingRect.size.height / 2.0);
 
+	NSLog(@"XRoseView: drawingRect = %@, rosePlotController = %@", NSStringFromRect(_drawingRect), self.rosePlotController);
 
 	//post notification that the drawing rect has changed
-	[self.rosePlotController resetGeometryWithBoundsRect:_drawingRect];
+	if (self.rosePlotController) {
+		NSLog(@"XRoseView: Calling resetGeometryWithBoundsRect with rect = %@", NSStringFromRect(_drawingRect));
+		[self.rosePlotController resetGeometryWithBoundsRect:_drawingRect];
+	} else {
+		NSLog(@"XRoseView: WARNING - rosePlotController is nil, geometry not updated!");
+	}
 	[[NSNotificationCenter defaultCenter] postNotificationName:XRRoseViewDrawingRectDidChange object:self];
 }
 
-- (void)mouseDown:(NSEvent *)theEvent
-{
+- (void)mouseDown:(NSEvent *)theEvent {
 	XRLayer *aLayer;
 	LayersTableController *tableController = (LayersTableController *)self.roseTableController;
     if(([theEvent type] == NSEventTypeLeftMouseDown)&&([theEvent clickCount]>1))
 	   [tableController handleMouseEvent:theEvent];
-    else if((aLayer = [tableController activeLayerWith:[self convertPoint:[theEvent locationInWindow] fromView:nil]])&&([theEvent type]==NSEventTypeLeftMouseDown))
-	{
+    else if((aLayer = [tableController activeLayerWith:[self convertPoint:[theEvent locationInWindow] fromView:nil]])&&([theEvent type]==NSEventTypeLeftMouseDown)) {
 		NSImage *dragImage = [(XRLayerText *)aLayer dragImage];
         [[NSPasteboard pasteboardWithName:NSPasteboardNameDrag] setData:[dragImage TIFFRepresentation] forType:NSPasteboardTypeTIFF];
 		draggedObject = aLayer;
@@ -146,9 +114,9 @@
              pasteboard:[NSPasteboard pasteboardWithName:NSPasteboardNameDrag]
 				 source:self
 			  slideBack:NO];
-	}
-	else
-		[tableController handleMouseEvent:theEvent];
+    } else {
+        [tableController handleMouseEvent:theEvent];
+    }
 	//if([theEvent type] == NSLeftMouseDown)
 	//{
 	//	NSPoint aPoint =[self convertPoint:[theEvent locationInWindow] fromView:self];
@@ -158,17 +126,14 @@
     return;
 }
 
--(void)copyPDFToPasteboard
-{
+-(void)copyPDFToPasteboard {
 	NSData *data = [self dataWithPDFInsideRect:[self bounds]];
 	
     [[NSPasteboard generalPasteboard]  declareTypes:[NSArray arrayWithObjects:NSPasteboardTypePDF,nil] owner:self];
     [[NSPasteboard generalPasteboard] setData:data forType:NSPasteboardTypePDF];
 }
 
-
--(void)copyTIFFToPastboard
-{
+-(void)copyTIFFToPastboard {
 	NSData *data = [self dataWithPDFInsideRect:[self bounds]];
 	NSImage *anImage = [[NSImage alloc] initWithSize:[self bounds].size];
     [[NSPasteboard generalPasteboard]  declareTypes:[NSArray arrayWithObjects:NSPasteboardTypeTIFF,nil] owner:self];
@@ -209,12 +174,9 @@
     return pageHeight / scale;
 }
 
-
-
 #pragma mark dragging
 
-- (NSDragOperation)draggingSourceOperationMaskForLocal:(BOOL)isLocal
-{
+- (NSDragOperation)draggingSourceOperationMaskForLocal:(BOOL)isLocal {
 
 	//NSLog(@"draggingSourceOperationMaskForLocal");
 	if(draggedObject)
@@ -263,23 +225,17 @@
 	draggedObject = nil;
 }
 
--(NSData *)imageDataForType:(NSString *)type
-{
-	if(([type isEqualToString:@"PDF"])||([type isEqualToString:@"pdf"]))
-	{
+-(NSData *)imageDataForType:(NSString *)type {
+	if(([type isEqualToString:@"PDF"])||([type isEqualToString:@"pdf"])) {
 		return [self dataWithPDFInsideRect:[self bounds]];
-	}
-	else if(([type isEqualToString:@"TIF"])||([type isEqualToString:@"tif"]))
-	{
+	} else if(([type isEqualToString:@"TIF"])||([type isEqualToString:@"tif"])) {
 		NSData *data = [self dataWithPDFInsideRect:[self bounds]];
 		NSImage *anImage = [[NSImage alloc] initWithSize:[self bounds].size];
 
 		[anImage addRepresentation:[NSPDFImageRep imageRepWithData:data]];
 		
 		return [anImage TIFFRepresentationUsingCompression:NSTIFFCompressionNone factor:1.0];
-	}
-	else if(([type isEqualToString:@"JPG"])||([type isEqualToString:@"jpg"]))
-	{
+	} else if(([type isEqualToString:@"JPG"])||([type isEqualToString:@"jpg"])) {
 		NSImage *anImage = [[NSImage alloc] initWithSize:[self bounds].size];
 		NSAffineTransform *aTrans = [NSAffineTransform transform] ;
 		[aTrans translateXBy:([self bounds].size.width)/2.0 yBy:([self bounds].size.height)/2.0] ;

@@ -73,7 +73,7 @@ NSRect initialRect;
 
 - (void)completeControllerSetupWithDocumentModel:(DocumentModel *)documentModel {
     XRGeometryController *geometryController = documentModel.geometryController;
-    
+
     // Update data sources for controllers
     if (self.tableListController) {
         [self.tableListController setDataSource:documentModel];
@@ -83,14 +83,33 @@ NSRect initialRect;
         [self.layersTableController setDataSource:documentModel];
         [self.layersTableController setGeometryController:geometryController];
     }
-    
+
     // Set the back-reference in geometryController
     geometryController.layersTableController = self.layersTableController;
+
+    // Set the rosePlotController reference in XRoseView
+    XRoseView *roseView = (XRoseView *)_roseView;
+    roseView.rosePlotController = geometryController;
+    NSLog(@"XRoseWindowController: Set rosePlotController, view frame = %@", NSStringFromRect([roseView frame]));
+
+    // If the view already has a non-zero frame, trigger geometry update now
+    // Otherwise, it will be updated when setFrame: is called during window display
+    if (!NSIsEmptyRect([roseView frame]) && [roseView frame].size.width > 0 && [roseView frame].size.height > 0) {
+        NSLog(@"XRoseWindowController: Calling computeDrawingFrames immediately (frame is valid)");
+        [roseView computeDrawingFrames];
+    } else {
+        NSLog(@"XRoseWindowController: NOT calling computeDrawingFrames (frame is empty/invalid)");
+    }
 }
 
 
 -(void)awakeFromNib
 {
+    // Guard against multiple awakeFromNib calls on the SAME instance
+    if (self.layersTableController != nil) {
+        return;
+    }
+
     // Create controllers - they will be configured when documentModel is set
     self.tableListController = [[TableListController alloc] initWithDataSource:nil];
     self.tableListController.tableView = self->_tableNameTable;
@@ -100,9 +119,15 @@ NSRect initialRect;
     self.layersTableController.roseView = (NSView *)_roseView;
     self.layersTableController.windowController = self;
 
+    // Set the controller references in XRoseView
+    XRoseView *roseView = (XRoseView *)_roseView;
+    roseView.roseTableController = self.layersTableController;
+
     // If documentModel was already set before awakeFromNib (unlikely), complete setup now
     if (self.documentModel) {
         [self completeControllerSetupWithDocumentModel:self.documentModel];
+        // Set rosePlotController after documentModel is set
+        roseView.rosePlotController = self.documentModel.geometryController;
     }
 
 	NSToolbar *roseToolbar = [[NSToolbar alloc] initWithIdentifier:@"RoseToolbar"];

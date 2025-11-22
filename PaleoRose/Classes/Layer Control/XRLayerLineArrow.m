@@ -71,9 +71,11 @@
             vectorType:(int)vectorType
              arrowType:(int)arrowType
             showVector:(BOOL)showVector
-             showError:(BOOL)showError {
+             showError:(BOOL)showError
+             datasetId:(int)datasetId {
     self = [super init];
     if (self) {
+        _graphicalObjects = [[NSMutableArray alloc] init];
         _isVisible = visible;
         _isActive = active;
         _isBiDir = isBiDir;
@@ -88,11 +90,11 @@
         _headType = arrowType;
         _showVector = showVector;
         _showError = showError;
-        
-        // Initialize _graphicalObjects if parent didn't (defensive programming)
-        if (!_graphicalObjects) {
-            _graphicalObjects = [[NSMutableArray alloc] init];
-        }
+        _datasetId = datasetId;
+        _canFill = YES;
+        _canStroke = YES;
+        // Generate the color preview image for the table view
+        [self resetColorImage];
     }
     return self;
 }
@@ -106,6 +108,14 @@
 
 -(void)generateGraphics
 {
+    if (!_theSet) {
+        return;
+    }
+
+    if (!geometryController) {
+        return;
+    }
+
     NSMutableDictionary *theDictionary = [[NSMutableDictionary alloc] init];
     float vector = 0.0;
     float radius;
@@ -114,11 +124,10 @@
     float errorAngle = 0.0;
     ArrowHead *anArrow;
     NSBezierPath *aPath;
-    NSEnumerator *anEnum = [[_theSet currentStatistics] objectEnumerator];
+    NSArray *stats = [_theSet currentStatistics];
+    NSEnumerator *anEnum = [stats objectEnumerator];
     XRStatistic *theStat;
-    //NSLog(@"1");
     [_graphicalObjects removeAllObjects];
-    //NSLog(@"2");
     while(theStat = [anEnum nextObject])
     {
         if([theStat.statisticName isEqualToString:[NSString stringWithUTF8String:"θ̅"]])
@@ -167,11 +176,8 @@
     //NSLog(@"6");
     [theDictionary setObject:anArrow forKey:@"arrow"];
     [_graphicalObjects addObject:theDictionary];
-    //NSLog(@"7");
     [self configureErrorWithVector:vector error:errorAngle];
 
-
-    //[_graphicalObjects addObject:theDictionary];
     [[NSNotificationCenter defaultCenter] postNotificationName:XRLayerTableRequiresReload object:self];
     [[NSNotificationCenter defaultCenter] postNotificationName:XRLayerRequiresRedraw object:self];
 }
@@ -220,16 +226,13 @@
 }
 -(void)drawRect:(NSRect)rect
 {
-    //NSLog(@"drawing arrowline %i",[_graphicalObjects count]);
-    
-    // Safety check: ensure _graphicalObjects exists and has content
     if (!_graphicalObjects || [_graphicalObjects count] == 0) {
         return;
     }
-    
+
     [NSGraphicsContext saveGraphicsState];
     [_strokeColor set];
-    //NSLog([_strokeColor description]);
+
     if(_isVisible)
     {
         if(_showVector)
@@ -239,10 +242,8 @@
 
             if((path = [[_graphicalObjects objectAtIndex:0] objectForKey:@"vector"]))
             {
-                //NSLog([path description]);
                 [(NSBezierPath *)path setLineWidth:_lineWeight];
                 [(NSBezierPath *)path stroke];
-
                 [[dict objectForKey:@"arrow"] drawRect:rect];
             }
         }
@@ -305,7 +306,12 @@
 }
 
 -(int)datasetId {
-    return _theSet.setId;
+    // Return the stored dataset ID if we don't have a dataset reference yet
+    // Otherwise return the actual dataset's ID
+    if (_theSet) {
+        return _theSet.setId;
+    }
+    return _datasetId;
 }
 
 -(float)arrowSize {

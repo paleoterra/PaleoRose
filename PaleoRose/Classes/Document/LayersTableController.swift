@@ -69,6 +69,11 @@ private let layerDragType = NSPasteboard.PasteboardType("LayerDragType")
         self.dataSource = dataSource
         setColorArray()
         setupDataSourceSubscription()
+        setupLayerRedrawObserver()
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     /// Objective-C compatible method to set data source
@@ -104,6 +109,29 @@ private let layerDragType = NSPasteboard.PasteboardType("LayerDragType")
                 roseView?.setNeedsDisplay(roseView?.bounds ?? .zero)
             }
             .store(in: &cancellables)
+    }
+
+    private func setupLayerRedrawObserver() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(layerRequiresRedraw(_:)),
+            name: NSNotification.Name(rawValue: "XRLayerRequiresRedraw"),
+            object: nil
+        )
+    }
+
+    @objc private func layerRequiresRedraw(_ notification: Notification) {
+        let layerName = (notification.object as? XRLayer)?.layerName() ?? "unknown"
+        print("LayersTableController: Received XRLayerRequiresRedraw notification from layer: \(layerName)")
+        // Ensure we're on the main thread for UI updates
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self, let roseView = self.roseView else {
+                print("LayersTableController: WARNING - self or roseView is nil!")
+                return
+            }
+            print("LayersTableController: Calling setNeedsDisplay on roseView")
+            roseView.setNeedsDisplay(roseView.bounds)
+        }
     }
 
     private func setColorArray() {
