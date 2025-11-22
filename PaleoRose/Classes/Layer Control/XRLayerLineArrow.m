@@ -31,7 +31,6 @@
 #import "XRStatistic.h"
 #import "XRGeometryController.h"
 #import "PaleoRose-Swift.h"
-#import "sqlite3.h"
 #import <Cocoa/Cocoa.h>
 @implementation XRLayerLineArrow
 
@@ -82,7 +81,6 @@
         _lineWeight = lineWeight;
         _maxCount = maxCount;
         _maxPercent = maxPercent;
-        _maxPercent = maxPercent;
         _strokeColor = strokeColor;
         _fillColor = fillColor;
         _arrowSize = arrowSize;
@@ -90,6 +88,11 @@
         _headType = arrowType;
         _showVector = showVector;
         _showError = showError;
+        
+        // Initialize _graphicalObjects if parent didn't (defensive programming)
+        if (!_graphicalObjects) {
+            _graphicalObjects = [[NSMutableArray alloc] init];
+        }
     }
     return self;
 }
@@ -218,6 +221,12 @@
 -(void)drawRect:(NSRect)rect
 {
     //NSLog(@"drawing arrowline %i",[_graphicalObjects count]);
+    
+    // Safety check: ensure _graphicalObjects exists and has content
+    if (!_graphicalObjects || [_graphicalObjects count] == 0) {
+        return;
+    }
+    
     [NSGraphicsContext saveGraphicsState];
     [_strokeColor set];
     //NSLog([_strokeColor description]);
@@ -318,107 +327,4 @@
     return _showError;
 }
 
--(id)initWithGeometryController:(XRGeometryController *)aController sqlDB:(sqlite3 *)db   layerID:(int)layerID
-{
-    if (!(self = [self initWithGeometryController:aController])) return nil;
-    if(self)
-    {
-        [self setStrokeColor:[NSColor blackColor]];
-        [self setFillColor:[NSColor blackColor]];
-
-        _arrowSize = 1.0;
-        _type = 0;
-        _headType = 1;
-        _showVector = YES;
-        _showError = YES;
-
-        [super configureWithSQL:db forLayerID:layerID];
-        [self configureWithSQL:db forLayerID:layerID];
-        [self generateGraphics];
-    }
-    return self;
-}
-
--(void)configureWithSQL:(sqlite3 *)db forLayerID:(int)layerid
-{
-    int columns;
-
-    sqlite3_stmt *stmt;
-    NSString *columnName;
-
-    const char *pzTail;
-    NSString *command = [NSString stringWithFormat:@"SELECT * FROM _layerLineArrow WHERE LAYERID=%i",layerid];
-    //NSLog(@"Configuring with SQL");
-    sqlite3_prepare(db,[command UTF8String],-1,&stmt,&pzTail);
-
-    while(sqlite3_step(stmt)==SQLITE_ROW)
-    {
-        columns = sqlite3_column_count(stmt);
-        for(int i=0;i<columns;i++)
-        {
-            columnName = [NSString stringWithUTF8String:(char *)sqlite3_column_name(stmt,i)];
-            //NSLog(columnName);
-            if([columnName isEqualToString:@"ARROWSIZE"])
-                _arrowSize = (float)sqlite3_column_double(stmt,i);
-            else if([columnName isEqualToString:@"VECTORTYPE"])
-                _type = (int)sqlite3_column_int(stmt,i);
-            else if([columnName isEqualToString:@"ARROWTYPE"])
-                _headType = (float)sqlite3_column_double(stmt,i);
-            else if([columnName isEqualToString:@"SHOWVECTOR"])
-            {
-                NSString *result = [NSString stringWithUTF8String:(char *)sqlite3_column_text(stmt,i)];
-                if([result isEqualToString:@"TRUE"])
-                    _showVector = YES;
-                else
-                    _showVector = NO;
-            }
-            else if([columnName isEqualToString:@"SHOWERROR"])
-            {
-
-                NSString *result = [NSString stringWithUTF8String:(char *)sqlite3_column_text(stmt,i)];
-                if([result isEqualToString:@"TRUE"])
-                    _showError = YES;
-                else
-                    _showError = NO;
-            }
-            /* note: data set information not loaded here.  It is loaded by the tablecontroller when using dataset name method below*/
-
-        }
-    }
-    sqlite3_finalize(stmt);
-
-}
-
-
--(NSString *)getDatasetNameWithLayerID:(int)layerID fromDB:(sqlite3 *)db
-{
-    int columns;
-
-    sqlite3_stmt *stmt;
-    NSString *columnName;
-    NSString *datasetName;
-
-    const char *pzTail;
-    NSString *command = [NSString stringWithFormat:@"SELECT NAME FROM _datasets d, _layerLineArrow l where l.DATASET=d._id AND l.LAYERID=%i",layerID];
-    //NSLog(@"Configuring with SQL");
-    sqlite3_prepare(db,[command UTF8String],-1,&stmt,&pzTail);
-
-    while(sqlite3_step(stmt)==SQLITE_ROW)
-    {
-        columns = sqlite3_column_count(stmt);
-        for(int i=0;i<columns;i++)
-        {
-            columnName = [NSString stringWithUTF8String:(char *)sqlite3_column_name(stmt,i)];
-            //NSLog(columnName);
-            if([columnName isEqualToString:@"NAME"])
-                datasetName = [NSString stringWithUTF8String:(char *)sqlite3_column_text(stmt,i)];
-
-            /* note: data set information not loaded here.  It is loaded by the tablecontroller when using dataset name method below*/
-
-        }
-    }
-    sqlite3_finalize(stmt);
-
-    return datasetName;
-}
 @end

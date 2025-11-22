@@ -30,7 +30,10 @@
       "Skill(xrose-database-reader)",
       "Bash(chmod:*)",
       "Bash(python3:*)",
-      "Bash(xcodebuild:*)"
+      "Bash(xcodebuild:*)",
+      "Bash(open:*)",
+      "Bash(cat:*)",
+      "Bash(1)"
     ],
     "deny": [],
     "ask": []

@@ -41,20 +41,28 @@ class DocumentModel: NSObject {
     @objc var dataSets: [XRDataSet] = []
     @objc var layers: [XRLayer] = []
     @objc weak var document: NSDocument?
-    @objc var geometryController: XRGeometryController?
+    @objc let geometryController: XRGeometryController
 
     private let tableNamesSubject = CurrentValueSubject<[String], Never>([])
     private let layersSubject = CurrentValueSubject<[XRLayer], Never>([])
 
-    // MARK: - Deprecated Methods
+    // MARK: - Initialization
 
-    @available(*, deprecated, message: "This code will become unavailable")
     @objc init(inMemoryStore: InMemoryStore, document: NSDocument?) {
         self.inMemoryStore = inMemoryStore
         self.document = document
+        geometryController = XRGeometryController()
         super.init()
+
+        // Set undo manager if document is available
+        if let document {
+            geometryController.setUndoManager(document.undoManager)
+        }
+
         inMemoryStore.delegate = self
     }
+
+    // MARK: - Deprecated Methods
 
     @available(*, deprecated, message: "This code will become unavailable")
     @objc func memoryStore() -> OpaquePointer? {
@@ -106,10 +114,26 @@ class DocumentModel: NSObject {
         try inMemoryStore.addColumn(to: table, columnDefinition: column)
     }
 
+    // MARK: - Persistence
+
+    /// Saves the current geometry controller state to the store
+    @objc func saveGeometry() throws {
+        try inMemoryStore.store(geometryController: geometryController)
+    }
+
+    /// Saves the current layers to the store
+    @objc func saveLayers() throws {
+        try inMemoryStore.store(layers: layers)
+    }
+
+    // MARK: - Deprecated Persistence Methods
+
+    @available(*, deprecated, message: "Use saveGeometry() instead - DocumentModel now owns the geometry controller")
     @objc func store(geometryController: XRGeometryController) throws {
         try inMemoryStore.store(geometryController: geometryController)
     }
 
+    @available(*, deprecated, message: "Configuration happens automatically via InMemoryStoreDelegate.update(geometry:)")
     @objc func configure(geometryController: XRGeometryController) throws {
         do {
             try inMemoryStore.configure(geometryController: geometryController)
@@ -118,8 +142,7 @@ class DocumentModel: NSObject {
         }
     }
 
-    // MARK: - Layers
-
+    @available(*, deprecated, message: "Use saveLayers() instead")
     @objc func store(layers: [XRLayer]) throws {
         try inMemoryStore.store(layers: layers)
     }
@@ -153,10 +176,7 @@ extension DocumentModel: InMemoryStoreDelegate {
     }
 
     func update(geometry: Geometry) {
-        guard let controller = geometryController else {
-            return
-        }
-        controller.configureIsEqualArea(
+        geometryController.configureIsEqualArea(
             geometry.isEqualArea,
             isPercent: geometry.isPercent,
             maxCount: Int32(geometry.MAXCOUNT),
@@ -203,8 +223,7 @@ extension DocumentModel: LayerTableControllerDataSource {
     func createDataLayer(
         dataSetName: String,
         color: NSColor,
-        name: String?,
-        geometryController: XRGeometryController
+        name: String?
     ) {
         // Find the dataset by name
         guard let dataSet = dataSets.first(where: { $0.tableName() == dataSetName }) else {
@@ -212,7 +231,7 @@ extension DocumentModel: LayerTableControllerDataSource {
             return
         }
 
-        // Create the layer
+        // Create the layer using our geometry controller
         guard let layer = XRLayerData(geometryController: geometryController, with: dataSet) else {
             print("Failed to create data layer")
             return
@@ -234,7 +253,7 @@ extension DocumentModel: LayerTableControllerDataSource {
         layersSubject.send(layers)
     }
 
-    func createCoreLayer(name: String?, geometryController: XRGeometryController) {
+    func createCoreLayer(name: String?) {
         guard let layer = XRLayerCore(geometryController: geometryController) else {
             print("Failed to create core layer")
             return
@@ -248,7 +267,7 @@ extension DocumentModel: LayerTableControllerDataSource {
         layersSubject.send(layers)
     }
 
-    func createGridLayer(name: String?, geometryController: XRGeometryController) {
+    func createGridLayer(name: String?) {
         guard let layer = XRLayerGrid(geometryController: geometryController) else {
             print("Failed to create grid layer")
             return
@@ -262,7 +281,7 @@ extension DocumentModel: LayerTableControllerDataSource {
         layersSubject.send(layers)
     }
 
-    func createTextLayer(name: String?, parentView: NSView, geometryController: XRGeometryController) {
+    func createTextLayer(name: String?, parentView: NSView) {
         guard let layer = XRLayerText(geometryController: geometryController, parentView: parentView) else {
             print("Failed to create text layer")
             return
@@ -278,8 +297,7 @@ extension DocumentModel: LayerTableControllerDataSource {
 
     func createLineArrowLayer(
         dataSetName: String,
-        name: String?,
-        geometryController: XRGeometryController
+        name: String?
     ) {
         // Find the dataset by name
         guard let dataSet = dataSets.first(where: { $0.tableName() == dataSetName }) else {

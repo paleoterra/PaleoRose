@@ -29,7 +29,6 @@
 #import "XRLayer.h"
 #import "XRLayerCore.h"
 #import "XRGeometryController.h"
-#import "sqlite3.h"
 #import <PaleoRose-Swift.h>
 
 @implementation XRLayerCore
@@ -231,51 +230,4 @@
 	return @"XRLayerCore";
 }
 
--(id)initWithGeometryController:(XRGeometryController *)aController sqlDB:(sqlite3 *)db   layerID:(int)layerID 
-{
-	if (!(self = [self initWithGeometryController:aController])) return nil;
-	if(self)
-	{
-		[super configureWithSQL:db forLayerID:layerID];
-		[self configureWithSQL:db forLayerID:layerID];
-	}
-	return self;
-}
-
--(void)configureWithSQL:(sqlite3 *)db forLayerID:(int)layerid
-{
-	int columns;
-	//long long int  rowIDOfFill =-1;
-	//long long int  rowIDOfStroke=-1;
-	sqlite3_stmt *stmt;
-	NSString *columnName;
-	//NSString *ringFontName;
-	//NSString *spokeFontName;
-	//float ringFontSize,spokeFontSize;
-	const char *pzTail;
-	NSString *command = [NSString stringWithFormat:@"SELECT * FROM _layerCore WHERE LAYERID=%i",layerid];
-	//NSLog(@"Configuring with SQL");
-	sqlite3_prepare(db,[command UTF8String],-1,&stmt,&pzTail);
-	while(sqlite3_step(stmt)==SQLITE_ROW)
-	{
-		columns = sqlite3_column_count(stmt);
-		for(int i=0;i<columns;i++)
-		{
-			columnName = [NSString stringWithUTF8String:(char *)sqlite3_column_name(stmt,i)];
-			//NSLog(columnName);
-			if([columnName isEqualToString:@"TYPE"])
-			{
-				NSString *result = [NSString stringWithUTF8String:(char *)sqlite3_column_text(stmt,i)];
-				if([result isEqualToString:@"TRUE"])
-					_coreType = YES;
-				else
-					_coreType = NO;
-			}
-			else if([columnName isEqualToString:@"RADIUS"])
-				_percentRadius = (float)sqlite3_column_double(stmt,i);
-		}
-	}
-	sqlite3_finalize(stmt);
-	[self generateGraphics];
-}
 @end

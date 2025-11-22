@@ -63,12 +63,24 @@ private let layerDragType = NSPasteboard.PasteboardType("LayerDragType")
 
     // MARK: - Initialization
 
-    @objc init(dataSource: DocumentModel, geometryController: XRGeometryController) {
+    @objc init(dataSource: DocumentModel?, geometryController: XRGeometryController?) {
         rosePlotController = geometryController
         super.init()
         self.dataSource = dataSource
         setColorArray()
         setupDataSourceSubscription()
+    }
+
+    /// Objective-C compatible method to set data source
+    @objc func setDataSource(_ source: DocumentModel) {
+        dataSource = source
+        // Update geometry controller reference when data source is set
+        rosePlotController = source.geometryController
+    }
+
+    /// Objective-C compatible method to update geometry controller
+    @objc func setGeometryController(_ controller: XRGeometryController) {
+        rosePlotController = controller
     }
 
     // MARK: - Private Methods
@@ -207,30 +219,29 @@ private let layerDragType = NSPasteboard.PasteboardType("LayerDragType")
         dataSource.createDataLayer(
             dataSetName: dataSetName ?? "Unknown",
             color: color,
-            name: uniqueName,
-            geometryController: rosePlotController
+            name: uniqueName
         )
     }
 
     @objc func addCoreLayer(_: Any?) {
-        guard let dataSource, let rosePlotController else { return }
+        guard let dataSource else { return }
 
         let uniqueName = newLayerName(forBaseName: "Core")
-        dataSource.createCoreLayer(name: uniqueName, geometryController: rosePlotController)
+        dataSource.createCoreLayer(name: uniqueName)
     }
 
     @objc func addGridLayer(_: Any?) {
-        guard let dataSource, let rosePlotController else { return }
+        guard let dataSource else { return }
 
         let uniqueName = newLayerName(forBaseName: "Grid")
-        dataSource.createGridLayer(name: uniqueName, geometryController: rosePlotController)
+        dataSource.createGridLayer(name: uniqueName)
     }
 
     @objc func addTextLayer(_: Any?) {
-        guard let dataSource, let rosePlotController, let roseView else { return }
+        guard let dataSource, let roseView else { return }
 
         let uniqueName = newLayerName(forBaseName: "Text")
-        dataSource.createTextLayer(name: uniqueName, parentView: roseView, geometryController: rosePlotController)
+        dataSource.createTextLayer(name: uniqueName, parentView: roseView)
     }
 
     @objc func displaySheetForVStatLayer(_: Any?) {
@@ -255,8 +266,7 @@ private let layerDragType = NSPasteboard.PasteboardType("LayerDragType")
         //             let dataSetName = selectedLayer.dataSet().tableName()
         //             dataSource.createLineArrowLayer(
         //                 dataSetName: dataSetName ?? "Unknown",
-        //                 name: nil,
-        //                 geometryController: rosePlotController
+        //                 name: nil
         //             )
         //         }
         //     }

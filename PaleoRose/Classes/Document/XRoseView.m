@@ -23,10 +23,35 @@
 
 #import "XRoseView.h"
 #import "XRGeometryController.h"
-#import "XRoseTableController.h"
 #import "XRLayerText.h"
+#import "XRoseWindowController.h"
+#import <PaleoRose-Swift.h>
 
 @implementation XRoseView
+
+- (id)roseTableController {
+    NSWindow *window = [self window];
+    if (!window) {
+        return nil;
+    }
+    XRoseWindowController *windowController = (XRoseWindowController *)[window windowController];
+    if (!windowController) {
+        return nil;
+    }
+    return [windowController tableController];
+}
+
+- (id)rosePlotController {
+    NSWindow *window = [self window];
+    if (!window) {
+        return nil;
+    }
+    XRoseWindowController *windowController = (XRoseWindowController *)[window windowController];
+    if (!windowController) {
+        return nil;
+    }
+    return [windowController geometryController];
+}
 
 - (id)initWithFrame:(NSRect)frameRect
 {
@@ -52,7 +77,7 @@
 - (void)drawRect:(NSRect)rect
 {
 
-	[_roseTableController drawRect:rect];
+	[self.roseTableController drawRect:rect];
 }
 
 -(void)resetDrawingFrames
@@ -99,16 +124,17 @@
 
 
 	//post notification that the drawing rect has changed
-	[_rosePlotController resetGeometryWithBoundsRect:_drawingRect];
+	[self.rosePlotController resetGeometryWithBoundsRect:_drawingRect];
 	[[NSNotificationCenter defaultCenter] postNotificationName:XRRoseViewDrawingRectDidChange object:self];
 }
 
 - (void)mouseDown:(NSEvent *)theEvent
 {
 	XRLayer *aLayer;
+	LayersTableController *tableController = (LayersTableController *)self.roseTableController;
     if(([theEvent type] == NSEventTypeLeftMouseDown)&&([theEvent clickCount]>1))
-	   [(XRoseTableController *)_roseTableController handleMouseEvent:theEvent];
-    else if((aLayer = [_roseTableController activeLayerWithPoint:[self convertPoint:[theEvent locationInWindow] fromView:nil]])&&([theEvent type]==NSEventTypeLeftMouseDown))
+	   [tableController handleMouseEvent:theEvent];
+    else if((aLayer = [tableController activeLayerWith:[self convertPoint:[theEvent locationInWindow] fromView:nil]])&&([theEvent type]==NSEventTypeLeftMouseDown))
 	{
 		NSImage *dragImage = [(XRLayerText *)aLayer dragImage];
         [[NSPasteboard pasteboardWithName:NSPasteboardNameDrag] setData:[dragImage TIFFRepresentation] forType:NSPasteboardTypeTIFF];
@@ -122,7 +148,7 @@
 			  slideBack:NO];
 	}
 	else
-		[(XRoseTableController *)_roseTableController handleMouseEvent:theEvent];
+		[tableController handleMouseEvent:theEvent];
 	//if([theEvent type] == NSLeftMouseDown)
 	//{
 	//	NSPoint aPoint =[self convertPoint:[theEvent locationInWindow] fromView:self];

@@ -23,7 +23,6 @@
 
 #import "XRoseWindowController.h"
 #import "XRPropertyInspector.h"
-#import "XRoseTableController.h"
 #import "XRoseDocument.h"
 #import "XRGeometryPropertyInspector.h"
 #import "FStatisticController.h"
@@ -40,6 +39,7 @@
 @property (nonatomic) XRTableAddColumnController *addColumnController;
 @property (nonatomic) XRCalculateAzimuthController *azimuthController;
 @property (nonatomic) TableListController *tableListController;
+@property (nonatomic, weak) DocumentModel *documentModelBacking;
 @end
 @implementation XRoseWindowController
 NSRect initialRect;
@@ -54,14 +54,56 @@ NSRect initialRect;
 
 -(XRRoseTableController *)tableController
 {
-	return (XRRoseTableController *)_roseTableController;
+	return (XRRoseTableController *)self.layersTableController;
+}
+
+// Custom getter and setter for documentModel to ensure proper initialization order
+- (DocumentModel *)documentModel {
+    return self.documentModelBacking;
+}
+
+- (void)setDocumentModel:(DocumentModel *)documentModel {
+    self.documentModelBacking = documentModel;
+
+    // If controllers have already been created in awakeFromNib, complete their setup now
+    if (documentModel) {
+        [self completeControllerSetupWithDocumentModel:documentModel];
+    }
+}
+
+- (void)completeControllerSetupWithDocumentModel:(DocumentModel *)documentModel {
+    XRGeometryController *geometryController = documentModel.geometryController;
+    
+    // Update data sources for controllers
+    if (self.tableListController) {
+        [self.tableListController setDataSource:documentModel];
+    }
+
+    if (self.layersTableController) {
+        [self.layersTableController setDataSource:documentModel];
+        [self.layersTableController setGeometryController:geometryController];
+    }
+    
+    // Set the back-reference in geometryController
+    geometryController.layersTableController = self.layersTableController;
 }
 
 
 -(void)awakeFromNib
 {
-    self.tableListController = [[TableListController alloc] initWithDataSource:self.documentModel];
+    // Create controllers - they will be configured when documentModel is set
+    self.tableListController = [[TableListController alloc] initWithDataSource:nil];
     self.tableListController.tableView = self->_tableNameTable;
+
+    self.layersTableController = [[LayersTableController alloc] initWithDataSource:nil geometryController:nil];
+    self.layersTableController.tableView = (NSTableView *)_roseTableView;
+    self.layersTableController.roseView = (NSView *)_roseView;
+    self.layersTableController.windowController = self;
+
+    // If documentModel was already set before awakeFromNib (unlikely), complete setup now
+    if (self.documentModel) {
+        [self completeControllerSetupWithDocumentModel:self.documentModel];
+    }
 
 	NSToolbar *roseToolbar = [[NSToolbar alloc] initWithIdentifier:@"RoseToolbar"];
 	[roseToolbar setDelegate:self];
@@ -76,11 +118,10 @@ NSRect initialRect;
 		//NSLog(NSStringFromRect(frame));
 		frame.origin = initialRect.origin;
 		[[self window] setFrame:frame display:YES];
-		
+
 		//NSLog(NSStringFromRect(initialRect));
 	}
 
-	[_rosePlotController setUndoManager:[[self document] undoManager]];
 	//[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(splitViewDidResize:) name:NSViewFrameDidChangeNotification object:_windowSplitView];
 	[[self document] awakeFromNib];
 }
@@ -152,7 +193,7 @@ NSRect initialRect;
 		[anItem setLabel:@"Add Core Layer"];
 		[anItem setPaletteLabel:@"Add Core Layer"];
 		[anItem setToolTip:@"Add Core Layer"];
-		[anItem setTarget:_roseTableController];//this is okay.  Has to tell the document to load more data
+		[anItem setTarget:self.layersTableController];//this is okay.  Has to tell the document to load more data
 		[anItem setAction:@selector(addCoreLayer:)];
 		[anItem setImage:[[NSImage alloc] initWithContentsOfFile:[[NSBundle bundleForClass:[self class]]pathForImageResource:@"coreLayer"]]];
 			
@@ -163,7 +204,7 @@ NSRect initialRect;
 		[anItem setLabel:@"Delete Layer"];
 		[anItem setPaletteLabel:@"Delete Layer"];
 		[anItem setToolTip:@"Delete Layer"];
-		[anItem setTarget:_roseTableController];//this is okay.  Has to tell the document to load more data
+		[anItem setTarget:self.layersTableController];//this is okay.  Has to tell the document to load more data
 			[anItem setAction:@selector(deleteLayers:)];
 			[anItem setImage:[[NSImage alloc] initWithContentsOfFile:[[NSBundle bundleForClass:[self class]]pathForImageResource:@"removeLayer"]]];
 			
@@ -174,7 +215,7 @@ NSRect initialRect;
 		[anItem setLabel:@"Add Grid Layer"];
 		[anItem setPaletteLabel:@"Add Grid Layer"];
 		[anItem setToolTip:@"Add Grid Layer"];
-		[anItem setTarget:_roseTableController];//this is okay.  Has to tell the document to load more data
+		[anItem setTarget:self.layersTableController];//this is okay.  Has to tell the document to load more data
 			[anItem setAction:@selector(addGridLayer:)];
 			[anItem setImage:[[NSImage alloc] initWithContentsOfFile:[[NSBundle bundleForClass:[self class]]pathForImageResource:@"gridLayer"]]];
 			
@@ -185,7 +226,7 @@ NSRect initialRect;
 		[anItem setLabel:@"Add Text Layer"];
 		[anItem setPaletteLabel:@"Add Text Layer"];
 		[anItem setToolTip:@"Add Text Layer"];
-		[anItem setTarget:_roseTableController];//this is okay.  Has to tell the document to load more data
+		[anItem setTarget:self.layersTableController];//this is okay.  Has to tell the document to load more data
 			[anItem setAction:@selector(addTextLayer:)];
 			[anItem setImage:[[NSImage alloc] initWithContentsOfFile:[[NSBundle bundleForClass:[self class]]pathForImageResource:@"textLayer"]]];
 			
@@ -196,7 +237,7 @@ NSRect initialRect;
 		[anItem setLabel:@"Add Vector Layer"];
 		[anItem setPaletteLabel:@"Add Vector Layer"];
 		[anItem setToolTip:@"Add Vector Layer"];
-		[anItem setTarget:_roseTableController];//this is okay.  Has to tell the document to load more data
+		[anItem setTarget:self.layersTableController];//this is okay.  Has to tell the document to load more data
 			[anItem setAction:@selector(displaySheetForVStatLayer:)];
 			[anItem setImage:[[NSImage alloc] initWithContentsOfFile:[[NSBundle bundleForClass:[self class]]pathForImageResource:@"vectorLayer"]]];
 			
@@ -232,48 +273,48 @@ NSRect initialRect;
 
 -(XRGeometryController *)geometryController
 {
-	return _rosePlotController;
+	return self.documentModel.geometryController;
 }
 
 
 -(void)windowDidBecomeMain:(NSNotification *)notification
 {
 	//NSLog(@"windowDidBecomeMain");
-	[_roseTableController displaySelectedLayerInInspector];
-	[[XRGeometryPropertyInspector defaultGeometryInspector] displayInfoForObject:_rosePlotController];
+	[self.layersTableController displaySelectedLayerInInspector];
+	[[XRGeometryPropertyInspector defaultGeometryInspector] displayInfoForObject:[self geometryController]];
 }
 
 -(void)addCoreLayer:(id)sender
 {
-	[_roseTableController addCoreLayer:sender];
+	[self.layersTableController addCoreLayer:sender];
 	//[[[self document] undoManager] registerUndoWithTarget:_roseTableController selector:@selector(deleteLayer:) object:sender];
 	//[[[self document] undoManager] setActionName:@"Add Core Layer"];
 }
 
 -(void)addGridLayer:(id)sender
 {
-	[_roseTableController addGridLayer:sender];
+	[self.layersTableController addGridLayer:sender];
 	//[[[self document] undoManager] registerUndoWithTarget:_roseTableController selector:@selector(deleteLayer:) object:sender];
 	//[[[self document] undoManager] setActionName:@"Add Grid Layer"];
 }
 
 -(void)addVectorLayer:(id)sender
 {
-	[_roseTableController displaySheetForVStatLayer:sender];
+	[self.layersTableController displaySheetForVStatLayer:sender];
 	//[[[self document] undoManager] registerUndoWithTarget:_roseTableController selector:@selector(deleteLayer:) object:sender];
 	//[[[self document] undoManager] setActionName:@"Add Vector Layer"];
 }
 
 -(void)addTextLayer:(id)sender
 {
-	[_roseTableController addTextLayer:sender];
+	[self.layersTableController addTextLayer:sender];
 	//[[[self document] undoManager] registerUndoWithTarget:_roseTableController selector:@selector(deleteLayer:) object:sender];
 	//[[[self document] undoManager] setActionName:@"Add Text Layer"];
 }
 
 -(void)deleteLayers:(id)sender
 {
-	[_roseTableController deleteLayers:sender];
+	[self.layersTableController deleteLayers:sender];
 	[[self document] updateChangeCount:NSChangeDone];
 }
 
@@ -290,7 +331,7 @@ NSRect initialRect;
 -(IBAction)generateFTestReport:(id)sender
 {
 	self.theSheetController = [[FStatisticController alloc] init];
-	[self.theSheetController setLayerNames:[_roseTableController dataLayerNames]];
+	[self.theSheetController setLayerNames:[self.layersTableController dataLayerNames]];
 	//NSLog(@"set layers sheet");
     [self.window beginSheet:[self.theSheetController window] completionHandler:^(NSModalResponse returnCode) {
         if(returnCode == NSModalResponseOK)
@@ -399,7 +440,7 @@ NSRect initialRect;
     }
 
 	//Table is now deleted.  We must now delete all dependent layers and datasets
-	[_roseTableController deleteLayersForTableName:tableToDelete];
+	[self.layersTableController deleteLayersForTableName:tableToDelete];
 	[[self document] discoverTables];
 	[self updateTable];
 }
@@ -590,7 +631,7 @@ NSRect initialRect;
             //now append general geometry issues
             [theString appendFormat:@"Geometry:\n\tSector Count: %i\n\tSector Size (degrees): %f\n\n",[(XRGeometryController *)self.geometryController  sectorCount],[(XRGeometryController *)self.geometryController  sectorSize]];
             //have table controller append info
-            [theString appendString:[(XRoseTableController *)self.tableController generateStatisticsString]];
+            [theString appendString:[self.layersTableController generateStatisticsString]];
             if([[NSFileManager defaultManager] fileExistsAtPath:[[sp URL] path]])
                 [[NSFileManager defaultManager] removeItemAtPath:[[sp URL] path] error:nil];
             [[NSFileManager defaultManager] createFileAtPath:[[sp URL] path] contents:[theString dataUsingEncoding:NSASCIIStringEncoding] attributes:nil];

@@ -40,34 +40,29 @@ protocol LayerTableControllerDataSource: AnyObject {
     ///   - dataSetName: Name of the dataset to associate with the layer
     ///   - color: Color for the layer (stroke and fill)
     ///   - name: Optional custom name for the layer (auto-generated if nil)
-    ///   - geometryController: Geometry controller for the layer
-    func createDataLayer(dataSetName: String, color: NSColor, name: String?, geometryController: XRGeometryController)
+    func createDataLayer(dataSetName: String, color: NSColor, name: String?)
 
     /// Creates a core layer
     /// - Parameters:
     ///   - name: Optional custom name for the layer
-    ///   - geometryController: Geometry controller for the layer
-    func createCoreLayer(name: String?, geometryController: XRGeometryController)
+    func createCoreLayer(name: String?)
 
     /// Creates a grid layer
     /// - Parameters:
     ///   - name: Optional custom name for the layer
-    ///   - geometryController: Geometry controller for the layer
-    func createGridLayer(name: String?, geometryController: XRGeometryController)
+    func createGridLayer(name: String?)
 
     /// Creates a text layer
     /// - Parameters:
     ///   - name: Optional custom name for the layer
     ///   - parentView: Parent view for the text layer
-    ///   - geometryController: Geometry controller for the layer
-    func createTextLayer(name: String?, parentView: NSView, geometryController: XRGeometryController)
+    func createTextLayer(name: String?, parentView: NSView)
 
     /// Creates a line arrow layer (vector statistics)
     /// - Parameters:
     ///   - dataSetName: Name of the dataset to associate with the layer
     ///   - name: Optional custom name for the layer
-    ///   - geometryController: Geometry controller for the layer
-    func createLineArrowLayer(dataSetName: String, name: String?, geometryController: XRGeometryController)
+    func createLineArrowLayer(dataSetName: String, name: String?)
 
     // MARK: - Layer Deletion
 

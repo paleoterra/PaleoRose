@@ -31,7 +31,6 @@ import Testing
 
 // MARK: - Mock Data Source
 
-@MainActor
 final class MockLayerTableDataSource: LayerTableControllerDataSource {
     private let subject = CurrentValueSubject<[XRLayer], Never>([])
 
@@ -59,26 +58,26 @@ final class MockLayerTableDataSource: LayerTableControllerDataSource {
         subject.send(layers)
     }
 
-    func createDataLayer(dataSetName: String, color: NSColor, name: String?, geometryController: XRGeometryController) {
+    func createDataLayer(dataSetName: String, color: NSColor, name: String?) {
         createDataLayerCallCount += 1
         lastDataSetName = dataSetName
         lastColor = color
         lastLayerName = name
     }
 
-    func createCoreLayer(name: String?, geometryController: XRGeometryController) {
+    func createCoreLayer(name: String?) {
         createCoreLayerCallCount += 1
         lastLayerName = name
     }
 
-    func createGridLayer(name: String?, geometryController: XRGeometryController) {
+    func createGridLayer(name: String?) {
         createGridLayerCallCount += 1
         lastLayerName = name
     }
 
-    func createTextLayer(name: String?, parentView: NSView, geometryController: XRGeometryController) {}
+    func createTextLayer(name: String?, parentView: NSView) {}
 
-    func createLineArrowLayer(dataSetName: String, name: String?, geometryController: XRGeometryController) {}
+    func createLineArrowLayer(dataSetName: String, name: String?) {}
 
     func deleteLayer(_: XRLayer) {
         deleteLayerCallCount += 1

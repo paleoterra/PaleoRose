@@ -100,8 +100,6 @@
 		B48345CF05C238B500E3F6B7 /* XRoseDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = B48345CD05C238B500E3F6B7 /* XRoseDocument.m */; };
 		B48345D205C23B3000E3F6B7 /* XRoseWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = B48345D005C23B3000E3F6B7 /* XRoseWindowController.h */; };
 		B48345D305C23B3000E3F6B7 /* XRoseWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = B48345D105C23B3000E3F6B7 /* XRoseWindowController.m */; };
-		B48345D605C23B3D00E3F6B7 /* XRoseTableController.h in Headers */ = {isa = PBXBuildFile; fileRef = B48345D405C23B3D00E3F6B7 /* XRoseTableController.h */; };
-		B48345D705C23B3D00E3F6B7 /* XRoseTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = B48345D505C23B3D00E3F6B7 /* XRoseTableController.m */; };
 		B48345F005C23CA100E3F6B7 /* XRoseView.h in Headers */ = {isa = PBXBuildFile; fileRef = B48345EE05C23CA100E3F6B7 /* XRoseView.h */; };
 		B48345F105C23CA100E3F6B7 /* XRoseView.m in Sources */ = {isa = PBXBuildFile; fileRef = B48345EF05C23CA100E3F6B7 /* XRoseView.m */; };
 		B48430862E1193E500E126C0 /* GraphicCircleLabelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48430852E1193E500E126C0 /* GraphicCircleLabelTests.swift */; };
@@ -379,8 +377,6 @@
 		B48345CD05C238B500E3F6B7 /* XRoseDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRoseDocument.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B48345D005C23B3000E3F6B7 /* XRoseWindowController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRoseWindowController.h; sourceTree = "<group>"; };
 		B48345D105C23B3000E3F6B7 /* XRoseWindowController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRoseWindowController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		B48345D405C23B3D00E3F6B7 /* XRoseTableController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRoseTableController.h; sourceTree = "<group>"; };
-		B48345D505C23B3D00E3F6B7 /* XRoseTableController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRoseTableController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B48345EE05C23CA100E3F6B7 /* XRoseView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRoseView.h; sourceTree = "<group>"; };
 		B48345EF05C23CA100E3F6B7 /* XRoseView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XRoseView.m; sourceTree = "<group>"; };
 		B48430852E1193E500E126C0 /* GraphicCircleLabelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicCircleLabelTests.swift; sourceTree = "<group>"; };
@@ -632,8 +628,6 @@
 				B414A0042B24CB37008AE5F4 /* XRose Document */,
 				B48345D005C23B3000E3F6B7 /* XRoseWindowController.h */,
 				B48345D105C23B3000E3F6B7 /* XRoseWindowController.m */,
-				B48345D405C23B3D00E3F6B7 /* XRoseTableController.h */,
-				B48345D505C23B3D00E3F6B7 /* XRoseTableController.m */,
 				B4081BEF2EC79D9500EA734A /* LayerTableControllerDataSource.swift */,
 				B4081C322EC7C71100EA734A /* LayersTableController.swift */,
 				B4081C302EC7C65A00EA734A /* LayersTableControllerTests.swift */,
@@ -1112,7 +1106,6 @@
 				8D15AC290486D014006FF6A4 /* PaleoRose_Prefix.pch in Headers */,
 				B48345CE05C238B500E3F6B7 /* XRoseDocument.h in Headers */,
 				B48345D205C23B3000E3F6B7 /* XRoseWindowController.h in Headers */,
-				B48345D605C23B3D00E3F6B7 /* XRoseTableController.h in Headers */,
 				B4A82F9B2A07F8A400790052 /* LITMXMLBinaryEncoding.h in Headers */,
 				B48345F005C23CA100E3F6B7 /* XRoseView.h in Headers */,
 				B4852A8405C2E223002212E3 /* XRGeometryController.h in Headers */,
@@ -1411,7 +1404,6 @@
 				B48345D305C23B3000E3F6B7 /* XRoseWindowController.m in Sources */,
 				B439AB372C83CF7900252574 /* DocumentModel.swift in Sources */,
 				B41266732B6EE09300E1C385 /* ApplicationDefaults.swift in Sources */,
-				B48345D705C23B3D00E3F6B7 /* XRoseTableController.m in Sources */,
 				B48345F105C23CA100E3F6B7 /* XRoseView.m in Sources */,
 				B4852A8505C2E223002212E3 /* XRGeometryController.m in Sources */,
 				B4E22DA82DFF701200A9AFE0 /* FormatterFactory.swift in Sources */,

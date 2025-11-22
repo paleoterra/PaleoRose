@@ -22,9 +22,9 @@
 // SOFTWARE.
 
 #import "XRGeometryController.h"
-#import "XRoseTableController.h"
 #import <math.h>
 #import <sqlite3.h>
+#import <PaleoRose-Swift.h>
 
 @implementation XRGeometryController
 
@@ -206,14 +206,16 @@
 
 -(void)calculateGeometryMaxCount
 {
-	int result = [(XRoseTableController *)_roseTableController calculateGeometryMaxCount];
+	LayersTableController *controller = (LayersTableController *)self.layersTableController;
+	int result = [controller calculateGeometryMaxCount];
 	if(result > 0)
 		[self setGeomentryMaxCount:result];
 }
 
 -(void)calculateGeometryMaxPercent
 {
-	float result = [(XRoseTableController *)_roseTableController calculateGeometryMaxPercent];
+	LayersTableController *controller = (LayersTableController *)self.layersTableController;
+	float result = [controller calculateGeometryMaxPercent];
 	if(result > 0.0)
 		[self setGeomentryMaxPercent:result];
 }

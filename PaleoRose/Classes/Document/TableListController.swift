@@ -62,10 +62,15 @@ protocol TableListControllerDataSource: AnyObject {
 
     // MARK: - Initialization
 
-    @objc init(dataSource: DocumentModel) {
+    @objc init(dataSource: DocumentModel?) {
         super.init()
         self.dataSource = dataSource
         setupDataSourceSubscription()
+    }
+
+    /// Objective-C compatible method to set data source
+    @objc func setDataSource(_ source: DocumentModel) {
+        dataSource = source
     }
 
     // MARK: - Private Methods

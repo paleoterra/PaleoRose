@@ -28,8 +28,6 @@
 @class XRRoseTableController, XRGeometryController;
 @interface XRoseWindowController : NSWindowController <NSToolbarDelegate>
 {
-    __weak IBOutlet id _rosePlotController;
-    __weak IBOutlet id _roseTableController;
     __weak IBOutlet id _roseTableView;
     __weak IBOutlet id _roseView;
     __weak IBOutlet id _tableSplitView;
@@ -41,6 +39,7 @@
 }
 
 @property (weak) DocumentModel *documentModel;
+@property (strong) LayersTableController *layersTableController;
 
 -(XRRoseTableController *)tableController;
 -(XRGeometryController *)geometryController;
