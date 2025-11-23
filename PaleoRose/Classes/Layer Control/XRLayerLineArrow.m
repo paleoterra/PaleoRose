@@ -137,7 +137,6 @@
         if([theStat.statisticName isEqualToString:[NSString stringWithUTF8String:"θ̅± (95%)"]])
             errorAngle = [theStat floatValue];
     }
-    //NSLog(@"3");
     switch(_type)
     {
 
@@ -162,18 +161,14 @@
         }
             break;
     }
-    //NSLog(@"4");
     aPath = [NSBezierPath bezierPath];
     [aPath moveToPoint:[geometryController rotationOfPoint:NSMakePoint(0.0,radiusCore) byAngle:vector]];
     [aPath lineToPoint:[geometryController rotationOfPoint:NSMakePoint(0.0,radius) byAngle:vector]];
     [theDictionary setObject:aPath forKey:@"vector"];
 
-    //NSLog(@"5 %f %i",_arrowSize,_headType);
     anArrow = [[ArrowHead alloc] initWithSize:_arrowSize color:_strokeColor type:_headType];
 
-    //NSLog(@"5.5 %f %f",radiusCore, radius);
     [anArrow positionAtLineEndpoint:[geometryController rotationOfPoint:NSMakePoint(0.0,radius) byAngle:vector] withAngle:vector];
-    //NSLog(@"6");
     [theDictionary setObject:anArrow forKey:@"arrow"];
     [_graphicalObjects addObject:theDictionary];
     [self configureErrorWithVector:vector error:errorAngle];
@@ -294,7 +289,6 @@
 
 -(void)setDataSet:(XRDataSet *)aSet
 {
-
     _theSet = aSet;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statisticsDidChange:) name:XRDataSetChangedStatisticsNotification object:_theSet];
     [self generateGraphics];

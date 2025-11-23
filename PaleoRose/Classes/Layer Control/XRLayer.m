@@ -290,7 +290,6 @@
 
 -(void)geometryDidChange:(NSNotification *)notification
 {
-	NSLog(@"XRLayer: geometryDidChange received for layer %@ (class %@)", _layerName, NSStringFromClass([self class]));
 	[self generateGraphics];
 
 	[[NSNotificationCenter defaultCenter] postNotificationName:XRLayerRequiresRedraw object:self];

@@ -172,7 +172,7 @@ extension DocumentModel: InMemoryStoreDelegate {
 
     func update(layers: [XRLayer]) {
         // Set datasets and geometry controller on all loaded layers
-        // IMPORTANT: For data-dependent layers, set dataset BEFORE geometry controller
+        // IMPORTANT: Set geometry controller FIRST, then dataset
         // because setDataSet calls generateGraphics which needs the geometry controller
         for layer in layers {
             // First, set the dataset for data and line arrow layers

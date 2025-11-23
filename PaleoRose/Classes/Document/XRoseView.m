@@ -64,7 +64,6 @@
 
 	//set last frame
 	_lastFrame = [self frame];
-	NSLog(@"XRoseView: computeDrawingFrames called, frame = %@", NSStringFromRect(_lastFrame));
 
 	//do work here
 	//estimate internal rect
@@ -86,14 +85,9 @@
 	_drawingRect.origin.x = -1 * (_drawingRect.size.width / 2.0);
 	_drawingRect.origin.y = -1 * (_drawingRect.size.height / 2.0);
 
-	NSLog(@"XRoseView: drawingRect = %@, rosePlotController = %@", NSStringFromRect(_drawingRect), self.rosePlotController);
-
 	//post notification that the drawing rect has changed
 	if (self.rosePlotController) {
-		NSLog(@"XRoseView: Calling resetGeometryWithBoundsRect with rect = %@", NSStringFromRect(_drawingRect));
 		[self.rosePlotController resetGeometryWithBoundsRect:_drawingRect];
-	} else {
-		NSLog(@"XRoseView: WARNING - rosePlotController is nil, geometry not updated!");
 	}
 	[[NSNotificationCenter defaultCenter] postNotificationName:XRRoseViewDrawingRectDidChange object:self];
 }

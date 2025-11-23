@@ -121,15 +121,11 @@ private let layerDragType = NSPasteboard.PasteboardType("LayerDragType")
     }
 
     @objc private func layerRequiresRedraw(_ notification: Notification) {
-        let layerName = (notification.object as? XRLayer)?.layerName() ?? "unknown"
-        print("LayersTableController: Received XRLayerRequiresRedraw notification from layer: \(layerName)")
         // Ensure we're on the main thread for UI updates
         DispatchQueue.main.async { [weak self] in
             guard let self, let roseView else {
-                print("LayersTableController: WARNING - self or roseView is nil!")
                 return
             }
-            print("LayersTableController: Calling setNeedsDisplay on roseView")
             roseView.setNeedsDisplay(roseView.bounds)
         }
     }
@@ -178,13 +174,14 @@ private let layerDragType = NSPasteboard.PasteboardType("LayerDragType")
 
     @objc func displaySelectedLayerInInspector() {
         guard let tableView else { return }
+        guard let inspector = XRPropertyInspector.defaultInspector() as? XRPropertyInspector else { return }
 
         let selectedRowCount = tableView.numberOfSelectedRows
 
         if selectedRowCount == 0 {
-            // XRPropertyInspector.default().displayInfo(for: nil as XRLayer?)
+            inspector.displayInfo(for: nil)
         } else if selectedRowCount > 1 {
-            // XRPropertyInspector.default().displayInfo(for: nil as XRLayer?)
+            inspector.displayInfo(for: nil)
         } else {
             let row = tableView.selectedRow
             guard layers.indices.contains(row) else { return }
@@ -194,7 +191,7 @@ private let layerDragType = NSPasteboard.PasteboardType("LayerDragType")
                 layer.setIsActive(index == row)
             }
 
-            // XRPropertyInspector.default().displayInfo(for: layers[row])
+            inspector.displayInfo(for: layers[row])
         }
     }
 

@@ -34,7 +34,8 @@
       "Bash(open:*)",
       "Bash(cat:*)",
       "Bash(1)",
-      "Bash(sqlite3:*)"
+      "Bash(sqlite3:*)",
+      "Bash(xcrun swift-api-digester:*)"
     ],
     "deny": [],
     "ask": []
