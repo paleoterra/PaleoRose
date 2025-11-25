@@ -59,17 +59,38 @@ class ArrowHead: NSObject {
     func position(atLineEndpoint point: CGPoint, withAngle angle: Float) {
         positionTransform = CGAffineTransform.identity
         positionTransform = positionTransform.translatedBy(x: point.x, y: point.y)
-        positionTransform = positionTransform.rotated(by: CGFloat(360.0 - angle) * .pi / 180.0)
+        // The arrow path points in -Y direction (down) by default
+        // The line from center goes in +Y direction (up)
+        // Simply apply the negative angle to align with the line
+        let rotationAngle = CGFloat(-angle) * .pi / 180.0
+        positionTransform = positionTransform.rotated(by: rotationAngle)
     }
 
     @objc(drawRect:)
     func draw(_: NSRect) {
         NSGraphicsContext.saveGraphicsState()
 
-        if let context = NSGraphicsContext.current?.cgContext {
-            context.concatenate(scaleTransform)
-            context.concatenate(positionTransform)
-        }
+        // IMPORTANT: Apply transforms in correct order
+        // 1. First apply position/rotation (translate to endpoint and rotate)
+        //    Use the combined positionTransform which already has both operations
+        // 2. Then apply scale (scale the arrow at that position)
+        // This ensures changing size doesn't affect position
+
+        // Convert CGAffineTransform to NSAffineTransform and apply
+        let nsPositionTransform = NSAffineTransform()
+        nsPositionTransform.transformStruct = NSAffineTransformStruct(
+            m11: positionTransform.a,
+            m12: positionTransform.b,
+            m21: positionTransform.c,
+            m22: positionTransform.d,
+            tX: positionTransform.tx,
+            tY: positionTransform.ty
+        )
+        nsPositionTransform.concat()
+
+        let nsScaleTransform = NSAffineTransform()
+        nsScaleTransform.scaleX(by: scaleTransform.a, yBy: scaleTransform.d)
+        nsScaleTransform.concat()
 
         arrowColor.set()
 

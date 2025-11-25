@@ -30,7 +30,6 @@
 #import "XRLayer.h"
 #import "XRGeometryController.h"
 #import "XRoseView.h"
-#import "sqlite3.h"
 #import "XRoseWindowController.h"
 #import "LITMXMLBinaryEncoding.h"
 
@@ -78,6 +77,7 @@ static NSLayoutManager *sharedDrawingLayoutManager(void);
                             );
     self = [super init];
     if (self) {
+        _graphicalObjects = [[NSMutableArray alloc] init];
         _contents = [[NSTextStorage  alloc] init];
         gutter = 4.0;
         [self setLayerName:@"Default Text"];
@@ -94,6 +94,10 @@ static NSLayoutManager *sharedDrawingLayoutManager(void);
         _fillColor = fillColor;
         [self setContents:contents];
         textBounds = NSMakeRect((CGFloat)rectOriginX, (CGFloat)rectOriginY, (CGFloat)rectWidth, (CGFloat)rectHeight);
+        _canFill = YES;
+        _canStroke = YES;
+        // Generate the color preview image for the table view
+        [self resetColorImage];
 //        [self setContents:[[NSAttributedString alloc] initWithData:decodeBase64([[NSString alloc] initWithData:contents encoding:NSUTF8StringEncoding]) options:@{} documentAttributes:nil error:nil ]];
     }
     return self;
@@ -349,68 +353,6 @@ static NSLayoutManager *sharedDrawingLayoutManager(void) {
 -(NSString *)type
 {
     return @"XRLayerText";
-}
-
--(id)initWithGeometryController:(XRGeometryController *)aController sqlDB:(sqlite3 *)db   layerID:(int)layerID withParentView:(NSView *)parentView
-{
-    if (!(self = [self initWithGeometryController:aController parentView:parentView])) return nil;
-    if(self)
-    {
-        [super configureWithSQL:db forLayerID:layerID];
-        [self configureWithSQL:db forLayerID:layerID];
-    }
-    return self;
-}
-
--(void)configureWithSQL:(sqlite3 *)db forLayerID:(int)layerid
-{
-    int columns;
-    sqlite3_stmt *stmt;
-    NSString *columnName;
-    const char *pzTail;
-    NSRect aTextRect;
-    NSAttributedString *tempString;
-    NSString *command = [NSString stringWithFormat:@"SELECT * FROM _layerText WHERE LAYERID=%i",(int)layerid];
-    //NSLog(@"Configuring with SQL");
-    sqlite3_prepare(db,[command UTF8String],-1,&stmt,&pzTail);
-    while(sqlite3_step(stmt)==SQLITE_ROW)
-    {
-        columns = sqlite3_column_count(stmt);
-        for(int i=0;i<columns;i++)
-        {
-            columnName = [NSString stringWithUTF8String:(char *)sqlite3_column_name(stmt,i)];
-            if([columnName isEqualToString:@"RECT_POINT_X"])
-            {
-                aTextRect.origin.x =  (float)sqlite3_column_double(stmt,i);
-
-            }
-            else if([columnName isEqualToString:@"RECT_POINT_Y"])
-            {
-                aTextRect.origin.y =  (float)sqlite3_column_double(stmt,i);
-
-            }
-            else if([columnName isEqualToString:@"RECT_SIZE_HEIGHT"])
-            {
-                aTextRect.size.height =  (float)sqlite3_column_double(stmt,i);
-
-            }
-            else if([columnName isEqualToString:@"RECT_SIZE_WIDTH"])
-            {
-                aTextRect.size.width =  (float)sqlite3_column_double(stmt,i);
-
-            }
-            else if([columnName isEqualToString:@"CONTENTS"])
-            {
-                tempString = [[NSAttributedString alloc] initWithData:decodeBase64([NSString stringWithUTF8String:(char *)sqlite3_column_text(stmt,i)]) options:@{} documentAttributes:nil error:nil ];
-            }
-
-
-
-        }
-    }
-    [self setContents:tempString];
-    textBounds = aTextRect;
-
 }
 
 @end

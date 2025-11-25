@@ -39,7 +39,6 @@
 
 @interface XRGeometryController : NSObject <GraphicGeometrySource>
 {
-    IBOutlet id _roseTableController;
 	NSRect _mainRect;
 	NSRect _circleRect;
 	float _relativeSizeOfCircleRect;
@@ -54,6 +53,10 @@
 	int _sectorCount;
 	NSUndoManager *theUndoManager;
 }
+
+@property (nonatomic, weak) id layersTableController;
+
+-(void)setUndoManager:(NSUndoManager *)aManager;
 
 -(void)configureIsEqualArea:(BOOL)isEqualArea
                   isPercent:(BOOL)isPercent

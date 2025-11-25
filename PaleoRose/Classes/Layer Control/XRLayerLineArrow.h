@@ -31,6 +31,7 @@
 @class XRDataSet;
 @interface XRLayerLineArrow : XRLayer {
 	XRDataSet *_theSet;
+	int _datasetId;  // Stored separately so we can find the dataset before _theSet is set
 	float _arrowSize;
 	int _type;
 	int _headType;
@@ -53,7 +54,8 @@
             vectorType:(int)vectorType
              arrowType:(int)arrowType
             showVector:(BOOL)showVector
-             showError:(BOOL)showError;
+             showError:(BOOL)showError
+             datasetId:(int)datasetId;
 
 -(int)datasetId;
 -(float)arrowSize;

@@ -40,7 +40,8 @@ extension XRLayerData {
         fill: NSColor = NSColor.white,
         plotType: Int = 0,
         totalCount: Int = 10,
-        dotRadius: Float = 2.0
+        dotRadius: Float = 2.0,
+        datasetId: Int32 = 1
     ) -> XRLayerData {
         XRLayerData(
             isVisible: isVisible,
@@ -54,7 +55,8 @@ extension XRLayerData {
             fill: fill,
             plotType: Int32(plotType),
             totalCount: Int32(totalCount),
-            dotRadius: dotRadius
+            dotRadius: dotRadius,
+            datasetId: datasetId
         )
     }
 

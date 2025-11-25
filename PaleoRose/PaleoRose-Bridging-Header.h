@@ -11,3 +11,4 @@
 #import "XRLayerData.h"
 #import "XRLayerGrid.h"
 #import "GraphicGeometrySource.h"
+#import "XRPropertyInspector.h"

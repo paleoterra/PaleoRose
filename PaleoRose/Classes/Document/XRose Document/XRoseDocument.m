@@ -32,9 +32,7 @@
 #import "XRGeometryController.h"
 #import "XRAppendDialogController.h"
 #import "XREncodingAccessoryView.h"
-#import "XRoseTableController.h"
 #import "XRoseView.h"
-#import "XRoseTableController.h"
 
 #import "XRStatistic.h"
 #import "XRMakeDatasetController.h"
@@ -239,7 +237,8 @@
             [[self.mainWindowController window] setFrame:frame display:YES];
         }
 
-        [(XRoseTableController *)[self.mainWindowController  tableController] configureControllerWithSQL:[self.documentModel memoryStore] withDataSets:self.dataSets];
+        // NOTE: LayersTableController no longer uses SQLite configuration.
+        // Layers are loaded from DocumentModel via Combine publishers.
     }
     else {
 
@@ -319,7 +318,7 @@
             if(aSet)
             {
                 [self.dataSets addObject:aSet];
-                [(XRoseTableController *)[self.mainWindowController tableController] addDataLayerForSet:aSet];
+                [self.mainWindowController.layersTableController addDataLayerFor:aSet];
                 //[[self undoManager] registerUndoWithTarget:[self.mainWindowController tableController] selector:@selector(deleteLayer:) object:[[self.mainWindowController tableController]lastLayer]];
                 //[[self undoManager] setActionName:@"Add Data Layer"];
                 [self updateChangeCount:NSChangeDone];

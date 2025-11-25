@@ -51,7 +51,7 @@ private enum XRGeometryDefaultKey: String {
 @objc class XRGeometryController: NSObject, XRGeometryCalculating, XRGeometryConfiguring {
     // MARK: - Properties
 
-    @IBOutlet private var roseTableController: XRoseTableController?
+    @IBOutlet private var layersTableController: LayersTableController?
 
     private var mainRect: NSRect = .zero {
         didSet { updateCircleRect() }
@@ -282,13 +282,13 @@ private enum XRGeometryDefaultKey: String {
     // MARK: - Auto Calculations
 
     func calculateGeometryMaxCount() {
-        if let maxCount = roseTableController?.calculateGeometryMaxCount(), maxCount > 0 {
+        if let maxCount = layersTableController?.calculateGeometryMaxCount(), maxCount > 0 {
             geometryMaxCount = maxCount
         }
     }
 
     func calculateGeometryMaxPercent() {
-        if let percent = roseTableController?.calculateGeometryMaxPercent(), percent > 0 {
+        if let percent = layersTableController?.calculateGeometryMaxPercent(), percent > 0 {
             geometryMaxPercent = percent
         }
     }

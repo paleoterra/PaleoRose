@@ -159,17 +159,25 @@ class InMemoryStore: NSObject {
                 // requires additional processing
                 let dataSets = try dataSets(sqliteStore: sqliteStore)
 
+                // IMPORTANT: Update dataSets first and wait for it to complete
+                // before updating layers, because layers need to look up their
+                // datasets during configuration (especially XRLayerLineArrow)
                 group.enter()
                 DispatchQueue.main.async { [weak self] in
                     self?.delegate?.update(dataSets: dataSets)
                     group.leave()
                 }
+                // Wait for dataSets update to complete before loading layers
+                group.wait()
+
                 let layers = try readLayers(sqliteStore: sqliteStore)
                 group.enter()
                 DispatchQueue.main.async { [weak self] in
                     self?.delegate?.update(layers: layers)
                     group.leave()
                 }
+                // Wait for layers update to complete before calling completion
+                group.wait()
                 completion(.success(true))
             } catch {
                 completion(.failure(error))

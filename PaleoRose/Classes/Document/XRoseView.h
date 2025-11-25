@@ -29,12 +29,13 @@
 
 @interface XRoseView : NSView
 {
-    __weak IBOutlet id _rosePlotController;
-    __weak IBOutlet id _roseTableController;
 	NSRect _lastFrame;
 	NSRect _drawingRect;
 	id draggedObject;
 }
+
+@property (nonatomic, weak) id roseTableController;
+@property (nonatomic, weak) id rosePlotController;
 
 -(void)resetDrawingFrames;
 -(void)computeDrawingFrames;

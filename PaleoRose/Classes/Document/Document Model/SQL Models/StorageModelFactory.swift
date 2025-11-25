@@ -73,6 +73,50 @@ class StorageModelFactory {
         )
     }
 
+    /// Find the color ID for a given NSColor, or create a new color entry if not found
+    /// - Parameter nsColor: The NSColor to find or create
+    /// - Returns: The color ID for the given color
+    func findOrCreateColorID(for nsColor: NSColor) -> Int {
+        // Convert NSColor to RGB components (use calibrated RGB color space)
+        guard let rgbColor = nsColor.usingColorSpace(.deviceRGB) else {
+            // If conversion fails, return 1 (black - default color)
+            return 1
+        }
+
+        let red = Float(rgbColor.redComponent)
+        let green = Float(rgbColor.greenComponent)
+        let blue = Float(rgbColor.blueComponent)
+        let alpha = Float(rgbColor.alphaComponent)
+
+        // Try to find an existing color with the same components
+        // Use a small epsilon for floating point comparison
+        let epsilon: Float = 0.001
+        if
+            let existingColor = colors.first(where: { color in
+                abs(color.RED - red) < epsilon &&
+                    abs(color.GREEN - green) < epsilon &&
+                    abs(color.BLUE - blue) < epsilon &&
+                    abs(color.ALPHA - alpha) < epsilon
+            }) {
+            return existingColor.COLORID
+        }
+
+        // Color not found - create a new one
+        // Find the next available color ID
+        let nextID = (colors.map(\.COLORID).max() ?? 0) + 1
+
+        let newColor = Color(
+            COLORID: nextID,
+            RED: red,
+            BLUE: blue,
+            GREEN: green,
+            ALPHA: alpha
+        )
+        colors.append(newColor)
+
+        return nextID
+    }
+
     // MARK: - Create Storage Layers
 
     func storageLayers(from inputLayer: XRLayer, at index: Int) -> [TableRepresentable] {
@@ -101,7 +145,11 @@ class StorageModelFactory {
     }
 
     func storageLayerRoot(from inputLayer: XRLayer, at index: Int) -> Layer {
-        Layer(
+        // Get the actual stroke and fill colors from the layer and find/create their IDs
+        let strokeColorID = findOrCreateColorID(for: inputLayer.strokeColor())
+        let fillColorID = findOrCreateColorID(for: inputLayer.fillColor())
+
+        return Layer(
             LAYERID: index,
             TYPE: inputLayer.type(),
             VISIBLE: inputLayer.isVisible(),
@@ -111,8 +159,8 @@ class StorageModelFactory {
             LINEWEIGHT: inputLayer.lineWeight(),
             MAXCOUNT: Int(inputLayer.maxCount()),
             MAXPERCENT: Float(inputLayer.maxPercent()),
-            STROKECOLORID: 0,
-            FILLCOLORID: 0
+            STROKECOLORID: strokeColorID,
+            FILLCOLORID: fillColorID
         )
     }
 
@@ -259,7 +307,8 @@ class StorageModelFactory {
             vectorType: Int32(lineArrowLayer.VECTORTYPE),
             arrowType: Int32(lineArrowLayer.ARROWTYPE),
             showVector: lineArrowLayer.SHOWVECTOR,
-            showError: lineArrowLayer.SHOWERROR
+            showError: lineArrowLayer.SHOWERROR,
+            datasetId: Int32(lineArrowLayer.DATASET)
         )
     }
 
@@ -293,7 +342,8 @@ class StorageModelFactory {
             fill: fillColor(id: layer.FILLCOLORID),
             plotType: Int32(dataLayer.PLOTTYPE),
             totalCount: Int32(dataLayer.TOTALCOUNT),
-            dotRadius: dataLayer.DOTRADIUS
+            dotRadius: dataLayer.DOTRADIUS,
+            datasetId: Int32(dataLayer.DATASET)
         )
     }
 

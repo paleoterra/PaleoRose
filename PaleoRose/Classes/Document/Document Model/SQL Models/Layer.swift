@@ -81,4 +81,8 @@ struct Layer: TableRepresentable, LayerIdentifiable {
     static func deleteQuery() -> any QueryProtocol {
         Query(sql: "DELETE FROM _layers WHERE LAYERID = ?")
     }
+
+    static func storedValues() -> any QueryProtocol {
+        Query(sql: "SELECT * FROM _layers ORDER BY LAYERID ASC")
+    }
 }

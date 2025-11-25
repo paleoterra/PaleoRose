@@ -29,7 +29,13 @@
       "Bash(find:*)",
       "Skill(xrose-database-reader)",
       "Bash(chmod:*)",
-      "Bash(python3:*)"
+      "Bash(python3:*)",
+      "Bash(xcodebuild:*)",
+      "Bash(open:*)",
+      "Bash(cat:*)",
+      "Bash(1)",
+      "Bash(sqlite3:*)",
+      "Bash(xcrun swift-api-digester:*)"
     ],
     "deny": [],
     "ask": []

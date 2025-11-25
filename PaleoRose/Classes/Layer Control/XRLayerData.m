@@ -30,7 +30,6 @@
 #import "XRDataSet.h"
 #import "XRGeometryController.h"
 #import "XRStatistic.h"
-#import "sqlite3.h"
 #import <PaleoRose-Swift.h>
 
 @implementation XRLayerData
@@ -111,9 +110,14 @@
              fillColor:(NSColor *)fillColor
               plotType:(int)plotType
             totalCount:(int)totalCount
-             dotRadius:(float)dotRadius {
+             dotRadius:(float)dotRadius
+             datasetId:(int)datasetId {
     self = [super init];
     if (self) {
+        _graphicalObjects = [[NSMutableArray alloc] init];
+        _sectorValues = [[NSMutableArray alloc] init];
+        _sectorValuesCount = [[NSMutableArray alloc] init];
+        _statistics = [[NSMutableArray alloc] init];
         _isVisible = visible;
         _isActive = active;
         _isBiDir = isBiDir;
@@ -127,6 +131,11 @@
         _plotType = plotType;
         _totalCount = totalCount;
         _dotRadius = dotRadius;
+        _datasetId = datasetId;
+        _canFill = YES;
+        _canStroke = YES;
+        // Generate the color preview image for the table view
+        [self resetColorImage];
     }
     return self;
 }
@@ -402,7 +411,12 @@
 }
 
 -(int)datasetId {
-    return _theSet.setId;
+    // Return the stored dataset ID if we don't have a dataset reference yet
+    // Otherwise return the actual dataset's ID
+    if (_theSet) {
+        return _theSet.setId;
+    }
+    return _datasetId;
 }
 
 
@@ -552,93 +566,5 @@
 {
 	return @"XRLayerData";
 }
-
--(id)initWithGeometryController:(XRGeometryController *)aController sqlDB:(sqlite3 *)db   layerID:(int)layerID 
-{
-	if (!(self = [self initWithGeometryController:aController])) return nil;
-	if(self)
-	{
-		_sectorValues = [[NSMutableArray alloc] init];
-		_sectorValuesCount = [[NSMutableArray alloc] init];
-		_statistics =  [[NSMutableArray alloc] init];
-		_plotType = (int)[[NSUserDefaults standardUserDefaults] integerForKey:XRLayerDataDefaultKeyType];
-		
-		_lineWeight = 1.0;
-		_dotRadius = 4.0;
-
-		[self configureWithSQL:db forLayerID:layerID];
-		[self calculateSectorValues];
-		[self generateGraphics];
-	}
-	return self;
-}
-
--(void)configureWithSQL:(sqlite3 *)db forLayerID:(int)layerid
-{
-    [super configureWithSQL:db forLayerID:layerid];
-	int columns;
-
-	sqlite3_stmt *stmt;
-	NSString *columnName;
-
-	const char *pzTail;
-	NSString *command = [NSString stringWithFormat:@"SELECT * FROM _layerData WHERE LAYERID=%i",layerid];
-
-	sqlite3_prepare(db,[command UTF8String],-1,&stmt,&pzTail);
-	
-	while(sqlite3_step(stmt)==SQLITE_ROW)
-	{
-		columns = sqlite3_column_count(stmt);
-		for(int i=0;i<columns;i++)
-		{
-			columnName = [NSString stringWithUTF8String:(char *)sqlite3_column_name(stmt,i)];
-			//NSLog(columnName);
-			if([columnName isEqualToString:@"PLOTTYPE"])
-				_plotType = (int)sqlite3_column_int(stmt,i);
-			else if([columnName isEqualToString:@"TOTALCOUNT"])
-				_totalCount = (int)sqlite3_column_int(stmt,i);
-			else if([columnName isEqualToString:@"DOTRADIUS"])
-				_dotRadius = (float)sqlite3_column_double(stmt,i);
-			/* note: data set information not loaded here.  It is loaded by the tablecontroller when using dataset name method below*/
-			
-		}
-	}
-	sqlite3_finalize(stmt);
-	
-}
-
-
--(NSString *)getDatasetNameWithLayerID:(int)layerID fromDB:(sqlite3 *)db
-{
-	int columns;
-	
-	sqlite3_stmt *stmt;
-	NSString *columnName;
-	NSString *datasetName;
-	
-	const char *pzTail;
-	NSString *command = [NSString stringWithFormat:@"SELECT NAME FROM _datasets where _datasets._id = %i;",layerID];
-	//NSLog(@"Configuring with SQL");
-	sqlite3_prepare(db,[command UTF8String],-1,&stmt,&pzTail);
-	
-	while(sqlite3_step(stmt)==SQLITE_ROW)
-	{
-		columns = sqlite3_column_count(stmt);
-		for(int i=0;i<columns;i++)
-		{
-			columnName = [NSString stringWithUTF8String:(char *)sqlite3_column_name(stmt,i)];
-			//NSLog(columnName);
-			if([columnName isEqualToString:@"NAME"])
-				datasetName = [NSString stringWithUTF8String:(char *)sqlite3_column_text(stmt,i)];
-			
-			/* note: data set information not loaded here.  It is loaded by the tablecontroller when using dataset name method below*/
-			
-		}
-	}
-	sqlite3_finalize(stmt);
-	
-	return datasetName;
-}
-
 
 @end
