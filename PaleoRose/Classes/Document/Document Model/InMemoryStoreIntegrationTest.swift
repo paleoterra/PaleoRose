@@ -170,7 +170,7 @@ struct InMemoryStoreIntegrationTest {
         try backupFromSampleFileToInMemoryStore(store)
 
         let tables = try store.tableNames(sqliteStore: store.sqlitePointer())
-        print(tables)
+
         #expect(tables.count == 1, "Expected 1 table, got \(tables.count)")
         #expect(tables.first == "rtest")
     }
@@ -273,7 +273,7 @@ struct InMemoryStoreIntegrationTest {
             query: TableSchema.storedValues()
         )
         let schema = try #require(schemas.first { $0.name == "rtest" })
-        print(schema.sql)
+
         #expect(schema.sql.contains("newColumn"))
     }
 
