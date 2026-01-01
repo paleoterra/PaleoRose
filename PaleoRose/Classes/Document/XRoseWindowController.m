@@ -390,10 +390,10 @@ NSRect initialRect;
 }
 
 
-- (IBAction)addLayerAction:(id)sender
-{
+- (IBAction)addLayerAction:(id)sender {
 	[[self document] addDataLayer:sender];
 }
+
 - (IBAction)deleteLayerAction:(id)sender
 {
 	[self deleteLayers:sender];

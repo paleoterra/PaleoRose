@@ -282,11 +282,6 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:XRLayerInspectorRequiresReload object:self];
 }
 
-+(NSString *)classTag
-{
-    return @"VECTOR";
-}
-
 -(void)setDataSet:(XRDataSet *)aSet
 {
     _theSet = aSet;

@@ -345,11 +345,6 @@ static NSLayoutManager *sharedDrawingLayoutManager(void) {
     [[NSNotificationCenter defaultCenter] postNotificationName:XRLayerRequiresRedraw object:self];
 }
 
-+(NSString *)classTag
-{
-    return @"TEXT";
-}
-
 -(NSString *)type
 {
     return @"XRLayerText";

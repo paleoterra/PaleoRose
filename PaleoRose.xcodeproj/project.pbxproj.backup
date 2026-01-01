@@ -125,6 +125,7 @@
 		B486E2981E7B774E00F1ADAA /* XRPropertyInspector.xib in Resources */ = {isa = PBXBuildFile; fileRef = B486E2961E7B774E00F1ADAA /* XRPropertyInspector.xib */; };
 		B486E29B1E7B775600F1ADAA /* XRVectorInspector.xib in Resources */ = {isa = PBXBuildFile; fileRef = B486E2991E7B775600F1ADAA /* XRVectorInspector.xib */; };
 		B486E29D1E7B850300F1ADAA /* AppendDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = B486E29C1E7B850300F1ADAA /* AppendDialog.xib */; };
+		B486E29F1E7B9C2300F1ADAA /* XRCreateDatasetSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = B486E29E1E7B9C2300F1ADAA /* XRCreateDatasetSheet.xib */; };
 		B48871EB2D8783360065AEFE /* LayerIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48871EA2D8783360065AEFE /* LayerIdentifiable.swift */; };
 		B48B89FB05C794C500248F96 /* XRDataInspector.h in Headers */ = {isa = PBXBuildFile; fileRef = B48B89F905C794C500248F96 /* XRDataInspector.h */; };
 		B48B89FC05C794C500248F96 /* XRDataInspector.m in Sources */ = {isa = PBXBuildFile; fileRef = B48B89FA05C794C500248F96 /* XRDataInspector.m */; };
@@ -157,8 +158,8 @@
 		B4AF8C752C9CEECA0044A63D /* CodableSQLiteNonThread.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4AF8C602C9CEECA0044A63D /* CodableSQLiteNonThread.framework */; };
 		B4AF8C762C9CEECA0044A63D /* CodableSQLiteNonThread.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B4AF8C602C9CEECA0044A63D /* CodableSQLiteNonThread.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B4B0BB881E7E45CB00F392DA /* XRLayerDataTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B0BB731E7E42B000F392DA /* XRLayerDataTests.m */; };
-		B4B984182F05C18F00A31FD9 /* DatasetCreationSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B984172F05C18F00A31FD9 /* DatasetCreationSheet.swift */; };
-		B4B9841A2F05C27800A31FD9 /* DatasetCreationSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B984192F05C27800A31FD9 /* DatasetCreationSheetView.swift */; };
+		B4B10C3809529F7F00E6A350 /* XRMakeDatasetController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B10C3609529F7F00E6A350 /* XRMakeDatasetController.m */; };
+		B4B10C3909529F7F00E6A350 /* XRMakeDatasetController.h in Headers */ = {isa = PBXBuildFile; fileRef = B4B10C3709529F7F00E6A350 /* XRMakeDatasetController.h */; };
 		B4BDF3172A259164002A84B0 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B4BDF3162A259164002A84B0 /* libsqlite3.tbd */; };
 		B4BF9C1505CD6B110047E8CF /* XRGridInspector.h in Headers */ = {isa = PBXBuildFile; fileRef = B4BF9C1305CD6B110047E8CF /* XRGridInspector.h */; };
 		B4BF9C1605CD6B110047E8CF /* XRGridInspector.m in Sources */ = {isa = PBXBuildFile; fileRef = B4BF9C1405CD6B110047E8CF /* XRGridInspector.m */; };
@@ -389,6 +390,7 @@
 		B486E2771E7B769300F1ADAA /* XRCalculateAzimuthSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XRCalculateAzimuthSheet.xib; sourceTree = "<group>"; };
 		B486E2791E7B76A500F1ADAA /* XRTableAddColumnSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XRTableAddColumnSheet.xib; sourceTree = "<group>"; };
 		B486E29C1E7B850300F1ADAA /* AppendDialog.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppendDialog.xib; sourceTree = "<group>"; };
+		B486E29E1E7B9C2300F1ADAA /* XRCreateDatasetSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XRCreateDatasetSheet.xib; sourceTree = "<group>"; };
 		B48871EA2D8783360065AEFE /* LayerIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerIdentifiable.swift; sourceTree = "<group>"; };
 		B48B89F905C794C500248F96 /* XRDataInspector.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRDataInspector.h; sourceTree = "<group>"; };
 		B48B89FA05C794C500248F96 /* XRDataInspector.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRDataInspector.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -424,8 +426,8 @@
 		B4B0BB691E7E41C900F392DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B4B0BB731E7E42B000F392DA /* XRLayerDataTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRLayerDataTests.m; sourceTree = "<group>"; };
 		B4B0BB7B1E7E459B00F392DA /* Unit Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Unit Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B4B984172F05C18F00A31FD9 /* DatasetCreationSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatasetCreationSheet.swift; sourceTree = "<group>"; };
-		B4B984192F05C27800A31FD9 /* DatasetCreationSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatasetCreationSheetView.swift; sourceTree = "<group>"; };
+		B4B10C3609529F7F00E6A350 /* XRMakeDatasetController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XRMakeDatasetController.m; sourceTree = "<group>"; };
+		B4B10C3709529F7F00E6A350 /* XRMakeDatasetController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRMakeDatasetController.h; sourceTree = "<group>"; };
 		B4BDF3162A259164002A84B0 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		B4BF9C1305CD6B110047E8CF /* XRGridInspector.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRGridInspector.h; sourceTree = "<group>"; };
 		B4BF9C1405CD6B110047E8CF /* XRGridInspector.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRGridInspector.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -881,8 +883,9 @@
 		B414A0012B24CA8E008AE5F4 /* Make Dataset Sheet */ = {
 			isa = PBXGroup;
 			children = (
-				B4B984172F05C18F00A31FD9 /* DatasetCreationSheet.swift */,
-				B4B984192F05C27800A31FD9 /* DatasetCreationSheetView.swift */,
+				B4B10C3709529F7F00E6A350 /* XRMakeDatasetController.h */,
+				B4B10C3609529F7F00E6A350 /* XRMakeDatasetController.m */,
+				B486E29E1E7B9C2300F1ADAA /* XRCreateDatasetSheet.xib */,
 			);
 			path = "Make Dataset Sheet";
 			sourceTree = "<group>";
@@ -1123,6 +1126,7 @@
 				B43D613A06345207001B863E /* FStatisticController.h in Headers */,
 				B41D283C094FC7CA008DF384 /* XRTableImporter.h in Headers */,
 				B427BD070950B3050063849E /* XRTableImporterDelimiterController.h in Headers */,
+				B4B10C3909529F7F00E6A350 /* XRMakeDatasetController.h in Headers */,
 				B47DDF500964CDE700C7EF02 /* XRTableImporterXRose.h in Headers */,
 				B4564ABB096A04A1005E0015 /* XRTableAddColumnController.h in Headers */,
 				B42FE3AD096AEB99007E9DC5 /* XRCalculateAzimuthController.h in Headers */,
@@ -1303,6 +1307,7 @@
 				B4E0138D05EC4AC500C50D5D /* version.plist in Resources */,
 				B486E28F1E7B773900F1ADAA /* XRDataInspector.xib in Resources */,
 				B416A04805F2D77500821225 /* XRose Help in Resources */,
+				B486E29F1E7B9C2300F1ADAA /* XRCreateDatasetSheet.xib in Resources */,
 				B486E2861E7B770F00F1ADAA /* FStatisticSheet.xib in Resources */,
 				B486E27A1E7B76A500F1ADAA /* XRTableAddColumnSheet.xib in Resources */,
 				B486E2891E7B772E00F1ADAA /* XRLayerCore.xib in Resources */,
@@ -1390,7 +1395,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B48345CF05C238B500E3F6B7 /* XRoseDocument.m in Sources */,
-				B4B984182F05C18F00A31FD9 /* DatasetCreationSheet.swift in Sources */,
 				B48345D305C23B3000E3F6B7 /* XRoseWindowController.m in Sources */,
 				B439AB372C83CF7900252574 /* DocumentModel.swift in Sources */,
 				B41266732B6EE09300E1C385 /* ApplicationDefaults.swift in Sources */,
@@ -1421,7 +1425,6 @@
 				B440D55E2E59444C000D98A0 /* GraphicKite.swift in Sources */,
 				44379A9A8F5640DA8A491A38 /* GraphicHistogram.swift in Sources */,
 				B440D55A2E589B69000D98A0 /* GraphicDotDeviation.swift in Sources */,
-				B4B9841A2F05C27800A31FD9 /* DatasetCreationSheetView.swift in Sources */,
 				B439AB392C83D01700252574 /* InMemoryStore.swift in Sources */,
 				B4BF9C1605CD6B110047E8CF /* XRGridInspector.m in Sources */,
 				B4F929FE05D35D3A00EAAED0 /* XRLayerCore.m in Sources */,
@@ -1457,6 +1460,7 @@
 				B41D283D094FC7CA008DF384 /* XRTableImporter.m in Sources */,
 				B41C85B12DE4A24A0053C9C9 /* SettingsWindowController.swift in Sources */,
 				B427BD080950B3050063849E /* XRTableImporterDelimiterController.m in Sources */,
+				B4B10C3809529F7F00E6A350 /* XRMakeDatasetController.m in Sources */,
 				B4237C992CFE959700E2B510 /* StorageModelFactory.swift in Sources */,
 				B47DDF510964CDE700C7EF02 /* XRTableImporterXRose.m in Sources */,
 				B41C86B22DE4B9C20053C9C9 /* UserDefaults+Extensions.swift in Sources */,

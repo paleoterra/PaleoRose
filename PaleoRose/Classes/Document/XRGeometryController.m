@@ -206,7 +206,7 @@
 -(void)calculateGeometryMaxCount
 {
 	LayersTableController *controller = (LayersTableController *)self.layersTableController;
-	int result = [controller calculateGeometryMaxCount];
+	int result = (int)[controller calculateGeometryMaxCount];
 	if(result > 0)
 		[self setGeomentryMaxCount:result];
 }

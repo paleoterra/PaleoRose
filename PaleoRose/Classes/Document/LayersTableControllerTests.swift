@@ -46,8 +46,8 @@ final class MockLayerTableDataSource: LayerTableControllerDataSource {
     var lastDataSetName: String?
     var lastColor: NSColor?
     var lastLayerName: String?
-    var lastDeletedIndices: [Int]?
-    var lastMovedIndices: [Int]?
+    var lastDeletedIndices: [Int] = []
+    var lastMovedIndices: [Int] = []
     var lastMoveDestination: Int?
 
     var layersPublisher: AnyPublisher<[XRLayer], Never> {
@@ -266,7 +266,7 @@ struct LayersTableControllerTests {
         let column = NSTableColumn(identifier: NSUserInterfaceItemIdentifier("isVisible"))
         fixture.controller.tableView(
             fixture.mockTableView,
-            setObjectValue: NSNumber(value: NSControl.StateValue.on.rawValue),
+            setObjectValue: NSControl.StateValue.on,
             for: column,
             row: 0
         )
@@ -334,7 +334,7 @@ struct LayersTableControllerTests {
         fixture.controller.deleteLayers(nil as Any?)
 
         #expect(fixture.mockDataSource.deleteLayersCallCount == 1)
-        #expect(fixture.mockDataSource.lastDeletedIndices?.count == 2)
+        #expect(fixture.mockDataSource.lastDeletedIndices.count == 2)
     }
 
     @Test("deleteLayer calls dataSource")

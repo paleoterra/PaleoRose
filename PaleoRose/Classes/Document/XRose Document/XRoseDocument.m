@@ -35,14 +35,14 @@
 #import "XRoseView.h"
 
 #import "XRStatistic.h"
-#import "XRMakeDatasetController.h"
+#import "PaleoRose-Swift.h"
 #import <Security/Security.h>
 #import <Security/AuthSession.h>
 #import "XRTableImporter.h"
 #import <os/activity.h>
 
 
-@interface XRoseDocument()
+@interface XRoseDocument() <DatasetColumnProvider>
 
 @property (nonatomic) NSMutableArray *dataSets;
 
@@ -292,35 +292,28 @@
     os_activity_initiate("add data layer", OS_ACTIVITY_FLAG_DEFAULT, ^{
         [self loadDataSet];
     });
-	
 }
 
 // **** REFACTOR/MOVE
 -(void)loadDataSet
 {
-    XRMakeDatasetController *controller;
-    if([self fileURL])
-        controller = [[XRMakeDatasetController alloc] initWithTableArray:self.tables inMemoryDocument:[self.documentModel memoryStore]];
-    else
-        controller = [[XRMakeDatasetController alloc] initWithTableArray:self.tables inMemoryDocument:[self.documentModel memoryStore]];
+    DatasetCreationSheet *controller = [[DatasetCreationSheet alloc] initWithTableArray:self.tables
+                                                                          columnProvider:self];
     self.currentSheetController = controller;
     [[self.mainWindowController window]
      beginSheet:[controller window]
      completionHandler:^(NSModalResponse returnCode) {
         if(returnCode == NSModalResponseOK)
         {
-            XRDataSet *aSet;
-            if([controller predicate])
-                aSet = [[XRDataSet alloc] initWithTable:[controller selectedTable] column:[controller selectedColumn] db:[self.documentModel memoryStore]  predicate:[controller predicate]];
-            else
-                aSet = [[XRDataSet alloc] initWithTable:[controller selectedTable] column:[controller selectedColumn] db:[self.documentModel memoryStore]];
+            XRDataSet *aSet = [[XRDataSet alloc] initWithTable:[controller selectedTable]
+                                                         column:[controller selectedColumn]
+                                                             db:[self.documentModel memoryStore]];
             [aSet setName:[controller selectedName]];
             if(aSet)
             {
                 [self.dataSets addObject:aSet];
                 [self.mainWindowController.layersTableController addDataLayerFor:aSet];
-                //[[self undoManager] registerUndoWithTarget:[self.mainWindowController tableController] selector:@selector(deleteLayer:) object:[[self.mainWindowController tableController]lastLayer]];
-                //[[self undoManager] setActionName:@"Add Data Layer"];
+
                 [self updateChangeCount:NSChangeDone];
             }
 
@@ -453,6 +446,14 @@
          return nil;
     }
     return columns;
+}
+
+#pragma mark - DatasetColumnProvider
+
+- (NSArray<NSString *> *)numericColumnsForTable:(NSString *)tableName
+{
+    NSArray *columns = [self retrieveNonTextColumnNamesFromTable:tableName];
+    return columns ?: @[];
 }
 
 // **** REFACTOR/MOVE

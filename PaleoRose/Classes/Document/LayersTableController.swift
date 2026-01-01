@@ -29,6 +29,7 @@ import Combine
 
 // MARK: - Constants
 
+// swiftlint:disable file_length
 private let layerDragType = NSPasteboard.PasteboardType("LayerDragType")
 
 /// Controller for managing the layers table view
@@ -115,12 +116,12 @@ private let layerDragType = NSPasteboard.PasteboardType("LayerDragType")
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(layerRequiresRedraw(_:)),
-            name: NSNotification.Name(rawValue: "XRLayerRequiresRedraw"),
+            name: Notification.Name(rawValue: "XRLayerRequiresRedraw"),
             object: nil
         )
     }
 
-    @objc private func layerRequiresRedraw(_ notification: Notification) {
+    @objc private func layerRequiresRedraw(_: Notification) {
         // Ensure we're on the main thread for UI updates
         DispatchQueue.main.async { [weak self] in
             guard let self, let roseView else {
@@ -173,7 +174,9 @@ private let layerDragType = NSPasteboard.PasteboardType("LayerDragType")
     }
 
     @objc func displaySelectedLayerInInspector() {
-        guard let tableView else { return }
+        guard let tableView else {
+            return
+        }
         guard let inspector = XRPropertyInspector.defaultInspector() as? XRPropertyInspector else { return }
 
         let selectedRowCount = tableView.numberOfSelectedRows
@@ -198,12 +201,10 @@ private let layerDragType = NSPasteboard.PasteboardType("LayerDragType")
     @objc func calculateGeometryMaxCount() -> Int {
         var maxCount: Int32 = -1
 
-        for layer in layers {
-            if layer.isKind(of: XRLayerData.self) {
-                let count = layer.maxCount()
-                if count > maxCount {
-                    maxCount = count
-                }
+        for layer in layers where layer.isKind(of: XRLayerData.self) {
+            let count = layer.maxCount()
+            if count > maxCount {
+                maxCount = count
             }
         }
 
@@ -213,12 +214,10 @@ private let layerDragType = NSPasteboard.PasteboardType("LayerDragType")
     @objc func calculateGeometryMaxPercent() -> Float {
         var maxPercent: Float = -1.0
 
-        for layer in layers {
-            if layer.isKind(of: XRLayerData.self) {
-                let percent = layer.maxPercent()
-                if percent > maxPercent {
-                    maxPercent = percent
-                }
+        for layer in layers where layer.isKind(of: XRLayerData.self) {
+            let percent = layer.maxPercent()
+            if percent > maxPercent {
+                maxPercent = percent
             }
         }
 
@@ -228,7 +227,7 @@ private let layerDragType = NSPasteboard.PasteboardType("LayerDragType")
     // MARK: - Layer Creation (Pass-Through to DocumentModel)
 
     @objc func addDataLayer(for set: XRDataSet) {
-        guard let dataSource, let rosePlotController else { return }
+        guard let dataSource, rosePlotController != nil else { return }
 
         // Extract dataset name
         let dataSetName = set.tableName()
@@ -270,32 +269,32 @@ private let layerDragType = NSPasteboard.PasteboardType("LayerDragType")
     }
 
     @objc func displaySheetForVStatLayer(_: Any?) {
-        guard let dataSource, let rosePlotController, let windowController else { return }
+//        guard let dataSource, let rosePlotController, let windowController else { return }
+//
+//        let layerNames = dataLayerNames()
+//        guard !layerNames.isEmpty else { return }
 
-        let layerNames = dataLayerNames()
-        guard !layerNames.isEmpty else { return }
-
-        // Create the panel controller
-        // TODO: Re-enable when XRVStatCreatePanelController is accessible from Swift
-        // guard let panelController = XRVStatCreatePanelController(array: layerNames) else { return }
-        //
-        // // Show the sheet
-        // windowController.window?.beginSheet(panelController.window) { [weak self, weak dataSource, weak panelController] response in
-        //     guard let self, let dataSource, let panelController else { return }
-        //
-        //     if response == .OK {
-        //         let selectedName = panelController.selectedName()
-        //
-        //         // Find the dataset name from the selected layer
-        //         if let selectedLayer = dataLayer(withName: selectedName) as? XRLayerData {
-        //             let dataSetName = selectedLayer.dataSet().tableName()
-        //             dataSource.createLineArrowLayer(
-        //                 dataSetName: dataSetName ?? "Unknown",
-        //                 name: nil
-        //             )
-        //         }
-        //     }
-        // }
+//         Create the panel controller
+//         TODO: Re-enable when XRVStatCreatePanelController is accessible from Swift
+//         guard let panelController = XRVStatCreatePanelController(array: layerNames) else { return }
+//
+//         // Show the sheet
+//         windowController.window?.beginSheet(panelController.window) { [weak self, weak dataSource, weak panelController] response in
+//             guard let self, let dataSource, let panelController else { return }
+//
+//             if response == .OK {
+//                 let selectedName = panelController.selectedName()
+//
+//                 // Find the dataset name from the selected layer
+//                 if let selectedLayer = dataLayer(withName: selectedName) as? XRLayerData {
+//                     let dataSetName = selectedLayer.dataSet().tableName()
+//                     dataSource.createLineArrowLayer(
+//                         dataSetName: dataSetName ?? "Unknown",
+//                         name: nil
+//                     )
+//                 }
+//             }
+//         }
     }
 
     // MARK: - Layer Deletion (Pass-Through to DocumentModel)
@@ -397,7 +396,7 @@ private let layerDragType = NSPasteboard.PasteboardType("LayerDragType")
 
         for layer in layers {
             if let dataLayer = layer as? XRLayerData {
-                result += "\nData Set: \(layer.layerName())\n"
+                result += "\nData Set: \(String(describing: layer.layerName()))\n"
                 result += dataLayer.dataSet().statisticsDescription()
                 result += "\n\n"
             }
@@ -420,6 +419,29 @@ extension LayersTableController: NSTableViewDelegate {
 
 extension LayersTableController: NSTableViewDataSource {
 
+    // Helper to parse various representations into Bool
+    private func parseBool(_ value: Any?) -> Bool {
+        switch value {
+        case let bValue as Bool:
+            return bValue
+
+        case let sValue as String:
+            let lower = sValue.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+            if ["1", "true", "yes", "on"].contains(lower) { return true }
+            if ["0", "false", "no", "off"].contains(lower) { return false }
+            return false
+
+        case let iValue as Int:
+            return iValue != 0
+
+        case let dValue as Double:
+            return dValue != 0
+
+        default:
+            return false
+        }
+    }
+
     func numberOfRows(in tableView: NSTableView) -> Int {
         layers.count
     }
@@ -435,10 +457,13 @@ extension LayersTableController: NSTableViewDataSource {
         switch identifier {
         case "layerName":
             return layer.layerName()
+
         case "layerColors":
             return layer.colorImage()
+
         case "isVisible":
-            return layer.isVisible() ? NSNumber(value: NSControl.StateValue.on.rawValue) : NSNumber(value: NSControl.StateValue.off.rawValue)
+            return layer.isVisible()
+
         default:
             return nil
         }
@@ -464,11 +489,10 @@ extension LayersTableController: NSTableViewDataSource {
             if let newName = object as? String, !newName.isEmpty {
                 dataSource.updateLayerName(layer, newName: newName)
             }
+
         case "isVisible":
-            if let number = object as? NSNumber {
-                let isVisible = number.intValue == NSControl.StateValue.on.rawValue
-                dataSource.updateLayerVisibility(layer, isVisible: isVisible)
-            }
+            dataSource.updateLayerVisibility(layer, isVisible: parseBool(object))
+
         default:
             break
         }
@@ -537,3 +561,5 @@ extension LayersTableController: NSTableViewDataSource {
         return true
     }
 }
+
+// swiftlint:enable file_length

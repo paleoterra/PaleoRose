@@ -76,21 +76,10 @@ class ArrowHead: NSObject {
         // 2. Then apply scale (scale the arrow at that position)
         // This ensures changing size doesn't affect position
 
-        // Convert CGAffineTransform to NSAffineTransform and apply
-        let nsPositionTransform = NSAffineTransform()
-        nsPositionTransform.transformStruct = NSAffineTransformStruct(
-            m11: positionTransform.a,
-            m12: positionTransform.b,
-            m21: positionTransform.c,
-            m22: positionTransform.d,
-            tX: positionTransform.tx,
-            tY: positionTransform.ty
-        )
-        nsPositionTransform.concat()
-
-        let nsScaleTransform = NSAffineTransform()
-        nsScaleTransform.scaleX(by: scaleTransform.a, yBy: scaleTransform.d)
-        nsScaleTransform.concat()
+        if let ctx = NSGraphicsContext.current?.cgContext {
+            ctx.concatenate(positionTransform)
+            ctx.concatenate(scaleTransform)
+        }
 
         arrowColor.set()
 

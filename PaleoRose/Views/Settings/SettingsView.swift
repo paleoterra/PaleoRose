@@ -45,9 +45,11 @@ public struct SettingsView: View {
                     Button(action: { showingHelp = true }) {
                         Image(systemName: "questionmark.circle")
                             .foregroundColor(.accentColor)
+                            .accessibilityHidden(true)
                     }
                     .buttonStyle(PlainButtonStyle())
                     .help("Learn more about calculation methods")
+                    .accessibilityLabel("Help")
                 }
 
                 Picker("Vector Calculation Method", selection: $vectorCalcMethod) {
