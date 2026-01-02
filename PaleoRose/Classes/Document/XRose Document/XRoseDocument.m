@@ -297,7 +297,7 @@
 // **** REFACTOR/MOVE
 -(void)loadDataSet
 {
-    DatasetCreationSheet *controller = [[DatasetCreationSheet alloc] initWithTableArray:self.tables
+    DatasetCreationSheet *controller = [[DatasetCreationSheet alloc] initWithTableArray:[self.documentModel dataTableNames]
                                                                           columnProvider:self];
     self.currentSheetController = controller;
     [[self.mainWindowController window]
