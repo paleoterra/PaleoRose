@@ -28,6 +28,7 @@ import CodableSQLiteNonThread
 import Combine
 import Foundation
 
+// swiftlint:disable file_length
 class DocumentModel: NSObject {
 
     enum DocumentModelError: Error {
@@ -133,7 +134,7 @@ class DocumentModel: NSObject {
         try inMemoryStore.store(geometryController: geometryController)
     }
 
-    @available(*, deprecated, message: "Configuration happens automatically via InMemoryStoreDelegate.update(geometry:)")
+    @available(*, deprecated, message: "Configuration happens automatically via InMemoryStoreDelegate")
     @objc func configure(geometryController: XRGeometryController) throws {
         do {
             try inMemoryStore.configure(geometryController: geometryController)
@@ -457,7 +458,8 @@ extension DocumentModel: LayerTableControllerDataSource {
         let isUsed = layers.contains { layer in
             if let dataLayer = layer as? XRLayerData {
                 return dataLayer.dataSet() === dataSet
-            } else if let arrowLayer = layer as? XRLayerLineArrow {
+            }
+            if let arrowLayer = layer as? XRLayerLineArrow {
                 return arrowLayer.dataSet() === dataSet
             }
             return false
@@ -469,3 +471,5 @@ extension DocumentModel: LayerTableControllerDataSource {
         }
     }
 }
+
+// swiftlint:enable file_length

@@ -923,11 +923,6 @@
 	return [NSDictionary dictionaryWithDictionary:theDict];
 }
 
-+(NSString *)classTag
-{
-	return @"GRID";
-}
-
 -(NSString *)type
 {
 	return @"XRLayerGrid";

@@ -35,7 +35,8 @@
       "Bash(cat:*)",
       "Bash(1)",
       "Bash(sqlite3:*)",
-      "Bash(xcrun swift-api-digester:*)"
+      "Bash(xcrun swift-api-digester:*)",
+      "Bash(git checkout -- PaleoRose.xcodeproj/project.pbxproj)"
     ],
     "deny": [],
     "ask": []

@@ -53,8 +53,6 @@
 	//loose connection to the dataset
 }
 
-+(NSString *)classTag;
-
 -(id)initWithGeometryController:(XRGeometryController *)aController;
 -(id)initWithGeometryController:(XRGeometryController *)aController dictionary:(NSDictionary *)configure;
 -(void)dealloc;
@@ -91,9 +89,5 @@
 -(NSString *)type;
 -(void)setGeometryController:(XRGeometryController *)controller;
 -(XRGeometryController *)geometryController;
--(long long int)findColorIDForColor:(NSColor *)aColor inDB:(sqlite3 *)db DEPRECATED_ATTRIBUTE;
--(long long int)findDatasetIDByName:(NSString *)aName inSQLDB:(sqlite3 *)db DEPRECATED_ATTRIBUTE;
-+(id)layerWithGeometryController:(XRGeometryController *)aController sqlDB:(sqlite3 *)db layerID:(int)layerid withParentView:(NSView *)parentView DEPRECATED_ATTRIBUTE;
--(NSString *)getDatasetNameWithLayerID:(int)layerID fromDB:(sqlite3 *)db DEPRECATED_ATTRIBUTE;
--(void)configureWithSQL:(sqlite3 *)db forLayerID:(int)layerid DEPRECATED_ATTRIBUTE;//
+
 @end

@@ -225,11 +225,6 @@
 	return [NSDictionary dictionaryWithDictionary:theDict];
 }
 
-+(NSString *)classTag
-{
-	return @"CORE";
-}
-
 -(NSString *)type
 {
 	return @"XRLayerCore";

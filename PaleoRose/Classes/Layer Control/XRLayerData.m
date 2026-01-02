@@ -550,11 +550,6 @@
 	return _theSet;
 }
 
-+(NSString *)classTag
-{
-	return @"DATA";
-}
-
 -(void)setDataSet:(XRDataSet *)aSet
 {
 	_theSet = aSet;

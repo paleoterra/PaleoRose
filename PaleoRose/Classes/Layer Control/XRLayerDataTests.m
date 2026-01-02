@@ -64,17 +64,5 @@
 //    XRLayerData *testObject = [[XRLayerData alloc] initWithGeometryController:self.mockController withSet:_mockDataSet];
 //    XCTAssertNotNil(testObject);
 //}
-//
-//
-//-(void)testXRLayerDataGetsNonNilResult {
-//    XRLayerData *layer = [[XRLayerData alloc] init];
-//    NSString *result = [layer getDatasetNameWithLayerID:1 fromDB:self.file];
-//    XCTAssertNotNil(result);
-//}
-//
-//-(void)testXRLayerDataGetsCorrectName {
-//    XRLayerData *layer = [[XRLayerData alloc] init];
-//    NSString *result = [layer getDatasetNameWithLayerID:1 fromDB:self.file];
-//    XCTAssertTrue([result isEqualToString: @"dfgdf"]);
-//}
+
 @end

@@ -28,7 +28,7 @@ import CodableSQLiteNonThread
 @testable import PaleoRose
 import Testing
 
-// swiftlint:disable indentation_width file_length type_body_length type_contents_order
+// swiftlint:disable file_length type_body_length type_contents_order
 @Suite(
     "InMemory Store Integration Test",
     .tags(.integration)
@@ -649,3 +649,5 @@ struct InMemoryStoreIntegrationTest {
         #expect(grid.radianLabels())
     }
 }
+
+// swiftlint:enable file_length type_body_length type_contents_order

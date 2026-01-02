@@ -426,4 +426,9 @@
 	return geometryController;
 }
 
+-(NSString *)type
+{
+    return @"XRLayer";
+}
+
 @end
