@@ -62,6 +62,8 @@ private let layerDragType = NSPasteboard.PasteboardType("LayerDragType")
     @objc weak var rosePlotController: XRGeometryController?
     @objc weak var windowController: NSWindowController?
 
+    private var sheetController: NSWindowController?
+
     // MARK: - Initialization
 
     @objc init(dataSource: DocumentModel?, geometryController: XRGeometryController?) {
@@ -269,32 +271,41 @@ private let layerDragType = NSPasteboard.PasteboardType("LayerDragType")
     }
 
     @objc func displaySheetForVStatLayer(_: Any?) {
-//        guard let dataSource, let rosePlotController, let windowController else { return }
-//
-//        let layerNames = dataLayerNames()
-//        guard !layerNames.isEmpty else { return }
+        sheetController = nil
+        guard let dataSource, let windowController else { return }
 
-//         Create the panel controller
-//         TODO: Re-enable when XRVStatCreatePanelController is accessible from Swift
-//         guard let panelController = XRVStatCreatePanelController(array: layerNames) else { return }
-//
-//         // Show the sheet
-//         windowController.window?.beginSheet(panelController.window) { [weak self, weak dataSource, weak panelController] response in
-//             guard let self, let dataSource, let panelController else { return }
-//
-//             if response == .OK {
-//                 let selectedName = panelController.selectedName()
-//
-//                 // Find the dataset name from the selected layer
-//                 if let selectedLayer = dataLayer(withName: selectedName) as? XRLayerData {
-//                     let dataSetName = selectedLayer.dataSet().tableName()
-//                     dataSource.createLineArrowLayer(
-//                         dataSetName: dataSetName ?? "Unknown",
-//                         name: nil
-//                     )
-//                 }
-//             }
-//         }
+        let layerNames = dataLayerNames()
+        guard !layerNames.isEmpty else { return }
+
+        guard let panelController = XRVStatCreatePanelController(array: layerNames),
+        let panelWindow = panelController.window else {
+            return
+        }
+
+        sheetController = panelController
+
+        // Show the sheet
+        windowController.window?.beginSheet(panelWindow) { [weak self, weak dataSource, weak panelController] response in
+            guard let self else { return }
+            defer {
+                sheetController = nil
+            }
+
+            guard let dataSource, let panelController else { return }
+
+            if response == .OK {
+                guard let selectedName = panelController.selectedName() else { return }
+
+                // Find the dataset name from the selected layer
+                if let selectedLayer = dataLayer(withName: selectedName) as? XRLayerData {
+                    let dataSetName = selectedLayer.dataSet().tableName()
+                    dataSource.createLineArrowLayer(
+                        dataSetName: dataSetName ?? "Unknown",
+                        name: nil
+                    )
+                }
+            }
+        }
     }
 
     // MARK: - Layer Deletion (Pass-Through to DocumentModel)
