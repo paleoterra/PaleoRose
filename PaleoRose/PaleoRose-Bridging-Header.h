@@ -12,3 +12,4 @@
 #import "XRLayerGrid.h"
 #import "GraphicGeometrySource.h"
 #import "XRPropertyInspector.h"
+#import "XRVStatCreatePanelController.h"

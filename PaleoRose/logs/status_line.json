@@ -1,0 +1,3907 @@
+[
+  {
+    "timestamp": "2026-02-14T21:59:33.610449",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.24810625,
+        "total_duration_ms": 200674,
+        "total_api_duration_ms": 39656,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 2281,
+        "total_output_tokens": 1761,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 1,
+          "cache_creation_input_tokens": 878,
+          "cache_read_input_tokens": 23843
+        },
+        "used_percentage": 12,
+        "remaining_percentage": 88
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T21:59:33.611133",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.24810625,
+        "total_duration_ms": 200674,
+        "total_api_duration_ms": 39656,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 2281,
+        "total_output_tokens": 1761,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 1,
+          "cache_creation_input_tokens": 878,
+          "cache_read_input_tokens": 23843
+        },
+        "used_percentage": 12,
+        "remaining_percentage": 88
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T21:59:34.401609",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.24810625,
+        "total_duration_ms": 201470,
+        "total_api_duration_ms": 39656,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 2281,
+        "total_output_tokens": 1761,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 1,
+          "cache_creation_input_tokens": 878,
+          "cache_read_input_tokens": 23843
+        },
+        "used_percentage": 12,
+        "remaining_percentage": 88
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T21:59:34.402329",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.24810625,
+        "total_duration_ms": 201470,
+        "total_api_duration_ms": 39656,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 2281,
+        "total_output_tokens": 1761,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 1,
+          "cache_creation_input_tokens": 878,
+          "cache_read_input_tokens": 23843
+        },
+        "used_percentage": 12,
+        "remaining_percentage": 88
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T21:59:35.181418",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.24860025,
+        "total_duration_ms": 202246,
+        "total_api_duration_ms": 40758,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 2615,
+        "total_output_tokens": 1793,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 1,
+          "cache_creation_input_tokens": 878,
+          "cache_read_input_tokens": 23843
+        },
+        "used_percentage": 12,
+        "remaining_percentage": 88
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T21:59:35.182223",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.24860025,
+        "total_duration_ms": 202246,
+        "total_api_duration_ms": 40758,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 2615,
+        "total_output_tokens": 1793,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 1,
+          "cache_creation_input_tokens": 878,
+          "cache_read_input_tokens": 23843
+        },
+        "used_percentage": 12,
+        "remaining_percentage": 88
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T21:59:35.742707",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.27679925,
+        "total_duration_ms": 202801,
+        "total_api_duration_ms": 46438,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 2623,
+        "total_output_tokens": 2223,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 430,
+          "cache_creation_input_tokens": 878,
+          "cache_read_input_tokens": 23843
+        },
+        "used_percentage": 12,
+        "remaining_percentage": 88
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T21:59:35.743634",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.27679925,
+        "total_duration_ms": 202801,
+        "total_api_duration_ms": 46438,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 2623,
+        "total_output_tokens": 2223,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 430,
+          "cache_creation_input_tokens": 878,
+          "cache_read_input_tokens": 23843
+        },
+        "used_percentage": 12,
+        "remaining_percentage": 88
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T21:59:38.231302",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.27679925,
+        "total_duration_ms": 205297,
+        "total_api_duration_ms": 46438,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 2623,
+        "total_output_tokens": 2223,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 2,
+          "cache_creation_input_tokens": 613,
+          "cache_read_input_tokens": 24721
+        },
+        "used_percentage": 13,
+        "remaining_percentage": 87
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T21:59:38.232325",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.27679925,
+        "total_duration_ms": 205297,
+        "total_api_duration_ms": 46438,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 2623,
+        "total_output_tokens": 2223,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 2,
+          "cache_creation_input_tokens": 613,
+          "cache_read_input_tokens": 24721
+        },
+        "used_percentage": 13,
+        "remaining_percentage": 87
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T21:59:38.717358",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.295906,
+        "total_duration_ms": 205770,
+        "total_api_duration_ms": 49408,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 2631,
+        "total_output_tokens": 2338,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 115,
+          "cache_creation_input_tokens": 613,
+          "cache_read_input_tokens": 24721
+        },
+        "used_percentage": 13,
+        "remaining_percentage": 87
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T21:59:38.718267",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.295906,
+        "total_duration_ms": 205770,
+        "total_api_duration_ms": 49408,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 2631,
+        "total_output_tokens": 2338,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 115,
+          "cache_creation_input_tokens": 613,
+          "cache_read_input_tokens": 24721
+        },
+        "used_percentage": 13,
+        "remaining_percentage": 87
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T21:59:41.622067",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.296402,
+        "total_duration_ms": 208694,
+        "total_api_duration_ms": 49964,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 2967,
+        "total_output_tokens": 2370,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 6,
+          "cache_creation_input_tokens": 163,
+          "cache_read_input_tokens": 25334
+        },
+        "used_percentage": 13,
+        "remaining_percentage": 87
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T21:59:41.623034",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.296402,
+        "total_duration_ms": 208694,
+        "total_api_duration_ms": 49964,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 2967,
+        "total_output_tokens": 2370,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 6,
+          "cache_creation_input_tokens": 163,
+          "cache_read_input_tokens": 25334
+        },
+        "used_percentage": 13,
+        "remaining_percentage": 87
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T21:59:42.052069",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.31352775,
+        "total_duration_ms": 209117,
+        "total_api_duration_ms": 53266,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 2975,
+        "total_output_tokens": 2506,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 136,
+          "cache_creation_input_tokens": 163,
+          "cache_read_input_tokens": 25334
+        },
+        "used_percentage": 13,
+        "remaining_percentage": 87
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T21:59:42.053201",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.31352775,
+        "total_duration_ms": 209117,
+        "total_api_duration_ms": 53266,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 2975,
+        "total_output_tokens": 2506,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 136,
+          "cache_creation_input_tokens": 163,
+          "cache_read_input_tokens": 25334
+        },
+        "used_percentage": 13,
+        "remaining_percentage": 87
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T21:59:44.125081",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.31352775,
+        "total_duration_ms": 211192,
+        "total_api_duration_ms": 53266,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 2975,
+        "total_output_tokens": 2506,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 1,
+          "cache_creation_input_tokens": 860,
+          "cache_read_input_tokens": 25497
+        },
+        "used_percentage": 13,
+        "remaining_percentage": 87
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T21:59:44.126258",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.31352775,
+        "total_duration_ms": 211192,
+        "total_api_duration_ms": 53266,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 2975,
+        "total_output_tokens": 2506,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 1,
+          "cache_creation_input_tokens": 860,
+          "cache_read_input_tokens": 25497
+        },
+        "used_percentage": 13,
+        "remaining_percentage": 87
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T21:59:45.140214",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.33601625,
+        "total_duration_ms": 212207,
+        "total_api_duration_ms": 56294,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 2983,
+        "total_output_tokens": 2679,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 173,
+          "cache_creation_input_tokens": 860,
+          "cache_read_input_tokens": 25497
+        },
+        "used_percentage": 13,
+        "remaining_percentage": 87
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T21:59:45.141564",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.33601625,
+        "total_duration_ms": 212207,
+        "total_api_duration_ms": 56294,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 2983,
+        "total_output_tokens": 2679,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 173,
+          "cache_creation_input_tokens": 860,
+          "cache_read_input_tokens": 25497
+        },
+        "used_percentage": 13,
+        "remaining_percentage": 87
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T21:59:47.760428",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.4983845,
+        "total_duration_ms": 214824,
+        "total_api_duration_ms": 60371,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 2985,
+        "total_output_tokens": 2817,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 8,
+          "cache_creation_input_tokens": 255,
+          "cache_read_input_tokens": 26357
+        },
+        "used_percentage": 13,
+        "remaining_percentage": 87
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T21:59:47.761812",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.4983845,
+        "total_duration_ms": 214824,
+        "total_api_duration_ms": 60371,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 2985,
+        "total_output_tokens": 2817,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 8,
+          "cache_creation_input_tokens": 255,
+          "cache_read_input_tokens": 26357
+        },
+        "used_percentage": 13,
+        "remaining_percentage": 87
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T21:59:49.094827",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.51642175,
+        "total_duration_ms": 216161,
+        "total_api_duration_ms": 64302,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 2993,
+        "total_output_tokens": 2946,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 129,
+          "cache_creation_input_tokens": 255,
+          "cache_read_input_tokens": 26357
+        },
+        "used_percentage": 13,
+        "remaining_percentage": 87
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T21:59:49.096309",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.51642175,
+        "total_duration_ms": 216161,
+        "total_api_duration_ms": 64302,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 2993,
+        "total_output_tokens": 2946,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 129,
+          "cache_creation_input_tokens": 255,
+          "cache_read_input_tokens": 26357
+        },
+        "used_percentage": 13,
+        "remaining_percentage": 87
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T21:59:52.777581",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.51699775,
+        "total_duration_ms": 219838,
+        "total_api_duration_ms": 65788,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 3324,
+        "total_output_tokens": 2995,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 1,
+          "cache_creation_input_tokens": 3066,
+          "cache_read_input_tokens": 26612
+        },
+        "used_percentage": 15,
+        "remaining_percentage": 85
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T21:59:52.779134",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.51699775,
+        "total_duration_ms": 219838,
+        "total_api_duration_ms": 65788,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 3324,
+        "total_output_tokens": 2995,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 1,
+          "cache_creation_input_tokens": 3066,
+          "cache_read_input_tokens": 26612
+        },
+        "used_percentage": 15,
+        "remaining_percentage": 85
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T21:59:53.993339",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.5527562500000001,
+        "total_duration_ms": 221061,
+        "total_api_duration_ms": 70648,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 3332,
+        "total_output_tokens": 3125,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 130,
+          "cache_creation_input_tokens": 3066,
+          "cache_read_input_tokens": 26612
+        },
+        "used_percentage": 15,
+        "remaining_percentage": 85
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T21:59:53.994885",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.5527562500000001,
+        "total_duration_ms": 221061,
+        "total_api_duration_ms": 70648,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 3332,
+        "total_output_tokens": 3125,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 130,
+          "cache_creation_input_tokens": 3066,
+          "cache_read_input_tokens": 26612
+        },
+        "used_percentage": 15,
+        "remaining_percentage": 85
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T21:59:56.422644",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.5533282500000001,
+        "total_duration_ms": 223484,
+        "total_api_duration_ms": 71334,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 3659,
+        "total_output_tokens": 3174,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 1,
+          "cache_creation_input_tokens": 163,
+          "cache_read_input_tokens": 29678
+        },
+        "used_percentage": 15,
+        "remaining_percentage": 85
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T21:59:56.424698",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.5533282500000001,
+        "total_duration_ms": 223484,
+        "total_api_duration_ms": 71334,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 3659,
+        "total_output_tokens": 3174,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 1,
+          "cache_creation_input_tokens": 163,
+          "cache_read_input_tokens": 29678
+        },
+        "used_percentage": 15,
+        "remaining_percentage": 85
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T21:59:56.988728",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.5718260000000001,
+        "total_duration_ms": 224056,
+        "total_api_duration_ms": 74266,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 3667,
+        "total_output_tokens": 3278,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 104,
+          "cache_creation_input_tokens": 163,
+          "cache_read_input_tokens": 29678
+        },
+        "used_percentage": 15,
+        "remaining_percentage": 85
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T21:59:56.990540",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.5718260000000001,
+        "total_duration_ms": 224056,
+        "total_api_duration_ms": 74266,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 3667,
+        "total_output_tokens": 3278,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 104,
+          "cache_creation_input_tokens": 163,
+          "cache_read_input_tokens": 29678
+        },
+        "used_percentage": 15,
+        "remaining_percentage": 85
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T22:00:00.638562",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.5724170000000001,
+        "total_duration_ms": 227701,
+        "total_api_duration_ms": 74923,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 4098,
+        "total_output_tokens": 3310,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 5,
+          "cache_creation_input_tokens": 354,
+          "cache_read_input_tokens": 29841
+        },
+        "used_percentage": 15,
+        "remaining_percentage": 85
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T22:00:00.640577",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.5724170000000001,
+        "total_duration_ms": 227701,
+        "total_api_duration_ms": 74923,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 4098,
+        "total_output_tokens": 3310,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 5,
+          "cache_creation_input_tokens": 354,
+          "cache_read_input_tokens": 29841
+        },
+        "used_percentage": 15,
+        "remaining_percentage": 85
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T22:00:01.410388",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.5724170000000001,
+        "total_duration_ms": 228476,
+        "total_api_duration_ms": 74923,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 4098,
+        "total_output_tokens": 3310,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 5,
+          "cache_creation_input_tokens": 354,
+          "cache_read_input_tokens": 29841
+        },
+        "used_percentage": 15,
+        "remaining_percentage": 85
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T22:00:01.412353",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.5724170000000001,
+        "total_duration_ms": 228476,
+        "total_api_duration_ms": 74923,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 4098,
+        "total_output_tokens": 3310,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 5,
+          "cache_creation_input_tokens": 354,
+          "cache_read_input_tokens": 29841
+        },
+        "used_percentage": 15,
+        "remaining_percentage": 85
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T22:00:02.192270",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.574045,
+        "total_duration_ms": 229262,
+        "total_api_duration_ms": 75915,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 5511,
+        "total_output_tokens": 3353,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 5,
+          "cache_creation_input_tokens": 354,
+          "cache_read_input_tokens": 29841
+        },
+        "used_percentage": 15,
+        "remaining_percentage": 85
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T22:00:02.193964",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.574045,
+        "total_duration_ms": 229262,
+        "total_api_duration_ms": 75915,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 5511,
+        "total_output_tokens": 3353,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 5,
+          "cache_creation_input_tokens": 354,
+          "cache_read_input_tokens": 29841
+        },
+        "used_percentage": 15,
+        "remaining_percentage": 85
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T22:00:02.715624",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.599749,
+        "total_duration_ms": 229781,
+        "total_api_duration_ms": 82203,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 6325,
+        "total_output_tokens": 3706,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 298,
+          "cache_creation_input_tokens": 354,
+          "cache_read_input_tokens": 29841
+        },
+        "used_percentage": 15,
+        "remaining_percentage": 85
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T22:00:02.717671",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.599749,
+        "total_duration_ms": 229781,
+        "total_api_duration_ms": 82203,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 6325,
+        "total_output_tokens": 3706,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 298,
+          "cache_creation_input_tokens": 354,
+          "cache_read_input_tokens": 29841
+        },
+        "used_percentage": 15,
+        "remaining_percentage": 85
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T22:00:05.371689",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.6005119999999999,
+        "total_duration_ms": 232435,
+        "total_api_duration_ms": 82884,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 6828,
+        "total_output_tokens": 3758,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 1,
+          "cache_creation_input_tokens": 2140,
+          "cache_read_input_tokens": 30195
+        },
+        "used_percentage": 16,
+        "remaining_percentage": 84
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T22:00:05.373848",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.6005119999999999,
+        "total_duration_ms": 232435,
+        "total_api_duration_ms": 82884,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 6828,
+        "total_output_tokens": 3758,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 1,
+          "cache_creation_input_tokens": 2140,
+          "cache_read_input_tokens": 30195
+        },
+        "used_percentage": 16,
+        "remaining_percentage": 84
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T22:00:06.601018",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.6328744999999999,
+        "total_duration_ms": 233664,
+        "total_api_duration_ms": 86705,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 6836,
+        "total_output_tokens": 3912,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 154,
+          "cache_creation_input_tokens": 2140,
+          "cache_read_input_tokens": 30195
+        },
+        "used_percentage": 16,
+        "remaining_percentage": 84
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T22:00:06.602905",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.6328744999999999,
+        "total_duration_ms": 233664,
+        "total_api_duration_ms": 86705,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 6836,
+        "total_output_tokens": 3912,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 154,
+          "cache_creation_input_tokens": 2140,
+          "cache_read_input_tokens": 30195
+        },
+        "used_percentage": 16,
+        "remaining_percentage": 84
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T22:00:16.501575",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.6355934999999999,
+        "total_duration_ms": 243560,
+        "total_api_duration_ms": 88010,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 9265,
+        "total_output_tokens": 3970,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 2,
+          "cache_creation_input_tokens": 2264,
+          "cache_read_input_tokens": 32335
+        },
+        "used_percentage": 17,
+        "remaining_percentage": 83
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T22:00:16.503571",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.6355934999999999,
+        "total_duration_ms": 243560,
+        "total_api_duration_ms": 88010,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 9265,
+        "total_output_tokens": 3970,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 2,
+          "cache_creation_input_tokens": 2264,
+          "cache_read_input_tokens": 32335
+        },
+        "used_percentage": 17,
+        "remaining_percentage": 83
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T22:00:17.261537",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.6355934999999999,
+        "total_duration_ms": 244329,
+        "total_api_duration_ms": 88010,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 9265,
+        "total_output_tokens": 3970,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 2,
+          "cache_creation_input_tokens": 2264,
+          "cache_read_input_tokens": 32335
+        },
+        "used_percentage": 17,
+        "remaining_percentage": 83
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T22:00:17.263908",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.6355934999999999,
+        "total_duration_ms": 244329,
+        "total_api_duration_ms": 88010,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 9265,
+        "total_output_tokens": 3970,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 2,
+          "cache_creation_input_tokens": 2264,
+          "cache_read_input_tokens": 32335
+        },
+        "used_percentage": 17,
+        "remaining_percentage": 83
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T22:00:55.441410",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.7287759999999999,
+        "total_duration_ms": 282504,
+        "total_api_duration_ms": 136765,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 9273,
+        "total_output_tokens": 6483,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 2513,
+          "cache_creation_input_tokens": 2264,
+          "cache_read_input_tokens": 32335
+        },
+        "used_percentage": 17,
+        "remaining_percentage": 83
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T22:00:55.443413",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.7287759999999999,
+        "total_duration_ms": 282504,
+        "total_api_duration_ms": 136765,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 9273,
+        "total_output_tokens": 6483,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 2513,
+          "cache_creation_input_tokens": 2264,
+          "cache_read_input_tokens": 32335
+        },
+        "used_percentage": 17,
+        "remaining_percentage": 83
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T22:01:00.272432",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.7287759999999999,
+        "total_duration_ms": 287339,
+        "total_api_duration_ms": 136765,
+        "total_lines_added": 224,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 9273,
+        "total_output_tokens": 6483,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 1,
+          "cache_creation_input_tokens": 2557,
+          "cache_read_input_tokens": 34599
+        },
+        "used_percentage": 19,
+        "remaining_percentage": 81
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T22:01:00.274959",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.7287759999999999,
+        "total_duration_ms": 287339,
+        "total_api_duration_ms": 136765,
+        "total_lines_added": 224,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 9273,
+        "total_output_tokens": 6483,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 1,
+          "cache_creation_input_tokens": 2557,
+          "cache_read_input_tokens": 34599
+        },
+        "used_percentage": 19,
+        "remaining_percentage": 81
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T22:01:05.830153",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.7725467499999998,
+        "total_duration_ms": 292892,
+        "total_api_duration_ms": 146655,
+        "total_lines_added": 224,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 9281,
+        "total_output_tokens": 6901,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 418,
+          "cache_creation_input_tokens": 2557,
+          "cache_read_input_tokens": 34599
+        },
+        "used_percentage": 19,
+        "remaining_percentage": 81
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T22:01:05.832900",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.7725467499999998,
+        "total_duration_ms": 292892,
+        "total_api_duration_ms": 146655,
+        "total_lines_added": 224,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 9281,
+        "total_output_tokens": 6901,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 418,
+          "cache_creation_input_tokens": 2557,
+          "cache_read_input_tokens": 34599
+        },
+        "used_percentage": 19,
+        "remaining_percentage": 81
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T22:08:20.778684",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.8148247499999999,
+        "total_duration_ms": 727845,
+        "total_api_duration_ms": 167424,
+        "total_lines_added": 224,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 9611,
+        "total_output_tokens": 7673,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 10,
+          "output_tokens": 8,
+          "cache_creation_input_tokens": 34,
+          "cache_read_input_tokens": 37576
+        },
+        "used_percentage": 19,
+        "remaining_percentage": 81
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T22:08:20.781318",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.8148247499999999,
+        "total_duration_ms": 727845,
+        "total_api_duration_ms": 167424,
+        "total_lines_added": 224,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 9611,
+        "total_output_tokens": 7673,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 10,
+          "output_tokens": 8,
+          "cache_creation_input_tokens": 34,
+          "cache_read_input_tokens": 37576
+        },
+        "used_percentage": 19,
+        "remaining_percentage": 81
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T22:08:21.432171",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.8148247499999999,
+        "total_duration_ms": 728492,
+        "total_api_duration_ms": 167424,
+        "total_lines_added": 224,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 9611,
+        "total_output_tokens": 7673,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 10,
+          "output_tokens": 8,
+          "cache_creation_input_tokens": 34,
+          "cache_read_input_tokens": 37576
+        },
+        "used_percentage": 19,
+        "remaining_percentage": 81
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T22:08:21.434654",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.8148247499999999,
+        "total_duration_ms": 728492,
+        "total_api_duration_ms": 167424,
+        "total_lines_added": 224,
+        "total_lines_removed": 0
+      },
+      "context_window": {
+        "total_input_tokens": 9611,
+        "total_output_tokens": 7673,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 10,
+          "output_tokens": 8,
+          "cache_creation_input_tokens": 34,
+          "cache_read_input_tokens": 37576
+        },
+        "used_percentage": 19,
+        "remaining_percentage": 81
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T22:08:25.657661",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.8442502499999999,
+        "total_duration_ms": 732732,
+        "total_api_duration_ms": 176988,
+        "total_lines_added": 225,
+        "total_lines_removed": 14
+      },
+      "context_window": {
+        "total_input_tokens": 9621,
+        "total_output_tokens": 8088,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 10,
+          "output_tokens": 415,
+          "cache_creation_input_tokens": 34,
+          "cache_read_input_tokens": 37576
+        },
+        "used_percentage": 19,
+        "remaining_percentage": 81
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T22:08:25.659811",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.8442502499999999,
+        "total_duration_ms": 732732,
+        "total_api_duration_ms": 176988,
+        "total_lines_added": 225,
+        "total_lines_removed": 14
+      },
+      "context_window": {
+        "total_input_tokens": 9621,
+        "total_output_tokens": 8088,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 10,
+          "output_tokens": 415,
+          "cache_creation_input_tokens": 34,
+          "cache_read_input_tokens": 37576
+        },
+        "used_percentage": 19,
+        "remaining_percentage": 81
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T22:08:27.756106",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.8442502499999999,
+        "total_duration_ms": 734820,
+        "total_api_duration_ms": 176988,
+        "total_lines_added": 225,
+        "total_lines_removed": 14
+      },
+      "context_window": {
+        "total_input_tokens": 9621,
+        "total_output_tokens": 8088,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 2,
+          "cache_creation_input_tokens": 489,
+          "cache_read_input_tokens": 37610
+        },
+        "used_percentage": 19,
+        "remaining_percentage": 81
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T22:08:27.759015",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.8442502499999999,
+        "total_duration_ms": 734820,
+        "total_api_duration_ms": 176988,
+        "total_lines_added": 225,
+        "total_lines_removed": 14
+      },
+      "context_window": {
+        "total_input_tokens": 9621,
+        "total_output_tokens": 8088,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 2,
+          "cache_creation_input_tokens": 489,
+          "cache_read_input_tokens": 37610
+        },
+        "used_percentage": 19,
+        "remaining_percentage": 81
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T22:09:19.369130",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.9484264999999998,
+        "total_duration_ms": 786418,
+        "total_api_duration_ms": 230673,
+        "total_lines_added": 468,
+        "total_lines_removed": 33
+      },
+      "context_window": {
+        "total_input_tokens": 9629,
+        "total_output_tokens": 11379,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 3291,
+          "cache_creation_input_tokens": 489,
+          "cache_read_input_tokens": 37610
+        },
+        "used_percentage": 19,
+        "remaining_percentage": 81
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T22:09:19.371899",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.9484264999999998,
+        "total_duration_ms": 786418,
+        "total_api_duration_ms": 230673,
+        "total_lines_added": 468,
+        "total_lines_removed": 33
+      },
+      "context_window": {
+        "total_input_tokens": 9629,
+        "total_output_tokens": 11379,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 3291,
+          "cache_creation_input_tokens": 489,
+          "cache_read_input_tokens": 37610
+        },
+        "used_percentage": 19,
+        "remaining_percentage": 81
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T22:09:22.157659",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.9484264999999998,
+        "total_duration_ms": 789223,
+        "total_api_duration_ms": 230673,
+        "total_lines_added": 468,
+        "total_lines_removed": 33
+      },
+      "context_window": {
+        "total_input_tokens": 9629,
+        "total_output_tokens": 11379,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 1,
+          "cache_creation_input_tokens": 3472,
+          "cache_read_input_tokens": 38099
+        },
+        "used_percentage": 21,
+        "remaining_percentage": 79
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T22:09:22.160581",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.9484264999999998,
+        "total_duration_ms": 789223,
+        "total_api_duration_ms": 230673,
+        "total_lines_added": 468,
+        "total_lines_removed": 33
+      },
+      "context_window": {
+        "total_input_tokens": 9629,
+        "total_output_tokens": 11379,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 1,
+          "cache_creation_input_tokens": 3472,
+          "cache_read_input_tokens": 38099
+        },
+        "used_percentage": 21,
+        "remaining_percentage": 79
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T22:09:27.924465",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.9998909999999999,
+        "total_duration_ms": 794998,
+        "total_api_duration_ms": 239222,
+        "total_lines_added": 477,
+        "total_lines_removed": 39
+      },
+      "context_window": {
+        "total_input_tokens": 9637,
+        "total_output_tokens": 11806,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 427,
+          "cache_creation_input_tokens": 3472,
+          "cache_read_input_tokens": 38099
+        },
+        "used_percentage": 21,
+        "remaining_percentage": 79
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T22:09:27.927193",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.9998909999999999,
+        "total_duration_ms": 794998,
+        "total_api_duration_ms": 239222,
+        "total_lines_added": 477,
+        "total_lines_removed": 39
+      },
+      "context_window": {
+        "total_input_tokens": 9637,
+        "total_output_tokens": 11806,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 427,
+          "cache_creation_input_tokens": 3472,
+          "cache_read_input_tokens": 38099
+        },
+        "used_percentage": 21,
+        "remaining_percentage": 79
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T22:09:29.920962",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.9998909999999999,
+        "total_duration_ms": 796971,
+        "total_api_duration_ms": 239222,
+        "total_lines_added": 477,
+        "total_lines_removed": 39
+      },
+      "context_window": {
+        "total_input_tokens": 9637,
+        "total_output_tokens": 11806,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 1,
+          "cache_creation_input_tokens": 482,
+          "cache_read_input_tokens": 41571
+        },
+        "used_percentage": 21,
+        "remaining_percentage": 79
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T22:09:29.923931",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.9998909999999999,
+        "total_duration_ms": 796971,
+        "total_api_duration_ms": 239222,
+        "total_lines_added": 477,
+        "total_lines_removed": 39
+      },
+      "context_window": {
+        "total_input_tokens": 9637,
+        "total_output_tokens": 11806,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 1,
+          "cache_creation_input_tokens": 482,
+          "cache_read_input_tokens": 41571
+        },
+        "used_percentage": 21,
+        "remaining_percentage": 79
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T22:09:58.910560",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 1.0660539999999998,
+        "total_duration_ms": 825949,
+        "total_api_duration_ms": 270163,
+        "total_lines_added": 546,
+        "total_lines_removed": 57
+      },
+      "context_window": {
+        "total_input_tokens": 9645,
+        "total_output_tokens": 13499,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 1693,
+          "cache_creation_input_tokens": 482,
+          "cache_read_input_tokens": 41571
+        },
+        "used_percentage": 21,
+        "remaining_percentage": 79
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T22:09:58.913600",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 1.0660539999999998,
+        "total_duration_ms": 825949,
+        "total_api_duration_ms": 270163,
+        "total_lines_added": 546,
+        "total_lines_removed": 57
+      },
+      "context_window": {
+        "total_input_tokens": 9645,
+        "total_output_tokens": 13499,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 1693,
+          "cache_creation_input_tokens": 482,
+          "cache_read_input_tokens": 41571
+        },
+        "used_percentage": 21,
+        "remaining_percentage": 79
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T22:10:01.513605",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 1.0660539999999998,
+        "total_duration_ms": 828566,
+        "total_api_duration_ms": 270163,
+        "total_lines_added": 546,
+        "total_lines_removed": 57
+      },
+      "context_window": {
+        "total_input_tokens": 9645,
+        "total_output_tokens": 13499,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 1,
+          "cache_creation_input_tokens": 1747,
+          "cache_read_input_tokens": 42053
+        },
+        "used_percentage": 22,
+        "remaining_percentage": 78
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T22:10:01.516723",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 1.0660539999999998,
+        "total_duration_ms": 828566,
+        "total_api_duration_ms": 270163,
+        "total_lines_added": 546,
+        "total_lines_removed": 57
+      },
+      "context_window": {
+        "total_input_tokens": 9645,
+        "total_output_tokens": 13499,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 1,
+          "cache_creation_input_tokens": 1747,
+          "cache_read_input_tokens": 42053
+        },
+        "used_percentage": 22,
+        "remaining_percentage": 78
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T22:10:38.448990",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 1.14438925,
+        "total_duration_ms": 865477,
+        "total_api_duration_ms": 309683,
+        "total_lines_added": 693,
+        "total_lines_removed": 73
+      },
+      "context_window": {
+        "total_input_tokens": 9653,
+        "total_output_tokens": 15353,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 1854,
+          "cache_creation_input_tokens": 1747,
+          "cache_read_input_tokens": 42053
+        },
+        "used_percentage": 22,
+        "remaining_percentage": 78
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T22:10:38.453332",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 1.14438925,
+        "total_duration_ms": 865477,
+        "total_api_duration_ms": 309683,
+        "total_lines_added": 693,
+        "total_lines_removed": 73
+      },
+      "context_window": {
+        "total_input_tokens": 9653,
+        "total_output_tokens": 15353,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 1854,
+          "cache_creation_input_tokens": 1747,
+          "cache_read_input_tokens": 42053
+        },
+        "used_percentage": 22,
+        "remaining_percentage": 78
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T22:10:41.047632",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 1.14438925,
+        "total_duration_ms": 868091,
+        "total_api_duration_ms": 309683,
+        "total_lines_added": 693,
+        "total_lines_removed": 73
+      },
+      "context_window": {
+        "total_input_tokens": 9653,
+        "total_output_tokens": 15353,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 1,
+          "cache_creation_input_tokens": 1907,
+          "cache_read_input_tokens": 43800
+        },
+        "used_percentage": 23,
+        "remaining_percentage": 77
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T22:10:41.050797",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 1.14438925,
+        "total_duration_ms": 868091,
+        "total_api_duration_ms": 309683,
+        "total_lines_added": 693,
+        "total_lines_removed": 73
+      },
+      "context_window": {
+        "total_input_tokens": 9653,
+        "total_output_tokens": 15353,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 1,
+          "cache_creation_input_tokens": 1907,
+          "cache_read_input_tokens": 43800
+        },
+        "used_percentage": 23,
+        "remaining_percentage": 77
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T22:11:05.285314",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 1.209798,
+        "total_duration_ms": 892350,
+        "total_api_duration_ms": 336607,
+        "total_lines_added": 804,
+        "total_lines_removed": 73
+      },
+      "context_window": {
+        "total_input_tokens": 9661,
+        "total_output_tokens": 16615,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 1262,
+          "cache_creation_input_tokens": 1907,
+          "cache_read_input_tokens": 43800
+        },
+        "used_percentage": 23,
+        "remaining_percentage": 77
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T22:11:05.288524",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 1.209798,
+        "total_duration_ms": 892350,
+        "total_api_duration_ms": 336607,
+        "total_lines_added": 804,
+        "total_lines_removed": 73
+      },
+      "context_window": {
+        "total_input_tokens": 9661,
+        "total_output_tokens": 16615,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 1262,
+          "cache_creation_input_tokens": 1907,
+          "cache_read_input_tokens": 43800
+        },
+        "used_percentage": 23,
+        "remaining_percentage": 77
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T22:11:08.365504",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 1.209798,
+        "total_duration_ms": 895413,
+        "total_api_duration_ms": 336607,
+        "total_lines_added": 804,
+        "total_lines_removed": 73
+      },
+      "context_window": {
+        "total_input_tokens": 9661,
+        "total_output_tokens": 16615,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 1,
+          "cache_creation_input_tokens": 1317,
+          "cache_read_input_tokens": 45707
+        },
+        "used_percentage": 24,
+        "remaining_percentage": 76
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T22:11:08.368792",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 1.209798,
+        "total_duration_ms": 895413,
+        "total_api_duration_ms": 336607,
+        "total_lines_added": 804,
+        "total_lines_removed": 73
+      },
+      "context_window": {
+        "total_input_tokens": 9661,
+        "total_output_tokens": 16615,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 1,
+          "cache_creation_input_tokens": 1317,
+          "cache_read_input_tokens": 45707
+        },
+        "used_percentage": 24,
+        "remaining_percentage": 76
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T22:11:48.150627",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 1.30449775,
+        "total_duration_ms": 935207,
+        "total_api_duration_ms": 379456,
+        "total_lines_added": 1042,
+        "total_lines_removed": 73
+      },
+      "context_window": {
+        "total_input_tokens": 9669,
+        "total_output_tokens": 19158,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 2543,
+          "cache_creation_input_tokens": 1317,
+          "cache_read_input_tokens": 45707
+        },
+        "used_percentage": 24,
+        "remaining_percentage": 76
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T22:11:48.160599",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 1.30449775,
+        "total_duration_ms": 935207,
+        "total_api_duration_ms": 379456,
+        "total_lines_added": 1042,
+        "total_lines_removed": 73
+      },
+      "context_window": {
+        "total_input_tokens": 9669,
+        "total_output_tokens": 19158,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 2543,
+          "cache_creation_input_tokens": 1317,
+          "cache_read_input_tokens": 45707
+        },
+        "used_percentage": 24,
+        "remaining_percentage": 76
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T22:11:52.436316",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 1.30449775,
+        "total_duration_ms": 939499,
+        "total_api_duration_ms": 379456,
+        "total_lines_added": 1042,
+        "total_lines_removed": 73
+      },
+      "context_window": {
+        "total_input_tokens": 9669,
+        "total_output_tokens": 19158,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 1,
+          "cache_creation_input_tokens": 2576,
+          "cache_read_input_tokens": 47024
+        },
+        "used_percentage": 25,
+        "remaining_percentage": 75
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T22:11:52.439712",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 1.30449775,
+        "total_duration_ms": 939499,
+        "total_api_duration_ms": 379456,
+        "total_lines_added": 1042,
+        "total_lines_removed": 73
+      },
+      "context_window": {
+        "total_input_tokens": 9669,
+        "total_output_tokens": 19158,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 1,
+          "cache_creation_input_tokens": 2576,
+          "cache_read_input_tokens": 47024
+        },
+        "used_percentage": 25,
+        "remaining_percentage": 75
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-14T22:12:06.335458",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 1.36202475,
+        "total_duration_ms": 953405,
+        "total_api_duration_ms": 397634,
+        "total_lines_added": 1042,
+        "total_lines_removed": 73
+      },
+      "context_window": {
+        "total_input_tokens": 9677,
+        "total_output_tokens": 19873,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 715,
+          "cache_creation_input_tokens": 2576,
+          "cache_read_input_tokens": 47024
+        },
+        "used_percentage": 25,
+        "remaining_percentage": 75
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-14T22:12:06.338869",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 1.36202475,
+        "total_duration_ms": 953405,
+        "total_api_duration_ms": 397634,
+        "total_lines_added": 1042,
+        "total_lines_removed": 73
+      },
+      "context_window": {
+        "total_input_tokens": 9677,
+        "total_output_tokens": 19873,
+        "context_window_size": 200000,
+        "current_usage": {
+          "input_tokens": 8,
+          "output_tokens": 715,
+          "cache_creation_input_tokens": 2576,
+          "cache_read_input_tokens": 47024
+        },
+        "used_percentage": 25,
+        "remaining_percentage": 75
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  },
+  {
+    "timestamp": "2026-02-21T17:53:10.538655",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 1.40778725,
+        "total_duration_ms": 590217013,
+        "total_api_duration_ms": 417013,
+        "total_lines_added": 1042,
+        "total_lines_removed": 73
+      },
+      "context_window": {
+        "total_input_tokens": 9687,
+        "total_output_tokens": 20457,
+        "context_window_size": 200000,
+        "current_usage": null,
+        "used_percentage": null,
+        "remaining_percentage": null
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "[Sonnet 4.5] \ud83d\udcad No session data",
+    "error": "Session file .claude/data/sessions/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.json does not exist"
+  },
+  {
+    "timestamp": "2026-02-21T17:53:10.544032",
+    "version": "v4",
+    "input_data": {
+      "session_id": "d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4",
+      "transcript_path": "/Users/tmoore/.claude/projects/-Users-tmoore-Desktop-Refactoring-PaleoRose/d5e1f119-e6f7-45de-9d43-d4bc7fb4e4b4.jsonl",
+      "cwd": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+      "model": {
+        "id": "claude-sonnet-4-5-20250929",
+        "display_name": "Sonnet 4.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose/PaleoRose/PaleoRose",
+        "project_dir": "/Users/tmoore/Desktop/Refactoring PaleoRose"
+      },
+      "version": "2.1.37",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 1.40778725,
+        "total_duration_ms": 590217013,
+        "total_api_duration_ms": 417013,
+        "total_lines_added": 1042,
+        "total_lines_removed": 73
+      },
+      "context_window": {
+        "total_input_tokens": 9687,
+        "total_output_tokens": 20457,
+        "context_window_size": 200000,
+        "current_usage": null,
+        "used_percentage": null,
+        "remaining_percentage": null
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[36m[Sonnet 4.5]\u001b[0m \u001b[90m\ud83d\udcad No session data\u001b[0m"
+  }
+]

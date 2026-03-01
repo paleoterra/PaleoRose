@@ -35,12 +35,14 @@
 
 - (IBAction)cancel:(id)sender
 {
-    [NSApp endSheet:[self window] returnCode:NSModalResponseCancel];
+    NSWindow *window = [self window];
+    [[window sheetParent] endSheet:window returnCode:NSModalResponseCancel];
 }
 
 - (IBAction)createLayer:(id)sender
 {
-    [NSApp endSheet:[self window] returnCode:NSModalResponseOK];
+    NSWindow *window = [self window];
+    [[window sheetParent] endSheet:window returnCode:NSModalResponseOK];
 }
 
 -(NSString *)selectedName
