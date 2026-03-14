@@ -165,6 +165,20 @@ class DocumentModel: NSObject {
             completion()
         }
     }
+
+    /// Refreshes the table-name list from the store without touching layers or datasets.
+    ///
+    /// Use this after a data-table import so the UI reflects the new table while
+    /// leaving `layers` and `dataSets` untouched.
+    @objc func refreshTableNames() {
+        do {
+            let sqliteStore = try inMemoryStore.sqlitePointer()
+            let names = try inMemoryStore.tableNames(sqliteStore: sqliteStore)
+            update(tableNames: names)
+        } catch {
+            print("Failed to refresh table names: \(error)")
+        }
+    }
 }
 
 extension DocumentModel: InMemoryStoreDelegate {

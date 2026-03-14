@@ -413,22 +413,13 @@ NSRect initialRect;
 
 -(void)importerCompleted:(NSNotification *)aNotification
 {
-    // Persist current in-memory layers before re-reading the store.
-    // Without this, layers that haven't been saved yet (e.g. the default
-    // grid layer on a new document) are lost when readFromStore overwrites
-    // DocumentModel.layers with whatever is in the _layers SQLite table.
-    NSError *error = nil;
-    [self.documentModel saveLayersAndReturnError:&error];
-    if (error) {
-        NSLog(@"Failed to save layers before import: %@", error.localizedDescription);
-    }
-
-    [self.documentModel readFromStoreWithCompletion:^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[self document] discoverTables];
-            [self updateTable];
-        });
-    }];
+    // Only refresh the table-name list so the UI shows the newly imported
+    // table. A full readFromStore is not needed here and would race with
+    // any layers the user has already created, overwriting DocumentModel.layers
+    // with a stale snapshot.
+    [self.documentModel refreshTableNames];
+    [[self document] discoverTables];
+    [self updateTable];
 }
 
 -(void)updateTable
