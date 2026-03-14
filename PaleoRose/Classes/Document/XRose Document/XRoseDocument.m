@@ -246,7 +246,8 @@
         // Layers are loaded from DocumentModel via Combine publishers.
     }
     else {
-
+        // New document: add a default grid layer
+        [self.mainWindowController.layersTableController addGridLayer:nil];
     }
     self.didLoad = NO;
 }
