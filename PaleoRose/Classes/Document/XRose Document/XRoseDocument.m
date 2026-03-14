@@ -130,6 +130,11 @@
         *outError = error;
         return NO;
     }
+    [self.documentModel saveLayersAndReturnError:&error];
+    if (error != nil) {
+        *outError = error;
+        return NO;
+    }
 
     [self.documentModel writeToFile:url error:&error];
     if (error) {
