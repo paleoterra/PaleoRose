@@ -259,7 +259,8 @@ private let layerDragType = NSPasteboard.PasteboardType("LayerDragType")
     @objc func addGridLayer(_: Any?) {
         guard let dataSource else { return }
 
-        let uniqueName = newLayerName(forBaseName: "Grid")
+        let baseName = "Grid"
+        let uniqueName = layerExists(withName: baseName) ? newLayerName(forBaseName: baseName) : baseName
         dataSource.createGridLayer(name: uniqueName)
     }
 
