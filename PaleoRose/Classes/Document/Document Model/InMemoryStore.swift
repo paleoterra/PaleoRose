@@ -381,13 +381,13 @@ class InMemoryStore: NSObject {
             sqlite: sqliteStore,
             query: Query(sql: "SELECT last_insert_rowid() AS rowid;")
         )
-        // SQLite numeric values come back as NSNumber from the interface layer
-        let insertedID = (rowResult.first?["rowid"] as? NSNumber)?.int64Value ?? -1
+        // SQLiteIntegerColumn returns Int32 via sqlite3_column_int
+        let insertedID = rowResult.first?["rowid"] as? Int32 ?? -1
 
         let values = try dataSetValues(for: dataSet)
         let data = Data(bytes: values, count: MemoryLayout<Float>.size * values.count)
         return XRDataSet(
-            id: Int32(insertedID),
+            id: insertedID,
             name: name,
             tableName: tableName,
             column: columnName,
