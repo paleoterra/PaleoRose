@@ -369,6 +369,33 @@ class InMemoryStore: NSObject {
         }
     }
 
+    func store(dataSetWithName name: String, tableName: String, columnName: String) throws -> XRDataSet {
+        let sqliteStore = try validateStore()
+        let dataSet = DataSet(NAME: name, TABLENAME: tableName, COLUMNNAME: columnName, PREDICATE: nil, COMMENTS: nil)
+        var query = DataSet.insertQuery()
+        query.bindings = try [dataSet.valueBindables(keys: DataSet.allKeys())]
+        _ = try interface.executeQuery(sqlite: sqliteStore, query: query)
+
+        // Retrieve the auto-assigned row ID
+        let rowResult = try interface.executeQuery(
+            sqlite: sqliteStore,
+            query: Query(sql: "SELECT last_insert_rowid() AS rowid;")
+        )
+        let insertedID = rowResult.first?["rowid"] as? Int64 ?? -1
+
+        let values = try dataSetValues(for: dataSet)
+        let data = Data(bytes: values, count: MemoryLayout<Float>.size * values.count)
+        return XRDataSet(
+            id: Int32(insertedID),
+            name: name,
+            tableName: tableName,
+            column: columnName,
+            predicate: "",
+            comments: NSMutableAttributedString(),
+            data: data
+        )
+    }
+
     // MARK: - Geometry
 
     func store(geometryController: XRGeometryController) throws {
