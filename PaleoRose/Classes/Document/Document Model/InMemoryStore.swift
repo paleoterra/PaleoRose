@@ -381,7 +381,8 @@ class InMemoryStore: NSObject {
             sqlite: sqliteStore,
             query: Query(sql: "SELECT last_insert_rowid() AS rowid;")
         )
-        let insertedID = rowResult.first?["rowid"] as? Int64 ?? -1
+        // SQLite numeric values come back as NSNumber from the interface layer
+        let insertedID = (rowResult.first?["rowid"] as? NSNumber)?.int64Value ?? -1
 
         let values = try dataSetValues(for: dataSet)
         let data = Data(bytes: values, count: MemoryLayout<Float>.size * values.count)
