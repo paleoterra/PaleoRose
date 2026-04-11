@@ -261,6 +261,17 @@ static NSLayoutManager *sharedDrawingLayoutManager(void) {
     return image;
 }
 
+-(void)setGeometryController:(XRGeometryController *)controller {
+    NSPoint savedOrigin = textBounds.origin;
+    [super setGeometryController:controller];
+    // super calls generateGraphics which resets textBounds.origin using estimatedRadius=0/estimatedAngle=0.
+    // If we had a stored position, restore it and back-calculate the polar coordinates.
+    if (geometryController && !NSEqualPoints(savedOrigin, NSZeroPoint)) {
+        textBounds.origin = savedOrigin;
+        [geometryController calculateRelativePositionWithPoint:savedOrigin intoRadius:&estimatedRadius intoAngle:&estimatedAngle];
+    }
+}
+
 -(void)moveToPoint:(NSPoint)newPoint
 {
     //NSLog(@"moveToPoint:");

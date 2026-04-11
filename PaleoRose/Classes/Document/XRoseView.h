@@ -27,7 +27,7 @@
 //NOTIFICATIONS
 #define XRRoseViewDrawingRectDidChange @"XRRoseViewDrawingRectDidChange"
 
-@interface XRoseView : NSView
+@interface XRoseView : NSView <NSDraggingSource>
 {
 	NSRect _lastFrame;
 	NSRect _drawingRect;

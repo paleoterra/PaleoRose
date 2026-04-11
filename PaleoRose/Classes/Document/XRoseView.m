@@ -99,15 +99,11 @@
 	   [tableController handleMouseEvent:theEvent];
     else if((aLayer = [tableController activeLayerWith:[self convertPoint:[theEvent locationInWindow] fromView:nil]])&&([theEvent type]==NSEventTypeLeftMouseDown)) {
 		NSImage *dragImage = [(XRLayerText *)aLayer dragImage];
-        [[NSPasteboard pasteboardWithName:NSPasteboardNameDrag] setData:[dragImage TIFFRepresentation] forType:NSPasteboardTypeTIFF];
+		NSRect imageBounds = [(XRLayerText *)aLayer imageBounds];
+		NSDraggingItem *dragItem = [[NSDraggingItem alloc] initWithPasteboardWriter:dragImage];
+		[dragItem setDraggingFrame:imageBounds contents:dragImage];
 		draggedObject = aLayer;
-		[self dragImage:dragImage
-					 at:[(XRLayerText *)aLayer imageBounds].origin
-				 offset:NSMakeSize(0.0,0.0) 
-				  event:theEvent 
-             pasteboard:[NSPasteboard pasteboardWithName:NSPasteboardNameDrag]
-				 source:self
-			  slideBack:NO];
+		[self beginDraggingSessionWithItems:@[dragItem] event:theEvent source:self];
     } else {
         [tableController handleMouseEvent:theEvent];
     }
@@ -170,18 +166,8 @@
 
 #pragma mark dragging
 
-- (NSDragOperation)draggingSourceOperationMaskForLocal:(BOOL)isLocal {
-
-	//NSLog(@"draggingSourceOperationMaskForLocal");
-	if(draggedObject)
-	{
-		//NSLog(@"generic");
-		[[NSPasteboard pasteboardWithName:NSDragPboard] declareTypes:[NSArray arrayWithObject:NSTIFFPboardType] owner:self];
-		[[NSPasteboard pasteboardWithName:NSDragPboard] setData:[[draggedObject dragImage] TIFFRepresentation] forType:NSTIFFPboardType];
-
-		return NSDragOperationMove;
-	}
-	return NSDragOperationNone;
+- (NSDragOperation)draggingSession:(NSDraggingSession *)session sourceOperationMaskForDraggingContext:(NSDraggingContext)context {
+	return NSDragOperationMove;
 }
 
 - (unsigned int)dragOperationForDraggingInfo:(id <NSDraggingInfo>)sender {
@@ -213,9 +199,9 @@
     return YES;
 }
 
- - (void)concludeDragOperation:(id <NSDraggingInfo>)sender {
-    NSPoint draggedImageLocation = [self convertPoint:[sender draggedImageLocation] fromView:nil];
-	[(XRLayerText *)draggedObject moveToPoint:draggedImageLocation];
+- (void)concludeDragOperation:(id <NSDraggingInfo>)sender {
+    NSPoint dropLocation = [self convertPoint:[sender draggingLocation] fromView:nil];
+	[(XRLayerText *)draggedObject moveToPoint:dropLocation];
 	draggedObject = nil;
 }
 
