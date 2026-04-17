@@ -36,7 +36,11 @@
       "Bash(1)",
       "Bash(sqlite3:*)",
       "Bash(xcrun swift-api-digester:*)",
-      "Bash(git checkout -- PaleoRose.xcodeproj/project.pbxproj)"
+      "Bash(git checkout -- PaleoRose.xcodeproj/project.pbxproj)",
+      "mcp__xcode__XcodeLS",
+      "mcp__xcode__XcodeGlob",
+      "mcp__xcode__XcodeRead",
+      "Skill(claude-md-management:revise-claude-md)"
     ],
     "deny": [],
     "ask": []

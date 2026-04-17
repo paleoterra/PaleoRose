@@ -117,6 +117,16 @@ class DocumentModel: NSObject {
 
     // MARK: - Persistence
 
+    /// Creates a new dataset entry in the store and adds it to the in-memory dataSets array.
+    ///
+    /// All dataset creation must go through this method so that the `_datasets` table
+    /// stays in sync with `DocumentModel.dataSets`.
+    @objc func createDataSet(tableName: String, columnName: String, name: String) throws -> XRDataSet {
+        let dataSet = try inMemoryStore.store(dataSetWithName: name, tableName: tableName, columnName: columnName)
+        dataSets.append(dataSet)
+        return dataSet
+    }
+
     /// Saves the current geometry controller state to the store
     @objc func saveGeometry() throws {
         try inMemoryStore.store(geometryController: geometryController)
@@ -153,6 +163,20 @@ class DocumentModel: NSObject {
     @objc func readFromStore(completion: @escaping () -> Void) {
         inMemoryStore.readFromStore { _ in
             completion()
+        }
+    }
+
+    /// Refreshes the table-name list from the store without touching layers or datasets.
+    ///
+    /// Use this after a data-table import so the UI reflects the new table while
+    /// leaving `layers` and `dataSets` untouched.
+    @objc func refreshTableNames() {
+        do {
+            let sqliteStore = try inMemoryStore.sqlitePointer()
+            let names = try inMemoryStore.tableNames(sqliteStore: sqliteStore)
+            update(tableNames: names)
+        } catch {
+            print("Failed to refresh table names: \(error)")
         }
     }
 }

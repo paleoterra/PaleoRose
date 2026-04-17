@@ -52,7 +52,10 @@ struct DataSet: TableRepresentable, Equatable {
     }
 
     static func insertQuery() -> any QueryProtocol {
-        Query(sql: "")
+        Query(
+            sql: "INSERT INTO _datasets (NAME, TABLENAME, COLUMNNAME, PREDICATE, COMMENTS) VALUES (?, ?, ?, ?, ?);",
+            keys: allKeys()
+        )
     }
 
     static func updateQuery() -> any QueryProtocol {

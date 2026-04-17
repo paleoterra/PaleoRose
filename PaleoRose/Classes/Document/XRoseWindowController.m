@@ -413,14 +413,13 @@ NSRect initialRect;
 
 -(void)importerCompleted:(NSNotification *)aNotification
 {
-    [self.documentModel readFromStoreWithCompletion:^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[self document] discoverTables];
-            [self updateTable];
-        });
-    }];
-
-
+    // Only refresh the table-name list so the UI shows the newly imported
+    // table. A full readFromStore is not needed here and would race with
+    // any layers the user has already created, overwriting DocumentModel.layers
+    // with a stale snapshot.
+    [self.documentModel refreshTableNames];
+    [[self document] discoverTables];
+    [self updateTable];
 }
 
 -(void)updateTable

@@ -130,6 +130,11 @@
         *outError = error;
         return NO;
     }
+    [self.documentModel saveLayersAndReturnError:&error];
+    if (error != nil) {
+        *outError = error;
+        return NO;
+    }
 
     [self.documentModel writeToFile:url error:&error];
     if (error) {
@@ -241,7 +246,8 @@
         // Layers are loaded from DocumentModel via Combine publishers.
     }
     else {
-
+        // New document: add a default grid layer
+        [self.mainWindowController.layersTableController addGridLayer:nil];
     }
     self.didLoad = NO;
 }
@@ -305,18 +311,20 @@
      completionHandler:^(NSModalResponse returnCode) {
         if(returnCode == NSModalResponseOK)
         {
-            XRDataSet *aSet = [[XRDataSet alloc] initWithTable:[controller selectedTable]
-                                                         column:[controller selectedColumn]
-                                                             db:[self.documentModel memoryStore]];
-            [aSet setName:[controller selectedName]];
-            if(aSet)
+            NSError *createError = nil;
+            XRDataSet *aSet = [self.documentModel createDataSetWithTableName:[controller selectedTable]
+                                                                  columnName:[controller selectedColumn]
+                                                                        name:[controller selectedName]
+                                                                       error:&createError];
+            if(aSet && !createError)
             {
-                [self.dataSets addObject:aSet];
                 [self.mainWindowController.layersTableController addDataLayerFor:aSet];
-
                 [self updateChangeCount:NSChangeDone];
             }
-
+            else if(createError)
+            {
+                NSLog(@"Failed to create dataset: %@", [createError localizedDescription]);
+            }
         }
         self.currentSheetController = nil;
     }];

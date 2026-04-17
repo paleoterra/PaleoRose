@@ -252,21 +252,24 @@ private let layerDragType = NSPasteboard.PasteboardType("LayerDragType")
     @objc func addCoreLayer(_: Any?) {
         guard let dataSource else { return }
 
-        let uniqueName = newLayerName(forBaseName: "Core")
+        let baseName = "Core"
+        let uniqueName = layerExists(withName: baseName) ? newLayerName(forBaseName: baseName) : baseName
         dataSource.createCoreLayer(name: uniqueName)
     }
 
     @objc func addGridLayer(_: Any?) {
         guard let dataSource else { return }
 
-        let uniqueName = newLayerName(forBaseName: "Grid")
+        let baseName = "Grid"
+        let uniqueName = layerExists(withName: baseName) ? newLayerName(forBaseName: baseName) : baseName
         dataSource.createGridLayer(name: uniqueName)
     }
 
     @objc func addTextLayer(_: Any?) {
         guard let dataSource, let roseView else { return }
 
-        let uniqueName = newLayerName(forBaseName: "Text")
+        let baseName = "Text"
+        let uniqueName = layerExists(withName: baseName) ? newLayerName(forBaseName: baseName) : baseName
         dataSource.createTextLayer(name: uniqueName, parentView: roseView)
     }
 

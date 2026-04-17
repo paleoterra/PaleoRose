@@ -369,6 +369,34 @@ class InMemoryStore: NSObject {
         }
     }
 
+    func store(dataSetWithName name: String, tableName: String, columnName: String) throws -> XRDataSet {
+        let sqliteStore = try validateStore()
+        let dataSet = DataSet(NAME: name, TABLENAME: tableName, COLUMNNAME: columnName, PREDICATE: nil, COMMENTS: nil)
+        var query = DataSet.insertQuery()
+        query.bindings = try [dataSet.valueBindables(keys: DataSet.allKeys())]
+        _ = try interface.executeQuery(sqlite: sqliteStore, query: query)
+
+        // Retrieve the auto-assigned row ID
+        let rowResult = try interface.executeQuery(
+            sqlite: sqliteStore,
+            query: Query(sql: "SELECT last_insert_rowid() AS rowid;")
+        )
+        // SQLiteIntegerColumn returns Int32 via sqlite3_column_int
+        let insertedID = rowResult.first?["rowid"] as? Int32 ?? -1
+
+        let values = try dataSetValues(for: dataSet)
+        let data = Data(bytes: values, count: MemoryLayout<Float>.size * values.count)
+        return XRDataSet(
+            id: insertedID,
+            name: name,
+            tableName: tableName,
+            column: columnName,
+            predicate: "",
+            comments: NSMutableAttributedString(),
+            data: data
+        )
+    }
+
     // MARK: - Geometry
 
     func store(geometryController: XRGeometryController) throws {
@@ -404,7 +432,7 @@ class InMemoryStore: NSObject {
             query: Color.deleteAllRecords()
         )
         var query = Color.insertQuery()
-        query.bindings = try storedColors.map { color in
+        query.bindings = try storageLayerFactory.colors.map { color in
             try color.valueBindables(keys: Color.allKeys())
         }
         _ = try interface.executeQuery(
@@ -417,11 +445,12 @@ class InMemoryStore: NSObject {
 
     func store(layers: [XRLayer]) throws {
         let sqliteStore = try validateStore()
+        storageLayerFactory.clearColors()
         try deleteAllLayers(sqliteStore: sqliteStore)
         for (index, layer) in layers.enumerated() {
-            print("Storing layer \(index)")
             try store(layer: layer, at: index, in: sqliteStore)
         }
+        try storeColors(sqliteStore: sqliteStore)
     }
 
     private func store(layer: XRLayer, at index: Int, in sqliteStore: OpaquePointer) throws {

@@ -352,7 +352,6 @@ class StorageModelFactory {
             NSFont.systemFont(ofSize: CGFloat(gridLayer.RINGS_FONTSIZE))
         let radialFont = NSFont(name: gridLayer.RADIALS_FONT, size: CGFloat(gridLayer.RADIALS_FONTSIZE)) ??
             NSFont.systemFont(ofSize: CGFloat(gridLayer.RADIALS_FONTSIZE))
-        print("createXRLayerGrid radians percent \(gridLayer.RADIALS_ISPERCENT)")
         return XRLayerGrid(
             isVisible: layer.VISIBLE,
             active: layer.ACTIVE,

@@ -50,7 +50,7 @@ struct Color: TableRepresentable {
     }
 
     static func insertQuery() -> any QueryProtocol {
-        Query(sql: "INSERT INTO _colors (COLORID, RED, BLUE, GREEN, ALPHA) VALUES (?,?,?,?);")
+        Query(sql: "INSERT INTO _colors (COLORID, RED, BLUE, GREEN, ALPHA) VALUES (?,?,?,?,?);")
     }
 
     static func updateQuery() -> any QueryProtocol {

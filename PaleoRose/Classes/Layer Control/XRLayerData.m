@@ -376,7 +376,6 @@
 
 -(void)drawRect:(NSRect)rect
 {
-	//NSLog(@"XRLayerData:drawRect");
 	if(!_isVisible)
 		return;
 	NSEnumerator *anEnum = [_graphicalObjects objectEnumerator];
