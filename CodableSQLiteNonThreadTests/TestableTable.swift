@@ -197,7 +197,7 @@ struct TestableTable: TableRepresentable, Equatable {
         Query(sql: "")
     }
 
-    // create encode function
+    /// create encode function
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
 

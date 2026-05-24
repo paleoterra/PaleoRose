@@ -74,7 +74,7 @@ struct SQLiteErrorTest {
             )
         ]
     )
-    func testEquality(values: ErrorContainer) {
+    func equality(values: ErrorContainer) {
         #expect(values.leftError == values.rightError)
     }
 
@@ -111,7 +111,7 @@ struct SQLiteErrorTest {
             SingleError(error: .unknownSqliteError("test1"))
         ]
     )
-    func testInequality(lhs: SingleError, rhs: SingleError) {
+    func inequality(lhs: SingleError, rhs: SingleError) {
         #expect(lhs.error != rhs.error)
     }
 
@@ -119,7 +119,7 @@ struct SQLiteErrorTest {
         "Given sqlite valid status, then do not throw",
         arguments: [SQLITE_OK, SQLITE_DONE, SQLITE_ROW]
     )
-    func testValidSqliteStatus(result: Int32) throws {
+    func validSqliteStatus(result: Int32) throws {
         #expect(throws: Never.self) {
             try SQLiteError.checkSqliteStatus(result)
         }
@@ -129,7 +129,7 @@ struct SQLiteErrorTest {
         "Given sqlite valid status, then do not throw",
         arguments: [SQLITE_MISUSE, SQLITE_ERROR, SQLITE_IOERR]
     )
-    func testSqliteStatus(result: Int32) throws {
+    func sqliteStatus(result: Int32) throws {
         #expect(throws: SQLiteError.self) {
             try SQLiteError.checkSqliteStatus(result)
         }

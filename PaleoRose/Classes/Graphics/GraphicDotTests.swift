@@ -4,6 +4,7 @@ import Numerics
 import Testing
 
 struct GraphicDotTests {
+
     // MARK: - Test Setup
 
     struct TestConfiguration {
@@ -45,7 +46,7 @@ struct GraphicDotTests {
             TestConfiguration(dotSize: 4, increment: 0, valueCount: 10, totalCount: 10)
         ]
     )
-    func testInitWithController(params: TestConfiguration) throws {
+    func initWithController(params: TestConfiguration) throws {
         // Given
         let controller = MockGraphicGeometrySource()
 

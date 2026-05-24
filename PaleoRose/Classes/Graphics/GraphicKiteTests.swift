@@ -4,6 +4,7 @@ import Numerics
 import Testing
 
 struct GraphicKiteTests {
+
     // MARK: - Test Setup
 
     private func buildTestObject(controller: MockGraphicGeometrySource, angles: [Double] = [], values: [Double] = []) throws -> GraphicKite {
@@ -28,7 +29,7 @@ struct GraphicKiteTests {
     // MARK: - Initialization Tests
 
     @Test("initWithController should initialize with default values")
-    func testInitWithController() throws {
+    func initWithController() throws {
         // Given
         let controller = MockGraphicGeometrySource()
 
@@ -44,7 +45,7 @@ struct GraphicKiteTests {
     }
 
     @Test("calculate geometry for count no core")
-    func testGeometryCalculationNoCore() throws {
+    func geometryCalculationNoCore() throws {
         let controller = MockGraphicGeometrySource()
         controller.mockGeometryMaxCount = 10
 
@@ -77,7 +78,7 @@ struct GraphicKiteTests {
     }
 
     @Test("calculate geometry for count with core")
-    func testGeometryCalculationWithCore() throws {
+    func geometryCalculationWithCore() throws {
         let controller = MockGraphicGeometrySource()
         controller.mockGeometryMaxCount = 10
         controller.mockHollowCoreSize = 0.5
@@ -125,7 +126,7 @@ struct GraphicKiteTests {
     }
 
     @Test("calculate geometry for count no core percent")
-    func testGeometryCalculationNoCorePercent() throws {
+    func geometryCalculationNoCorePercent() throws {
         let controller = MockGraphicGeometrySource()
         controller.mockIsPercent = true
         controller.mockGeometryMaxPercent = 100.0
@@ -159,7 +160,7 @@ struct GraphicKiteTests {
     }
 
     @Test("calculate geometry for count with core percent")
-    func testGeometryCalculationWithCorePercent() throws {
+    func geometryCalculationWithCorePercent() throws {
         let controller = MockGraphicGeometrySource()
         controller.mockIsPercent = true
         controller.mockGeometryMaxPercent = 100.0

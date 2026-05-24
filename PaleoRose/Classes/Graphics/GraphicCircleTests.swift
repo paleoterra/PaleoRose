@@ -58,7 +58,7 @@ struct GraphicCircleTests {
     }
 
     @Test("Initialize with controller should set default values")
-    func initWithController() throws {
+    func initWithController() {
         // Given
         let controller = MockGraphicGeometrySource()
 
@@ -84,7 +84,7 @@ struct GraphicCircleTests {
     // MARK: - Count and Percentage Tests
 
     @Test("Count should be settable and gettable")
-    func count() throws {
+    func count() {
         // Given
         let controller = MockGraphicGeometrySource()
         let circle = GraphicCircle(controller: controller)
@@ -102,7 +102,7 @@ struct GraphicCircleTests {
     }
 
     @Test("Percent should be settable and gettable")
-    func percent() throws {
+    func percent() {
         // Given
         let controller = MockGraphicGeometrySource()
         let circle = GraphicCircle(controller: controller)
@@ -122,7 +122,7 @@ struct GraphicCircleTests {
     }
 
     @Test("Geometry percent should be settable and gettable")
-    func percentSetting() throws {
+    func percentSetting() {
         // Given
         let controller = MockGraphicGeometrySource()
         let circle = GraphicCircle(controller: controller)
@@ -144,7 +144,7 @@ struct GraphicCircleTests {
     // MARK: - Fixed State Tests
 
     @Test("Fixed state should be updatable")
-    func fixedState() throws {
+    func fixedState() {
         // Given
         let controller = MockGraphicGeometrySource()
         let circle = GraphicCircle(controller: controller)
@@ -170,7 +170,7 @@ struct GraphicCircleTests {
             (false, 75)
         ]
     )
-    func drawingRect(settings: (isPercent: Bool, expectedSize: CGFloat)) throws {
+    func drawingRect(settings: (isPercent: Bool, expectedSize: CGFloat)) {
         // Given
         let controller = MockGraphicGeometrySource(isPercent: settings.isPercent)
         let circle = GraphicCircle(controller: controller)
@@ -188,7 +188,7 @@ struct GraphicCircleTests {
     }
 
     @Test("Hit test should not detect point outside circle")
-    func hitTest_whenPointIsOutside() throws {
+    func hitTest_whenPointIsOutside() {
         // Given
         let controller = MockGraphicGeometrySource()
         let circle = GraphicCircle(controller: controller)
@@ -202,7 +202,7 @@ struct GraphicCircleTests {
     }
 
     @Test("Setting fill color should update the fill color")
-    func setFillColor() throws {
+    func setFillColor() {
         // Given
         let controller = MockGraphicGeometrySource()
         let circle = GraphicCircle(controller: controller)
@@ -219,7 +219,7 @@ struct GraphicCircleTests {
     }
 
     @Test("Setting stroke color should update the stroke color")
-    func setStrokeColor() throws {
+    func setStrokeColor() {
         // Given
         let controller = MockGraphicGeometrySource()
         let circle = GraphicCircle(controller: controller)
@@ -257,7 +257,7 @@ struct GraphicCircleTests {
     // MARK: - Core Initialization
 
     @Test("initCoreCircleWithController should initialize with default values")
-    func initCoreCircleWithController() throws {
+    func initCoreCircleWithController() {
         // Given
         let controller = MockGraphicGeometrySource()
 
@@ -273,7 +273,7 @@ struct GraphicCircleTests {
     // MARK: - Percent Tests
 
     @Test("percent should return correct value")
-    func testPercent() throws {
+    func testPercent() {
         // Given
         let controller = MockGraphicGeometrySource()
         let circle = GraphicCircle(controller: controller)
@@ -388,7 +388,7 @@ struct GraphicCircleTests {
     }
 
     @Test("setTransparency should handle nil colors gracefully")
-    func testSetTransparencyWithNilColors() throws {
+    func setTransparencyWithNilColors() throws {
         // Given
         let controller = MockGraphicGeometrySource()
         let circle = GraphicCircle(controller: controller)
@@ -413,7 +413,7 @@ struct GraphicCircleTests {
     // MARK: - Drawing Tests
 
     @Test("setDrawsFill should update fill drawing state")
-    func testSetDrawsFill() throws {
+    func setDrawsFill() {
         // Given
         let controller = MockGraphicGeometrySource()
         let circle = GraphicCircle(controller: controller)
@@ -440,7 +440,7 @@ struct GraphicCircleTests {
     // MARK: - Line and Fill Color Tests
 
     @Test("setLineColor should update both stroke and fill colors")
-    func testSetLineAndFillColor() throws {
+    func setLineAndFillColor() throws {
         // Given
         let controller = MockGraphicGeometrySource()
         let circle = GraphicCircle(controller: controller)
@@ -460,7 +460,7 @@ struct GraphicCircleTests {
     }
 
     @Test("setLineColor with nil parameters should use default colors")
-    func testSetLineColorWithNilParameters() throws {
+    func setLineColorWithNilParameters() {
         // Given
         let controller = MockGraphicGeometrySource()
         let circle = GraphicCircle(controller: controller)

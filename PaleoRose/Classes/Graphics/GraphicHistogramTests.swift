@@ -4,6 +4,7 @@ import Numerics
 import Testing
 
 struct GraphicHistogramTests {
+
     // MARK: - Test Setup
 
     private func buildTestObject(controller: MockGraphicGeometrySource, increment: Int32 = 0, value: Int32 = 1) throws -> GraphicHistogram {
@@ -29,7 +30,7 @@ struct GraphicHistogramTests {
     // MARK: - Initialization Tests
 
     @Test("correct InitWithController initialization")
-    func testInitWithController() throws {
+    func initWithController() throws {
         // Given
         let controller = MockGraphicGeometrySource()
 
@@ -59,7 +60,7 @@ struct GraphicHistogramTests {
             (Int32(30), CGRect(x: -17.20729, y: 0.0, width: 17.20729, height: 24.57456))
         ]
     )
-    func testCalculateGeometry(params: (value: Int32, expectedRect: CGRect)) throws {
+    func calculateGeometry(params: (value: Int32, expectedRect: CGRect)) throws {
         let controller = MockGraphicGeometrySource()
         controller.mockSectorSize = 10.0
         let histogram = try buildTestObject(
@@ -104,7 +105,7 @@ struct GraphicHistogramTests {
             (Int32(30), CGRect(x: -0.1720, y: 0.0, width: 0.1720, height: 0.2457))
         ]
     )
-    func testCalculateGeometryPercent(params: (value: Int32, expectedRect: CGRect)) throws {
+    func calculateGeometryPercent(params: (value: Int32, expectedRect: CGRect)) throws {
         let controller = MockGraphicGeometrySource()
         controller.mockIsPercent = true
         controller.mockSectorSize = 10.0
@@ -143,7 +144,7 @@ struct GraphicHistogramTests {
     }
 
     @Test("Calculate Geometry 360 check")
-    func testCalculateGeometry360check() throws {
+    func calculateGeometry360check() throws {
         let controller = MockGraphicGeometrySource()
         controller.mockSectorSize = 10.0
         let histogram = try buildTestObject(

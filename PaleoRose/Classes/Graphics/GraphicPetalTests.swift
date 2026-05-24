@@ -4,6 +4,7 @@ import Numerics
 import Testing
 
 struct GraphicPetalTests {
+
     // MARK: - Test Data Structures
 
     struct PetalGeometryTestParams {
@@ -38,7 +39,7 @@ struct GraphicPetalTests {
     // MARK: - Initialization Tests
 
     @Test("initWithController should initialize with default values and configure")
-    func testInitWithController() throws {
+    func initWithController() throws {
         // Given
         let controller = MockGraphicGeometrySource()
 
@@ -123,7 +124,7 @@ struct GraphicPetalTests {
             ])
         ]
     )
-    func testCalculateGeometryCountController(params: PetalGeometryTestParams) throws {
+    func calculateGeometryCountController(params: PetalGeometryTestParams) throws {
         // Given
         let controller = MockGraphicGeometrySource()
         controller.mockSectorSize = 10
@@ -211,7 +212,7 @@ struct GraphicPetalTests {
             ])
         ]
     )
-    func testCalculateGeometryCountControllerPercent(params: PetalGeometryTestParams) throws {
+    func calculateGeometryCountControllerPercent(params: PetalGeometryTestParams) throws {
         // Given
         let controller = MockGraphicGeometrySource()
         controller.mockSectorSize = 10

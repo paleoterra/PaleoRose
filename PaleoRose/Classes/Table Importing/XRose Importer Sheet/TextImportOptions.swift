@@ -1,5 +1,4 @@
-//
-// TableSchemaTest.swift
+// TextImportOptions.swift
 // PaleoRose
 //
 // MIT License
@@ -24,33 +23,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import CodableSQLiteNonThread
-import Testing
+import Foundation
 
-struct TableSchemaTest {
-    let interface = SQLiteInterface()
-
-    @Test("Given Table, then read the schema")
-    func readSchema() throws {
-        let database = try interface.createInMemoryStore(identifier: UUID().uuidString)
-        _ = try interface.executeQuery(sqlite: database, query: TestableTable.createTableQuery())
-
-        let schema: [TableSchema] = try interface.executeCodableQuery(
-            sqlite: database,
-            query: TableSchema.storedValues()
-        )
-        let scheme = try #require(schema.first)
-        #expect(schema.count == 1)
-        #expect(scheme.name == "TestableTable")
-        #expect(scheme.sql + ";" == TestableTable.createTableQuery().sql)
-    }
-
-    @Test("Generate empty queries")
-    func generateEmptyQueries() {
-        #expect(TableSchema.storedValues().sql == "SELECT * FROM sqlite_schema;")
-        #expect(TableSchema.createTableQuery().sql.isEmpty)
-        #expect(TableSchema.insertQuery().sql.isEmpty)
-        #expect(TableSchema.updateQuery().sql.isEmpty)
-        #expect(TableSchema.deleteQuery().sql.isEmpty)
-    }
+struct TextImportOptions {
+    let tableName: String
+    let hasColumnHeaders: Bool
+    let delimiter: Character
+    let encoding: String.Encoding
 }

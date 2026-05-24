@@ -11,6 +11,7 @@ import Testing
 
 // swiftlint:disable file_length type_body_length
 struct GraphicCircleLabelTests {
+
     // MARK: - Test Setup
 
     private func buildTestObject(controller: GraphicGeometrySource) throws -> GraphicCircleLabel {
@@ -49,7 +50,7 @@ struct GraphicCircleLabelTests {
     // MARK: - Initialization Tests
 
     @Test("initWithController should initialize with default values")
-    func testInitWithController() throws {
+    func initWithController() throws {
         // Given
         let controller = MockGraphicGeometrySource()
 
@@ -71,7 +72,7 @@ struct GraphicCircleLabelTests {
     }
 
     @Test("initCoreCircleWithController should initialize core label with default values")
-    func testInitCoreCircleWithController() throws {
+    func initCoreCircleWithController() throws {
         // Given
         let controller = MockGraphicGeometrySource()
 
@@ -103,7 +104,7 @@ struct GraphicCircleLabelTests {
     // MARK: - Property Tests
 
     @Test("setShow should update showLabel value")
-    func testSetShow() throws {
+    func setShow() throws {
         // Given
         let controller = MockGraphicGeometrySource()
         let label = try buildTestObject(controller: controller)
@@ -122,7 +123,7 @@ struct GraphicCircleLabelTests {
     }
 
     @Test("setLabelAngle should update label angle and trigger geometry update")
-    func testSetLabelAngle() throws {
+    func setLabelAngle() throws {
         // Given
         let controller = MockGraphicGeometrySource()
         let label = try buildTestObject(controller: controller)
@@ -139,7 +140,7 @@ struct GraphicCircleLabelTests {
     }
 
     @Test("setFont should update font and trigger geometry update")
-    func testSetFont() throws {
+    func setFont() throws {
         // Given
         let controller = MockGraphicGeometrySource()
         let label = try buildTestObject(controller: controller)
@@ -187,7 +188,7 @@ struct GraphicCircleLabelTests {
     // MARK: - Label Text Computation Tests
 
     @Test("computeLabelText should generate correct label for percent mode")
-    func testComputeLabelTextPercentMode() throws {
+    func computeLabelTextPercentMode() throws {
         // Given
         let controller = MockGraphicGeometrySource()
         controller.mockIsPercent = true
@@ -203,7 +204,7 @@ struct GraphicCircleLabelTests {
     }
 
     @Test("computeLabelText should generate correct label for count mode")
-    func testComputeLabelTextCountMode() throws {
+    func computeLabelTextCountMode() throws {
         // Given
         let controller = MockGraphicGeometrySource()
         controller.mockIsPercent = false
@@ -219,7 +220,7 @@ struct GraphicCircleLabelTests {
     }
 
     @Test("computeLabelText should generate correct label for fixed count mode")
-    func testComputeLabelTextFixCountMode() throws {
+    func computeLabelTextFixCountMode() throws {
         // Given
         let controller = MockGraphicGeometrySource()
         controller.mockIsPercent = false
@@ -277,7 +278,7 @@ struct GraphicCircleLabelTests {
     }
 
     @Test("Show label to NO")
-    func testShowLabelToNo() throws {
+    func showLabelToNo() throws {
         let controller = MockGraphicGeometrySource()
         let label = try buildTestObject(controller: controller)
 
@@ -298,7 +299,7 @@ struct GraphicCircleLabelTests {
     // MARK: - Core Circle Tests
 
     @Test("Core circle in percent mode should use circleRect(forPercent:)")
-    func testCoreCirclePercentMode() throws {
+    func coreCirclePercentMode() throws {
         // Given
         let controller = MockGraphicGeometrySource()
         controller.mockIsPercent = true
@@ -321,7 +322,7 @@ struct GraphicCircleLabelTests {
     }
 
     @Test("Core circle in count mode should use circleRect(forCount:)")
-    func testCoreCircleCountMode() throws {
+    func coreCircleCountMode() throws {
         // Given
         let controller = MockGraphicGeometrySource()
         controller.mockIsPercent = false
@@ -345,7 +346,7 @@ struct GraphicCircleLabelTests {
     // MARK: - Non-Core Circle Tests
 
     @Test("Non-core circle with showLabel in percent mode should use radius methods")
-    func testNonCoreCircleWithLabelPercentMode() throws {
+    func nonCoreCircleWithLabelPercentMode() throws {
         // Given
         let controller = MockGraphicGeometrySource()
         controller.mockIsPercent = true
@@ -380,7 +381,7 @@ struct GraphicCircleLabelTests {
     }
 
     @Test("Non-core circle with showLabel in count mode should use radius methods")
-    func testNonCoreCircleWithLabelCountMode() throws {
+    func nonCoreCircleWithLabelCountMode() throws {
         // Given
         let controller = MockGraphicGeometrySource()
         controller.mockIsPercent = false
@@ -408,7 +409,7 @@ struct GraphicCircleLabelTests {
     }
 
     @Test("Non-core circle without showLabel in percent mode should use circleRect")
-    func testNonCoreCircleWithoutLabelPercentMode() throws {
+    func nonCoreCircleWithoutLabelPercentMode() throws {
         // Given
         let controller = MockGraphicGeometrySource()
         controller.mockIsPercent = true
@@ -431,7 +432,7 @@ struct GraphicCircleLabelTests {
     }
 
     @Test("Non-core circle without showLabel in count mode should use circleRect")
-    func testNonCoreCircleWithoutLabelCountMode() throws {
+    func nonCoreCircleWithoutLabelCountMode() throws {
         // Given
         let controller = MockGraphicGeometrySource()
         controller.mockIsPercent = false
@@ -456,7 +457,7 @@ struct GraphicCircleLabelTests {
     // MARK: - Fixed Count Tests
 
     @Test("Non-core circle with fixedCount should use percent methods regardless of isPercent")
-    func testNonCoreCircleWithFixedCount() throws {
+    func nonCoreCircleWithFixedCount() throws {
         // Given
         let controller = MockGraphicGeometrySource()
         controller.mockIsPercent = false // This should be ignored when isFixedCount is true
