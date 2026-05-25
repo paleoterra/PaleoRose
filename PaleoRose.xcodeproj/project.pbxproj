@@ -15,7 +15,6 @@
 		8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 		AA94BE0D2FC3B69500999D6F /* TableImportError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA94BE0C2FC3B69500999D6F /* TableImportError.swift */; };
 		AA94BE0F2FC3B69500999D6F /* TextImportOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA94BE0E2FC3B69500999D6F /* TextImportOptions.swift */; };
-		AA94BE112FC3B79000999D6F /* TabularData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA94BE102FC3B79000999D6F /* TabularData.framework */; };
 		AA94BE132FC3B8F900999D6F /* DataFrameTableWriting.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA94BE122FC3B8F900999D6F /* DataFrameTableWriting.swift */; };
 		AA94BE152FC3B90200999D6F /* DataFrameTableWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA94BE142FC3B90200999D6F /* DataFrameTableWriter.swift */; };
 		AA94BE192FC3B99600999D6F /* DataFrameTableWriterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA94BE182FC3B99600999D6F /* DataFrameTableWriterTests.swift */; };
@@ -501,7 +500,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4BDF3172A259164002A84B0 /* libsqlite3.tbd in Frameworks */,
-				AA94BE112FC3B79000999D6F /* TabularData.framework in Frameworks */,
 				8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */,
 				B4AF8C752C9CEECA0044A63D /* CodableSQLiteNonThread.framework in Frameworks */,
 				B427095D095D2D990059C65A /* Security.framework in Frameworks */,
