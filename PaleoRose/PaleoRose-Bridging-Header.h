@@ -13,3 +13,5 @@
 #import "GraphicGeometrySource.h"
 #import "XRPropertyInspector.h"
 #import "XRVStatCreatePanelController.h"
+#import "XRTableImporterDelimiterController.h"
+#import "XRTableImporterXRose.h"

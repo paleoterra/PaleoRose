@@ -55,5 +55,4 @@
 -(void)updateTable;
 -(void)performAzimuthFromVector;
 
--(void)importerCompleted:(NSNotification *)aNotification;
 @end

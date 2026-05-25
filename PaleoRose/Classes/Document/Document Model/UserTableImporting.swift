@@ -1,12 +1,9 @@
-//
-//  XRTableImporter.h
-//  XRose
-//
-//  Created by Tom Moore on 12/13/05.
+// UserTableImporting.swift
+// PaleoRose
 //
 // MIT License
 //
-// Copyright (c) 2005 to present Thomas L. Moore.
+// Copyright (c) 2024 to present Thomas L. Moore.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,14 +23,21 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#import <Cocoa/Cocoa.h>
+import Foundation
+import TabularData
 
+/// The interface through which `TableImportCoordinator` writes imported data into the document.
+/// Keeping this as a protocol lets tests inject a mock without touching any store.
+protocol UserTableImporting: AnyObject {
+    /// Parses `dataFrame` and creates a new SQLite user table named `tableName`.
+    func importTable(_ dataFrame: DataFrame, named tableName: String) throws
 
-@interface XRTableImporter : NSObject {
-	NSString *sourcePath;
-	NSDocument *targetDocument;
+    /// Copies selected tables from a source `.XRose` file into the current document.
+    func copyTables(
+        from sourceURL: URL,
+        selecting tables: [(original: String, destination: String)]
+    ) throws
+
+    /// Returns the names of all user data tables currently in the document.
+    func dataTableNames() -> [String]
 }
-
--(void)importTableFromFile:(NSString *)source forDocument:(NSDocument *)aDocument;
-
-@end

@@ -411,17 +411,6 @@ NSRect initialRect;
 	tableList = aList;
 }
 
--(void)importerCompleted:(NSNotification *)aNotification
-{
-    // Only refresh the table-name list so the UI shows the newly imported
-    // table. A full readFromStore is not needed here and would race with
-    // any layers the user has already created, overwriting DocumentModel.layers
-    // with a stale snapshot.
-    [self.documentModel refreshTableNames];
-    [[self document] discoverTables];
-    [self updateTable];
-}
-
 -(void)updateTable
 {
 	//NSLog(@"updatetable");
@@ -454,9 +443,10 @@ NSRect initialRect;
 
 -(IBAction)deleteTableAction:(id)sender
 {
+    NSInteger selectedRow = [_tableNameTable selectedRow];
+    if (selectedRow < 0 || selectedRow >= (NSInteger)[tableList count]) { return; }
     NSError *error;
-	//deleting a table should also delete all layers and datasets that make use of it.
-	NSString *tableToDelete = [tableList objectAtIndex:[_tableNameTable selectedRow]];
+	NSString *tableToDelete = [tableList objectAtIndex:selectedRow];
 
     [self.documentModel deleteWithTable:tableToDelete error:&error];
     if(error != nil) {

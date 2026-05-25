@@ -535,6 +535,80 @@ class InMemoryStore: NSObject {
         _ = try interface.executeQuery(sqlite: sqliteStore, query: query)
     }
 
+    /// Creates a user data table and inserts all rows in a single transaction.
+    /// Rolls back and rethrows on any failure — the table will not exist if an error is thrown.
+    func createUserTable(
+        createSQL: String,
+        insertSQL: String,
+        rows: [[Bindable?]]
+    ) throws {
+        let db = try validateStore()
+        _ = try interface.executeQuery(sqlite: db, query: Query(sql: "BEGIN"))
+        do {
+            _ = try interface.executeQuery(sqlite: db, query: Query(sql: createSQL))
+            let insert = Query(sql: insertSQL, bindings: rows)
+            _ = try interface.executeQuery(sqlite: db, query: insert)
+            _ = try interface.executeQuery(sqlite: db, query: Query(sql: "COMMIT"))
+        } catch {
+            _ = try? interface.executeQuery(sqlite: db, query: Query(sql: "ROLLBACK"))
+            throw error
+        }
+    }
+
+    /// Copies selected tables from a source .XRose file into the in-memory store.
+    /// Rolls back and rethrows on any failure.
+    func copyTables(
+        from sourceURL: URL,
+        selecting tables: [(original: String, destination: String)]
+    ) throws {
+        let db = try validateStore()
+        let attachSQL = "ATTACH DATABASE \"\(sourceURL.path.sqliteEscaped)\" AS source"
+        _ = try interface.executeQuery(sqlite: db, query: Query(sql: attachSQL))
+        defer {
+            _ = try? interface.executeQuery(sqlite: db, query: Query(sql: "DETACH DATABASE source"))
+        }
+        _ = try interface.executeQuery(sqlite: db, query: Query(sql: "BEGIN"))
+        do {
+            for pair in tables {
+                let schemaSQL = try fetchSchema(db: db, sourceName: pair.original, destinationName: pair.destination)
+                _ = try interface.executeQuery(sqlite: db, query: Query(sql: schemaSQL))
+                let dst = pair.destination.sqliteEscaped
+                let src = pair.original.sqliteEscaped
+                let copySQL = "INSERT INTO main.\"\(dst)\" SELECT * FROM source.\"\(src)\""
+                _ = try interface.executeQuery(sqlite: db, query: Query(sql: copySQL))
+            }
+            _ = try interface.executeQuery(sqlite: db, query: Query(sql: "COMMIT"))
+        } catch {
+            _ = try? interface.executeQuery(sqlite: db, query: Query(sql: "ROLLBACK"))
+            throw error
+        }
+    }
+
+    private func fetchSchema(
+        db: OpaquePointer,
+        sourceName: String,
+        destinationName: String
+    ) throws -> String {
+        let query = Query(
+            sql: "SELECT sql FROM source.sqlite_master WHERE type='table' AND name=?",
+            bindings: [[sourceName as Bindable?]]
+        )
+        let result = try interface.executeQuery(sqlite: db, query: query)
+        guard let originalSQL = result.first?["sql"] as? String else {
+            throw InMemoryStoreError.unexpectedEmptyResult
+        }
+        return rewrite(sql: originalSQL, from: sourceName, to: destinationName)
+    }
+
+    private func rewrite(sql: String, from sourceName: String, to destinationName: String) -> String {
+        let escapedSrc = "\"\(sourceName.sqliteEscaped)\""
+        let escapedDst = "\"\(destinationName.sqliteEscaped)\""
+        if sql.contains(escapedSrc) {
+            return sql.replacingOccurrences(of: escapedSrc, with: escapedDst)
+        }
+        return sql.replacingOccurrences(of: sourceName, with: escapedDst, options: .caseInsensitive)
+    }
+
     @discardableResult
     private func validateStore() throws -> OpaquePointer {
         guard let sqliteStore else {
@@ -599,5 +673,13 @@ class InMemoryStore: NSObject {
                 logError(error: "Error closing in-memory store: \(error)")
             }
         }
+    }
+}
+
+// MARK: -
+
+private extension String {
+    var sqliteEscaped: String {
+        replacingOccurrences(of: "\"", with: "\"\"")
     }
 }
