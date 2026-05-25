@@ -107,7 +107,7 @@ struct TableListControllerTests {
     // MARK: - Data Source Tests
 
     @Test("Setting data source triggers subscription")
-    func testDataSourceSubscription() async throws {
+    func dataSourceSubscription() async throws {
         let fixture = TableListControllerTestFixture()
 
         try await fixture.setTableNames(["Table1", "Table2"])
@@ -116,7 +116,7 @@ struct TableListControllerTests {
     }
 
     @Test("Data source publishes table names updates")
-    func testDataSourcePublishesUpdates() async throws {
+    func dataSourcePublishesUpdates() async throws {
         let fixture = TableListControllerTestFixture()
         let initialReloadCount = fixture.mockTableView.reloadDataCallCount
 
@@ -126,7 +126,7 @@ struct TableListControllerTests {
     }
 
     @Test("Multiple data source updates trigger multiple reloads")
-    func testMultipleDataSourceUpdates() async throws {
+    func multipleDataSourceUpdates() async throws {
         let fixture = TableListControllerTestFixture()
 
         fixture.mockDataSource.updateTableNames(["Table1"])
@@ -155,7 +155,7 @@ struct TableListControllerTests {
     }
 
     @Test("Object value for valid row returns table name")
-    func testObjectValueForValidRow() async throws {
+    func objectValueForValidRow() async throws {
         let fixture = TableListControllerTestFixture()
 
         try await fixture.setTableNames(["Table1", "Table2", "Table3"])
@@ -170,7 +170,7 @@ struct TableListControllerTests {
     }
 
     @Test("Object value for invalid row returns nil")
-    func testObjectValueForInvalidRow() async throws {
+    func objectValueForInvalidRow() async throws {
         let fixture = TableListControllerTestFixture()
 
         try await fixture.setTableNames(["Table1", "Table2"])
@@ -185,7 +185,7 @@ struct TableListControllerTests {
     // MARK: - Table Name Editing Tests
 
     @Test("Setting valid object value renames table")
-    func testSettingValidObjectValue() async throws {
+    func settingValidObjectValue() async throws {
         let fixture = TableListControllerTestFixture()
 
         try await fixture.setTableNames(["OldName", "Table2"])
@@ -198,7 +198,7 @@ struct TableListControllerTests {
     }
 
     @Test("Setting empty string does not rename table")
-    func testSettingEmptyString() async throws {
+    func settingEmptyString() async throws {
         let fixture = TableListControllerTestFixture()
 
         try await fixture.setTableNames(["Table1"])
@@ -209,7 +209,7 @@ struct TableListControllerTests {
     }
 
     @Test("Setting non-string object does not rename table")
-    func testSettingNonStringObject() async throws {
+    func settingNonStringObject() async throws {
         let fixture = TableListControllerTestFixture()
 
         try await fixture.setTableNames(["Table1"])
@@ -220,7 +220,7 @@ struct TableListControllerTests {
     }
 
     @Test("Setting object value for invalid row does not rename")
-    func testSettingObjectValueForInvalidRow() async throws {
+    func settingObjectValueForInvalidRow() async throws {
         let fixture = TableListControllerTestFixture()
 
         try await fixture.setTableNames(["Table1"])
@@ -231,7 +231,7 @@ struct TableListControllerTests {
     }
 
     @Test("Setting object value without data source does nothing")
-    func testSettingObjectValueWithoutDataSource() async throws {
+    func settingObjectValueWithoutDataSource() async throws {
         let fixture = TableListControllerTestFixture()
 
         try await fixture.setTableNames(["Table1"])
@@ -246,7 +246,7 @@ struct TableListControllerTests {
     // MARK: - TableView Property Tests
 
     @Test("Setting tableView triggers reload")
-    func testSettingTableViewTriggersReload() {
+    func settingTableViewTriggersReload() {
         let mockDocument = createMockDocumentModel()
         let controller = TableListController(dataSource: mockDocument)
         let mockTableView = MockTableView()
@@ -257,7 +257,7 @@ struct TableListControllerTests {
     }
 
     @Test("Replacing tableView triggers reload on new view")
-    func testReplacingTableView() {
+    func replacingTableView() {
         let mockDocument = createMockDocumentModel()
         let controller = TableListController(dataSource: mockDocument)
         let mockTableView1 = MockTableView()
@@ -273,7 +273,7 @@ struct TableListControllerTests {
     // MARK: - Integration Tests
 
     @Test("Complete workflow: initialize, set data source, update names, rename")
-    func testCompleteWorkflow() async throws {
+    func completeWorkflow() async throws {
         let fixture = TableListControllerTestFixture()
 
         #expect(fixture.controller.numberOfRows(in: fixture.mockTableView) == 0)

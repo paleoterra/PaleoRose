@@ -49,6 +49,7 @@ private enum XRGeometryDefaultKey: String {
 }
 
 @objc class XRGeometryController: NSObject, XRGeometryCalculating, XRGeometryConfiguring {
+
     // MARK: - Properties
 
     @IBOutlet private var layersTableController: LayersTableController?
@@ -295,7 +296,9 @@ private enum XRGeometryDefaultKey: String {
 
     // MARK: - Accessors
 
-    var drawingBounds: NSRect { circleRect }
+    var drawingBounds: NSRect {
+        circleRect
+    }
 }
 
 // MARK: - XML Support

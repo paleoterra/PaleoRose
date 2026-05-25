@@ -7,7 +7,7 @@ import Testing
 struct ArrowHeadTests {
 
     @Test("Initialization with valid parameters")
-    func testInitialization() {
+    func initialization() {
         let color = NSColor.red
         let size: Float = 1.0
         let type = 0
@@ -22,7 +22,7 @@ struct ArrowHeadTests {
     }
 
     @Test("Initialization with different arrow types", arguments: [0, 1, 2, 4])
-    func testInitializationWithDifferentTypes(type: Int) {
+    func initializationWithDifferentTypes(type: Int) {
         let color = NSColor.blue
         let size: Float = 2.0
 
@@ -31,7 +31,7 @@ struct ArrowHeadTests {
     }
 
     @Test("Initialization with different sizes", arguments: [0.5, 1.0, 2.0, 10.0])
-    func testInitializationWithDifferentSizes(size: Float) {
+    func initializationWithDifferentSizes(size: Float) {
         let color = NSColor.green
         let type = 0
 
@@ -44,7 +44,7 @@ struct ArrowHeadTests {
         "Initialization with different colors",
         arguments: [NSColor.red, NSColor.blue, NSColor.green, NSColor.black, NSColor.white]
     )
-    func testInitializationWithDifferentColors(color: NSColor) {
+    func initializationWithDifferentColors(color: NSColor) {
         let size: Float = 1.0
         let type = 0
 
@@ -53,7 +53,7 @@ struct ArrowHeadTests {
     }
 
     @Test("Position transform changes after positioning")
-    func testPositionTransformChanges() {
+    func positionTransformChanges() {
         let arrowHead = ArrowHead(size: 1.0, color: NSColor.red, type: 0)
         let initialTransform = arrowHead.positionTransform
         let point = CGPoint(x: 10.0, y: 20.0)
@@ -65,7 +65,7 @@ struct ArrowHeadTests {
     }
 
     @Test("Multiple positioning calls update transform", arguments: [0.0, 45.0, 90.0, 180.0, 270.0, 360.0])
-    func testMultiplePositioningUpdatesTransform(angle: Float) {
+    func multiplePositioningUpdatesTransform(angle: Float) {
         let arrowHead = ArrowHead(size: 1.0, color: NSColor.red, type: 0)
         let point1 = CGPoint(x: 15.0, y: 25.0)
         let point2 = CGPoint(x: 30.0, y: 40.0)
@@ -80,7 +80,7 @@ struct ArrowHeadTests {
     }
 
     @Test("Position at line endpoint with various points")
-    func testPositionAtLineEndpointWithPoints() {
+    func positionAtLineEndpointWithPoints() {
         let arrowHead = ArrowHead(size: 1.0, color: NSColor.red, type: 0)
         let points = [
             CGPoint.zero,
@@ -96,7 +96,7 @@ struct ArrowHeadTests {
     }
 
     @Test("Draw rect functionality")
-    func testDrawRect() {
+    func drawRect() {
         let arrowHead = ArrowHead(size: 1.0, color: NSColor.red, type: 0)
         let rect = CGRect(x: 0, y: 0, width: 100, height: 100)
 
@@ -104,35 +104,35 @@ struct ArrowHeadTests {
     }
 
     @Test("Standard arrow type path creation")
-    func testStandardArrowType() {
+    func standardArrowType() {
         let arrowHead = ArrowHead(size: 1.0, color: NSColor.red, type: 0)
 
         #expect(arrowHead.path.elementCount > 0)
     }
 
     @Test("Flying arrow type path creation")
-    func testFlyingArrowType() {
+    func flyingArrowType() {
         let arrowHead = ArrowHead(size: 1.0, color: NSColor.red, type: 1)
 
         #expect(arrowHead.path.elementCount > 0)
     }
 
     @Test("Half arrow left type path creation")
-    func testHalfArrowLeftType() {
+    func halfArrowLeftType() {
         let arrowHead = ArrowHead(size: 1.0, color: NSColor.red, type: 2)
 
         #expect(arrowHead.path.elementCount > 0)
     }
 
     @Test("Half arrow right type path creation")
-    func testHalfArrowRightType() {
+    func halfArrowRightType() {
         let arrowHead = ArrowHead(size: 1.0, color: NSColor.red, type: 4)
 
         #expect(arrowHead.path.elementCount > 0)
     }
 
     @Test("Scale transform configuration")
-    func testScaleTransformConfiguration() {
+    func scaleTransformConfiguration() {
         let smallArrow = ArrowHead(size: 0.5, color: NSColor.red, type: 0)
         let largeArrow = ArrowHead(size: 2.0, color: NSColor.red, type: 0)
 
@@ -140,7 +140,7 @@ struct ArrowHeadTests {
     }
 
     @Test("Position transform after positioning")
-    func testPositionTransformAfterPositioning() {
+    func positionTransformAfterPositioning() {
         let arrowHead = ArrowHead(size: 1.0, color: NSColor.red, type: 0)
         let initialTransform = arrowHead.positionTransform
 
@@ -150,7 +150,7 @@ struct ArrowHeadTests {
     }
 
     @Test("Multiple repositioning updates transform")
-    func testMultipleRepositioning() {
+    func multipleRepositioning() {
         let arrowHead = ArrowHead(size: 1.0, color: NSColor.red, type: 0)
 
         arrowHead
@@ -168,7 +168,7 @@ struct ArrowHeadTests {
     }
 
     @Test("Invalid arrow type defaults gracefully")
-    func testInvalidArrowType() {
+    func invalidArrowType() {
         let arrowHead = ArrowHead(size: 1.0, color: NSColor.red, type: 999)
 
         #expect(arrowHead.path.elementCount == 0)

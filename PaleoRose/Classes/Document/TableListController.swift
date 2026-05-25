@@ -107,7 +107,7 @@ extension TableListController: NSTableViewDataSource {
         tableNames.count
     }
 
-    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
+    func tableView(_: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
         guard tableNames.indices.contains(row) else {
             return nil
         }
@@ -115,7 +115,7 @@ extension TableListController: NSTableViewDataSource {
     }
 
     func tableView(
-        _ tableView: NSTableView,
+        _: NSTableView,
         setObjectValue object: Any?,
         for tableColumn: NSTableColumn?,
         row: Int

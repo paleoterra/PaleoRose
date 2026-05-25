@@ -39,7 +39,7 @@ public struct SQLiteInterface {
     /// Simple init
     public init() {}
 
-    // document the createInMemoryStore function
+    /// document the createInMemoryStore function
     /// Create an in memory store
     /// When using an in-memory store, the user must hold on to the pointer to the store.
     /// Allowing the pointer to go nil may delete he store and could lead to a memory leak

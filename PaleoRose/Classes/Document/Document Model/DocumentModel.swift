@@ -27,6 +27,7 @@
 import CodableSQLiteNonThread
 import Combine
 import Foundation
+import TabularData
 
 // swiftlint:disable file_length
 class DocumentModel: NSObject {
@@ -493,6 +494,37 @@ extension DocumentModel: LayerTableControllerDataSource {
         if !isUsed {
             dataSets.removeAll { $0 === dataSet }
         }
+    }
+}
+
+// MARK: - Table Import
+
+extension DocumentModel: UserTableImporting {
+
+    func importTable(_ dataFrame: DataFrame, named tableName: String) throws {
+        try importTable(dataFrame, named: tableName, writer: DataFrameTableWriter())
+    }
+
+    /// Extended entry point used by tests to inject a mock writer.
+    func importTable(
+        _ dataFrame: DataFrame,
+        named tableName: String,
+        writer: DataFrameTableWriting
+    ) throws {
+        guard !dataFrame.isEmpty else { throw TableImportError.emptyDataFrame }
+        let createSQL = writer.createSQL(for: dataFrame, named: tableName)
+        let insertSQL = writer.insertSQL(for: dataFrame, named: tableName)
+        let rows = writer.bindingRows(for: dataFrame)
+        try inMemoryStore.createUserTable(createSQL: createSQL, insertSQL: insertSQL, rows: rows)
+        refreshTableNames()
+    }
+
+    func copyTables(
+        from sourceURL: URL,
+        selecting tables: [(original: String, destination: String)]
+    ) throws {
+        try inMemoryStore.copyTables(from: sourceURL, selecting: tables)
+        refreshTableNames()
     }
 }
 

@@ -1,0 +1,825 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>top-level-items</key>
+	<array>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingColumnNumber</key>
+					<string>13</string>
+					<key>EndingLineNumber</key>
+					<string>175</string>
+					<key>StartingColumnNumber</key>
+					<string>0</string>
+					<key>StartingLineNumber</key>
+					<string>175</string>
+					<key>Timestamp</key>
+					<string>781891794.139027</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>PaleoRose/PaleoRose/Classes/Table Importing/XRTableImporter.m</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>text-context</key>
+			<dict>
+				<key>focused</key>
+				<string>-(void)create</string>
+				<key>leading</key>
+				<string>
+
+</string>
+				<key>trailing</key>
+				<string>TableWithSQL:(NSString *)sqlCreate withTableArray:(NSArray *)contents table:(NSString *)table columnNames:(NSArray *)names
+{
+	sqlite3 *db = [(XRoseDocument *)targetDocument documentInMemoryStore];
+</string>
+			</dict>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingColumnNumber</key>
+					<string>24</string>
+					<key>EndingLineNumber</key>
+					<string>248</string>
+					<key>StartingColumnNumber</key>
+					<string>7</string>
+					<key>StartingLineNumber</key>
+					<string>248</string>
+					<key>Timestamp</key>
+					<string>781891805.161724</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>PaleoRose/PaleoRose/Classes/Table Importing/XRTableImporter.m</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>text-context</key>
+			<dict>
+				<key>focused</key>
+				<string>importFromXRoseDB</string>
+				<key>leading</key>
+				<string>}
+
+-(void)</string>
+				<key>trailing</key>
+				<string>
+{
+	sqlite3* db; //source xrose file
+</string>
+			</dict>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingColumnNumber</key>
+					<string>25</string>
+					<key>EndingLineNumber</key>
+					<string>384</string>
+					<key>StartingColumnNumber</key>
+					<string>12</string>
+					<key>StartingLineNumber</key>
+					<string>384</string>
+					<key>Timestamp</key>
+					<string>781891830.169199</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>PaleoRose/PaleoRose/Classes/Table Importing/XRTableImporter.m</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>text-context</key>
+			<dict>
+				<key>focused</key>
+				<string>validateNames</string>
+				<key>leading</key>
+				<string>}
+
+-(NSArray *)</string>
+				<key>trailing</key>
+				<string>:(NSArray *)names
+{
+	NSMutableArray *resultArray = [[NSMutableArray alloc] init];
+</string>
+			</dict>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>PaleoRose/PaleoRose/Classes/Table Importing/XRTableImporter.m</string>
+					</dict>
+				</dict>
+				<key>type</key>
+				<string>DVTDocumentLocation</string>
+			</dict>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingColumnNumber</key>
+					<string>23</string>
+					<key>EndingLineNumber</key>
+					<string>27</string>
+					<key>StartingColumnNumber</key>
+					<string>5</string>
+					<key>StartingLineNumber</key>
+					<string>27</string>
+					<key>Timestamp</key>
+					<string>781891882.229614</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>PaleoRose/PaleoRose/Classes/Data/Make Dataset Sheet/XRMakeDatasetController.m</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>text-context</key>
+			<dict>
+				<key>focused</key>
+				<string>rt "PaleoRose-Swif</string>
+				<key>leading</key>
+				<string>
+#if __has_include("PaleoRose-Swift.h")
+#impo</string>
+				<key>trailing</key>
+				<string>t.h"
+#endif
+
+</string>
+			</dict>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingColumnNumber</key>
+					<string>1</string>
+					<key>EndingLineNumber</key>
+					<string>155</string>
+					<key>StartingColumnNumber</key>
+					<string>1</string>
+					<key>StartingLineNumber</key>
+					<string>155</string>
+					<key>Timestamp</key>
+					<string>788758672.794203</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>PaleoRose/PaleoRose/Classes/Data/Make Dataset Sheet/XRMakeDatasetController.m</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>text-context</key>
+			<dict>
+				<key>focused</key>
+				<string></string>
+				<key>leading</key>
+				<string>			[(NSView *)self.predicateBuilder setFrame:builderFrame];
+
+	</string>
+				<key>trailing</key>
+				<string>		// Add to window content view
+			[[[self window] contentView] addSubview:(NSView *)self.predicateBuilder];
+			[(NSView *)self.predicateBuilder setHidden:YES];
+</string>
+			</dict>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingColumnNumber</key>
+					<string>32</string>
+					<key>EndingLineNumber</key>
+					<string>92</string>
+					<key>StartingColumnNumber</key>
+					<string>19</string>
+					<key>StartingLineNumber</key>
+					<string>92</string>
+					<key>Timestamp</key>
+					<string>781891927.50141</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>PaleoRose/PaleoRose/Classes/Data/Make Dataset Sheet/XRMakeDatasetController.swift</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>text-context</key>
+			<dict>
+				<key>focused</key>
+				<string>selectColumns</string>
+				<key>leading</key>
+				<string>    }
+
+    @IBAction func </string>
+				<key>trailing</key>
+				<string>(_: Any) {
+        guard
+            let inMemoryStore,
+</string>
+			</dict>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingColumnNumber</key>
+					<string>36</string>
+					<key>EndingLineNumber</key>
+					<string>159</string>
+					<key>StartingColumnNumber</key>
+					<string>19</string>
+					<key>StartingLineNumber</key>
+					<string>159</string>
+					<key>Timestamp</key>
+					<string>781891939.94434</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>PaleoRose/PaleoRose/Classes/Data/Make Dataset Sheet/XRMakeDatasetController.swift</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>text-context</key>
+			<dict>
+				<key>focused</key>
+				<string>validatePredicate</string>
+				<key>leading</key>
+				<string>    }
+
+    @IBAction func </string>
+				<key>trailing</key>
+				<string>(_: Any) {
+        guard
+            let inMemoryStore,
+</string>
+			</dict>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingColumnNumber</key>
+					<string>18</string>
+					<key>EndingLineNumber</key>
+					<string>38</string>
+					<key>StartingColumnNumber</key>
+					<string>5</string>
+					<key>StartingLineNumber</key>
+					<string>38</string>
+					<key>Timestamp</key>
+					<string>781891957.0748399</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>PaleoRose/PaleoRose/Classes/Data/Data Set/XRDataSet.m</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>text-context</key>
+			<dict>
+				<key>focused</key>
+				<string>initWithTable</string>
+				<key>leading</key>
+				<string>#pragma mark Initers
+
+-(id)</string>
+				<key>trailing</key>
+				<string>:(NSString *)table column:(NSString *)column db:(sqlite3 *)db
+{
+	if (!(self = [super init])) return nil;
+</string>
+			</dict>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingColumnNumber</key>
+					<string>18</string>
+					<key>EndingLineNumber</key>
+					<string>55</string>
+					<key>StartingColumnNumber</key>
+					<string>5</string>
+					<key>StartingLineNumber</key>
+					<string>55</string>
+					<key>Timestamp</key>
+					<string>781891967.210602</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>PaleoRose/PaleoRose/Classes/Data/Data Set/XRDataSet.m</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>text-context</key>
+			<dict>
+				<key>focused</key>
+				<string>initWithTable</string>
+				<key>leading</key>
+				<string>}
+
+-(id)</string>
+				<key>trailing</key>
+				<string>:(NSString *)table column:(NSString *)column db:(sqlite3 *)db predicate:(NSString *)aPredicate;
+{
+	if (!(self = [super init])) return nil;
+</string>
+			</dict>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingColumnNumber</key>
+					<string>14</string>
+					<key>EndingLineNumber</key>
+					<string>656</string>
+					<key>StartingColumnNumber</key>
+					<string>7</string>
+					<key>StartingLineNumber</key>
+					<string>656</string>
+					<key>Timestamp</key>
+					<string>781891999.559875</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>PaleoRose/PaleoRose/Classes/Data/Data Set/XRDataSet.m</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>text-context</key>
+			<dict>
+				<key>focused</key>
+				<string>readSQL</string>
+				<key>leading</key>
+				<string>}
+
+-(BOOL)</string>
+				<key>trailing</key>
+				<string>:(sqlite3 *)db
+{
+	NSString *theSQL = [self buildSQL];
+</string>
+			</dict>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingColumnNumber</key>
+					<string>20</string>
+					<key>EndingLineNumber</key>
+					<string>700</string>
+					<key>StartingColumnNumber</key>
+					<string>7</string>
+					<key>StartingLineNumber</key>
+					<string>700</string>
+					<key>Timestamp</key>
+					<string>781892014.3214</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>PaleoRose/PaleoRose/Classes/Data/Data Set/XRDataSet.m</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>text-context</key>
+			<dict>
+				<key>focused</key>
+				<string>readSQLFromDB</string>
+				<key>leading</key>
+				<string>
+// private
+-(BOOL)</string>
+				<key>trailing</key>
+				<string>:(sqlite3 *)db
+{
+	NSString *theSQL = [self buildSQL];
+</string>
+			</dict>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingColumnNumber</key>
+					<string>0</string>
+					<key>EndingLineNumber</key>
+					<string>742</string>
+					<key>StartingColumnNumber</key>
+					<string>0</string>
+					<key>StartingLineNumber</key>
+					<string>742</string>
+					<key>Timestamp</key>
+					<string>781896459.989288</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>PaleoRose/PaleoRose/Classes/Data/Data Set/XRDataSet.m</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>text-context</key>
+			<dict>
+				<key>focused</key>
+				<string></string>
+				<key>leading</key>
+				<string>	return YES;
+}
+</string>
+				<key>trailing</key>
+				<string>
+-(id)initFromSQL:(sqlite3 *)db forIndex:(int)index
+{
+</string>
+			</dict>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingColumnNumber</key>
+					<string>0</string>
+					<key>EndingLineNumber</key>
+					<string>744</string>
+					<key>StartingColumnNumber</key>
+					<string>0</string>
+					<key>StartingLineNumber</key>
+					<string>743</string>
+					<key>Timestamp</key>
+					<string>781896460.005481</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>PaleoRose/PaleoRose/Classes/Data/Data Set/XRDataSet.m</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>text-context</key>
+			<dict>
+				<key>focused</key>
+				<string>-(id)initFromSQL:(sqlite3 *)db forIndex:(int)index
+</string>
+				<key>leading</key>
+				<string>}
+
+</string>
+				<key>trailing</key>
+				<string>{
+	//NSLog(@"index: %i",index);
+	if (!(self = [super init])) return nil;
+</string>
+			</dict>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingColumnNumber</key>
+					<string>24</string>
+					<key>EndingLineNumber</key>
+					<string>190</string>
+					<key>StartingColumnNumber</key>
+					<string>17</string>
+					<key>StartingLineNumber</key>
+					<string>190</string>
+					<key>Timestamp</key>
+					<string>781892052.735124</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>PaleoRose/PaleoRose/Classes/Data/Data Set/XRDataSet.swift</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>text-context</key>
+			<dict>
+				<key>focused</key>
+				<string>readSQL</string>
+				<key>leading</key>
+				<string>    // MARK: - Private Methods
+
+    private func </string>
+				<key>trailing</key>
+				<string>(db: OpaquePointer?) -&gt; Bool {
+        guard let db else { return false }
+
+</string>
+			</dict>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingColumnNumber</key>
+					<string>0</string>
+					<key>EndingLineNumber</key>
+					<string>259</string>
+					<key>StartingColumnNumber</key>
+					<string>0</string>
+					<key>StartingLineNumber</key>
+					<string>258</string>
+					<key>Timestamp</key>
+					<string>785462259.022458</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>PaleoRose/PaleoRose/Classes/Document/XRose Document/XRoseDocument.m</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>text-context</key>
+			<dict>
+				<key>focused</key>
+				<string>    return [self.documentModel memoryStore];
+</string>
+				<key>leading</key>
+				<string>-(sqlite3 *)documentInMemoryStore
+{
+</string>
+				<key>trailing</key>
+				<string>}
+
+// **** REFACTOR/MOVE
+</string>
+			</dict>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingColumnNumber</key>
+					<string>0</string>
+					<key>EndingLineNumber</key>
+					<string>419</string>
+					<key>StartingColumnNumber</key>
+					<string>0</string>
+					<key>StartingLineNumber</key>
+					<string>418</string>
+					<key>Timestamp</key>
+					<string>790363195.014981</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>PaleoRose/PaleoRose/Classes/Document/XRoseWindowController.m</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>text-context</key>
+			<dict>
+				<key>focused</key>
+				<string>    // with a stale snapshot.
+</string>
+				<key>leading</key>
+				<string>    // table. A full readFromStore is not needed here and would race with
+    // any layers the user has already created, overwriting DocumentModel.layers
+</string>
+				<key>trailing</key>
+				<string>    [self.documentModel refreshTableNames];
+    [[self document] discoverTables];
+    [self updateTable];
+</string>
+			</dict>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingColumnNumber</key>
+					<string>0</string>
+					<key>EndingLineNumber</key>
+					<string>455</string>
+					<key>StartingColumnNumber</key>
+					<string>0</string>
+					<key>StartingLineNumber</key>
+					<string>454</string>
+					<key>Timestamp</key>
+					<string>784773462.846415</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>PaleoRose/PaleoRose/Classes/Document/XRoseTableController.m</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>text-context</key>
+			<dict>
+				<key>focused</key>
+				<string>
+</string>
+				<key>leading</key>
+				<string>    }
+}
+</string>
+				<key>trailing</key>
+				<string>-(void)configureControllerWithSQL:(sqlite3 *)db withDataSets:(NSArray *)datasets {
+    NSMutableArray *anArray = [[NSMutableArray alloc] init];
+    int k;
+</string>
+			</dict>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingColumnNumber</key>
+					<string>0</string>
+					<key>EndingLineNumber</key>
+					<string>456</string>
+					<key>StartingColumnNumber</key>
+					<string>0</string>
+					<key>StartingLineNumber</key>
+					<string>455</string>
+					<key>Timestamp</key>
+					<string>781896477.935515</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>PaleoRose/PaleoRose/Classes/Document/XRoseTableController.m</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>text-context</key>
+			<dict>
+				<key>focused</key>
+				<string>-(void)configureControllerWithSQL:(sqlite3 *)db withDataSets:(NSArray *)datasets {
+</string>
+				<key>leading</key>
+				<string>}
+
+</string>
+				<key>trailing</key>
+				<string>    NSMutableArray *anArray = [[NSMutableArray alloc] init];
+    int k;
+    const char *pzMsg;
+</string>
+			</dict>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+	</array>
+</dict>
+</plist>

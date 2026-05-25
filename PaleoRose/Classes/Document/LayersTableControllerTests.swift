@@ -96,12 +96,12 @@ final class MockLayerTableDataSource: LayerTableControllerDataSource {
         lastMoveDestination = destination
     }
 
-    func updateLayerName(_ layer: XRLayer, newName: String) {
+    func updateLayerName(_: XRLayer, newName: String) {
         updateLayerNameCallCount += 1
         lastLayerName = newName
     }
 
-    func updateLayerVisibility(_ layer: XRLayer, isVisible: Bool) {
+    func updateLayerVisibility(_: XRLayer, isVisible: Bool) {
         updateLayerVisibilityCallCount += 1
     }
 }
@@ -169,7 +169,7 @@ struct LayersTableControllerTests {
     // MARK: - Subscription Tests
 
     @Test("Setting data source triggers subscription")
-    func testDataSourceSubscription() async throws {
+    func dataSourceSubscription() async throws {
         let fixture = LayersTableControllerTestFixture()
 
         let layer1 = try #require(createMockLayer(name: "Layer 1"))
@@ -181,7 +181,7 @@ struct LayersTableControllerTests {
     }
 
     @Test("Data source publishes layer updates")
-    func testDataSourcePublishesUpdates() async throws {
+    func dataSourcePublishesUpdates() async throws {
         let fixture = LayersTableControllerTestFixture()
         let initialReloadCount = fixture.mockTableView.reloadDataCallCount
 
@@ -211,7 +211,7 @@ struct LayersTableControllerTests {
     }
 
     @Test("Object value for valid row returns layer name")
-    func testObjectValueForValidRow() async throws {
+    func objectValueForValidRow() async throws {
         let fixture = LayersTableControllerTestFixture()
 
         let layer1 = try #require(createMockLayer(name: "Test Layer 1"))
@@ -228,7 +228,7 @@ struct LayersTableControllerTests {
     }
 
     @Test("Object value for invalid row returns nil")
-    func testObjectValueForInvalidRow() async throws {
+    func objectValueForInvalidRow() async throws {
         let fixture = LayersTableControllerTestFixture()
 
         let layer1 = try #require(createMockLayer(name: "Layer 1"))
@@ -243,7 +243,7 @@ struct LayersTableControllerTests {
     }
 
     @Test("Setting layer name calls updateLayerName")
-    func testSettingLayerName() async throws {
+    func settingLayerName() async throws {
         let fixture = LayersTableControllerTestFixture()
 
         let layer1 = try #require(createMockLayer(name: "Old Name"))
@@ -257,7 +257,7 @@ struct LayersTableControllerTests {
     }
 
     @Test("Setting visibility calls updateLayerVisibility")
-    func testSettingVisibility() async throws {
+    func settingVisibility() async throws {
         let fixture = LayersTableControllerTestFixture()
 
         let layer1 = try #require(createMockLayer(name: "Layer 1"))
@@ -277,7 +277,7 @@ struct LayersTableControllerTests {
     // MARK: - Layer Utilities Tests
 
     @Test("layerExists returns true for existing layer")
-    func testLayerExistsTrue() async throws {
+    func layerExistsTrue() async throws {
         let fixture = LayersTableControllerTestFixture()
 
         let layer1 = try #require(createMockLayer(name: "Existing Layer"))
@@ -287,7 +287,7 @@ struct LayersTableControllerTests {
     }
 
     @Test("layerExists returns false for non-existing layer")
-    func testLayerExistsFalse() async throws {
+    func layerExistsFalse() async throws {
         let fixture = LayersTableControllerTestFixture()
 
         let layer1 = try #require(createMockLayer(name: "Layer 1"))
@@ -352,7 +352,7 @@ struct LayersTableControllerTests {
     // MARK: - Statistics Tests
 
     @Test("generateStatisticsString returns empty for non-data layers")
-    func testGenerateStatisticsStringEmpty() async throws {
+    func generateStatisticsStringEmpty() async throws {
         let fixture = LayersTableControllerTestFixture()
 
         let layer1 = try #require(createMockLayer(name: "Grid"))

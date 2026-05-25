@@ -38,7 +38,7 @@
 #import "PaleoRose-Swift.h"
 #import <Security/Security.h>
 #import <Security/AuthSession.h>
-#import "XRTableImporter.h"
+#import <UniformTypeIdentifiers/UniformTypeIdentifiers.h>
 #import <os/activity.h>
 
 
@@ -47,7 +47,7 @@
 @property (nonatomic) NSMutableArray *dataSets;
 
 @property (nonatomic) NSObject *currentSheetController;
-@property (nonatomic) XRTableImporter *tableImporter;
+@property (nonatomic) TableImportCoordinator *currentImportCoordinator;
 
 @property (nonatomic) NSMutableArray *tables;
 
@@ -67,7 +67,6 @@
     if (self) {
 		_dataSets = [[NSMutableArray alloc] init];
 		_tables = [[NSMutableArray alloc] init];
-        _tableImporter = [[XRTableImporter alloc] init];
         _documentModel = [[DocumentModel alloc] initInMemoryStore:[[InMemoryStore alloc] init] document:self];
         [self subscribeToDocumentModel];
         [self createDB];
@@ -156,7 +155,6 @@
     [self addWindowController:aController];
     _mainWindowController = aController;
     _mainWindowController.documentModel = self.documentModel;
-    [[NSNotificationCenter defaultCenter] addObserver:aController selector:@selector(importerCompleted:) name:@"XRTableListChanged" object:nil];
 }
 
 #pragma mark - Managing Document Windows
@@ -480,27 +478,23 @@
 
 #pragma mark Importing Data
 
-// **** RESEARCH
 -(void)importTable:(id)sender
 {
-    //NSLog(@"in importTable");
     NSOpenPanel *op = [NSOpenPanel openPanel];
-    [op setAllowsMultipleSelection:NO]; //this should change as the code matures
-    [op setAllowedFileTypes:[NSArray arrayWithObjects:@"txt", nil]];
+    [op setAllowsMultipleSelection:NO];
+    [op setAllowedContentTypes:@[UTTypePlainText, [UTType typeWithFilenameExtension:@"xrose"]]];
     [op beginSheetModalForWindow:[self.mainWindowController window] completionHandler:^(NSInteger result) {
-        if(result == NSModalResponseOK)
-        {
-            NSEnumerator *anEnum = [[op URLs] objectEnumerator];
-            NSString *aPath;
-            while((aPath = [[anEnum nextObject] path]))
-            {
-                [op close];
-                [self.tableImporter importTableFromFile:aPath forDocument:self] ;
-                //NSLog(@"***back at document***");
-                [self.mainWindowController updateTable];
-
-
-            }
+        if (result == NSModalResponseOK) {
+            NSURL *url = [op URL];
+            if (!url) { return; }
+            [op close];
+            self.currentImportCoordinator = [[TableImportCoordinator alloc]
+                initWithDocumentModel:self.documentModel
+                window:[[[self windowControllers] firstObject] window]];
+            [self.currentImportCoordinator beginImportFromURL:url completionHandler:^(NSError *error) {
+                if (error) { [self presentError:error]; }
+                self.currentImportCoordinator = nil;
+            }];
         }
     }];
 }

@@ -5,6 +5,7 @@ import Testing
 
 // swiftlint:disable type_body_length file_length
 struct GraphicLineTests {
+
     // MARK: - Test Setup
 
     private func buildTestObject(controller: MockGraphicGeometrySource) throws -> GraphicLine {
@@ -33,7 +34,7 @@ struct GraphicLineTests {
     // MARK: - Initialization Tests
 
     @Test("initWithController should initialize with default values")
-    func testInitWithController() throws {
+    func initWithController() throws {
         // Given
         let controller = MockGraphicGeometrySource()
 
@@ -53,7 +54,7 @@ struct GraphicLineTests {
     // MARK: - Property Tests
 
     @Test("setLineWidth should update the line width")
-    func testSetLineWidth() throws {
+    func setLineWidth() throws {
         // Given
         let controller = MockGraphicGeometrySource()
         let line = try buildTestObject(controller: controller)
@@ -102,7 +103,7 @@ struct GraphicLineTests {
             0, 1, 2, -1, 3
         ]
     )
-    func testSetTickType(tickType: Int32) throws {
+    func setTickType(tickType: Int32) throws {
         let controller = MockGraphicGeometrySource()
         let line = try buildTestObject(controller: controller)
         var expectedSettings = try defaultSettings()
@@ -142,7 +143,7 @@ struct GraphicLineTests {
             true, false
         ]
     )
-    func testSetShowLabel(showLabel: Bool) throws {
+    func setShowLabel(showLabel: Bool) throws {
         let controller = MockGraphicGeometrySource()
         let line = try buildTestObject(controller: controller)
         var expectedSettings = try defaultSettings()
@@ -188,7 +189,7 @@ struct GraphicLineTests {
             (360.0, "N")
         ]
     )
-    func testSetLineLabelForCompassPointsInDegrees(values: (degrees: Float, expected: String)) async throws {
+    func setLineLabelForCompassPointsInDegrees(values: (degrees: Float, expected: String)) throws {
         let controller = MockGraphicGeometrySource()
         let line = GraphicLine(controller: controller)
 
@@ -209,7 +210,7 @@ struct GraphicLineTests {
             (360.0, "0")
         ]
     )
-    func testSetLineLabelForCompassPointsQuadNumbering(values: (degrees: Float, expected: String)) async throws {
+    func setLineLabelForCompassPointsQuadNumbering(values: (degrees: Float, expected: String)) throws {
         let controller = MockGraphicGeometrySource()
         let line = GraphicLine(controller: controller)
 
@@ -231,7 +232,7 @@ struct GraphicLineTests {
 //          (360.0, "0")
         ]
     )
-    func testSetLineLabelForCompassPointsNumericNumbering(values: (degrees: Float, expected: String)) async throws {
+    func setLineLabelForCompassPointsNumericNumbering(values: (degrees: Float, expected: String)) throws {
         let controller = MockGraphicGeometrySource()
         let line = GraphicLine(controller: controller)
 
@@ -252,7 +253,7 @@ struct GraphicLineTests {
             (220.0, "220")
         ]
     )
-    func testSetLineLabelForSpokeAngle(values: (degrees: Float, expected: String)) async throws {
+    func setLineLabelForSpokeAngle(values: (degrees: Float, expected: String)) throws {
         let controller = MockGraphicGeometrySource()
         let line = GraphicLine(controller: controller)
 
@@ -274,7 +275,7 @@ struct GraphicLineTests {
             (231.3234, "51.3")
         ]
     )
-    func testSetLineLabelForSpokeAngleQuad(values: (degrees: Float, expected: String)) async throws {
+    func setLineLabelForSpokeAngleQuad(values: (degrees: Float, expected: String)) throws {
         let controller = MockGraphicGeometrySource()
         let line = GraphicLine(controller: controller)
 
@@ -296,7 +297,7 @@ struct GraphicLineTests {
             (231.3234, "51.3")
         ]
     )
-    func testSetLineLabelForSpokeAngleNotPoints(values: (degrees: Float, expected: String)) async throws {
+    func setLineLabelForSpokeAngleNotPoints(values: (degrees: Float, expected: String)) throws {
         let controller = MockGraphicGeometrySource()
         let line = GraphicLine(controller: controller)
 
@@ -318,7 +319,7 @@ struct GraphicLineTests {
             (231.3234, "")
         ]
     )
-    func testWhenSpokePointsOnlyReturnEmptyStringsForNonPoints(values: (degrees: Float, expected: String)) async throws {
+    func whenSpokePointsOnlyReturnEmptyStringsForNonPoints(values: (degrees: Float, expected: String)) throws {
         let controller = MockGraphicGeometrySource()
         let line = GraphicLine(controller: controller)
 
@@ -343,7 +344,7 @@ struct GraphicLineTests {
             (Float(180.0), CGAffineTransform.unitTestTranform(.horizontal180Degree))
         ]
     )
-    func testHorizontalTransform(params: (angle: Float, transform: CGAffineTransform)) async throws {
+    func horizontalTransform(params: (angle: Float, transform: CGAffineTransform)) throws {
         let controller = MockGraphicGeometrySource()
         let line = GraphicLine(controller: controller)
         line.spokeNumberAlign = GraphicLineNumberAlign.horizontal.rawValue
@@ -362,12 +363,12 @@ struct GraphicLineTests {
             (Float(180), CGAffineTransform.unitTestTranform(.parallel180Degree))
         ]
     )
-    func testParallelTransform(
+    func parallelTransform(
         params: (
             angle: Float,
             transform: CGAffineTransform
         )
-    ) async throws {
+    ) throws {
         let controller = MockGraphicGeometrySource()
         let line = GraphicLine(controller: controller)
         line.spokeNumberAlign = 1
@@ -385,7 +386,7 @@ struct GraphicLineTests {
             Float(1.0), Float(0.5), Float(0.8)
         ]
     )
-    func testMajorTickTypeRadius(relativePercent: Float) throws {
+    func majorTickTypeRadius(relativePercent: Float) throws {
         let controller = MockGraphicGeometrySource()
         let line = try buildTestObject(controller: controller)
 
@@ -424,7 +425,7 @@ struct GraphicLineTests {
             (Float(270.0), "W")
         ]
     )
-    func testSpokePointOnlyWithCompassPoints(values: (angle: Float, expectedLabel: String)) throws {
+    func spokePointOnlyWithCompassPoints(values: (angle: Float, expectedLabel: String)) throws {
         let controller = MockGraphicGeometrySource()
         let line = try buildTestObject(controller: controller)
 
@@ -442,7 +443,7 @@ struct GraphicLineTests {
     }
 
     @Test("Spoke point only with compass points and non-cardinal angle shows empty label")
-    func testSpokePointOnlyWithCompassPointsNonCardinal() throws {
+    func spokePointOnlyWithCompassPointsNonCardinal() throws {
         let controller = MockGraphicGeometrySource()
         let line = try buildTestObject(controller: controller)
 

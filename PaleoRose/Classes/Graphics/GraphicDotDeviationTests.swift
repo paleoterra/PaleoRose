@@ -4,6 +4,7 @@ import Numerics
 import Testing
 
 struct GraphicDotDeviationTests {
+
     // MARK: - Test Setup
 
     private func buildTestObject(controller: MockGraphicGeometrySource, forIncrement: Int32 = 3, totalCount: Int32 = 32, valueCount: Int32 = 0, mean: Float = 0.0) throws -> GraphicDotDeviation {
@@ -35,7 +36,7 @@ struct GraphicDotDeviationTests {
     // MARK: - Initialization Tests
 
     @Test("initWithController:ForIncrement:valueCount:statics should initialize with correct values")
-    func testInitWithControllerforIncrement() throws {
+    func initWithControllerforIncrement() throws {
         // Given
         let controller = MockGraphicGeometrySource()
 
@@ -58,7 +59,7 @@ struct GraphicDotDeviationTests {
     // MARK: - Property Tests
 
     @Test("setLineWidth should update line width")
-    func testSetLineWidth() throws {
+    func setLineWidth() throws {
         // Given
         let controller = MockGraphicGeometrySource()
         let dotDeviation = try buildTestObject(controller: controller)
@@ -107,7 +108,7 @@ struct GraphicDotDeviationTests {
             -3.0
         ]
     )
-    func testSetDotSize(dotSize: Float) throws {
+    func setDotSize(dotSize: Float) throws {
         let controller = MockGraphicGeometrySource()
         let dotDeviation = try buildTestObject(controller: controller)
 
@@ -178,7 +179,7 @@ struct GraphicDotDeviationTests {
             )
         ]
     )
-    func testCalculateGeometryBasic(params: CalculateGeometryParams) throws {
+    func calculateGeometryBasic(params: CalculateGeometryParams) throws {
         let controller = MockGraphicGeometrySource()
         controller.mockIsPercent = params.mockIsPercent
         let dotDeviation = try #require(

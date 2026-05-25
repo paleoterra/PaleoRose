@@ -13,7 +13,7 @@ import Testing
 struct UserDefaultsExtensionsTests {
 
     @Test("Should store and retrieve integer values")
-    func testIntegerStorage() throws {
+    func integerStorage() throws {
         // Given
         let defaults = try #require(UserDefaults(suiteName: #function))
         let key = UserDefaultsKey.vectorCalculationMethod
@@ -31,7 +31,7 @@ struct UserDefaultsExtensionsTests {
     }
 
     @Test("Should store and retrieve boolean values")
-    func testBoolStorage() throws {
+    func boolStorage() throws {
         // Given
         let defaults = try #require(UserDefaults(suiteName: #function))
         let key = UserDefaultsKey.vectorCalculationMethod
@@ -49,7 +49,7 @@ struct UserDefaultsExtensionsTests {
     }
 
     @Test("Should store and retrieve string values")
-    func testStringStorage() throws {
+    func stringStorage() throws {
         // Given
         let defaults = try #require(UserDefaults(suiteName: #function))
         let key = UserDefaultsKey.vectorCalculationMethod
@@ -67,7 +67,7 @@ struct UserDefaultsExtensionsTests {
     }
 
     @Test("Should store and retrieve URL values")
-    func testURLStorage() throws {
+    func uRLStorage() throws {
         // Given
         let defaults = try #require(UserDefaults(suiteName: #function))
         let key = UserDefaultsKey.vectorCalculationMethod
@@ -85,7 +85,7 @@ struct UserDefaultsExtensionsTests {
     }
 
     @Test("Should handle subscript access with optional values")
-    func testSubscriptOptionalAccess() throws {
+    func subscriptOptionalAccess() throws {
         // Given
         let defaults = try #require(UserDefaults(suiteName: #function))
         let key = UserDefaultsKey.vectorCalculationMethod
@@ -103,7 +103,7 @@ struct UserDefaultsExtensionsTests {
     }
 
     @Test("Should handle subscript access with default values")
-    func testSubscriptDefaultValue() throws {
+    func subscriptDefaultValue() throws {
         // Given
         let defaults = try #require(UserDefaults(suiteName: #function))
         let key = UserDefaultsKey.vectorCalculationMethod

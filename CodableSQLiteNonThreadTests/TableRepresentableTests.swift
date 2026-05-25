@@ -28,7 +28,7 @@ import CodableSQLiteNonThread
 import Testing
 
 // swiftlint:disable legacy_objc_type no_magic_numbers
-@Suite struct TableRepresentableTests {
+struct TableRepresentableTests {
     struct BindingsExpectation {
         let keys: [String]
         let values: [Any?]
@@ -181,7 +181,7 @@ import Testing
             // swiftlint:enable line_length
         ]
     )
-    func testBindingArrays(bindingExpectations: BindingsExpectation) throws {
+    func bindingArrays(bindingExpectations: BindingsExpectation) throws {
         let sut = bindingExpectations.testableTable
         let bindables = try sut.valueBindables(keys: bindingExpectations.keys).compactMap { $0 }
         let expectedValues = bindingExpectations.values
@@ -192,25 +192,25 @@ import Testing
     }
 
     @Test("Given table name, then create the correct SQL count query")
-    func countQuery() throws {
+    func countQuery() {
         let query = TestableTable.countQuery()
         #expect(query.sql == "SELECT COUNT(*) FROM TestableTable;")
     }
 
     @Test("Given create table querty, then return a query")
-    func createTableQuery() throws {
+    func createTableQuery() {
         let query = TestableTable.createTableQuery()
         #expect(!query.sql.isEmpty)
     }
 
     @Test("Given table,then return correct count query")
-    func getCountQuery() throws {
+    func getCountQuery() {
         let query = TestableTable.countQuery()
         #expect(query.sql == "SELECT COUNT(*) FROM TestableTable;")
     }
 
     @Test("Given table,then return correct stored count query")
-    func getStoredValuesQuery() throws {
+    func getStoredValuesQuery() {
         let query = TestableTable.storedValues()
         #expect(query.sql == "SELECT * FROM TestableTable;")
     }

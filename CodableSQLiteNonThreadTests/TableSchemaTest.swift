@@ -46,7 +46,7 @@ struct TableSchemaTest {
     }
 
     @Test("Generate empty queries")
-    func generateEmptyQueries() throws {
+    func generateEmptyQueries() {
         #expect(TableSchema.storedValues().sql == "SELECT * FROM sqlite_schema;")
         #expect(TableSchema.createTableQuery().sql.isEmpty)
         #expect(TableSchema.insertQuery().sql.isEmpty)

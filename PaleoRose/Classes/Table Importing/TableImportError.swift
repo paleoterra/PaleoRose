@@ -1,12 +1,9 @@
-//
-//  XRTableImporter.h
-//  XRose
-//
-//  Created by Tom Moore on 12/13/05.
+// TableImportError.swift
+// PaleoRose
 //
 // MIT License
 //
-// Copyright (c) 2005 to present Thomas L. Moore.
+// Copyright (c) 2024 to present Thomas L. Moore.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,14 +23,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#import <Cocoa/Cocoa.h>
-
-
-@interface XRTableImporter : NSObject {
-	NSString *sourcePath;
-	NSDocument *targetDocument;
+enum TableImportError: Error, Equatable {
+    case unsupportedFileFormat(String)
+    case emptyDataFrame
+    case tableNameConflict(proposed: String, existing: String)
+    case storageFailure(underlying: String)
 }
-
--(void)importTableFromFile:(NSString *)source forDocument:(NSDocument *)aDocument;
-
-@end

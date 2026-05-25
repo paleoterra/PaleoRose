@@ -64,7 +64,7 @@ import AppKit
     private var spokeNumberCompassPointEnum: GraphicLineNumberCompassPoint = .points
     private var spokeNumberOrderEnum: GraphicLineNumberingOrder = .quad
 
-    // Objective-C compatible Int32 computed properties
+    /// Objective-C compatible Int32 computed properties
     @objc dynamic var tickType: Int32 {
         get { tickTypeEnum.rawValue }
         set {
@@ -100,7 +100,7 @@ import AppKit
         }
     }
 
-    // Other properties
+    /// Other properties
     @objc dynamic var showTick: Bool = false {
         didSet { calculateGeometry() }
     }

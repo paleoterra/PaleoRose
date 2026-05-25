@@ -239,7 +239,7 @@ struct DatasetCreationSheetViewWrapper: NSViewRepresentable {
         return view
     }
 
-    func updateNSView(_ nsView: DatasetCreationSheetView, context: Context) {}
+    func updateNSView(_: DatasetCreationSheetView, context: Context) {}
 }
 
 // Use modern #Preview macro if available (Xcode 15+), otherwise fall back to PreviewProvider

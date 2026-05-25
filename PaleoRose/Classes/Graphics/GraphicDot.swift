@@ -33,7 +33,9 @@ import AppKit
     // MARK: - Public API
 
     /// Diameter of each dot.
-    @objc dynamic var dotSize: Float = 4.0 { didSet { calculateGeometry() } }
+    @objc dynamic var dotSize: Float = 4.0 {
+        didSet { calculateGeometry() }
+    }
 
     // MARK: - Private State
 
