@@ -82,9 +82,8 @@ struct TableImportCoordinatorTests {
     func unsupportedExtensionCarriesValue() async throws {
         let (coordinator, _) = makeCoordinator()
         let url = URL(fileURLWithPath: "/tmp/data.xlsx")
-        let error = await #expect(throws: TableImportError.self) {
+        await #expect(throws: TableImportError.unsupportedFileFormat("xlsx")) {
             try await coordinator.beginImport(from: url)
         }
-        #expect(error == .unsupportedFileFormat("xlsx"))
     }
 }
