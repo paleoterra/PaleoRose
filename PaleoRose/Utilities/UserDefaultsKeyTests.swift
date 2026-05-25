@@ -13,7 +13,7 @@ import Testing
 struct UserDefaultsKeyTests {
 
     @Test("All keys should have unique raw values")
-    func testUniqueRawValues() throws {
+    func testUniqueRawValues() {
         let allKeys = UserDefaultsKey.allCases
         let rawValues = allKeys.map(\.rawValue)
         let uniqueRawValues = Set(rawValues)
@@ -22,7 +22,7 @@ struct UserDefaultsKeyTests {
     }
 
     @Test("Raw values should not contain spaces or special characters")
-    func testRawValueFormat() throws {
+    func rawValueFormat() {
         for key in UserDefaultsKey.allCases {
             let rawValue = key.rawValue
             let validCharacterSet = CharacterSet.alphanumerics.union(CharacterSet(charactersIn: "_"))
@@ -33,7 +33,7 @@ struct UserDefaultsKeyTests {
     }
 
     @Test("All keys should have non-empty raw values")
-    func testNonEmptyRawValues() throws {
+    func nonEmptyRawValues() {
         for key in UserDefaultsKey.allCases {
             #expect(!key.rawValue.isEmpty, "Key '\(key)' has an empty raw value")
         }

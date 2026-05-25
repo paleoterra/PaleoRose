@@ -29,6 +29,7 @@ import SwiftUI
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
+
     // MARK: - Properties
 
     private var aboutWindow: NSWindow?

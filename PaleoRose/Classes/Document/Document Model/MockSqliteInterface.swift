@@ -93,7 +93,7 @@ class MockSqliteInterface: StoreProtocol {
         return executeQueryResult
     }
 
-    func executeCodableQuery<T>(sqlite: OpaquePointer, query: any CodableSQLiteNonThread.QueryProtocol) throws -> [T] where T: Decodable, T: Encodable {
+    func executeCodableQuery<T: Decodable & Encodable>(sqlite: OpaquePointer, query: any CodableSQLiteNonThread.QueryProtocol) throws -> [T] {
         executeCodableQueryCalled = true
         queryAccumulator.append(query)
         if let queryError {

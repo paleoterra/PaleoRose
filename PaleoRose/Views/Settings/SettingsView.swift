@@ -3,6 +3,7 @@ import SwiftUI
 /// A view that displays application settings.
 /// Currently supports configuring the vector calculation method.
 public struct SettingsView: View {
+
     // MARK: - Properties
 
     @DefaultsStorage(

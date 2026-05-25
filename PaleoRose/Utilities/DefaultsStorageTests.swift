@@ -13,7 +13,7 @@ import Testing
 struct DefaultsStorageTests {
 
     @Test("Should initialize with default value")
-    func testInitialization() throws {
+    func initialization() throws {
         // Given
         let defaults = try #require(UserDefaults(suiteName: #function))
         let key = DefaultsKey.vectorCalculationMethod
@@ -30,7 +30,7 @@ struct DefaultsStorageTests {
     }
 
     @Test("Should update stored value")
-    func testValueUpdate() throws {
+    func valueUpdate() throws {
         // Given
         let defaults = try #require(UserDefaults(suiteName: #function))
         let key = DefaultsKey.vectorCalculationMethod
@@ -76,7 +76,7 @@ struct DefaultsStorageTests {
     }
 
     @Test("Should support binding through projected value")
-    func testBinding() throws {
+    func binding() throws {
         // Given
         let defaults = try #require(UserDefaults(suiteName: #function))
         let key = DefaultsKey.vectorCalculationMethod
@@ -100,7 +100,7 @@ struct DefaultsStorageTests {
     }
 
     @Test("Should handle different value types")
-    func testValueTypes() throws {
+    func valueTypes() throws {
         // Given
         let defaults = try #require(UserDefaults(suiteName: #function))
         let key = DefaultsKey.vectorCalculationMethod

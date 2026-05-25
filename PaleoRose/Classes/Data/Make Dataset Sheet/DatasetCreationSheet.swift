@@ -54,7 +54,7 @@ import AppKit
         return name.isEmpty ? (selectedTable ?? "New Layer") : name
     }
 
-    // UI
+    /// UI
     private let sheetView = DatasetCreationSheetView(frame: .zero)
 
     // MARK: - Initialization
@@ -175,7 +175,7 @@ struct DatasetCreationSheetWrapper: NSViewRepresentable {
         return sheet.window?.contentView ?? NSView()
     }
 
-    func updateNSView(_ nsView: NSView, context: Context) {}
+    func updateNSView(_: NSView, context: Context) {}
 }
 
 // Use modern #Preview macro if available (Xcode 15+), otherwise fall back to PreviewProvider

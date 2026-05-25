@@ -8,6 +8,7 @@
 import Cocoa
 
 final class XRVStatCreatePanelController: NSWindowController {
+
     // MARK: - Properties
 
     private let names: [String]

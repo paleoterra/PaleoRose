@@ -280,8 +280,9 @@ private let layerDragType = NSPasteboard.PasteboardType("LayerDragType")
         let layerNames = dataLayerNames()
         guard !layerNames.isEmpty else { return }
 
-        guard let panelController = XRVStatCreatePanelController(array: layerNames),
-        let panelWindow = panelController.window else {
+        guard
+            let panelController = XRVStatCreatePanelController(array: layerNames),
+            let panelWindow = panelController.window else {
             return
         }
 
@@ -433,7 +434,7 @@ extension LayersTableController: NSTableViewDelegate {
 
 extension LayersTableController: NSTableViewDataSource {
 
-    // Helper to parse various representations into Bool
+    /// Helper to parse various representations into Bool
     private func parseBool(_ value: Any?) -> Bool {
         switch value {
         case let bValue as Bool:
@@ -460,7 +461,7 @@ extension LayersTableController: NSTableViewDataSource {
         layers.count
     }
 
-    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
+    func tableView(_: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
         guard layers.indices.contains(row) else {
             return nil
         }
@@ -484,7 +485,7 @@ extension LayersTableController: NSTableViewDataSource {
     }
 
     func tableView(
-        _ tableView: NSTableView,
+        _: NSTableView,
         setObjectValue object: Any?,
         for tableColumn: NSTableColumn?,
         row: Int
@@ -514,7 +515,7 @@ extension LayersTableController: NSTableViewDataSource {
 
     // MARK: - Drag & Drop
 
-    func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
+    func tableView(_: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
         let pasteboardItem = NSPasteboardItem()
         pasteboardItem.setString(String(row), forType: layerDragType)
         return pasteboardItem

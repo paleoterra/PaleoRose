@@ -6,6 +6,7 @@ import SwiftUI
 /// Manages the settings window for the application.
 /// Handles the display and state of the settings UI.
 public final class SettingsWindowController: NSWindowController {
+
     // MARK: - Properties
 
     /// Shared instance of the settings window controller.

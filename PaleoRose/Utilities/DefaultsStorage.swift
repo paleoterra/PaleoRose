@@ -37,13 +37,14 @@ public enum DefaultsKey: String, CaseIterable {
 /// A property wrapper that provides type-safe access to UserDefaults with support for SwiftUI bindings.
 @propertyWrapper
 public struct DefaultsStorage<Value>: DynamicProperty {
+
     // MARK: - Properties
 
     private let key: DefaultsKey
     private let defaultValue: Value
     private let defaults: UserDefaults
 
-    // SwiftUI state to trigger UI updates
+    /// SwiftUI state to trigger UI updates
     @ObservedObject private var notifier = DefaultsChangeNotifier()
 
     // MARK: - Initialization
@@ -119,7 +120,7 @@ private class DefaultsChangeNotifier: ObservableObject {}
 
 // MARK: - Testing Support
 
-// Make these methods accessible only in test code
+/// Make these methods accessible only in test code
 extension DefaultsStorage {
     /// Helper for testing - directly accesses UserDefaults
     func test_setValue(_ newValue: Value) {
@@ -130,5 +131,7 @@ extension DefaultsStorage {
     }
 
     // swiftlint:disable:next identifier_name
-    var _testValue: Value { wrappedValue }
+    var _testValue: Value {
+        wrappedValue
+    }
 }

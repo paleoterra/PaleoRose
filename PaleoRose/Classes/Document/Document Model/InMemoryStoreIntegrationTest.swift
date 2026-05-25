@@ -396,7 +396,7 @@ struct InMemoryStoreIntegrationTest {
         if !layer.radianIsPercent() {
             print("fail")
         }
-        layer.verify(
+        try layer.verify(
             isVisible: true,
             active: false,
             biDir: false,
@@ -412,14 +412,14 @@ struct InMemoryStoreIntegrationTest {
             showRingLabels: true,
             labelAngle: 77.616188,
             // swiftlint:disable:next force_unwrapping
-            ringFont: NSFont(name: "ArialMT", size: 24.0)!,
+            ringFont: #require(NSFont(name: "ArialMT", size: 24.0)),
             radialsCount: 32,
             radialsAngle: 11.25,
             radialsLabelAlignment: 0,
             radialsCompassPoint: 1,
             radialsOrder: 0,
             // swiftlint:disable:next force_unwrapping
-            radialFont: NSFont(name: "AurulentSansMonoNerdFontComplete-Regular", size: 12.0)!,
+            radialFont: #require(NSFont(name: "AurulentSansMonoNerdFontComplete-Regular", size: 12.0)),
             radialsSectorLock: false,
             radialsVisible: true,
             radialsIsPercent: true,

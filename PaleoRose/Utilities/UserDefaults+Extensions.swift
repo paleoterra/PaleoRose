@@ -33,6 +33,7 @@ import SwiftUI
 /// with the `UserDefaultsKey` enum instead of raw strings, reducing the chance of typos and
 /// making the code more maintainable.
 extension UserDefaults {
+
     // MARK: - Type-Safe Accessors
 
     /// Returns the integer value associated with the specified key.

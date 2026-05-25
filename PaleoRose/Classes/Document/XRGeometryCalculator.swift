@@ -23,7 +23,7 @@
 import Cocoa
 
 /// Protocol for objects that can provide geometry calculations
-protocol XRGeometryCalculating { /// Calculate circle rect for a given percentage
+protocol XRGeometryCalculating { // Calculate circle rect for a given percentage
     func circleRect(forPercent percent: CGFloat) -> NSRect
 
     /// Calculate circle rect for a geometry percentage
@@ -74,6 +74,7 @@ protocol XRGeometryConfiguring {
 
 /// Struct for managing geometry calculations
 enum XRGeometryCalculator {
+
     // MARK: - Types
 
     struct CircleParameters {
