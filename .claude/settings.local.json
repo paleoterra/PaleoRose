@@ -40,7 +40,14 @@
       "mcp__xcode__XcodeLS",
       "mcp__xcode__XcodeGlob",
       "mcp__xcode__XcodeRead",
-      "Skill(claude-md-management:revise-claude-md)"
+      "Skill(claude-md-management:revise-claude-md)",
+      "Bash(ruby -e \"require 'xcodeproj'\")",
+      "mcp__xcode__XcodeListWindows",
+      "mcp__xcode__XcodeGrep",
+      "mcp__xcode__XcodeWrite",
+      "mcp__xcode__BuildProject",
+      "mcp__xcode__XcodeRM",
+      "mcp__xcode__RunSomeTests"
     ],
     "deny": [],
     "ask": []

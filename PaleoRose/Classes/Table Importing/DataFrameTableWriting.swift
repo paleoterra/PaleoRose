@@ -1,4 +1,4 @@
-// TextImportOptions.swift
+// DataFrameTableWriting.swift
 // PaleoRose
 //
 // MIT License
@@ -23,11 +23,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
+import CodableSQLiteNonThread
+import TabularData
 
-struct TextImportOptions {
-    let tableName: String
-    let hasColumnHeaders: Bool
-    let delimiter: Character
-    let encoding: String.Encoding
+/// Transforms a `DataFrame` into the SQL strings and bindings needed to create and populate a user data table.
+protocol DataFrameTableWriting {
+    /// Returns a CREATE TABLE SQL string with `_id INTEGER PRIMARY KEY` plus
+    /// one column per DataFrame column using SQLite affinity rules.
+    func createSQL(for dataFrame: DataFrame, named tableName: String) -> String
+
+    /// Returns a parameterised INSERT SQL string with `?` placeholders.
+    /// Column count matches `createSQL` (excludes `_id`).
+    func insertSQL(for dataFrame: DataFrame, named tableName: String) -> String
+
+    /// Returns one flat `[Bindable?]` array per row, matching the column order
+    /// in `createSQL`. Used as `Query.bindings`.
+    func bindingRows(for dataFrame: DataFrame) -> [[Bindable?]]
 }

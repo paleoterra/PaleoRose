@@ -23,6 +23,7 @@
 import Cocoa
 
 @objc class XRCalculateAzimuthController: NSObject {
+
     // MARK: - Outlets
 
     @IBOutlet private var tableNamePop: NSPopUpButton!

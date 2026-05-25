@@ -13,6 +13,12 @@
 		8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */; };
 		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
 		8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
+		AA94BE0D2FC3B69500999D6F /* TableImportError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA94BE0C2FC3B69500999D6F /* TableImportError.swift */; };
+		AA94BE0F2FC3B69500999D6F /* TextImportOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA94BE0E2FC3B69500999D6F /* TextImportOptions.swift */; };
+		AA94BE112FC3B79000999D6F /* TabularData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA94BE102FC3B79000999D6F /* TabularData.framework */; };
+		AA94BE132FC3B8F900999D6F /* DataFrameTableWriting.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA94BE122FC3B8F900999D6F /* DataFrameTableWriting.swift */; };
+		AA94BE152FC3B90200999D6F /* DataFrameTableWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA94BE142FC3B90200999D6F /* DataFrameTableWriter.swift */; };
+		AA94BE192FC3B99600999D6F /* DataFrameTableWriterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA94BE182FC3B99600999D6F /* DataFrameTableWriterTests.swift */; };
 		B4081BAF2EC016C200EA734A /* TableListControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4081BAE2EC016C200EA734A /* TableListControllerTests.swift */; };
 		B4081BF02EC79D9500EA734A /* LayerTableControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4081BEF2EC79D9500EA734A /* LayerTableControllerDataSource.swift */; };
 		B4081C312EC7C65A00EA734A /* LayersTableControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4081C302EC7C65A00EA734A /* LayersTableControllerTests.swift */; };
@@ -270,6 +276,12 @@
 		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32DBCF750370BD2300C91783 /* PaleoRose_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaleoRose_Prefix.pch; sourceTree = "<group>"; };
 		8D15AC370486D014006FF6A4 /* PaleoRose.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaleoRose.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA94BE0C2FC3B69500999D6F /* TableImportError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableImportError.swift; sourceTree = "<group>"; };
+		AA94BE0E2FC3B69500999D6F /* TextImportOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextImportOptions.swift; sourceTree = "<group>"; };
+		AA94BE102FC3B79000999D6F /* TabularData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TabularData.framework; path = System/Library/Frameworks/TabularData.framework; sourceTree = SDKROOT; };
+		AA94BE122FC3B8F900999D6F /* DataFrameTableWriting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFrameTableWriting.swift; sourceTree = "<group>"; };
+		AA94BE142FC3B90200999D6F /* DataFrameTableWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFrameTableWriter.swift; sourceTree = "<group>"; };
+		AA94BE182FC3B99600999D6F /* DataFrameTableWriterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFrameTableWriterTests.swift; sourceTree = "<group>"; };
 		B4081BAE2EC016C200EA734A /* TableListControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableListControllerTests.swift; sourceTree = "<group>"; };
 		B4081BEF2EC79D9500EA734A /* LayerTableControllerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerTableControllerDataSource.swift; sourceTree = "<group>"; };
 		B4081C302EC7C65A00EA734A /* LayersTableControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayersTableControllerTests.swift; sourceTree = "<group>"; };
@@ -483,6 +495,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4BDF3172A259164002A84B0 /* libsqlite3.tbd in Frameworks */,
+				AA94BE112FC3B79000999D6F /* TabularData.framework in Frameworks */,
 				8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */,
 				B4AF8C752C9CEECA0044A63D /* CodableSQLiteNonThread.framework in Frameworks */,
 				B427095D095D2D990059C65A /* Security.framework in Frameworks */,
@@ -560,6 +573,7 @@
 		2A37F4C3FDCFA73011CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AA94BE102FC3B79000999D6F /* TabularData.framework */,
 				B4BDF3162A259164002A84B0 /* libsqlite3.tbd */,
 				B4270928095D2D990059C65A /* Security.framework */,
 				1058C7A6FEA54F5311CA2CBB /* Linked Frameworks */,
@@ -571,6 +585,11 @@
 		B4149FE22B24C285008AE5F4 /* Table Importing */ = {
 			isa = PBXGroup;
 			children = (
+				AA94BE0C2FC3B69500999D6F /* TableImportError.swift */,
+				AA94BE0E2FC3B69500999D6F /* TextImportOptions.swift */,
+				AA94BE122FC3B8F900999D6F /* DataFrameTableWriting.swift */,
+				AA94BE142FC3B90200999D6F /* DataFrameTableWriter.swift */,
+				AA94BE182FC3B99600999D6F /* DataFrameTableWriterTests.swift */,
 				B41D283A094FC7CA008DF384 /* XRTableImporter.h */,
 				B41D283B094FC7CA008DF384 /* XRTableImporter.m */,
 				B4149FFA2B24C952008AE5F4 /* XRose Importer Sheet */,
@@ -1389,9 +1408,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA94BE0D2FC3B69500999D6F /* TableImportError.swift in Sources */,
 				B48345CF05C238B500E3F6B7 /* XRoseDocument.m in Sources */,
 				B4B984182F05C18F00A31FD9 /* DatasetCreationSheet.swift in Sources */,
 				B48345D305C23B3000E3F6B7 /* XRoseWindowController.m in Sources */,
+				AA94BE0F2FC3B69500999D6F /* TextImportOptions.swift in Sources */,
 				B439AB372C83CF7900252574 /* DocumentModel.swift in Sources */,
 				B41266732B6EE09300E1C385 /* ApplicationDefaults.swift in Sources */,
 				B48345F105C23CA100E3F6B7 /* XRoseView.m in Sources */,
@@ -1417,6 +1438,7 @@
 				B47CA2F205C6C5470060A30C /* XRPropertyInspector.m in Sources */,
 				B47CA37905C6CB150060A30C /* XREmptyInspectorController.m in Sources */,
 				B47CA41405C6D56D0060A30C /* XRGeometryInspector.m in Sources */,
+				AA94BE132FC3B8F900999D6F /* DataFrameTableWriting.swift in Sources */,
 				B48B89FC05C794C500248F96 /* XRDataInspector.m in Sources */,
 				B440D55E2E59444C000D98A0 /* GraphicKite.swift in Sources */,
 				44379A9A8F5640DA8A491A38 /* GraphicHistogram.swift in Sources */,
@@ -1433,6 +1455,7 @@
 				B40C43C6060545BD00353928 /* XRLayerLineArrow.m in Sources */,
 				B46C6D2A0607F2A2000620E7 /* XRVectorInspector.m in Sources */,
 				B4F2B1892C97CB300017E717 /* LayerData.swift in Sources */,
+				AA94BE152FC3B90200999D6F /* DataFrameTableWriter.swift in Sources */,
 				B4F2B18A2C97CB300017E717 /* WindowControllerSize.swift in Sources */,
 				B4F2B18B2C97CB300017E717 /* Layer.swift in Sources */,
 				B4F2B18C2C97CB300017E717 /* LayerText.swift in Sources */,
@@ -1515,6 +1538,7 @@
 				B4A23EFF2E19C49E00EDE135 /* GraphicPetalTests.swift in Sources */,
 				B4A23EFD2E19960100EDE135 /* GraphicLineTests.swift in Sources */,
 				B4AE41CA2D17D76000E05D96 /* LayerLineArrow+Testing.swift in Sources */,
+				AA94BE192FC3B99600999D6F /* DataFrameTableWriterTests.swift in Sources */,
 				B4AE41C72D14EA5900E05D96 /* LayerText+Testing.swift in Sources */,
 				B4CC53482E10593000067436 /* GraphicCircleTests.swift in Sources */,
 				B41C87442DE4DC070053C9C9 /* CommonUtilities.swift in Sources */,
