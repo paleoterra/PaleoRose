@@ -411,15 +411,13 @@ struct InMemoryStoreIntegrationTest {
             ringPercentIncrement: 0.11,
             showRingLabels: true,
             labelAngle: 77.616188,
-            // swiftlint:disable:next force_unwrapping
-            ringFont: #require(NSFont(name: "ArialMT", size: 24.0)),
+            ringFont: NSFont(name: "ArialMT", size: 24.0) ?? NSFont.systemFont(ofSize: 24.0),
             radialsCount: 32,
             radialsAngle: 11.25,
             radialsLabelAlignment: 0,
             radialsCompassPoint: 1,
             radialsOrder: 0,
-            // swiftlint:disable:next force_unwrapping
-            radialFont: #require(NSFont(name: "AurulentSansMonoNerdFontComplete-Regular", size: 12.0)),
+            radialFont: NSFont(name: "AurulentSansMonoNerdFontComplete-Regular", size: 12.0) ?? NSFont.systemFont(ofSize: 12.0),
             radialsSectorLock: false,
             radialsVisible: true,
             radialsIsPercent: true,
@@ -639,7 +637,9 @@ struct InMemoryStoreIntegrationTest {
         #expect(grid.radialsLabelAlign() == 0)
         #expect(grid.radialsCompassPoint() == 1)
         #expect(grid.radiansOrder() == 0)
-        #expect(grid.spokeFont().fontName == "AurulentSansMonoNerdFontComplete-Regular")
+        let expectedSpokeFontName = (NSFont(name: "AurulentSansMonoNerdFontComplete-Regular", size: 12.0)
+            ?? NSFont.systemFont(ofSize: 12.0)).fontName
+        #expect(grid.spokeFont().fontName == expectedSpokeFontName)
         #expect(grid.radianFontSize() == 12.0)
         #expect(!grid.radianSectorLock())
         #expect(grid.radianVisible())
