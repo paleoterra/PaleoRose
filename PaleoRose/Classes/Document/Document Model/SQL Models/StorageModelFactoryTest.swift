@@ -43,7 +43,7 @@ struct StorageModelFactoryTest {
     }
 
     @Test("Given a layer line arrow, then generate the correct storage layers")
-    func createLineArrowLayer() throws {
+    func createLineArrowLayer() {
         let original = XRLayerLineArrow.stub()
         let location = 27
         let layer = sut.storageLayerRoot(from: original, at: location)
@@ -55,7 +55,7 @@ struct StorageModelFactoryTest {
     }
 
     @Test("Given a layer grid, then generate the correct storage layers")
-    func createGridLayer() throws {
+    func createGridLayer() {
         let original = XRLayerGrid.stub()
         let location = 27
         let layer = sut.storageLayerRoot(from: original, at: location)
@@ -67,7 +67,7 @@ struct StorageModelFactoryTest {
     }
 
     @Test("Given a layer core, then generate the correct storage layers")
-    func createCoreLayer() throws {
+    func createCoreLayer() {
         let original = XRLayerCore.stub()
         let location = 27
         let layer = sut.storageLayerRoot(from: original, at: location)
@@ -79,7 +79,7 @@ struct StorageModelFactoryTest {
     }
 
     @Test("Given a layer data, then generate the correct storage layers")
-    func createDataLayer() throws {
+    func createDataLayer() {
         let original = XRLayerData.stub()
         let location = 27
         let layer = sut.storageLayerRoot(from: original, at: location)
@@ -105,7 +105,7 @@ struct StorageModelFactoryTest {
     }
 
     @Test("Given a layer and line arrow, then correctly create XRLayerLineArrow")
-    func createLineArrowLayerFromStorage() throws {
+    func createLineArrowLayerFromStorage() {
         let layerid = 5
         let layer = Layer.stub(LAYERID: layerid, TYPE: "XRLayerLineArrow")
         let lineArrow = LayerLineArrow.stub(LAYERID: layerid)
