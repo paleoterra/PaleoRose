@@ -27,17 +27,12 @@
 #import "XRGeometryPropertyInspector.h"
 #import "FStatisticController.h"
 #import "XRGeometryController.h"
-#import "XRTableAddColumnController.h"
-#import "XRCalculateAzimuthController.h"
-#import "math.h"
 #import "XRExportGraphicAccessory.h"
 #import <PaleoRose-Swift.h>
 #import "XRoseView.h"
 
 @interface XRoseWindowController()
 @property (nonatomic) FStatisticController *theSheetController;
-@property (nonatomic) XRTableAddColumnController *addColumnController;
-@property (nonatomic) XRCalculateAzimuthController *azimuthController;
 @property (nonatomic) TableListController *tableListController;
 @property (nonatomic, weak) DocumentModel *documentModelBacking;
 @end
@@ -411,34 +406,8 @@ NSRect initialRect;
 	tableList = aList;
 }
 
--(void)updateTable
-{
-	//NSLog(@"updatetable");
-	
+-(void)updateTable {
 	[_tableNameTable reloadData];
-
-}
-
--(IBAction)tableAddColumn:(id)sender
-{
-	//this method should work on selected table items.  otherwise, does nothing.
-	self.addColumnController = [[XRTableAddColumnController alloc] init];
-    [[self window]
-     beginSheet:[self.addColumnController window]
-     completionHandler:^(NSModalResponse returnCode) {
-        if(returnCode == NSModalResponseOK)
-        {
-            //alter table "table name" add COLUMNNAME DEFINITION
-            NSError *error;
-            NSString *table = [self->tableList objectAtIndex: [self->_tableNameTable selectedRow]];
-            NSString *columnDefinition = [self.addColumnController columnDefinition];
-            [self.documentModel addWithTable:table column:columnDefinition error:&error];
-            if(error != nil) {
-                NSLog(@"Error: %@",error.localizedDescription);
-            }
-        }
-        self.addColumnController = nil;
-    }];
 }
 
 -(IBAction)deleteTableAction:(id)sender
@@ -457,141 +426,6 @@ NSRect initialRect;
 	[self.layersTableController deleteLayersForTableName:tableToDelete];
 	[[self document] discoverTables];
 	[self updateTable];
-}
-
--(IBAction)tablePerformCalculation:(id)sender
-{
-	if([[sender title] isEqualToString:@"Azimuth from Vectors"])
-		[self performAzimuthFromVector];
-}
-
--(void)performAzimuthFromVector
-{
-	int index = (int)[_tableNameTable selectedRow];
-
-	if(index == -1)
-	{
-		if([tableList count]<1)
-			return;
-		else
-			index = 0;
-	}
-	
-	self.azimuthController = [[XRCalculateAzimuthController alloc] initWithDocument:[self document] withItemSelectedAtIndex:index];
-    [[self window]
-     beginSheet:[self.azimuthController window]
-     completionHandler:^(NSModalResponse returnCode) {
-        if(returnCode == NSModalResponseOK)
-        {
-            NSDictionary *results = [self.azimuthController resultDictionary];
-
-            sqlite3 *db = [[self document] documentInMemoryStore];
-            sqlite3_stmt *stmt;
-            const char *pzTail;
-            char *errorMsg;
-            int error,valueCount;
-            long long *indexes;
-            double *finalValues;
-            int currentIndex=0;
-            NSString *command0 = [NSString stringWithFormat:@"SELECT count(*) FROM \"%@\"",[results objectForKey:@"table"]] ;
-            //NSLog(command0);
-            error = sqlite3_prepare(db,[command0 UTF8String],-1,&stmt,&pzTail);
-            valueCount = -1;
-            if(error!=SQLITE_OK)
-                NSLog(@"Error 600: %s",(const char *)sqlite3_errmsg(db));
-            while(sqlite3_step(stmt)==SQLITE_ROW)
-            {
-                valueCount = (int)sqlite3_column_int(stmt,0);
-            }
-            sqlite3_finalize(stmt);
-            stmt = NULL;
-            indexes = (long long *)malloc(sizeof(long long)*valueCount);
-            finalValues = (double *)malloc(sizeof(double)*valueCount);
-            NSString *command1 = [NSString stringWithFormat:@"SELECT _id, \"%@\", \"%@\" FROM \"%@\"",[results objectForKey:@"xVector"],[results objectForKey:@"yVector"],[results objectForKey:@"table"]] ;
-            error = sqlite3_prepare(db,[command1 UTF8String],-1,&stmt,&pzTail);
-            if(error!=SQLITE_OK)
-                NSLog(@"Error: %s",(char *)sqlite3_errmsg(db));
-            while(sqlite3_step(stmt)==SQLITE_ROW)
-            {
-
-                int columIndex;
-                int columCount = sqlite3_column_count(stmt);
-                long long int idNumber = -1;
-                BOOL isNull = NO;
-                char *nullTest;
-                double xValue = 0.0;
-                double yValue = 0.0;
-                double hypot;
-                double radians;
-                double finalAngle;
-                for(columIndex=0;columIndex<columCount;columIndex++)
-                {
-                    //now we have the sequence of columns.  Now string compare names
-                    NSString *currentColumnName = [NSString stringWithUTF8String:(char *)sqlite3_column_name(stmt,columIndex)];
-
-                    if([currentColumnName isEqualToString:@"_id"])
-                    {
-                        idNumber = (long long int)sqlite3_column_int64(stmt,columIndex);
-                    }
-                    else if([currentColumnName isEqualToString:[results objectForKey:@"xVector"]])
-                    {
-                        xValue  = (double)sqlite3_column_double(stmt,columIndex);
-                        if(xValue == (float)0.0)
-                        {
-                            nullTest = (char *)sqlite3_column_text(stmt,columIndex);
-                            if(!nullTest)
-                                isNull = YES;
-                        }
-                    }
-                    else if([currentColumnName isEqualToString:[results objectForKey:@"yVector"]])
-                    {
-                        yValue  = (double)sqlite3_column_double(stmt,columIndex);
-                        if(yValue == (float)0.0)
-                        {
-                            nullTest = (char *)sqlite3_column_text(stmt,columIndex);
-                            if(!nullTest)
-                                isNull = YES;
-                        }
-
-                    }
-                }
-                if(!isNull)
-                {
-                    hypot = sqrt((xValue*xValue) + (yValue*yValue));
-                    radians = asin(yValue/hypot);//compute angle;
-                    if(xValue>=0.0)
-                    {
-                        finalAngle = 90 - ((180.0/M_PI)*radians);
-                    }
-                    else
-                        finalAngle = 270 + ((180.0/M_PI)*radians);
-                    indexes[currentIndex] = idNumber;
-                    finalValues[currentIndex] = finalAngle;
-                    currentIndex++;
-
-
-                }
-
-            }
-            sqlite3_finalize(stmt);
-            error = sqlite3_exec(db,"BEGIN",NULL,NULL,&errorMsg);
-            if(error!=SQLITE_OK)
-                NSLog(@"Error: %s",errorMsg);
-            for(int i=0;i<currentIndex;i++)
-            {
-                NSString *command2 = [NSString stringWithFormat:@"UPDATE \"%@\" SET \"%@\"=\'%f\' WHERE _id=%lld",[results objectForKey:@"table"],[results objectForKey:@"target"],finalValues[i],indexes[i]];
-                //NSLog(command2);
-                error = sqlite3_exec(db,[command2 UTF8String],NULL,NULL,&errorMsg);
-                if(error!=SQLITE_OK)
-                    NSLog(@"Error: %s",errorMsg);
-
-            }
-            sqlite3_exec(db,"COMMIT",NULL,NULL,&errorMsg);
-            free(finalValues);
-            free(indexes);
-        }
-        self.azimuthController = nil;
-    }];
 }
 
 -(IBAction)copyPDFImage:(id)sender
