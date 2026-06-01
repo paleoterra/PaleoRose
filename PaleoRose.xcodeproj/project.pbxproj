@@ -61,8 +61,6 @@
 		B427BD070950B3050063849E /* XRTableImporterDelimiterController.h in Headers */ = {isa = PBXBuildFile; fileRef = B427BD050950B3050063849E /* XRTableImporterDelimiterController.h */; };
 		B427BD080950B3050063849E /* XRTableImporterDelimiterController.m in Sources */ = {isa = PBXBuildFile; fileRef = B427BD060950B3050063849E /* XRTableImporterDelimiterController.m */; };
 		B427CFF21E81EB9E0047F659 /* XRStatisticTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B427CFF11E81EB9E0047F659 /* XRStatisticTests.m */; };
-		B42FE3AC096AEB99007E9DC5 /* XRCalculateAzimuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = B42FE3AA096AEB99007E9DC5 /* XRCalculateAzimuthController.m */; };
-		B42FE3AD096AEB99007E9DC5 /* XRCalculateAzimuthController.h in Headers */ = {isa = PBXBuildFile; fileRef = B42FE3AB096AEB99007E9DC5 /* XRCalculateAzimuthController.h */; };
 		B4324D0A06187FFF0083AE8A /* XRLayerText.h in Headers */ = {isa = PBXBuildFile; fileRef = B4324D0806187FFF0083AE8A /* XRLayerText.h */; };
 		B4324D0B06187FFF0083AE8A /* XRLayerText.m in Sources */ = {isa = PBXBuildFile; fileRef = B4324D0906187FFF0083AE8A /* XRLayerText.m */; };
 		B439AB372C83CF7900252574 /* DocumentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B439AB362C83CF7900252574 /* DocumentModel.swift */; };
@@ -81,8 +79,6 @@
 		B4524FB605D408C3008338E8 /* coreLayer.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B4524FB505D408C3008338E8 /* coreLayer.tiff */; };
 		B452504D05D427F1008338E8 /* XRCoreInspector.h in Headers */ = {isa = PBXBuildFile; fileRef = B452504B05D427F1008338E8 /* XRCoreInspector.h */; };
 		B452504E05D427F1008338E8 /* XRCoreInspector.m in Sources */ = {isa = PBXBuildFile; fileRef = B452504C05D427F1008338E8 /* XRCoreInspector.m */; };
-		B4564ABB096A04A1005E0015 /* XRTableAddColumnController.h in Headers */ = {isa = PBXBuildFile; fileRef = B4564AB9096A04A1005E0015 /* XRTableAddColumnController.h */; };
-		B4564ABC096A04A1005E0015 /* XRTableAddColumnController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4564ABA096A04A1005E0015 /* XRTableAddColumnController.m */; };
 		B45DD0E2062849BD00B06A95 /* textLayer.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B45DD0E1062849BD00B06A95 /* textLayer.tiff */; };
 		B460028A2E54135600DD41C8 /* GraphicPetal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46002892E54135600DD41C8 /* GraphicPetal.swift */; };
 		B461BA3D05C4F84C00738D23 /* LayerDrawerImageAddLayer.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B461BA3C05C4F84C00738D23 /* LayerDrawerImageAddLayer.tiff */; };
@@ -119,8 +115,6 @@
 		B4866BF72CAE039200319712 /* MockSqliteInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4866BF52CAE033800319712 /* MockSqliteInterface.swift */; };
 		B486E2731E7B761B00F1ADAA /* XRTableImporterXRoseSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = B486E2721E7B761B00F1ADAA /* XRTableImporterXRoseSheet.xib */; };
 		B486E2761E7B765400F1ADAA /* XRTableInitialTextController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B486E2741E7B765400F1ADAA /* XRTableInitialTextController.xib */; };
-		B486E2781E7B769300F1ADAA /* XRCalculateAzimuthSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = B486E2771E7B769300F1ADAA /* XRCalculateAzimuthSheet.xib */; };
-		B486E27A1E7B76A500F1ADAA /* XRTableAddColumnSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = B486E2791E7B76A500F1ADAA /* XRTableAddColumnSheet.xib */; };
 		B486E27D1E7B76EB00F1ADAA /* XRoseDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = B486E27B1E7B76EB00F1ADAA /* XRoseDocument.xib */; };
 		B486E2801E7B76FB00F1ADAA /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B486E27E1E7B76FB00F1ADAA /* MainMenu.xib */; };
 		B486E2831E7B770A00F1ADAA /* XRVStatPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = B486E2811E7B770A00F1ADAA /* XRVStatPanel.xib */; };
@@ -328,8 +322,6 @@
 		B427BD050950B3050063849E /* XRTableImporterDelimiterController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRTableImporterDelimiterController.h; sourceTree = "<group>"; };
 		B427BD060950B3050063849E /* XRTableImporterDelimiterController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XRTableImporterDelimiterController.m; sourceTree = "<group>"; };
 		B427CFF11E81EB9E0047F659 /* XRStatisticTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRStatisticTests.m; sourceTree = "<group>"; };
-		B42FE3AA096AEB99007E9DC5 /* XRCalculateAzimuthController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XRCalculateAzimuthController.m; sourceTree = "<group>"; };
-		B42FE3AB096AEB99007E9DC5 /* XRCalculateAzimuthController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRCalculateAzimuthController.h; sourceTree = "<group>"; };
 		B4324D0806187FFF0083AE8A /* XRLayerText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRLayerText.h; sourceTree = "<group>"; };
 		B4324D0906187FFF0083AE8A /* XRLayerText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRLayerText.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B4339BF12B82BC310016F4E0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
@@ -366,8 +358,6 @@
 		B4524FB505D408C3008338E8 /* coreLayer.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = coreLayer.tiff; sourceTree = "<group>"; };
 		B452504B05D427F1008338E8 /* XRCoreInspector.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRCoreInspector.h; sourceTree = "<group>"; };
 		B452504C05D427F1008338E8 /* XRCoreInspector.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XRCoreInspector.m; sourceTree = "<group>"; };
-		B4564AB9096A04A1005E0015 /* XRTableAddColumnController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRTableAddColumnController.h; sourceTree = "<group>"; };
-		B4564ABA096A04A1005E0015 /* XRTableAddColumnController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XRTableAddColumnController.m; sourceTree = "<group>"; };
 		B45DD0E1062849BD00B06A95 /* textLayer.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = textLayer.tiff; sourceTree = "<group>"; };
 		B46002892E54135600DD41C8 /* GraphicPetal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicPetal.swift; sourceTree = "<group>"; };
 		B461BA3C05C4F84C00738D23 /* LayerDrawerImageAddLayer.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = LayerDrawerImageAddLayer.tiff; sourceTree = "<group>"; };
@@ -403,8 +393,6 @@
 		B4866BF32CAE02C300319712 /* StoreProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreProtocol.swift; sourceTree = "<group>"; };
 		B4866BF52CAE033800319712 /* MockSqliteInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSqliteInterface.swift; sourceTree = "<group>"; };
 		B486E2721E7B761B00F1ADAA /* XRTableImporterXRoseSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XRTableImporterXRoseSheet.xib; sourceTree = "<group>"; };
-		B486E2771E7B769300F1ADAA /* XRCalculateAzimuthSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XRCalculateAzimuthSheet.xib; sourceTree = "<group>"; };
-		B486E2791E7B76A500F1ADAA /* XRTableAddColumnSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XRTableAddColumnSheet.xib; sourceTree = "<group>"; };
 		B486E29C1E7B850300F1ADAA /* AppendDialog.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppendDialog.xib; sourceTree = "<group>"; };
 		B48871EA2D8783360065AEFE /* LayerIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerIdentifiable.swift; sourceTree = "<group>"; };
 		B48B89F905C794C500248F96 /* XRDataInspector.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRDataInspector.h; sourceTree = "<group>"; };
@@ -412,8 +400,6 @@
 		B48BBEC02CAA1BF40050852E /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		B48BBEC62CAA20C70050852E /* InMemoryStoreTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryStoreTest.swift; sourceTree = "<group>"; };
 		B4950F0205DD286A00C711DD /* GraphicCircleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicCircleLabel.swift; sourceTree = "<group>"; };
-		B49D7EB62DDEC8720046A8B8 /* XRCalculateAzimuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRCalculateAzimuthController.swift; sourceTree = "<group>"; };
-		B49D7EB72DDEC87E0046A8B8 /* XRTableAddColumnController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XRTableAddColumnController.swift; sourceTree = "<group>"; };
 		B4A23EF62E18951700EDE135 /* GraphicDotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicDotTests.swift; sourceTree = "<group>"; };
 		B4A23EF82E19668900EDE135 /* GraphicHistogramTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicHistogramTests.swift; sourceTree = "<group>"; };
 		B4A23EFA2E196D1800EDE135 /* GraphicKiteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicKiteTests.swift; sourceTree = "<group>"; };
@@ -656,24 +642,8 @@
 				B4852A8205C2E223002212E3 /* XRGeometryController.h */,
 				B4852A8305C2E223002212E3 /* XRGeometryController.m */,
 				B4AE41D42D1E5DA300E05D96 /* XRGeometryController+Testing.swift */,
-				B4149FEA2B24C41D008AE5F4 /* Table Work */,
 			);
 			path = Document;
-			sourceTree = "<group>";
-		};
-		B4149FEA2B24C41D008AE5F4 /* Table Work */ = {
-			isa = PBXGroup;
-			children = (
-				B42FE3AB096AEB99007E9DC5 /* XRCalculateAzimuthController.h */,
-				B42FE3AA096AEB99007E9DC5 /* XRCalculateAzimuthController.m */,
-				B486E2771E7B769300F1ADAA /* XRCalculateAzimuthSheet.xib */,
-				B49D7EB62DDEC8720046A8B8 /* XRCalculateAzimuthController.swift */,
-				B4564AB9096A04A1005E0015 /* XRTableAddColumnController.h */,
-				B4564ABA096A04A1005E0015 /* XRTableAddColumnController.m */,
-				B486E2791E7B76A500F1ADAA /* XRTableAddColumnSheet.xib */,
-				B49D7EB72DDEC87E0046A8B8 /* XRTableAddColumnController.swift */,
-			);
-			path = "Table Work";
 			sourceTree = "<group>";
 		};
 		B4149FEB2B24C43C008AE5F4 /* Layer Control */ = {
@@ -1149,8 +1119,6 @@
 				B43D613A06345207001B863E /* FStatisticController.h in Headers */,
 				B427BD070950B3050063849E /* XRTableImporterDelimiterController.h in Headers */,
 				B47DDF500964CDE700C7EF02 /* XRTableImporterXRose.h in Headers */,
-				B4564ABB096A04A1005E0015 /* XRTableAddColumnController.h in Headers */,
-				B42FE3AD096AEB99007E9DC5 /* XRCalculateAzimuthController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1311,7 +1279,6 @@
 			files = (
 				B486E29B1E7B775600F1ADAA /* XRVectorInspector.xib in Resources */,
 				8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */,
-				B486E2781E7B769300F1ADAA /* XRCalculateAzimuthSheet.xib in Resources */,
 				8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */,
 				B486E2731E7B761B00F1ADAA /* XRTableImporterXRoseSheet.xib in Resources */,
 				B461BA3D05C4F84C00738D23 /* LayerDrawerImageAddLayer.tiff in Resources */,
@@ -1329,7 +1296,6 @@
 				B486E28F1E7B773900F1ADAA /* XRDataInspector.xib in Resources */,
 				B416A04805F2D77500821225 /* XRose Help in Resources */,
 				B486E2861E7B770F00F1ADAA /* FStatisticSheet.xib in Resources */,
-				B486E27A1E7B76A500F1ADAA /* XRTableAddColumnSheet.xib in Resources */,
 				B486E2891E7B772E00F1ADAA /* XRLayerCore.xib in Resources */,
 				B464E72106095B82009C1C89 /* geometryInspector.tiff in Resources */,
 				B486E2801E7B76FB00F1ADAA /* MainMenu.xib in Resources */,
@@ -1490,11 +1456,9 @@
 				B4237C992CFE959700E2B510 /* StorageModelFactory.swift in Sources */,
 				B47DDF510964CDE700C7EF02 /* XRTableImporterXRose.m in Sources */,
 				B41C86B22DE4B9C20053C9C9 /* UserDefaults+Extensions.swift in Sources */,
-				B4564ABC096A04A1005E0015 /* XRTableAddColumnController.m in Sources */,
 				B444B5732E62AC8C007E7E36 /* Graphic.swift in Sources */,
 				B463B60A2DE2AD51006B6C7C /* AboutView.swift in Sources */,
 				B463B60B2DE2AD51006B6C7C /* AboutWindowController.swift in Sources */,
-				B42FE3AC096AEB99007E9DC5 /* XRCalculateAzimuthController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="24412" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="24765" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24412"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24765"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication"/>
@@ -420,33 +420,6 @@
                                 <connections>
                                     <action selector="alignRight:" target="-1" id="330"/>
                                 </connections>
-                            </menuItem>
-                        </items>
-                    </menu>
-                </menuItem>
-                <menuItem title="Tables" id="360">
-                    <menu key="submenu" title="Tables" id="361">
-                        <items>
-                            <menuItem title="Import" id="362">
-                                <connections>
-                                    <action selector="importTable:" target="-1" id="363"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Add Column" id="364">
-                                <connections>
-                                    <action selector="tableAddColumn:" target="-1" id="369"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Calculations" id="366">
-                                <menu key="submenu" title="Calculations" id="367">
-                                    <items>
-                                        <menuItem title="Azimuth from Vectors" id="368">
-                                            <connections>
-                                                <action selector="tablePerformCalculation:" target="-1" id="370"/>
-                                            </connections>
-                                        </menuItem>
-                                    </items>
-                                </menu>
                             </menuItem>
                         </items>
                     </menu>

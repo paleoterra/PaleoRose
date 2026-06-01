@@ -23,7 +23,6 @@
 // SOFTWARE.
 
 #import <Cocoa/Cocoa.h>
-#import "sqlite3.h"
 #import <PaleoRose-Swift.h>
 @class XRRoseTableController, XRGeometryController;
 @interface XRoseWindowController : NSWindowController <NSToolbarDelegate>
@@ -53,6 +52,5 @@
 - (IBAction)importTableAction:(id)sender;
 - (IBAction)deleteTableAction:(id)sender;
 -(void)updateTable;
--(void)performAzimuthFromVector;
 
 @end
