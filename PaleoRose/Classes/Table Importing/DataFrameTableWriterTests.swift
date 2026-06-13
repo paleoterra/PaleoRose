@@ -37,94 +37,98 @@ struct DataFrameTableWriterTests {
 
     @Test("creates NUMERIC affinity for Int column")
     func numericAffinityInt() {
-        var df = DataFrame()
-        df.append(column: Column<Int>(name: "Azimuth", contents: [0, 90, 180]))
-        #expect(writer.createSQL(for: df, named: "strikes").contains("\"Azimuth\" NUMERIC"))
+        var dataframe = DataFrame()
+        dataframe.append(column: Column<Int>(name: "Azimuth", contents: [0, 90, 180]))
+        #expect(writer.createSQL(for: dataframe, named: "strikes").contains("\"Azimuth\" NUMERIC"))
     }
 
     @Test("creates TEXT affinity for String column")
     func textAffinityString() {
-        var df = DataFrame()
-        df.append(column: Column<String>(name: "Label", contents: ["N", "S"]))
-        #expect(writer.createSQL(for: df, named: "labels").contains("\"Label\" TEXT"))
+        var dataframe = DataFrame()
+        dataframe.append(column: Column<String>(name: "Label", contents: ["N", "S"]))
+        #expect(writer.createSQL(for: dataframe, named: "labels").contains("\"Label\" TEXT"))
     }
 
     @Test("escapes double-quotes in table name")
     func escapesTableName() {
-        var df = DataFrame()
-        df.append(column: Column<Int>(name: "v", contents: [1]))
-        #expect(writer.createSQL(for: df, named: "ta\"ble").contains("\"ta\"\"ble\""))
+        var dataframe = DataFrame()
+        dataframe.append(column: Column<Int>(name: "v", contents: [1]))
+        #expect(writer.createSQL(for: dataframe, named: "ta\"ble").contains("\"ta\"\"ble\""))
     }
 
     @Test("escapes double-quotes in column name")
     func escapesColumnName() {
-        var df = DataFrame()
-        df.append(column: Column<Int>(name: "col\"name", contents: [1]))
-        #expect(writer.createSQL(for: df, named: "t").contains("\"col\"\"name\""))
+        var dataframe = DataFrame()
+        dataframe.append(column: Column<Int>(name: "col\"name", contents: [1]))
+        #expect(writer.createSQL(for: dataframe, named: "t").contains("\"col\"\"name\""))
     }
 
     @Test("CREATE TABLE includes _id INTEGER PRIMARY KEY")
     func includesPrimaryKey() {
-        var df = DataFrame()
-        df.append(column: Column<Int>(name: "v", contents: [1]))
-        #expect(writer.createSQL(for: df, named: "t").contains("_id INTEGER PRIMARY KEY"))
+        var dataframe = DataFrame()
+        dataframe.append(column: Column<Int>(name: "v", contents: [1]))
+        #expect(writer.createSQL(for: dataframe, named: "t").contains("_id INTEGER PRIMARY KEY"))
     }
 
     // MARK: - insertSQL
 
     @Test("INSERT SQL placeholder count matches column count", arguments: [1, 3, 5])
     func insertPlaceholderCount(columnCount: Int) {
-        var df = DataFrame()
-        for i in 0 ..< columnCount {
-            df.append(column: Column<Int>(name: "c\(i)", contents: [0]))
+        var dataframe = DataFrame()
+        for index in 0 ..< columnCount {
+            dataframe.append(column: Column<Int>(name: "c\(index)", contents: [0]))
         }
-        let placeholders = writer.insertSQL(for: df, named: "t").components(separatedBy: "?").count - 1
+        let placeholders = writer.insertSQL(for: dataframe, named: "t").components(separatedBy: "?").count - 1
         #expect(placeholders == columnCount)
     }
 
     @Test("INSERT SQL escapes double-quotes in table name")
     func insertEscapesTableName() {
-        var df = DataFrame()
-        df.append(column: Column<Int>(name: "v", contents: [1]))
-        #expect(writer.insertSQL(for: df, named: "ta\"ble").contains("\"ta\"\"ble\""))
+        var dataframe = DataFrame()
+        dataframe.append(column: Column<Int>(name: "v", contents: [1]))
+        #expect(writer.insertSQL(for: dataframe, named: "ta\"ble").contains("\"ta\"\"ble\""))
     }
 
     // MARK: - bindingRows
 
     @Test("bindingRows count matches row count")
     func bindingRowCount() {
-        var df = DataFrame()
-        df.append(column: Column<Double>(name: "v", contents: [1.0, 2.0, 3.0]))
-        #expect(writer.bindingRows(for: df).count == 3)
+        var dataframe = DataFrame()
+        dataframe.append(column: Column<Double>(name: "v", contents: [1.0, 2.0, 3.0]))
+        #expect(writer.bindingRows(for: dataframe).count == 3)
     }
 
     @Test("each binding row has one entry per column")
     func bindingColumnCount() {
-        var df = DataFrame()
-        df.append(column: Column<Int>(name: "a", contents: [1, 2]))
-        df.append(column: Column<String>(name: "b", contents: ["x", "y"]))
-        let rows = writer.bindingRows(for: df)
+        var dataframe = DataFrame()
+        dataframe.append(column: Column<Int>(name: "a", contents: [1, 2]))
+        dataframe.append(column: Column<String>(name: "b", contents: ["x", "y"]))
+        let rows = writer.bindingRows(for: dataframe)
         #expect(rows.allSatisfy { $0.count == 2 })
     }
 
-    @Test("binding values are non-nil for supported types",
-          arguments: [
-              makeAnyColumn(Column<Int>(name: "v", contents: [42])),
-              makeAnyColumn(Column<Double>(name: "v", contents: [3.14])),
-              makeAnyColumn(Column<String>(name: "v", contents: ["hi"])),
-              makeAnyColumn(Column<Bool>(name: "v", contents: [true]))
-          ])
-    func bindableTypes(col: AnyColumn) {
-        var df = DataFrame()
-        df.append(column: col)
-        #expect(writer.bindingRows(for: df)[0][0] != nil)
+    @Test("binding values are non-nil for supported types", arguments: [SupportedColumnType.int, .double, .string, .bool])
+    func bindableTypes(kind: SupportedColumnType) {
+        var dataframe = DataFrame()
+        switch kind {
+        case .int:
+            dataframe.append(column: Column<Int>(name: "v", contents: [42]))
+
+        case .double:
+            dataframe.append(column: Column<Double>(name: "v", contents: [3.14]))
+
+        case .string:
+            dataframe.append(column: Column<String>(name: "v", contents: ["hi"]))
+
+        case .bool:
+            dataframe.append(column: Column<Bool>(name: "v", contents: [true]))
+        }
+        #expect(writer.bindingRows(for: dataframe)[0][0] != nil)
     }
 }
 
 // MARK: - Helpers
 
-private func makeAnyColumn(_ column: Column<some Any>) -> AnyColumn {
-    var df = DataFrame()
-    df.append(column: column)
-    return df.columns[0]
+enum SupportedColumnType {
+    case bool, double, int, string
 }

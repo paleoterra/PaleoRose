@@ -26,8 +26,6 @@
 
 import Foundation
 
-// swiftlint:disable indentation_width
-
 /// A type must conform to this protocol in order to work with Codable decoding from Sqlite
 public protocol TableRepresentable: Codable {
     static var tableName: String { get }
@@ -121,5 +119,3 @@ public extension TableRepresentable {
         return false
     }
 }
-
-// swiftlint:enable indentation_width

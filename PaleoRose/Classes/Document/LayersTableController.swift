@@ -29,7 +29,7 @@ import Combine
 
 // MARK: - Constants
 
-// swiftlint:disable file_length
+// swiftlint:disable file_length type_body_length
 private let layerDragType = NSPasteboard.PasteboardType("LayerDragType")
 
 /// Controller for managing the layers table view
@@ -289,27 +289,29 @@ private let layerDragType = NSPasteboard.PasteboardType("LayerDragType")
         sheetController = panelController
 
         // Show the sheet
-        windowController.window?.beginSheet(panelWindow) { [weak self, weak dataSource, weak panelController] response in
-            guard let self else { return }
-            defer {
-                sheetController = nil
-            }
+        windowController
+            .window?
+            .beginSheet(panelWindow) { [weak self, weak dataSource, weak panelController] response in
+                guard let self else { return }
+                defer {
+                    sheetController = nil
+                }
 
-            guard let dataSource, let panelController else { return }
+                guard let dataSource, let panelController else { return }
 
-            if response == .OK {
-                guard let selectedName = panelController.selectedName() else { return }
+                if response == .OK {
+                    guard let selectedName = panelController.selectedName() else { return }
 
-                // Find the dataset name from the selected layer
-                if let selectedLayer = dataLayer(withName: selectedName) as? XRLayerData {
-                    let dataSetName = selectedLayer.dataSet().tableName()
-                    dataSource.createLineArrowLayer(
-                        dataSetName: dataSetName ?? "Unknown",
-                        name: nil
-                    )
+                    // Find the dataset name from the selected layer
+                    if let selectedLayer = dataLayer(withName: selectedName) as? XRLayerData {
+                        let dataSetName = selectedLayer.dataSet().tableName()
+                        dataSource.createLineArrowLayer(
+                            dataSetName: dataSetName ?? "Unknown",
+                            name: nil
+                        )
+                    }
                 }
             }
-        }
     }
 
     // MARK: - Layer Deletion (Pass-Through to DocumentModel)

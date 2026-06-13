@@ -228,8 +228,7 @@ struct GraphicLineTests {
             (0.0, "0"),
             (90.0, "90"),
             (180.0, "180"),
-            (270.0, "270") // ,
-//          (360.0, "0")
+            (270.0, "270")
         ]
     )
     func setLineLabelForCompassPointsNumericNumbering(values: (degrees: Float, expected: String)) throws {

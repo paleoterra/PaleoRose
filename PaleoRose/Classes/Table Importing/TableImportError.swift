@@ -24,8 +24,8 @@
 // SOFTWARE.
 
 enum TableImportError: Error, Equatable {
-    case unsupportedFileFormat(String)
     case emptyDataFrame
-    case tableNameConflict(proposed: String, existing: String)
     case storageFailure(underlying: String)
+    case tableNameConflict(proposed: String, existing: String)
+    case unsupportedFileFormat(String)
 }

@@ -50,8 +50,10 @@ import TabularData
         switch url.pathExtension.lowercased() {
         case "txt":
             try await importText(from: url)
+
         case "xrose":
             try await importXRose(from: url)
+
         default:
             throw TableImportError.unsupportedFileFormat(url.pathExtension)
         }
@@ -130,15 +132,15 @@ import TabularData
 
     /// Opens the source .XRose file read-only and returns names of tables not prefixed with `_`.
     private func listDataTables(in url: URL) throws -> [String] {
-        var db: OpaquePointer?
-        guard sqlite3_open_v2(url.path, &db, SQLITE_OPEN_READONLY, nil) == SQLITE_OK else {
+        var database: OpaquePointer?
+        guard sqlite3_open_v2(url.path, &database, SQLITE_OPEN_READONLY, nil) == SQLITE_OK else {
             throw TableImportError.storageFailure(underlying: "Cannot open source file")
         }
-        defer { sqlite3_close(db) }
+        defer { sqlite3_close(database) }
 
         var statement: OpaquePointer?
         let sql = "SELECT name FROM sqlite_master WHERE type='table' AND substr(name,1,1)!='_'"
-        guard sqlite3_prepare_v2(db, sql, -1, &statement, nil) == SQLITE_OK else {
+        guard sqlite3_prepare_v2(database, sql, -1, &statement, nil) == SQLITE_OK else {
             throw TableImportError.storageFailure(underlying: "Cannot read source table list")
         }
         defer { sqlite3_finalize(statement) }

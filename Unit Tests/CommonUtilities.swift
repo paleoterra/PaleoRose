@@ -62,7 +62,7 @@ enum CommonUtilities {
         return strings
     }
 
-    // swiftlint:disable:next function_default_parameter_at_end function_parameter_count
+    // swiftlint:disable:next function_parameter_count
     static func assertXRLayerHasCorrectValues(
         layer: XRLayer,
         isVisible: Bool = true,
