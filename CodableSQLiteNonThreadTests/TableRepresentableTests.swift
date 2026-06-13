@@ -68,7 +68,6 @@ struct TableRepresentableTests {
         Issue.record("Binding (\(String(describing: binding)))and value (\(String(describing: value)))are not equal")
     }
 
-    // swiftlint:disable line_length
     @Test(
         "Given keys for binding, then return array of correct values",
         arguments: [
@@ -178,7 +177,6 @@ struct TableRepresentableTests {
                 values: [17, 45, 44, 65, 8, 16, 32.0, 64.0, 128.0, "Testing string", "Testing string", "Data String".data(using: .utf8)],
                 testableTable: TestableTable.stub(intValue: 17, int32Value: 45, uintValue: 44, uint32Value: 65, int16Value: 8, uint16Value: 16, floatValue: 32.0, doubleValue: 64.0, cgFloatValue: 128.0, stringValue: "Testing string", optionalString: "Testing string", dataStore: "Data String".data(using: .utf8))
             )
-            // swiftlint:enable line_length
         ]
     )
     func bindingArrays(bindingExpectations: BindingsExpectation) throws {

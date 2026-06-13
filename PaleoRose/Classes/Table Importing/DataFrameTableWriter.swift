@@ -32,9 +32,9 @@ struct DataFrameTableWriter: DataFrameTableWriting {
 
     func affinity(for column: AnyColumn) -> String {
         switch column.wrappedElementType {
-        case is Int.Type, is Int32.Type, is Int64.Type,
-             is Double.Type, is Float.Type, is Bool.Type:
+        case is Int.Type, is Int32.Type, is Int64.Type, is Double.Type, is Float.Type, is Bool.Type:
             "NUMERIC"
+
         default:
             "TEXT"
         }
@@ -42,9 +42,8 @@ struct DataFrameTableWriter: DataFrameTableWriting {
 
     func createSQL(for dataFrame: DataFrame, named tableName: String) -> String {
         let escapedName = tableName.sqliteEscaped
-        let columnDefs = dataFrame.columns.map { col in
-            "\"\(col.name.sqliteEscaped)\" \(affinity(for: col))"
-        }.joined(separator: ",\n\t")
+        let columnDefs = dataFrame.columns.map { col in "\"\(col.name.sqliteEscaped)\" \(affinity(for: col))" }
+            .joined(separator: ",\n\t")
         return """
         CREATE TABLE "\(escapedName)" (
         \t_id INTEGER PRIMARY KEY,
@@ -71,6 +70,7 @@ struct DataFrameTableWriter: DataFrameTableWriting {
 
     // MARK: - Private
 
+    // swiftlint:disable switch_case_on_newline
     private func bindable(from column: AnyColumn, at index: Int) -> Bindable? {
         switch column.wrappedElementType {
         case is Int.Type: return column[index] as? Int
@@ -81,10 +81,12 @@ struct DataFrameTableWriter: DataFrameTableWriting {
         default: return column[index].map { "\($0)" }
         }
     }
+    // swiftlint:enable switch_case_on_newline
 }
 
 // MARK: -
 
+// swiftlint:disable:next no_extension_access_modifier
 private extension String {
     var sqliteEscaped: String {
         replacingOccurrences(of: "\"", with: "\"\"")

@@ -542,15 +542,15 @@ class InMemoryStore: NSObject {
         insertSQL: String,
         rows: [[Bindable?]]
     ) throws {
-        let db = try validateStore()
-        _ = try interface.executeQuery(sqlite: db, query: Query(sql: "BEGIN"))
+        let database = try validateStore()
+        _ = try interface.executeQuery(sqlite: database, query: Query(sql: "BEGIN"))
         do {
-            _ = try interface.executeQuery(sqlite: db, query: Query(sql: createSQL))
+            _ = try interface.executeQuery(sqlite: database, query: Query(sql: createSQL))
             let insert = Query(sql: insertSQL, bindings: rows)
-            _ = try interface.executeQuery(sqlite: db, query: insert)
-            _ = try interface.executeQuery(sqlite: db, query: Query(sql: "COMMIT"))
+            _ = try interface.executeQuery(sqlite: database, query: insert)
+            _ = try interface.executeQuery(sqlite: database, query: Query(sql: "COMMIT"))
         } catch {
-            _ = try? interface.executeQuery(sqlite: db, query: Query(sql: "ROLLBACK"))
+            _ = try? interface.executeQuery(sqlite: database, query: Query(sql: "ROLLBACK"))
             throw error
         }
     }
@@ -561,31 +561,35 @@ class InMemoryStore: NSObject {
         from sourceURL: URL,
         selecting tables: [(original: String, destination: String)]
     ) throws {
-        let db = try validateStore()
+        let database = try validateStore()
         let attachSQL = "ATTACH DATABASE \"\(sourceURL.path.sqliteEscaped)\" AS source"
-        _ = try interface.executeQuery(sqlite: db, query: Query(sql: attachSQL))
+        _ = try interface.executeQuery(sqlite: database, query: Query(sql: attachSQL))
         defer {
-            _ = try? interface.executeQuery(sqlite: db, query: Query(sql: "DETACH DATABASE source"))
+            _ = try? interface.executeQuery(sqlite: database, query: Query(sql: "DETACH DATABASE source"))
         }
-        _ = try interface.executeQuery(sqlite: db, query: Query(sql: "BEGIN"))
+        _ = try interface.executeQuery(sqlite: database, query: Query(sql: "BEGIN"))
         do {
             for pair in tables {
-                let schemaSQL = try fetchSchema(db: db, sourceName: pair.original, destinationName: pair.destination)
-                _ = try interface.executeQuery(sqlite: db, query: Query(sql: schemaSQL))
+                let schemaSQL = try fetchSchema(
+                    database: database,
+                    sourceName: pair.original,
+                    destinationName: pair.destination
+                )
+                _ = try interface.executeQuery(sqlite: database, query: Query(sql: schemaSQL))
                 let dst = pair.destination.sqliteEscaped
                 let src = pair.original.sqliteEscaped
                 let copySQL = "INSERT INTO main.\"\(dst)\" SELECT * FROM source.\"\(src)\""
-                _ = try interface.executeQuery(sqlite: db, query: Query(sql: copySQL))
+                _ = try interface.executeQuery(sqlite: database, query: Query(sql: copySQL))
             }
-            _ = try interface.executeQuery(sqlite: db, query: Query(sql: "COMMIT"))
+            _ = try interface.executeQuery(sqlite: database, query: Query(sql: "COMMIT"))
         } catch {
-            _ = try? interface.executeQuery(sqlite: db, query: Query(sql: "ROLLBACK"))
+            _ = try? interface.executeQuery(sqlite: database, query: Query(sql: "ROLLBACK"))
             throw error
         }
     }
 
     private func fetchSchema(
-        db: OpaquePointer,
+        database: OpaquePointer,
         sourceName: String,
         destinationName: String
     ) throws -> String {
@@ -593,7 +597,7 @@ class InMemoryStore: NSObject {
             sql: "SELECT sql FROM source.sqlite_master WHERE type='table' AND name=?",
             bindings: [[sourceName as Bindable?]]
         )
-        let result = try interface.executeQuery(sqlite: db, query: query)
+        let result = try interface.executeQuery(sqlite: database, query: query)
         guard let originalSQL = result.first?["sql"] as? String else {
             throw InMemoryStoreError.unexpectedEmptyResult
         }
@@ -678,6 +682,7 @@ class InMemoryStore: NSObject {
 
 // MARK: -
 
+// swiftlint:disable:next no_extension_access_modifier
 private extension String {
     var sqliteEscaped: String {
         replacingOccurrences(of: "\"", with: "\"\"")

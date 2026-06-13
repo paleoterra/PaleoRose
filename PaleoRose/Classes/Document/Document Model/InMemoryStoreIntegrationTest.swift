@@ -417,7 +417,10 @@ struct InMemoryStoreIntegrationTest {
             radialsLabelAlignment: 0,
             radialsCompassPoint: 1,
             radialsOrder: 0,
-            radialFont: NSFont(name: "AurulentSansMonoNerdFontComplete-Regular", size: 12.0) ?? NSFont.systemFont(ofSize: 12.0),
+            radialFont: NSFont(
+                name: "AurulentSansMonoNerdFontComplete-Regular",
+                size: 12.0
+            ) ?? NSFont.systemFont(ofSize: 12.0),
             radialsSectorLock: false,
             radialsVisible: true,
             radialsIsPercent: true,

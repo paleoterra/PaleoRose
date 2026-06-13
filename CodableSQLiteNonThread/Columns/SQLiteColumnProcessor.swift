@@ -27,8 +27,6 @@
 import Foundation
 import SQLite3
 
-// swiftlint:disable indentation_width
-
 struct SQLiteColumnProcessor {
     let sqliteBool: Int32 = 1000
     let boolNameArray = ["bool", "boolean", "bit"]
@@ -67,5 +65,3 @@ struct SQLiteColumnProcessor {
         return columnType
     }
 }
-
-// swiftlint:enable indentation_width

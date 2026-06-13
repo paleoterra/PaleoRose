@@ -50,9 +50,9 @@ struct InMemoryStoreUserTableTests {
             insertSQL: "INSERT INTO \"t\" (\"v\") VALUES (?)",
             rows: [[1 as Bindable?], [2 as Bindable?], [3 as Bindable?]]
         )
-        let db = try store.sqlitePointer()
+        let database = try store.sqlitePointer()
         let result = try store.interface.executeQuery(
-            sqlite: db, query: Query(sql: "SELECT count(*) AS n FROM \"t\"")
+            sqlite: database, query: Query(sql: "SELECT count(*) AS n FROM \"t\"")
         )
         #expect(result.first?["n"] as? Int32 == 3)
     }
@@ -88,11 +88,11 @@ struct InMemoryStoreUserTableTests {
                 [90 as Bindable?, "East" as Bindable?]
             ]
         )
-        let db = try store.sqlitePointer()
+        let database = try store.sqlitePointer()
         let result = try store.interface.executeQuery(
-            sqlite: db, query: Query(sql: "SELECT count(*) AS n FROM \"samples\"")
+            sqlite: database, query: Query(sql: "SELECT count(*) AS n FROM \"samples\"")
         )
         #expect(result.first?["n"] as? Int32 == 2)
-        #expect(try store.tableNames(sqliteStore: db).contains("samples"))
+        #expect(try store.tableNames(sqliteStore: database).contains("samples"))
     }
 }

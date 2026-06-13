@@ -65,12 +65,12 @@ struct DocumentModelImportTests {
         mock.insertSQLResult = "INSERT INTO \"strikes\" (\"v\") VALUES (?)"
         mock.bindingRowsResult = [[1.0 as Bindable?]]
 
-        var df = DataFrame()
-        df.append(column: Column<Double>(name: "v", contents: [1.0]))
+        var dataframe = DataFrame()
+        dataframe.append(column: Column<Double>(name: "v", contents: [1.0]))
 
         var received: [String] = []
         let cancellable = model.dataSetRecordsPublisher.sink { received = $0 }
-        try model.importTable(df, named: "strikes", writer: mock)
+        try model.importTable(dataframe, named: "strikes", writer: mock)
 
         #expect(received.contains("strikes"))
         cancellable.cancel()
@@ -93,9 +93,9 @@ struct DocumentModelImportTests {
         mock.createSQLResult = "CREATE TABLE \"x\" (_id INTEGER PRIMARY KEY, \"v\" NUMERIC)"
         mock.insertSQLResult = "INSERT INTO \"x\" (\"v\") VALUES (?)"
         mock.bindingRowsResult = [[1 as Bindable?]]
-        var df = DataFrame()
-        df.append(column: Column<Int>(name: "v", contents: [1]))
-        try model.importTable(df, named: "x", writer: mock)
+        var dataframe = DataFrame()
+        dataframe.append(column: Column<Int>(name: "v", contents: [1]))
+        try model.importTable(dataframe, named: "x", writer: mock)
         #expect(mock.createCallCount == 1)
     }
 
@@ -103,9 +103,9 @@ struct DocumentModelImportTests {
     func twoArgImportUsesRealWriter() throws {
         let store = try InMemoryStore()
         let model = DocumentModel(inMemoryStore: store, document: nil)
-        var df = DataFrame()
-        df.append(column: Column<Double>(name: "Azimuth", contents: [45.0, 90.0]))
-        try model.importTable(df, named: "azimuths")
+        var dataframe = DataFrame()
+        dataframe.append(column: Column<Double>(name: "Azimuth", contents: [45.0, 90.0]))
+        try model.importTable(dataframe, named: "azimuths")
         let names = try store.tableNames(sqliteStore: store.sqlitePointer())
         #expect(names.contains("azimuths"))
     }

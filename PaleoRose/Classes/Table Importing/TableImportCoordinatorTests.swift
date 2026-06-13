@@ -37,12 +37,12 @@ final class MockUserTableImporting: NSObject, UserTableImporting {
     var shouldThrow: Error?
 
     func importTable(_ dataFrame: DataFrame, named tableName: String) throws {
-        if let e = shouldThrow { throw e }
+        if let error = shouldThrow { throw error }
         importedFrames.append((dataFrame, tableName))
     }
 
     func copyTables(from url: URL, selecting tables: [(original: String, destination: String)]) throws {
-        if let e = shouldThrow { throw e }
+        if let error = shouldThrow { throw error }
         copiedTables.append((url, tables))
     }
 
