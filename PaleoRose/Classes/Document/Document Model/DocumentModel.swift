@@ -103,17 +103,8 @@ class DocumentModel: NSObject {
         try inMemoryStore.store(windowSize: size)
     }
 
-    @available(*, deprecated, message: "Use TableListControllerDataSource.renameTable(oldName:to:) instead")
-    @objc func rename(table: String, toName: String) throws {
-        try inMemoryStore.renameTable(from: table, toName: toName)
-    }
-
     @objc func delete(table: String) throws {
         try inMemoryStore.drop(table: table)
-    }
-
-    @objc func add(table: String, column: String) throws {
-        try inMemoryStore.addColumn(to: table, columnDefinition: column)
     }
 
     // MARK: - Persistence
@@ -138,30 +129,9 @@ class DocumentModel: NSObject {
         try inMemoryStore.store(layers: layers)
     }
 
-    // MARK: - Deprecated Persistence Methods
-
-    @available(*, deprecated, message: "Use saveGeometry() instead - DocumentModel now owns the geometry controller")
-    @objc func store(geometryController: XRGeometryController) throws {
-        try inMemoryStore.store(geometryController: geometryController)
-    }
-
-    @available(*, deprecated, message: "Configuration happens automatically via InMemoryStoreDelegate")
-    @objc func configure(geometryController: XRGeometryController) throws {
-        do {
-            try inMemoryStore.configure(geometryController: geometryController)
-        } catch {
-            return
-        }
-    }
-
-    @available(*, deprecated, message: "Use saveLayers() instead")
-    @objc func store(layers: [XRLayer]) throws {
-        try inMemoryStore.store(layers: layers)
-    }
-
     // MARK: - Read From Store
 
-    @objc func readFromStore(completion: @escaping () -> Void) {
+    func readFromStore(completion: @escaping () -> Void) {
         inMemoryStore.readFromStore { _ in
             completion()
         }
@@ -171,7 +141,7 @@ class DocumentModel: NSObject {
     ///
     /// Use this after a data-table import so the UI reflects the new table while
     /// leaving `layers` and `dataSets` untouched.
-    @objc func refreshTableNames() {
+    func refreshTableNames() {
         do {
             let sqliteStore = try inMemoryStore.sqlitePointer()
             let names = try inMemoryStore.tableNames(sqliteStore: sqliteStore)

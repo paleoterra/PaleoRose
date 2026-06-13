@@ -27,7 +27,7 @@
 // SOFTWARE.
 
 #import "XRExportGraphicAccessory.h"
-
+#import <UniformTypeIdentifiers/UniformTypeIdentifiers.h>
 
 @implementation XRExportGraphicAccessory
 
@@ -59,26 +59,19 @@
     return self;
 }
 
-
-
-
 -(void)setDelegate:(id)aDelegate
 {
 	delegate = aDelegate;
 }
 
--(void)selectionDidChange:(id)sender
-{
-	if([delegate respondsToSelector:@selector(setRequiredFileType:)])
-	{
-
-		
+-(void)selectionDidChange:(id)sender {
+	if([delegate respondsToSelector:@selector(setRequiredFileType:)]) {
 		if([[sender titleOfSelectedItem] isEqualToString:@"PDF"])
-            [delegate setAllowedFileTypes:@[@"pdf"]];
+            [delegate setAllowedContentTypes:@[UTTypePDF]];
 		else if([[sender titleOfSelectedItem] isEqualToString:@"JPEG"])
-            [delegate setAllowedFileTypes:@[@"jpg"]];
+            [delegate setAllowedContentTypes:@[UTTypeJPEG]];
 		else if([[sender titleOfSelectedItem] isEqualToString:@"TIFF"])
-            [delegate setAllowedFileTypes:@[@"tif"]];
+            [delegate setAllowedContentTypes:@[UTTypeTIFF]];
 	}
 }
 

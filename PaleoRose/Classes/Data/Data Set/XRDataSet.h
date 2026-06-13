@@ -28,7 +28,6 @@
 
 #import <Foundation/Foundation.h>
 #import "XRoseDocument.h"
-#import "sqlite3.h"
 #define XRDataSetChangedStatisticsNotification @"XRDataSetChangedStatisticsNotification"
 
 @class XRStatistic;
@@ -47,8 +46,6 @@
 
 #pragma mark init
 
--(id)initWithTable:(NSString *)table column:(NSString *)column db:(sqlite3 *)db DEPRECATED_ATTRIBUTE;
--(id)initWithTable:(NSString *)table column:(NSString *)column db:(sqlite3 *)db predicate:(NSString *)aPredicate DEPRECATED_ATTRIBUTE;
 -(id)initWithData:(NSData *)theData withName:(NSString *)name;
 -(id)initWithId:(int)setId name:(NSString *)name tableName:(NSString *)table column:(NSString *)column predicate:(NSString *)aPredicate comments:(NSAttributedString *)comments data:(NSData *)data;
 #pragma mark accessors
@@ -115,12 +112,6 @@
 -(float)standardDeviationForIntArray:(int *)array count:(int)count expected:(float)expected;
 
 -(NSString *)statisticsDescription;
-
-#pragma mark SQL
-
--(NSString *)buildSQL DEPRECATED_ATTRIBUTE;
--(BOOL)readSQL:(sqlite3 *)db DEPRECATED_ATTRIBUTE;
--(id)initFromSQL:(sqlite3 *)db forIndex:(int)index DEPRECATED_ATTRIBUTE;
 
 #pragma mark Mutability
 -(void)appendData:(NSData *)data;
