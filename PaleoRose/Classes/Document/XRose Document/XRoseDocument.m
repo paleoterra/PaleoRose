@@ -69,7 +69,6 @@
 		_tables = [[NSMutableArray alloc] init];
         _documentModel = [[DocumentModel alloc] initInMemoryStore:[[InMemoryStore alloc] init] document:self];
         [self subscribeToDocumentModel];
-        [self createDB];
         _didLoad = NO;
 	}
     return self;
@@ -120,7 +119,7 @@
 -(BOOL)writeToURL:(NSURL *)url ofType:(NSString *)typeName error:(NSError * _Nullable __autoreleasing *)outError
 {
     NSError *error = nil;
-    [self.documentModel storeWithGeometryController:[self.mainWindowController geometryController] error:&error];
+    [self.documentModel saveGeometryAndReturnError:&error];
     if (error != nil) {
         NSLog(@"Cannot store geometry: %@", [error localizedDescription]);
     }
@@ -228,8 +227,7 @@
 {
     NSError *error;
     if(self.didLoad) {
-        [self loadDatasetsFromDB:[self.documentModel memoryStore]];
-        [self.documentModel configureWithGeometryController:[self.mainWindowController geometryController] error:&error];
+        [self loadDatasets];
         if (error != nil) {
             NSLog(@"Error reading geometry: %@", [error localizedDescription]);
         }
@@ -269,23 +267,22 @@
 -(void)configureDocument
 {
     NSError *error;
-	if([self.documentModel memoryStore] != NULL)
-	{
+    if(NSEqualSizes(self.documentModel.windowSize, CGSizeZero)) {
+        if([[self windowControllers] count]) {
+            [self.documentModel setWindowSize:[self.mainWindowController window].frame.size error:&error];
+            if (error != nil) {
+                NSLog(@"%@", error.localizedDescription);
+                return;
+            }
+        }
+    } else {
         CGRect frame = [self.mainWindowController.window frame];
         frame.size = [self.documentModel windowSize];
         if (frame.size.width != 0) {
             [[self.mainWindowController window] setFrame:frame display:YES];
         }
-        [self.documentModel configureWithGeometryController:[self.mainWindowController geometryController] error:&error];
-        if (error != nil) {
-            NSLog(@"Error configuring document: %@", [error localizedDescription]);
-        }
+    }
 
-	}
-	else
-	{
-		[self createDB];
-	}
 	[self.mainWindowController setTableList:self.tables];
 	[self discoverTables];
 }
@@ -413,24 +410,6 @@
 #pragma mark - SQLITE CRUD
 
 // **** REFACTOR/MOVE
--(void)createDB
-{
-    NSError *error = nil;
-    if([[self windowControllers] count]) {
-        [self.documentModel setWindowSize:[self.mainWindowController window].frame.size error:&error];
-        if (error != nil) {
-            NSLog(@"%@", error.localizedDescription);
-            return;
-        }
-        [self.documentModel storeWithGeometryController:[self.mainWindowController geometryController] error:&error];
-        if (error != nil) {
-            NSLog(@"%@", error.localizedDescription);
-            return;
-        }
-    }
-}
-
-// **** REFACTOR/MOVE
 -(void)datasetsRenameTable:(NSString *)oldName toName:(NSString *)newName
 {
     NSEnumerator *anEnum = [self.dataSets objectEnumerator];
@@ -471,7 +450,7 @@
 }
 
 // **** REFACTOR/MOVE
--(void)loadDatasetsFromDB:(sqlite3 *)db
+-(void)loadDatasets
 {
     self.dataSets = [[NSMutableArray alloc] initWithArray: self.documentModel.dataSets];
 }
