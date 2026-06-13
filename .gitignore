@@ -1,3 +1,58 @@
 docs
 .CARD_NUMBER
 build
+
+## Mac OS user tracking files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+## Xcode Build artifacts
+DerivedData/
+
+## Xcode User Settings & workspaces
+# Ignore personal layouts, open tabs, and locally breakpoints
+xcuserdata/
+*.xcuserstate
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+
+## Xcode automation & scheme changes
+*.xccheckout
+*.xcscmblueprint
+
+## App packaging distributions
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+## Package Managers
+# CocoaPods (uncomment if you check in Pods)
+# Pods/
+# Podfile.lock
+
+# Carthage
+Carthage/Build/
+
+# Swift Package Manager
+.build/
+.swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
+.swiftpm/xcode/xcuserdata/
+
+## Fastlane configuration outputs
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+
+## Development environment setup
+.env
+.env.*
+*.xcconfig
