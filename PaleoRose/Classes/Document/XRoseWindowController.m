@@ -368,8 +368,6 @@ NSRect initialRect;
                     if([[NSFileManager defaultManager] fileExistsAtPath:path])
                         [[NSFileManager defaultManager]  removeItemAtPath:path error:nil];
                     [[NSFileManager defaultManager] createFileAtPath:path contents:[resultString dataUsingEncoding:NSASCIIStringEncoding] attributes:nil];
-
-                    [[NSWorkspace sharedWorkspace] openFile:path withApplication:@"TextEdit"];
                 }
             }];
         }

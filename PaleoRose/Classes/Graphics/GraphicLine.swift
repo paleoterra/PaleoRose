@@ -413,6 +413,7 @@ import AppKit
         settings[GraphicKeyAngleSetting] = string(from: spokeAngle)
         settings[GraphicKeySpokeNumberAlignment] = string(from: spokeNumberAlign)
         settings[GraphicKeyStrokeColor] = strokeColor ?? NSColor.black
+        // swiftlint:disable next force_unwrapping
         settings[GraphicKeyCurrentFont] = font ?? NSFont(name: "Arial-Black", size: 12)!
 
         return settings
