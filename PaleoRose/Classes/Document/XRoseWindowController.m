@@ -30,6 +30,7 @@
 #import "XRExportGraphicAccessory.h"
 #import <PaleoRose-Swift.h>
 #import "XRoseView.h"
+#import <UniformTypeIdentifiers/UniformTypeIdentifiers.h>
 
 @interface XRoseWindowController()
 @property (nonatomic) FStatisticController *theSheetController;
@@ -163,10 +164,9 @@ NSRect initialRect;
 
 - (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar *)toolbar
 {
-	return [NSArray arrayWithObjects:NSToolbarSeparatorItemIdentifier,
+	return [NSArray arrayWithObjects:
 		NSToolbarSpaceItemIdentifier,
 		NSToolbarFlexibleSpaceItemIdentifier,
-		NSToolbarCustomizeToolbarItemIdentifier,
 		NSToolbarPrintItemIdentifier,
 		NSToolbarShowColorsItemIdentifier,
 		NSToolbarShowFontsItemIdentifier,
@@ -359,7 +359,7 @@ NSRect initialRect;
 
             __block NSString *resultString = [(XRoseDocument *)[self document] FTestStatisticsForSetNames:[self->_theSheetController selectedItems] biDirectional:[self->_theSheetController isBiDir]];
             NSSavePanel *sp = [NSSavePanel savePanel];
-            [sp setAllowedFileTypes:@[@"txt"]];
+            [sp setAllowedContentTypes:@[UTTypePlainText]];
             [sp setNameFieldLabel:@"F-Stat Report"];
             [sp beginSheetModalForWindow:[self window] completionHandler:^(NSInteger result) {
                 if(result == NSModalResponseOK)
@@ -439,7 +439,12 @@ NSRect initialRect;
     XRExportGraphicAccessory *accessoryView = [XRExportGraphicAccessory exportGraphicAccessoryView];
     [accessoryView setDelegate:sp];
     [sp setAccessoryView:accessoryView];
-    [sp setAllowedFileTypes:[NSArray arrayWithObjects:@"pdf",@"tif",@"jpg",@"PDF",@"TIF",@"JPG",nil]];
+    [sp setAllowedContentTypes:@[
+        UTTypePDF,
+        UTTypeTIFF,
+        UTTypeJPEG
+    ]];
+
     //[sp setExtensionHidden:NO];
     NSString *baseName;
     if([self.documentModel fileURL])
@@ -469,7 +474,7 @@ NSRect initialRect;
     __block NSString *basename = [[currentURL path ] lastPathComponent];
     if(!basename)
         basename = [self.window title];
-    [sp setAllowedFileTypes:@[@"txt"]];
+    [sp setAllowedContentTypes:@[UTTypePlainText]];
     [sp setDirectoryURL:[currentURL URLByDeletingLastPathComponent]];
     [sp beginSheetModalForWindow: self.window completionHandler:^(NSInteger result) {
         if(result == NSModalResponseOK)
