@@ -30,7 +30,7 @@ import Foundation
 import TabularData
 
 // swiftlint:disable file_length
-class DocumentModel: NSObject {
+class DocumentModel: NSObject, DatasetColumnProvider {
 
     enum DocumentModelError: Error {
         case unknownLayerType

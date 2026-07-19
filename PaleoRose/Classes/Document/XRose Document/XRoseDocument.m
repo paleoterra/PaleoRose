@@ -35,7 +35,7 @@
 #import <os/activity.h>
 
 
-@interface XRoseDocument() <DatasetColumnProvider>
+@interface XRoseDocument()
 
 @property (readwrite) DocumentModel* documentModel;
 @property (weak, nonatomic) XRoseWindowController *mainWindowController;
@@ -187,24 +187,6 @@
         // a specific reason for doing so
         // [self setPrintInfo: [printOperation printInfo]];
     }
-}
-
-#pragma mark DatasetColumnProvider Protocol
-
--(NSArray *)retrieveNonTextColumnNamesFromTable:(NSString *)aTableName
-{
-    NSError *error = nil;
-    NSArray *columns = [self.documentModel possibleColumnNamesWithTable:aTableName error:&error];
-    if (error != nil) {
-        [self presentError:error];
-        return nil;
-    }
-    return columns;
-}
-
-- (NSArray<NSString *> * _Nonnull)numericColumnsForTable:(NSString * _Nonnull)tableName {
-    NSArray *columns = [self retrieveNonTextColumnNamesFromTable:tableName];
-    return columns ?: @[];
 }
 
 @end

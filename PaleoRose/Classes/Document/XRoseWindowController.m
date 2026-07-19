@@ -391,7 +391,7 @@ NSRect initialRect;
 -(void)loadDataSet
 {
     DatasetCreationSheet *controller = [[DatasetCreationSheet alloc] initWithTableArray:[self.documentModel dataTableNames]
-                                                                          columnProvider:self];
+                                                                         columnProvider:self.documentModel];
     self.currentSheetController = controller;
     [[self window]
      beginSheet:[controller window]
