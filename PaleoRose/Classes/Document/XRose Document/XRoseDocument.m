@@ -29,15 +29,8 @@
 #import "XRoseDocument.h"
 #import "XRDataSet.h"
 #import "XRoseWindowController.h"
-#import "XRGeometryController.h"
-#import "XRAppendDialogController.h"
-#import "XREncodingAccessoryView.h"
-#import "XRoseView.h"
-
 #import "XRStatistic.h"
 #import "PaleoRose-Swift.h"
-#import <Security/Security.h>
-#import <Security/AuthSession.h>
 #import <UniformTypeIdentifiers/UniformTypeIdentifiers.h>
 #import <os/activity.h>
 
@@ -248,19 +241,6 @@
     self.didLoad = NO;
 }
 
-#pragma mark - Accessors
-
--(sqlite3 *)documentInMemoryStore
-{
-    return [self.documentModel memoryStore];
-}
-
-// **** REFACTOR/MOVE
--(NSArray *)tableList
-{
-    return self.tables;
-}
-
 #pragma mark - PR Window Controller Delegate
 
 // **** REFACTOR/MOVE
@@ -326,18 +306,6 @@
 }
 
 #pragma mark Data Sets
-
-// **** REFACTOR/MOVE
--(void)addDataSet:(XRDataSet *)aSet
-{
-    [self.dataSets addObject:aSet];
-}
-
-// **** REFACTOR/MOVE
--(void)removeDataSet:(XRDataSet *)aSet
-{
-    [self.dataSets removeObject:aSet];
-}
 
 // **** REFACTOR/MOVE
 -(XRDataSet *)dataSetWithName:(NSString *)name
@@ -407,39 +375,7 @@
     return aString;
 }
 
-#pragma mark - SQLITE CRUD
-
-// **** REFACTOR/MOVE
--(void)datasetsRenameTable:(NSString *)oldName toName:(NSString *)newName
-{
-    NSEnumerator *anEnum = [self.dataSets objectEnumerator];
-    XRDataSet *aSet;
-    while(aSet = [anEnum nextObject])
-    {
-        if([[aSet tableName] isEqualToString:oldName])
-            [aSet setTableName:newName];
-    }
-}
-
-// **** REFACTOR/MOVE
--(NSArray *)retrieveNonTextColumnNamesFromTable:(NSString *)aTableName
-{
-    NSError *error = nil;
-    NSArray *columns = [self.documentModel possibleColumnNamesWithTable:aTableName error:&error];
-    if (error != nil) {
-        [self presentError:error];
-         return nil;
-    }
-    return columns;
-}
-
 #pragma mark - DatasetColumnProvider
-
-- (NSArray<NSString *> *)numericColumnsForTable:(NSString *)tableName
-{
-    NSArray *columns = [self retrieveNonTextColumnNamesFromTable:tableName];
-    return columns ?: @[];
-}
 
 // **** REFACTOR/MOVE
 -(void)discoverTables
