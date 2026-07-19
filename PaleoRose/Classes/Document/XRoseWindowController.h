@@ -51,6 +51,5 @@
 - (IBAction)deleteLayerAction:(id)sender;
 - (IBAction)importTableAction:(id)sender;
 - (IBAction)deleteTableAction:(id)sender;
--(void)updateTable;
 
 @end

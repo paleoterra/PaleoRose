@@ -37,9 +37,6 @@
 
 @interface XRoseDocument() <DatasetColumnProvider>
 
-@property (nonatomic) NSMutableArray *dataSets;
-@property (nonatomic) NSMutableArray *tables;
-
 @property (readwrite) BOOL didLoad;
 
 @property (nonatomic) TableImportCoordinator *currentImportCoordinator;
@@ -57,36 +54,10 @@
 {
     self = [super init];
     if (self) {
-		_dataSets = [[NSMutableArray alloc] init];
-		_tables = [[NSMutableArray alloc] init];
         _documentModel = [[DocumentModel alloc] initInMemoryStore:[[InMemoryStore alloc] init] document:self];
-        [self subscribeToDocumentModel];
         _didLoad = NO;
 	}
     return self;
-}
-
--(void)subscribeToDocumentModel {
-    NSArray *keys = @[@"dataSets", @"layers"];
-    for(int i = 0; i<[keys count]; i++) {
-        [self.documentModel addObserver:self
-                             forKeyPath:keys[i]
-                                options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld | NSKeyValueObservingOptionInitial)
-                                context:nil];
-    }
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath
-                     ofObject:(id)object
-                       change:(NSDictionary<NSKeyValueChangeKey,id> *)change
-                      context:(void *)context {
-    NSLog(@"Change Description");
-    NSLog(@"%@", keyPath);
-    NSLog(@"%@", [change description]);
-
-    if([keyPath isEqualToString:@"tableNames"]) {
-        [self discoverTables];
-    }
 }
 
 #pragma mark - Reading the Document's Content
@@ -212,60 +183,6 @@
         return NO;
 }
 
-#pragma mark - NSObject
-
-// **** REFACTOR/MOVE
--(void)awakeFromNib
-{
-    NSError *error;
-    if(self.didLoad) {
-        [self loadDatasets];
-        if (error != nil) {
-            NSLog(@"Error reading geometry: %@", [error localizedDescription]);
-        }
-
-        CGRect frame = [self.mainWindowController.window frame];
-        frame.size = self.documentModel.windowSize;
-        if (frame.size.width != 0) {
-            [[self.mainWindowController window] setFrame:frame display:YES];
-        }
-
-        // NOTE: LayersTableController no longer uses SQLite configuration.
-        // Layers are loaded from DocumentModel via Combine publishers.
-    }
-    else {
-        // New document: add a default grid layer
-        [self.mainWindowController.layersTableController addGridLayer:nil];
-    }
-    self.didLoad = NO;
-}
-
-#pragma mark - PR Window Controller Delegate
-
-// **** REFACTOR/MOVE
--(void)configureDocument
-{
-    NSError *error;
-    if(NSEqualSizes(self.documentModel.windowSize, CGSizeZero)) {
-        if([[self windowControllers] count]) {
-            [self.documentModel setWindowSize:[self.mainWindowController window].frame.size error:&error];
-            if (error != nil) {
-                NSLog(@"%@", error.localizedDescription);
-                return;
-            }
-        }
-    } else {
-        CGRect frame = [self.mainWindowController.window frame];
-        frame.size = [self.documentModel windowSize];
-        if (frame.size.width != 0) {
-            [[self.mainWindowController window] setFrame:frame display:YES];
-        }
-    }
-
-	[self.mainWindowController setTableList:self.tables];
-	[self discoverTables];
-}
-
 // **** REFACTOR/MOVE
 -(void)addDataLayer:(id)sender
 {
@@ -302,22 +219,6 @@
         }
         self.currentSheetController = nil;
     }];
-}
-
-#pragma mark - DatasetColumnProvider
-
-// **** REFACTOR/MOVE
--(void)discoverTables
-{
-    [self.tables removeAllObjects];
-    [self.tables addObjectsFromArray:[self.documentModel dataTableNames]];
-    [self.mainWindowController updateTable];
-}
-
-// **** REFACTOR/MOVE
--(void)loadDatasets
-{
-    self.dataSets = [[NSMutableArray alloc] initWithArray: self.documentModel.dataSets];
 }
 
 #pragma mark Importing Data

@@ -133,20 +133,16 @@ NSRect initialRect;
 	[[self window] setToolbar:roseToolbar];
 	[roseToolbar setAutosavesConfiguration:YES];
 	[roseToolbar setAllowsUserCustomization:YES];
-	[[self document] configureDocument];
-	if([[[NSDocumentController sharedDocumentController] documents] count] == 1)
-	{
-		//NSLog(@"displaying initial window");
-		NSRect frame = [[self window] frame];
-		//NSLog(NSStringFromRect(frame));
-		frame.origin = initialRect.origin;
-		[[self window] setFrame:frame display:YES];
 
-		//NSLog(NSStringFromRect(initialRect));
-	}
+    // Set window size and position
+    NSRect frame = [[self window] frame];
+    NSSize windowSize = [self.documentModel windowSize];
+    if (!CGSizeEqualToSize(windowSize, CGSizeZero)) {
+        frame.size = windowSize;
+        [[self window] setFrame:frame display:YES];
+    }
 
-	//[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(splitViewDidResize:) name:NSViewFrameDidChangeNotification object:_windowSplitView];
-	[[self document] awakeFromNib];
+    [self.layersTableController createGridLayerIfNeeded];
 }
 
 //toolbar control
@@ -399,15 +395,9 @@ NSRect initialRect;
 	[[self document] importTable:sender];
 }
 
-
-
 -(void)setTableList:(NSMutableArray *)aList
 {
 	tableList = aList;
-}
-
--(void)updateTable {
-	[_tableNameTable reloadData];
 }
 
 -(IBAction)deleteTableAction:(id)sender
@@ -424,8 +414,6 @@ NSRect initialRect;
 
 	//Table is now deleted.  We must now delete all dependent layers and datasets
 	[self.layersTableController deleteLayersForTableName:tableToDelete];
-	[[self document] discoverTables];
-	[self updateTable];
 }
 
 -(IBAction)copyPDFImage:(id)sender

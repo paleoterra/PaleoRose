@@ -421,6 +421,12 @@ private let layerDragType = NSPasteboard.PasteboardType("LayerDragType")
 
         return result
     }
+
+    @objc func createGridLayerIfNeeded() {
+        if layers.isEmpty {
+            addGridLayer(nil)
+        }
+    }
 }
 
 // MARK: - NSTableViewDelegate

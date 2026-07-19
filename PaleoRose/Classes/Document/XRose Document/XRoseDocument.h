@@ -32,8 +32,6 @@
 @interface XRoseDocument : NSDocument
 
 -(void)addDataLayer:(id)sender;
--(void)configureDocument;
 -(void)importTable:(id)sender;
--(void)discoverTables;
 
 @end
