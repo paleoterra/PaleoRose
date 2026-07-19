@@ -107,6 +107,10 @@ class DocumentModel: NSObject {
         try inMemoryStore.drop(table: table)
     }
 
+    @objc func dataSet(name: String) -> XRDataSet? {
+        dataSets.first(where: { $0.name() == name })
+    }
+
     // MARK: - Persistence
 
     /// Creates a new dataset entry in the store and adds it to the in-memory dataSets array.

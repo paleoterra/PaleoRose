@@ -33,7 +33,6 @@
 
 -(void)addDataLayer:(id)sender;
 -(void)configureDocument;
--(NSString *)FTestStatisticsForSetNames:(NSArray *)setNames biDirectional:(BOOL)isBiDir DEPRECATED_ATTRIBUTE;
 -(void)importTable:(id)sender;
 -(void)discoverTables;
 
