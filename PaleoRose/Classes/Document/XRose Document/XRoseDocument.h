@@ -31,7 +31,4 @@
 @class XRDataSet;
 @interface XRoseDocument : NSDocument
 
--(void)addDataLayer:(id)sender;
--(void)importTable:(id)sender;
-
 @end

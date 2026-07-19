@@ -37,11 +37,6 @@
 
 @interface XRoseDocument() <DatasetColumnProvider>
 
-@property (readwrite) BOOL didLoad;
-
-@property (nonatomic) TableImportCoordinator *currentImportCoordinator;
-@property (nonatomic) NSObject *currentSheetController;
-
 @property (readwrite) DocumentModel* documentModel;
 @property (weak, nonatomic) XRoseWindowController *mainWindowController;
 @end
@@ -55,7 +50,6 @@
     self = [super init];
     if (self) {
         _documentModel = [[DocumentModel alloc] initInMemoryStore:[[InMemoryStore alloc] init] document:self];
-        _didLoad = NO;
 	}
     return self;
 }
@@ -72,7 +66,6 @@
             NSLog(@"%@", error.localizedDescription);
             return NO;
         }
-        self.didLoad = YES;
         return YES;
     }
     return NO;
@@ -183,66 +176,6 @@
         return NO;
 }
 
-// **** REFACTOR/MOVE
--(void)addDataLayer:(id)sender
-{
-    os_activity_initiate("add data layer", OS_ACTIVITY_FLAG_DEFAULT, ^{
-        [self loadDataSet];
-    });
-}
-
-// **** REFACTOR/MOVE
--(void)loadDataSet
-{
-    DatasetCreationSheet *controller = [[DatasetCreationSheet alloc] initWithTableArray:[self.documentModel dataTableNames]
-                                                                          columnProvider:self];
-    self.currentSheetController = controller;
-    [[self.mainWindowController window]
-     beginSheet:[controller window]
-     completionHandler:^(NSModalResponse returnCode) {
-        if(returnCode == NSModalResponseOK)
-        {
-            NSError *createError = nil;
-            XRDataSet *aSet = [self.documentModel createDataSetWithTableName:[controller selectedTable]
-                                                                  columnName:[controller selectedColumn]
-                                                                        name:[controller selectedName]
-                                                                       error:&createError];
-            if(aSet && !createError)
-            {
-                [self.mainWindowController.layersTableController addDataLayerFor:aSet];
-                [self updateChangeCount:NSChangeDone];
-            }
-            else if(createError)
-            {
-                NSLog(@"Failed to create dataset: %@", [createError localizedDescription]);
-            }
-        }
-        self.currentSheetController = nil;
-    }];
-}
-
-#pragma mark Importing Data
-
--(void)importTable:(id)sender
-{
-    NSOpenPanel *op = [NSOpenPanel openPanel];
-    [op setAllowsMultipleSelection:NO];
-    [op setAllowedContentTypes:@[UTTypePlainText, [UTType typeWithFilenameExtension:@"xrose"]]];
-    [op beginSheetModalForWindow:[self.mainWindowController window] completionHandler:^(NSInteger result) {
-        if (result == NSModalResponseOK) {
-            NSURL *url = [op URL];
-            if (!url) { return; }
-            [op close];
-            self.currentImportCoordinator = [[TableImportCoordinator alloc]
-                initWithDocumentModel:self.documentModel
-                window:[[[self windowControllers] firstObject] window]];
-            [self.currentImportCoordinator beginImportFromURL:url completionHandler:^(NSError *error) {
-                if (error) { [self presentError:error]; }
-                self.currentImportCoordinator = nil;
-            }];
-        }
-    }];
-}
 
 #pragma mark Print Operation Delegate
 

@@ -38,6 +38,8 @@
 @property (nonatomic) FStatisticController *theSheetController;
 @property (nonatomic) TableListController *tableListController;
 @property (nonatomic, weak) DocumentModel *documentModelBacking;
+@property (nonatomic) NSObject *currentSheetController;
+@property (nonatomic) TableImportCoordinator *currentImportCoordinator;
 @end
 @implementation XRoseWindowController
 NSRect initialRect;
@@ -382,7 +384,37 @@ NSRect initialRect;
 
 
 - (IBAction)addLayerAction:(id)sender {
-	[[self document] addDataLayer:sender];
+//	[[self document] addDataLayer:sender];
+    [self loadDataSet];
+}
+
+-(void)loadDataSet
+{
+    DatasetCreationSheet *controller = [[DatasetCreationSheet alloc] initWithTableArray:[self.documentModel dataTableNames]
+                                                                          columnProvider:self];
+    self.currentSheetController = controller;
+    [[self window]
+     beginSheet:[controller window]
+     completionHandler:^(NSModalResponse returnCode) {
+        if(returnCode == NSModalResponseOK)
+        {
+            NSError *createError = nil;
+            XRDataSet *aSet = [self.documentModel createDataSetWithTableName:[controller selectedTable]
+                                                                  columnName:[controller selectedColumn]
+                                                                        name:[controller selectedName]
+                                                                       error:&createError];
+            if(aSet && !createError)
+            {
+                [self.layersTableController addDataLayerFor:aSet];
+                [self.document updateChangeCount:NSChangeDone];
+            }
+            else if(createError)
+            {
+                NSLog(@"Failed to create dataset: %@", [createError localizedDescription]);
+            }
+        }
+        self.currentSheetController = nil;
+    }];
 }
 
 - (IBAction)deleteLayerAction:(id)sender
@@ -393,6 +425,27 @@ NSRect initialRect;
 - (IBAction)importTableAction:(id)sender
 {
 	[[self document] importTable:sender];
+}
+
+-(void)importTable:(id)sender
+{
+    NSOpenPanel *op = [NSOpenPanel openPanel];
+    [op setAllowsMultipleSelection:NO];
+    [op setAllowedContentTypes:@[UTTypePlainText, [UTType typeWithFilenameExtension:@"xrose"]]];
+    [op beginSheetModalForWindow:[self window] completionHandler:^(NSInteger result) {
+        if (result == NSModalResponseOK) {
+            NSURL *url = [op URL];
+            if (!url) { return; }
+            [op close];
+            self.currentImportCoordinator = [[TableImportCoordinator alloc]
+                initWithDocumentModel:self.documentModel
+                window:[self window]];
+            [self.currentImportCoordinator beginImportFromURL:url completionHandler:^(NSError *error) {
+                if (error) { [self presentError:error]; }
+                self.currentImportCoordinator = nil;
+            }];
+        }
+    }];
 }
 
 -(void)setTableList:(NSMutableArray *)aList
