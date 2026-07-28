@@ -34,7 +34,6 @@
 #import <UniformTypeIdentifiers/UniformTypeIdentifiers.h>
 #import <os/activity.h>
 
-
 @interface XRoseDocument()
 
 @property (readwrite) DocumentModel* documentModel;
@@ -45,8 +44,7 @@
 
 #pragma mark - Creating a Document Object
 
-- (id)init
-{
+- (id)init {
     self = [super init];
     if (self) {
         _documentModel = [[DocumentModel alloc] initInMemoryStore:[[InMemoryStore alloc] init] document:self];
@@ -56,8 +54,7 @@
 
 #pragma mark - Reading the Document's Content
 
--(BOOL)readFromURL:(NSURL *)url ofType:(NSString *)typeName error:(NSError * _Nullable __autoreleasing *)outError
-{
+-(BOOL)readFromURL:(NSURL *)url ofType:(NSString *)typeName error:(NSError * _Nullable __autoreleasing *)outError {
     if([typeName isEqualToString:@"XRose"])
     {
         NSError *error = nil;
@@ -72,8 +69,7 @@
 }
 
 #pragma mark - Writing the Document's Content
--(BOOL)writeToURL:(NSURL *)url ofType:(NSString *)typeName error:(NSError * _Nullable __autoreleasing *)outError
-{
+-(BOOL)writeToURL:(NSURL *)url ofType:(NSString *)typeName error:(NSError * _Nullable __autoreleasing *)outError {
     NSError *error = nil;
     [self.documentModel saveGeometryAndReturnError:&error];
     if (error != nil) {
@@ -98,86 +94,28 @@
     return YES;
 }
 
-#pragma mark - Getting Document Metadata
-
-#pragma mark - Managing File Type Information
-
-#pragma mark - Creating and Manageing Window Controllers
-
--(void)makeWindowControllers
-{
+-(void)makeWindowControllers {
     XRoseWindowController *aController = [[XRoseWindowController alloc] initWithWindowNibName:@"XRoseDocument"];
     [self addWindowController:aController];
     _mainWindowController = aController;
     _mainWindowController.documentModel = self.documentModel;
 }
 
-#pragma mark - Managing Document Windows
-
-#pragma mark - Configuring the Autosave Behavior
-
-#pragma mark - Autosaving the Document
-
-#pragma mark - Managing Document Versions
-
-#pragma mark - Storing Documents in iCloud
-
-#pragma mark - Managing Undo and Redo Actions
-
-#pragma mark - Updating the Document Change Count
-
-#pragma mark - Handling Window Restoration
-
-#pragma mark - Presenting a Save Panel
-
-#pragma mark - Supporting User Activities
-
-#pragma mark - Validating User Interface Items
-
-#pragma mark - Performing Tasks Serially
-
-#pragma mark - Handling User Actions
-
 - (void)printDocument:(id)sender {
     [[NSPrintOperation printOperationWithView:[self.mainWindowController mainView] printInfo:[self printInfo]] runOperation];
 }
 
-#pragma mark - Closing the Document
-
-#pragma mark - Reverting the Document Contents
-
-#pragma mark - Duplicating the Document
-
-#pragma mark - Renaming the Document
-
-#pragma mark - Moving the Document
-
-#pragma mark - Locking the Document
-
-#pragma mark - Printing the Document
-
-#pragma mark - Sharing the Document
-
-#pragma mark - Handling Script Commands
-
-#pragma mark - Displaying Errors to the User
-
-- (NSError *)willPresentError:(NSError *)anError
-{
+- (NSError *)willPresentError:(NSError *)anError {
     //NSLog(@"will present error");
     return anError;
 }
 
-- (BOOL)presentError:(NSError *)error
-{
+- (BOOL)presentError:(NSError *)error {
     if([super respondsToSelector:@selector(presentError:)])
         return [super presentError:error];
     else
         return NO;
 }
-
-
-#pragma mark Print Operation Delegate
 
 - (void)printOperationDidRun:(NSPrintOperation *)printOperation
 					 success:(BOOL)success

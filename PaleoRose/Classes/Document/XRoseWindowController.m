@@ -41,6 +41,7 @@
 @property (nonatomic) NSObject *currentSheetController;
 @property (nonatomic) TableImportCoordinator *currentImportCoordinator;
 @end
+
 @implementation XRoseWindowController
 NSRect initialRect;
 +(void)initialize
@@ -191,8 +192,8 @@ NSRect initialRect;
 		[anItem setLabel:@"Add Data Layer"];
 		[anItem setPaletteLabel:@"Add Data Layer"];
 		[anItem setToolTip:@"Add Data Layer"];
-		[anItem setTarget:[self document]];//this is okay.  Has to tell the document to load more data
-		[anItem setAction:@selector(addDataLayer:)];
+		[anItem setTarget:self];
+		[anItem setAction:@selector(addLayerAction:)];
 		[anItem setImage:[[NSImage alloc] initWithContentsOfFile:[[NSBundle bundleForClass:[self class]]pathForImageResource:@"LayerDrawerImageAddLayer"]]];
 			
 	}
@@ -382,9 +383,7 @@ NSRect initialRect;
 		[[XRGeometryPropertyInspector defaultGeometryInspector] displayInfoForObject:nil];
 }
 
-
 - (IBAction)addLayerAction:(id)sender {
-//	[[self document] addDataLayer:sender];
     [self loadDataSet];
 }
 
@@ -448,13 +447,9 @@ NSRect initialRect;
     }];
 }
 
--(void)setTableList:(NSMutableArray *)aList
-{
-	tableList = aList;
-}
-
 -(IBAction)deleteTableAction:(id)sender
 {
+    NSArray *tableList = [self.documentModel dataTableNames];
     NSInteger selectedRow = [_tableNameTable selectedRow];
     if (selectedRow < 0 || selectedRow >= (NSInteger)[tableList count]) { return; }
     NSError *error;
