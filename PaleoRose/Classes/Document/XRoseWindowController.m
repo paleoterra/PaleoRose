@@ -30,13 +30,18 @@
 #import "XRExportGraphicAccessory.h"
 #import <PaleoRose-Swift.h>
 #import "XRoseView.h"
+#import "XRDataSet.h"
+#import "XRStatistic.h"
 #import <UniformTypeIdentifiers/UniformTypeIdentifiers.h>
 
 @interface XRoseWindowController()
 @property (nonatomic) FStatisticController *theSheetController;
 @property (nonatomic) TableListController *tableListController;
 @property (nonatomic, weak) DocumentModel *documentModelBacking;
+@property (nonatomic) NSObject *currentSheetController;
+@property (nonatomic) TableImportCoordinator *currentImportCoordinator;
 @end
+
 @implementation XRoseWindowController
 NSRect initialRect;
 +(void)initialize
@@ -131,20 +136,16 @@ NSRect initialRect;
 	[[self window] setToolbar:roseToolbar];
 	[roseToolbar setAutosavesConfiguration:YES];
 	[roseToolbar setAllowsUserCustomization:YES];
-	[[self document] configureDocument];
-	if([[[NSDocumentController sharedDocumentController] documents] count] == 1)
-	{
-		//NSLog(@"displaying initial window");
-		NSRect frame = [[self window] frame];
-		//NSLog(NSStringFromRect(frame));
-		frame.origin = initialRect.origin;
-		[[self window] setFrame:frame display:YES];
 
-		//NSLog(NSStringFromRect(initialRect));
-	}
+    // Set window size and position
+    NSRect frame = [[self window] frame];
+    NSSize windowSize = [self.documentModel windowSize];
+    if (!CGSizeEqualToSize(windowSize, CGSizeZero)) {
+        frame.size = windowSize;
+        [[self window] setFrame:frame display:YES];
+    }
 
-	//[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(splitViewDidResize:) name:NSViewFrameDidChangeNotification object:_windowSplitView];
-	[[self document] awakeFromNib];
+    [self.layersTableController createGridLayerIfNeeded];
 }
 
 //toolbar control
@@ -191,8 +192,8 @@ NSRect initialRect;
 		[anItem setLabel:@"Add Data Layer"];
 		[anItem setPaletteLabel:@"Add Data Layer"];
 		[anItem setToolTip:@"Add Data Layer"];
-		[anItem setTarget:[self document]];//this is okay.  Has to tell the document to load more data
-		[anItem setAction:@selector(addDataLayer:)];
+		[anItem setTarget:self];
+		[anItem setAction:@selector(addLayerAction:)];
 		[anItem setImage:[[NSImage alloc] initWithContentsOfFile:[[NSBundle bundleForClass:[self class]]pathForImageResource:@"LayerDrawerImageAddLayer"]]];
 			
 	}
@@ -357,7 +358,7 @@ NSRect initialRect;
         if(returnCode == NSModalResponseOK)
         {
 
-            __block NSString *resultString = [(XRoseDocument *)[self document] FTestStatisticsForSetNames:[self->_theSheetController selectedItems] biDirectional:[self->_theSheetController isBiDir]];
+            __block NSString *resultString = [self FTestStatisticsForSetNames:[self->_theSheetController selectedItems] biDirectional:[self->_theSheetController isBiDir]];
             NSSavePanel *sp = [NSSavePanel savePanel];
             [sp setAllowedContentTypes:@[UTTypePlainText]];
             [sp setNameFieldLabel:@"F-Stat Report"];
@@ -382,9 +383,37 @@ NSRect initialRect;
 		[[XRGeometryPropertyInspector defaultGeometryInspector] displayInfoForObject:nil];
 }
 
-
 - (IBAction)addLayerAction:(id)sender {
-	[[self document] addDataLayer:sender];
+    [self loadDataSet];
+}
+
+-(void)loadDataSet
+{
+    DatasetCreationSheet *controller = [[DatasetCreationSheet alloc] initWithTableArray:[self.documentModel dataTableNames]
+                                                                         columnProvider:self.documentModel];
+    self.currentSheetController = controller;
+    [[self window]
+     beginSheet:[controller window]
+     completionHandler:^(NSModalResponse returnCode) {
+        if(returnCode == NSModalResponseOK)
+        {
+            NSError *createError = nil;
+            XRDataSet *aSet = [self.documentModel createDataSetWithTableName:[controller selectedTable]
+                                                                  columnName:[controller selectedColumn]
+                                                                        name:[controller selectedName]
+                                                                       error:&createError];
+            if(aSet && !createError)
+            {
+                [self.layersTableController addDataLayerFor:aSet];
+                [self.document updateChangeCount:NSChangeDone];
+            }
+            else if(createError)
+            {
+                NSLog(@"Failed to create dataset: %@", [createError localizedDescription]);
+            }
+        }
+        self.currentSheetController = nil;
+    }];
 }
 
 - (IBAction)deleteLayerAction:(id)sender
@@ -397,19 +426,30 @@ NSRect initialRect;
 	[[self document] importTable:sender];
 }
 
-
-
--(void)setTableList:(NSMutableArray *)aList
+-(void)importTable:(id)sender
 {
-	tableList = aList;
-}
-
--(void)updateTable {
-	[_tableNameTable reloadData];
+    NSOpenPanel *op = [NSOpenPanel openPanel];
+    [op setAllowsMultipleSelection:NO];
+    [op setAllowedContentTypes:@[UTTypePlainText, [UTType typeWithFilenameExtension:@"xrose"]]];
+    [op beginSheetModalForWindow:[self window] completionHandler:^(NSInteger result) {
+        if (result == NSModalResponseOK) {
+            NSURL *url = [op URL];
+            if (!url) { return; }
+            [op close];
+            self.currentImportCoordinator = [[TableImportCoordinator alloc]
+                initWithDocumentModel:self.documentModel
+                window:[self window]];
+            [self.currentImportCoordinator beginImportFromURL:url completionHandler:^(NSError *error) {
+                if (error) { [self presentError:error]; }
+                self.currentImportCoordinator = nil;
+            }];
+        }
+    }];
 }
 
 -(IBAction)deleteTableAction:(id)sender
 {
+    NSArray *tableList = [self.documentModel dataTableNames];
     NSInteger selectedRow = [_tableNameTable selectedRow];
     if (selectedRow < 0 || selectedRow >= (NSInteger)[tableList count]) { return; }
     NSError *error;
@@ -422,8 +462,6 @@ NSRect initialRect;
 
 	//Table is now deleted.  We must now delete all dependent layers and datasets
 	[self.layersTableController deleteLayersForTableName:tableToDelete];
-	[[self document] discoverTables];
-	[self updateTable];
 }
 
 -(IBAction)copyPDFImage:(id)sender
@@ -488,6 +526,60 @@ NSRect initialRect;
             [[NSFileManager defaultManager] createFileAtPath:[[sp URL] path] contents:[theString dataUsingEncoding:NSASCIIStringEncoding] attributes:nil];
         }
     }];
+}
+
+-(NSString *)FTestStatisticsForSetNames:(NSArray *)setNames biDirectional:(BOOL)isBiDir
+{
+    XRDataSet *tempSet1 = [[self documentModel] dataSetWithName:[setNames objectAtIndex:0]];
+    XRDataSet *tempSet2 = [[self documentModel] dataSetWithName:[setNames objectAtIndex:1]];
+    XRDataSet *set1,*set2,*set3;
+    NSMutableString *aString = [[NSMutableString alloc] init];
+    float R1,R2,Rp;
+    float FStatistic,n;
+
+    float kp;//kappa pooled
+        FStatistic = 0;
+    if(tempSet1)
+        set1= [[XRDataSet alloc] initWithData:[tempSet1 theData] withName:[setNames objectAtIndex:0]];
+    else
+        return nil;
+    if(tempSet2)
+        set2= [[XRDataSet alloc] initWithData:[tempSet2 theData] withName:[setNames objectAtIndex:1]];
+    else
+        return nil;
+    set3 = [[XRDataSet alloc] initWithData:[tempSet1 theData] withName:[NSString stringWithFormat:@"Test Set for %@ and %@",[setNames objectAtIndex:0],[setNames objectAtIndex:1]]];
+    [set3 appendData:[tempSet2 theData]];
+    //generate all the stats
+    [set1 calculateStatisticObjectsForBiDir:isBiDir];
+    [set2 calculateStatisticObjectsForBiDir:isBiDir];
+    [set3 calculateStatisticObjectsForBiDir:isBiDir];
+    [aString appendFormat:@"\nData Set: %@",[set1 name]];
+    [aString appendFormat:@"\n%@",[set1 statisticsDescription]];
+    [aString appendFormat:@"\nData Set: %@",[set2 name]];
+    [aString appendFormat:@"\n%@",[set2 statisticsDescription]];
+    [aString appendFormat:@"\nData Set: %@",[set3 name]];
+    [aString appendFormat:@"\n%@",[set3 statisticsDescription]];
+    kp = [[set3 currentStatisticWithName:[NSString stringWithUTF8String:"κ (est)"]] floatValue];
+    n = (float)[[set3 currentStatisticWithName:@"N"] intValue];
+    R1 = [[set1 currentStatisticWithName:[NSString stringWithUTF8String:"R"]] floatValue];
+    R2 = [[set2 currentStatisticWithName:[NSString stringWithUTF8String:"R"]] floatValue];
+    Rp = [[set3 currentStatisticWithName:[NSString stringWithUTF8String:"R"]] floatValue];
+    if(kp >=10.0)
+    {
+        FStatistic = ((n - 2.0)*(R1 + R2 - Rp))/(n-R1-R2);
+
+    }
+    else if(kp>=2.0)
+    {
+        FStatistic = (1 + (3/(8*kp)))*((n - 2.0)*(R1 + R2 - Rp))/(n-R1-R2);
+        //NSLog(@"%f %f %f %f %f",FStatistic,kp,R1,R2,Rp);
+    }
+    if(kp<2.0)
+        [aString appendFormat:@"\n%@",@"F-Statistic: Not Calculable.  Kappa below 2"];
+    else
+        [aString appendFormat:@"\n%@",[NSString stringWithFormat:@"F-Statistic: \t%f \tdf1: = 1\tdf2 = %i",FStatistic,(int)n-2]];
+
+    return aString;
 }
 
 @end

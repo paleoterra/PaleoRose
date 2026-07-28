@@ -33,7 +33,6 @@
     __weak IBOutlet id _windowSplitView;
 	float splitterOne;
 	float splitterTwo;
-	NSMutableArray *tableList;
     __weak IBOutlet id _tableNameTable;
 }
 
@@ -46,11 +45,9 @@
 -(void)copyTIFFToPasteboard;
 -(NSView *)mainView;
 
--(void)setTableList:(NSMutableArray *)aList;
 - (IBAction)addLayerAction:(id)sender;
 - (IBAction)deleteLayerAction:(id)sender;
 - (IBAction)importTableAction:(id)sender;
 - (IBAction)deleteTableAction:(id)sender;
--(void)updateTable;
 
 @end

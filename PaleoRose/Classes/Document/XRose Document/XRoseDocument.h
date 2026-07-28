@@ -27,27 +27,8 @@
 // SOFTWARE.
 
 #import <AppKit/AppKit.h>
-#import "sqlite3.h"
+
 @class XRDataSet;
 @interface XRoseDocument : NSDocument
--(void)addDataLayer:(id)sender;
-
-
-//-(void)addDataSet:(XRDataSet *)aSet;
--(void)removeDataSet:(XRDataSet *)aSet;
-
--(void)configureDocument;
-
-
--(NSString *)FTestStatisticsForSetNames:(NSArray *)setNames biDirectional:(BOOL)isBiDir DEPRECATED_ATTRIBUTE;
-
--(void)importTable:(id)sender;
-
--(void)discoverTables;
-
--(sqlite3 *)documentInMemoryStore DEPRECATED_ATTRIBUTE;
--(void)datasetsRenameTable:(NSString *)oldName toName:(NSString *)newName;
--(NSArray *)tableList;
--(NSArray *)retrieveNonTextColumnNamesFromTable:(NSString *)aTableName;
 
 @end

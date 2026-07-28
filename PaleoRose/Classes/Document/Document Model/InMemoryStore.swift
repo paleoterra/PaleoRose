@@ -533,6 +533,11 @@ class InMemoryStore: NSObject {
         let sqliteStore = try validateStore()
         let query = Query(sql: "DROP TABLE \(table)")
         _ = try interface.executeQuery(sqlite: sqliteStore, query: query)
+
+        let updatedTableNames = try tableNames(sqliteStore: sqliteStore)
+        DispatchQueue.main.async { [weak self] in
+            self?.delegate?.update(tableNames: updatedTableNames)
+        }
     }
 
     /// Creates a user data table and inserts all rows in a single transaction.

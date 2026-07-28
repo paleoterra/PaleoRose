@@ -29,7 +29,7 @@ import AppKit
 // MARK: - Column Provider Protocol
 
 @objc protocol DatasetColumnProvider: AnyObject {
-    func numericColumns(forTable tableName: String) -> [String]
+    func possibleColumnNames(table: String) throws -> [String]
 }
 
 // MARK: - Dataset Creation Sheet
@@ -111,8 +111,13 @@ import AppKit
             return
         }
 
-        let columns = provider.numericColumns(forTable: table)
-        sheetView.setAvailableColumns(columns)
+        do {
+            let columns = try provider.possibleColumnNames(table: table)
+            sheetView.setAvailableColumns(columns)
+        } catch {
+            print("error reading column names: \(error)")
+            sheetView.setAvailableColumns([])
+        }
     }
 
     private func updatePlaceholder() {
@@ -146,7 +151,7 @@ import AppKit
 import SwiftUI
 
 private class MockColumnProvider: NSObject, DatasetColumnProvider {
-    func numericColumns(forTable tableName: String) -> [String] {
+    func possibleColumnNames(table tableName: String) throws -> [String] {
         switch tableName {
         case "Orientations":
             ["angle", "strike", "dip", "azimuth"]

@@ -27,7 +27,7 @@
 // SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import "XRoseDocument.h"
+
 #define XRDataSetChangedStatisticsNotification @"XRDataSetChangedStatisticsNotification"
 
 @class XRStatistic;

@@ -30,7 +30,7 @@ import Foundation
 import TabularData
 
 // swiftlint:disable file_length
-class DocumentModel: NSObject {
+class DocumentModel: NSObject, DatasetColumnProvider {
 
     enum DocumentModelError: Error {
         case unknownLayerType
@@ -105,6 +105,10 @@ class DocumentModel: NSObject {
 
     @objc func delete(table: String) throws {
         try inMemoryStore.drop(table: table)
+    }
+
+    @objc func dataSet(name: String) -> XRDataSet? {
+        dataSets.first(where: { $0.name() == name })
     }
 
     // MARK: - Persistence
