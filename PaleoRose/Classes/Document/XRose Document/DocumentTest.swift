@@ -27,6 +27,4 @@
 @testable import PaleoRose
 import Testing
 
-struct DocumentTest {
-
-}
+struct DocumentTest {}

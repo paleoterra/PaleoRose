@@ -25,6 +25,8 @@
 		AA94BE1F2FC4A94A00999D6F /* DocumentModelImportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA94BE1E2FC4A94A00999D6F /* DocumentModelImportTests.swift */; };
 		AA94BE212FC4B2F900999D6F /* TableImportCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA94BE202FC4B2F900999D6F /* TableImportCoordinator.swift */; };
 		AA94BE232FC4B30B00999D6F /* TableImportCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA94BE222FC4B30B00999D6F /* TableImportCoordinatorTests.swift */; };
+		AAFEE3893023F50C003C136C /* DocumentModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFEE3873023F50C003C136C /* DocumentModelTest.swift */; };
+		AAFEE38B3023F986003C136C /* MockInMemoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFEE38A3023F97F003C136C /* MockInMemoryStore.swift */; };
 		B4081BAF2EC016C200EA734A /* TableListControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4081BAE2EC016C200EA734A /* TableListControllerTests.swift */; };
 		B4081BF02EC79D9500EA734A /* LayerTableControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4081BEF2EC79D9500EA734A /* LayerTableControllerDataSource.swift */; };
 		B4081C312EC7C65A00EA734A /* LayersTableControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4081C302EC7C65A00EA734A /* LayersTableControllerTests.swift */; };
@@ -287,6 +289,8 @@
 		AA94BE1E2FC4A94A00999D6F /* DocumentModelImportTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentModelImportTests.swift; sourceTree = "<group>"; };
 		AA94BE202FC4B2F900999D6F /* TableImportCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableImportCoordinator.swift; sourceTree = "<group>"; };
 		AA94BE222FC4B30B00999D6F /* TableImportCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableImportCoordinatorTests.swift; sourceTree = "<group>"; };
+		AAFEE3873023F50C003C136C /* DocumentModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentModelTest.swift; sourceTree = "<group>"; };
+		AAFEE38A3023F97F003C136C /* MockInMemoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockInMemoryStore.swift; sourceTree = "<group>"; };
 		B4081BAE2EC016C200EA734A /* TableListControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableListControllerTests.swift; sourceTree = "<group>"; };
 		B4081BEF2EC79D9500EA734A /* LayerTableControllerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerTableControllerDataSource.swift; sourceTree = "<group>"; };
 		B4081C302EC7C65A00EA734A /* LayersTableControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayersTableControllerTests.swift; sourceTree = "<group>"; };
@@ -1015,7 +1019,9 @@
 			isa = PBXGroup;
 			children = (
 				B439AB362C83CF7900252574 /* DocumentModel.swift */,
+				AAFEE3873023F50C003C136C /* DocumentModelTest.swift */,
 				B439AB382C83D01700252574 /* InMemoryStore.swift */,
+				AAFEE38A3023F97F003C136C /* MockInMemoryStore.swift */,
 				AA94BE1A2FC49AA700999D6F /* InMemoryStoreUserTableTests.swift */,
 				AA94BE1E2FC4A94A00999D6F /* DocumentModelImportTests.swift */,
 				AA94BE1C2FC4A91B00999D6F /* UserTableImporting.swift */,
@@ -1492,6 +1498,7 @@
 				B4AE41D32D17DD2800E05D96 /* LayerData+Testing.swift in Sources */,
 				B48430862E1193E500E126C0 /* GraphicCircleLabelTests.swift in Sources */,
 				B4AE41C42D14E86700E05D96 /* Layer+Testing.swift in Sources */,
+				AAFEE38B3023F986003C136C /* MockInMemoryStore.swift in Sources */,
 				B4AE41D02D17DA3700E05D96 /* LayerCore+Testing.swift in Sources */,
 				B41C17532CB1C2AF002D19C2 /* Tag.swift in Sources */,
 				B48430882E1486D100E126C0 /* ArrowHeadTests.swift in Sources */,
@@ -1528,6 +1535,7 @@
 				B4AE41CD2D17D77C00E05D96 /* LayerGrid+Testing.swift in Sources */,
 				B4AE41C02D0BD08C00E05D96 /* XRLayerData+Stub.swift in Sources */,
 				AA443842301F952E0031D164 /* DocumentTest.swift in Sources */,
+				AAFEE3893023F50C003C136C /* DocumentModelTest.swift in Sources */,
 				B4A23EF92E19668900EDE135 /* GraphicHistogramTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

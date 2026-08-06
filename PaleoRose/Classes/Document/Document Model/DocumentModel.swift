@@ -38,11 +38,11 @@ class DocumentModel: NSObject, DatasetColumnProvider {
 
     // MARK: - Properties
 
-    private var inMemoryStore: InMemoryStore
+    private var inMemoryStore: any InMemoryStoreProtocol
     @objc var windowSize: CGSize = .zero
-    @objc var dataSets: [XRDataSet] = []
-    @objc var layers: [XRLayer] = []
-    @objc weak var document: NSDocument?
+    private var dataSets: [XRDataSet] = []
+    private var layers: [XRLayer] = []
+    weak var document: NSDocument?
     @objc let geometryController: XRGeometryController
 
     private let tableNamesSubject = CurrentValueSubject<[String], Never>([])
@@ -50,25 +50,20 @@ class DocumentModel: NSObject, DatasetColumnProvider {
 
     // MARK: - Initialization
 
-    @objc init(inMemoryStore: InMemoryStore, document: NSDocument?) {
+    init(inMemoryStore: any InMemoryStoreProtocol, document: NSDocument?) {
         self.inMemoryStore = inMemoryStore
         self.document = document
         geometryController = XRGeometryController()
         super.init()
-
-        // Set undo manager if document is available
         if let document {
             geometryController.setUndoManager(document.undoManager)
         }
-
         inMemoryStore.delegate = self
     }
 
-    // MARK: - Deprecated Methods
-
-    @available(*, deprecated, message: "This code will become unavailable")
-    @objc func memoryStore() -> OpaquePointer? {
-        inMemoryStore.store()
+    /// ObjC-callable bridge — used by `XRoseDocument.m` while the ObjC document class is still in service.
+    @objc convenience init(inMemoryStore store: InMemoryStore, document: NSDocument?) {
+        self.init(inMemoryStore: store as any InMemoryStoreProtocol, document: document)
     }
 
     // MARK: - File Management
