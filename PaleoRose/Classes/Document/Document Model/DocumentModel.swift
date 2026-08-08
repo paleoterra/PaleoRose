@@ -103,7 +103,7 @@ class DocumentModel: NSObject, DatasetColumnProvider {
     }
 
     @objc func dataSet(name: String) -> XRDataSet? {
-        dataSets.first(where: { $0.name() == name })
+        dataSets.first { $0.name() == name }
     }
 
     // MARK: - Persistence

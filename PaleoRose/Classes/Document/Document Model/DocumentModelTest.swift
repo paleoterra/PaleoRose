@@ -674,6 +674,445 @@ struct DocumentModelTest {
         sut.updateLayerVisibility(layer, isVisible: false)
         #expect(!layer.isVisible())
     }
+
+    // MARK: - Layers Publisher
+
+    @Test("Layers publisher emits when layers change")
+    func layersPublisherEmits() {
+        let inMemoryStore = MockInMemoryStore()
+        let sut = DocumentModel(inMemoryStore: inMemoryStore, document: nil)
+        var received: [XRLayer] = []
+        let cancellable = sut.layersPublisher.sink { received = $0 }
+        sut.createCoreLayer(name: "Core")
+        #expect(received.count == 1)
+        #expect(received.first?.layerName() == "Core")
+        cancellable.cancel()
+    }
+
+    // MARK: - Update Layers Delegate
+
+    @Test("Update layers sets geometry controller on non-data layers")
+    func updateLayersNonDataLayerGetsGeometry() throws {
+        let inMemoryStore = MockInMemoryStore()
+        let sut = DocumentModel(inMemoryStore: inMemoryStore, document: nil)
+        let layer = try #require(XRLayerCore(geometryController: XRGeometryController()))
+        sut.update(layers: [layer])
+        #expect(layer.geometryController() === sut.geometryController)
+    }
+
+    @Test("Update layers wires data layer to matching dataset")
+    func updateLayersWiresDataLayerToDataset() throws {
+        let inMemoryStore = MockInMemoryStore()
+        let sut = DocumentModel(inMemoryStore: inMemoryStore, document: nil)
+        sut.update(geometry: Geometry(
+            isEqualArea: false,
+            isPercent: false,
+            MAXCOUNT: 100,
+            MAXPERCENT: 50.0,
+            HOLLOWCORE: 0.0,
+            SECTORSIZE: 10.0,
+            STARTINGANGLE: 0.0,
+            SECTORCOUNT: 36,
+            RELATIVESIZE: 1.0
+        ))
+        let dataSet = try #require(XRDataSet(
+            id: 1,
+            name: "strikes",
+            tableName: "my_table",
+            column: "azimuth",
+            predicate: "",
+            comments: NSMutableAttributedString(),
+            data: Data()
+        ))
+        sut.update(dataSets: [dataSet])
+        let layer = XRLayerData.stub(datasetId: 1)
+        sut.update(layers: [layer])
+        #expect(layer.geometryController() === sut.geometryController)
+        #expect(layer.dataSet() === dataSet)
+    }
+
+    @Test("Update layers sets geometry only when data layer has no matching dataset")
+    func updateLayersDataLayerNoMatchingDataset() {
+        let inMemoryStore = MockInMemoryStore()
+        let sut = DocumentModel(inMemoryStore: inMemoryStore, document: nil)
+        let layer = XRLayerData.stub(datasetId: 99)
+        sut.update(layers: [layer])
+        #expect(layer.geometryController() === sut.geometryController)
+        #expect(layer.dataSet() == nil)
+    }
+
+    @Test("Update layers wires arrow layer to matching dataset")
+    func updateLayersWiresArrowLayerToDataset() throws {
+        let inMemoryStore = MockInMemoryStore()
+        let sut = DocumentModel(inMemoryStore: inMemoryStore, document: nil)
+        sut.update(geometry: Geometry(
+            isEqualArea: false,
+            isPercent: false,
+            MAXCOUNT: 100,
+            MAXPERCENT: 50.0,
+            HOLLOWCORE: 0.0,
+            SECTORSIZE: 10.0,
+            STARTINGANGLE: 0.0,
+            SECTORCOUNT: 36,
+            RELATIVESIZE: 1.0
+        ))
+        let dataSet = try #require(XRDataSet(
+            id: 1,
+            name: "strikes",
+            tableName: "my_table",
+            column: "azimuth",
+            predicate: "",
+            comments: NSMutableAttributedString(),
+            data: Data()
+        ))
+        sut.update(dataSets: [dataSet])
+        let layer = XRLayerLineArrow.stub(datasetId: 1)
+        sut.update(layers: [layer])
+        #expect(layer.geometryController() === sut.geometryController)
+        #expect(layer.dataSet() === dataSet)
+    }
+
+    // MARK: - Layer Creation (additional)
+
+    @Test("Create data layer with nil name still creates layer")
+    func createDataLayerNilName() throws {
+        let inMemoryStore = MockInMemoryStore()
+        let sut = DocumentModel(inMemoryStore: inMemoryStore, document: nil)
+        sut.update(geometry: Geometry(
+            isEqualArea: false,
+            isPercent: false,
+            MAXCOUNT: 100,
+            MAXPERCENT: 50.0,
+            HOLLOWCORE: 0.0,
+            SECTORSIZE: 10.0,
+            STARTINGANGLE: 0.0,
+            SECTORCOUNT: 36,
+            RELATIVESIZE: 1.0
+        ))
+        let dataSet = try #require(XRDataSet(
+            id: 1,
+            name: "strikes",
+            tableName: "my_table",
+            column: "azimuth",
+            predicate: "",
+            comments: NSMutableAttributedString(),
+            data: Data()
+        ))
+        sut.update(dataSets: [dataSet])
+        sut.createDataLayer(dataSetName: "my_table", color: .red, name: nil)
+        try sut.saveLayers()
+        let layers = try #require(inMemoryStore.storeLayersArguments.last)
+        #expect(layers.count == 1)
+    }
+
+    @Test("Create data layer sets stroke and fill color")
+    func createDataLayerSetsColors() throws {
+        let inMemoryStore = MockInMemoryStore()
+        let sut = DocumentModel(inMemoryStore: inMemoryStore, document: nil)
+        sut.update(geometry: Geometry(
+            isEqualArea: false,
+            isPercent: false,
+            MAXCOUNT: 100,
+            MAXPERCENT: 50.0,
+            HOLLOWCORE: 0.0,
+            SECTORSIZE: 10.0,
+            STARTINGANGLE: 0.0,
+            SECTORCOUNT: 36,
+            RELATIVESIZE: 1.0
+        ))
+        let dataSet = try #require(XRDataSet(
+            id: 1,
+            name: "strikes",
+            tableName: "my_table",
+            column: "azimuth",
+            predicate: "",
+            comments: NSMutableAttributedString(),
+            data: Data()
+        ))
+        sut.update(dataSets: [dataSet])
+        sut.createDataLayer(dataSetName: "my_table", color: .red, name: "Layer")
+        try sut.saveLayers()
+        let layer = try #require(inMemoryStore.storeLayersArguments.last?.first)
+        #expect(layer.strokeColor() == .red)
+        #expect(layer.fillColor() == .red)
+    }
+
+    @Test("Create grid layer with nil name still creates layer")
+    func createGridLayerNilName() throws {
+        let inMemoryStore = MockInMemoryStore()
+        let sut = DocumentModel(inMemoryStore: inMemoryStore, document: nil)
+        sut.createGridLayer(name: nil)
+        try sut.saveLayers()
+        let layers = try #require(inMemoryStore.storeLayersArguments.first)
+        #expect(layers.count == 1)
+    }
+
+    @Test("Create text layer with nil name still creates layer")
+    func createTextLayerNilName() throws {
+        let inMemoryStore = MockInMemoryStore()
+        let sut = DocumentModel(inMemoryStore: inMemoryStore, document: nil)
+        sut.createTextLayer(name: nil, parentView: NSView())
+        try sut.saveLayers()
+        let layers = try #require(inMemoryStore.storeLayersArguments.first)
+        #expect(layers.count == 1)
+    }
+
+    @Test("Create line arrow layer with nil name still creates layer when dataset found")
+    func createLineArrowLayerNilName() throws {
+        let inMemoryStore = MockInMemoryStore()
+        let sut = DocumentModel(inMemoryStore: inMemoryStore, document: nil)
+        sut.update(geometry: Geometry(
+            isEqualArea: false,
+            isPercent: false,
+            MAXCOUNT: 100,
+            MAXPERCENT: 50.0,
+            HOLLOWCORE: 0.0,
+            SECTORSIZE: 10.0,
+            STARTINGANGLE: 0.0,
+            SECTORCOUNT: 36,
+            RELATIVESIZE: 1.0
+        ))
+        let dataSet = try #require(XRDataSet(
+            id: 1,
+            name: "strikes",
+            tableName: "my_table",
+            column: "azimuth",
+            predicate: "",
+            comments: NSMutableAttributedString(),
+            data: Data()
+        ))
+        sut.update(dataSets: [dataSet])
+        sut.createLineArrowLayer(dataSetName: "my_table", name: nil)
+        try sut.saveLayers()
+        let layers = try #require(inMemoryStore.storeLayersArguments.last)
+        #expect(layers.count == 1)
+    }
+
+    @Test("Core and grid layers insert at front; data layer appends to back")
+    func layerInsertionOrdering() throws {
+        let inMemoryStore = MockInMemoryStore()
+        let sut = DocumentModel(inMemoryStore: inMemoryStore, document: nil)
+        sut.update(geometry: Geometry(
+            isEqualArea: false,
+            isPercent: false,
+            MAXCOUNT: 100,
+            MAXPERCENT: 50.0,
+            HOLLOWCORE: 0.0,
+            SECTORSIZE: 10.0,
+            STARTINGANGLE: 0.0,
+            SECTORCOUNT: 36,
+            RELATIVESIZE: 1.0
+        ))
+        let dataSet = try #require(XRDataSet(
+            id: 1,
+            name: "strikes",
+            tableName: "my_table",
+            column: "azimuth",
+            predicate: "",
+            comments: NSMutableAttributedString(),
+            data: Data()
+        ))
+        sut.update(dataSets: [dataSet])
+        sut.createDataLayer(dataSetName: "my_table", color: .red, name: "Data")
+        sut.createCoreLayer(name: "Core")
+        // layers = [Core, Data] — Core inserted at 0, Data appended before that
+        try sut.saveLayers()
+        let layers = try #require(inMemoryStore.storeLayersArguments.last)
+        #expect(layers.count == 2)
+        #expect(layers.first?.layerName() == "Core")
+        #expect(layers.last?.layerName() == "Data")
+    }
+
+    @Test("Create line arrow layer does nothing when dataset not found")
+    func createLineArrowLayerNotFound() throws {
+        let inMemoryStore = MockInMemoryStore()
+        let sut = DocumentModel(inMemoryStore: inMemoryStore, document: nil)
+        sut.createLineArrowLayer(dataSetName: "nonexistent", name: nil)
+        try sut.saveLayers()
+        let layers = try #require(inMemoryStore.storeLayersArguments.first)
+        #expect(layers.isEmpty)
+    }
+
+    // MARK: - Dataset Cleanup on Layer Deletion
+
+    @Test("Delete data layer removes its dataset when it is the last user")
+    func deleteDataLayerRemovesUnusedDataset() throws {
+        let inMemoryStore = MockInMemoryStore()
+        let sut = DocumentModel(inMemoryStore: inMemoryStore, document: nil)
+        sut.update(geometry: Geometry(
+            isEqualArea: false,
+            isPercent: false,
+            MAXCOUNT: 100,
+            MAXPERCENT: 50.0,
+            HOLLOWCORE: 0.0,
+            SECTORSIZE: 10.0,
+            STARTINGANGLE: 0.0,
+            SECTORCOUNT: 36,
+            RELATIVESIZE: 1.0
+        ))
+        let dataSet = try #require(XRDataSet(
+            id: 1,
+            name: "strikes",
+            tableName: "my_table",
+            column: "azimuth",
+            predicate: "",
+            comments: NSMutableAttributedString(),
+            data: Data()
+        ))
+        sut.update(dataSets: [dataSet])
+        sut.createDataLayer(dataSetName: "my_table", color: .red, name: "Layer")
+        try sut.saveLayers()
+        let layer = try #require(inMemoryStore.storeLayersArguments.last?.first)
+        #expect(sut.dataSet(name: "strikes") != nil)
+        sut.deleteLayer(layer)
+        #expect(sut.dataSet(name: "strikes") == nil)
+    }
+
+    @Test("Delete data layer keeps dataset when another layer still uses it")
+    func deleteDataLayerKeepsDatasetIfStillUsed() throws {
+        let inMemoryStore = MockInMemoryStore()
+        let sut = DocumentModel(inMemoryStore: inMemoryStore, document: nil)
+        sut.update(geometry: Geometry(
+            isEqualArea: false,
+            isPercent: false,
+            MAXCOUNT: 100,
+            MAXPERCENT: 50.0,
+            HOLLOWCORE: 0.0,
+            SECTORSIZE: 10.0,
+            STARTINGANGLE: 0.0,
+            SECTORCOUNT: 36,
+            RELATIVESIZE: 1.0
+        ))
+        let dataSet = try #require(XRDataSet(
+            id: 1,
+            name: "strikes",
+            tableName: "my_table",
+            column: "azimuth",
+            predicate: "",
+            comments: NSMutableAttributedString(),
+            data: Data()
+        ))
+        sut.update(dataSets: [dataSet])
+        sut.createDataLayer(dataSetName: "my_table", color: .red, name: "Layer 1")
+        sut.createDataLayer(dataSetName: "my_table", color: .blue, name: "Layer 2")
+        try sut.saveLayers()
+        let layer = try #require(inMemoryStore.storeLayersArguments.last?.first)
+        sut.deleteLayer(layer)
+        #expect(sut.dataSet(name: "strikes") != nil)
+    }
+
+    @Test("Delete layers at indices removes dataset when its data layer is deleted")
+    func deleteLayersAtIndicesRemovesDataset() throws {
+        let inMemoryStore = MockInMemoryStore()
+        let sut = DocumentModel(inMemoryStore: inMemoryStore, document: nil)
+        sut.update(geometry: Geometry(
+            isEqualArea: false,
+            isPercent: false,
+            MAXCOUNT: 100,
+            MAXPERCENT: 50.0,
+            HOLLOWCORE: 0.0,
+            SECTORSIZE: 10.0,
+            STARTINGANGLE: 0.0,
+            SECTORCOUNT: 36,
+            RELATIVESIZE: 1.0
+        ))
+        let dataSet = try #require(XRDataSet(
+            id: 1,
+            name: "strikes",
+            tableName: "my_table",
+            column: "azimuth",
+            predicate: "",
+            comments: NSMutableAttributedString(),
+            data: Data()
+        ))
+        sut.update(dataSets: [dataSet])
+        // layers = [DataLayer] after append
+        sut.createDataLayer(dataSetName: "my_table", color: .red, name: "Data Layer")
+        // layers = [Core, DataLayer] after insert at 0
+        sut.createCoreLayer(name: "Core")
+        sut.deleteLayers(at: [1])
+        #expect(sut.dataSet(name: "strikes") == nil)
+    }
+
+    @Test("Delete arrow layer removes its dataset when it is the last user")
+    func deleteArrowLayerRemovesUnusedDataset() throws {
+        let inMemoryStore = MockInMemoryStore()
+        let sut = DocumentModel(inMemoryStore: inMemoryStore, document: nil)
+        sut.update(geometry: Geometry(
+            isEqualArea: false,
+            isPercent: false,
+            MAXCOUNT: 100,
+            MAXPERCENT: 50.0,
+            HOLLOWCORE: 0.0,
+            SECTORSIZE: 10.0,
+            STARTINGANGLE: 0.0,
+            SECTORCOUNT: 36,
+            RELATIVESIZE: 1.0
+        ))
+        let dataSet = try #require(XRDataSet(
+            id: 1,
+            name: "strikes",
+            tableName: "my_table",
+            column: "azimuth",
+            predicate: "",
+            comments: NSMutableAttributedString(),
+            data: Data()
+        ))
+        sut.update(dataSets: [dataSet])
+        sut.createLineArrowLayer(dataSetName: "my_table", name: "Arrow")
+        try sut.saveLayers()
+        let layer = try #require(inMemoryStore.storeLayersArguments.last?.first)
+        #expect(sut.dataSet(name: "strikes") != nil)
+        sut.deleteLayer(layer)
+        #expect(sut.dataSet(name: "strikes") == nil)
+    }
+
+    @Test("Delete layers at indices ignores out-of-bounds indices")
+    func deleteLayersAtIndicesIgnoresOutOfBounds() throws {
+        let inMemoryStore = MockInMemoryStore()
+        let sut = DocumentModel(inMemoryStore: inMemoryStore, document: nil)
+        sut.createCoreLayer(name: "Core")
+        // valid index 0, invalid index 99
+        sut.deleteLayers(at: [0, 99])
+        try sut.saveLayers()
+        let layers = try #require(inMemoryStore.storeLayersArguments.last)
+        #expect(layers.isEmpty)
+    }
+
+    // MARK: - Layer Modification (additional)
+
+    @Test("Move layers clamps destination to layer count")
+    func moveLayersDestinationClamped() throws {
+        let inMemoryStore = MockInMemoryStore()
+        let sut = DocumentModel(inMemoryStore: inMemoryStore, document: nil)
+        sut.createGridLayer(name: "Grid")
+        sut.createCoreLayer(name: "Core")
+        // layers = [Core, Grid]; move index 0 (Core) to position 99 → appends to end
+        sut.moveLayers(from: [0], to: 99)
+        try sut.saveLayers()
+        let layers = try #require(inMemoryStore.storeLayersArguments.last)
+        #expect(layers.first?.layerName() == "Grid")
+        #expect(layers.last?.layerName() == "Core")
+    }
+
+    @Test("Move layers with multiple indices preserves relative order")
+    func moveLayersMultipleIndices() throws {
+        let inMemoryStore = MockInMemoryStore()
+        let sut = DocumentModel(inMemoryStore: inMemoryStore, document: nil)
+        sut.createGridLayer(name: "Grid")
+        sut.createCoreLayer(name: "Core")
+        sut.createTextLayer(name: "Text", parentView: NSView())
+        // layers = [Text, Core, Grid]; move indices [0, 2] (Text, Grid) to position 1
+        // After removal of Grid (index 2) and Text (index 0), remaining = [Core]
+        // Insert Text at 1 → [Core, Text]; insert Grid at 2 → [Core, Text, Grid]
+        sut.moveLayers(from: [0, 2], to: 1)
+        try sut.saveLayers()
+        let layers = try #require(inMemoryStore.storeLayersArguments.last)
+        #expect(layers.count == 3)
+        #expect(layers[0].layerName() == "Core")
+        #expect(layers[1].layerName() == "Text")
+        #expect(layers[2].layerName() == "Grid")
+    }
 }
 
 // swiftlint:enable type_body_length
