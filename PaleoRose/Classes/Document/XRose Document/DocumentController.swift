@@ -1,10 +1,10 @@
 //
-// Logger.swift
+// DocumentController.swift
 // PaleoRose
 //
 // MIT License
 //
-// Copyright (c) 2024 to present Thomas L. Moore.
+// Copyright (c) 2026 to present Thomas L. Moore.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,10 +23,24 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
+import Cocoa
 import OSLog
 
-@available(macOS 11.0, *)
-extension Logger {
-    static let documentControllerLogger = Logger(subsystem: "com.paleorose", category: "documentcontroller")
-    static let memoryStoreLogger = Logger(subsystem: "com.paleorose", category: "memorystore")
+class DocumentController: NSDocumentController {
+
+    override func makeUntitledDocument(ofType typeName: String) throws -> NSDocument {
+        Logger.documentControllerLogger.trace("Creating new untitled document of type \(typeName)")
+        let document = XRoseDocument()
+        document.fileType = typeName
+        return document
+    }
+
+    override func makeDocument(withContentsOf url: URL, ofType typeName: String) throws -> NSDocument {
+        Logger.documentControllerLogger.trace("Opening new file with name \(url.lastPathComponent) of type \(typeName)")
+        let document = XRoseDocument()
+        document.fileType = typeName
+        try document.read(from: url, ofType: typeName)
+        return document
+    }
 }

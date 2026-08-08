@@ -34,6 +34,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     private var aboutWindow: NSWindow?
     private var settingsWindowController: SettingsWindowController?
+    private var documentController = DocumentController()
 
     private var applicationName: String {
         Bundle.main.object(forInfoDictionaryKey: kCFBundleNameKey as String) as? String ?? ""
