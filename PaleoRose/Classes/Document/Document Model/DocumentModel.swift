@@ -29,8 +29,42 @@ import Combine
 import Foundation
 import TabularData
 
+protocol DocumentModelProtocol: AnyObject {
+    var windowSize: CGSize { get }
+    var geometryController: XRGeometryController { get }
+    var undoManager: UndoManager? { get set }
+    var url: URL? { get set }
+
+    // MARK: - File Management
+
+    func writeToFile(_ file: URL) throws
+    func openFile(_ file: URL) throws
+
+    @available(*, deprecated, message: "File url now stored as url property")
+    func fileURL() -> URL?
+
+    // MARK: - General
+
+    func dataTableNames() -> [String]
+    func possibleColumnNames(table: String) throws -> [String]
+    func setWindowSize(_ size: CGSize) throws
+    func delete(table: String) throws
+    func dataSet(name: String) -> XRDataSet?
+
+    // MARK: - Persistence
+
+    func createDataSet(tableName: String, columnName: String, name: String) throws -> XRDataSet
+    func saveGeometry() throws
+    func saveLayers() throws
+
+    // MARK: - Read From Store
+
+    func readFromStore(completion: @escaping () -> Void)
+    func refreshTableNames()
+}
+
 // swiftlint:disable file_length
-class DocumentModel: NSObject, DatasetColumnProvider {
+class DocumentModel: NSObject, DocumentModelProtocol, DatasetColumnProvider {
 
     enum DocumentModelError: Error {
         case unknownLayerType
@@ -46,7 +80,7 @@ class DocumentModel: NSObject, DatasetColumnProvider {
 
     private let tableNamesSubject = CurrentValueSubject<[String], Never>([])
     private let layersSubject = CurrentValueSubject<[XRLayer], Never>([])
-    weak var undoManager: UndoManager? {
+    @objc weak var undoManager: UndoManager? {
         didSet {
             geometryController.setUndoManager(undoManager)
         }

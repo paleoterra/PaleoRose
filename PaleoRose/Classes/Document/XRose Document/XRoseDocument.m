@@ -44,6 +44,15 @@
 
 #pragma mark - Creating a Document Object
 
+- (id)initWithDocumentModel: (DocumentModel *)documentModel {
+    self = [super init];
+    if (self) {
+        _documentModel = documentModel;
+        documentModel.undoManager = self.undoManager;
+    }
+    return self;
+}
+
 - (id)init {
     self = [super init];
     if (self) {

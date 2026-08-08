@@ -27,6 +27,12 @@
 import Cocoa
 
 class Document: NSDocument {
+    private let documentModel: DocumentModel
+
+    init(documentModel: DocumentModel) {
+        self.documentModel = documentModel
+        super.init()
+    }
 
     override class var autosavesInPlace: Bool {
         true

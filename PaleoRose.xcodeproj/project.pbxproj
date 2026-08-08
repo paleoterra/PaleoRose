@@ -14,6 +14,7 @@
 		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
 		8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 		AA2E6FFD3027A95800059B9F /* DocumentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2E6FFC3027A95800059B9F /* DocumentController.swift */; };
+		AA2E70403027BFF900059B9F /* MockDocumentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2E703F3027BFF900059B9F /* MockDocumentModel.swift */; };
 		AA44383F301F94F00031D164 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA44383E301F94F00031D164 /* Document.swift */; };
 		AA443842301F952E0031D164 /* DocumentTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA443840301F952E0031D164 /* DocumentTest.swift */; };
 		AA94BE0D2FC3B69500999D6F /* TableImportError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA94BE0C2FC3B69500999D6F /* TableImportError.swift */; };
@@ -278,6 +279,7 @@
 		32DBCF750370BD2300C91783 /* PaleoRose_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaleoRose_Prefix.pch; sourceTree = "<group>"; };
 		8D15AC370486D014006FF6A4 /* PaleoRose.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaleoRose.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA2E6FFC3027A95800059B9F /* DocumentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentController.swift; sourceTree = "<group>"; };
+		AA2E703F3027BFF900059B9F /* MockDocumentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDocumentModel.swift; sourceTree = "<group>"; };
 		AA44383E301F94F00031D164 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		AA443840301F952E0031D164 /* DocumentTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentTest.swift; sourceTree = "<group>"; };
 		AA94BE0C2FC3B69500999D6F /* TableImportError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableImportError.swift; sourceTree = "<group>"; };
@@ -1023,6 +1025,7 @@
 			children = (
 				B439AB362C83CF7900252574 /* DocumentModel.swift */,
 				AAFEE3873023F50C003C136C /* DocumentModelTest.swift */,
+				AA2E703F3027BFF900059B9F /* MockDocumentModel.swift */,
 				B439AB382C83D01700252574 /* InMemoryStore.swift */,
 				AAFEE38A3023F97F003C136C /* MockInMemoryStore.swift */,
 				AA94BE1A2FC49AA700999D6F /* InMemoryStoreUserTableTests.swift */,
@@ -1511,6 +1514,7 @@
 				B4A23EFB2E196D1800EDE135 /* GraphicKiteTests.swift in Sources */,
 				B4A23EF72E18951700EDE135 /* GraphicDotTests.swift in Sources */,
 				B4237C9C2D013BE900E2B510 /* StorageModelFactoryTest.swift in Sources */,
+				AA2E70403027BFF900059B9F /* MockDocumentModel.swift in Sources */,
 				B4866BF72CAE039200319712 /* MockSqliteInterface.swift in Sources */,
 				AA94BE1B2FC49AA700999D6F /* InMemoryStoreUserTableTests.swift in Sources */,
 				B4081BAF2EC016C200EA734A /* TableListControllerTests.swift in Sources */,

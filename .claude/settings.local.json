@@ -47,7 +47,10 @@
       "mcp__xcode__XcodeWrite",
       "mcp__xcode__BuildProject",
       "mcp__xcode__XcodeRM",
-      "mcp__xcode__RunSomeTests"
+      "mcp__xcode__RunSomeTests",
+      "mcp__xcode__GetTestList",
+      "Bash(git rm *)",
+      "Bash(rm -f \"PaleoRose/Classes/Document/Document Model/MockDocumentModel 2.swift\")"
     ],
     "deny": [],
     "ask": []

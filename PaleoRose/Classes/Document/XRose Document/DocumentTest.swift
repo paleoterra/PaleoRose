@@ -31,7 +31,7 @@ import Testing
 struct DocumentTest {
     @Test("Initialization")
     func initialization() {
-        let document = Document()
+        let document = XRoseDocument()
         #expect(document.isDocumentEdited == false)
     }
 }
