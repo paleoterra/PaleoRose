@@ -97,6 +97,7 @@ class MockDocumentModel: NSObject, DocumentModelProtocol {
     func openFile(_ file: URL) throws {
         openFileCalled = true
         openFileArguments.append(file)
+        url = file
         if let error = errorToThrow { throw error }
     }
 

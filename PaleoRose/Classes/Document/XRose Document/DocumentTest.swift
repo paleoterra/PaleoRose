@@ -29,9 +29,45 @@ import Testing
 
 @MainActor
 struct DocumentTest {
+    enum DocumentTestError: Error, Equatable {
+        case readingDocumentFailed
+    }
+
     @Test("Initialization")
     func initialization() {
-        let document = XRoseDocument()
-        #expect(document.isDocumentEdited == false)
+        let mockDocumentModel = MockDocumentModel()
+        let sut = Document(documentModel: mockDocumentModel)
+        #expect(sut.isDocumentEdited == false)
+    }
+
+    // MARK: Reading the document
+
+    @Test("Document Reading Fails")
+    func readingDocumentFails() throws {
+        let mockDocumentModel = MockDocumentModel()
+        let typeName = "XRose"
+        let url = try #require(URL(string: "file:///Volumes/test/MyFile.XRose"))
+        mockDocumentModel.errorToThrow = DocumentTestError.readingDocumentFailed
+        let sut = Document(documentModel: mockDocumentModel)
+
+        #expect(throws: DocumentTestError.readingDocumentFailed) {
+            _ = try sut.read(from: url, ofType: typeName)
+        }
+        #expect(mockDocumentModel.openFileCalled)
+        #expect(mockDocumentModel.url == url)
+    }
+
+    @Test("Document Invalide File Type Fails")
+    func readingDocumentFailsBadType() throws {
+        let mockDocumentModel = MockDocumentModel()
+        let typeName = "XRoseXX"
+        let url = try #require(URL(string: "file:///Volumes/test/MyFile.XRose"))
+        let sut = Document(documentModel: mockDocumentModel)
+
+        #expect(throws: CocoaError(.fileReadUnknown)) {
+            _ = try sut.read(from: url, ofType: typeName)
+        }
+        #expect(!mockDocumentModel.openFileCalled)
+        #expect(mockDocumentModel.url == nil)
     }
 }

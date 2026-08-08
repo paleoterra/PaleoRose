@@ -27,14 +27,25 @@
 import Cocoa
 
 class Document: NSDocument {
-    private let documentModel: DocumentModel
+    private let documentModel: any DocumentModelProtocol
 
-    init(documentModel: DocumentModel) {
+    init(documentModel: any DocumentModelProtocol) {
         self.documentModel = documentModel
         super.init()
     }
 
     override class var autosavesInPlace: Bool {
         true
+    }
+
+    override func read(from url: URL, ofType typeName: String) throws {
+        switch typeName {
+        case "XRose":
+            try documentModel.openFile(url)
+            documentModel.url = url
+
+        default:
+            throw CocoaError(.fileReadUnknown)
+        }
     }
 }
