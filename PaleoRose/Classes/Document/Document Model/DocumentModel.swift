@@ -42,7 +42,7 @@ class DocumentModel: NSObject, DatasetColumnProvider {
     @objc var windowSize: CGSize = .zero
     private var dataSets: [XRDataSet] = []
     private var layers: [XRLayer] = []
-    @objc let geometryController: XRGeometryController = XRGeometryController()
+    @objc let geometryController = XRGeometryController()
 
     private let tableNamesSubject = CurrentValueSubject<[String], Never>([])
     private let layersSubject = CurrentValueSubject<[XRLayer], Never>([])
@@ -51,6 +51,7 @@ class DocumentModel: NSObject, DatasetColumnProvider {
             geometryController.setUndoManager(undoManager)
         }
     }
+
     @objc var url: URL?
 
     // MARK: - Initialization

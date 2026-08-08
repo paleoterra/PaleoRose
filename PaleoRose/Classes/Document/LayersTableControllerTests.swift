@@ -144,7 +144,7 @@ struct LayersTableControllerTestFixture {
 
     init() {
         geometryController = createMockGeometryController()
-        let documentModel = DocumentModel(inMemoryStore: InMemoryStore(), document: nil)
+        let documentModel = DocumentModel(inMemoryStore: InMemoryStore(), undoManager: nil)
         controller = LayersTableController(dataSource: documentModel, geometryController: geometryController)
         mockDataSource = MockLayerTableDataSource()
         mockTableView = MockLayersTableView()
