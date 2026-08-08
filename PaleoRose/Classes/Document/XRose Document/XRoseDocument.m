@@ -47,7 +47,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        _documentModel = [[DocumentModel alloc] initInMemoryStore:[[InMemoryStore alloc] init] document:self];
+        _documentModel = [[DocumentModel alloc] initInMemoryStore:[[InMemoryStore alloc] init] undoManager: self.undoManager];
 	}
     return self;
 }
@@ -63,6 +63,7 @@
             NSLog(@"%@", error.localizedDescription);
             return NO;
         }
+        [self.documentModel setUrl:url];
         return YES;
     }
     return NO;
@@ -91,6 +92,7 @@
         NSLog(@"%@", error.localizedDescription);
         return NO;
     }
+    [self.documentModel setUrl:url];
     return YES;
 }
 

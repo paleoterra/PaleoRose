@@ -42,8 +42,7 @@ class DocumentModel: NSObject, DatasetColumnProvider {
     @objc var windowSize: CGSize = .zero
     private var dataSets: [XRDataSet] = []
     private var layers: [XRLayer] = []
-    weak var document: NSDocument?
-    @objc let geometryController: XRGeometryController
+    @objc let geometryController: XRGeometryController = XRGeometryController()
 
     private let tableNamesSubject = CurrentValueSubject<[String], Never>([])
     private let layersSubject = CurrentValueSubject<[XRLayer], Never>([])
@@ -52,23 +51,20 @@ class DocumentModel: NSObject, DatasetColumnProvider {
             geometryController.setUndoManager(undoManager)
         }
     }
+    @objc var url: URL?
 
     // MARK: - Initialization
 
-    init(inMemoryStore: any InMemoryStoreProtocol, document: NSDocument?) {
+    init(inMemoryStore: any InMemoryStoreProtocol, undoManager: UndoManager? = nil) {
         self.inMemoryStore = inMemoryStore
-        self.document = document
-        geometryController = XRGeometryController()
         super.init()
-        if let document {
-            geometryController.setUndoManager(document.undoManager)
-        }
+        self.undoManager = undoManager
         inMemoryStore.delegate = self
     }
 
     /// ObjC-callable bridge — used by `XRoseDocument.m` while the ObjC document class is still in service.
-    @objc convenience init(inMemoryStore store: InMemoryStore, document: NSDocument?) {
-        self.init(inMemoryStore: store as any InMemoryStoreProtocol, document: document)
+    @objc convenience init(inMemoryStore store: InMemoryStore, undoManager: UndoManager?) {
+        self.init(inMemoryStore: store as any InMemoryStoreProtocol, undoManager: undoManager)
     }
 
     // MARK: - File Management
@@ -82,11 +78,9 @@ class DocumentModel: NSObject, DatasetColumnProvider {
         readFromStore {}
     }
 
+    @available(*, deprecated, message: "File url now stored as url property")
     @objc func fileURL() -> URL? {
-        if let document {
-            return document.fileURL
-        }
-        return nil
+        url
     }
 
     // MARK: - General
