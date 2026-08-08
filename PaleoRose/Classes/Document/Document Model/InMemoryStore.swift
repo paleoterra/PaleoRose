@@ -109,7 +109,13 @@ class InMemoryStore: NSObject, InMemoryStoreProtocol {
         LayerData.createTableQuery()
     ]
 
-    @available(*, deprecated, message: "This code will become unavailable")
+    init(interface: StoreProtocol = SQLiteInterface()) throws {
+        self.interface = interface
+        super.init()
+        try setupDatabase()
+    }
+
+    @available(*, deprecated, message: "ObjC bridging only; use init(interface:) instead")
     @objc override init() {
         interface = SQLiteInterface()
         super.init()
@@ -117,14 +123,8 @@ class InMemoryStore: NSObject, InMemoryStoreProtocol {
             try setupDatabase()
         } catch {
             logError(error: "Error creating in-memory store: \(error)")
-            return
+            sqliteStore = nil
         }
-    }
-
-    init(interface: StoreProtocol = SQLiteInterface()) throws {
-        self.interface = interface
-        super.init()
-        try setupDatabase()
     }
 
     @available(*, deprecated, message: "This code will become unavailable")
