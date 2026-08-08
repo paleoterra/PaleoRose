@@ -47,6 +47,11 @@ class DocumentModel: NSObject, DatasetColumnProvider {
 
     private let tableNamesSubject = CurrentValueSubject<[String], Never>([])
     private let layersSubject = CurrentValueSubject<[XRLayer], Never>([])
+    weak var undoManager: UndoManager? {
+        didSet {
+            geometryController.setUndoManager(undoManager)
+        }
+    }
 
     // MARK: - Initialization
 

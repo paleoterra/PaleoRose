@@ -27,4 +27,11 @@
 @testable import PaleoRose
 import Testing
 
-struct DocumentTest {}
+@MainActor
+struct DocumentTest {
+    @Test("Initialization")
+    func initialization() {
+        let document = Document()
+        #expect(document.isDocumentEdited == false)
+    }
+}
