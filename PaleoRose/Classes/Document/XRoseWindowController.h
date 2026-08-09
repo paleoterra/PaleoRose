@@ -23,8 +23,9 @@
 // SOFTWARE.
 
 #import <Cocoa/Cocoa.h>
-#import <PaleoRose-Swift.h>
-@class XRRoseTableController, XRGeometryController;
+
+@class XRRoseTableController, XRGeometryController, LayersTableController;
+@protocol DocumentModelProtocol;
 @interface XRoseWindowController : NSWindowController <NSToolbarDelegate>
 {
     __weak IBOutlet id _roseTableView;

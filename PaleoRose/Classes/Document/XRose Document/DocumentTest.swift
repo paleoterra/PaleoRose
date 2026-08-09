@@ -31,6 +31,7 @@ import Testing
 struct DocumentTest {
     enum DocumentTestError: Error, Equatable {
         case readingDocumentFailed
+        case windowControllerNotFound
     }
 
     @Test("Initialization")
@@ -81,5 +82,20 @@ struct DocumentTest {
         let sut = Document(documentModel: mockDocumentModel)
         try sut.read(from: url, ofType: typeName)
         #expect(mockDocumentModel.url == url)
+    }
+
+    @Test("Make Window Controllers")
+    func creatingTheMainController() throws {
+        let mockDocumentModel = MockDocumentModel()
+        let sut = Document(documentModel: mockDocumentModel)
+
+        #expect(sut.windowControllers.isEmpty)
+        sut.makeWindowControllers()
+        #expect(sut.windowControllers.count == 1)
+
+        guard let windowController = sut.windowControllers.first as? XRoseWindowController else {
+            throw DocumentTestError.windowControllerNotFound
+        }
+        #expect(windowController.documentModel === mockDocumentModel)
     }
 }

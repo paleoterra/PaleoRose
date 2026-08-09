@@ -28,15 +28,10 @@ import Cocoa
 
 class Document: NSDocument {
     private let documentModel: any DocumentModelProtocol
-    private var windowController: XRoseWindowController?
 
     init(documentModel: any DocumentModelProtocol) {
         self.documentModel = documentModel
         super.init()
-    }
-
-    override class var autosavesInPlace: Bool {
-        true
     }
 
     override func read(from url: URL, ofType typeName: String) throws {
@@ -51,9 +46,12 @@ class Document: NSDocument {
     }
 
     override func makeWindowControllers() {
-        var windowController = XRoseWindowController(windowNibName: "XRoseDocument")
+        let windowController = XRoseWindowController(windowNibName: "XRoseDocument")
         addWindowController(windowController)
-//        XRoseWindowController.documentModel = documentModel as? DocumentModel
-        self.windowController = windowController
+        windowController.documentModel = documentModel
+    }
+
+    override class var autosavesInPlace: Bool {
+        true
     }
 }

@@ -23,7 +23,6 @@
 
 #import "XRoseWindowController.h"
 #import "XRPropertyInspector.h"
-#import "XRoseDocument.h"
 #import "XRGeometryPropertyInspector.h"
 #import "FStatisticController.h"
 #import "XRGeometryController.h"
