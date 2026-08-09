@@ -39,8 +39,8 @@ import TabularData
     }
 
     /// ObjC-compatible initialiser for use from `XRoseDocument.m`.
-    @objc convenience init(documentModel: DocumentModel, window: NSWindow) {
-        self.init(documentModel: documentModel as UserTableImporting & NSObject, window: window)
+    @objc convenience init(documentModel: DocumentModelProtocol, window: NSWindow) {
+        self.init(documentModel: documentModel, window: window)
     }
 
     // MARK: - Entry point
