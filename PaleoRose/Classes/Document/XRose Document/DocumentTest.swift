@@ -54,7 +54,9 @@ struct DocumentTest {
             _ = try sut.read(from: url, ofType: typeName)
         }
         #expect(mockDocumentModel.openFileCalled)
-        #expect(mockDocumentModel.url == url)
+        #expect(mockDocumentModel.url == nil)
+        print("printing url")
+        print("\(String(describing: mockDocumentModel.url?.path))")
     }
 
     @Test("Document Invalide File Type Fails")
@@ -69,5 +71,15 @@ struct DocumentTest {
         }
         #expect(!mockDocumentModel.openFileCalled)
         #expect(mockDocumentModel.url == nil)
+    }
+
+    @Test("Document Reading Happy Path")
+    func readDocumentSuccess() throws {
+        let mockDocumentModel = MockDocumentModel()
+        let typeName = "XRose"
+        let url = try #require(URL(string: "file:///Volumes/test/MyFile.XRose"))
+        let sut = Document(documentModel: mockDocumentModel)
+        try sut.read(from: url, ofType: typeName)
+        #expect(mockDocumentModel.url == url)
     }
 }

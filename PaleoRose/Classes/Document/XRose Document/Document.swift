@@ -28,6 +28,7 @@ import Cocoa
 
 class Document: NSDocument {
     private let documentModel: any DocumentModelProtocol
+    private var windowController: XRoseWindowController?
 
     init(documentModel: any DocumentModelProtocol) {
         self.documentModel = documentModel
@@ -47,5 +48,12 @@ class Document: NSDocument {
         default:
             throw CocoaError(.fileReadUnknown)
         }
+    }
+
+    override func makeWindowControllers() {
+        var windowController = XRoseWindowController(windowNibName: "XRoseDocument")
+        addWindowController(windowController)
+//        XRoseWindowController.documentModel = documentModel as? DocumentModel
+        self.windowController = windowController
     }
 }

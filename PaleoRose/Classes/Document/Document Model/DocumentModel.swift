@@ -29,7 +29,11 @@ import Combine
 import Foundation
 import TabularData
 
-protocol DocumentModelProtocol: AnyObject {
+/// `@objc` so that Objective-C call sites (`XRoseWindowController`, `XRoseDocument`) can hold
+/// `DocumentModel` behind this protocol instead of the concrete type. Inherits `DatasetColumnProvider`
+/// so a `DocumentModelProtocol` reference remains usable everywhere a column provider is expected
+/// (e.g. `DatasetCreationSheet`) without an explicit cast.
+@objc protocol DocumentModelProtocol: DatasetColumnProvider {
     var windowSize: CGSize { get }
     var geometryController: XRGeometryController { get }
     var undoManager: UndoManager? { get set }
@@ -46,7 +50,6 @@ protocol DocumentModelProtocol: AnyObject {
     // MARK: - General
 
     func dataTableNames() -> [String]
-    func possibleColumnNames(table: String) throws -> [String]
     func setWindowSize(_ size: CGSize) throws
     func delete(table: String) throws
     func dataSet(name: String) -> XRDataSet?
@@ -64,7 +67,7 @@ protocol DocumentModelProtocol: AnyObject {
 }
 
 // swiftlint:disable file_length
-class DocumentModel: NSObject, DocumentModelProtocol, DatasetColumnProvider {
+class DocumentModel: NSObject, DocumentModelProtocol {
 
     enum DocumentModelError: Error {
         case unknownLayerType

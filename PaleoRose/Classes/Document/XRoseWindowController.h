@@ -36,7 +36,7 @@
     __weak IBOutlet id _tableNameTable;
 }
 
-@property (weak) DocumentModel *documentModel;
+@property (weak) id<DocumentModelProtocol> documentModel;
 @property (strong) LayersTableController *layersTableController;
 
 -(XRRoseTableController *)tableController;

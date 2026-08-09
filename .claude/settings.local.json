@@ -50,7 +50,11 @@
       "mcp__xcode__RunSomeTests",
       "mcp__xcode__GetTestList",
       "Bash(git rm *)",
-      "Bash(rm -f \"PaleoRose/Classes/Document/Document Model/MockDocumentModel 2.swift\")"
+      "Bash(rm -f \"PaleoRose/Classes/Document/Document Model/MockDocumentModel 2.swift\")",
+      "Bash(rm -rf /Users/sundown/Library/Developer/Xcode/DerivedData/PaleoRose-etaofaesjfbwavgohbqmhoferzqj/Build/Intermediates.noindex/PaleoRose.build/Debug/PaleoRose.build/Objects-normal/arm64/PaleoRose-primary-Bridging-header.pch)",
+      "Bash(rm -rf /Users/sundown/Library/Developer/Xcode/DerivedData/PaleoRose-etaofaesjfbwavgohbqmhoferzqj/Build/Intermediates.noindex/PaleoRose.build/Debug/PaleoRose.build/DerivedSources/PaleoRose-Swift.h)",
+      "mcp__xcode__GetBuildLog",
+      "Bash(git checkout *)"
     ],
     "deny": [],
     "ask": []

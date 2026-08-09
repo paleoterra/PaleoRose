@@ -16,3 +16,4 @@
 #import "XRTableImporterDelimiterController.h"
 #import "XRTableImporterXRose.h"
 #import "XRoseDocument.h"
+#import "XRoseWindowController.h"

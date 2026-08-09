@@ -37,7 +37,7 @@
 @interface XRoseWindowController()
 @property (nonatomic) FStatisticController *theSheetController;
 @property (nonatomic) TableListController *tableListController;
-@property (nonatomic, weak) DocumentModel *documentModelBacking;
+@property (nonatomic, weak) id<DocumentModelProtocol> documentModelBacking;
 @property (nonatomic) NSObject *currentSheetController;
 @property (nonatomic) TableImportCoordinator *currentImportCoordinator;
 @end
@@ -59,11 +59,11 @@ NSRect initialRect;
 }
 
 // Custom getter and setter for documentModel to ensure proper initialization order
-- (DocumentModel *)documentModel {
+- (id<DocumentModelProtocol>)documentModel {
     return self.documentModelBacking;
 }
 
-- (void)setDocumentModel:(DocumentModel *)documentModel {
+- (void)setDocumentModel:(id<DocumentModelProtocol>)documentModel {
     self.documentModelBacking = documentModel;
 
     // If controllers have already been created in awakeFromNib, complete their setup now
@@ -72,7 +72,7 @@ NSRect initialRect;
     }
 }
 
-- (void)completeControllerSetupWithDocumentModel:(DocumentModel *)documentModel {
+- (void)completeControllerSetupWithDocumentModel:(id<DocumentModelProtocol>)documentModel {
     XRGeometryController *geometryController = documentModel.geometryController;
 
     // Update data sources for controllers
