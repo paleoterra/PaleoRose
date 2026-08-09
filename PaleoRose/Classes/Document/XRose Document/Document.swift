@@ -38,10 +38,19 @@ class Document: NSDocument {
         switch typeName {
         case "XRose":
             try documentModel.openFile(url)
-            documentModel.url = url
 
         default:
             throw CocoaError(.fileReadUnknown)
+        }
+    }
+
+    override func write(to url: URL, ofType typeName: String) throws {
+        switch typeName {
+        case "XRose":
+            try documentModel.writeToFile(url)
+
+        default:
+            throw CocoaError(.fileWriteUnknown)
         }
     }
 

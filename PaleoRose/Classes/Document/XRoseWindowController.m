@@ -581,6 +581,13 @@ NSRect initialRect;
     return aString;
 }
 
+-(void)windowDidEndLiveReseize:(NSNotification *)notification {
+    NSError *error;
+    [self.documentModel setWindowSize:[self window].frame.size error: &error];
+    if(error) {
+        NSLog(@"Failed to persist window size: %@", error.localizedDescription);
+    }
+}
 
 
 @end

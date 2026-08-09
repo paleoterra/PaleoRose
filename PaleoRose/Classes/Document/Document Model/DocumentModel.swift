@@ -108,12 +108,16 @@ class DocumentModel: NSObject, DocumentModelProtocol {
     // MARK: - File Management
 
     @objc func writeToFile(_ file: URL) throws {
+        try saveGeometry()
+        try saveLayers()
         try inMemoryStore.save(to: file.path)
+        url = file
     }
 
     @objc func openFile(_ file: URL) throws {
         try inMemoryStore.load(from: file.path)
         readFromStore {}
+        url = file
     }
 
     @available(*, deprecated, message: "File url now stored as url property")

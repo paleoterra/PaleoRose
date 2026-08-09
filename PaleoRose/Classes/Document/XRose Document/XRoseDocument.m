@@ -72,7 +72,6 @@
             NSLog(@"%@", error.localizedDescription);
             return NO;
         }
-        [self.documentModel setUrl:url];
         return YES;
     }
     return NO;
@@ -81,27 +80,11 @@
 #pragma mark - Writing the Document's Content
 -(BOOL)writeToURL:(NSURL *)url ofType:(NSString *)typeName error:(NSError * _Nullable __autoreleasing *)outError {
     NSError *error = nil;
-    [self.documentModel saveGeometryAndReturnError:&error];
-    if (error != nil) {
-        NSLog(@"Cannot store geometry: %@", [error localizedDescription]);
-    }
-    [self.documentModel setWindowSize:[self.mainWindowController window].frame.size error:&error];
-    if (error != nil) {
-        *outError = error;
-        return NO;
-    }
-    [self.documentModel saveLayersAndReturnError:&error];
-    if (error != nil) {
-        *outError = error;
-        return NO;
-    }
-
     [self.documentModel writeToFile:url error:&error];
     if (error) {
         NSLog(@"%@", error.localizedDescription);
         return NO;
     }
-    [self.documentModel setUrl:url];
     return YES;
 }
 

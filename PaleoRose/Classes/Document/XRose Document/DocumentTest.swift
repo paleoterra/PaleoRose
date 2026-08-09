@@ -32,6 +32,7 @@ struct DocumentTest {
     enum DocumentTestError: Error, Equatable {
         case readingDocumentFailed
         case windowControllerNotFound
+        case writingDocumentFailed
     }
 
     @Test("Initialization")
@@ -60,7 +61,7 @@ struct DocumentTest {
         print("\(String(describing: mockDocumentModel.url?.path))")
     }
 
-    @Test("Document Invalide File Type Fails")
+    @Test("Document Invalid File Type Fails")
     func readingDocumentFailsBadType() throws {
         let mockDocumentModel = MockDocumentModel()
         let typeName = "XRoseXX"
@@ -81,7 +82,6 @@ struct DocumentTest {
         let url = try #require(URL(string: "file:///Volumes/test/MyFile.XRose"))
         let sut = Document(documentModel: mockDocumentModel)
         try sut.read(from: url, ofType: typeName)
-        #expect(mockDocumentModel.url == url)
     }
 
     @Test("Make Window Controllers")
@@ -97,5 +97,45 @@ struct DocumentTest {
             throw DocumentTestError.windowControllerNotFound
         }
         #expect(windowController.documentModel === mockDocumentModel)
+    }
+
+    @Test("Document Invalid File Type Fails")
+    func writeInvalidFileType() throws {
+        let mockDocumentModel = MockDocumentModel()
+        let typeName = "XRoseXX"
+        let url = try #require(URL(string: "file:///Volumes/test/MyFile.XRose"))
+        let sut = Document(documentModel: mockDocumentModel)
+
+        #expect(throws: CocoaError(.fileWriteUnknown)) {
+            _ = try sut.write(to: url, ofType: typeName)
+        }
+        #expect(!mockDocumentModel.writeToFileCalled)
+        #expect(mockDocumentModel.url == nil)
+    }
+
+    @Test("Document fails to write")
+    func writingFileFails() throws {
+        let mockDocumentModel = MockDocumentModel()
+        let typeName = "XRose"
+        let url = try #require(URL(string: "file:///Volumes/test/MyFile.XRose"))
+        let sut = Document(documentModel: mockDocumentModel)
+        mockDocumentModel.errorToThrow = DocumentTestError.writingDocumentFailed
+        #expect(throws: DocumentTestError.writingDocumentFailed) {
+            _ = try sut.write(to: url, ofType: typeName)
+        }
+        #expect(mockDocumentModel.writeToFileCalled)
+        #expect(mockDocumentModel.url == nil)
+    }
+
+    @Test("Document write to file succeeds")
+    func writingFileSucceeds() throws {
+        let mockDocumentModel = MockDocumentModel()
+        let typeName = "XRose"
+        let url = try #require(URL(string: "file:///Volumes/test/MyFile.XRose"))
+        let sut = Document(documentModel: mockDocumentModel)
+
+        try sut.write(to: url, ofType: typeName)
+
+        #expect(mockDocumentModel.writeToFileCalled)
     }
 }
