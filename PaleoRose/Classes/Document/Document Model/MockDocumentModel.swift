@@ -74,6 +74,7 @@ class MockDocumentModel: NSObject, DocumentModelProtocol {
     var dataSetArguments: [String] = []
 
     var createDataSetCalled = false
+    // swiftlint:disable:next large_tuple
     var createDataSetArguments: [(tableName: String, columnName: String, name: String)] = []
 
     var saveGeometryCalled = false

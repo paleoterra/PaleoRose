@@ -482,8 +482,8 @@ NSRect initialRect;
 
     //[sp setExtensionHidden:NO];
     NSString *baseName;
-    if([self.documentModel fileURL])
-        baseName = [[[self.documentModel fileURL] path ]stringByDeletingPathExtension];
+    if([self.documentModel url])
+        baseName = [[[self.documentModel url] path ]stringByDeletingPathExtension];
     else
     {
         baseName = NSHomeDirectory();
@@ -505,7 +505,7 @@ NSRect initialRect;
 -(IBAction)generateStatisticsReport:(id)sender
 {
     NSSavePanel *sp = [NSSavePanel savePanel];
-    NSURL *currentURL = [self.documentModel fileURL];
+    NSURL *currentURL = [self.documentModel url];
     __block NSString *basename = [[currentURL path ] lastPathComponent];
     if(!basename)
         basename = [self.window title];

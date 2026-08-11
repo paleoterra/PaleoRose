@@ -82,6 +82,7 @@ class MockInMemoryStore: NSObject, InMemoryStoreProtocol {
     var valueColumnNamesArguments: [String] = []
 
     var storeDataSetCalled = false
+    // swiftlint:disable:next large_tuple
     var storeDataSetArguments: [(name: String, tableName: String, columnName: String)] = []
 
     var storeGeometryControllerCalled = false
@@ -106,6 +107,7 @@ class MockInMemoryStore: NSObject, InMemoryStoreProtocol {
     var dropTableArguments: [String] = []
 
     var createUserTableCalled = false
+    // swiftlint:disable:next large_tuple
     var createUserTableArguments: [(createSQL: String, insertSQL: String, rows: [[Bindable?]])] = []
 
     var copyTablesCalled = false

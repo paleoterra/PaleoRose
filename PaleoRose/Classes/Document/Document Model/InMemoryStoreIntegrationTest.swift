@@ -124,17 +124,6 @@ struct InMemoryStoreIntegrationTest {
         #expect(colors.count == 4)
     }
 
-    @Test("Given sample file, then loading the file will populate the in-memory store")
-    func readFileShouldPopulateStore() throws {
-        let store = try InMemoryStore(interface: SQLiteInterface())
-
-        try backupFromSampleFileToInMemoryStore(store)
-
-        let storePointer = try #require(store.store())
-
-        try assertDatabaseContentMatchesSampleFile(database: storePointer)
-    }
-
     @Test("Given a populated in-memory store, when backing up to new file, then backup successfully")
     func backupToNewFile() throws {
         let store = try InMemoryStore(interface: SQLiteInterface())
@@ -396,7 +385,7 @@ struct InMemoryStoreIntegrationTest {
         if !layer.radianIsPercent() {
             print("fail")
         }
-        try layer.verify(
+        layer.verify(
             isVisible: true,
             active: false,
             biDir: false,

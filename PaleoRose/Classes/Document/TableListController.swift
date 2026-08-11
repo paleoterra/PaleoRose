@@ -29,6 +29,7 @@ import Combine
 
 // MARK: - Data Source Protocol
 
+@MainActor
 protocol TableListControllerDataSource: AnyObject {
     /// Publisher that emits dataset records whenever they change
     var dataSetRecordsPublisher: AnyPublisher<[String], Never> { get }
@@ -39,6 +40,7 @@ protocol TableListControllerDataSource: AnyObject {
 
 // MARK: - Data Table Controller
 
+@MainActor
 @objc class TableListController: NSObject {
 
     // MARK: - Properties

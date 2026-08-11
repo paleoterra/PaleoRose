@@ -104,7 +104,7 @@ struct DocumentModelTest {
     func fileURLNilDocument() {
         let inMemoryStore = MockInMemoryStore()
         let sut = DocumentModel(inMemoryStore: inMemoryStore, undoManager: nil)
-        #expect(sut.fileURL() == nil)
+        #expect(sut.url == nil)
     }
 
     @Test("File URL delegates to document")
@@ -112,7 +112,7 @@ struct DocumentModelTest {
         let document = NSDocument()
         let inMemoryStore = MockInMemoryStore()
         let sut = DocumentModel(inMemoryStore: inMemoryStore, undoManager: nil)
-        #expect(sut.fileURL() == document.fileURL)
+        #expect(sut.url == document.fileURL)
     }
 
     // MARK: - General
