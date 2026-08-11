@@ -35,7 +35,6 @@ struct DocumentModelTest {
 
     @Test("Initialization Sets Expected Values")
     func initialization() {
-        let document = NSDocument()
         let inMemoryStore = MockInMemoryStore()
         let sut = DocumentModel(inMemoryStore: inMemoryStore, undoManager: nil)
         #expect(inMemoryStore.delegate === sut)
@@ -45,34 +44,33 @@ struct DocumentModelTest {
 
     @Test("Write to file propagates store error")
     func writeToFileError() {
-        let document = NSDocument()
         let inMemoryStore = MockInMemoryStore()
         let sut = DocumentModel(inMemoryStore: inMemoryStore, undoManager: nil)
         let documentURL = URL(fileURLWithPath: "/test/path")
-        inMemoryStore.errorToThrow = NSError(domain: "test", code: 1, userInfo: nil)
+        inMemoryStore.saveToError = NSError(domain: "test", code: 1, userInfo: nil)
 
         #expect(throws: NSError.self) {
             try sut.writeToFile(documentURL)
         }
         #expect(inMemoryStore.saveToFileCalled)
+        #expect(sut.url == nil)
     }
 
     @Test("Write to file")
     func writeToFile() throws {
-        let document = NSDocument()
         let inMemoryStore = MockInMemoryStore()
         let sut = DocumentModel(inMemoryStore: inMemoryStore, undoManager: nil)
         let documentURL = URL(fileURLWithPath: "/test/path")
         try sut.writeToFile(documentURL)
         #expect(inMemoryStore.saveToFileCalled)
         #expect(inMemoryStore.saveToFileArguments.first == documentURL.path)
+        #expect(sut.url == documentURL)
     }
 
     // MARK: - Open File
 
     @Test("Open file calls load with correct path")
     func openFile() throws {
-        let document = NSDocument()
         let inMemoryStore = MockInMemoryStore()
         let sut = DocumentModel(inMemoryStore: inMemoryStore, undoManager: nil)
         let documentURL = URL(fileURLWithPath: "/test/path")
@@ -82,11 +80,11 @@ struct DocumentModelTest {
         #expect(inMemoryStore.loadFromFileCalled)
         #expect(inMemoryStore.loadFromFileArguments.first == documentURL.path)
         #expect(inMemoryStore.readFromStoreCalled)
+        #expect(sut.url == documentURL)
     }
 
     @Test("Open file propagates store error")
     func openFileError() {
-        let document = NSDocument()
         let inMemoryStore = MockInMemoryStore()
         let sut = DocumentModel(inMemoryStore: inMemoryStore, undoManager: nil)
         let documentURL = URL(fileURLWithPath: "/test/path")
@@ -97,6 +95,7 @@ struct DocumentModelTest {
         }
         #expect(inMemoryStore.loadFromFileCalled)
         #expect(!inMemoryStore.readFromStoreCalled)
+        #expect(sut.url == nil)
     }
 
     // MARK: - File URL
@@ -270,7 +269,7 @@ struct DocumentModelTest {
     func saveGeometryError() {
         let inMemoryStore = MockInMemoryStore()
         let sut = DocumentModel(inMemoryStore: inMemoryStore, undoManager: nil)
-        inMemoryStore.errorToThrow = NSError(domain: "test", code: 1, userInfo: nil)
+        inMemoryStore.storeGeometryError = NSError(domain: "test", code: 1, userInfo: nil)
         #expect(throws: NSError.self) {
             try sut.saveGeometry()
         }
@@ -291,7 +290,7 @@ struct DocumentModelTest {
     func saveLayersError() {
         let inMemoryStore = MockInMemoryStore()
         let sut = DocumentModel(inMemoryStore: inMemoryStore, undoManager: nil)
-        inMemoryStore.errorToThrow = NSError(domain: "test", code: 1, userInfo: nil)
+        inMemoryStore.storeLayersError = NSError(domain: "test", code: 1, userInfo: nil)
         #expect(throws: NSError.self) {
             try sut.saveLayers()
         }
@@ -323,7 +322,7 @@ struct DocumentModelTest {
         let inMemoryStore = MockInMemoryStore()
         let sut = DocumentModel(inMemoryStore: inMemoryStore, undoManager: nil)
         var completionCalled = false
-        sut.readFromStore { completionCalled = true }
+        sut.readFromStore { _ in completionCalled = true }
         #expect(inMemoryStore.readFromStoreCalled)
         #expect(completionCalled)
     }

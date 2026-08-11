@@ -51,4 +51,6 @@
 - (IBAction)importTableAction:(id)sender;
 - (IBAction)deleteTableAction:(id)sender;
 
+- (void)printDiagram:(NSPrintInfo *)printInfo;
+
 @end

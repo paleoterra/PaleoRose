@@ -589,5 +589,7 @@ NSRect initialRect;
     }
 }
 
-
+- (void)printDiagram:(NSPrintInfo *)printInfo {
+    [[NSPrintOperation printOperationWithView:_roseView printInfo: printInfo] runOperation];
+}
 @end

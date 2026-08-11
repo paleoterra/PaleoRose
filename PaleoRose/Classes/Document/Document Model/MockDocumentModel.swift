@@ -161,9 +161,9 @@ class MockDocumentModel: NSObject, DocumentModelProtocol {
 
     // MARK: Read From Store
 
-    func readFromStore(completion: @escaping () -> Void) {
+    func readFromStore(completion: @escaping (Bool) -> Void) {
         readFromStoreCalled = true
-        completion()
+        completion(readFromStoreCalled)
     }
 
     func refreshTableNames() {

@@ -27,6 +27,8 @@ import OSLog
 
 @available(macOS 11.0, *)
 extension Logger {
+    static let documentLogger = Logger(subsystem: "com.paleorose", category: "document")
+    static let documentModelLogger = Logger(subsystem: "com.paleorose", category: "documentmodel")
     static let documentControllerLogger = Logger(subsystem: "com.paleorose", category: "documentcontroller")
     static let memoryStoreLogger = Logger(subsystem: "com.paleorose", category: "memorystore")
 }

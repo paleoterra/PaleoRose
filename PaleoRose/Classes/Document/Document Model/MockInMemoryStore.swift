@@ -111,6 +111,10 @@ class MockInMemoryStore: NSObject, InMemoryStoreProtocol {
     var copyTablesCalled = false
     var copyTablesArguments: [(sourceURL: URL, tables: [(original: String, destination: String)])] = []
 
+    var saveToError: Error?
+    var storeGeometryError: Error?
+    var storeLayersError: Error?
+
     // MARK: - InMemoryStoreProtocol
 
     func sqlitePointer() throws -> OpaquePointer {
@@ -131,7 +135,7 @@ class MockInMemoryStore: NSObject, InMemoryStoreProtocol {
     func save(to filePath: String) throws {
         saveToFileCalled = true
         saveToFileArguments.append(filePath)
-        if let error = errorToThrow { throw error }
+        if let error = saveToError { throw error }
     }
 
     func readFromStore(completion: @escaping (Result<Bool, Error>) -> Void) {
@@ -196,7 +200,7 @@ class MockInMemoryStore: NSObject, InMemoryStoreProtocol {
     func store(geometryController: XRGeometryController) throws {
         storeGeometryControllerCalled = true
         storeGeometryControllerArguments.append(geometryController)
-        if let error = errorToThrow { throw error }
+        if let error = storeGeometryError { throw error }
     }
 
     func configure(geometryController: XRGeometryController) throws {
@@ -208,7 +212,7 @@ class MockInMemoryStore: NSObject, InMemoryStoreProtocol {
     func store(layers: [XRLayer]) throws {
         storeLayersCalled = true
         storeLayersArguments.append(layers)
-        if let error = errorToThrow { throw error }
+        if let error = storeLayersError { throw error }
     }
 
     func readLayers(sqliteStore: OpaquePointer) throws -> [XRLayer] {

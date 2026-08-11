@@ -27,6 +27,7 @@
 import CodableSQLiteNonThread
 import Combine
 import Foundation
+import OSLog
 import TabularData
 
 /// `@objc` so that Objective-C call sites (`XRoseWindowController`, `XRoseDocument`) can hold
@@ -62,7 +63,7 @@ import TabularData
 
     // MARK: - Read From Store
 
-    func readFromStore(completion: @escaping () -> Void)
+    func readFromStore(completion: @escaping (Bool) -> Void)
     func refreshTableNames()
 }
 
@@ -116,8 +117,11 @@ class DocumentModel: NSObject, DocumentModelProtocol {
 
     @objc func openFile(_ file: URL) throws {
         try inMemoryStore.load(from: file.path)
-        readFromStore {}
-        url = file
+        readFromStore { [weak self] result in
+            if result {
+                self?.url = file
+            }
+        }
     }
 
     @available(*, deprecated, message: "File url now stored as url property")
@@ -171,9 +175,15 @@ class DocumentModel: NSObject, DocumentModelProtocol {
 
     // MARK: - Read From Store
 
-    func readFromStore(completion: @escaping () -> Void) {
-        inMemoryStore.readFromStore { _ in
-            completion()
+    func readFromStore(completion: @escaping (Bool) -> Void) {
+        inMemoryStore.readFromStore { result in
+            switch result {
+            case .failure:
+                completion(false)
+
+            default:
+                completion(true)
+            }
         }
     }
 

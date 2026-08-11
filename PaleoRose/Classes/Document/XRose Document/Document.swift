@@ -23,8 +23,8 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-
 import Cocoa
+import OSLog
 
 class Document: NSDocument {
     private let documentModel: any DocumentModelProtocol
@@ -62,5 +62,13 @@ class Document: NSDocument {
 
     override class var autosavesInPlace: Bool {
         true
+    }
+
+    override func printDocument(_: Any?) {
+        guard let windowController = windowControllers.first as? XRoseWindowController else {
+            Logger.documentLogger.error("No window controller for document: \(self)")
+            return
+        }
+        windowController.printDiagram(printInfo)
     }
 }
