@@ -106,8 +106,6 @@
 		B47DDF510964CDE700C7EF02 /* XRTableImporterXRose.m in Sources */ = {isa = PBXBuildFile; fileRef = B47DDF4F0964CDE700C7EF02 /* XRTableImporterXRose.m */; };
 		B4815B7005C44C0200403360 /* XRLayerData.h in Headers */ = {isa = PBXBuildFile; fileRef = B4815B6E05C44C0200403360 /* XRLayerData.h */; };
 		B4815B7105C44C0200403360 /* XRLayerData.m in Sources */ = {isa = PBXBuildFile; fileRef = B4815B6F05C44C0200403360 /* XRLayerData.m */; };
-		B48345CE05C238B500E3F6B7 /* XRoseDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = B48345CC05C238B500E3F6B7 /* XRoseDocument.h */; };
-		B48345CF05C238B500E3F6B7 /* XRoseDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = B48345CD05C238B500E3F6B7 /* XRoseDocument.m */; };
 		B48345D205C23B3000E3F6B7 /* XRoseWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = B48345D005C23B3000E3F6B7 /* XRoseWindowController.h */; };
 		B48345D305C23B3000E3F6B7 /* XRoseWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = B48345D105C23B3000E3F6B7 /* XRoseWindowController.m */; };
 		B48345F005C23CA100E3F6B7 /* XRoseView.h in Headers */ = {isa = PBXBuildFile; fileRef = B48345EE05C23CA100E3F6B7 /* XRoseView.h */; };
@@ -391,8 +389,6 @@
 		B47DDF4F0964CDE700C7EF02 /* XRTableImporterXRose.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XRTableImporterXRose.m; sourceTree = "<group>"; };
 		B4815B6E05C44C0200403360 /* XRLayerData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRLayerData.h; sourceTree = "<group>"; };
 		B4815B6F05C44C0200403360 /* XRLayerData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRLayerData.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		B48345CC05C238B500E3F6B7 /* XRoseDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRoseDocument.h; sourceTree = "<group>"; };
-		B48345CD05C238B500E3F6B7 /* XRoseDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRoseDocument.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B48345D005C23B3000E3F6B7 /* XRoseWindowController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRoseWindowController.h; sourceTree = "<group>"; };
 		B48345D105C23B3000E3F6B7 /* XRoseWindowController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRoseWindowController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B48345EE05C23CA100E3F6B7 /* XRoseView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRoseView.h; sourceTree = "<group>"; };
@@ -915,8 +911,6 @@
 		B414A0042B24CB37008AE5F4 /* XRose Document */ = {
 			isa = PBXGroup;
 			children = (
-				B48345CC05C238B500E3F6B7 /* XRoseDocument.h */,
-				B48345CD05C238B500E3F6B7 /* XRoseDocument.m */,
 				AA2E6FFC3027A95800059B9F /* DocumentController.swift */,
 				AA44383E301F94F00031D164 /* Document.swift */,
 				AA443840301F952E0031D164 /* DocumentTest.swift */,
@@ -1109,7 +1103,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D15AC290486D014006FF6A4 /* PaleoRose_Prefix.pch in Headers */,
-				B48345CE05C238B500E3F6B7 /* XRoseDocument.h in Headers */,
 				B48345D205C23B3000E3F6B7 /* XRoseWindowController.h in Headers */,
 				B4A82F9B2A07F8A400790052 /* LITMXMLBinaryEncoding.h in Headers */,
 				B48345F005C23CA100E3F6B7 /* XRoseView.h in Headers */,
@@ -1399,7 +1392,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA94BE0D2FC3B69500999D6F /* TableImportError.swift in Sources */,
-				B48345CF05C238B500E3F6B7 /* XRoseDocument.m in Sources */,
 				B4B984182F05C18F00A31FD9 /* DatasetCreationSheet.swift in Sources */,
 				B48345D305C23B3000E3F6B7 /* XRoseWindowController.m in Sources */,
 				AA94BE0F2FC3B69500999D6F /* TextImportOptions.swift in Sources */,

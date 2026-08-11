@@ -25,20 +25,25 @@
 // SOFTWARE.
 
 import Cocoa
+import CodableSQLiteNonThread
 import OSLog
 
 class DocumentController: NSDocumentController {
 
     override func makeUntitledDocument(ofType typeName: String) throws -> NSDocument {
-        Logger.documentControllerLogger.trace("Creating new untitled document of type \(typeName)")
-        let document = XRoseDocument()
+        Logger.documentControllerLogger.debug("Creating new untitled document of type \(typeName)")
+        let document = try Document(
+            documentModel: DocumentModel(inMemoryStore: InMemoryStore(interface: SQLiteInterface()))
+        )
         document.fileType = typeName
         return document
     }
 
     override func makeDocument(withContentsOf url: URL, ofType typeName: String) throws -> NSDocument {
-        Logger.documentControllerLogger.trace("Opening new file with name \(url.lastPathComponent) of type \(typeName)")
-        let document = XRoseDocument()
+        Logger.documentControllerLogger.debug("Opening existing file with name \(url.lastPathComponent) of type \(typeName)")
+        let document = try Document(
+            documentModel: DocumentModel(inMemoryStore: InMemoryStore(interface: SQLiteInterface()))
+        )
         document.fileType = typeName
         try document.read(from: url, ofType: typeName)
         return document

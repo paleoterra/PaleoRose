@@ -15,5 +15,4 @@
 #import "XRVStatCreatePanelController.h"
 #import "XRTableImporterDelimiterController.h"
 #import "XRTableImporterXRose.h"
-#import "XRoseDocument.h"
 #import "XRoseWindowController.h"

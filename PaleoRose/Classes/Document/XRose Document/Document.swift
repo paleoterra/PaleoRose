@@ -24,10 +24,23 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 import Cocoa
+import CodableSQLiteNonThread
 import OSLog
 
 class Document: NSDocument {
     private let documentModel: any DocumentModelProtocol
+
+    override init() {
+        do {
+            documentModel = try DocumentModel(
+                inMemoryStore: InMemoryStore(interface: SQLiteInterface())
+            )
+            super.init()
+        } catch {
+            Logger.documentModelLogger.error("Failed to initialize document model: \(error)")
+            fatalError("Failed to initialize document model: \(error)")
+        }
+    }
 
     init(documentModel: any DocumentModelProtocol) {
         self.documentModel = documentModel
