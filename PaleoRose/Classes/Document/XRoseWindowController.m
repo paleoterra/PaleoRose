@@ -581,7 +581,7 @@ NSRect initialRect;
     return aString;
 }
 
--(void)windowDidEndLiveReseize:(NSNotification *)notification {
+-(void)windowDidEndLiveResize:(NSNotification *)notification {
     NSError *error;
     [self.documentModel setWindowSize:[self window].frame.size error: &error];
     if(error) {

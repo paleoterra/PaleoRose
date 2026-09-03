@@ -37,7 +37,7 @@ class Document: NSDocument {
             )
             super.init()
         } catch {
-            Logger.documentModelLogger.error("Failed to initialize document model: \(error)")
+            Logger.documentLogger.error("Failed to initialize document model: \(error)")
             fatalError("Failed to initialize document model: \(error)")
         }
     }
