@@ -23,7 +23,6 @@
 
 #import "XRoseWindowController.h"
 #import "XRPropertyInspector.h"
-#import "XRoseDocument.h"
 #import "XRGeometryPropertyInspector.h"
 #import "FStatisticController.h"
 #import "XRGeometryController.h"
@@ -37,7 +36,7 @@
 @interface XRoseWindowController()
 @property (nonatomic) FStatisticController *theSheetController;
 @property (nonatomic) TableListController *tableListController;
-@property (nonatomic, weak) DocumentModel *documentModelBacking;
+@property (nonatomic, weak) id<DocumentModelProtocol> documentModelBacking;
 @property (nonatomic) NSObject *currentSheetController;
 @property (nonatomic) TableImportCoordinator *currentImportCoordinator;
 @end
@@ -59,11 +58,11 @@ NSRect initialRect;
 }
 
 // Custom getter and setter for documentModel to ensure proper initialization order
-- (DocumentModel *)documentModel {
+- (id<DocumentModelProtocol>)documentModel {
     return self.documentModelBacking;
 }
 
-- (void)setDocumentModel:(DocumentModel *)documentModel {
+- (void)setDocumentModel:(id<DocumentModelProtocol>)documentModel {
     self.documentModelBacking = documentModel;
 
     // If controllers have already been created in awakeFromNib, complete their setup now
@@ -72,7 +71,7 @@ NSRect initialRect;
     }
 }
 
-- (void)completeControllerSetupWithDocumentModel:(DocumentModel *)documentModel {
+- (void)completeControllerSetupWithDocumentModel:(id<DocumentModelProtocol>)documentModel {
     XRGeometryController *geometryController = documentModel.geometryController;
 
     // Update data sources for controllers
@@ -483,8 +482,8 @@ NSRect initialRect;
 
     //[sp setExtensionHidden:NO];
     NSString *baseName;
-    if([self.documentModel fileURL])
-        baseName = [[[self.documentModel fileURL] path ]stringByDeletingPathExtension];
+    if([self.documentModel url])
+        baseName = [[[self.documentModel url] path ]stringByDeletingPathExtension];
     else
     {
         baseName = NSHomeDirectory();
@@ -506,7 +505,7 @@ NSRect initialRect;
 -(IBAction)generateStatisticsReport:(id)sender
 {
     NSSavePanel *sp = [NSSavePanel savePanel];
-    NSURL *currentURL = [self.documentModel fileURL];
+    NSURL *currentURL = [self.documentModel url];
     __block NSString *basename = [[currentURL path ] lastPathComponent];
     if(!basename)
         basename = [self.window title];
@@ -582,4 +581,15 @@ NSRect initialRect;
     return aString;
 }
 
+-(void)windowDidEndLiveResize:(NSNotification *)notification {
+    NSError *error;
+    [self.documentModel setWindowSize:[self window].frame.size error: &error];
+    if(error) {
+        NSLog(@"Failed to persist window size: %@", error.localizedDescription);
+    }
+}
+
+- (void)printDiagram:(NSPrintInfo *)printInfo {
+    [[NSPrintOperation printOperationWithView:_roseView printInfo: printInfo] runOperation];
+}
 @end

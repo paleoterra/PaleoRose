@@ -66,10 +66,10 @@ private let layerDragType = NSPasteboard.PasteboardType("LayerDragType")
 
     // MARK: - Initialization
 
-    @objc init(dataSource: DocumentModel?, geometryController: XRGeometryController?) {
+    @objc init(dataSource: DocumentModelProtocol?, geometryController: XRGeometryController?) {
         rosePlotController = geometryController
         super.init()
-        self.dataSource = dataSource
+        self.dataSource = dataSource as? LayerTableControllerDataSource
         setColorArray()
         setupDataSourceSubscription()
         setupLayerRedrawObserver()
@@ -80,8 +80,8 @@ private let layerDragType = NSPasteboard.PasteboardType("LayerDragType")
     }
 
     /// Objective-C compatible method to set data source
-    @objc func setDataSource(_ source: DocumentModel) {
-        dataSource = source
+    @objc func setDataSource(_ source: DocumentModelProtocol) {
+        dataSource = source as? LayerTableControllerDataSource
         // Update geometry controller reference when data source is set
         rosePlotController = source.geometryController
     }

@@ -53,13 +53,14 @@ final class MockDataFrameTableWriter: DataFrameTableWriting {
 
 // MARK: - Tests
 
+@MainActor
 @Suite("DocumentModel — importTable")
 struct DocumentModelImportTests {
 
     @Test("tableNamesSubject emits new name after import")
     func tableNamesPublisherFires() throws {
-        let store = try InMemoryStore()
-        let model = DocumentModel(inMemoryStore: store, document: nil)
+        let store = try InMemoryStore(interface: SQLiteInterface())
+        let model = DocumentModel(inMemoryStore: store, undoManager: nil)
         let mock = MockDataFrameTableWriter()
         mock.createSQLResult = "CREATE TABLE \"strikes\" (_id INTEGER PRIMARY KEY, \"v\" NUMERIC)"
         mock.insertSQLResult = "INSERT INTO \"strikes\" (\"v\") VALUES (?)"
@@ -78,8 +79,8 @@ struct DocumentModelImportTests {
 
     @Test("throws emptyDataFrame for a zero-row DataFrame")
     func throwsOnEmptyFrame() throws {
-        let store = try InMemoryStore()
-        let model = DocumentModel(inMemoryStore: store, document: nil)
+        let store = try InMemoryStore(interface: SQLiteInterface())
+        let model = DocumentModel(inMemoryStore: store, undoManager: nil)
         #expect(throws: TableImportError.emptyDataFrame) {
             try model.importTable(DataFrame(), named: "t")
         }
@@ -87,8 +88,8 @@ struct DocumentModelImportTests {
 
     @Test("writer is called exactly once per import")
     func writerCalledOnce() throws {
-        let store = try InMemoryStore()
-        let model = DocumentModel(inMemoryStore: store, document: nil)
+        let store = try InMemoryStore(interface: SQLiteInterface())
+        let model = DocumentModel(inMemoryStore: store, undoManager: nil)
         let mock = MockDataFrameTableWriter()
         mock.createSQLResult = "CREATE TABLE \"x\" (_id INTEGER PRIMARY KEY, \"v\" NUMERIC)"
         mock.insertSQLResult = "INSERT INTO \"x\" (\"v\") VALUES (?)"
@@ -101,8 +102,8 @@ struct DocumentModelImportTests {
 
     @Test("two-arg importTable uses real DataFrameTableWriter")
     func twoArgImportUsesRealWriter() throws {
-        let store = try InMemoryStore()
-        let model = DocumentModel(inMemoryStore: store, document: nil)
+        let store = try InMemoryStore(interface: SQLiteInterface())
+        let model = DocumentModel(inMemoryStore: store, undoManager: nil)
         var dataframe = DataFrame()
         dataframe.append(column: Column<Double>(name: "Azimuth", contents: [45.0, 90.0]))
         try model.importTable(dataframe, named: "azimuths")

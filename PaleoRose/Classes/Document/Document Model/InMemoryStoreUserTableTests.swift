@@ -32,7 +32,7 @@ struct InMemoryStoreUserTableTests {
 
     @Test("created table appears in tableNames")
     func tableAppearsAfterCreate() throws {
-        let store = try InMemoryStore()
+        let store = try InMemoryStore(interface: SQLiteInterface())
         try store.createUserTable(
             createSQL: "CREATE TABLE \"strikes\" (_id INTEGER PRIMARY KEY, \"Azimuth\" NUMERIC)",
             insertSQL: "INSERT INTO \"strikes\" (\"Azimuth\") VALUES (?)",
@@ -44,7 +44,7 @@ struct InMemoryStoreUserTableTests {
 
     @Test("row count matches inserted rows")
     func rowCountMatches() throws {
-        let store = try InMemoryStore()
+        let store = try InMemoryStore(interface: SQLiteInterface())
         try store.createUserTable(
             createSQL: "CREATE TABLE \"t\" (_id INTEGER PRIMARY KEY, \"v\" NUMERIC)",
             insertSQL: "INSERT INTO \"t\" (\"v\") VALUES (?)",
@@ -59,7 +59,7 @@ struct InMemoryStoreUserTableTests {
 
     @Test("rolls back entirely on INSERT failure — table does not exist")
     func rollsBackOnError() throws {
-        let store = try InMemoryStore()
+        let store = try InMemoryStore(interface: SQLiteInterface())
         #expect(throws: (any Error).self) {
             try store.createUserTable(
                 createSQL: "CREATE TABLE \"t\" (_id INTEGER PRIMARY KEY, \"v\" NUMERIC)",
@@ -73,7 +73,7 @@ struct InMemoryStoreUserTableTests {
 
     @Test("multiple columns: all values stored correctly")
     func multipleColumnsStored() throws {
-        let store = try InMemoryStore()
+        let store = try InMemoryStore(interface: SQLiteInterface())
         try store.createUserTable(
             createSQL: """
             CREATE TABLE "samples" (

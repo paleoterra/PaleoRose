@@ -28,6 +28,38 @@ import CodableSQLiteNonThread
 import Foundation
 import OSLog
 
+protocol InMemoryStoreProtocol: AnyObject {
+    var delegate: InMemoryStoreDelegate? { get set }
+
+    func sqlitePointer() throws -> OpaquePointer
+    func load(from filePath: String) throws
+    func save(to filePath: String) throws
+    func readFromStore(completion: @escaping (Result<Bool, Error>) -> Void)
+    func tableNames(sqliteStore: OpaquePointer) throws -> [String]
+    func windowSize(sqliteStore: OpaquePointer) throws -> CGSize
+    func geometry(sqliteStore: OpaquePointer) throws -> Geometry
+    func store(windowSize: CGSize) throws
+    func dataSetValues(for dataSet: DataSet) throws -> [Float]
+    func valueColumnNames(for table: String) throws -> [String]
+    func store(dataSetWithName name: String, tableName: String, columnName: String) throws -> XRDataSet
+    func store(geometryController: XRGeometryController) throws
+    func configure(geometryController: XRGeometryController) throws
+    func store(layers: [XRLayer]) throws
+    func readLayers(sqliteStore: OpaquePointer) throws -> [XRLayer]
+    func renameTable(from: String, toName: String) throws
+    func addColumn(to table: String, columnDefinition: String) throws
+    func drop(table: String) throws
+    func createUserTable(
+        createSQL: String,
+        insertSQL: String,
+        rows: [[Bindable?]]
+    ) throws
+    func copyTables(
+        from sourceURL: URL,
+        selecting tables: [(original: String, destination: String)]
+    ) throws
+}
+
 protocol InMemoryStoreDelegate: AnyObject {
     func update(tableNames: [String])
     func update(windowSize: CGSize)
@@ -37,7 +69,7 @@ protocol InMemoryStoreDelegate: AnyObject {
 }
 
 // swiftlint:disable type_body_length file_length
-class InMemoryStore: NSObject {
+class InMemoryStore: NSObject, InMemoryStoreProtocol {
     enum InMemoryStoreError: Error {
         case databaseDoesNotExist
         case unknownType
@@ -77,7 +109,13 @@ class InMemoryStore: NSObject {
         LayerData.createTableQuery()
     ]
 
-    @available(*, deprecated, message: "This code will become unavailable")
+    init(interface: StoreProtocol = SQLiteInterface()) throws {
+        self.interface = interface
+        super.init()
+        try setupDatabase()
+    }
+
+    @available(*, deprecated, message: "ObjC bridging only; use init(interface:) instead")
     @objc override init() {
         interface = SQLiteInterface()
         super.init()
@@ -85,14 +123,8 @@ class InMemoryStore: NSObject {
             try setupDatabase()
         } catch {
             logError(error: "Error creating in-memory store: \(error)")
-            return
+            sqliteStore = nil
         }
-    }
-
-    init(interface: StoreProtocol = SQLiteInterface()) throws {
-        self.interface = interface
-        super.init()
-        try setupDatabase()
     }
 
     @available(*, deprecated, message: "This code will become unavailable")
@@ -511,7 +543,7 @@ class InMemoryStore: NSObject {
 
     // MARK: - Table Manipulation
 
-    @objc func renameTable(from: String, toName: String) throws {
+    func renameTable(from: String, toName: String) throws {
         let sqliteStore = try validateStore()
         let query = Query(sql: "ALTER TABLE \(from) RENAME TO \(toName)")
         _ = try interface.executeQuery(sqlite: sqliteStore, query: query)
@@ -523,13 +555,13 @@ class InMemoryStore: NSObject {
         }
     }
 
-    @objc func addColumn(to table: String, columnDefinition: String) throws {
+    func addColumn(to table: String, columnDefinition: String) throws {
         let sqliteStore = try validateStore()
         let query = Query(sql: "ALTER TABLE \(table) ADD COLUMN \(columnDefinition)")
         _ = try interface.executeQuery(sqlite: sqliteStore, query: query)
     }
 
-    @objc func drop(table: String) throws {
+    func drop(table: String) throws {
         let sqliteStore = try validateStore()
         let query = Query(sql: "DROP TABLE \(table)")
         _ = try interface.executeQuery(sqlite: sqliteStore, query: query)

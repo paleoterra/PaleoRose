@@ -29,6 +29,7 @@ import Combine
 
 // MARK: - Data Source Protocol
 
+@MainActor
 protocol TableListControllerDataSource: AnyObject {
     /// Publisher that emits dataset records whenever they change
     var dataSetRecordsPublisher: AnyPublisher<[String], Never> { get }
@@ -39,6 +40,7 @@ protocol TableListControllerDataSource: AnyObject {
 
 // MARK: - Data Table Controller
 
+@MainActor
 @objc class TableListController: NSObject {
 
     // MARK: - Properties
@@ -62,15 +64,15 @@ protocol TableListControllerDataSource: AnyObject {
 
     // MARK: - Initialization
 
-    @objc init(dataSource: DocumentModel?) {
+    @objc init(dataSource: DocumentModelProtocol?) {
         super.init()
-        self.dataSource = dataSource
+        self.dataSource = dataSource as? TableListControllerDataSource
         setupDataSourceSubscription()
     }
 
     /// Objective-C compatible method to set data source
-    @objc func setDataSource(_ source: DocumentModel) {
-        dataSource = source
+    @objc func setDataSource(_ source: DocumentModelProtocol) {
+        dataSource = source as? TableListControllerDataSource
     }
 
     // MARK: - Private Methods

@@ -25,6 +25,7 @@
 // SOFTWARE.
 
 import AppKit
+import CodableSQLiteNonThread
 import Combine
 @testable import PaleoRose
 import Testing
@@ -142,9 +143,12 @@ struct LayersTableControllerTestFixture {
     let mockTableView: MockLayersTableView
     let geometryController: XRGeometryController
 
-    init() {
+    init() throws {
         geometryController = createMockGeometryController()
-        let documentModel = DocumentModel(inMemoryStore: InMemoryStore(), document: nil)
+        let documentModel = try DocumentModel(
+            inMemoryStore: InMemoryStore(interface: SQLiteInterface()),
+            undoManager: nil
+        )
         controller = LayersTableController(dataSource: documentModel, geometryController: geometryController)
         mockDataSource = MockLayerTableDataSource()
         mockTableView = MockLayersTableView()
@@ -170,7 +174,7 @@ struct LayersTableControllerTests {
 
     @Test("Setting data source triggers subscription")
     func dataSourceSubscription() async throws {
-        let fixture = LayersTableControllerTestFixture()
+        let fixture = try LayersTableControllerTestFixture()
 
         let layer1 = try #require(createMockLayer(name: "Layer 1"))
         let layer2 = try #require(createMockLayer(name: "Layer 2"))
@@ -182,7 +186,7 @@ struct LayersTableControllerTests {
 
     @Test("Data source publishes layer updates")
     func dataSourcePublishesUpdates() async throws {
-        let fixture = LayersTableControllerTestFixture()
+        let fixture = try LayersTableControllerTestFixture()
         let initialReloadCount = fixture.mockTableView.reloadDataCallCount
 
         let layer1 = try #require(createMockLayer(name: "Layer 1"))
@@ -198,7 +202,7 @@ struct LayersTableControllerTests {
 
     @Test("Number of rows returns correct count")
     func testNumberOfRows() async throws {
-        let fixture = LayersTableControllerTestFixture()
+        let fixture = try LayersTableControllerTestFixture()
 
         #expect(fixture.controller.numberOfRows(in: fixture.mockTableView) == 0)
 
@@ -212,7 +216,7 @@ struct LayersTableControllerTests {
 
     @Test("Object value for valid row returns layer name")
     func objectValueForValidRow() async throws {
-        let fixture = LayersTableControllerTestFixture()
+        let fixture = try LayersTableControllerTestFixture()
 
         let layer1 = try #require(createMockLayer(name: "Test Layer 1"))
         let layer2 = try #require(createMockLayer(name: "Test Layer 2"))
@@ -229,7 +233,7 @@ struct LayersTableControllerTests {
 
     @Test("Object value for invalid row returns nil")
     func objectValueForInvalidRow() async throws {
-        let fixture = LayersTableControllerTestFixture()
+        let fixture = try LayersTableControllerTestFixture()
 
         let layer1 = try #require(createMockLayer(name: "Layer 1"))
         try await fixture.setLayers([layer1])
@@ -244,7 +248,7 @@ struct LayersTableControllerTests {
 
     @Test("Setting layer name calls updateLayerName")
     func settingLayerName() async throws {
-        let fixture = LayersTableControllerTestFixture()
+        let fixture = try LayersTableControllerTestFixture()
 
         let layer1 = try #require(createMockLayer(name: "Old Name"))
         try await fixture.setLayers([layer1])
@@ -258,7 +262,7 @@ struct LayersTableControllerTests {
 
     @Test("Setting visibility calls updateLayerVisibility")
     func settingVisibility() async throws {
-        let fixture = LayersTableControllerTestFixture()
+        let fixture = try LayersTableControllerTestFixture()
 
         let layer1 = try #require(createMockLayer(name: "Layer 1"))
         try await fixture.setLayers([layer1])
@@ -278,7 +282,7 @@ struct LayersTableControllerTests {
 
     @Test("layerExists returns true for existing layer")
     func layerExistsTrue() async throws {
-        let fixture = LayersTableControllerTestFixture()
+        let fixture = try LayersTableControllerTestFixture()
 
         let layer1 = try #require(createMockLayer(name: "Existing Layer"))
         try await fixture.setLayers([layer1])
@@ -288,7 +292,7 @@ struct LayersTableControllerTests {
 
     @Test("layerExists returns false for non-existing layer")
     func layerExistsFalse() async throws {
-        let fixture = LayersTableControllerTestFixture()
+        let fixture = try LayersTableControllerTestFixture()
 
         let layer1 = try #require(createMockLayer(name: "Layer 1"))
         try await fixture.setLayers([layer1])
@@ -298,7 +302,7 @@ struct LayersTableControllerTests {
 
     @Test("newLayerName generates unique name")
     func testNewLayerName() async throws {
-        let fixture = LayersTableControllerTestFixture()
+        let fixture = try LayersTableControllerTestFixture()
 
         let layer1 = try #require(createMockLayer(name: "Grid"))
         let layer2 = try #require(createMockLayer(name: "Grid-1"))
@@ -310,7 +314,7 @@ struct LayersTableControllerTests {
 
     @Test("lastLayer returns last layer")
     func testLastLayer() async throws {
-        let fixture = LayersTableControllerTestFixture()
+        let fixture = try LayersTableControllerTestFixture()
 
         let layer1 = try #require(createMockLayer(name: "Layer 1"))
         let layer2 = try #require(createMockLayer(name: "Layer 2"))
@@ -324,7 +328,7 @@ struct LayersTableControllerTests {
 
     @Test("deleteLayers calls dataSource with indices")
     func testDeleteLayers() async throws {
-        let fixture = LayersTableControllerTestFixture()
+        let fixture = try LayersTableControllerTestFixture()
 
         let layer1 = try #require(createMockLayer(name: "Layer 1"))
         let layer2 = try #require(createMockLayer(name: "Layer 2"))
@@ -339,7 +343,7 @@ struct LayersTableControllerTests {
 
     @Test("deleteLayer calls dataSource")
     func testDeleteLayer() async throws {
-        let fixture = LayersTableControllerTestFixture()
+        let fixture = try LayersTableControllerTestFixture()
 
         let layer1 = try #require(createMockLayer(name: "Layer 1"))
         try await fixture.setLayers([layer1])
@@ -353,7 +357,7 @@ struct LayersTableControllerTests {
 
     @Test("generateStatisticsString returns empty for non-data layers")
     func generateStatisticsStringEmpty() async throws {
-        let fixture = LayersTableControllerTestFixture()
+        let fixture = try LayersTableControllerTestFixture()
 
         let layer1 = try #require(createMockLayer(name: "Grid"))
         try await fixture.setLayers([layer1])

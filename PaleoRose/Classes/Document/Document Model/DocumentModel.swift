@@ -27,10 +27,48 @@
 import CodableSQLiteNonThread
 import Combine
 import Foundation
+import OSLog
 import TabularData
 
+/// `@objc` so that Objective-C call sites (`XRoseWindowController`, `XRoseDocument`) can hold
+/// `DocumentModel` behind this protocol instead of the concrete type. Inherits `DatasetColumnProvider`
+/// so a `DocumentModelProtocol` reference remains usable everywhere a column provider is expected
+/// (e.g. `DatasetCreationSheet`) without an explicit cast.
+@objc protocol DocumentModelProtocol: DatasetColumnProvider {
+    var windowSize: CGSize { get }
+    var geometryController: XRGeometryController { get }
+    var undoManager: UndoManager? { get set }
+    var url: URL? { get set }
+
+    // MARK: - File Management
+
+    func writeToFile(_ file: URL) throws
+    func openFile(_ file: URL) throws
+
+    @available(*, deprecated, message: "File url now stored as url property")
+    func fileURL() -> URL?
+
+    // MARK: - General
+
+    func dataTableNames() -> [String]
+    func setWindowSize(_ size: CGSize) throws
+    func delete(table: String) throws
+    func dataSet(name: String) -> XRDataSet?
+
+    // MARK: - Persistence
+
+    func createDataSet(tableName: String, columnName: String, name: String) throws -> XRDataSet
+    func saveGeometry() throws
+    func saveLayers() throws
+
+    // MARK: - Read From Store
+
+    func readFromStore(completion: @escaping (Bool) -> Void)
+    func refreshTableNames()
+}
+
 // swiftlint:disable file_length
-class DocumentModel: NSObject, DatasetColumnProvider {
+class DocumentModel: NSObject, DocumentModelProtocol {
 
     enum DocumentModelError: Error {
         case unknownLayerType
@@ -38,55 +76,57 @@ class DocumentModel: NSObject, DatasetColumnProvider {
 
     // MARK: - Properties
 
-    private var inMemoryStore: InMemoryStore
+    private var inMemoryStore: any InMemoryStoreProtocol
     @objc var windowSize: CGSize = .zero
-    @objc var dataSets: [XRDataSet] = []
-    @objc var layers: [XRLayer] = []
-    @objc weak var document: NSDocument?
-    @objc let geometryController: XRGeometryController
+    private var dataSets: [XRDataSet] = []
+    private var layers: [XRLayer] = []
+    @objc let geometryController = XRGeometryController()
 
     private let tableNamesSubject = CurrentValueSubject<[String], Never>([])
     private let layersSubject = CurrentValueSubject<[XRLayer], Never>([])
+    @objc weak var undoManager: UndoManager? {
+        didSet {
+            geometryController.setUndoManager(undoManager)
+        }
+    }
+
+    @objc var url: URL?
 
     // MARK: - Initialization
 
-    @objc init(inMemoryStore: InMemoryStore, document: NSDocument?) {
+    init(inMemoryStore: any InMemoryStoreProtocol, undoManager: UndoManager? = nil) {
         self.inMemoryStore = inMemoryStore
-        self.document = document
-        geometryController = XRGeometryController()
         super.init()
-
-        // Set undo manager if document is available
-        if let document {
-            geometryController.setUndoManager(document.undoManager)
-        }
-
+        self.undoManager = undoManager
         inMemoryStore.delegate = self
     }
 
-    // MARK: - Deprecated Methods
-
-    @available(*, deprecated, message: "This code will become unavailable")
-    @objc func memoryStore() -> OpaquePointer? {
-        inMemoryStore.store()
+    /// ObjC-callable bridge — used by `XRoseDocument.m` while the ObjC document class is still in service.
+    @objc convenience init(inMemoryStore store: InMemoryStore, undoManager: UndoManager?) {
+        self.init(inMemoryStore: store as any InMemoryStoreProtocol, undoManager: undoManager)
     }
 
     // MARK: - File Management
 
     @objc func writeToFile(_ file: URL) throws {
+        try saveGeometry()
+        try saveLayers()
         try inMemoryStore.save(to: file.path)
+        url = file
     }
 
     @objc func openFile(_ file: URL) throws {
         try inMemoryStore.load(from: file.path)
-        readFromStore {}
+        readFromStore { [weak self] result in
+            if result {
+                self?.url = file
+            }
+        }
     }
 
+    @available(*, deprecated, message: "File url now stored as url property")
     @objc func fileURL() -> URL? {
-        if let document {
-            return document.fileURL
-        }
-        return nil
+        url
     }
 
     // MARK: - General
@@ -108,7 +148,7 @@ class DocumentModel: NSObject, DatasetColumnProvider {
     }
 
     @objc func dataSet(name: String) -> XRDataSet? {
-        dataSets.first(where: { $0.name() == name })
+        dataSets.first { $0.name() == name }
     }
 
     // MARK: - Persistence
@@ -135,9 +175,15 @@ class DocumentModel: NSObject, DatasetColumnProvider {
 
     // MARK: - Read From Store
 
-    func readFromStore(completion: @escaping () -> Void) {
-        inMemoryStore.readFromStore { _ in
-            completion()
+    func readFromStore(completion: @escaping (Bool) -> Void) {
+        inMemoryStore.readFromStore { result in
+            switch result {
+            case .failure:
+                completion(false)
+
+            default:
+                completion(true)
+            }
         }
     }
 

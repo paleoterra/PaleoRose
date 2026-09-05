@@ -1,12 +1,10 @@
 //
-//  XRoseDocument.h
-//  XRose
-//
-//  Created by Tom Moore on Fri Jan 23 2004.
+// DocumentController.swift
+// PaleoRose
 //
 // MIT License
 //
-// Copyright (c) 2004 to present Thomas L. Moore.
+// Copyright (c) 2026 to present Thomas L. Moore.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,9 +24,28 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#import <AppKit/AppKit.h>
+import Cocoa
+import CodableSQLiteNonThread
+import OSLog
 
-@class XRDataSet;
-@interface XRoseDocument : NSDocument
+class DocumentController: NSDocumentController {
 
-@end
+    override func makeUntitledDocument(ofType typeName: String) throws -> NSDocument {
+        Logger.documentControllerLogger.debug("Creating new untitled document of type \(typeName)")
+        let document = try Document(
+            documentModel: DocumentModel(inMemoryStore: InMemoryStore(interface: SQLiteInterface()))
+        )
+        document.fileType = typeName
+        return document
+    }
+
+    override func makeDocument(withContentsOf url: URL, ofType typeName: String) throws -> NSDocument {
+        Logger.documentControllerLogger.debug("Opening existing file with name \(url.lastPathComponent) of type \(typeName)")
+        let document = try Document(
+            documentModel: DocumentModel(inMemoryStore: InMemoryStore(interface: SQLiteInterface()))
+        )
+        document.fileType = typeName
+        try document.read(from: url, ofType: typeName)
+        return document
+    }
+}

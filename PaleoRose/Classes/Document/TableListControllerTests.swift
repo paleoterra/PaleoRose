@@ -70,7 +70,7 @@ final class MockTableView: NSTableView {
 @MainActor
 private func createMockDocumentModel() -> DocumentModel {
     let store = InMemoryStore()
-    return DocumentModel(inMemoryStore: store, document: nil)
+    return DocumentModel(inMemoryStore: store, undoManager: nil)
 }
 
 /// Test fixture encapsulating common test setup

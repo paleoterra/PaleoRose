@@ -13,6 +13,10 @@
 		8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */; };
 		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
 		8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
+		AA2E6FFD3027A95800059B9F /* DocumentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2E6FFC3027A95800059B9F /* DocumentController.swift */; };
+		AA2E70403027BFF900059B9F /* MockDocumentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2E703F3027BFF900059B9F /* MockDocumentModel.swift */; };
+		AA44383F301F94F00031D164 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA44383E301F94F00031D164 /* Document.swift */; };
+		AA443842301F952E0031D164 /* DocumentTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA443840301F952E0031D164 /* DocumentTest.swift */; };
 		AA94BE0D2FC3B69500999D6F /* TableImportError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA94BE0C2FC3B69500999D6F /* TableImportError.swift */; };
 		AA94BE0F2FC3B69500999D6F /* TextImportOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA94BE0E2FC3B69500999D6F /* TextImportOptions.swift */; };
 		AA94BE132FC3B8F900999D6F /* DataFrameTableWriting.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA94BE122FC3B8F900999D6F /* DataFrameTableWriting.swift */; };
@@ -23,6 +27,8 @@
 		AA94BE1F2FC4A94A00999D6F /* DocumentModelImportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA94BE1E2FC4A94A00999D6F /* DocumentModelImportTests.swift */; };
 		AA94BE212FC4B2F900999D6F /* TableImportCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA94BE202FC4B2F900999D6F /* TableImportCoordinator.swift */; };
 		AA94BE232FC4B30B00999D6F /* TableImportCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA94BE222FC4B30B00999D6F /* TableImportCoordinatorTests.swift */; };
+		AAFEE3893023F50C003C136C /* DocumentModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFEE3873023F50C003C136C /* DocumentModelTest.swift */; };
+		AAFEE38B3023F986003C136C /* MockInMemoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFEE38A3023F97F003C136C /* MockInMemoryStore.swift */; };
 		B4081BAF2EC016C200EA734A /* TableListControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4081BAE2EC016C200EA734A /* TableListControllerTests.swift */; };
 		B4081BF02EC79D9500EA734A /* LayerTableControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4081BEF2EC79D9500EA734A /* LayerTableControllerDataSource.swift */; };
 		B4081C312EC7C65A00EA734A /* LayersTableControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4081C302EC7C65A00EA734A /* LayersTableControllerTests.swift */; };
@@ -100,8 +106,6 @@
 		B47DDF510964CDE700C7EF02 /* XRTableImporterXRose.m in Sources */ = {isa = PBXBuildFile; fileRef = B47DDF4F0964CDE700C7EF02 /* XRTableImporterXRose.m */; };
 		B4815B7005C44C0200403360 /* XRLayerData.h in Headers */ = {isa = PBXBuildFile; fileRef = B4815B6E05C44C0200403360 /* XRLayerData.h */; };
 		B4815B7105C44C0200403360 /* XRLayerData.m in Sources */ = {isa = PBXBuildFile; fileRef = B4815B6F05C44C0200403360 /* XRLayerData.m */; };
-		B48345CE05C238B500E3F6B7 /* XRoseDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = B48345CC05C238B500E3F6B7 /* XRoseDocument.h */; };
-		B48345CF05C238B500E3F6B7 /* XRoseDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = B48345CD05C238B500E3F6B7 /* XRoseDocument.m */; };
 		B48345D205C23B3000E3F6B7 /* XRoseWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = B48345D005C23B3000E3F6B7 /* XRoseWindowController.h */; };
 		B48345D305C23B3000E3F6B7 /* XRoseWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = B48345D105C23B3000E3F6B7 /* XRoseWindowController.m */; };
 		B48345F005C23CA100E3F6B7 /* XRoseView.h in Headers */ = {isa = PBXBuildFile; fileRef = B48345EE05C23CA100E3F6B7 /* XRoseView.h */; };
@@ -272,6 +276,10 @@
 		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32DBCF750370BD2300C91783 /* PaleoRose_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaleoRose_Prefix.pch; sourceTree = "<group>"; };
 		8D15AC370486D014006FF6A4 /* PaleoRose.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaleoRose.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA2E6FFC3027A95800059B9F /* DocumentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentController.swift; sourceTree = "<group>"; };
+		AA2E703F3027BFF900059B9F /* MockDocumentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDocumentModel.swift; sourceTree = "<group>"; };
+		AA44383E301F94F00031D164 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
+		AA443840301F952E0031D164 /* DocumentTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentTest.swift; sourceTree = "<group>"; };
 		AA94BE0C2FC3B69500999D6F /* TableImportError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableImportError.swift; sourceTree = "<group>"; };
 		AA94BE0E2FC3B69500999D6F /* TextImportOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextImportOptions.swift; sourceTree = "<group>"; };
 		AA94BE102FC3B79000999D6F /* TabularData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TabularData.framework; path = System/Library/Frameworks/TabularData.framework; sourceTree = SDKROOT; };
@@ -283,6 +291,8 @@
 		AA94BE1E2FC4A94A00999D6F /* DocumentModelImportTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentModelImportTests.swift; sourceTree = "<group>"; };
 		AA94BE202FC4B2F900999D6F /* TableImportCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableImportCoordinator.swift; sourceTree = "<group>"; };
 		AA94BE222FC4B30B00999D6F /* TableImportCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableImportCoordinatorTests.swift; sourceTree = "<group>"; };
+		AAFEE3873023F50C003C136C /* DocumentModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentModelTest.swift; sourceTree = "<group>"; };
+		AAFEE38A3023F97F003C136C /* MockInMemoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockInMemoryStore.swift; sourceTree = "<group>"; };
 		B4081BAE2EC016C200EA734A /* TableListControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableListControllerTests.swift; sourceTree = "<group>"; };
 		B4081BEF2EC79D9500EA734A /* LayerTableControllerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerTableControllerDataSource.swift; sourceTree = "<group>"; };
 		B4081C302EC7C65A00EA734A /* LayersTableControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayersTableControllerTests.swift; sourceTree = "<group>"; };
@@ -379,8 +389,6 @@
 		B47DDF4F0964CDE700C7EF02 /* XRTableImporterXRose.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XRTableImporterXRose.m; sourceTree = "<group>"; };
 		B4815B6E05C44C0200403360 /* XRLayerData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRLayerData.h; sourceTree = "<group>"; };
 		B4815B6F05C44C0200403360 /* XRLayerData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRLayerData.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		B48345CC05C238B500E3F6B7 /* XRoseDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRoseDocument.h; sourceTree = "<group>"; };
-		B48345CD05C238B500E3F6B7 /* XRoseDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRoseDocument.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B48345D005C23B3000E3F6B7 /* XRoseWindowController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRoseWindowController.h; sourceTree = "<group>"; };
 		B48345D105C23B3000E3F6B7 /* XRoseWindowController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XRoseWindowController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B48345EE05C23CA100E3F6B7 /* XRoseView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XRoseView.h; sourceTree = "<group>"; };
@@ -903,8 +911,9 @@
 		B414A0042B24CB37008AE5F4 /* XRose Document */ = {
 			isa = PBXGroup;
 			children = (
-				B48345CC05C238B500E3F6B7 /* XRoseDocument.h */,
-				B48345CD05C238B500E3F6B7 /* XRoseDocument.m */,
+				AA2E6FFC3027A95800059B9F /* DocumentController.swift */,
+				AA44383E301F94F00031D164 /* Document.swift */,
+				AA443840301F952E0031D164 /* DocumentTest.swift */,
 				B486E27B1E7B76EB00F1ADAA /* XRoseDocument.xib */,
 			);
 			path = "XRose Document";
@@ -1009,7 +1018,10 @@
 			isa = PBXGroup;
 			children = (
 				B439AB362C83CF7900252574 /* DocumentModel.swift */,
+				AAFEE3873023F50C003C136C /* DocumentModelTest.swift */,
+				AA2E703F3027BFF900059B9F /* MockDocumentModel.swift */,
 				B439AB382C83D01700252574 /* InMemoryStore.swift */,
+				AAFEE38A3023F97F003C136C /* MockInMemoryStore.swift */,
 				AA94BE1A2FC49AA700999D6F /* InMemoryStoreUserTableTests.swift */,
 				AA94BE1E2FC4A94A00999D6F /* DocumentModelImportTests.swift */,
 				AA94BE1C2FC4A91B00999D6F /* UserTableImporting.swift */,
@@ -1091,7 +1103,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D15AC290486D014006FF6A4 /* PaleoRose_Prefix.pch in Headers */,
-				B48345CE05C238B500E3F6B7 /* XRoseDocument.h in Headers */,
 				B48345D205C23B3000E3F6B7 /* XRoseWindowController.h in Headers */,
 				B4A82F9B2A07F8A400790052 /* LITMXMLBinaryEncoding.h in Headers */,
 				B48345F005C23CA100E3F6B7 /* XRoseView.h in Headers */,
@@ -1381,7 +1392,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA94BE0D2FC3B69500999D6F /* TableImportError.swift in Sources */,
-				B48345CF05C238B500E3F6B7 /* XRoseDocument.m in Sources */,
 				B4B984182F05C18F00A31FD9 /* DatasetCreationSheet.swift in Sources */,
 				B48345D305C23B3000E3F6B7 /* XRoseWindowController.m in Sources */,
 				AA94BE0F2FC3B69500999D6F /* TextImportOptions.swift in Sources */,
@@ -1404,6 +1414,7 @@
 				B440D55C2E594369000D98A0 /* GraphicDot.swift in Sources */,
 				B4866BF42CAE02C900319712 /* StoreProtocol.swift in Sources */,
 				B4DB28E32D22450300FC6A49 /* Encoding.swift in Sources */,
+				AA44383F301F94F00031D164 /* Document.swift in Sources */,
 				B4E2DE8A05C5BD6500714F6F /* XRLayerGrid.m in Sources */,
 				B423AB6D2D472DB1002474C7 /* MockInMemoryStoreDelegate.swift in Sources */,
 				AA94BE1D2FC4A91B00999D6F /* UserTableImporting.swift in Sources */,
@@ -1450,6 +1461,7 @@
 				B4081BF02EC79D9500EA734A /* LayerTableControllerDataSource.swift in Sources */,
 				B4C08803063069F2001A91F4 /* XRExportGraphicAccessory.m in Sources */,
 				B43D613906345207001B863E /* FStatisticController.m in Sources */,
+				AA2E6FFD3027A95800059B9F /* DocumentController.swift in Sources */,
 				AA94BE212FC4B2F900999D6F /* TableImportCoordinator.swift in Sources */,
 				B41C85B12DE4A24A0053C9C9 /* SettingsWindowController.swift in Sources */,
 				B427BD080950B3050063849E /* XRTableImporterDelimiterController.m in Sources */,
@@ -1485,6 +1497,7 @@
 				B4AE41D32D17DD2800E05D96 /* LayerData+Testing.swift in Sources */,
 				B48430862E1193E500E126C0 /* GraphicCircleLabelTests.swift in Sources */,
 				B4AE41C42D14E86700E05D96 /* Layer+Testing.swift in Sources */,
+				AAFEE38B3023F986003C136C /* MockInMemoryStore.swift in Sources */,
 				B4AE41D02D17DA3700E05D96 /* LayerCore+Testing.swift in Sources */,
 				B41C17532CB1C2AF002D19C2 /* Tag.swift in Sources */,
 				B48430882E1486D100E126C0 /* ArrowHeadTests.swift in Sources */,
@@ -1493,6 +1506,7 @@
 				B4A23EFB2E196D1800EDE135 /* GraphicKiteTests.swift in Sources */,
 				B4A23EF72E18951700EDE135 /* GraphicDotTests.swift in Sources */,
 				B4237C9C2D013BE900E2B510 /* StorageModelFactoryTest.swift in Sources */,
+				AA2E70403027BFF900059B9F /* MockDocumentModel.swift in Sources */,
 				B4866BF72CAE039200319712 /* MockSqliteInterface.swift in Sources */,
 				AA94BE1B2FC49AA700999D6F /* InMemoryStoreUserTableTests.swift in Sources */,
 				B4081BAF2EC016C200EA734A /* TableListControllerTests.swift in Sources */,
@@ -1520,6 +1534,8 @@
 				B4B0BB881E7E45CB00F392DA /* XRLayerDataTests.m in Sources */,
 				B4AE41CD2D17D77C00E05D96 /* LayerGrid+Testing.swift in Sources */,
 				B4AE41C02D0BD08C00E05D96 /* XRLayerData+Stub.swift in Sources */,
+				AA443842301F952E0031D164 /* DocumentTest.swift in Sources */,
+				AAFEE3893023F50C003C136C /* DocumentModelTest.swift in Sources */,
 				B4A23EF92E19668900EDE135 /* GraphicHistogramTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

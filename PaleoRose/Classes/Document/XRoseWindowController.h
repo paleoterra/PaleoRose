@@ -23,8 +23,9 @@
 // SOFTWARE.
 
 #import <Cocoa/Cocoa.h>
-#import <PaleoRose-Swift.h>
-@class XRRoseTableController, XRGeometryController;
+
+@class XRRoseTableController, XRGeometryController, LayersTableController;
+@protocol DocumentModelProtocol;
 @interface XRoseWindowController : NSWindowController <NSToolbarDelegate>
 {
     __weak IBOutlet id _roseTableView;
@@ -36,7 +37,7 @@
     __weak IBOutlet id _tableNameTable;
 }
 
-@property (weak) DocumentModel *documentModel;
+@property (weak) id<DocumentModelProtocol> documentModel;
 @property (strong) LayersTableController *layersTableController;
 
 -(XRRoseTableController *)tableController;
@@ -49,5 +50,7 @@
 - (IBAction)deleteLayerAction:(id)sender;
 - (IBAction)importTableAction:(id)sender;
 - (IBAction)deleteTableAction:(id)sender;
+
+- (void)printDiagram:(NSPrintInfo *)printInfo;
 
 @end
