@@ -25,6 +25,7 @@
 // SOFTWARE.
 
 import AppKit
+import SwiftUI
 
 // MARK: - Dataset Creation Sheet View Delegate
 
@@ -222,8 +223,6 @@ final class DatasetCreationSheetView: NSView {
 }
 
 // MARK: - Preview
-
-import SwiftUI
 
 struct DatasetCreationSheetViewWrapper: NSViewRepresentable {
     let populated: Bool

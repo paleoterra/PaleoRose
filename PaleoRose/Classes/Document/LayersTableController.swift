@@ -176,10 +176,7 @@ private let layerDragType = NSPasteboard.PasteboardType("LayerDragType")
     }
 
     @objc func displaySelectedLayerInInspector() {
-        guard let tableView else {
-            return
-        }
-        guard let inspector = XRPropertyInspector.defaultInspector() as? XRPropertyInspector else { return }
+        guard let tableView, let inspector = XRPropertyInspector.defaultInspector() as? XRPropertyInspector else { return }
 
         let selectedRowCount = tableView.numberOfSelectedRows
 
@@ -278,9 +275,8 @@ private let layerDragType = NSPasteboard.PasteboardType("LayerDragType")
         guard let dataSource, let windowController else { return }
 
         let layerNames = dataLayerNames()
-        guard !layerNames.isEmpty else { return }
-
         guard
+            !layerNames.isEmpty,
             let panelController = XRVStatCreatePanelController(array: layerNames),
             let panelWindow = panelController.window else {
             return
@@ -450,8 +446,12 @@ extension LayersTableController: NSTableViewDataSource {
 
         case let sValue as String:
             let lower = sValue.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-            if ["1", "true", "yes", "on"].contains(lower) { return true }
-            if ["0", "false", "no", "off"].contains(lower) { return false }
+            if ["1", "true", "yes", "on"].contains(lower) {
+                return true
+            }
+            if ["0", "false", "no", "off"].contains(lower) {
+                return false
+            }
             return false
 
         case let iValue as Int:
