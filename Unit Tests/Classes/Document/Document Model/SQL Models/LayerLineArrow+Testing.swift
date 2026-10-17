@@ -1,5 +1,5 @@
 //
-// LayerData+Testing.swift
+// LayerLineArrow+Testing.swift
 // PaleoRose
 //
 // MIT License
@@ -28,31 +28,30 @@ import Foundation
 @testable import PaleoRose
 
 // swiftlint:disable conditional_returns_on_newline
-
-extension LayerData {
+extension LayerLineArrow {
 
     static func stub(
         LAYERID: Int = 1,
         DATASET: Int = 0,
-        PLOTTYPE: Int = 0,
-        TOTALCOUNT: Int = 1,
-        DOTRADIUS: Float = 1.0
-    ) -> LayerData {
-        LayerData(
+        ARROWSIZE: Float = 1.0,
+        VECTORTYPE: Int = 0,
+        ARROWTYPE: Int = 0,
+        SHOWVECTOR: Bool = false,
+        SHOWERROR: Bool = false
+    ) -> LayerLineArrow {
+        LayerLineArrow(
             LAYERID: LAYERID,
             DATASET: DATASET,
-            PLOTTYPE: PLOTTYPE,
-            TOTALCOUNT: TOTALCOUNT,
-            DOTRADIUS: DOTRADIUS
+            ARROWSIZE: ARROWSIZE,
+            VECTORTYPE: VECTORTYPE,
+            ARROWTYPE: ARROWTYPE,
+            SHOWVECTOR: SHOWVECTOR,
+            SHOWERROR: SHOWERROR
         )
     }
 
-    func compare(with layer: XRLayerData, id: Int) -> Bool {
-        guard LAYERID == id else { return false }
-        guard DATASET == layer.datasetId() else { return false }
-        guard PLOTTYPE == layer.plotType() else { return false }
-        guard TOTALCOUNT == layer.totalCount() else { return false }
-        guard DOTRADIUS == layer.dotRadius() else { return false }
+    func compare(with layer: XRLayerLineArrow, id: Int) -> Bool {
+        guard LAYERID == id, DATASET == layer.datasetId(), ARROWSIZE == layer.arrowSize(), VECTORTYPE == layer.vectorType(), ARROWTYPE == layer.arrowType(), SHOWVECTOR == layer.showVector(), SHOWERROR == layer.showError() else { return false }
         return true
     }
 }

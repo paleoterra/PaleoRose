@@ -121,7 +121,9 @@ class MockInMemoryStore: NSObject, InMemoryStoreProtocol {
 
     func sqlitePointer() throws -> OpaquePointer {
         sqlitePointerCalled = true
-        if let error = errorToThrow { throw error }
+        if let error = errorToThrow {
+            throw error
+        }
         guard let pointer = stubbedSqlitePointer else {
             throw InMemoryStore.InMemoryStoreError.databaseDoesNotExist
         }
@@ -131,13 +133,17 @@ class MockInMemoryStore: NSObject, InMemoryStoreProtocol {
     func load(from filePath: String) throws {
         loadFromFileCalled = true
         loadFromFileArguments.append(filePath)
-        if let error = errorToThrow { throw error }
+        if let error = errorToThrow {
+            throw error
+        }
     }
 
     func save(to filePath: String) throws {
         saveToFileCalled = true
         saveToFileArguments.append(filePath)
-        if let error = saveToError { throw error }
+        if let error = saveToError {
+            throw error
+        }
     }
 
     func readFromStore(completion: @escaping (Result<Bool, Error>) -> Void) {
@@ -148,21 +154,27 @@ class MockInMemoryStore: NSObject, InMemoryStoreProtocol {
     func tableNames(sqliteStore: OpaquePointer) throws -> [String] {
         tableNamesCalled = true
         tableNamesArguments.append(sqliteStore)
-        if let error = errorToThrow { throw error }
+        if let error = errorToThrow {
+            throw error
+        }
         return stubbedTableNames
     }
 
     func windowSize(sqliteStore: OpaquePointer) throws -> CGSize {
         windowSizeCalled = true
         windowSizeArguments.append(sqliteStore)
-        if let error = errorToThrow { throw error }
+        if let error = errorToThrow {
+            throw error
+        }
         return stubbedWindowSize
     }
 
     func geometry(sqliteStore: OpaquePointer) throws -> Geometry {
         geometryCalled = true
         geometryArguments.append(sqliteStore)
-        if let error = errorToThrow { throw error }
+        if let error = errorToThrow {
+            throw error
+        }
         guard let geometry = stubbedGeometry else {
             throw InMemoryStore.InMemoryStoreError.unexpectedEmptyResult
         }
@@ -172,27 +184,35 @@ class MockInMemoryStore: NSObject, InMemoryStoreProtocol {
     func store(windowSize: CGSize) throws {
         storeWindowSizeCalled = true
         storeWindowSizeArguments.append(windowSize)
-        if let error = errorToThrow { throw error }
+        if let error = errorToThrow {
+            throw error
+        }
     }
 
     func dataSetValues(for dataSet: DataSet) throws -> [Float] {
         dataSetValuesCalled = true
         dataSetValuesArguments.append(dataSet)
-        if let error = errorToThrow { throw error }
+        if let error = errorToThrow {
+            throw error
+        }
         return stubbedDataSetValues
     }
 
     func valueColumnNames(for table: String) throws -> [String] {
         valueColumnNamesCalled = true
         valueColumnNamesArguments.append(table)
-        if let error = errorToThrow { throw error }
+        if let error = errorToThrow {
+            throw error
+        }
         return stubbedValueColumnNames
     }
 
     func store(dataSetWithName name: String, tableName: String, columnName: String) throws -> XRDataSet {
         storeDataSetCalled = true
         storeDataSetArguments.append((name: name, tableName: tableName, columnName: columnName))
-        if let error = errorToThrow { throw error }
+        if let error = errorToThrow {
+            throw error
+        }
         guard let dataSet = stubbedDataSet else {
             throw InMemoryStore.InMemoryStoreError.unexpectedEmptyResult
         }
@@ -202,44 +222,58 @@ class MockInMemoryStore: NSObject, InMemoryStoreProtocol {
     func store(geometryController: XRGeometryController) throws {
         storeGeometryControllerCalled = true
         storeGeometryControllerArguments.append(geometryController)
-        if let error = storeGeometryError { throw error }
+        if let error = storeGeometryError {
+            throw error
+        }
     }
 
     func configure(geometryController: XRGeometryController) throws {
         configureGeometryControllerCalled = true
         configureGeometryControllerArguments.append(geometryController)
-        if let error = errorToThrow { throw error }
+        if let error = errorToThrow {
+            throw error
+        }
     }
 
     func store(layers: [XRLayer]) throws {
         storeLayersCalled = true
         storeLayersArguments.append(layers)
-        if let error = storeLayersError { throw error }
+        if let error = storeLayersError {
+            throw error
+        }
     }
 
     func readLayers(sqliteStore: OpaquePointer) throws -> [XRLayer] {
         readLayersCalled = true
         readLayersArguments.append(sqliteStore)
-        if let error = errorToThrow { throw error }
+        if let error = errorToThrow {
+            throw error
+        }
         return stubbedLayers
     }
 
     func renameTable(from: String, toName: String) throws {
         renameTableCalled = true
         renameTableArguments.append((from: from, toName: toName))
-        if let error = errorToThrow { throw error }
+        if let error = errorToThrow {
+            throw error
+        }
     }
 
     func addColumn(to table: String, columnDefinition: String) throws {
         addColumnCalled = true
         addColumnArguments.append((table: table, columnDefinition: columnDefinition))
-        if let error = errorToThrow { throw error }
+        if let error = errorToThrow {
+            throw error
+        }
     }
 
     func drop(table: String) throws {
         dropTableCalled = true
         dropTableArguments.append(table)
-        if let error = errorToThrow { throw error }
+        if let error = errorToThrow {
+            throw error
+        }
     }
 
     func createUserTable(
@@ -249,7 +283,9 @@ class MockInMemoryStore: NSObject, InMemoryStoreProtocol {
     ) throws {
         createUserTableCalled = true
         createUserTableArguments.append((createSQL: createSQL, insertSQL: insertSQL, rows: rows))
-        if let error = errorToThrow { throw error }
+        if let error = errorToThrow {
+            throw error
+        }
     }
 
     func copyTables(
@@ -258,6 +294,8 @@ class MockInMemoryStore: NSObject, InMemoryStoreProtocol {
     ) throws {
         copyTablesCalled = true
         copyTablesArguments.append((sourceURL: sourceURL, tables: tables))
-        if let error = errorToThrow { throw error }
+        if let error = errorToThrow {
+            throw error
+        }
     }
 }

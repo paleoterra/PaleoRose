@@ -92,13 +92,17 @@ class MockDocumentModel: NSObject, DocumentModelProtocol {
     func writeToFile(_ file: URL) throws {
         writeToFileCalled = true
         writeToFileArguments.append(file)
-        if let error = errorToThrow { throw error }
+        if let error = errorToThrow {
+            throw error
+        }
     }
 
     func openFile(_ file: URL) throws {
         openFileCalled = true
         openFileArguments.append(file)
-        if let error = errorToThrow { throw error }
+        if let error = errorToThrow {
+            throw error
+        }
     }
 
     func fileURL() -> URL? {
@@ -116,20 +120,26 @@ class MockDocumentModel: NSObject, DocumentModelProtocol {
     func possibleColumnNames(table: String) throws -> [String] {
         possibleColumnNamesCalled = true
         possibleColumnNamesArguments.append(table)
-        if let error = errorToThrow { throw error }
+        if let error = errorToThrow {
+            throw error
+        }
         return stubbedPossibleColumnNames
     }
 
     func setWindowSize(_ size: CGSize) throws {
         setWindowSizeCalled = true
         setWindowSizeArguments.append(size)
-        if let error = errorToThrow { throw error }
+        if let error = errorToThrow {
+            throw error
+        }
     }
 
     func delete(table: String) throws {
         deleteTableCalled = true
         deleteTableArguments.append(table)
-        if let error = errorToThrow { throw error }
+        if let error = errorToThrow {
+            throw error
+        }
     }
 
     func dataSet(name: String) -> XRDataSet? {
@@ -143,7 +153,9 @@ class MockDocumentModel: NSObject, DocumentModelProtocol {
     func createDataSet(tableName: String, columnName: String, name: String) throws -> XRDataSet {
         createDataSetCalled = true
         createDataSetArguments.append((tableName: tableName, columnName: columnName, name: name))
-        if let error = errorToThrow { throw error }
+        if let error = errorToThrow {
+            throw error
+        }
         guard let dataSet = stubbedCreatedDataSet else {
             throw DocumentModel.DocumentModelError.unknownLayerType
         }
@@ -152,12 +164,16 @@ class MockDocumentModel: NSObject, DocumentModelProtocol {
 
     func saveGeometry() throws {
         saveGeometryCalled = true
-        if let error = errorToThrow { throw error }
+        if let error = errorToThrow {
+            throw error
+        }
     }
 
     func saveLayers() throws {
         saveLayersCalled = true
-        if let error = errorToThrow { throw error }
+        if let error = errorToThrow {
+            throw error
+        }
     }
 
     // MARK: Read From Store
