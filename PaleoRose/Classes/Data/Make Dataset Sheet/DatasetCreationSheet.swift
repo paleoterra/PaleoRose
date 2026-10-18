@@ -25,6 +25,7 @@
 // SOFTWARE.
 
 import AppKit
+import SwiftUI
 
 // MARK: - Column Provider Protocol
 
@@ -147,8 +148,6 @@ import AppKit
 }
 
 // MARK: - Preview
-
-import SwiftUI
 
 private class MockColumnProvider: NSObject, DatasetColumnProvider {
     func possibleColumnNames(table tableName: String) throws -> [String] {

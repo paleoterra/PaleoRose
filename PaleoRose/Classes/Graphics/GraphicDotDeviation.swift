@@ -59,7 +59,11 @@ import AppKit
         angleIncrement = Int(increment)
         totalCount = Int(total)
         self.count = Int(count)
-        if let mean1 = (stats["mean"] as? NSNumber)?.floatValue { mean = mean1 } else { mean = 0 }
+        if let mean1 = (stats["mean"] as? NSNumber)?.floatValue {
+            mean = mean1
+        } else {
+            mean = 0
+        }
         drawsFill = true
         calculateGeometry()
     }

@@ -67,10 +67,7 @@ struct DataSet: TableRepresentable, Equatable {
     }
 
     func decodedComments() -> NSAttributedString? {
-        guard let COMMENTS else {
-            return nil
-        }
-        guard let rtfData = Data(base64Encoded: COMMENTS) else {
+        guard let COMMENTS, let rtfData = Data(base64Encoded: COMMENTS) else {
             return nil
         }
         return NSAttributedString(rtf: rtfData, documentAttributes: nil)

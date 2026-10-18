@@ -213,7 +213,8 @@ import AppKit
         strokeColor?.set()
         if
             let transform = theTransform,
-            let context = NSGraphicsContext.current?.cgContext { context.concatenate(transform)
+            let context = NSGraphicsContext.current?.cgContext {
+            context.concatenate(transform)
         }
         path.stroke()
 

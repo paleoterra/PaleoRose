@@ -43,9 +43,7 @@ extension LayerCore {
     }
 
     func compare(with layer: XRLayerCore, id: Int) -> Bool {
-        guard LAYERID == id else { return false }
-        guard RADIUS == layer.radius() else { return false }
-        guard TYPE == layer.coreType() else { return false }
+        guard LAYERID == id, RADIUS == layer.radius(), TYPE == layer.coreType() else { return false }
         return true
     }
 }
