@@ -24,7 +24,9 @@ struct FeatureTests {
 ## Project Setup
 - Import the app: `@testable import PaleoRose`
 - Any ObjC file used in tests must be added to `PaleoRose-Bridging-Header.h`
-- Keep test files alongside the files they test
+- Tests live in the `Unit Tests` target, under `PaleoRose/Unit Tests/`, mirroring the source path under `PaleoRose/PaleoRose/Classes/` — never alongside the source file. E.g. `Classes/Graphics/GraphicKite.swift` → `Unit Tests/Classes/Graphics/GraphicKiteTests.swift`
+- Mocks and `+Testing`/`+Stub` extensions follow the same mirrored structure and also belong to the `Unit Tests` target, not `PaleoRose`
+- When adding a new test/mock file, verify it's a member of the `Unit Tests` target (not `PaleoRose`) — folder placement alone doesn't set target membership
 
 ## Patterns
 - Use `try #require(...)` instead of force-unwrapping or `guard let`

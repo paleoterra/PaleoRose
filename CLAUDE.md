@@ -20,7 +20,7 @@ xcodebuild test -workspace PaleoRose.xcworkspace -scheme PaleoRose -testPlan Pal
 ## Architecture
 
 ```
-PaleoRose/Classes/
+PaleoRose/PaleoRose/Classes/          (app target: "PaleoRose")
 ├── Layer Control/      XRLayer + subclasses (ObjC — active refactor target)
 ├── Graphics/           CoreGraphics rendering: GraphicPetal, GraphicKite, etc.
 ├── Geometry Controller/ XRGeometryController (.swift + .m ObjC category)
@@ -28,6 +28,13 @@ PaleoRose/Classes/
 │   └── Document Model/ DocumentModel.swift, InMemoryStore.swift
 │       └── SQL Models/ StorageModelFactory, typed Codable layer structs
 └── Data/               XRDataSet (ObjC)
+
+PaleoRose/Unit Tests/                 (test target: "Unit Tests")
+└── Classes/            Mirrors the tree above 1:1 — tests, mocks, and
+                         +Testing/+Stub extensions live here, not next to
+                         the source they cover. E.g. the test for
+                         Classes/Graphics/GraphicKite.swift lives at
+                         Unit Tests/Classes/Graphics/GraphicKiteTests.swift.
 ```
 
 **Key components:**
@@ -35,6 +42,8 @@ PaleoRose/Classes/
 - `InMemoryStore` — SQLite abstraction layer; handles document persistence
 - `LayersTableController` — Swift bridge between layer model and UI table view
 - `XRoseView` — NSView subclass that renders the rose diagram
+
+**Targets:** `PaleoRose` (app) and `Unit Tests` (unit test bundle) are separate Xcode targets. Test/mock/stub files must be members of `Unit Tests`, not `PaleoRose` — check target membership when adding or moving files, not just folder location.
 
 ## Critical Constraints
 
